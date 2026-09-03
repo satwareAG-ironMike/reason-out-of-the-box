@@ -80,8 +80,8 @@ When the user requests a durable behavior change, record it here or in the relev
 
 ## Project Notes
 
-- This is a research POC (no build, no runtime; `experiments/` holds manual tool experiments). Question, verdict, and evidence map live in README.md
-- Git: single `main` branch, no remote
+- This is a research POC (no build, no runtime). Question, verdict, and evidence map live in README.md
+- Git: `main`, remote github.com/satwareAG-ironMike/reason-out-of-the-box (branch-protected)
 - Public-only rule: the repository holds only public resources (papers, open repositories, published tools). No personal data, device or network inventories, session state, credentials, or private discussion content - in files or in history
 - Paper provenance rule: every archive entry must carry arXiv ID, authors, venue, year, and peer-review status; entries with quotes verified against paper full text are marked `[FT]` in archive/INDEX.md
 - No em dashes in any file (project punctuation standard)

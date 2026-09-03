@@ -35,6 +35,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   accuracy drop, Embers task counts, ARC-AGI-2 human baseline attribution; one 2026
   preprint verdict corrected (reasoning models diverge, non-reasoning models collapse)
 
+#### Changed
+
+- Published to github.com/satwareAG-ironMike/reason-out-of-the-box (public,
+  `main` branch-protected, issues enabled)
+
 #### Removed
 
 - All non-public material (local experiment artifacts, session state, discussion

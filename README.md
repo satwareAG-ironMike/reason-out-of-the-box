@@ -55,6 +55,5 @@ cross-checked secondary sources.
 
 ## Status
 
-POC, single `main` branch, no remote yet. Continuation options: draft the 5-condition study design, track
-2026 ARC-AGI-2 leaderboard claims for independent review, or add a remote for
-persistence.
+Public research archive at https://github.com/satwareAG-ironMike/reason-out-of-the-box
+(`main` is branch-protected). Open continuation: run the study design on open-data models.
