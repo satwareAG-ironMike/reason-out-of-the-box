@@ -30,6 +30,7 @@ in [docs/study-design.md](docs/study-design.md).
 | `archive/INDEX.md` | Master catalog, verdict, evidence matrix, open-problem spec |
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/study-design.md` | Pre-registrable protocol for the experiment that would settle the question |
+| `docs/next-investigations.md` | 2026-09-03 re-scan: investigation fields, feasibility findings, thesis timeline (M1-M5) |
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |
 | `docs/claims-marcus-wall.md` | Claim ledger: Marcus "Deep Learning Is Hitting a Wall" (2022), judged against evidence through 2026 |
 | `CHANGELOG.md` | Change history |
@@ -59,4 +60,10 @@ cross-checked secondary sources.
 ## Status
 
 Public research archive at https://github.com/satwareAG-ironMike/reason-out-of-the-box
-(`main` is branch-protected). Open continuation: run the study design on open-data models.
+(`main` is branch-protected). The 2026-09-03 re-scan re-confirmed the verdict: the
+remaining gap is experimental, not bibliographic. The thesis program (study design
+execution on open-data models) is tracked in the [issue board](https://github.com/satwareAG-ironMike/reason-out-of-the-box/issues)
+under milestones M1 (protocol freeze + pre-registration, 2026-09-30) to M5 (paper +
+public release, 2027-04-30); see [docs/next-investigations.md](docs/next-investigations.md).
+University students can join the thesis program: apply via bewerbung@satware.com or
+message https://github.com/satwareAG-ironMike.
