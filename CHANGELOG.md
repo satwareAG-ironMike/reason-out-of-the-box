@@ -9,6 +9,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 #### Added
 
+- Branch protection: GitHub ruleset on `main` requires 1 approving human review
+  (author self-approval excluded by platform), all three CI checks green with
+  up-to-date branches, squash-only merges, linear history, no force pushes or
+  deletions; second ruleset makes tags `v*` immutable (no deletion, no retagging)
 - `docs/claims-marcus-wall.md`: claim ledger for Marcus's "Deep Learning Is Hitting a
   Wall" (Nautilus, 2022-03-10), judged against evidence through 2026; full-text ingest
   of the essay plus two 2025 author retrospectives; archive-worthiness assessment of 8
