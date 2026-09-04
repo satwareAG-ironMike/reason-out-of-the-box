@@ -1,5 +1,7 @@
 # reason-out-of-the-box
 
+[![CI](https://github.com/satwareAG-ironMike/reason-out-of-the-box/actions/workflows/ci.yml/badge.svg)](https://github.com/satwareAG-ironMike/reason-out-of-the-box/actions/workflows/ci.yml)
+
 Research POC answering one question with peer-reviewed evidence:
 
 > Is there a single peer-reviewed paper proving an LLM can reason out of the box - without

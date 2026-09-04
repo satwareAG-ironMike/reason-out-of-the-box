@@ -86,6 +86,14 @@ When the user requests a durable behavior change, record it here or in the relev
 - Paper provenance rule: every archive entry must carry arXiv ID, authors, venue, year, and peer-review status; entries with quotes verified against paper full text are marked `[FT]` in archive/INDEX.md
 - No em dashes in any file (project punctuation standard)
 - Changes of substance get a CHANGELOG.md entry under [Unreleased] until a version is cut
+- CI: GitHub Actions run on every push and PR - archive consistency (`scripts/check_archive.py`),
+  markdown hygiene (em/en dashes, `scripts/check_links.py`), and a full-history gitleaks secret
+  scan. The single action is SHA-pinned; the workflow is read-only (`permissions: contents: read`)
+- Local CI parity before pushing: `python3 scripts/check_archive.py --selftest && python3
+  scripts/check_archive.py` then `python3 scripts/check_links.py --selftest && python3
+  scripts/check_links.py` then `set +e; git grep -n -P "\x{2014}|\x{2013}" -- .; r=$?;
+  set -e; [ "$r" -eq 1 ]` (strict: passes only when grep reports "no match", fails on
+  dashes or grep error)
 
 ## Child DOX Index
 
@@ -93,4 +101,4 @@ When the user requests a durable behavior change, record it here or in the relev
 |------|-------|------|
 | `archive/` | Paper archive: 63 entries, 8 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
 | `docs/` | Durable project documents (acceptance criteria, study design, claim ledgers: Hinton-Lemoine, Marcus wall); governed by root rules | - |
-| `scripts/` | `check_archive.py` archive consistency checker (stdlib, `--selftest`, `--report`); run before any archive closeout | - |
+| `scripts/` | `check_archive.py` archive consistency checker and `check_links.py` markdown link checker (stdlib, each with `--selftest`); run both before any closeout | - |
