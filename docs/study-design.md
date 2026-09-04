@@ -1,8 +1,9 @@
 # Study design: does a base LLM reason out of the box?
 
-Status: draft v0.2 (2026-09-03), red-teamed (see Red-team findings). Pre-registration candidate. Derived from the 5-condition
+Status: draft v0.3 (2026-09-03), red-teamed (see Red-team findings). Pre-registration candidate. Derived from the 5-condition
 spec in [archive/INDEX.md](../archive/INDEX.md) and the failure modes catalogued in rounds
-1-7.
+1-7. v0.3 corrects the model list after release verification (OLMo 2 was released at 7B
+and 13B only; see docs/next-investigations.md) and re-targets the replication arm.
 
 ## Hypotheses
 
@@ -21,7 +22,7 @@ The design must be able to separate all three. Most published work cannot.
 
 | Choice | Rationale |
 |--------|-----------|
-| Models: OLMo 2 (7B, 13B, 32B) base checkpoints; Pythia suite as scale control | **Open pretraining data (Dolma)** is mandatory - contamination cannot be audited on closed models |
+| Models: OLMo 2 7B and 13B base checkpoints; Pythia 1B, 2.8B, 6.9B, 12B as scale control; OLMo 3 32B as conditional large checkpoint (pending official release verification) | **Open pretraining data (Dolma)** is mandatory - contamination cannot be audited on closed models. v0.3: OLMo 2 has no public 32B release (verified 2026-09-03); the 32B slot moves to OLMo 3 (7B/32B + Dolma 3 reported) once the official repos confirm complete data and manifests |
 | Primary arm A: standard `Q: ... A:` greedy decoding | The Wang-Zhou baseline; QA format only because bare base models continue the question |
 | Primary arm B: CoT-decoding (top-k=10 first-token branches, confidence selection) | Inference-time only - no parameter updates, no task-specific prompt tokens - so it counts as out of the box; greedy alone hides latent paths (red-team item 2) |
 | Secondary arm (analysis only): "let's think step by step" | Quantifies the verbal-trigger gap (H0-b) without contaminating the primary claim |
@@ -89,8 +90,9 @@ This is the decisive test and the one the 2026 length-generalization barrier
 
 - Tasks: 300 items per family per depth level; 3 families x 5 depths x 300 = 4,500 items
   per model. Human baseline: 40 participants x 60 items per family.
-- Models: 3 OLMo 2 sizes + 4 Pythia sizes = 7 checkpoints, all open weights, one 8x80GB
-  node suffices for inference; activation patching on the 7B and 13B only.
+- Models: 2 OLMo 2 sizes (7B, 13B) + 4 Pythia sizes (1B, 2.8B, 6.9B, 12B) = 6 checkpoints,
+  +1 conditional (OLMo 3 32B), all open weights, one 8x80GB node suffices for inference;
+  activation patching on the 7B and 13B only.
 - Dolma audit: n-gram index over the pretraining corpus (existing infrastructure: WIMBD /
   infini-gram).
 - Estimated wall time: 12 weeks including IRB lead time and human data collection.
@@ -145,8 +147,9 @@ mitigation). Changes adopted into v0.2 are marked.
 - Generalization to natural-language reasoning beyond synthetic families.
 - A biological-comparison arm (child data on the same digit matrices) to test the data-
   efficiency disanalogy, not just the accuracy one.
-- Replication on a second open-data model family (DCLM) to rule out OLMo-specific
-  pretraining artifacts.
+- Replication on a second open-data model family to rule out OLMo-specific pretraining
+  artifacts. DCLM Base v2 is not confirmed as a fully released corpus (2026-09-03);
+  candidates: OLMo 3/Dolma 3 or Apertus 1.5 (8B/70B), both pending release verification.
 
 ## Provenance
 

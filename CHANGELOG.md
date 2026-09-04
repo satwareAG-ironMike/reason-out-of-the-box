@@ -22,6 +22,36 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   gitleaks 8.30.1 secret scan (checksum-pinned binary, redacted output). Single action
   pinned by SHA; no third-party actions
 
+### 2026-09-03 (second entry, SOD)
+
+#### Added
+
+- `docs/next-investigations.md`: 2026-09-03 online re-scan (arXiv API + Hugging Face
+  API verified). Findings: the strict claim is still unmet (no peer-reviewed
+  open-data base-model study on procedurally novel tasks); ARC-AGI-2 verified scores
+  (92.5% GPT-5.6 Sol, 90.4% Claude Opus 5, ARC-Prize verified semi-private); reusable
+  task-generator infrastructure (2404.07353, ARC-GEN 2511.00162); corpus audit tooling
+  (WIMBD 2310.20707); OLMo 2 public base confirmed at 7B/13B only (no 32B in the
+  release); two-layer pre-registration practice (OSF + AsPredicted). Ranked
+  investigation fields and the thesis timeline M1-M5.
+- GitHub thesis board: milestones M1 protocol freeze + pre-registration (2026-09-30),
+  M2 pilot (2026-10-31), M3 main experiment (2026-12-31), M4 human baseline + analysis
+  (2027-02-28), M5 paper + public release (2027-04-30); 14 work-package issues
+  (#1-#14, incl. M4 human data collection and decision-table analysis) with labels
+  thesis/research/infra/data/experiment/analysis/publication. All milestone descriptions
+  carry the student application line (bewerbung@satware.com or
+  https://github.com/satwareAG-ironMike); harness gap on the gh milestone failure chain
+  filed as git.satware.ai issue #628
+
+#### Changed
+
+- `docs/study-design.md` to v0.3: model list corrected after release verification
+  (OLMo 2 7B/13B + Pythia 1B/2.8B/6.9B/12B; OLMo 3 32B conditional pending official
+  repo verification), DCLM replication arm re-targeted to OLMo 3/Dolma 3 or Apertus 1.5
+- `README.md`: status now points at the thesis program and the issue board; layout
+  lists `docs/next-investigations.md`
+- Root `AGENTS.md` Child DOX Index: docs/ scope lists next investigations + thesis timeline
+
 ### 2026-09-03
 
 #### Added
