@@ -15,6 +15,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   papers surfaced by the essay and its verification trail (no verdict-relevant paper
   missed; 2304.15004 and the Nature 2024 AlphaGeometry paper flagged as round 9
   candidates only)
+- GitHub Actions CI (`.github/workflows/ci.yml`) running on push and PR with three
+  read-only jobs: archive consistency and provenance (`check_archive.py --selftest`,
+  metrics report, consistency), markdown hygiene (repo-wide em/en dash check plus new
+  `scripts/check_links.py` relative-link checker with selftest), and a full-history
+  gitleaks 8.30.1 secret scan (checksum-pinned binary, redacted output). Single action
+  pinned by SHA; no third-party actions
 
 ### 2026-09-03
 
