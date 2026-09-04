@@ -27,7 +27,9 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: No em/en dashes in tracked files
-        run: '! git grep -n -P "\x{2014}|\x{2013}" -- .'
+        run: |
+          # pass only on rc=1 (no match); rc=0 (found) and rc=2+ (error) both fail
+          set +e; git grep -n -P "\x{2014}|\x{2013}" -- .; r=$?; set -e; [ "$r" -eq 1 ]
       - name: Relative markdown links resolve
         run: |
           python3 scripts/check_links.py --selftest

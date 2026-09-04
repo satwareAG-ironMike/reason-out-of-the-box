@@ -91,7 +91,9 @@ When the user requests a durable behavior change, record it here or in the relev
   scan. The single action is SHA-pinned; the workflow is read-only (`permissions: contents: read`)
 - Local CI parity before pushing: `python3 scripts/check_archive.py --selftest && python3
   scripts/check_archive.py` then `python3 scripts/check_links.py --selftest && python3
-  scripts/check_links.py` then `! git grep -n -P "\x{2014}|\x{2013}" -- .`
+  scripts/check_links.py` then `set +e; git grep -n -P "\x{2014}|\x{2013}" -- .; r=$?;
+  set -e; [ "$r" -eq 1 ]` (strict: passes only when grep reports "no match", fails on
+  dashes or grep error)
 
 ## Child DOX Index
 
