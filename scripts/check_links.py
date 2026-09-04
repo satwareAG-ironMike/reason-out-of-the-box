@@ -4,19 +4,14 @@
 Checks every tracked-style *.md file (hidden dirs pruned):
   - relative links [text](target) resolve to an existing file
   - http(s), mailto, and in-page (#) targets are skipped
-  - percent-encoded targets are URL-decoded before resolution
 
 Usage:
   check_links.py            exit 0 + "link check passed" only if clean
-  check_links.py --report   also print per-file link counts
   check_links.py --selftest negative control on a synthetic broken tree
 """
-from __future__ import annotations
-
 import re
 import sys
 import tempfile
-import urllib.parse
 from pathlib import Path
 
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
@@ -32,7 +27,6 @@ def check(root: Path) -> tuple[list[str], int]:
         text = md.read_text(encoding="utf-8")
         for target in LINK_RE.findall(text):
             total += 1
-            target = urllib.parse.unquote(target)
             if target.startswith(SKIP_PREFIXES):
                 continue
             path = target.split("#", 1)[0]
@@ -40,9 +34,7 @@ def check(root: Path) -> tuple[list[str], int]:
                 continue
             resolved = (md.parent / path).resolve()
             if not resolved.exists():
-                errors.append(
-                    f"{md.relative_to(root)}: broken link -> {target}"
-                )
+                errors.append(f"{md.relative_to(root)}: broken link -> {target}")
     return errors, total
 
 
@@ -68,8 +60,6 @@ def main() -> int:
         return selftest()
     root = Path(__file__).resolve().parent.parent
     errors, total = check(root)
-    if "--report" in sys.argv:
-        print(f"links scanned: {total}")
     for err in errors:
         print(err, file=sys.stderr)
     if errors:
