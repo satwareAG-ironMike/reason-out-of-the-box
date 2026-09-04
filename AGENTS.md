@@ -92,5 +92,5 @@ When the user requests a durable behavior change, record it here or in the relev
 | Path | Scope | File |
 |------|-------|------|
 | `archive/` | Paper archive: 63 entries, 8 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
-| `docs/` | Durable project documents (acceptance criteria, study design, Hinton-Lemoine claim ledger); governed by root rules | - |
+| `docs/` | Durable project documents (acceptance criteria, study design, claim ledgers: Hinton-Lemoine, Marcus wall); governed by root rules | - |
 | `scripts/` | `check_archive.py` archive consistency checker (stdlib, `--selftest`, `--report`); run before any archive closeout | - |
