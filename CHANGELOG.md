@@ -5,6 +5,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-09-04
+
+#### Added
+
+- `docs/claims-marcus-wall.md`: claim ledger for Marcus's "Deep Learning Is Hitting a
+  Wall" (Nautilus, 2022-03-10), judged against evidence through 2026; full-text ingest
+  of the essay plus two 2025 author retrospectives; archive-worthiness assessment of 8
+  papers surfaced by the essay and its verification trail (no verdict-relevant paper
+  missed; 2304.15004 and the Nature 2024 AlphaGeometry paper flagged as round 9
+  candidates only)
+
 ### 2026-09-03
 
 #### Added

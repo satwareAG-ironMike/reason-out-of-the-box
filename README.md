@@ -29,6 +29,7 @@ in [docs/study-design.md](docs/study-design.md).
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/study-design.md` | Pre-registrable protocol for the experiment that would settle the question |
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |
+| `docs/claims-marcus-wall.md` | Claim ledger: Marcus "Deep Learning Is Hitting a Wall" (2022), judged against evidence through 2026 |
 | `CHANGELOG.md` | Change history |
 
 ## Method
