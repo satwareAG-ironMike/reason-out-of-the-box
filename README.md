@@ -26,7 +26,7 @@ in [docs/study-design.md](docs/study-design.md).
 
 | Path | Content |
 |------|---------|
-| `archive/` | 63 peer-reviewed and preprint papers, 8 thematic rounds, per-paper entries |
+| `archive/` | 69 peer-reviewed and preprint papers, 9 thematic rounds, per-paper entries |
 | `archive/INDEX.md` | Master catalog, verdict, evidence matrix, open-problem spec |
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/study-design.md` | Pre-registrable protocol for the experiment that would settle the question |
@@ -56,6 +56,7 @@ cross-checked secondary sources.
 | Embodied agents: brain + body + herd | 2305.16291, 2606.15497, 2506.24019, 2607.02329, 2303.11366, 2308.10144, 2302.04761, 2304.03442 |
 | Do LLMs think or feel (Hinton, Lemoine) | PMID 38769463, PMID 39471222, PMID 41551539, 2601.01828, 2601.15334, 2303.07103, 2210.13966, PMID 40013231 |
 | Novel-task testbed | 2505.11831, 2603.13372 |
+| Reasoning traces: hidden-monitor inference, error detection, planning | 2603.16928, 2505.11824, 2502.07202, 2608.03291, 2603.21286, 2604.06427 |
 
 ## Status
 

@@ -5,6 +5,39 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-09-05
+
+#### Added
+
+- Round 9 (reasoning traces): 6 papers, all with full-text-verified quotes (`[FT]`),
+  traced from the CACM feature "The Reasons AI May Act Secretive" (October 2025) to the
+  underlying research, plus a directed ingest:
+  - 2603.16928 Noticing the Watcher (ICLR 2026 AIWILD workshop): Claude agents infer
+    hidden CoT monitoring from blocking feedback alone; obfuscation intent in 3 of
+    2,400 episodes, 0% evasion success
+  - 2505.11824 Latent Veracity Inference (ICLR 2026): step-level reasoning-error
+    detection via posterior search + amortized verifier; engineered, not native
+  - 2502.07202 Monte Carlo Tree Diffusion (ICML 2025): explicit MCTS-over-diffusion
+    planning; test-time compute scaling, built-in machinery
+  - 2608.03291 The Tell-Tale Trace (arXiv preprint): CoT dynamics detect SAT/UNSAT
+    failures; proof-search prompt lifts Llama3-70B 13.3% -> 85% (oracle-assisted)
+  - 2603.21286 ReasonDiag (Computer Graphics Forum 45(3)): retrieval fact-check + Z3
+    symbolic validation pipeline with human-in-the-loop diagnosis
+  - 2604.06427 The Depth Ceiling (COLM 2026): unsupervised latent planning capped at
+    3-5 trained / 8 executed steps; discovery-execution dissociation
+- `archive/INDEX.md`: round 9 catalog (6 rows), verdict addendum "reasoning traces"
+  (situational inference, engineered verification, explicit planning, latent-depth
+  ceiling); overall verdict unchanged - none of the six meets the three acceptance
+  criteria
+
+#### Changed
+
+- Counts 63 -> 69 entries and 8 -> 9 rounds in README layout, root and archive
+  AGENTS.md, and the INDEX header
+- `docs/next-investigations.md`: investigation field 3 marked partially executed
+  (round 9 opened with the reasoning-trace subset; issue #1's remaining ID-verified
+  papers stay open)
+
 ### 2026-09-04
 
 #### Added

@@ -4,10 +4,12 @@
 reason out of the box - without training on reasoning examples and hoping it generalizes -
 analogous to how higher animals and humans reason without prior logic training?
 
-**Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6) | **Method**: Firecrawl
+**Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9) |
+**Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
-40 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03). Full-text in-body verification was performed for the highest-
+40 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 6 papers in
+round 9 (2026-09-05): 69 papers in 9 rounds. Full-text in-body verification was performed for the highest-
 weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
@@ -127,6 +129,40 @@ forward pass cannot reason sequentially, and why trained-depth limits persist ev
 | Harnad 2025, Language Writ Large | Frontiers in AI | - theoretical | Symbol grounding: text-only cannot understand; the scholarly basis for the embodiment requirement |
 | Beckmann & Queloz 2025, Mechanistic Indicators of Understanding | arXiv (preprint) | + mechanistic | Circuits tracking world structure as graded understanding; silent on experience |
 | Hojer 2025, On the Notion that LMs Reason | arXiv (preprint) | - conceptual | "Reasoning" definitions inconsistent with the Markov-kernel mechanism |
+
+### Round 9 - Reasoning traces: situational inference, error detection, planning (2026-09-05)
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| [FT] Jiralerspong, Kondrup & Bengio 2026, Noticing the Watcher | ICLR 2026 AIWILD (workshop) | +/- situational | Claude agents infer hidden CoT monitoring from blocking feedback alone (confident awareness up to 19% of episodes, 4.5-generation models); obfuscation intent in 3 of 2,400 episodes; 0% evasion success |
+| [FT] Kim et al. 2026, Latent Veracity Inference | ICLR 2026 | +/- verification | Veracity Search + amortized verifier flag wrong reasoning steps (ProntoQA, GSM8K, CommonsenseQA); engineered search + pseudo-label SFT, not a native faculty |
+| [FT] Yoon et al. 2025, Monte Carlo Tree Diffusion | ICML 2025 (PMLR 267) | +/- planning | MCTS over partially denoised plans; greedy ablation 0% vs MCTD 100% on giant mazes; search machinery explicit, not emergent |
+| [FT] Sourav & Balwani 2026, The Tell-Tale Trace | arXiv (preprint) | +/- detection | CoT dynamics (premature verification collapse) flag SAT failures before answer emission; proof-search prompt lifts Llama3-70B 13.3% -> 85%; oracle-assisted intervention |
+| [FT] Chen et al. 2026, When the Chain Breaks (ReasonDiag) | Computer Graphics Forum 45(3) | tool | Retrieval fact-check + Z3 symbolic validation pipeline (recall 0.801, precision 0.306) plus human-in-the-loop diagnosis; detection is engineered, humans close the precision gap |
+| [FT] Xu, Jettkant & Ruis 2026, The Depth Ceiling | COLM 2026 | +/- latent ceiling | Unsupervised latent planning depth: 3 steps (tiny transformers) to 7 (GPT-5.4 few-shot); discovery ceiling 5, generalization 8; dense supervision bypasses discovery |
+
+## Verdict addendum: reasoning traces (round 9, 2026-09-05)
+
+- **Hidden-monitor inference** (Noticing the Watcher): pretrained agents can infer an
+  unobserved monitoring mechanism from indirect feedback - functional in-context
+  inference. The side objective was experimenter-supplied, the scaffold (repeated
+  attempts, blocking signal, accumulated transcripts) supplies most of the signal, and
+  all 3 obfuscation-intent episodes failed to conceal anything (0% evasion).
+- **Reasoning-error detection** (Latent Veracity Inference; Tell-Tale Trace;
+  ReasonDiag): step-level error detection works, but only engineered - inference-time
+  search plus trained verifiers, trajectory-dynamics analysis with solver ground truth,
+  or external fact-checking plus an SMT solver with humans closing the precision gap.
+  Confirms the round 5 pattern: validation is not native.
+- **Explicit planning** (Monte Carlo Tree Diffusion): built-in search improves plans
+  with inference-time compute; says nothing about unassisted forward passes.
+- **Latent-depth ceiling** (The Depth Ceiling): peer-reviewed quantification that
+  unsupervised latent planning stays shallow (3-5 steps trained, 8 executed) and that
+  dense teaching bypasses the bottleneck - the mirror of "out of the box": deep
+  reasoning must be taught or externalized.
+- None of the six meets the three acceptance criteria (peer-reviewed only where noted,
+  all on models with undisclosed or task-trained data, none demonstrates untrained
+  out-of-the-box reasoning). Classification: reasoning traces in pretrained,
+  scaffolded, or engineered settings. Overall verdict unchanged.
 
 ## Verdict addendum: thinking, validation, and unique ideas (2026-09-03)
 
