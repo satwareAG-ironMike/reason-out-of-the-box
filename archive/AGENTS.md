@@ -2,10 +2,10 @@
 
 ## Purpose
 
-Durable archive of the papers behind the project verdict: 69 entries in 9 thematic rounds
+Durable archive of the papers behind the project verdict: 78 entries in 9 thematic rounds
 (base-model emergence, skeptical, theory and faithfulness, mechanistic and recent, thinking
 and validation, unique idea generation, embodied agents and tools, do LLMs think,
-reasoning traces). The
+reasoning traces and 2026 updates). The
 verdict, evidence matrix, and the 5-condition open-problem spec live in
 [INDEX.md](INDEX.md).
 

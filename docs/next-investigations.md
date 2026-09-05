@@ -37,7 +37,7 @@ What is needed to settle H1, in order:
 |---|-------|-------|-------------|
 | 1 | The H1 experiment on open-data models | Open; no paper fills the gap (criteria 1-3 unmet) | Execute study design v1.0 (milestones M1-M5 below) |
 | 2 | Feasibility: models, data, compute | Partially verified today (findings below) | Close remaining release verifications (OLMo 3, Apertus 1.5) |
-| 3 | Literature round 9: 2026 latent-reasoning updates | Round 9 opened 2026-09-05 with 6 reasoning-trace papers (all `[FT]`); the 7 ID-verified papers below remain pending | Add remaining issue #1 papers to round 9 per `archive/AGENTS.md` contract |
+| 3 | Literature round 9: 2026 latent-reasoning updates | Executed 2026-09-05: 15 papers added (6 reasoning traces + the issue #1 list incl. corrected Akyurek ID 2211.15661) | Closed; future 2026 updates go to round 10 |
 | 4 | ARC-AGI-2 process level | Scores verified; no peer-reviewed process-level analysis exists | Monitor 2026 competition; audit winner write-ups when available |
 | 5 | In-context learning as algorithm formation | New theoretical frame for "from nothing" | Add Akyürek line + In-Context Algebra to round 9 |
 | 6 | Pre-registration practice | Established: two-layer (human IRB + computational analysis plan) | Pre-register in M1 |

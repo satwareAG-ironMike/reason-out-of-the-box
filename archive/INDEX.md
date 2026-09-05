@@ -8,8 +8,8 @@ analogous to how higher animals and humans reason without prior logic training?
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
-40 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 6 papers in
-round 9 (2026-09-05): 69 papers in 9 rounds. Full-text in-body verification was performed for the highest-
+40 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
+round 9 (2026-09-05): 78 papers in 9 rounds. Full-text in-body verification was performed for the highest-
 weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
@@ -70,7 +70,7 @@ forward pass cannot reason sequentially, and why trained-depth limits persist ev
 | [FT] Wang et al. 2024, Grokked Implicit Reasoners | ICML 2024 | - | Implicit reasoning circuits still fail OOD composition |
 | [FT] Liu et al. 2025, R1-Zero Critical Perspective | COLM 2025 | + key ablation | Base models already solve math and show "Aha"; RL amplifies, not creates |
 | DeepSeek-AI 2025, R1 | Nature | +/- paradigm | RL elicitation: 15.6% -> 71% AIME from a base that already scored 15.6% |
-| [FT] Chollet et al. 2025, ARC-AGI-2 | arXiv | test platform | ~0-4% at launch vs 60% human; 24% 2025 winner; >90% claimed 2026 (unreviewed) |
+| [FT] Chollet et al. 2025, ARC-AGI-2 | arXiv | test platform | ~0-4% at launch vs 60% human; 24% 2025 winner; 92.5% GPT-5.6 Sol / 90.4% Claude Opus 5 verified semi-private 2026 (ARC Prize) |
 | 2026, ARC Living Survey | arXiv (preprint) | - synthesis | All paradigms drop 2-3x on regenerated tasks |
 
 ### Round 5 - How LLMs think and validate ideas
@@ -130,7 +130,7 @@ forward pass cannot reason sequentially, and why trained-depth limits persist ev
 | Beckmann & Queloz 2025, Mechanistic Indicators of Understanding | arXiv (preprint) | + mechanistic | Circuits tracking world structure as graded understanding; silent on experience |
 | Hojer 2025, On the Notion that LMs Reason | arXiv (preprint) | - conceptual | "Reasoning" definitions inconsistent with the Markov-kernel mechanism |
 
-### Round 9 - Reasoning traces: situational inference, error detection, planning (2026-09-05)
+### Round 9 - Reasoning traces, ICL as algorithm, 2026 updates (2026-09-05)
 
 | Paper | Venue | Verdict | Note |
 |-------|-------|---------|------|
@@ -140,6 +140,15 @@ forward pass cannot reason sequentially, and why trained-depth limits persist ev
 | [FT] Sourav & Balwani 2026, The Tell-Tale Trace | arXiv (preprint) | +/- detection | CoT dynamics (premature verification collapse) flag SAT failures before answer emission; proof-search prompt lifts Llama3-70B 13.3% -> 85%; oracle-assisted intervention |
 | [FT] Chen et al. 2026, When the Chain Breaks (ReasonDiag) | Computer Graphics Forum 45(3) | tool | Retrieval fact-check + Z3 symbolic validation pipeline (recall 0.801, precision 0.306) plus human-in-the-loop diagnosis; detection is engineered, humans close the precision gap |
 | [FT] Xu, Jettkant & Ruis 2026, The Depth Ceiling | COLM 2026 | +/- latent ceiling | Unsupervised latent planning depth: 3 steps (tiny transformers) to 7 (GPT-5.4 few-shot); discovery ceiling 5, generalization 8; dense supervision bypasses discovery |
+| [FT] Yue et al. 2025, Does RL Really Incentivize Reasoning? | NeurIPS 2025 (Oral) | + key pass@k | Base models catch up and surpass RLVR twins at large pass@k on all benchmarks (Minerva 32B: base +9% at k=128); RLVR narrows coverage; hardest-problem CoTs verified manually |
+| [FT] Hojer et al. 2025, Representation Engineering Reasoning | ICLR 2025 | +/- latent extract | Control vectors from residual-stream activations improve reasoning on Pythia-1.4B/2.8B and Mistral-7B; vectors derived from task data, no weight training |
+| [FT] Todd et al. 2026, In-Context Algebra | ICLR 2026 | +/- procedure | Tokens as pure variables (finite groups): near-perfect accuracy, unseen-group generalization; causally isolated mechanisms (copying head, identity recognition, closure cancellation); task-family training required |
+| Garg et al. 2022, What Can Transformers Learn In-Context? | NeurIPS 2022 | +/- frame | Function classes learned in-context, inference-time only; the empirical baseline for the ICL-as-algorithm line |
+| [FT] Akyurek et al. 2023, What Learning Algorithm is ICL? | ICLR 2023 | +/- formal | Transformers can implement GD steps (O(d) hidden, constant depth) and ridge updates (O(d^2)); trained ICL transitions between predictors, Bayesian at scale; intermediate quantities decodable |
+| Sileo et al. 2026, Reasoning Core | arXiv (preprint) | tool | 50 procedural generators (math, logic, planning, state tracking, formal languages, code) with difficulty controls; completion-supervised training study incl. OLMo-1B |
+| Hodel 2024, ARC Procedural Example Generation | arXiv (preprint) | tool | Per-task generators for all 400 ARC training tasks; Condition 2 infrastructure |
+| Moffitt 2025, ARC-GEN | arXiv (preprint) | tool | Mimetic procedural ARC generator, open source; intra-task sample scarcity fix |
+| Elazar et al. 2024, WIMBD | ICLR 2024 | tool | Count + search at scale over >35 TB of corpora; contamination audit backbone for the pilot |
 
 ## Verdict addendum: reasoning traces (round 9, 2026-09-05)
 
@@ -159,10 +168,22 @@ forward pass cannot reason sequentially, and why trained-depth limits persist ev
   unsupervised latent planning stays shallow (3-5 steps trained, 8 executed) and that
   dense teaching bypasses the bottleneck - the mirror of "out of the box": deep
   reasoning must be taught or externalized.
-- None of the six meets the three acceptance criteria (peer-reviewed only where noted,
-  all on models with undisclosed or task-trained data, none demonstrates untrained
-  out-of-the-box reasoning). Classification: reasoning traces in pretrained,
-  scaffolded, or engineered settings. Overall verdict unchanged.
+- **RLVR boundary** (Yue et al., NeurIPS 2025 oral): at large sampling budgets base
+  models match and surpass their RLVR twins on every benchmark - RL narrows coverage
+  rather than creating reasoning. Strengthens the elicitation-only consensus of
+  rounds 1 and 4 with pass@k evidence.
+- **ICL as algorithm** (Garg 2022; Akyurek 2023; Todd et al. 2026): transformers can
+  implement and mechanistically reveal real learning algorithms over in-context
+  variables, but always with demonstrations in the prompt or task-family training.
+  "In-context" generality is demonstrated; "out of the box" is not.
+- **Study infrastructure** (Hodel; Moffitt; Elazar et al.; Sileo et al.): ARC task
+  generators, corpus-audit platform, and 50 procedural reasoning generators - the
+  components the pre-registrable study design (docs/study-design.md) requires.
+- None of the fifteen meets the three acceptance criteria (peer-reviewed only where
+  noted, all on models with undisclosed or task-trained data, none demonstrates
+  untrained out-of-the-box reasoning). Classification: reasoning traces in pretrained,
+  scaffolded, or engineered settings; formal frames; study infrastructure. Overall
+  verdict unchanged.
 
 ## Verdict addendum: thinking, validation, and unique ideas (2026-09-03)
 

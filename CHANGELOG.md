@@ -25,18 +25,31 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     symbolic validation pipeline with human-in-the-loop diagnosis
   - 2604.06427 The Depth Ceiling (COLM 2026): unsupervised latent planning capped at
     3-5 trained / 8 executed steps; discovery-execution dissociation
-- `archive/INDEX.md`: round 9 catalog (6 rows), verdict addendum "reasoning traces"
-  (situational inference, engineered verification, explicit planning, latent-depth
-  ceiling); overall verdict unchanged - none of the six meets the three acceptance
-  criteria
+- Round 9 extension (issue #1 completion), all ID/venue-verified:
+  - 2504.13837 Does RL Really Incentivize Reasoning? (NeurIPS 2025 Oral, `[FT]`):
+    base models surpass RLVR twins at large pass@k; RLVR narrows coverage
+  - 2504.19483 Representation Engineering Reasoning (ICLR 2025, `[FT]`): residual-stream
+    control vectors improve reasoning on Pythia/Mistral; vectors derived from task data
+  - 2208.01066 Garg et al. (NeurIPS 2022) + 2211.15661 Akyurek et al. (ICLR 2023,
+    `[FT]`): the ICL-as-algorithm line; issue #1's "Akyurek (2208.01066)" attribution
+    corrected - the ID is Garg et al., the actual Akyurek paper is 2211.15661
+  - 2512.16902 In-Context Algebra (ICLR 2026, `[FT]`): symbolic mechanisms over
+    per-sequence randomized tokens; unseen-group generalization; task-family training
+  - Study infrastructure: 2404.07353 ARC generators (Hodel), 2511.00162 ARC-GEN
+    (Moffitt), 2310.20707 WIMBD (ICLR 2024), 2608.05148 Reasoning Core (preprint)
+- Round 9 catalog (15 rows) and verdict addendum extended: RLVR pass@k boundary,
+  ICL-as-algorithm frames, study infrastructure; overall verdict unchanged - none of
+  the fifteen meets the three acceptance criteria
 
 #### Changed
 
-- Counts 63 -> 69 entries and 8 -> 9 rounds in README layout, root and archive
+- Round 4 ARC-AGI-2 entry + INDEX row: ">90% claimed 2026 (unreviewed)" replaced with
+  ARC-Prize-verified semi-private figures (GPT-5.6 Sol 92.5%, Claude Opus 5 90.4%;
+  eligibility as competition submissions not established)
+- Counts 63 -> 78 entries and 8 -> 9 rounds in README layout, root and archive
   AGENTS.md, and the INDEX header
-- `docs/next-investigations.md`: investigation field 3 marked partially executed
-  (round 9 opened with the reasoning-trace subset; issue #1's remaining ID-verified
-  papers stay open)
+- `docs/next-investigations.md`: investigation field 3 marked executed (round 9
+  complete with the reasoning-trace subset and the issue #1 papers)
 
 ### 2026-09-04
 
