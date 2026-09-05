@@ -8,7 +8,7 @@ analogous to how higher animals and humans reason without prior logic training?
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
-40 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
+26 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
 round 9 (2026-09-05): 78 papers in 9 rounds. Full-text in-body verification was performed for the highest-
 weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
@@ -70,7 +70,7 @@ forward pass cannot reason sequentially, and why trained-depth limits persist ev
 | [FT] Wang et al. 2024, Grokked Implicit Reasoners | ICML 2024 | - | Implicit reasoning circuits still fail OOD composition |
 | [FT] Liu et al. 2025, R1-Zero Critical Perspective | COLM 2025 | + key ablation | Base models already solve math and show "Aha"; RL amplifies, not creates |
 | DeepSeek-AI 2025, R1 | Nature | +/- paradigm | RL elicitation: 15.6% -> 71% AIME from a base that already scored 15.6% |
-| [FT] Chollet et al. 2025, ARC-AGI-2 | arXiv | test platform | ~0-4% at launch vs 60% human; 24% 2025 winner; 92.5% GPT-5.6 Sol / 90.4% Claude Opus 5 verified semi-private 2026 (ARC Prize) |
+| [FT] Chollet et al. 2025, ARC-AGI-2 | arXiv | test platform | ~0-4% at launch vs 60% human; 24% 2025 winner; 92.5% GPT-5.6 Sol / 90.4% Claude Opus 5 verified semi-private 2026 (ARC Prize; competition eligibility not established) |
 | 2026, ARC Living Survey | arXiv (preprint) | - synthesis | All paradigms drop 2-3x on regenerated tasks |
 
 ### Round 5 - How LLMs think and validate ideas
@@ -150,7 +150,7 @@ forward pass cannot reason sequentially, and why trained-depth limits persist ev
 | Moffitt 2025, ARC-GEN | arXiv (preprint) | tool | Mimetic procedural ARC generator, open source; intra-task sample scarcity fix |
 | Elazar et al. 2024, WIMBD | ICLR 2024 | tool | Count + search at scale over >35 TB of corpora; contamination audit backbone for the pilot |
 
-## Verdict addendum: reasoning traces (round 9, 2026-09-05)
+## Verdict addendum: round 9 - reasoning traces, ICL as algorithm, 2026 updates (2026-09-05)
 
 - **Hidden-monitor inference** (Noticing the Watcher): pretrained agents can infer an
   unobserved monitoring mechanism from indirect feedback - functional in-context
