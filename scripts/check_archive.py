@@ -2,7 +2,7 @@
 """Consistency checker for the paper archive (stdlib only).
 
 Checks every archive/round*/<id>-<slug>.md entry and archive/INDEX.md:
-  - filename id prefix appears in the entry's arXiv/PMID link
+  - filename id prefix appears in the entry's arXiv/PMID/PhilPapers link
   - required table fields and sections present
   - no placeholder author fields (value starting with "(")
   - no em/en dashes (project punctuation standard)
@@ -22,7 +22,7 @@ import tempfile
 from pathlib import Path
 
 REQUIRED_FIELDS = ("| Authors |", "| Venue |", "| Year |", "| Archive round |", "| Archived |")
-ID_FIELDS = ("| arXiv |", "| PMID |")
+ID_FIELDS = ("| arXiv |", "| PMID |", "| PhilPapers |")
 REQUIRED_SECTIONS = ("## Abstract", "## Key findings", "## Relevance to core question", "## Citation")
 FT_MARK = "verified from full text"
 BAD_DASHES = ("\u2014", "\u2013")
@@ -47,7 +47,7 @@ def check(root: Path) -> dict:
         text = entry.read_text(encoding="utf-8")
         rel = f"{entry.parent.name}/{entry.name}"
 
-        id_prefix = entry.name.split("-", 1)[0].removeprefix("pmid")
+        id_prefix = entry.name.split("-", 1)[0].removeprefix("pmid").removeprefix("pp")
         if id_prefix not in text:
             errors.append(f"{rel}: id {id_prefix} not found in body")
         for field in REQUIRED_FIELDS:
@@ -112,6 +112,26 @@ c
 ## Citation
 d
 """
+GOOD_ENTRY_PP = """# T2
+
+| Field | Value |
+|-------|-------|
+| PhilPapers | [XTEST](https://philpapers.org/rec/XTEST) |
+| Authors | Grace Hopper |
+| Venue | X |
+| Year | 2026 |
+| Archive round | 1 |
+| Archived | 2026-01-01 |
+
+## Abstract (condensed)
+a
+## Key findings (verified from full text)
+b
+## Relevance to core question
+c
+## Citation
+d
+"""
 GOOD_INDEX = """# I
 
 ### Round 1 - x
@@ -119,6 +139,7 @@ GOOD_INDEX = """# I
 | Paper | Venue | Verdict | Note |
 |-------|-------|---------|------|
 | [FT] Lovelace 2026 | X | + | n |
+| [FT] XTEST 2026 | X | - | n |
 
 ## Other
 """
@@ -130,10 +151,11 @@ def selftest() -> None:
         d = root / "archive" / "round1-x"
         d.mkdir(parents=True)
         (d / "1234.56789-lovelace-t.md").write_text(GOOD_ENTRY, encoding="utf-8")
+        (d / "ppXTEST-hopper-x.md").write_text(GOOD_ENTRY_PP, encoding="utf-8")
         (root / "archive" / "INDEX.md").write_text(GOOD_INDEX, encoding="utf-8")
         ok = check(root)
         assert not ok["errors"], ok["errors"]
-        assert ok["ft_verified"] == 1 and ok["ft_index_mismatch"] == 0
+        assert ok["ft_verified"] == 2 and ok["ft_index_mismatch"] == 0
 
         # negative controls: each break must be caught
         broken = GOOD_ENTRY.replace("| Authors | Ada Lovelace |", "| Authors | (2026) |")
@@ -147,7 +169,8 @@ def selftest() -> None:
                        "id 9999.00000 not found", "rows, dir has"):
             assert needle in kinds, f"negative control missed: {needle}\n{kinds}"
         assert bad["placeholder_authors"] == 1
-        assert bad["ft_index_mismatch"] == 0  # [FT] row 1, FT entry 1 (the good copy)
+        # ft: broken entry lost FT, the pp entry and the wrong-id copy keep it -> 2/2
+        assert bad["ft_index_mismatch"] == 0
     print("selftest passed")
 
 
