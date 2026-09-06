@@ -5,6 +5,33 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-09-06
+
+#### Added
+
+- Round 8 extension, the Abstraction Fallacy debate (PhilPapers ingest via Firecrawl,
+  both entries full-text-verified `[FT]` from the PhilArchive PDFs):
+  - ppLERTAF Lerchner, The Abstraction Fallacy (PhilArchive preprint 2026-03-19,
+    Google DeepMind author, personal views): computation is mapmaker-dependent;
+    simulation never becomes instantiation; embodiment concedes only referential
+    grounding; verdict - theoretical on machine experience
+  - ppDEVHTB-2 Deva, Hearing the Bell Ring Back (PhilArchive preprint 2026-05):
+    concedes Lerchner in full, formalizes the receiver side of the human-AI loop
+    (free energy, channel capacity, signal detection, PID) with a pre-registered
+    P1-P4 protocol and kill conditions; no results yet; verdict +/- framework
+- INDEX verdict addendum on the debate: preprint-only (PhilArchive unmoderated;
+  the 7+ response manuscripts likewise), verdict impact none - neither paper
+  addresses out-of-the-box reasoning or any acceptance criterion; overall verdict
+  unchanged (78 -> 80 entries)
+
+#### Changed
+
+- `scripts/check_archive.py`: PhilPapers records accepted as a source type -
+  `pp<RECORD>` filenames strip to the record ID, `| PhilPapers |` is a valid ID
+  field; selftest extended with a PhilPapers entry (negative controls unchanged)
+- Counts 78 -> 80 entries in README layout, root and archive AGENTS.md, and the
+  INDEX header
+
 ### 2026-09-05
 
 #### Added
