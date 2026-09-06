@@ -26,7 +26,7 @@ in [docs/study-design.md](docs/study-design.md).
 
 | Path | Content |
 |------|---------|
-| `archive/` | 63 peer-reviewed and preprint papers, 8 thematic rounds, per-paper entries |
+| `archive/` | 80 peer-reviewed and preprint papers, 9 thematic rounds, per-paper entries |
 | `archive/INDEX.md` | Master catalog, verdict, evidence matrix, open-problem spec |
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/study-design.md` | Pre-registrable protocol for the experiment that would settle the question |
@@ -47,7 +47,7 @@ cross-checked secondary sources.
 
 | Claim | Papers |
 |-------|--------|
-| Positive: latent reasoning, elicitation only | 2402.10200, 2212.09196, 2205.11916, 2503.20783 |
+| Positive: latent reasoning, elicitation only | 2402.10200, 2212.09196, 2205.11916, 2503.20783, 2504.13837, 2504.19483 |
 | Negative: pattern matching, contamination | 2305.18654, 2405.00332, 2410.05229, 2309.13638 |
 | Formal limits of a forward pass | 2310.07923, 2402.12875, 2604.25800 |
 | Mechanistic: real algorithms do form | 2301.05217, 2209.11895 |
@@ -56,6 +56,9 @@ cross-checked secondary sources.
 | Embodied agents: brain + body + herd | 2305.16291, 2606.15497, 2506.24019, 2607.02329, 2303.11366, 2308.10144, 2302.04761, 2304.03442 |
 | Do LLMs think or feel (Hinton, Lemoine) | PMID 38769463, PMID 39471222, PMID 41551539, 2601.01828, 2601.15334, 2303.07103, 2210.13966, PMID 40013231 |
 | Novel-task testbed | 2505.11831, 2603.13372 |
+| Reasoning traces: hidden-monitor inference, error detection, planning | 2603.16928, 2505.11824, 2502.07202, 2608.03291, 2603.21286, 2604.06427 |
+| ICL as algorithm (bounds and mechanisms) | 2208.01066, 2211.15661, 2512.16902 |
+| Task generators + corpus audit (study infrastructure) | 2404.07353, 2511.00162, 2310.20707, 2608.05148 |
 
 ## Status
 
