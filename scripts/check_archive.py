@@ -3,6 +3,9 @@
 
 Checks every archive/round*/<id>-<slug>.md entry and archive/INDEX.md:
   - filename id prefix appears in the entry's arXiv/PMID/PhilPapers link
+    (note: the pp<RECORD> prefix strip matches the record stem only - a link to a
+    sibling record sharing the stem, e.g. DEVHTB-3 vs DEVHTB-2, is not caught;
+    the [FT] human verification layer is the backstop)
   - required table fields and sections present
   - no placeholder author fields (value starting with "(")
   - no em/en dashes (project punctuation standard)
@@ -54,7 +57,7 @@ def check(root: Path) -> dict:
             if field not in text:
                 errors.append(f"{rel}: missing field {field}")
         if not any(f in text for f in ID_FIELDS):
-            errors.append(f"{rel}: missing arXiv/PMID field")
+            errors.append(f"{rel}: missing arXiv/PMID/PhilPapers field")
         for section in REQUIRED_SECTIONS:
             if section not in text:
                 errors.append(f"{rel}: missing section {section}")

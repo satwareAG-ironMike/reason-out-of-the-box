@@ -29,6 +29,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `scripts/check_archive.py`: PhilPapers records accepted as a source type -
   `pp<RECORD>` filenames strip to the record ID, `| PhilPapers |` is a valid ID
   field; selftest extended with a PhilPapers entry (negative controls unchanged)
+- Root `AGENTS.md` paper provenance rule generalized from "arXiv ID" to source ID
+  (arXiv, PubMed, or PhilPapers), matching the archive contract and the existing
+  pmid* entries
 - Counts 78 -> 80 entries in README layout, root and archive AGENTS.md, and the
   INDEX header
 
