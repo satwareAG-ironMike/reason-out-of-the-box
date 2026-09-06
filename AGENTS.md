@@ -83,7 +83,9 @@ When the user requests a durable behavior change, record it here or in the relev
 - This is a research POC (no build, no runtime). Question, verdict, and evidence map live in README.md
 - Git: `main`, remote github.com/satwareAG-ironMike/reason-out-of-the-box (branch-protected)
 - Public-only rule: the repository holds only public resources (papers, open repositories, published tools). No personal data, device or network inventories, session state, credentials, or private discussion content - in files or in history
-- Paper provenance rule: every archive entry must carry arXiv ID, authors, venue, year, and peer-review status; entries with quotes verified against paper full text are marked `[FT]` in archive/INDEX.md
+- Paper provenance rule: every archive entry must carry a source ID (arXiv, PubMed,
+  or PhilPapers record), authors, venue, year, and peer-review status; entries with
+  quotes verified against paper full text are marked `[FT]` in archive/INDEX.md
 - No em dashes in any file (project punctuation standard)
 - Changes of substance get a CHANGELOG.md entry under [Unreleased] until a version is cut
 - CI: GitHub Actions run on every push and PR - archive consistency (`scripts/check_archive.py`),
@@ -99,6 +101,6 @@ When the user requests a durable behavior change, record it here or in the relev
 
 | Path | Scope | File |
 |------|-------|------|
-| `archive/` | Paper archive: 78 entries, 9 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
+| `archive/` | Paper archive: 80 entries, 9 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
 | `docs/` | Durable project documents (acceptance criteria, study design, next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall); governed by root rules | - |
 | `scripts/` | `check_archive.py` archive consistency checker and `check_links.py` markdown link checker (stdlib, each with `--selftest`); run both before any closeout | - |

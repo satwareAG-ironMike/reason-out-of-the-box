@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Durable archive of the papers behind the project verdict: 78 entries in 9 thematic rounds
+Durable archive of the papers behind the project verdict: 80 entries in 9 thematic rounds
 (base-model emergence, skeptical, theory and faithfulness, mechanistic and recent, thinking
 and validation, unique idea generation, embodied agents and tools, do LLMs think,
 reasoning traces and 2026 updates). The
@@ -17,11 +17,13 @@ verdict, evidence matrix, and the 5-condition open-problem spec live in
 
 ## Local Contracts
 
-- Every paper file is named `<arxiv-id>-<first-author>-<slug>.md` and must contain:
-  arXiv ID link, authors, venue, peer-review status, year, archive round, condensed
-  abstract, key findings, relevance to the core question, citation
+- Every paper file is named `<source-id>-<first-author>-<slug>.md` and must contain:
+  source ID link (arXiv, PubMed `pmid<NNNN>`, or PhilPapers `pp<RECORD>`), authors,
+  venue, peer-review status, year, archive round, condensed abstract, key findings,
+  relevance to the core question, citation
 - Peer-review status must be explicit: NeurIPS/ICLR/ICML/COLM/Nature/Nature Human
-  Behaviour count as peer-reviewed; arXiv-only entries are flagged `preprint`
+  Behaviour count as peer-reviewed; arXiv-only and PhilArchive-only entries are
+  flagged `preprint` (PhilArchive is an unmoderated server)
 - Quotes in entries must come from the paper itself (`firecrawl research read-paper` or
   direct full text). Entries with such verification are marked `[FT]` in INDEX.md
 - INDEX.md verdict symbols: `+` supports out-of-the-box reasoning, `-` opposes,

@@ -26,7 +26,7 @@ in [docs/study-design.md](docs/study-design.md).
 
 | Path | Content |
 |------|---------|
-| `archive/` | 78 peer-reviewed and preprint papers, 9 thematic rounds, per-paper entries |
+| `archive/` | 80 peer-reviewed and preprint papers, 9 thematic rounds, per-paper entries |
 | `archive/INDEX.md` | Master catalog, verdict, evidence matrix, open-problem spec |
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/study-design.md` | Pre-registrable protocol for the experiment that would settle the question |

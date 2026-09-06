@@ -4,12 +4,13 @@
 reason out of the box - without training on reasoning examples and hoping it generalizes -
 analogous to how higher animals and humans reason without prior logic training?
 
-**Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9) |
+**Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
+2026-09-06 (round 8 extension) |
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
 26 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
-round 9 (2026-09-05): 78 papers in 9 rounds. Full-text in-body verification was performed for the highest-
+round 9 (2026-09-05), 2 papers in round 8 (2026-09-06): 80 papers in 9 rounds. Full-text in-body verification was performed for the highest-
 weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
@@ -129,6 +130,8 @@ forward pass cannot reason sequentially, and why trained-depth limits persist ev
 | Harnad 2025, Language Writ Large | Frontiers in AI | - theoretical | Symbol grounding: text-only cannot understand; the scholarly basis for the embodiment requirement |
 | Beckmann & Queloz 2025, Mechanistic Indicators of Understanding | arXiv (preprint) | + mechanistic | Circuits tracking world structure as graded understanding; silent on experience |
 | Hojer 2025, On the Notion that LMs Reason | arXiv (preprint) | - conceptual | "Reasoning" definitions inconsistent with the Markov-kernel mechanism |
+| [FT] Lerchner 2026, The Abstraction Fallacy | PhilArchive (preprint) | - theoretical | Computation is mapmaker-dependent; simulation never becomes instantiation; embodiment concedes only referential grounding; AGI as "non-sentient tool" |
+| [FT] Deva 2026, Hearing the Bell Ring Back | PhilArchive (preprint) | +/- framework | Concedes Lerchner in full; receiver-side formalism (free energy, channel, SDT, PID) with pre-registered P1-P4 protocol for loop-closure rate rho; no results yet |
 
 ### Round 9 - Reasoning traces, ICL as algorithm, 2026 updates (2026-09-05)
 
@@ -208,6 +211,28 @@ forward pass cannot reason sequentially, and why trained-depth limits persist ev
   systems that could change the answer are the agentic ones in round 7. Full claim ledger:
   [docs/claims-hinton-lemoine.md](../docs/claims-hinton-lemoine.md).
 
+## Verdict addendum: the Abstraction Fallacy debate (2026-09-06)
+
+- **Lerchner, The Abstraction Fallacy** (PhilArchive preprint; Google DeepMind author,
+  personal-views disclaimer): a conceptual argument that computation presupposes an
+  experiencing "mapmaker", so scaling syntax never yields experience. Extends Harnad's
+  grounding argument (round 8) from semantics to ontology, and concedes that embodiment
+  solves referential grounding - the precise gap Deva builds on. It is not empirical:
+  no experiment, no measurement; conceptual analyses are not the kind of thing evidence
+  overturns (as Deva notes). PhilArchive is unmoderated: the 2026 response cluster
+  (7+ PhilPapers-listed manuscripts, several with likely AI-generated author names) is
+  likewise entirely preprint. Not peer-reviewed literature.
+- **Deva, Hearing the Bell Ring Back** (PhilArchive preprint): accepts Lerchner's four
+  theses and formalizes only the referential register Lerchner concedes: a four-layer
+  receiver-side formalism and a falsifiable, pre-registered protocol (P1-P4, kill
+  conditions) for a loop-closure rate rho in bits per turn on human-AI dialogues.
+  No results yet; "rho > 0 does not imply consciousness anywhere in the loop".
+- **Verdict impact: none.** Neither paper addresses out-of-the-box reasoning, disclosed
+  training data, or any of the three acceptance criteria. Round 8's consciousness
+  balance gains its sharpest anti-functionalist statement plus a measurement framework
+  the thesis program may reuse for the M4 human-baseline arm; the overall verdict is
+  unchanged.
+
 ## The biological analogy - what cognitive science says
 
 - Spelke's core-knowledge research (What Babies Know, OUP 2022; BBS 2023): humans and many
@@ -245,6 +270,8 @@ contamination audit, depth ladders, activation patching, decision table) is draf
 ## Source notes
 
 - arXiv IDs in filenames map 1:1 to https://arxiv.org/abs/<id>.
+- PhilPapers records use `pp<RECORD>` filenames mapping to https://philpapers.org/rec/<RECORD>;
+  PhilArchive-only papers carry no arXiv ID and are preprints.
 - [FT] = full-text passages read and quoted via firecrawl research read-paper.
 - Peer-review status: NeurIPS/ICLR/ICML/COLM/Nature Human Behaviour/Nature = peer-reviewed;
   arXiv-only items are flagged as preprints in their entries.
