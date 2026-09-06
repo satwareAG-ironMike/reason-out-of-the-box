@@ -82,10 +82,10 @@ When the user requests a durable behavior change, record it here or in the relev
 
 - This is a research POC (no build, no runtime). Question, verdict, and evidence map live in README.md
 - Git: `main`, remote github.com/satwareAG-ironMike/reason-out-of-the-box - protected by the
-  `main-human-review-gate` ruleset: no direct pushes, PRs require 1 approving human review
-  (the PR author cannot self-approve), all 3 CI checks green on an up-to-date branch,
-  squash merges only. Agents: open a PR, then stop and wait for human review; never
-  bypass or edit the ruleset without explicit user instruction
+  `main-integrity-gate` ruleset: no force pushes, no branch deletion, linear history,
+  all 3 CI checks green to merge. Human review requirement removed 2026-09-06 by owner
+  decision; direct pushes to `main` are allowed, PRs remain the preferred route for
+  changes of substance. Never edit the ruleset without explicit user instruction
 - Public-only rule: the repository holds only public resources (papers, open repositories, published tools). No personal data, device or network inventories, session state, credentials, or private discussion content - in files or in history
 - Paper provenance rule: every archive entry must carry a source ID (arXiv, PubMed,
   or PhilPapers record), authors, venue, year, and peer-review status; entries with
