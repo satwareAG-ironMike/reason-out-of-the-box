@@ -81,7 +81,11 @@ When the user requests a durable behavior change, record it here or in the relev
 ## Project Notes
 
 - This is a research POC (no build, no runtime). Question, verdict, and evidence map live in README.md
-- Git: `main`, remote github.com/satwareAG-ironMike/reason-out-of-the-box (branch-protected)
+- Git: `main`, remote github.com/satwareAG-ironMike/reason-out-of-the-box - protected by the
+  `main-human-review-gate` ruleset: no direct pushes, PRs require 1 approving human review
+  (the PR author cannot self-approve), all 3 CI checks green on an up-to-date branch,
+  squash merges only. Agents: open a PR, then stop and wait for human review; never
+  bypass or edit the ruleset without explicit user instruction
 - Public-only rule: the repository holds only public resources (papers, open repositories, published tools). No personal data, device or network inventories, session state, credentials, or private discussion content - in files or in history
 - Paper provenance rule: every archive entry must carry a source ID (arXiv, PubMed,
   or PhilPapers record), authors, venue, year, and peer-review status; entries with
