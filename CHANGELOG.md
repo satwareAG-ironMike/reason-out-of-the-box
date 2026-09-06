@@ -5,6 +5,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-09-06 (second entry)
+
+#### Changed
+
+- Branch protection relaxed by owner decision: the `main-human-review-gate` ruleset
+  becomes `main-integrity-gate` - the 1-approving-human-review requirement is removed;
+  kept: no force pushes, no branch deletion, linear history, all 3 required CI checks.
+  PRs #21 (round 8 Abstraction Fallacy extension) and #18 (review-gate contract doc)
+  merged to `main`; all feature branches deleted remote and local
+
 ### 2026-09-06
 
 #### Added
