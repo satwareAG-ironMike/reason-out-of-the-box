@@ -37,9 +37,9 @@ What is needed to settle H1, in order:
 |---|-------|-------|-------------|
 | 1 | The H1 experiment on open-data models | Open; no paper fills the gap (criteria 1-3 unmet) | Execute study design v1.0 (milestones M1-M5 below) |
 | 2 | Feasibility: models, data, compute | Partially verified today (findings below) | Close remaining release verifications (OLMo 3, Apertus 1.5) |
-| 3 | Literature round 9: 2026 latent-reasoning updates | 7 new papers identified and ID-verified | Add to archive per `archive/AGENTS.md` contract, `[FT]` on high-weight |
+| 3 | Literature round 9: 2026 latent-reasoning updates | Executed 2026-09-05: 15 papers added (6 reasoning traces + the issue #1 list incl. corrected Akyurek ID 2211.15661) | Closed; future 2026 updates go to round 10 |
 | 4 | ARC-AGI-2 process level | Scores verified; no peer-reviewed process-level analysis exists | Monitor 2026 competition; audit winner write-ups when available |
-| 5 | In-context learning as algorithm formation | New theoretical frame for "from nothing" | Add Akyürek line + In-Context Algebra to round 9 |
+| 5 | In-context learning as algorithm formation | New theoretical frame for "from nothing" | Done in round 9 (2026-09-05): Garg 2208.01066, Akyurek 2211.15661, In-Context Algebra 2512.16902 |
 | 6 | Pre-registration practice | Established: two-layer (human IRB + computational analysis plan) | Pre-register in M1 |
 | 7 | Biological disanalogy (child data efficiency arm) | Future work per study design | Keep as follow-up; not in the thesis timeline |
 
@@ -60,9 +60,11 @@ What is needed to settle H1, in order:
   acquire procedures whose token-to-meaning mapping is randomized per prompt, and
   generalize to unseen groups. Strongest empirical evidence of procedure acquisition
   without fixed task training; still meta-trained on a related task family, so not
-  "from nothing". The Akyürek line (ICL as gradient descent, ICML 2023; ICL as a
-  meta-learned interpreter, ICML 2022/NeurIPS 2023) bounds what demonstrations can
-  identify.
+  "from nothing". The ICL-as-algorithm line (Garg et al. 2022, NeurIPS; Akyurek et al.
+  2023, ICLR 2023, arXiv:2211.15661 - ICL implementations provably include
+  gradient-descent-like and closed-form updates) bounds what demonstrations can
+  identify. Corrected 2026-09-05: this bullet previously mislabeled arXiv:2208.01066
+  as Akyurek; the ID is Garg et al.
 
 ### ARC-AGI-2: verified scores, no process analysis
 
