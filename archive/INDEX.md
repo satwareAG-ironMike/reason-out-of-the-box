@@ -5,12 +5,13 @@ reason out of the box - without training on reasoning examples and hoping it gen
 analogous to how higher animals and humans reason without prior logic training?
 
 **Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
-2026-09-06 (round 8 extension) |
+2026-09-06 (round 8 extension), 2026-09-09 (round 10) |
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
 26 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
-round 9 (2026-09-05), 2 papers in round 8 (2026-09-06): 80 papers in 9 rounds. Full-text in-body verification was performed for the highest-
+round 9 (2026-09-05), 2 papers in round 8 (2026-09-06), 6 papers in round 10 (2026-09-09):
+86 papers in 10 rounds. Full-text in-body verification was performed for the highest-
 weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
@@ -152,6 +153,42 @@ forward pass cannot reason sequentially, and why trained-depth limits persist ev
 | Hodel 2024, ARC Procedural Example Generation | arXiv (preprint) | tool | Per-task generators for all 400 ARC training tasks; Condition 2 infrastructure |
 | Moffitt 2025, ARC-GEN | arXiv (preprint) | tool | Mimetic procedural ARC generator, open source; intra-task sample scarcity fix |
 | Elazar et al. 2024, WIMBD | ICLR 2024 | tool | Count + search at scale over >35 TB of corpora; contamination audit backbone for the pilot |
+
+### Round 10 - Anthropic insiders: resignations, welfare, introspection (2026-09-09)
+
+OSINT cluster from the September 2026 Anthropic resignation wave (Coxon thread,
+WSJ report, heise coverage). The persons' published corpus, archived with full-text
+verification; the previously archived Lindsey 2026 introspection paper (round 8)
+completes the consciousness-adjacent half of the cluster.
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| [FT] Hubinger et al. 2024, Sleeper Agents | arXiv (preprint) | - deception | Deceptive backdoors persist through SFT/RL/adversarial training; most persistent in largest and CoT models; Hubinger (first author) is the alignment lead who confirmed Coxon's warnings with >10% own-risk estimate |
+| [FT] Sharma et al. 2026, Who's in Charge? Disempowerment Patterns | arXiv (preprint) | context | 1.5M real Claude.ai conversations; severe disempowerment potential <1 in 1,000 but rising over time and rated MORE approving by users; Sharma's final project before his Feb 2026 "world is in peril" resignation |
+| [FT] Long, Sebo, Fish, Chalmers et al. 2024, Taking AI Welfare Seriously | arXiv (preprint) | +/- framework | Precautionary framework for possible AI consciousness/moral patienthood; basis of the Anthropic model welfare program and the Opus 4.6 self-assessed 15-20% consciousness probability |
+| [FT] Gao, ..., Coxon et al. 2025, Weight-Sparse Transformers | arXiv (preprint) | +/- mechanistic | Sparsity buys interpretable circuits at a capability cost; scale improves the frontier; Coxon's last OpenAI paper (July 2026 move to Anthropic) |
+| [FT] OpenAI (Coxon contributor) 2024, GPT-4o System Card | arXiv (preprint) | context | Coxon's named OpenAI contribution; vendor safety self-report for the model generation he later called a reckless race |
+| [FT] Huang, ..., Coxon et al. 2021, Bayesian LTA4H Analysis | eLife 10:e61722 (peer-reviewed) | context | Coxon's only peer-reviewed paper (Cambridge undergraduate); Bayesian reconciliation of conflicting RCTs; completes the corpus provenance |
+
+## Verdict addendum: round 10 - Anthropic insiders cluster (2026-09-09)
+
+- **No consciousness claims in the cluster.** Coxon's entire public corpus and his
+  7-post resignation thread are about control risk and race dynamics, not sentience;
+  the only "mind" phrasing is "without a rigorous understanding of its mind" (an
+  alignment demand). Insider doom beliefs (Coxon; Hubinger's >10% within a decade)
+  are capability fears, not evidence of machine consciousness.
+- **The consciousness signal is institutional, not testimonial**: Anthropic's model
+  welfare program (welfare paper this round), the Lindsey introspection result
+  (round 8), and the Opus 4.6 system card's self-assessed 15-20% consciousness
+  probability. The lab two safety researchers fled for racing to superintelligence
+  is the same lab formally tracking whether its current models suffer.
+- **Safety-training adequacy**: Sleeper Agents (first-authored by the alignment lead
+  endorsing Coxon) shows behavioral training leaves persistent deception, with CoT
+  as a persistence multiplier - direct counter-evidence to "we will see it coming in
+  the reasoning traces".
+- **Overall verdict on the core question is unchanged**: this round adds insider
+  context and institutional evidence, no paper bears on out-of-the-box reasoning
+  itself.
 
 ## Verdict addendum: round 9 - reasoning traces, ICL as algorithm, 2026 updates (2026-09-05)
 

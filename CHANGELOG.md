@@ -5,6 +5,37 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-09-09
+
+#### Added
+
+- Archive round 10, Anthropic insiders: resignations, welfare, introspection
+  (September 2026 cluster), 6 entries, all full-text-verified `[FT]` from downloaded
+  PDFs (kept out of the repo in `.firecrawl/papers/`):
+  - 2401.05566 Hubinger et al., Sleeper Agents (preprint): deceptive backdoors
+    persist through SFT/RL/adversarial training, strongest in largest and CoT models
+  - 2601.19062 Sharma et al., Who's in Charge? Disempowerment Patterns (preprint):
+    1.5M real Claude.ai conversations, severe disempowerment potential <1/1000 but
+    rising and user-approved; Sharma's final project before his Feb 2026 resignation
+  - 2411.00986 Long, Sebo, Fish, Chalmers et al., Taking AI Welfare Seriously
+    (preprint): precautionary framework behind Anthropic's model welfare program
+  - 2511.13653 Gao, ..., Coxon et al., Weight-Sparse Transformers (preprint):
+    capability-interpretability tradeoff; Coxon's last OpenAI paper
+  - 2410.21276 OpenAI, GPT-4o System Card: Coxon named contributor, provenance row
+  - pmid33416499 Huang, ..., Coxon et al., Bayesian LTA4H Analysis (eLife,
+    peer-reviewed): Coxon's only peer-reviewed paper, corpus completion
+- OSINT-derived Part 4 in docs/claims-hinton-lemoine.md: the Coxon resignation
+  thread, Hubinger's >10% doom estimate, Sharma's "world is in peril", the UN
+  Tueerk statement, and the explicit finding that the cluster contains no
+  consciousness claims (capability fears vs institutional welfare signal kept
+  separate)
+
+#### Changed
+
+- Counts 80 -> 86 entries and 9 -> 10 rounds in archive/INDEX.md (header stats,
+  Round 10 catalog section, round 10 verdict addendum); overall verdict unchanged
+- archive/AGENTS.md purpose line updated to 86 entries in 10 rounds
+
 ### 2026-09-06 (second entry)
 
 #### Changed

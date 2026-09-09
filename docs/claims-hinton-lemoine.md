@@ -104,6 +104,31 @@ the wrong systems. The 2026 frontier-model evidence that matters is the agentic,
 equipped, tool-using line - and there, the results so far are functional capability
 without any bridge to experience.
 
+## Part 4 - The September 2026 insider cluster: Coxon, Hubinger, and the institutional consciousness signal (added 2026-09-09)
+
+Datapoints from the Anthropic resignation wave (OSINT, all public sources; papers
+archived in round 10):
+
+| Claimant | Claim | Type |
+|----------|-------|------|
+| Jacob Coxon (ex-OpenAI, ex-Anthropic pretraining, resigned 2026-09-08) | "The people building AI earnestly believe that it could kill us all by the end of the decade"; Anthropic "locked in a race to get there first"; colleagues say "Crunchtime"/"Endgame"; "end of next year things could be out of control" (WSJ) | Insider capability/loss-of-control belief |
+| Evan Hubinger (Anthropic alignment lead, sitting) | "Jacob is correct here - we really do earnestly believe AI could kill all humans! I personally think it is >10% within the next decade"; "we do not yet have a plan to solve alignment for superintelligence" | Named, dated personal probability from inside Anthropic |
+| Mrinank Sharma (ex-head Anthropic safeguards, resigned 2026-02-09) | "The world is in peril" (AI, bioweapons, interconnected crises); safety teams face "pressures to set aside what matters most" | Insider values/pressure testimony |
+| Volker Türk (UN High Commissioner for Human Rights) | Shares industry concern that advanced AI "could pose an existential danger to humanity" (HRC statement, 2026-09) | Institutional echo, outside industry |
+
+Reading against the consciousness question: **no person in the cluster claims AI is
+conscious.** Coxon's full corpus and thread contain no sentience/model-welfare
+statement; his only "mind" phrasing is an alignment demand ("without a rigorous
+understanding of its mind"). The cluster's consciousness signal is institutional:
+Anthropic's model welfare program (Long/Sebo/Fish/Chalmers framework, round 10),
+Lindsey's concept-injection introspection result (round 8, ~20% detection, unreliable),
+and the Opus 4.6 system card's self-assessed 15-20% consciousness probability. The
+doom predictions are about what models can DO; the welfare program is about what
+models might FEEL. Conflating them would contaminate both ledgers.
+
+Sociological note for the record: both 2026 Anthropic defectors (Sharma, Feb; Coxon,
+Sep) independently announced they are leaving AI to study poetry.
+
 ## Sources (non-archive)
 
 - BBC News, 2023-05-02, "AI 'godfather' Geoffrey Hinton warns of dangers as he quits Google"
@@ -116,3 +141,20 @@ without any bridge to experience.
 - Bender & Koller 2020 (ACL, "Climbing towards NLU", the octopus test); Bender et al. 2021
   (FAccT, "Stochastic Parrots") - the canonical contra positions, not archived as entries
   because they lack arXiv/PubMed identifiers under the archive naming contract
+
+## Sources (non-archive), Part 4 cluster
+
+- Coxon, J., X thread @hilbertspaess, 2026-09-09 00:04 UTC, 7 posts
+  (x.com/hilbertspaess/status/2097476196791709843)
+- Wall Street Journal, 2026-09-09, "Anthropic Researcher Quits Over 'Out-of-Control' AI Fears"
+- Hubinger, E., X reply @EvanHub status/2097497037956891126, 2026-09-09; CNBC and Forbes
+  coverage same day
+- Sharma, M., resignation letter on X @MrinankSharma status/2020881722003583421, 2026-02-09;
+  BBC "AI safety leader says 'world is in peril' and quits to study poetry", 2026-02-13
+- heise online, 2026-09-09, "Anthropic-Forscher kuendigt mit dramatischem Text -
+  Branche erwarte Ausloeschung" (Martin Holland)
+- OHCHR, 2026-09, High Commissioner Türk update to the Human Rights Council
+  (ohchr.org/en/statements-and-speeches/2026/09/high-commissioner-turk-updates-human-rights-council-human-rights)
+- Anthropic, Claude Opus 4.6 System Card (Feb 2026), model welfare assessment:
+  15-20% self-assessed consciousness probability; Fish, K., 80,000 Hours podcast,
+  2025-08-28 (~20% glimmer estimate)
