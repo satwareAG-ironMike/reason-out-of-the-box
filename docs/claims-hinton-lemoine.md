@@ -129,6 +129,21 @@ models might FEEL. Conflating them would contaminate both ledgers.
 Sociological note for the record: both 2026 Anthropic defectors (Sharma, Feb; Coxon,
 Sep) independently announced they are leaving AI to study poetry.
 
+Addendum 2026-09-10. The Coxon thread is now confirmed by WSJ, Forbes, CNN, Fortune, AFP
+and Business Insider (2026-09-08..10): Coxon, 27, three years of pretraining research at
+OpenAI then Anthropic. Hubinger's estimate is ">10% within the next decade" (his post; CNN
+misreports "under 10%"), with the clarification that present-model risk is low and the
+concern is recursive self-improvement. Samuel Marks (Anthropic Cognitive Oversight lead)
+added, in a personal capacity, "the more senior the employee, the more concerned". Hinton,
+The Times, 2026-09-07, alongside the UK Artificial Superintelligence Security Bill (ControlAI
+draft, Alex Sobel MP, presented 2026-09-08): "We would be very foolish to develop
+superintelligence now, when there is no scientific consensus it can be developed safely and
+controllably." A danger claim, not an understanding claim; Part 1's classification stands.
+Institutional consciousness signal, one new datapoint: Anthropic's interpretability team
+frames a causally privileged "verbalizable" subspace as a functional analogue of global
+workspace theory (Gurnee et al., arXiv 2607.15495, preprint), a consciousness-theory framing
+without a consciousness claim. The cluster still contains no consciousness claims.
+
 ## Sources (non-archive)
 
 - BBC News, 2023-05-02, "AI 'godfather' Geoffrey Hinton warns of dangers as he quits Google"
