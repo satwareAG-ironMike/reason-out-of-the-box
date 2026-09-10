@@ -25,6 +25,27 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   timeline "maybe 10 years, maybe less" - danger claims, classification unchanged;
   the stale "no distinct 2026 statement" note scoped to understanding claims; Times
   and Newsnight source entries added (#32)
+- docs/next-investigations.md: primary-source fetch of two Anthropic Transformer Circuits
+  articles (owner-requested). "On the Biology of a Large Language Model" (Lindsey et al.,
+  27 authors, 2025-03-27): web-only, non-archive; attribution graphs, in-head multi-step
+  planning, three mechanistic CoT-faithfulness regimes (faithful / bullshitting / motivated
+  reasoning), base-vs-finetuned feature formation - Condition 3/4 input. "Emergent
+  Introspective Awareness in Large Language Models" (Lindsey, arXiv 2601.01828,
+  API-verified): archive-eligible, queued as round-11 Tier A candidate; resolves the
+  ledger's "Lindsey 2026" citation; base pretrained models achieve no net introspective
+  performance (post-training elicits it) - an H0-b-line elicitation asymmetry. Named
+  related works (no IDs reported; dedup before round 11) and public professional person
+  notes (Lindsey, Olah, Batson, Gurnee) (#32)
+- docs/claims-hinton-lemoine.md: Lindsey citation resolved to arXiv 2601.01828 with the
+  base-model elicitation asymmetry in the Part 1 status table; addendum 2026-09-11
+  (primary-source fetch); both Transformer Circuits sources listed (#32)
+
+#### Changed
+
+- docs/next-investigations.md, README.md: EOD-review follow-ups - status dates bumped to
+  2026-09-11, feasibility-audit section retitled (closed 2026-09-10, issue #2),
+  timeline-risk paragraph reduced to the two residual unknowns (32B mix naming, Apertus
+  1.5 pretrain-only checkpoint), stale "pending the audit" source note rescoped (#32)
 
 ### 2026-09-10
 
