@@ -22,6 +22,20 @@ transformers learn real algorithms is toy-scale. The strict claim is therefore u
 ([acceptance criteria](docs/acceptance-criteria.md)); the experiment that would settle it is
 in [docs/study-design.md](docs/study-design.md).
 
+## What the verdict does and does not say
+
+The verdict is about one claim: that a **base** model, with no instruction tuning, no RL and
+no reasoning prompt, reasons on procedurally novel tasks beyond its trained depth, on a model
+whose training data is public. Nobody has shown that. It is not a verdict that LLMs cannot
+reason. The peer-reviewed record establishes, with measured bounds, that LLMs solve novel
+instances of reasoning tasks at human level when the competence is elicited (Webb et al.,
+Nature Human Behaviour 2023; Wang and Zhou, NeurIPS 2024), that real algorithms form inside
+trained transformers (Nanda et al., ICLR 2023), that the competence collapses beyond trained
+depth and tracks answer frequency (Dziri et al., NeurIPS 2023; McCoy et al., ICLR 2024), and
+that written reasoning traces are not evidence of the computation (Turpin et al., NeurIPS
+2023). The claim ladder and the ten recurring counterarguments, each in its strongest form,
+are in [docs/counterarguments.md](docs/counterarguments.md).
+
 ## Layout
 
 | Path | Content |
@@ -29,6 +43,7 @@ in [docs/study-design.md](docs/study-design.md).
 | `archive/` | 86 peer-reviewed and preprint papers, 10 thematic rounds, per-paper entries |
 | `archive/INDEX.md` | Master catalog, verdict, evidence matrix, open-problem spec |
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
+| `docs/counterarguments.md` | Claim ladder C1-C5 with evidence status, and the ten recurring counterarguments steelmanned against the archive |
 | `docs/study-design.md` | Pre-registrable protocol for the experiment that would settle the question |
 | `docs/next-investigations.md` | 2026-09-03 re-scan: investigation fields, feasibility findings, thesis timeline (M1-M5) |
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |

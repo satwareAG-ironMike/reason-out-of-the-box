@@ -7,6 +7,23 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### 2026-09-10
 
+#### Added
+
+- docs/counterarguments.md: skeptic-facing ledger. A claim ladder C1-C5 separates "LLMs
+  solve novel reasoning instances when elicited" (established, peer-reviewed), "part of it is
+  an algorithm" (established at toy scale), "the competence is bounded" (established),
+  "traces are not evidence" (established) from the untested C5 the headline verdict is
+  about. Ten recurring counterarguments steelmanned (stochastic machine, no new ideas, "your
+  repo says no evidence", babysitting, contamination, scaffold vs model, mirage, Tower of
+  Hanoi collapse, animals reason untrained, marketing), each with what the record says, what
+  is conceded, what stays open. New non-archive sources verified by API: FunSearch (Nature
+  2024, PMID 38096900), AlphaGeometry (Nature 2024, PMID 38233616), AlphaProof (Nature 2026,
+  PMID 41225005), Reasoning or Reciting (NAACL 2024, 2307.02477), The Illusion of Thinking
+  (NeurIPS 2025, 2506.06941) and its comment (2506.09250), AlphaEvolve (2506.13131, preprint),
+  Bender and Koller 2020 / Bender et al. 2021 (DOIs) (#28)
+- README: section "What the verdict does and does not say" scoping the headline verdict to
+  the base-model claim and naming the established claims with their venues (#28)
+
 #### Changed
 
 - Root AGENTS.md project notes: direct pushes to `main` are rejected by the
@@ -172,7 +189,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   thesis/research/infra/data/experiment/analysis/publication. All milestone descriptions
   carry the student application line (bewerbung@satware.com or
   https://github.com/satwareAG-ironMike); harness gap on the gh milestone failure chain
-  filed as git.satware.ai issue #628
+  filed in the internal harness tracker (#628)
 
 #### Changed
 
