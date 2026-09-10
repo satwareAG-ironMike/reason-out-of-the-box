@@ -85,9 +85,10 @@ When the user requests a durable behavior change, record it here or in the relev
   `main-integrity-gate` ruleset: no force pushes, no branch deletion, linear history,
   all 3 CI checks required on every commit reaching `main`, no bypass actors. Human
   review requirement removed 2026-09-06 by owner decision. Every change reaches `main`
-  via PR (squash, auto-merge once the 3 checks are green); direct pushes are rejected
-  (GH013) because a pushed commit must already carry the 3 passing checks. Never edit
-  the ruleset without explicit user instruction
+  via PR, squash-merged once the 3 checks are green (repo-level auto-merge is off, so
+  `gh pr merge --auto` is refused; watch the checks, then merge); direct pushes are
+  rejected (GH013) because a pushed commit must already carry the 3 passing checks.
+  Never edit the ruleset without explicit user instruction
 - Public-only rule: the repository holds only public resources (papers, open repositories, published tools). No personal data, device or network inventories, session state, credentials, or private discussion content - in files or in history
 - Paper provenance rule: every archive entry must carry a source ID (arXiv, PubMed,
   or PhilPapers record), authors, venue, year, and peer-review status; entries with

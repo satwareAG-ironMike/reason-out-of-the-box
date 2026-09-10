@@ -11,8 +11,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Root AGENTS.md project notes: direct pushes to `main` are rejected by the
   `main-integrity-gate` ruleset (3 required status checks, no bypass actors), so every
-  change reaches `main` via PR with squash + auto-merge. Corrects the 2026-09-06 note
-  that stated direct pushes were allowed (#25)
+  change reaches `main` via PR, squash-merged once the 3 checks are green (repo-level
+  auto-merge is off). Corrects the 2026-09-06 note that stated direct pushes were
+  allowed (#25)
 
 ### 2026-09-09
 
