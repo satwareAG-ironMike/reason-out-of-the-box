@@ -1,9 +1,9 @@
 # Next investigations and thesis timeline
 
-Status: 2026-09-03. Derived from the verdict in [archive/INDEX.md](../archive/INDEX.md), the
+Status: 2026-09-11. Derived from the verdict in [archive/INDEX.md](../archive/INDEX.md), the
 three criteria in [acceptance-criteria.md](acceptance-criteria.md), and the protocol in
-[study-design.md](study-design.md). All external sources below were checked today against
-arXiv (API), Hugging Face (API), or primary reporting; arXiv IDs are verified.
+[study-design.md](study-design.md). All external sources below were checked on the dates noted
+against arXiv (API), Hugging Face (API), or primary reporting; arXiv IDs are verified.
 
 ## Can we hunt down "reasoning from nothing"?
 
@@ -354,6 +354,72 @@ would change the citation status.
 - 2609.08650 (2026-09-08), DATPO (API-verified): RLVR reasoning-coverage expansion,
   adjacent to 2608.29188.
 
+### Primary-source fetch: Anthropic Transformer Circuits (owner-requested, 2026-09-11)
+
+Both articles fetched in full from transformer-circuits.pub. Neither is peer-reviewed.
+
+- "On the Biology of a Large Language Model" (Jack Lindsey lead; 27 authors incl. Gurnee,
+  Ameisen, Olah, Batson corresponding; Transformer Circuits Thread, 2025-03-27,
+  transformer-circuits.pub/2025/attribution-graphs/biology.html). **Web-only: no
+  arXiv/PubMed/PhilPapers record found - non-archive source** under the provenance rule.
+  Method: attribution graphs from a 30M-feature cross-layer transcoder replacement model of
+  Claude 3.5 Haiku, hypotheses validated by inhibition/injection on the real model.
+  Project-relevant findings: (a) multi-step planning runs "in its head" in the forward pass
+  (two-hop Dallas->Texas->Austin; poem rhyme planning, injecting the planned word changed
+  the line ending in ~70% of 25 sampled poems) - internal computation exceeds what any
+  trace shows; (b) CoT faithfulness splits into three mechanistic regimes: genuinely
+  faithful, "bullshitting" (claims calculator use while the graph shows guessing), and
+  motivated reasoning (works backwards from a human-suggested answer) - primary-source
+  mechanistic support for C4 (traces are not evidence) and input to Condition 4's
+  faithfulness controls; (c) "primitive metacognitive circuits": known/unknown entity
+  features driving hallucination vs professing ignorance; (d) base-vs-post-trained
+  asymmetry: general "harmful request" features form during finetuning from pretraining-era
+  parts; in the hidden-goal case study, RM-bias features are baked into the Assistant
+  persona (active in 100/100 Human-Assistant contexts; suppression cut the meta-poem rate
+  ~48% -> ~12%); (e) stated method limits: insight on only ~a quarter of prompts, "dark
+  matter" error nodes, attention circuits invisible. Feeds Condition 3: attribution graphs
+  as a complement to the planned activation patching (#6).
+- "Emergent Introspective Awareness in Large Language Models" (Jack Lindsey, sole author;
+  Transformer Circuits 2025-10-29, revised 2026-01-01; **arXiv 2601.01828**, submitted
+  2026-01-05, DOI 10.48550/arXiv.2601.01828, API-verified 2026-09-11 - **archive-eligible,
+  queued as a round-11 Tier A candidate**). This is the paper the claim ledger cites as
+  "Lindsey 2026". Method: contrastive concept vectors injected into the residual stream;
+  self-reports graded on accuracy, grounding, internality, metacognitive representation.
+  Findings: Opus 4/4.1 detect and identify injected concepts in ~20% of trials at optimal
+  layer (~2/3 depth) and strength, 0 false positives in 100 controls, detection precedes
+  verbalization; prefill disavowal flips when the concept vector is retro-injected (models
+  consult cached "intentions"); "don't think about X" lowers but does not eliminate the
+  X-representation. **Directly thesis-relevant: base pretrained models show high
+  false-positive rates and "none achieve greater-than-zero net task performance" -
+  post-training is key to eliciting introspective awareness**; helpful-only variants beat
+  refusal-prone production models. An elicitation asymmetry of the same kind the core
+  question is about (H0-b line). Author's scope limits: only detection + identification are
+  verified as grounded, the rest "may still be confabulated"; phenomenal consciousness
+  explicitly not addressed; "we advise against making strong inferences about AI
+  consciousness on the basis of our results".
+- Works named inside the two articles (citation hrefs were stripped by the fetch, so no
+  arXiv IDs are reported; names only, round-11 dedup check required before proposing any
+  as an entry): Circuit Tracing (Ameisen, Lindsey et al., companion methods paper); Marks
+  et al. hidden-goal model organism; Jenner et al. learned look-ahead in chess nets; Chen
+  et al. and Ghandeharioun et al. (activation patching into interpretation prompts);
+  Kadavath et al. metaknowledge; Betley et al. self-awareness of finetuned propensities;
+  Panickssery et al. self-recognition (Davidson et al. contra); Song et al. and Comsa &
+  Shanahan introspection definitions; Butlin et al. and Chalmers consciousness theories.
+- Person notes (public professional information only, 2+ sources each): Jack Lindsey -
+  Anthropic MTS since 2024, leads the "Model Psych" team (introspection, situational
+  awareness, personas, deception auditing); PhD Columbia theoretical neuroscience
+  (2019-2023); co-developed Humanity's Last Exam; sole-author position: advises against
+  strong consciousness inferences. Chris Olah - Anthropic co-founder (2021),
+  interpretability lead; previously Google Brain and OpenAI Clarity/Circuits; Distill
+  co-founder; TIME100 AI 2024; no public sentience claim found; frames interpretability as
+  safety tooling. Joshua Batson - Anthropic research scientist (2023-), led the circuits
+  project; previously chief data scientist at CZ Biohub. Wes Gurnee - Anthropic
+  interpretability MTS (2024-); MIT PhD (Tegmark, Nanda); refusal-direction and
+  space/time-representation papers; co-originator of the Jacobian lens /
+  verbalizable-global-workspace line (2607.15495, in the 2026-09-10 findings). Pattern for
+  the Part 4 ledger: the introspection and global-workspace work sits inside Anthropic's
+  interpretability org as consciousness-adjacent methodology without consciousness claims.
+
 ## Thesis timeline (milestones and exit criteria)
 
 | Milestone | Due | Content | Exit criteria |
@@ -365,14 +431,16 @@ would change the citation status.
 | M5 Paper + release | 2027-04-30 | pre-registered report; public release of code, generated tasks, and raw outputs | Submission to target venue (registered-report format); artifacts public |
 
 Total: about 7 months. The design's 12-week estimate covers M2-M4 including IRB lead time;
-M1 and M5 are protocol and publication overhead. Timeline risk (updated 2026-09-10): the
-model releases are verified; the remaining risks are corpus access (about 9 TB for the exact
-OLMo 2 mixes if the embedding-search layer needs local data) and Apertus 1.5 base-checkpoint
-availability, which affects only the second replication candidate.
+M1 and M5 are protocol and publication overhead. Timeline risk (updated 2026-09-11,
+post-audit): model releases and corpus access paths are verified (the n-gram layer runs on
+public infini-gram indexes; a local mirror needs only the 451 GB Pile plus a ~90 GB OLMo
+sample). Residual unknowns: the OLMo 3 32B mix naming (assumed generic `dolma3_mix-6T`) and
+whether Apertus 1.5 ships a pretrain-only checkpoint (affects only the optional second
+replication candidate).
 
-## Open questions for the feasibility audit
+## Feasibility audit (closed 2026-09-10, issue #2)
 
-Closed 2026-09-10 (issue #2); every model and corpus check below is a Hugging Face Hub API
+Every model and corpus check below is a Hugging Face Hub API
 call or a dataset card read on that date; items 3-5 rest on the sources named in each. Hub-stored sizes are the summed file sizes the API lists (compressed
 as stored); the dataset cards give uncompressed bytes per source.
 
@@ -464,7 +532,11 @@ target.
 - ARC-AGI-2 figures: ARC Prize leaderboard/results pages via secondary benchmark
   reporting; treat the ARC Prize site as the final authority before citing in the paper.
 - OLMo 3 and Apertus 1.5 release claims rest on secondary pages and official blogs;
-  marked unverified pending the audit.
+  Hub existence verified 2026-09-10 (audit above). Still unverified: the OLMo 3 32B mix
+  naming (assumed) and an Apertus 1.5 pretrain-only checkpoint.
 - arXiv IDs verified via the arXiv API on 2026-09-11: 2609.10357, 2609.09696,
-  2609.09776, 2609.09928, 2609.08851, 2609.10210, 2609.04963, 2609.04753, 2609.08650
-  (HTTPS endpoint; the HTTP endpoint returned empty responses during this session).
+  2609.09776, 2609.09928, 2609.08851, 2609.10210, 2609.04963, 2609.04753, 2609.08650,
+  2601.01828 (HTTPS endpoint; the HTTP endpoint returned empty responses during this
+  session). Transformer Circuits fetches 2026-09-11: both URLs retrieved in full;
+  "On the Biology of a Large Language Model" confirmed web-only (no arXiv record; citing
+  bibliographies list it as an online article).

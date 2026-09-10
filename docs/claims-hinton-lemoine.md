@@ -43,7 +43,7 @@ evidential status.
 | Claim | Evidence for | Evidence against | Verdict |
 |-------|--------------|------------------|---------|
 | They understand (functional) | ToM at adult level incl. 6th order (Street et al. 2025, Frontiers); human-level on 4 of 5 ToM batteries (Strachan et al. 2024, Nat Hum Behav); mechanistic indicators of world-tracking circuits (Beckmann & Queloz 2025; round 4 circuits) | Systematic review: higher-order and perturbation brittleness (Marchetti et al. 2025); symbol grounding argument (Harnad 2025); definitional mismatch (Hojer 2025); rounds 2-3 robustness failures | **Partially supported as a graded, non-human kind of understanding** (Mitchell & Krakauer's framing). Not supported as human-equivalent understanding |
-| They have subjective experience | Functional introspection: Claude Opus 4/4.1 detect injected concepts ~20% of the time (Lindsey 2026) | Same paper: remaining self-reports "may still be confabulated"; open models deny sentience and classifiers show the denials are sincere (Kaiser & Enderby 2026); architecture lacks recurrence, global workspace, unified agency (Chalmers 2023) | **Not supported.** Best case: a narrow, causally verified self-monitoring capacity in the strongest 2025-2026 models; no evidence bridges to experience, and the systems themselves, checked internally, say no |
+| They have subjective experience | Functional introspection: Claude Opus 4/4.1 detect injected concepts ~20% of the time (Lindsey, arXiv 2601.01828); base pretrained models achieve no net introspective performance - the capacity is post-training-elicited (same source) | Same paper: remaining self-reports "may still be confabulated"; author advises against strong consciousness inferences; open models deny sentience and classifiers show the denials are sincere (Kaiser & Enderby 2026); architecture lacks recurrence, global workspace, unified agency (Chalmers 2023) | **Not supported.** Best case: a narrow, causally verified self-monitoring capacity in the strongest 2025-2026 post-trained models; no evidence bridges to experience, and the systems themselves, checked internally, say no |
 | Already smarter in some ways | Knowledge breadth, throughput, some ToM orders above adult mean | Novel-depth reasoning ceilings (rounds 2-3), validation failure (round 5), execution gap (round 6) | **Supported for breadth and speed; not for fluid or grounded reasoning** |
 | Will become self-aware in time | Chalmers: 25%+ credence for LLM+ systems within a decade; round 7 agentic systems add memory, action, feedback | Nothing in 2026 shows the transition has happened | **Open; the trajectory claim is the reasonable one** |
 
@@ -147,6 +147,20 @@ frames a causally privileged "verbalizable" subspace as a functional analogue of
 workspace theory (Gurnee et al., arXiv 2607.15495, preprint), a consciousness-theory framing
 without a consciousness claim. The cluster still contains no consciousness claims.
 
+Addendum 2026-09-11 (primary-source fetch). The introspection paper cited above as "Lindsey
+2026" is resolved: "Emergent Introspective Awareness in Large Language Models" (Transformer
+Circuits Thread 2025-10-29, revised 2026-01-01; arXiv 2601.01828, sole author Jack Lindsey).
+The fetch confirms the ~20% injected-concept detection on Opus 4/4.1 and the confabulation
+caveat, and adds an elicitation asymmetry: base pretrained models achieve no net
+introspective performance - post-training elicits the capacity. The author explicitly advises
+against strong consciousness inferences and does not address phenomenal consciousness. The
+companion biology paper (Lindsey et al. 2025, web-only, non-archive) shows internal
+multi-step planning beyond what any trace reveals, plus three mechanistic CoT-faithfulness
+regimes (faithful / "bullshitting" / motivated reasoning). Author context (public
+professional): Lindsey leads Anthropic's "Model Psych" team and co-originated the Jacobian
+lens / verbalizable global-workspace line (2607.15495) with Wes Gurnee. Institutional-signal
+pattern unchanged: consciousness-adjacent methodology, no consciousness claims.
+
 ## Sources (non-archive)
 
 - BBC News, 2023-05-02, "AI 'godfather' Geoffrey Hinton warns of dangers as he quits Google"
@@ -180,3 +194,9 @@ without a consciousness claim. The cluster still contains no consciousness claim
   Security Bill (ControlAI draft, Alex Sobel MP)
 - BBC Newsnight, aired 2026-09-09, Hinton interview; secondary reporting 2026-09-10
   (Business Insider and others); primary broadcast not fetched
+- Lindsey, J., "Emergent Introspective Awareness in Large Language Models", Transformer
+  Circuits Thread, 2025-10-29 (rev. 2026-01-01); arXiv 2601.01828 (archive-eligible;
+  transformer-circuits.pub/2025/introspection/index.html)
+- Lindsey, J., et al. (27 authors), "On the Biology of a Large Language Model", Transformer
+  Circuits Thread, 2025-03-27 (transformer-circuits.pub/2025/attribution-graphs/biology.html);
+  web-only, no arXiv/PubMed/PhilPapers record - non-archive
