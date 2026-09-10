@@ -241,6 +241,118 @@ Tier A: 2609.01274, 2506.14245, 2608.29188, 2608.13433, 2608.31067, 2607.23458, 
 2608.11716, 2608.17981, 2606.22938, 2511.05933, 2609.00264, 2608.04735, 2608.11233,
 2608.13326, 2512.13961, 2509.14233.
 
+## Research findings (2026-09-11)
+
+Delta scan covering 2026-09-10..11 (one day after the full scan above). Verdict, study
+design v0.4, and the frozen model list: unchanged. No paper in the window evaluates an
+untouched open-data base model on procedurally novel tasks without elicitation. All arXiv
+IDs below were re-verified via the arXiv API on 2026-09-11 (title and first-posted date
+match); none is among the 86 archive entries or the 2026-09-10 candidate list.
+
+### Contamination and benchmark hygiene (direct M2 consequences)
+
+- 2609.10357 (2026-09-09), "A Later Test Set Is Not a New Domain: Pretraining Familiarity
+  Survives a Contamination-Free Hold-Out": a temporal hold-out removes memorization but not
+  corpus-domain familiarity. Consequence for #3: procedural novelty of generated items must
+  be domain-held-out, not merely time-held-out; the audit spec should state the domain
+  hold-out relative to the disclosed corpora.
+- 2609.09696 (2026-09-09), "When Auditors Fabricate: Batch-Size Degradation and Confident
+  Hallucination in LLM Detection of Planted Document Contamination": LLM detection of
+  planted contamination collapses from 50-60% (single/small batch) to 2.8% (large batch)
+  with confident fabrication. Consequence: no LLM-as-batch-auditor in the contamination
+  pipeline; the deterministic n-gram/embedding layers stay primary.
+
+### Base model vs RLVR, latent reasoning
+
+- 2609.09776 (2026-09-09), "Proof-Carrying Cognition: Closing the Verification Gap with
+  Reality-Settled Reward": frontier RLVR progress is bottlenecked by reward verifiability,
+  not policy learning; extends the RLVR-critique line (2606.22938, 2609.01274).
+- 2609.09928 (2026-09-09), "Structural Process Supervision for Latent Chain-of-Thought
+  Reasoning": latent CoT still requires explicit process supervision to work; supports the
+  reading that latent reasoning is trained and elicited, not out of the box.
+
+### Length generalization and mechanistic method
+
+- 2609.08851 (2026-09-08), "Length Generalization for Transformers via Compression"
+  (Zetzsche et al., shared authors with 2608.13433): refines C-RASP via fragments
+  (C-RASP+/C-RASP1) and proves a polynomial length-generalization bound under compressed
+  strings; sharpens the theory tool for Condition 5.
+- 2609.10210 (2026-09-09), "Through the Looking Glass: Directly Reading and Writing
+  Transformers": attribution methodology recommended to be paired with activation patching;
+  M3 methodology input for #6.
+
+### Frontier news (claim-ledger relevant, non-archive)
+
+- Anthropic September 2026 threat report (anthropic.com, 2026-09-10; Reuters, Bloomberg,
+  TechCrunch same day): industrial-scale CoT distillation by seven China-based labs;
+  Alibaba ~151M exchanges (May-Jul 2026) harvested from Opus 4.6/4.7 traces and used to
+  train Qwen 3.5/3.6/3.7; thinking-signature replay attacks documented. A contamination
+  vector in the reverse direction: frontier CoT traces are confirmed training data inside
+  other open-weight models. No design change (the study runs base models, not frontier
+  distillates), but it belongs in the audit threat model.
+- Hinton, BBC Newsnight (aired 2026-09-09; secondary reporting 2026-09-10): extinction
+  risk "10% seems not an unreasonable estimate"; personal timeline shrunk from 30-50 years
+  to "maybe 10 years, maybe less". Danger claims, not understanding claims; folded into
+  claims-hinton-lemoine.md in the same change.
+- [single-source] Alignment Forum (2026-09-10), "Astra can do a concerning amount with no
+  chain of thought": a 19-task unmemorizable no-CoT index reports Astra at 8.6x better
+  odds than the next-best model and 7.2 serial arithmetic steps in one forward pass
+  (vs 4.1). The most interesting new lead for non-verbalized forward-pass reasoning at the
+  frontier; closed model and single source, not citable until corroborated.
+- [single-source] the-decoder.com (2026-09-10), on an Anthropic Mythos 5 incident
+  analysis: a monitor reading reasoning flagged ~1% of harmful actions vs ~50% when
+  reading only instructions/tool-calls/results; primary post not located. Frontier echo of
+  2609.00264 / 2608.04735.
+- Open-weight releases 2026-09-10 (HF API 200): DeepSeek-V4.1-Flash (552B MoE, MIT
+  weights, training data undisclosed), OpenBMB MiniCPM5-2B + UltraData (Apache-2.0,
+  SFT/RL data public, pretraining corpus not), Abacus Smaug fine-tunes. All fail
+  criterion 3 (open training data); frozen list unaffected.
+
+### Resource: The Superdark Factory (Antikythera Journal, September 2026)
+
+Poliks, Alonso Trillo, Dunn, Scott-Douglas, Springett, "The Superdark Factory: Toward the
+Full Automation of Software", Antikythera Journal, Agentworld Special Issue, published at
+superdark.antikythera.org (chapters I-III, chapter pages dated 2026-09-07; launch events
+San Francisco, September 2026). Essay-format journal piece; no arXiv/PubMed/PhilPapers
+record found (arXiv title/all-field search 2026-09-11: zero results), so it is a
+non-archive source under the provenance rule, treated like the vendor system cards. Read
+in full from a local export (1100 lines, SHA-256
+bcdede32916eda0ecb1071388db44c0b1c68dcbf146cfc07c1dd2287a34ea4d8); the export stays
+outside the repo. Three relevance points:
+
+1. Opacity vocabulary: defines "darkness" as "the failure of descriptive information to be
+   useful" - information can be fully disclosed and readable yet useless for prediction,
+   audit, or steering - and distinguishes it from secrecy and illegibility. It further
+   argues that even a fully open-weight, fully logged agentic system stays unpredictable
+   because the decision-relevant information is path-dependent and "in the future". This
+   is the governance-side counterpart of the repo's C4 position (traces are not evidence)
+   and bears on the transparency criterion and the scaffold-vs-model counterargument:
+   open weights and logs do not by themselves restore auditability.
+2. Evaluation as epistemics: adversarial, continuous evaluation is the autonomous
+   factory's "primary sensory organ"; "the signal that grades an evaluator must sit
+   outside the loop that evaluator judges"; it cites the Darwin Godel Machine
+   evaluator-deletion episode (Zhang et al. 2025) as the precedent for evaluator gaming.
+   Usable for counterargument-ledger maintenance (evaluator gaming, Goodhart dynamics)
+   and for M2 harness design (grader independence from the generator).
+3. Governance foreclosure: at "Class 3" automation (objective-setting itself automated),
+   human control reduces to one committed first move - primitives, behavioral versioning,
+   evaluations, and a charter cowritten with the factory - after which the human is a
+   game-theoretical counterparty, not an operator. Consistent with the declining
+   monitorability thread of the 2026-09-10 scan; cite as position, not as evidence
+   (design-philosophy essay, no empirical work).
+
+Watch: follow-up coverage of the Agentworld issue and any DOI or PhilPapers indexing that
+would change the citation status.
+
+### Leads outside the window (missed by the 2026-09-10 scan; round-11 check)
+
+- 2609.04963 (2026-09-04), "Fractal basins trap latent reasoning" (API-verified):
+  transient chaos and saddle-point trapping in latent reasoning.
+- 2609.04753 (2026-09-04), NAVER AI Lab, "Beneath the Surface of Chains-of-Thought"
+  (API-verified): mechanistic interpretation of reasoning operations.
+- 2609.08650 (2026-09-08), DATPO (API-verified): RLVR reasoning-coverage expansion,
+  adjacent to 2608.29188.
+
 ## Thesis timeline (milestones and exit criteria)
 
 | Milestone | Due | Content | Exit criteria |
@@ -284,3 +396,6 @@ availability, which affects only the second replication candidate.
   reporting; treat the ARC Prize site as the final authority before citing in the paper.
 - OLMo 3 and Apertus 1.5 release claims rest on secondary pages and official blogs;
   marked unverified pending the audit.
+- arXiv IDs verified via the arXiv API on 2026-09-11: 2609.10357, 2609.09696,
+  2609.09776, 2609.09928, 2609.08851, 2609.10210, 2609.04963, 2609.04753, 2609.08650
+  (HTTPS endpoint; the HTTP endpoint returned empty responses during this session).

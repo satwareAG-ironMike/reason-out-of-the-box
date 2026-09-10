@@ -5,6 +5,27 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-09-11
+
+#### Added
+
+- docs/next-investigations.md: Research findings (2026-09-11), a one-day delta scan.
+  Six new arXiv API-verified papers, among them 2609.10357 (temporal hold-outs do not
+  remove domain familiarity - the contamination audit must domain-hold-out generated
+  items) and 2609.09696 (LLM contamination auditors collapse to 2.8% recall in large
+  batches - no LLM-as-batch-auditor in the pipeline); the Anthropic September 2026
+  threat report (industrial-scale CoT distillation, a reverse contamination vector);
+  2026-09-10 open-weight releases (DeepSeek-V4.1-Flash, MiniCPM5, Smaug - all fail
+  criterion 3); "The Superdark Factory" (Antikythera Journal, Agentworld Special Issue,
+  September 2026) recorded as a non-archive resource with an opacity/evaluation/
+  governance relevance analysis; three outside-window leads for round 11. Verdict,
+  study design v0.4, and the frozen model list unchanged (#32)
+- docs/claims-hinton-lemoine.md: Part 1 table row for the BBC Newsnight interview
+  (aired 2026-09-09): extinction risk "10% seems not an unreasonable estimate",
+  timeline "maybe 10 years, maybe less" - danger claims, classification unchanged;
+  the stale "no distinct 2026 statement" note scoped to understanding claims; Times
+  and Newsnight source entries added (#32)
+
 ### 2026-09-10
 
 #### Added
