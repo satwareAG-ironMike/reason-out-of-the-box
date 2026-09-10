@@ -1,6 +1,6 @@
 # Claim ledger: "AI thinks" (Hinton) and "LaMDA is sentient" (Lemoine)
 
-Status: 2026-09-03. Sources are primary where available (interview transcripts, the
+Status: 2026-09-11. Sources are primary where available (interview transcripts, the
 Washington Post reporting, the LaMDA technical report); evidence status is judged against
 the round 8 archive and the 2026 frontier-model studies in it. GPT-4-era results are
 treated as historical calibration only.
@@ -16,12 +16,15 @@ treated as historical calibration only.
 | 2023-12-04 | Eric Topol podcast | "They really do understand." And: "I'm actually inclined to say these big chatbots, particularly the multimodal ones, have subjective experience." |
 | 2025-06-16 | The Diary of a CEO | "I believe that current multimodal chatbots have subjective experiences." Systems can "draw new conclusions from much more data than a person ever saw." |
 | 2024-10 | Nobel Prize in Physics (with Hopfield) | No verified transcript of consciousness claims in the lecture was found; do not attribute quotes to it |
+| 2026-09-09 | BBC Newsnight (aired; secondary reporting 2026-09-10, Business Insider and others; primary broadcast not fetched) | Extinction risk: "10% seems not an unreasonable estimate". Timeline for AI surpassing human intelligence shrunk from 30-50 years to "maybe 10 years, maybe less". Harm possible "just by talking to people" (cyberattacks need no physical control) |
 
 Two formulations widely attributed to him are reconstructions, not verified quotes:
 "next-token prediction requires understanding" (his argument, our paraphrase) and the
 "digital minds copy and share knowledge, analog brains cannot" argument (his position,
-no primary transcript located). No distinct 2026 statement was verifiable; pages updated
-in 2026 are not 2026 statements.
+no primary transcript located). No distinct 2026 understanding-or-consciousness statement was
+verifiable; pages updated in 2026 are not 2026 statements. The verified 2026 statements on
+record (The Times 2026-09-07 in the Part 4 addendum, BBC Newsnight aired 2026-09-09 in the
+table above) are danger claims, not understanding claims.
 
 ### The structure of his argument
 
@@ -173,3 +176,7 @@ without a consciousness claim. The cluster still contains no consciousness claim
 - Anthropic, Claude Opus 4.6 System Card (Feb 2026), model welfare assessment:
   15-20% self-assessed consciousness probability; Fish, K., 80,000 Hours podcast,
   2025-08-28 (~20% glimmer estimate)
+- The Times, 2026-09-07, Hinton interview accompanying the UK Artificial Superintelligence
+  Security Bill (ControlAI draft, Alex Sobel MP)
+- BBC Newsnight, aired 2026-09-09, Hinton interview; secondary reporting 2026-09-10
+  (Business Insider and others); primary broadcast not fetched
