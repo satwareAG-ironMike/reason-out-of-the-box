@@ -371,19 +371,76 @@ availability, which affects only the second replication candidate.
 
 ## Open questions for the feasibility audit
 
-1. OLMo 3 7B/32B + Dolma 3: do the official repos contain the complete corpus shards,
-   document-level metadata, and training manifests? (Determine the 32B slot.)
-2. Apertus 1.5: same completeness check (replication candidate).
-3. Does the 92.5% ARC-AGI-2 result count as an eligible 2026 competition submission
-   (determines the $150k bonus outcome)? Answered 2026-09-10: no. Verified leaderboard runs
-   of closed frontier models are not competition entries; the open-solution track on Kaggle
-   stands at 7.51% on ARC-AGI-3 (2026-08-31), and the frontier record is now Astra's 95.0%
-   on ARC-AGI-2, so the gap between verified frontier systems and eligible open solutions is
-   roughly 90 points.
-4. Compute: one 8x80GB node suffices for 7B/13B inference + activation patching
-   (design claim); verify in the M2 pilot before the M3 commitment.
-5. Dolma audit: recall calibration via planted canaries (red-team item 1) - which
-   continued-pretraining budget makes the calibration runnable inside M2?
+Closed 2026-09-10 (issue #2); every check below is a Hugging Face Hub API call or a dataset
+card read on that date. Hub-stored sizes are the summed file sizes the API lists (compressed
+as stored); the dataset cards give uncompressed bytes per source.
+
+1. OLMo 3 7B/32B + Dolma 3. **Released and complete at the mix level.** Base checkpoints
+   `allenai/Olmo-3-1025-7B` and `allenai/Olmo-3-1125-32B` (2025-12-03). The exact 7B
+   pretraining mix is published as `allenai/dolma3_mix-6T-1025-7B` ("the full mix of documents
+   used to train Olmo 3 7B"; 99,834 files, 3.35 TB Hub-stored; per-source token, byte and
+   document tables; document-level `metadata` field), with `dolma3_dolmino_mix-*` and
+   `dolma3_longmino_mix-*` for the later stages and `dolma3_pool` (over 9T tokens, 99,587
+   files, 6.70 TB; Common Crawl and olmOCR PDFs only, StackEdu and FineMath linked). Data-order
+   manifests live in the OLMo-core training configs on GitHub and were not checked. Decision:
+   OLMo 3 7B/32B is the replication family (study design v0.4); the 32B slot of the
+   confirmatory list is OLMo 2's own `allenai/OLMo-2-0325-32B`.
+2. Apertus. **1.0 base released and ungated; 1.5 released and gated.** `swiss-ai/Apertus-8B-2509`
+   and `Apertus-70B-2509` (base, gated=false) with the data recipe published as compliance tag
+   lists over FineWeb / FineWeb-2 plus Swiss sources (`apertus-pretrain-swiss`,
+   `apertus-pretrain-romansh`, `apertus-pretrain-poisonandcanaries`); `Apertus-v1.5-8B/-70B`
+   (2026-07-24, gated=auto, continued pretraining +4T/+2T tokens) need an account that accepts
+   the terms, and whether a pretrain-only 1.5 checkpoint exists is unverified. Decision: second
+   replication candidate is Apertus 1.0 base; 1.5 optional.
+3. ARC-AGI-2 competition eligibility. Answered above: no. Verified leaderboard runs of closed
+   frontier models are not competition entries; the open-solution track on Kaggle stands at
+   7.51% on ARC-AGI-3 (2026-08-31), the frontier record is Astra's 95.0% on ARC-AGI-2.
+4. Compute. **Design claim holds with margin; node identification is an owner action.**
+   bf16 weights: 7B 14 GB, 13B 26 GB, Pythia 12B 24 GB, 32B 64 GB, each fits one 80 GB GPU
+   for inference on short items (the 32B with a small KV cache). Activation patching on 7B and
+   13B caches at most about 0.2 GB of residual stream per 512-token item (layers x d_model x
+   tokens x 2 bytes) and costs two forward passes per component. Volume: 4,500 items x 7
+   confirmatory checkpoints x 11 generations (arm A plus 10 CoT-decoding branches) is about
+   350k generations; at a few hundred tokens each this is tens of GPU-hours on one 80 GB GPU,
+   an 8-GPU node is comfort, not necessity. The concrete node and its availability are recorded
+   on the daily-ops issue, not in this repository (public-only rule).
+5. Corpus access and audit budget. **Two paths.** (a) Public infini-gram indexes exist over the
+   exact training data: `v4_olmo-2-0325-32b-instruct_llama` and `v4_olmo-2-1124-13b-instruct_llama`
+   (4.6T tokens each), `v4_olmo-3-7b-instruct_olmo2` (6.0T), `v4_olmo-3-32b-think_olmo2` (6.1T),
+   `v4_dclm-baseline_llama` (4.3T), `v4_dolma-v1_7_llama` (2.6T), `v4_piletrain_llama` (380B)
+   (index list from the public infini-gram space, 2025-12). The instruct/think indexes cover
+   pre-, mid- and post-training data, a superset of the base model's corpus: a miss is a miss
+   for the base model, a hit needs source filtering. The n-gram layer of the audit therefore
+   needs no download; API rate limits and the index tokenizer (Llama-2 for OLMo 2, olmo2 for
+   OLMo 3) are the constraints. (b) Local mirror for the embedding and rule-signature layer:
+   OLMo 2 exact corpora `allenai/olmo-mix-1124` (28,880 files, 7.48 TB) + `allenai/dolmino-mix-1124`
+   (7,355 files, 1.65 TB) = 9.1 TB Hub-stored (roughly 25 TB uncompressed at the dolmino card's
+   6 bytes per token); OLMo 3 7B mix 3.35 TB; Pile: `EleutherAI/pile` holds no data files any
+   more (3 files), `EleutherAI/the_pile_deduplicated` holds 451 GB (1,652 files). Consequence for
+   the model list: use the Pythia `-deduped` checkpoints (`EleutherAI/pythia-1b-deduped`,
+   `-2.8b-deduped`, `-6.9b-deduped`, `-12b-deduped`, all HTTP 200, 154 intermediate `stepN`
+   revisions each) so that the auditable corpus matches the training corpus. A full embedding
+   index over 4.6T tokens is out of budget; the embedding layer runs on a stratified sample
+   (about 1% of documents, roughly 90 GB for OLMo 2) plus the full n-gram layer, and d* is
+   reported as a lower bound (red-team item 1). Canary calibration: Apertus already planted
+   canaries in pretraining (`apertus-pretrain-poisonandcanaries`), which calibrates the audit
+   pipeline's recall without a continued-pretraining run; a small OLMo 2 continued-pretraining
+   run stays optional for M2.
+
+### Frozen model list for the pre-registration (2026-09-10)
+
+| Role | Checkpoints (Hub IDs, all HTTP 200 on 2026-09-10) | Corpus | Audit path |
+|------|-----------------------------------------------------|--------|------------|
+| Confirmatory, OLMo 2 | `allenai/OLMo-2-1124-7B`, `allenai/OLMo-2-1124-13B`, `allenai/OLMo-2-0325-32B` | `olmo-mix-1124` + `dolmino-mix-1124` (9.1 TB) | infini-gram OLMo 2 indexes + 1% embedding sample |
+| Confirmatory, scale control | `EleutherAI/pythia-1b-deduped`, `-2.8b-deduped`, `-6.9b-deduped`, `-12b-deduped` | `the_pile_deduplicated` (451 GB) | infini-gram `v4_piletrain_llama` + full local embedding index (fits) |
+| Replication | `allenai/Olmo-3-1025-7B`, `allenai/Olmo-3-1125-32B` | `dolma3_mix-6T-1025-7B` (3.35 TB) and the 32B mix | infini-gram OLMo 3 indexes |
+| Second replication candidate | `swiss-ai/Apertus-8B-2509`, `swiss-ai/Apertus-70B-2509` (base, ungated); 1.5 optional | FineWeb / FineWeb-2 compliance tags + Swiss sources | local, tag lists; canary dataset for recall calibration |
+| Closed | DCLM arm: only `mlfoundations/dclm-baseline-1.0` (2024) exists, no v2 | - | - |
+
+Budget summary: 13 TB compressed download for a full local mirror of the three corpora, of
+which only the 451 GB Pile mirror and a 1% OLMo sample are needed if the n-gram layer runs on
+the public infini-gram indexes; one 80 GB GPU is sufficient, one 8x80 GB node is the comfortable
+target.
 
 ## Source notes
 
@@ -392,6 +449,12 @@ availability, which affects only the second replication candidate.
 - Hugging Face API checks on 2026-09-03: `allenai/OLMo-2-1124-7B` (200),
   `allenai/OLMo-2-1124-13B` (200), `allenai/OLMo-2-1124-32B` (401, not in release),
   `allenai/dolma` dataset (200, ODC-BY).
+- Hugging Face API checks on 2026-09-10 (feasibility audit, issue #2): every Hub ID in the
+  frozen model list and in the corpus-access answer above returned HTTP 200; dataset sizes
+  are the summed `siblings` sizes from `?blobs=true`; the 2026-09-03 401 on
+  `allenai/OLMo-2-1124-32B` is a nonexistent-repository response, not a gating signal.
+  infini-gram index names from the public infini-gram Hugging Face space (`constants.py`,
+  2025-12).
 - ARC-AGI-2 figures: ARC Prize leaderboard/results pages via secondary benchmark
   reporting; treat the ARC Prize site as the final authority before citing in the paper.
 - OLMo 3 and Apertus 1.5 release claims rest on secondary pages and official blogs;

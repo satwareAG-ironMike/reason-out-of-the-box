@@ -58,6 +58,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 #### Changed
 
+- Feasibility audit closed (issue #2, M1): docs/next-investigations.md "Open questions for
+  the feasibility audit" now answers all five items with Hub API evidence dated 2026-09-10.
+  OLMo 3 7B/32B + Dolma 3 released and complete at the mix level (`dolma3_mix-6T-1025-7B`,
+  3.35 TB); Apertus 1.0 base ungated, 1.5 gated; DCLM arm closed; compute claim holds (one
+  80 GB GPU sufficient, 8x80 GB comfortable); corpus access via public infini-gram indexes
+  over the exact OLMo 2 and OLMo 3 training data plus a local mirror budget (9.1 TB OLMo 2,
+  3.35 TB OLMo 3 7B, 451 GB Pile dedup; 13 TB total, 1% embedding sample otherwise). Frozen
+  model list for the pre-registration: OLMo 2 7B/13B/32B, Pythia 1B/2.8B/6.9B/12B `-deduped`
+  (corpus match with `the_pile_deduplicated`), OLMo 3 7B/32B replication, Apertus 1.0 base
+  second candidate. Study design v0.4 model row names the `-deduped` checkpoints (#2)
 - docs/study-design.md v0.4: OLMo 2 32B restored to the confirmatory model list, OLMo 3
   7B/32B as replication family, DCLM arm closed; Amendments v0.4 fix the two-layer
   contamination audit (corpus-side plus raw-completion probes), a pre-registered activation-
