@@ -1,9 +1,10 @@
 # Study design: does a base LLM reason out of the box?
 
-Status: draft v0.3 (2026-09-03), red-teamed (see Red-team findings). Pre-registration candidate. Derived from the 5-condition
+Status: draft v0.4 (2026-09-10), red-teamed (see Red-team findings). Pre-registration candidate. Derived from the 5-condition
 spec in [archive/INDEX.md](../archive/INDEX.md) and the failure modes catalogued in rounds
-1-7. v0.3 corrects the model list after release verification (OLMo 2 was released at 7B
-and 13B only; see docs/next-investigations.md) and re-targets the replication arm.
+1-7. v0.3 (2026-09-03) removed OLMo 2 32B after a release check that queried a wrong model
+ID; v0.4 restores it (`allenai/OLMo-2-0325-32B`, verified 2026-09-10) and adds the
+methodology amendments listed under Amendments v0.4.
 
 ## Hypotheses
 
@@ -22,7 +23,7 @@ The design must be able to separate all three. Most published work cannot.
 
 | Choice | Rationale |
 |--------|-----------|
-| Models: OLMo 2 7B and 13B base checkpoints; Pythia 1B, 2.8B, 6.9B, 12B as scale control; OLMo 3 32B as conditional large checkpoint (pending official release verification) | **Open pretraining data (Dolma)** is mandatory - contamination cannot be audited on closed models. v0.3: OLMo 2 has no public 32B release (verified 2026-09-03); the 32B slot moves to OLMo 3 (7B/32B + Dolma 3 reported) once the official repos confirm complete data and manifests |
+| Models: OLMo 2 7B, 13B and 32B base checkpoints (`allenai/OLMo-2-1124-7B`, `-1124-13B`, `-0325-32B`); Pythia 1B, 2.8B, 6.9B, 12B as scale control; OLMo 3 7B and 32B (`allenai/Olmo-3-1025-7B`, `-1125-32B`, Dolma 3) as the replication family | **Open pretraining data** is mandatory - contamination cannot be audited on closed models. All three OLMo 2 sizes share the published OLMo-mix-1124 and Dolmino-mix-1124 corpora; OLMo 3 trains on the published Dolma 3 mixes. v0.4: the 32B is OLMo 2's own, restored after the v0.3 wrong-ID check |
 | Primary arm A: standard `Q: ... A:` greedy decoding | The Wang-Zhou baseline; QA format only because bare base models continue the question |
 | Primary arm B: CoT-decoding (top-k=10 first-token branches, confidence selection) | Inference-time only - no parameter updates, no task-specific prompt tokens - so it counts as out of the box; greedy alone hides latent paths (red-team item 2) |
 | Secondary arm (analysis only): "let's think step by step" | Quantifies the verbal-trigger gap (H0-b) without contaminating the primary claim |
@@ -90,9 +91,10 @@ This is the decisive test and the one the 2026 length-generalization barrier
 
 - Tasks: 300 items per family per depth level; 3 families x 5 depths x 300 = 4,500 items
   per model. Human baseline: 40 participants x 60 items per family.
-- Models: 2 OLMo 2 sizes (7B, 13B) + 4 Pythia sizes (1B, 2.8B, 6.9B, 12B) = 6 checkpoints,
-  +1 conditional (OLMo 3 32B), all open weights, one 8x80GB node suffices for inference;
-  activation patching on the 7B and 13B only.
+- Models: 3 OLMo 2 sizes (7B, 13B, 32B) + 4 Pythia sizes (1B, 2.8B, 6.9B, 12B) = 7
+  confirmatory checkpoints, + 2 OLMo 3 replication checkpoints (7B, 32B), all open weights
+  with published corpora; one 8x80GB node suffices for inference (bf16 weights: 64 GB for
+  32B); activation patching on the 7B and 13B only.
 - Dolma audit: n-gram index over the pretraining corpus (existing infrastructure: WIMBD /
   infini-gram).
 - Estimated wall time: 12 weeks including IRB lead time and human data collection.
@@ -148,8 +150,43 @@ mitigation). Changes adopted into v0.2 are marked.
 - A biological-comparison arm (child data on the same digit matrices) to test the data-
   efficiency disanalogy, not just the accuracy one.
 - Replication on a second open-data model family to rule out OLMo-specific pretraining
-  artifacts. DCLM Base v2 is not confirmed as a fully released corpus (2026-09-03);
-  candidates: OLMo 3/Dolma 3 or Apertus 1.5 (8B/70B), both pending release verification.
+  artifacts: OLMo 3 (Dolma 3) is the primary replication family (v0.4); Apertus 1.5
+  (8B/70B, released 2026-07-24, gated weights, base-checkpoint availability to verify) is
+  the second candidate. DCLM has no corpus release beyond dclm-baseline-1.0 (2024); the
+  DCLM arm is closed.
+
+## Amendments v0.4 (2026-09-10)
+
+Sources for each item are in docs/next-investigations.md, Research findings (2026-09-10).
+
+1. **Model list.** OLMo 2 32B restored (wrong-ID check in v0.3). OLMo 3 7B/32B promoted from
+   conditional slot to replication family. DCLM arm closed.
+2. **Condition 2, contamination audit.** Canary strings calibrate audit recall only for the
+   original copy of a document: Anthropic's August 2026 risk report documents canaried
+   transcripts re-entering training corpora through forks made before the canary was added
+   and through misconfigured filters. The audit therefore has two layers: corpus-side
+   (n-gram via infini-gram indexes over the exact OLMo 2 and OLMo 3 training data, plus
+   embedding and rule-signature search) and model-side raw-completion probes (prefix
+   continuation of generated items and of planted canaries). Recall is reported per layer.
+3. **Condition 3, activation patching.** Circuit-level claims flip in 73.2% of defensible
+   analytic specifications on a standard task (2608.13754). The patching pipeline (metric,
+   ablation type, position set, threshold, progress measure) is fixed in the pre-registration,
+   and results are reported over a small pre-registered specification grid, not a single
+   configuration.
+4. **Condition 4, faithfulness metrics.** The step-removal (truncation) metric anti-correlates
+   with human faithfulness labels on FaithCoT-Bench, and behavioral detection is at chance
+   where models are wrong (2607.23458). Truncation and mistake-insertion stay as descriptive
+   statistics; the confirmatory faithfulness metric for the secondary arms is parametric
+   (unlearning of a reasoning step, FUR, EMNLP 2025), with filler-token substitution kept.
+5. **Condition 5, depth generalization.** Before the runs, each task family's automaton is
+   classified with the 2608.13433 decision procedure (loop-balanced counter cascades); the
+   classification is a pre-registered prediction of which families can length-generalize
+   under NoPE theory, reported next to the results with the RoPE caveat.
+6. **Definition boundary.** "Out of the box" means no parameter updates and no task-specific
+   tokens in the prompt, with the model's own computation graph. Inference-time architectural
+   interventions on frozen weights (recirculation, retrofitted recurrence, latent-thought
+   adapters) are excluded from the primary arms and may appear only as analysis-only
+   secondary arms.
 
 ## Provenance
 

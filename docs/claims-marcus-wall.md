@@ -43,6 +43,17 @@ to 51% (SimpleQA) and o4-mini 48% to 79% (OpenAI, 2025-04); OpenAI's 2025-09 pap
 point remains unverified and must not be cited as fact: the 2025-04 Llama 4
 benchmark-gaming rumor, flagged by Marcus himself as unverified.
 
+Addendum 2026-09-10, claims 1 and 4 against the GPT-6 Astra results (ARC Prize verified,
+2026-09-03): ARC-AGI-2 95.0% and ARC-AGI-3 62.7% under the neutral Standard harness versus
+99.9% under a harness that preserves the provider's opaque reasoning state. Marcus's
+readings, both dated: "success on ARC-AGI is great and impressive, not (despite the name)
+proof of AGI" (2026-09-03) and, on the harness gap, "so it was the harness not the model"
+(2026-09-08); he also cites Astra's self-generated symbolic notation as evidence for claim 4.
+Scoring: claim 1 (brittleness on outliers) is weakened at the frontier for ARC-style tasks
+but the 37-point harness dependence keeps the reliability question open; claim 4 gains a
+datapoint only if the scaffold is read as the symbolic component, which ARC Prize itself
+treats as a separate question ("Two Harnesses, Two Questions"). No verdict change.
+
 ## Papers uncovered: archive-worthiness assessment
 
 None of the essay's citations are positive out-of-the-box reasoning evidence, so none

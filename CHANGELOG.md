@@ -23,8 +23,32 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   Bender and Koller 2020 / Bender et al. 2021 (DOIs) (#28)
 - README: section "What the verdict does and does not say" scoping the headline verdict to
   the base-model claim and naming the established claims with their venues (#28)
+- docs/next-investigations.md: Research findings (2026-09-10), a currency scan of every
+  project topic through 2026-09-10. Verdict unchanged (no qualifying paper 2026-08-01..09-10).
+  24 verified round-11 candidates, among them 2609.01274 (Findings of EMNLP 2026, RLVR gains
+  as sampling efficiency), 2506.14245 (CoT-Pass@K counter-position), 2608.13433 (complete
+  length-generalization characterization for regular languages), 2607.23458 (step-removal
+  faithfulness metric anti-correlates with human labels), 2608.13754 (circuit claims flip in
+  73.2% of analytic specifications), 2607.15495 (Anthropic global-workspace framing). Anthropic
+  Risk Report August 2026 (canary strings defeated by pre-canary forks) recorded as a
+  contamination-audit source. Open-data releases verified on the Hub: OLMo 2 32B exists
+  (`allenai/OLMo-2-0325-32B`; the 2026-09-03 check used a wrong ID), OLMo 3 7B/32B + Dolma 3
+  public, Apertus 1.5 released 2026-07-24, no DCLM v2 (#26)
 
 #### Changed
+
+- docs/study-design.md v0.4: OLMo 2 32B restored to the confirmatory model list, OLMo 3
+  7B/32B as replication family, DCLM arm closed; Amendments v0.4 fix the two-layer
+  contamination audit (corpus-side plus raw-completion probes), a pre-registered activation-
+  patching specification grid, parametric faithfulness as the confirmatory Condition 4 metric,
+  automaton classification for Condition 5, and the definition boundary excluding
+  inference-time architectural interventions (#26)
+- docs/next-investigations.md: ARC section carries the 2026-09-03 GPT-6 Astra verified
+  results (ARC-AGI-2 95.0%, ARC-AGI-3 62.7% vs 99.9% by harness) and answers open question 3;
+  investigation-fields table and timeline risk updated (#26)
+- docs/claims-hinton-lemoine.md and docs/claims-marcus-wall.md: 2026-09-10 addenda (Coxon
+  thread confirmations, Hinton in The Times 2026-09-07, Astra harness gap against Marcus
+  claims 1 and 4); no verdict change (#26)
 
 - Root AGENTS.md project notes: direct pushes to `main` are rejected by the
   `main-integrity-gate` ruleset (3 required status checks, no bypass actors), so every

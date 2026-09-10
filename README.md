@@ -45,7 +45,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/counterarguments.md` | Claim ladder C1-C5 with evidence status, and the ten recurring counterarguments steelmanned against the archive |
 | `docs/study-design.md` | Pre-registrable protocol for the experiment that would settle the question |
-| `docs/next-investigations.md` | 2026-09-03 re-scan: investigation fields, feasibility findings, thesis timeline (M1-M5) |
+| `docs/next-investigations.md` | 2026-09-03 and 2026-09-10 re-scans: investigation fields, feasibility findings, round-11 candidates, thesis timeline (M1-M5) |
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |
 | `docs/claims-marcus-wall.md` | Claim ledger: Marcus "Deep Learning Is Hitting a Wall" (2022), judged against evidence through 2026 |
 | `CHANGELOG.md` | Change history |
@@ -78,7 +78,7 @@ cross-checked secondary sources.
 ## Status
 
 Public research archive at https://github.com/satwareAG-ironMike/reason-out-of-the-box
-(`main` is branch-protected). The 2026-09-03 re-scan re-confirmed the verdict: the
+(`main` is branch-protected). The 2026-09-03 and 2026-09-10 re-scans re-confirmed the verdict: the
 remaining gap is experimental, not bibliographic. The thesis program (study design
 execution on open-data models) is tracked in the [issue board](https://github.com/satwareAG-ironMike/reason-out-of-the-box/issues)
 under milestones M1 (protocol freeze + pre-registration, 2026-09-30) to M5 (paper +
