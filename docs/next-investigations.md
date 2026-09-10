@@ -36,7 +36,7 @@ What is needed to settle H1, in order:
 | # | Field | State | Next action |
 |---|-------|-------|-------------|
 | 1 | The H1 experiment on open-data models | Open; no paper fills the gap (criteria 1-3 unmet) | Execute study design v1.0 (milestones M1-M5 below) |
-| 2 | Feasibility: models, data, compute | Re-verified 2026-09-10 (findings below): OLMo 2 32B exists, OLMo 3 7B/32B + Dolma 3 public, Apertus 1.5 released, no DCLM v2 | Close the #2 audit: manifests, corpus access path, budgets, frozen model list |
+| 2 | Feasibility: models, data, compute | Re-verified 2026-09-10 (findings below): OLMo 2 32B exists, OLMo 3 7B/32B + Dolma 3 public, Apertus 1.5 released, no DCLM v2 | Closed 2026-09-10 (issue #2): manifests, corpus access path, budgets, and the frozen model list are in the findings below |
 | 3 | Literature round 9: 2026 latent-reasoning updates | Executed 2026-09-05: 15 papers added (6 reasoning traces + the issue #1 list incl. corrected Akyurek ID 2211.15661). 2026-09-10 re-scan: verdict unchanged, 24 verified round-11 candidates (findings below) | Round 11 from the 2026-09-10 candidate list |
 | 4 | ARC-AGI-2 process level | 2026-09-03: GPT-6 Astra 95.0% ARC-AGI-2 verified; ARC-AGI-3 62.7% vs 99.9% depending on harness; still no peer-reviewed process analysis | Audit the Kaggle 2026 write-ups after the 2026-09-30 milestone prize |
 | 5 | In-context learning as algorithm formation | New theoretical frame for "from nothing" | Done in round 9 (2026-09-05): Garg 2208.01066, Akyurek 2211.15661, In-Context Algebra 2512.16902 |
@@ -84,8 +84,9 @@ What is needed to settle H1, in order:
   line with verified figures (the 24% 2025 winner line, NVARC 24.03% private, remains
   correct).
 - 2026 competition: $700k pool; $150k bonus for the first eligible solution at >=85%.
-  Whether the 92.5% result counts as an eligible competition submission is not
-  established; a model evaluation and a prize-winning open solution are different things.
+  Whether the 92.5% result counts as an eligible competition submission: answered
+  2026-09-10, no (see the feasibility audit below); a model evaluation and a
+  prize-winning open solution are different things.
 - No peer-reviewed process-level analysis of how any system solves ARC-AGI-2 exists.
   2025 winner and paper-award write-ups (NVARC; "Less is More: Recursive Reasoning with
   Tiny Networks"; "ARC-AGI Without Pretraining") are competition papers/preprints.
@@ -358,7 +359,7 @@ would change the citation status.
 | Milestone | Due | Content | Exit criteria |
 |-----------|-----|---------|---------------|
 | M1 Protocol freeze + pre-registration | 2026-09-30 | study design v1.0; feasibility audit closed; IRB submission (week 0 of the 12-week estimate); OSF computational layer + AsPredicted timestamp; statistical analysis plan | Timestamped pre-registration live; IRB submitted; model list frozen |
-| M2 Pilot | 2026-10-31 | contamination audit on one task family (d* lower bound + canary calibration); task generators (reuse 2404.07353 / ARC-GEN for the ARC family); inference harness (arms A and B); pilot run on Pythia-2.8B + OLMo 2 7B | Go/no-go: audit recall calibrated; harness reproducible; d* established for one family |
+| M2 Pilot | 2026-10-31 | contamination audit on one task family (d* lower bound + canary calibration); task generators (reuse 2404.07353 / ARC-GEN for the ARC family); inference harness (arms A and B); pilot run on Pythia-2.8B-deduped + OLMo 2 7B | Go/no-go: audit recall calibrated; harness reproducible; d* established for one family |
 | M3 Main experiment | 2026-12-31 | all checkpoints x all three families x arms A/B; activation patching on 7B/13B; process tests (answer-probability control, irrelevant clauses, instantiation variance) | Complete raw-output archive, all runs reproducible from the pre-registered spec |
 | M4 Human baseline + analysis | 2027-02-28 | human data collection (N >= 40 per family); faithfulness controls on secondary arms; apply the pre-registered decision table | One of H1 / H0-a / H0-b / mixed, per the decision table; deviations documented |
 | M5 Paper + release | 2027-04-30 | pre-registered report; public release of code, generated tasks, and raw outputs | Submission to target venue (registered-report format); artifacts public |
@@ -371,8 +372,8 @@ availability, which affects only the second replication candidate.
 
 ## Open questions for the feasibility audit
 
-Closed 2026-09-10 (issue #2); every check below is a Hugging Face Hub API call or a dataset
-card read on that date. Hub-stored sizes are the summed file sizes the API lists (compressed
+Closed 2026-09-10 (issue #2); every model and corpus check below is a Hugging Face Hub API
+call or a dataset card read on that date; items 3-5 rest on the sources named in each. Hub-stored sizes are the summed file sizes the API lists (compressed
 as stored); the dataset cards give uncompressed bytes per source.
 
 1. OLMo 3 7B/32B + Dolma 3. **Released and complete at the mix level.** Base checkpoints
@@ -382,7 +383,9 @@ as stored); the dataset cards give uncompressed bytes per source.
    document tables; document-level `metadata` field), with `dolma3_dolmino_mix-*` and
    `dolma3_longmino_mix-*` for the later stages and `dolma3_pool` (over 9T tokens, 99,587
    files, 6.70 TB; Common Crawl and olmOCR PDFs only, StackEdu and FineMath linked). Data-order
-   manifests live in the OLMo-core training configs on GitHub and were not checked. Decision:
+    manifests live in the OLMo-core training configs on GitHub and were not checked. The 32B
+    pretraining mix is assumed to be the generic `dolma3_mix-6T` (per-model naming exists only
+    for the 7B); unverified. Decision:
    OLMo 3 7B/32B is the replication family (study design v0.4); the 32B slot of the
    confirmatory list is OLMo 2's own `allenai/OLMo-2-0325-32B`.
 2. Apertus. **1.0 base released and ungated; 1.5 released and gated.** `swiss-ai/Apertus-8B-2509`
@@ -402,8 +405,9 @@ as stored); the dataset cards give uncompressed bytes per source.
    tokens x 2 bytes) and costs two forward passes per component. Volume: 4,500 items x 7
    confirmatory checkpoints x 11 generations (arm A plus 10 CoT-decoding branches) is about
    350k generations; at a few hundred tokens each this is tens of GPU-hours on one 80 GB GPU,
-   an 8-GPU node is comfort, not necessity. The concrete node and its availability are recorded
-   on the daily-ops issue, not in this repository (public-only rule).
+    an 8-GPU node is comfort, not necessity. This closure is a desk calculation (owner-approved
+    2026-09-11); the M2 pilot retains the empirical confirmation. The concrete node and its
+    availability are recorded on the daily-ops issue, not in this repository (public-only rule).
 5. Corpus access and audit budget. **Two paths.** (a) Public infini-gram indexes exist over the
    exact training data: `v4_olmo-2-0325-32b-instruct_llama` and `v4_olmo-2-1124-13b-instruct_llama`
    (4.6T tokens each), `v4_olmo-3-7b-instruct_olmo2` (6.0T), `v4_olmo-3-32b-think_olmo2` (6.1T),
@@ -422,10 +426,12 @@ as stored); the dataset cards give uncompressed bytes per source.
    revisions each) so that the auditable corpus matches the training corpus. A full embedding
    index over 4.6T tokens is out of budget; the embedding layer runs on a stratified sample
    (about 1% of documents, roughly 90 GB for OLMo 2) plus the full n-gram layer, and d* is
-   reported as a lower bound (red-team item 1). Canary calibration: Apertus already planted
-   canaries in pretraining (`apertus-pretrain-poisonandcanaries`), which calibrates the audit
-   pipeline's recall without a continued-pretraining run; a small OLMo 2 continued-pretraining
-   run stays optional for M2.
+    reported as a lower bound (red-team item 1). Canary calibration: Apertus already planted
+    canaries in pretraining (`apertus-pretrain-poisonandcanaries`), which calibrates the audit
+    pipeline's recall mechanics without a continued-pretraining run. Caveat: those canaries sit
+    in a FineWeb-derived corpus with the Apertus tokenizer, so cross-corpus transfer of the
+    measured recall to OLMo/Dolma is assumed, not shown; a small OLMo 2 continued-pretraining
+    run stays optional for M2 and would settle it.
 
 ### Frozen model list for the pre-registration (2026-09-10)
 
@@ -433,7 +439,7 @@ as stored); the dataset cards give uncompressed bytes per source.
 |------|-----------------------------------------------------|--------|------------|
 | Confirmatory, OLMo 2 | `allenai/OLMo-2-1124-7B`, `allenai/OLMo-2-1124-13B`, `allenai/OLMo-2-0325-32B` | `olmo-mix-1124` + `dolmino-mix-1124` (9.1 TB) | infini-gram OLMo 2 indexes + 1% embedding sample |
 | Confirmatory, scale control | `EleutherAI/pythia-1b-deduped`, `-2.8b-deduped`, `-6.9b-deduped`, `-12b-deduped` | `the_pile_deduplicated` (451 GB) | infini-gram `v4_piletrain_llama` + full local embedding index (fits) |
-| Replication | `allenai/Olmo-3-1025-7B`, `allenai/Olmo-3-1125-32B` | `dolma3_mix-6T-1025-7B` (3.35 TB) and the 32B mix | infini-gram OLMo 3 indexes |
+| Replication | `allenai/Olmo-3-1025-7B`, `allenai/Olmo-3-1125-32B` | `dolma3_mix-6T-1025-7B` (3.35 TB) and the 32B mix (assumed: generic `dolma3_mix-6T`; per-model naming exists only for the 7B, unverified) | infini-gram OLMo 3 indexes |
 | Second replication candidate | `swiss-ai/Apertus-8B-2509`, `swiss-ai/Apertus-70B-2509` (base, ungated); 1.5 optional | FineWeb / FineWeb-2 compliance tags + Swiss sources | local, tag lists; canary dataset for recall calibration |
 | Closed | DCLM arm: only `mlfoundations/dclm-baseline-1.0` (2024) exists, no v2 | - | - |
 
