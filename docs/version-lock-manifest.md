@@ -1,8 +1,9 @@
-# Version-lock manifest (issue #11 draft skeleton)
+# Version-lock manifest (issue #11)
 
-Status: draft skeleton, 2026-09-11, branch `docs/prereg-skeleton`. NOT yet frozen; the
-freeze happens at the issue #11 pre-registration timestamp (OSF + AsPredicted). Public-only
-rule: this manifest records hashes, identifiers, and versions only - no secrets, no private
+Status: draft 2026-09-11, issue #11, M1 work package. NOT yet frozen; the freeze happens at
+the issue #11 pre-registration timestamp (OSF + AsPredicted). Submission URLs and the freeze
+date are recorded in [preregistration.md](preregistration.md). Public-only rule: this
+manifest records hashes, identifiers, and versions only - no secrets, no private
 infrastructure.
 
 Purpose: pin every artifact the pre-registered analysis depends on, so that re-running the
@@ -17,6 +18,8 @@ analysis on the archived raw outputs reproduces every confirmatory number bit-fo
   the timestamp nothing here changes except through the amendment path (Section 13).
 - Model checkpoints are pinned to exact Hub repository revisions at freeze, with the access
   date recorded in this file. A checkpoint without a pinned revision does not enter the freeze.
+- The freeze commit is the repository commit current at the timestamp; the hashes below
+  describe the artifacts in that commit.
 
 ## 1. Frozen documents
 
