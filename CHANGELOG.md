@@ -53,6 +53,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   exhaustive confirmatory/exploratory split; amendment path (post-timestamp changes
   downgrade to exploratory; five elements immutable); frozen-document hash enters the
   #11 version-lock manifest. Refs #10 (timestamp via #11, issue stays open) (#32)
+- docs/next-investigations.md: Superdark Factory deep research status update (issue #36):
+  citation status re-verified (arXiv zero results, no DOI, PhilPapers 403/no entry; MIT
+  Press journal association, Disintegrator project, Gray Area co-hosted launch, no
+  reception yet - non-archive classification stands); full-text-derived additions
+  (Stackelberg V vs U* vocabulary for the novelty criterion, citable mechanism-design
+  grounding for evaluator gaming and M2 grader design, class taxonomy vs counterargument
+  6, darkness vs criterion 3, pre-registration analogy); fresh same-day sweep with
+  round-11 candidates 2609.09989, 2609.09038, 2609.09030 (abstracts API-verified) plus
+  adjacent 2609.08186, and frontier items (Astra "An Alien Mind" essay, single-source Astra
+  CoT monitor-recall collapse, OpenAI automated-research-intern report) (#36)
 
 #### Changed
 

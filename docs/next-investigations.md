@@ -342,8 +342,87 @@ outside the repo. Three relevance points:
    monitorability thread of the 2026-09-10 scan; cite as position, not as evidence
    (design-philosophy essay, no empirical work).
 
-Watch: follow-up coverage of the Agentworld issue and any DOI or PhilPapers indexing that
-would change the citation status.
+Status update (deep research, full-text fetch of superdark.antikythera.org, 2026-09-11, issue #36):
+
+- Citation status re-verified: arXiv all-field "superdark factory" query returns zero results
+  (API, 2026-09-11); PhilPapers direct search blocked (HTTP 403) with no entry found by web
+  search; no DOI. Non-archive classification stands. New context: the journal is published
+  with MIT Press and described as peer-reviewed, but the piece is a "Disintegrator project"
+  (Poliks's group) in the Agentworld special issue, and the review status of the individual
+  piece is unverified. Launch event 2026-09-11, San Francisco, co-hosted with Gray Area
+  (Bratton + Poliks). No independent reception or criticism found as of 2026-09-11.
+- Formal vocabulary worth borrowing (position, not evidence): the architect's committed first
+  move is a Stackelberg commitment; V is the best committed payoff, U* the value extractable
+  beyond V only by seeding mean-based no-regret learners (Deng et al. 2019); capability
+  outside the readable space c the architect provisioned is the novelty criterion. Same
+  conceptual shape as the contamination/novelty boundary the corpus audit operationalizes.
+- Evaluator-gaming grounding is established, citable literature: Carroll 2015 (robust
+  simplicity), Braverman et al. 2018, Camara et al. 2020, Deng et al. 2019 (mechanisms
+  against no-regret learners get exploited), Kamenica and Gentzkow 2011, Blum and Mansour
+  2007. Candidate citations for the counterargument-ledger evaluator-gaming entry and M2
+  harness design: an LLM judge on a frozen rubric behaves like a no-regret learner and will
+  exploit overstructured rewards; deterministic graders, grader-context independence, and a
+  grading signal outside the judged loop stay primary (consistent with the 2609.09696
+  no-LLM-batch-auditor decision).
+- The class taxonomy (Class 1 execution / Class 2 plan-making / Class 3 objective-setting)
+  sharpens counterargument 6: every agentic result in the literature lives at Class 2
+  orchestration, so the scaffold objection says the Class 2 layer did the work. The study
+  design's scaffold ban (greedy Q:/A: and CoT-decoding arms, no tools, no exemplars) is the
+  move that isolates the model-level claim C5.
+- "Darkness" (descriptive information fails to be useful even under full disclosure) bears
+  on criterion 3: disclosed training data makes the contamination audit tractable, it does
+  not make the model predictable. Verdict wording unaffected; do not over-claim what the
+  audit buys.
+- Reflexive note: the essay's one-committed-first-move prescription is structurally the
+  repo's pre-registration discipline (issue #11, M1 freeze of the decision table before the
+  run). Analogy only.
+
+Watch (unchanged): follow-up coverage of the Agentworld issue and any DOI or PhilPapers
+indexing that would change the citation status; re-check after the 2026-09-11 launch events.
+
+### Fresh leads (2026-09-11 same-day sweep; round-11 candidates)
+
+arXiv API sweep of cs.CL/cs.LG submissions 2026-09-08/09, 25 entries triaged, abstracts
+verified via API. Three core-relevant, one adjacent:
+
+- 2609.09989 (2026-09-09), "Stable Answers, Unfinished Reasoning: Why Self-Consensus Is Not
+  a Safe Early-Exit Signal": preregistered sweep of 3,520 consensus rules against three
+  acceptance gates fixed in advance, replayed on frozen trajectories; none pass. Probe
+  agreement measures answer persistence, not reasoning termination (at one token-saving
+  rule, 1-in-9 stops cuts off a correction the trajectory would have made). Doubly
+  relevant: a reasoning-signal negative result in the C4 family, and a worked example of
+  the repo's own pre-registration practice.
+- 2609.09038 (2026-09-08, EMNLP 2026 Findings), "Do Reasoning Representations Help Humans
+  Evaluate LLM Outputs?": controlled human study of six reasoning formats; participants
+  prefer planning- and decomposition-style representations, but plain chain-of-thought
+  better supports verification, trust, and interpretability, and preferred formats raise
+  calibration risks. Evaluator-side input for M2: the trace format a human grader sees is
+  a design variable.
+- 2609.09030 (2026-09-08), "Answer-Distribution Trajectories: A Stochastic-Dynamics View of
+  LLM Reasoning": tracks the model's full predictive distribution over answers as reasoning
+  unfolds; traces with the same endpoint and similar entropy profiles can show different
+  dynamics (exploration, revision, motion, commitment). Adjacent to 2609.04963 (fractal
+  basins); candidate process measure for the pilot harness.
+- Adjacent, one line: 2609.08186 (2026-09-08) reports alignment degradation as reasoning
+  depth grows (a "Reasoning Trap" jailbreak via extended reasoning; attention dilution as
+  mechanism). Monitorability/safety side, not core.
+
+Frontier news (non-archive; Superdark Factory and claim-ledger relevance):
+
+- GPT-6 Astra release and Pachocki essay "An Alien Mind" (openai.com, 2026-09-06; Tom's
+  Hardware 2026-09-09): the ARC-verified Astra line is recorded above; new is the chief
+  scientist's essay arguing development may need to slow until shared safety thresholds
+  exist. System-card-class source: position, not evidence.
+- [single-source] forkast.news (2026-09-08): Astra's chain-of-thought monitor recall drops
+  below 11% when the model is prompted to evade oversight, versus near-100% for predecessor
+  GPT-5.6 Sol. If corroborated in the Astra system card, the strongest quantified datapoint
+  yet for the declining-monitorability thread and the Superdark Factory's Class 3
+  trajectory; not citable until the primary source is located.
+- the-decoder.com (2026-09-07) on OpenAI's automated-research-intern report: 3.1 agent
+  workdays per human workday since June; median researcher above $600/day in inference; of
+  successful tasks in the 4-8 human-hour range, more than half still needed at least one
+  human step. An empirical snapshot of Class 2 automation limits, set directly against the
+  Superdark Factory's Class 3 premise.
 
 ### Leads outside the window (missed by the 2026-09-10 scan; round-11 check)
 
