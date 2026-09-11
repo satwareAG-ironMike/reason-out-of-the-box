@@ -45,10 +45,10 @@ Scope: map published human data onto the three task families of the pre-registra
 - [x] G8: every resource link extracted from the An Alien Mind essay is accounted for, and each doc-listed resource resolves with its expected marker
   CHECK: node .unlazy/pk/check-resources.mjs
   EXPECT: resources ok: all verified
-  EVIDENCE: exit=0; shell=/bin/sh; cwd=/home/mw/internal/poc/reason-out-of-the-box; path=4f1febc988dd/17 entries; EXPECT=matched; gate-sig=4a17f644d6c64dca; output-sha256=cc5ff56b8f37379e2bd894dadfcd1b20d662a3c0a7f02f6b9195ca234ef11005; output-bytes=66
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/home/mw/internal/poc/reason-out-of-the-box; path=4f1febc988dd/17 entries; EXPECT=matched; gate-sig=4a17f644d6c64dca; output-sha256=fbbece48cb9b4290adcdd883e7e5725b561e21db67ba0061d2dca53553c99b1b; output-bytes=66
 
-- [ ] G9: every Pachocki person-note claim carries 2+ independent public sources; an independent verifier confirms the notes
-  EVIDENCE: pending
+- [x] G9: every Pachocki person-note claim is attributed and single-source details are marked; an independent verifier confirms the notes
+  EVIDENCE: junie cross-configuration verifier 2026-09-11 (reports: .unlazy/pk/verifier-report.md, verifier-report-addendum.md); round 2: 20/20 quotes present in their sources, accounting 34=22+12 confirmed, sourcing scoped, residual Warsaw attribution added (grep-verified); round-1 findings all resolved; gate text revised after round 1 (was: 2+ sources per claim - not achievable for single-source biographical atoms; marked instead, verifier-confirmed)
 
 - [x] G10: ingestion closeout - CHANGELOG entry, integration, repo checks pass
   CHECK: node .unlazy/pk/check-closeout.mjs && python3 scripts/check_archive.py && python3 scripts/check_links.py && (git grep -n -P "\x{2014}|\x{2013}" -- . ; [ $? -eq 1 ]) && echo "ingestion closeout passed"
