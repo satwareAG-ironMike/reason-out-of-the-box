@@ -91,7 +91,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   #36 relevance), the OpenAI-Hugging Face agentic incident as design input for the
   agent-executed program, Astra/RSI positions, and the closing slowdown and safety-bars
   argument. All 22 content resources extracted, fetched, and verified (accounting: 22
-  resources + 9 navigation and self-anchor exclusions from 31 raw links);
+  resources + 12 exclusions - navigation, self-anchor, and inline images - of 34 raw
+  links);
   public-professional person notes for Pachocki (2+ sources; includes the arXiv
   reasoning and monitoring line, among them "Monitoring Monitorability", 2512.18311) (#32)
 
