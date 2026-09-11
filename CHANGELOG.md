@@ -63,6 +63,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   round-11 candidates 2609.09989, 2609.09038, 2609.09030 (abstracts API-verified) plus
   adjacent 2609.08186, and frontier items (Astra "An Alien Mind" essay, single-source Astra
   CoT monitor-recall collapse, OpenAI automated-research-intern report) (#36)
+- docs/preregistration.md (new) + docs/version-lock-manifest.md (new): issue #11
+  pre-registration package. Registration content mapped to sources (study design v0.4, frozen
+  model list, analysis plan, item selection, decoding/seed policy, version lock), AsPredicted
+  form mapping, two-layer structure (computational + human per #7), deviation policy
+  (post-timestamp addenda only, affected analyses downgraded to exploratory; immutable
+  elements per analysis-plan Section 13), and the owner-gated submission checklist with the
+  record table for the OSF and AsPredicted URLs. Version-lock manifest: freeze semantics;
+  SHA-256 captured 2026-09-11 for analysis-plan.md and study-design.md (re-capture at freeze);
+  model/corpus Hub IDs from the closed feasibility audit; DRAFT activation-patching grid with
+  the primary specification fixed; TBD slots with owning issues for M2 artifacts; capture
+  procedure. Refs #11 (external submissions owner-gated; #10 closes with the timestamp) (#32)
 
 #### Changed
 
@@ -70,6 +81,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   2026-09-11, feasibility-audit section retitled (closed 2026-09-10, issue #2),
   timeline-risk paragraph reduced to the two residual unknowns (32B mix naming, Apertus
   1.5 pretrain-only checkpoint), stale "pending the audit" source note rescoped (#32)
+- AGENTS.md, README.md: docs index and layout rows extended for the #11 pre-registration
+  package (docs/preregistration.md, docs/version-lock-manifest.md) (#32)
 
 ### 2026-09-10
 
