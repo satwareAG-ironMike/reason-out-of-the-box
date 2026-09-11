@@ -39,6 +39,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - docs/claims-hinton-lemoine.md: Lindsey citation resolved to arXiv 2601.01828 with the
   base-model elicitation asymmetry in the Part 1 status table; addendum 2026-09-11
   (primary-source fetch); both Transformer Circuits sources listed (#32)
+- docs/analysis-plan.md (new): statistical analysis plan, pre-registration candidate for
+  M1 issue #10. Decision table operationalized: 9 confirmatory tests (T1-T9) each with
+  null + CI-based deterministic decision rule; pre-registered definitions (human-level
+  non-inferiority margin 1 SD, 80% retention at d*+2 gated on ACC(d*) >= human mean,
+  cliff at d*+1, probability invariance +-10 pp, shared iterative circuit with >50%
+  specification-grid agreement per 2608.13754); deterministic per-checkpoint evaluation
+  order + study-level asymmetry rule (red-team 4); scale-trend Spearman vs log(params);
+  patching primary specification fixed pre-run; faithfulness: FUR parametric + filler
+  confirmatory, truncation/mistake-insertion descriptive per Amendment v0.4 item 4;
+  human baseline participant-unit statistics with kappa >= 0.8 rater subset; d* input
+  requires domain hold-out (2609.10357) and prohibits LLM batch auditors (2609.09696);
+  exhaustive confirmatory/exploratory split; amendment path (post-timestamp changes
+  downgrade to exploratory; five elements immutable); frozen-document hash enters the
+  #11 version-lock manifest. Refs #10 (timestamp via #11, issue stays open) (#32)
 
 #### Changed
 
