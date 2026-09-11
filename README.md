@@ -48,6 +48,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 | `docs/analysis-plan.md` | Pre-registration candidate: operationalized decision table (T1-T9), confirmatory/exploratory split, amendment path |
 | `docs/preregistration.md` | Pre-registration package (issue #11): OSF computational-layer content, AsPredicted mapping, deviation policy, owner-gated submission record |
 | `docs/version-lock-manifest.md` | Version-lock manifest (issue #11): freeze semantics, artifact hashes, model Hub IDs, capture procedure |
+| `docs/agent-execution.md` | Program operating model (issue #39): full agent execution, 2026 scientific standards (confrontation, verifier independence, Executed/Reproduced/Validated), resource policy, M1-M5 mapping |
 | `docs/next-investigations.md` | 2026-09-03, 2026-09-10 and 2026-09-11 scans: investigation fields, feasibility audit (closed), frozen model list, round-11 candidates, thesis timeline (M1-M5) |
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |
 | `docs/claims-marcus-wall.md` | Claim ledger: Marcus "Deep Learning Is Hitting a Wall" (2022), judged against evidence through 2026 |
