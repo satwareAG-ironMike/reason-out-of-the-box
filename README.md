@@ -45,6 +45,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/counterarguments.md` | Claim ladder C1-C5 with evidence status, and the ten recurring counterarguments steelmanned against the archive |
 | `docs/study-design.md` | Pre-registrable protocol for the experiment that would settle the question |
+| `docs/analysis-plan.md` | Pre-registration candidate: operationalized decision table (T1-T9), confirmatory/exploratory split, amendment path |
 | `docs/next-investigations.md` | 2026-09-03, 2026-09-10 and 2026-09-11 scans: investigation fields, feasibility audit (closed), frozen model list, round-11 candidates, thesis timeline (M1-M5) |
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |
 | `docs/claims-marcus-wall.md` | Claim ledger: Marcus "Deep Learning Is Hitting a Wall" (2022), judged against evidence through 2026 |
