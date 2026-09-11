@@ -74,6 +74,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   model/corpus Hub IDs from the closed feasibility audit; DRAFT activation-patching grid with
   the primary specification fixed; TBD slots with owning issues for M2 artifacts; capture
   procedure. Refs #11 (external submissions owner-gated; #10 closes with the timestamp) (#32)
+- docs/agent-execution.md (new): program operating model per the owner directive of
+  2026-09-11 (issue #39) - the full thesis program (M1-M5) executes on AI agents with
+  enforced scientific standards: the Plan-to-Report pipeline mapped to program mechanisms,
+  immutable run manifests, numerical-confrontation records, verifier independence with
+  seeded-defect tests, Executed/Reproduced/Validated labels, artifact and archive rules,
+  resource policy (local-first single-node inference, public indexes, subscription agents,
+  no metered calls). Publication landscape verified from primary sources (arXiv one-year
+  ban for unchecked AI output, 19 May 2026; NeurIPS 2026 position-track policy and
+  provenance audit-trail direction); the repository is the public record; open owner
+  decisions (human baseline path, compute node, registration timing) listed (#39)
 
 #### Changed
 
@@ -83,6 +93,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   1.5 pretrain-only checkpoint), stale "pending the audit" source note rescoped (#32)
 - AGENTS.md, README.md: docs index and layout rows extended for the #11 pre-registration
   package (docs/preregistration.md, docs/version-lock-manifest.md) (#32)
+- AGENTS.md, README.md: docs index, layout row, and a Project Notes line for the
+  agent-execution operating model (#39)
 
 ### 2026-09-10
 
