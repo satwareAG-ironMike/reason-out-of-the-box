@@ -5,6 +5,29 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-09-14
+
+#### Added
+
+- docs/next-investigations.md: Research findings (2026-09-14), owner-directed deep research
+  on everything connected to a LinkedIn post about Google/HHMI Janelia's male fruit fly
+  connectome and the week of simulations it spawned (#42): verified Cell paper record (PMID
+  42691995, DOI 10.1016/j.cell.2026.08.015, ~166,700 neurons, sexual-dimorphism findings),
+  MaleCNS v1.0 dataset release (2026-06-08) and preprint DOI 10.1101/2025.10.09.680999,
+  three companion papers, female Nature counterpart (10.1038/s41586-026-10735-w); verified
+  event timeline of the simulation wave (DOOMFLY Alex Wormuth 2026-09-06 with LIF
+  methodology, Fly64 Jessica Paquette 2026-09-07, Beat Saber with an overfit-motor caveat,
+  NeuroCraft Fly Minecraft, Breg Grockman parallel-parking video 2026-09-10 ~1.5M views,
+  Mark Unthank Driving Fly/Flyhard CARLA project); Nick Walton Rubik's cube X post
+  2026-09-11 with no disclosed training method plus community FlyCube repo; critical
+  assessment of fidelity (Peraza Pong audit, no author endorsement of fidelity claims);
+  thesis relevance mapped to counterargument #6 scaffold-vs-model and the elicitation-vs-
+  capacity line; archive eligibility note (Cell paper eligible but connectomics background -
+  not added without owner direction)
+- docs/counterarguments.md: counterargument #6 gains a fly-connectome illustration - the
+  MaleCNS simulation wave as a public case of scaffold-vs-model attribution, with the
+  ablation question framed as the same one the study design's scaffold ban operationalizes
+
 ### 2026-09-11
 
 #### Added

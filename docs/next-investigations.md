@@ -592,6 +592,125 @@ anthropomorphic claim.
   scope), IOI 2024 competition paper (2502.06807), Dota 2 (1912.06680) - plus a CMU-era
   theory line (2012-2016).
 
+## Research findings (2026-09-14)
+
+Owner-directed deep research: everything connected to a LinkedIn post about Google/HHMI
+Janelia's complete male fruit fly connectome and the week of simulations it spawned
+(fly "playing" Doom, Super Mario 64, Beat Saber, Minecraft; driving and parallel parking;
+Nick Walton's Rubik's cube). Researched 2026-09-14 via Perplexity multi-source search plus
+primary-source fetches (Google Research blog, HHMI news release, PubMed/Cell records).
+Background and analogy surface for the core question; not archive evidence about LLM
+reasoning. Every claim below carries a dated source; single-sourced items are marked
+`[single-source]`.
+
+### The science milestone (verified)
+
+- Paper: Berg et al., "Sexual dimorphism in the complete connectome of the Drosophila male
+  central nervous system", Cell 189(18): 5504-5526.e15, published online 2026-09-03,
+  DOI 10.1016/j.cell.2026.08.015, PMID 42691995 (peer-reviewed). S. Berg leads; partners:
+  HHMI Janelia FlyEM team + Google Research + Cambridge Connectomics Group + MRC Laboratory
+  of Molecular Biology. Covers brain + optic lobes + ventral nerve cord; ~166,700 neurons,
+  11,710 neuron types.
+- Key findings: 8,069 isomorphic neuron types (broadly corresponding organization in both
+  sexes), 138 sexually dimorphic types, 289 male-specific types, 71 female-specific types.
+  Dimorphism concentrates in higher-order brain centers; sensory and motor periphery is
+  largely shared. Male-specific connections form organized connectivity hotspots; dimorphic
+  neurons can reroute information between otherwise shared circuits - a wiring-level
+  mechanism by which the same sensory input can drive different male/female behavior.
+- Dataset: MaleCNS v1.0 released earlier at male-cns.janelia.org (CC-BY 4.0; browsable in
+  Neuroglancer; downloadable without credentials). Secondary sources date the release to
+  2026-06-08 [theconsciousness.ai] - before the paper. Preprint: bioRxiv
+  10.1101/2025.10.09.680999, first posted 2025-10-09 (PMID-indexed as 41279223); preprint
+  counts differ from final Cell counts - cite Cell for figures.
+- Companion papers same day (2026-09-03): visual system "Connectome-driven neural inventory
+  of a complete visual system" (Cell, DOI 10.1016/j.cell.2026.08.014); taste (Cell,
+  10.1016/j.cell.2026.08.016); social behavior (Current Biology, 10.1016/j.cub.2026.08.013;
+  exact titles of the last two not independently verified).
+- Female counterpart: "Distributed control circuits across a brain-and-cord connectome",
+  Nature, DOI 10.1038/s41586-026-10735-w (Bates, Phelps, Kim, Yang et al.) - male and female
+  complete connectomes now exist for one species (~95% of cells shared between sexes).
+- Post timeline claims checked: "ten years of work" matches Google's "decade-long
+  partnership" framing; HHMI frames total effort as "nearly two decades" (including earlier
+  hemibrain and MANC releases). "A week ago none of this existed" is accurate for the public
+  simulation wave relative to the paper (2026-09-03), not for the dataset itself (June).
+
+### The simulation wave (verified events)
+
+- DOOMFLY: Alex Wormuth (Coinbase software engineer), announced 2026-09-06, three days after
+  the paper; first viral demo post ~2026-09-09 (~149K views). Method (his own thread):
+  leaky integrate-and-fire model over the MaleCNS graph; each Doom frame stimulates sensory
+  neurons - brightness to ~3,335 R1-R6 photoreceptor neurons, color to ~811 R8 neurons;
+  damage triggers a stimulus to two PPL101 dopamine cells as reinforcement; descending-
+  neuron activity is mapped by the developer to turn left/right, forward, shoot (not the
+  fly's real motor functions). Open source on GitHub with a live neural-activity stream; as
+  of ~2026-09-12 it was on attempt ~6,385 and had not beaten Doom.
+- Super Mario 64: Jessica Paquette ("Fly64"), posted 2026-09-07; Mario repeatedly jumps into
+  walls; code described as "100% vibe coded" with GPT Astra.
+- Minecraft: NeuroCraft Fly (Evan Smith) runs the full retained MaleCNS graph inside
+  Minecraft with simulated neural activity driving a fly mob; a separate FlyWire.AI-based
+  variant by Ro0oney also exists.
+- Beat Saber: part of the wave; reporting says its motor system was overfit to a recorded
+  movement sequence while visual input and reinforcement learning were still in development
+  [IBTimes] - a caution flag for every "fly plays X" headline.
+- Driving and parallel parking: Breg Grockman (@alright_mark) video posted 2026-09-10,
+  "the fly has completed* the ultimate test: parallel parking" (~1.5M views and ~16K likes in
+  24h). Mark Unthank's "The Driving Fly"/Flyhard project drives a Mini in CARLA with a
+  165,122-neuron MaleCNS model in a NeuroMechFly/MuJoCo body; documents steering, indicators,
+  parking attempts and three-point turns, but uses structured inputs and engineered motor
+  assistance - explicitly not driving from vision.
+- Nick Walton (@nickwalton00): Rubik's cube X post 2026-09-11 (~06:42 PT),
+  "i trained the fly to solve rubiks cube is there anything this little guy can't do?"
+  (reported ~5.8M views by one aggregator [AGTP]; others lower). No technical method
+  disclosed - no sensory encoding, optimizer, or motor mapping published in the post or any
+  located thread; a community repo (github.com/lntegrals/flycube-public) implements a cube
+  environment with the connectome in the decision loop but that is not Walton's own code.
+  Same-day follow-up: "i just spent the last day training a real fly brain to play super
+  smash brothers wins against the bots 2/3 matches".
+- Wider wave (Know Your Movie-grade meme documentation): FLYTOK doomscrolling ("wireheaded"
+  dopamine enhancement), Stonkfly trading $100 of Bitcoin on Coinbase (up $1 after one day),
+  a döner-cutting fly, fighting games wired through courtship neurons, a $FLYBRAIN memecoin
+  that spiked then dropped.
+
+### Nick Walton identity (verified)
+
+Founder/creator of AI Dungeon - text-adventure game generated by GPT, created March 2019 at a
+BYU hackathon, developed by Latitude [Wikipedia]. Later founded Voyage.io ("first platform to
+fulfill the promise of AI games"); angel investor in @etched and @figure_robot; based in Palo
+Alto [his X bio]. The post's description is accurate.
+
+### Critical assessment - how much is fly vs developer
+
+- Peraza's Pong audit [beyondmarketintelligence.com]: attempting to make a real connectome
+  learn Pong surfaced a regex bug that zeroed neuron populations, missing pathways, and a
+  broken photoreceptor-to-motion-detector connection; its write-up concludes several viral
+  projects used hand-injected behaviors or overfit data rather than an intact simulated fly.
+- Consistent technical reading across coverage: MaleCNS is a static wiring map; every demo
+  adds developer-chosen LIF neuron dynamics, sensory encoding, motor decoding, reward wiring,
+  environment and objectives. "Trained" is fair only in the broad ML sense; nothing shows the
+  connectome itself learned Rubik's cube or Doom through biological learning mechanisms.
+- No MaleCNS author or connectomics researcher was found publicly endorsing fidelity claims;
+  coverage stresses these are connectome-based neural-control prototypes with no bearing on
+  consciousness or on how real brains work.
+
+### Thesis relevance
+
+The fly wave is a live public illustration of counterargument #6 (scaffold vs model):
+connectome supplies inductive structure and dynamics; developers supply embodiment,
+semantics, action channels, objectives and evaluation. The scientifically sharp question is
+the ablation one - which behavior survives removal of hand-designed encoders, decoders,
+demonstrations and task tuning - which is exactly the scaffold-ban logic of study design v0.4.
+Analogy surface only: LIF activity over a wiring diagram vs real neural dynamics parallels CoT
+trace vs actual computation (C4); an untrained connectome that needs engineered interfaces +
+learning rules to do anything task-like echoes the elicitation-vs-capacity reading of latent
+reasoning (H0-b line).
+
+### Archive eligibility note
+
+The Cell paper has a PubMed ID and is peer-reviewed; under the provenance rule it is fully
+archive-eligible as an entry, but it is connectomics background rather than LLM-reasoning
+evidence for this archive's question - do not add without owner direction (candidate round,
+if any: round with rationale recorded on an issue). The bioRxiv preprint is marked preprint.
+
 ## Thesis timeline (milestones and exit criteria)
 
 | Milestone | Due | Content | Exit criteria |
