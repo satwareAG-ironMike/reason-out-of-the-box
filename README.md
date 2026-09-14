@@ -48,6 +48,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 | `docs/analysis-plan.md` | Pre-registration candidate: operationalized decision table (T1-T9), confirmatory/exploratory split, amendment path |
 | `docs/preregistration.md` | Pre-registration package (issue #11): OSF computational-layer content, AsPredicted mapping, deviation policy, owner-gated submission record |
 | `docs/version-lock-manifest.md` | Version-lock manifest (issue #11): freeze semantics, artifact hashes, model Hub IDs, capture procedure |
+| `docs/irb-protocol.md` | IRB protocol draft (issue #7): design, sample size/precision target, recruitment, consent, data handling, privacy, IRB path decision 2026-09-14 |
 | `docs/agent-execution.md` | Program operating model (issue #39): full agent execution, 2026 scientific standards (confrontation, verifier independence, Executed/Reproduced/Validated), resource policy, M1-M5 mapping |
 | `docs/next-investigations.md` | 2026-09-03, 2026-09-10, 2026-09-11 and 2026-09-14 scans: investigation fields, feasibility audit (closed), frozen model list, round-11 candidates, thesis timeline (M1-M5), fly connectome research |
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |

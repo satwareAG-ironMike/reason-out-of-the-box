@@ -36,6 +36,19 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   section added with verdict symbols and context note
 - README.md + AGENTS.md (root and archive): archive count references updated to 88 entries,
   11 rounds; next-investigations layout row and status line now include the 2026-09-14 scan
+- docs/version-lock-manifest.md (issue #11): re-captured document hashes on 2026-09-14
+  (analysis-plan and study-design unchanged); captured current Hub revisions for all 11
+  checkpoints as draft values (final pin at freeze)
+- docs/irb-protocol.md (new, issue #7): complete human-baseline protocol - design, sample
+  size/precision target (Wilson CI half-width <= +/-8pp on HUM(f), T1 CI-based
+  non-inferiority), population/eligibility, recruitment and compensation, consent, data
+  handling and privacy (public-only rule), scoring gates (10% re-score, kappa >= 0.8),
+  pre-registered exclusions and stopping rule, and the IRB path decision 2026-09-14
+  (no host-institution IRB path in this POC; documented alternative = published Webb et al.
+  baseline anchor + collection under institutional review only if a partner institution
+  materializes; protocol kept submission-ready)
+- docs/preregistration.md: human-subject layer row now points at the IRB protocol draft and
+  records the 2026-09-14 path decision; README layout row added for irb-protocol.md
 
 ### 2026-09-11
 
