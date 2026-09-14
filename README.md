@@ -40,7 +40,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 
 | Path | Content |
 |------|---------|
-| `archive/` | 86 peer-reviewed and preprint papers, 10 thematic rounds, per-paper entries |
+| `archive/` | 88 peer-reviewed and preprint papers, 11 thematic rounds, per-paper entries |
 | `archive/INDEX.md` | Master catalog, verdict, evidence matrix, open-problem spec |
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/counterarguments.md` | Claim ladder C1-C5 with evidence status, and the ten recurring counterarguments steelmanned against the archive |
@@ -49,7 +49,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 | `docs/preregistration.md` | Pre-registration package (issue #11): OSF computational-layer content, AsPredicted mapping, deviation policy, owner-gated submission record |
 | `docs/version-lock-manifest.md` | Version-lock manifest (issue #11): freeze semantics, artifact hashes, model Hub IDs, capture procedure |
 | `docs/agent-execution.md` | Program operating model (issue #39): full agent execution, 2026 scientific standards (confrontation, verifier independence, Executed/Reproduced/Validated), resource policy, M1-M5 mapping |
-| `docs/next-investigations.md` | 2026-09-03, 2026-09-10 and 2026-09-11 scans: investigation fields, feasibility audit (closed), frozen model list, round-11 candidates, thesis timeline (M1-M5) |
+| `docs/next-investigations.md` | 2026-09-03, 2026-09-10, 2026-09-11 and 2026-09-14 scans: investigation fields, feasibility audit (closed), frozen model list, round-11 candidates, thesis timeline (M1-M5), fly connectome research |
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |
 | `docs/claims-marcus-wall.md` | Claim ledger: Marcus "Deep Learning Is Hitting a Wall" (2022), judged against evidence through 2026 |
 | `CHANGELOG.md` | Change history |
@@ -82,7 +82,8 @@ cross-checked secondary sources.
 ## Status
 
 Public research archive at https://github.com/satwareAG-ironMike/reason-out-of-the-box
-(`main` is branch-protected). The 2026-09-03, 2026-09-10 and 2026-09-11 scans re-confirmed the
+(`main` is branch-protected). The 2026-09-03, 2026-09-10, 2026-09-11 and 2026-09-14 scans
+re-confirmed the
 verdict: the remaining gap is experimental, not bibliographic. The thesis program (study design
 execution on open-data models) is tracked in the [issue board](https://github.com/satwareAG-ironMike/reason-out-of-the-box/issues)
 under milestones M1 (protocol freeze + pre-registration, 2026-09-30) to M5 (paper +

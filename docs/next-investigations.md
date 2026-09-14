@@ -707,9 +707,11 @@ reasoning (H0-b line).
 ### Archive eligibility note
 
 The Cell paper has a PubMed ID and is peer-reviewed; under the provenance rule it is fully
-archive-eligible as an entry, but it is connectomics background rather than LLM-reasoning
-evidence for this archive's question - do not add without owner direction (candidate round,
-if any: round with rationale recorded on an issue). The bioRxiv preprint is marked preprint.
+archive-eligible. On owner direction (2026-09-14) both the Cell paper (PMID 42691995) and
+the bioRxiv preprint (PMID 41279223) were added to the archive as round 12 - Fly brain
+connectome (context), explicitly framed as connectomics context for counterarguments #9 and
+#6, not LLM-reasoning evidence. The round numbering skips 11, which stays reserved for the
+queued LLM candidate round from the research scans.
 
 ## Thesis timeline (milestones and exit criteria)
 

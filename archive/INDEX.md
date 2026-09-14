@@ -5,13 +5,14 @@ reason out of the box - without training on reasoning examples and hoping it gen
 analogous to how higher animals and humans reason without prior logic training?
 
 **Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
-2026-09-06 (round 8 extension), 2026-09-09 (round 10) |
+2026-09-06 (round 8 extension), 2026-09-09 (round 10), 2026-09-14 (round 12) |
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
 26 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
-round 9 (2026-09-05), 2 papers in round 8 (2026-09-06), 6 papers in round 10 (2026-09-09):
-86 papers in 10 rounds. Full-text in-body verification was performed for the highest-
+round 9 (2026-09-05), 2 papers in round 8 (2026-09-06), 6 papers in round 10 (2026-09-09),
+2 papers in round 12 (2026-09-14):
+88 papers in 11 rounds. Full-text in-body verification was performed for the highest-
 weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
@@ -169,6 +170,20 @@ completes the consciousness-adjacent half of the cluster.
 | [FT] Gao, ..., Coxon et al. 2025, Weight-Sparse Transformers | arXiv (preprint) | +/- mechanistic | Sparsity buys interpretable circuits at a capability cost; scale improves the frontier; Coxon's last OpenAI paper (July 2026 move to Anthropic) |
 | [FT] OpenAI (Coxon contributor) 2024, GPT-4o System Card | arXiv (preprint) | context | Coxon's named OpenAI contribution; vendor safety self-report for the model generation he later called a reckless race |
 | [FT] Huang, ..., Coxon et al. 2021, Bayesian LTA4H Analysis | eLife 10:e61722 (peer-reviewed) | context | Coxon's only peer-reviewed paper (Cambridge undergraduate); Bayesian reconciliation of conflicting RCTs; completes the corpus provenance |
+
+### Round 12 - Fly brain connectome (context, 2026-09-14)
+
+Connectomics context behind counterargument #9 (animals reason without task training) and
+counterargument #6 (scaffold vs model), added on owner direction after the 2026-09-14
+research on the September 2026 male fruit fly connectome (MaleCNS v1.0) and the hobbyist
+simulation wave it spawned. Context/analogy evidence only - neither paper bears on
+out-of-the-box LLM reasoning and the overall verdict is unchanged; full event and fidelity
+analysis in docs/next-investigations.md findings 2026-09-14.
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| Berg et al. 2026, Sexual dimorphism in the complete Drosophila male CNS connectome (PMID 42691995) | Cell (peer-reviewed) | context | ~166,700 neurons, ~11,710 types; complete male CNS map (brain + optic lobes + VNC); sexual-dimorphism findings; MaleCNS v1.0 dataset released 2026-06-08 |
+| Berg et al. 2025, same title (preprint, PMID 41279223) | bioRxiv (preprint) | context | Version-of-record history; preprint counts differ from final Cell figures - cite Cell |
 
 ## Verdict addendum: round 10 - Anthropic insiders cluster (2026-09-09)
 

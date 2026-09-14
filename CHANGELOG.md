@@ -27,6 +27,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - docs/counterarguments.md: counterargument #6 gains a fly-connectome illustration - the
   MaleCNS simulation wave as a public case of scaffold-vs-model attribution, with the
   ablation question framed as the same one the study design's scaffold ban operationalizes
+- archive/round12-fly-brain-context/: two provenance-standard entries added on owner
+  direction - Cell paper (PMID 42691995, peer-reviewed) and bioRxiv preprint (PMID
+  41279223), both with PubMed-verified author lists, framed as connectomics context for
+  counterarguments #9/#6, not LLM-reasoning evidence; round number 11 stays reserved for
+  the queued LLM candidate round
+- archive/INDEX.md: catalog counts updated to 88 papers in 11 rounds; Round 12 catalog
+  section added with verdict symbols and context note
+- README.md + AGENTS.md (root and archive): archive count references updated to 88 entries,
+  11 rounds; next-investigations layout row and status line now include the 2026-09-14 scan
 
 ### 2026-09-11
 

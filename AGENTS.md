@@ -109,6 +109,6 @@ When the user requests a durable behavior change, record it here or in the relev
 
 | Path | Scope | File |
 |------|-------|------|
-| `archive/` | Paper archive: 86 entries, 10 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
+| `archive/` | Paper archive: 88 entries, 11 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
 | `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall); governed by root rules | - |
 | `scripts/` | `check_archive.py` archive consistency checker and `check_links.py` markdown link checker (stdlib, each with `--selftest`); run both before any closeout | - |
