@@ -50,6 +50,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - docs/preregistration.md: human-subject layer row now points at the IRB protocol draft and
   records the 2026-09-14 path decision; README layout row added for irb-protocol.md
 
+#### Fixed
+
+- docs/next-investigations.md: M1 thesis-timeline row now matches the 2026-09-14 IRB path
+  decision - content and exit criteria reference the documented decision on #7 (no
+  host-institution submission path in this POC; submission only if a partner institution
+  materializes before M4) instead of an IRB submission the M1 deadline cannot meet
+- docs/next-investigations.md: research findings (2026-09-14) section now applies the
+  file's own sourcing discipline - [single-source] markers on the two single-sourced items
+  (dataset release date, Beat Saber overfit-motor caveat) and an explicit exemption for
+  the wider-wave color bullet, which carries no formal citation
+
 ### 2026-09-11
 
 #### Added

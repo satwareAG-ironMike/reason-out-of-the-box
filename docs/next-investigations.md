@@ -600,8 +600,9 @@ Janelia's complete male fruit fly connectome and the week of simulations it spaw
 Nick Walton's Rubik's cube). Researched 2026-09-14 via Perplexity multi-source search plus
 primary-source fetches (Google Research blog, HHMI news release, PubMed/Cell records).
 Background and analogy surface for the core question; not archive evidence about LLM
-reasoning. Every claim below carries a dated source; single-sourced items are marked
-`[single-source]`.
+reasoning. Every claim below carries a dated source except the wider-wave color bullet,
+which aggregates scan observations without formal citation; single-sourced items are
+marked `[single-source]`.
 
 ### The science milestone (verified)
 
@@ -618,8 +619,8 @@ reasoning. Every claim below carries a dated source; single-sourced items are ma
   neurons can reroute information between otherwise shared circuits - a wiring-level
   mechanism by which the same sensory input can drive different male/female behavior.
 - Dataset: MaleCNS v1.0 released earlier at male-cns.janelia.org (CC-BY 4.0; browsable in
-  Neuroglancer; downloadable without credentials). Secondary sources date the release to
-  2026-06-08 [theconsciousness.ai] - before the paper. Preprint: bioRxiv
+  Neuroglancer; downloadable without credentials). Secondary reporting dates the release to
+  2026-06-08 [theconsciousness.ai] [single-source] - before the paper. Preprint: bioRxiv
   10.1101/2025.10.09.680999, first posted 2025-10-09 (PMID-indexed as 41279223); preprint
   counts differ from final Cell counts - cite Cell for figures.
 - Companion papers same day (2026-09-03): visual system "Connectome-driven neural inventory
@@ -651,7 +652,7 @@ reasoning. Every claim below carries a dated source; single-sourced items are ma
   variant by Ro0oney also exists.
 - Beat Saber: part of the wave; reporting says its motor system was overfit to a recorded
   movement sequence while visual input and reinforcement learning were still in development
-  [IBTimes] - a caution flag for every "fly plays X" headline.
+  [IBTimes] [single-source] - a caution flag for every "fly plays X" headline.
 - Driving and parallel parking: Breg Grockman (@alright_mark) video posted 2026-09-10,
   "the fly has completed* the ultimate test: parallel parking" (~1.5M views and ~16K likes in
   24h). Mark Unthank's "The Driving Fly"/Flyhard project drives a Mini in CARLA with a
@@ -717,7 +718,7 @@ queued LLM candidate round from the research scans.
 
 | Milestone | Due | Content | Exit criteria |
 |-----------|-----|---------|---------------|
-| M1 Protocol freeze + pre-registration | 2026-09-30 | study design v1.0; feasibility audit closed; IRB submission (week 0 of the 12-week estimate); OSF computational layer + AsPredicted timestamp; statistical analysis plan | Timestamped pre-registration live; IRB submitted; model list frozen |
+| M1 Protocol freeze + pre-registration | 2026-09-30 | study design v1.0; feasibility audit closed; IRB path decision documented (2026-09-14: no host-institution path in this POC; submission only if a partner institution materializes before M4); OSF computational layer + AsPredicted timestamp; statistical analysis plan | Timestamped pre-registration live; IRB path decision documented (#7); model list frozen |
 | M2 Pilot | 2026-10-31 | contamination audit on one task family (d* lower bound + canary calibration); task generators (reuse 2404.07353 / ARC-GEN for the ARC family); inference harness (arms A and B); pilot run on Pythia-2.8B-deduped + OLMo 2 7B | Go/no-go: audit recall calibrated; harness reproducible; d* established for one family |
 | M3 Main experiment | 2026-12-31 | all checkpoints x all three families x arms A/B; activation patching on 7B/13B; process tests (answer-probability control, irrelevant clauses, instantiation variance) | Complete raw-output archive, all runs reproducible from the pre-registered spec |
 | M4 Human baseline + analysis | 2027-02-28 | human data collection (N >= 40 per family); faithfulness controls on secondary arms; apply the pre-registered decision table | One of H1 / H0-a / H0-b / mixed, per the decision table; deviations documented |
