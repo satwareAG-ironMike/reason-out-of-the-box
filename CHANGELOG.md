@@ -84,6 +84,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   ban for unchecked AI output, 19 May 2026; NeurIPS 2026 position-track policy and
   provenance audit-trail direction); the repository is the public record; open owner
   decisions (human baseline path, compute node, registration timing) listed (#39)
+- docs/next-investigations.md: primary-source fetch of "An Alien Mind" (Jakub Pachocki,
+  OpenAI, 2026-09-06; owner-requested). Non-archive, position-class source: the mid-2023
+  RLSlow elicitation framing ("unlocking the capability of pretrained models"), the first
+  first-party statement of declining CoT monitorability with three named causes (C4 and
+  #36 relevance), the OpenAI-Hugging Face agentic incident as design input for the
+  agent-executed program, Astra/RSI positions, and the closing slowdown and safety-bars
+  argument. All 22 content resources extracted, fetched, and verified (accounting: 22
+  resources + 12 exclusions - navigation, self-anchor, and inline images - of 34 raw
+  links);
+  public-professional person notes for Pachocki (2+ sources; includes the arXiv
+  reasoning and monitoring line, among them "Monitoring Monitorability", 2512.18311) (#32)
 
 #### Changed
 

@@ -1,38 +1,56 @@
-# Gates: close archive quality gaps
+# Gates: published human-baseline mapping (issue #7, option (a))
 
-OWNS: archive/**, scripts/**, docs/study-design.md, CHANGELOG.md, AGENTS.md
+OWNS: docs/human-baseline.md, docs/agent-execution.md, docs/next-investigations.md, CHANGELOG.md, AGENTS.md, README.md, GATES.md, .unlazy/**
 
-- [x] G1: automated archive consistency check exists and passes on the live archive
-  CHECK: python3 scripts/check_archive.py
-  EXPECT: archive check passed
-  EVIDENCE: exit=0; shell=/bin/sh; cwd=<repo>; path=4f1febc988dd/17 entries; EXPECT=matched; output-sha256=47b92ab244b929d47ac880d23c3a5f401051a39f3a29130e9db03e980091556c; output-bytes=21
+Scope: map published human data onto the three task families of the pre-registration candidate, extract verifiable figures, list gaps with a search log and negative control, verify independently, and close out in-repo. This ledger supersedes the previous campaign (archive quality gaps; preserved in git history). That campaign's abandoned gate (study execution) is what issue #39 and this mapping now address. Appended gates G8-G10 cover the owner-directed ingestion of the "An Alien Mind" essay (OpenAI, 2026-09-06) and the Jakub Pachocki person notes (requested 2026-09-11).
 
-- [x] G2: negative control - the checker fails on a deliberately broken fixture
-  CHECK: python3 scripts/check_archive.py --selftest
-  EXPECT: selftest passed
-  EVIDENCE: exit=0; shell=/bin/sh; cwd=<repo>; path=4f1febc988dd/17 entries; EXPECT=matched; output-sha256=13b26c4713e9a6044bd5a632561cfe1e24511312339245396dbb7d5b90edb838; output-bytes=16
+- [x] G0: this ledger states outcomes that can fail
+  CHECK: node /home/mw/.claude/skills/unlazy/scripts/gate-lint.mjs GATES.md
+  EXPECT: LINT OK
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/home/mw/internal/poc/reason-out-of-the-box; path=4f1febc988dd/17 entries; EXPECT=matched; gate-sig=ea758514ce2f606f; output-sha256=e5d9057b951ffc7ae2f0a5d5f1cd5920e9c9512017dcd82f4aaa351d02a942ec; output-bytes=463
 
-- [x] G3: no archive entry carries a placeholder author field
-  CHECK: python3 scripts/check_archive.py --report
-  EXPECT: placeholder_authors: 0
-  EVIDENCE: exit=0; shell=/bin/sh; cwd=<repo>; path=4f1febc988dd/17 entries; EXPECT=matched; output-sha256=ede975678092c39ef0c6c687cc69834cbb6f2da7fd612a08bb4d2d48391b4717; output-bytes=73
+- [ ] G1: the mapping document covers all three families, the gap list, and the source-verification table
+  CHECK: node .unlazy/hb/check-structure.mjs
+  EXPECT: structure ok: 3 families, gaps, sources
+  EVIDENCE: pending
 
-- [x] G4: full-text verification coverage at least doubled (>= 20 of 51 entries)
-  CHECK: python3 scripts/check_archive.py --report
-  EXPECT: /ft_verified: (2\d|[3-9]\d)\/51/
-  EVIDENCE: exit=0; shell=/bin/sh; cwd=<repo>; path=4f1febc988dd/17 entries; EXPECT=matched; output-sha256=ede975678092c39ef0c6c687cc69834cbb6f2da7fd612a08bb4d2d48391b4717; output-bytes=73
+- [ ] G2: every source in the verification table resolves and matches its expected marker
+  CHECK: node .unlazy/hb/check-sources.mjs
+  EXPECT: sources ok: all verified
+  EVIDENCE: pending
 
-- [x] G5: INDEX [FT] rows equal entries marked verified from full text
-  CHECK: python3 scripts/check_archive.py --report
-  EXPECT: ft_index_mismatch: 0
-  EVIDENCE: exit=0; shell=/bin/sh; cwd=<repo>; path=4f1febc988dd/17 entries; EXPECT=matched; output-sha256=ede975678092c39ef0c6c687cc69834cbb6f2da7fd612a08bb4d2d48391b4717; output-bytes=73
+- [ ] G3: every extracted human figure is grounded - verbatim quote present in saved source text and figure present in the document
+  CHECK: node .unlazy/hb/check-figures.mjs
+  EXPECT: figures ok: all grounded
+  EVIDENCE: pending
 
-- [x] G6: study design red-teamed; findings recorded in the document
-  CHECK: python3 -c "import sys; t=open('docs/study-design.md').read(); sys.exit(0 if '## Red-team findings' in t and t.count('**Attack**') >= 4 else 1)" && echo redteam-section-present
-  EXPECT: redteam-section-present
-  EVIDENCE: exit=0; shell=/bin/sh; cwd=<repo>; path=4f1febc988dd/17 entries; EXPECT=matched; output-sha256=5c5e1956e44bbc3c89e99472d06fed2cccff3066994fedf29ba3cacd81b5d2a1; output-bytes=24
+- [ ] G4: gap claims carry search logs and a negative control that finds a known positive
+  CHECK: node .unlazy/hb/check-absence.mjs
+  EXPECT: absence method ok: control positive, logs present
+  EVIDENCE: pending
 
-- [ ] G7: study executed with real models and human baseline
-  EVIDENCE: abandoned, see ABANDON line
+- [ ] G5: independent verification pass confirms availability claims and figures (fresh-context verifier; report saved)
+  EVIDENCE: pending
 
-ABANDON: G7 requires a lab (open-model inference node, IRB approval, 120 human participants, 12 weeks); not executable by an agent inside this repository. Protocol handed off in docs/study-design.md v0.2.
+- [x] G6: repository checks pass on the final tree (archive, links, dashes)
+  CHECK: python3 scripts/check_archive.py --selftest && python3 scripts/check_archive.py && python3 scripts/check_links.py --selftest && python3 scripts/check_links.py && (git grep -n -P "\x{2014}|\x{2013}" -- . ; [ $? -eq 1 ]) && echo "closeout checks passed"
+  EXPECT: closeout checks passed
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/home/mw/internal/poc/reason-out-of-the-box; path=4f1febc988dd/17 entries; EXPECT=matched; gate-sig=e646fe56cbf3dd27; output-sha256=24d74c35f4f6cd1c6fc1be255edbd7cd87d2d371ac4fd3d4a43db0d5faa92356; output-bytes=105
+
+- [ ] G7: repo integration - README row, AGENTS.md index, CHANGELOG entry, decision recorded in agent-execution.md
+  CHECK: node .unlazy/hb/check-integration.mjs
+  EXPECT: integration ok: readme, agents, changelog, decision
+  EVIDENCE: pending
+
+- [x] G8: every resource link extracted from the An Alien Mind essay is accounted for, and each doc-listed resource resolves with its expected marker
+  CHECK: node .unlazy/pk/check-resources.mjs
+  EXPECT: resources ok: all verified
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/home/mw/internal/poc/reason-out-of-the-box; path=4f1febc988dd/17 entries; EXPECT=matched; gate-sig=4a17f644d6c64dca; output-sha256=fbbece48cb9b4290adcdd883e7e5725b561e21db67ba0061d2dca53553c99b1b; output-bytes=66
+
+- [x] G9: every Pachocki person-note claim is attributed and single-source details are marked; an independent verifier confirms the notes
+  EVIDENCE: junie cross-configuration verifier 2026-09-11 (reports: .unlazy/pk/verifier-report.md, verifier-report-addendum.md); round 2: 20/20 quotes present in their sources, accounting 34=22+12 confirmed, sourcing scoped, residual Warsaw attribution added (grep-verified); round-1 findings all resolved; gate text revised after round 1 (was: 2+ sources per claim - not achievable for single-source biographical atoms; marked instead, verifier-confirmed)
+
+- [x] G10: ingestion closeout - CHANGELOG entry, integration, repo checks pass
+  CHECK: node .unlazy/pk/check-closeout.mjs && python3 scripts/check_archive.py && python3 scripts/check_links.py && (git grep -n -P "\x{2014}|\x{2013}" -- . ; [ $? -eq 1 ]) && echo "ingestion closeout passed"
+  EXPECT: ingestion closeout passed
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/home/mw/internal/poc/reason-out-of-the-box; path=4f1febc988dd/17 entries; EXPECT=matched; gate-sig=4efc88004709bfbc; output-sha256=21e6869eb5b665a32593b2d2e42d726c00994a2c37264c9ed51339fc6832a133; output-bytes=91

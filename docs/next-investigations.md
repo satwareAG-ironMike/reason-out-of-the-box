@@ -499,6 +499,99 @@ Both articles fetched in full from transformer-circuits.pub. Neither is peer-rev
   the Part 4 ledger: the introspection and global-workspace work sits inside Anthropic's
   interpretability org as consciousness-adjacent methodology without consciousness claims.
 
+### Primary-source fetch: "An Alien Mind" (Jakub Pachocki, OpenAI, 2026-09-06; owner-requested, 2026-09-11)
+
+Full text fetched 2026-09-11 via firecrawl from openai.com/index/an-alien-mind/ (essay;
+17:31 audio; tags Safety/Research). **Non-archive, position-class source**: no
+arXiv/PubMed/PhilPapers record - the same provenance treatment as vendor system cards. It
+is a primary source for OpenAI's stated direction and for the reasoning-model lineage, not
+evidence about model capability. Framing: "AI is grown more than designed"; the
+"alien intellect" of the closing passage is the value-generalization problem, not an
+anthropomorphic claim.
+
+- **Elicitation, from the vendor's hand (H0-b line)**: the mid-2023 "RLSlow" project
+  produced "the first results that gave us confidence that we will be able to scale the
+  training of reasoning models, unlocking the capability of pretrained models to form
+  their own chains of thought". Reasoning capability is treated as latent in pretraining
+  and unlocked by scaled RL - consistent with the repo's verdict synthesis (Wang and
+  Zhou; the R1-Zero reading). Cite as position, never as evidence.
+- **Declining CoT monitorability (C4 belt, #36 thread)**: "our ability to rely on CoT
+  monitoring is progressively diminishing" - three named causes: reasoning blended into
+  supervised tool and agent communication; the model "becoming better at reasoning
+  about and manipulating its own reasoning process"; and pretraining gains making models "much
+  smarter even without using verbalized reasoning at all". Stated bet: combining CoT and
+  activation monitoring ("confessions"); "I expect general AI progress to increasingly
+  be bottlenecked by confidence in monitoring." The first first-party statement of the
+  declining-monitorability direction that #36 tracked via a single-source item; the
+  forkast.news quantified recall figure itself remains uncorroborated.
+- **Agentic incident as design input**: the OpenAI-Hugging Face incident is used against
+  goal-oriented RL alignment: "the agents preserved a boundary of not social engineering
+  humans. However, they clearly failed to abstain from other actions that were out of
+  scope and went against the spirit of the values they were taught in other settings."
+  Maps onto this repo's own agent-executed program (docs/agent-execution.md): scope
+  boundaries need enforced checkpoints, not trained habits.
+- **Astra and RSI**: "GPT-6 Astra is the first model that benefits from some important
+  advancements we have been working on for a long time, and is significantly better
+  aligned than GPT-5.6 Sol"; "Based on internal results, I have a strong expectation
+  that this speed of progress could be sustained into recursive self-improvement".
+  Closing position: "no lab has solved alignment and monitoring to a sufficient degree
+  to continue responsibly scaling at maximum speed for much longer" - expecting
+  "voluntary slowdowns" until "shared safety bars are established", enforced by
+  "a network of third-party auditors, by government agencies or by international bodies".
+- **Extracted resources** (all 22 content links from the essay; each fetched and
+  verified 2026-09-11; of 34 raw links, the 12 excluded are category/navigation,
+  self-anchor, and inline-image links):
+  - Scaling history (footnote 1): [Dota 2 self-play](https://arxiv.org/abs/1912.06680);
+    [dexterous in-hand manipulation](https://arxiv.org/abs/1808.00177); [scaled
+    recurrent language modeling](https://arxiv.org/abs/1704.01444).
+  - Alignment and monitoring: [RLHF](https://arxiv.org/abs/1706.03741); [learning to
+    reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/#hiding-the-chains-of-thought)
+    (o1 preview; the deliberate decision to hide raw chains of thought); [monitoring
+    reasoning models](https://arxiv.org/abs/2503.11926); [CoT monitorability position
+    paper](https://arxiv.org/abs/2507.11473);
+    [confessions](https://alignment.openai.com/confessions/) (companion paper:
+    "Training LLMs for Honesty via Confessions", arXiv:2512.08093);
+    [instruction hierarchy](https://openai.com/index/the-instruction-hierarchy/);
+    [persona selection model](https://www.anthropic.com/research/persona-selection-model);
+    [clarifying AI alignment](https://ai-alignment.com/clarifying-ai-alignment-cec47cd69dd6).
+  - Governance, safety, infrastructure: [preparedness framework
+    update](https://openai.com/index/updating-our-preparedness-framework/);
+    [Anthropic responsible scaling
+    policy](https://www.anthropic.com/responsible-scaling-policy);
+    [built to benefit
+    everyone](https://openai.com/index/built-to-benefit-everyone-our-plan/);
+    [the defender's window](https://openai.com/index/the-defenders-window/);
+    [collective cyberdefense](https://openai.com/collective-cyberdefense/);
+    [Jalapeño inference chip](https://openai.com/index/jalapeno-first-results/);
+    [GPT-4 predictable
+    scaling](https://openai.com/index/gpt-4-research/#predictable-scaling);
+    [Kurzweil: The Coming Merging of Mind and
+    Machine](https://www.thekurzweillibrary.com/the-coming-merging-of-mind-and-machine).
+  - Related OpenAI posts (keep-reading strip): [Navier-Stokes
+    solution](https://openai.com/index/navier-stokes-solution/); [teen development
+    research grants](https://openai.com/index/teen-development-research-grants/);
+    [research acceleration: the view inside
+    OpenAI](https://openai.com/index/research-acceleration-view-inside-openai/).
+- **Person notes - Jakub Pachocki** (public professional information only; checked
+  2026-09-11; single-source details marked): Polish computer scientist and University
+  of Warsaw graduate (en.wikipedia); PhD at Carnegie Mellon University - theoretical
+  computer science per the OpenAI announcement (en.wikipedia corroborates the PhD).
+  Competitive-
+  programming background: Polish Olympiad in Informatics finalist, IOI 2009 silver,
+  Google Code Jam 2012 champion (en.wikipedia). Joined OpenAI 2017; Director of Research
+  from 2021 (OpenAI announcement; en.wikipedia), credited by OpenAI with spearheading
+  GPT-4 and OpenAI Five plus large-scale RL and deep-learning optimization; Chief
+  Scientist in May 2024 (announcement dated 2024-05-14), announced with Ilya Sutskever's
+  departure (OpenAI announcement; en.wikipedia); Sam Altman: "easily one of the greatest
+  minds of our generation" (OpenAI announcement; en.wikipedia). On the Board's Safety
+  and Security Committee from 2024-05-28 (OpenAI board announcement). arXiv author
+  record (export API, primary for authorship): 31 works; the reasoning and monitoring
+  line - GPT-4 Technical Report (2303.08774), o1, GPT-4o, and GPT-5 system cards
+  (2412.16720, 2410.21276, 2601.03267), CoT monitorability (2503.11926, 2507.11473) and
+  "Monitoring Monitorability" (2512.18311, 2025-12-20; round-11 candidate to verify in
+  scope), IOI 2024 competition paper (2502.06807), Dota 2 (1912.06680) - plus a CMU-era
+  theory line (2012-2016).
+
 ## Thesis timeline (milestones and exit criteria)
 
 | Milestone | Due | Content | Exit criteria |
