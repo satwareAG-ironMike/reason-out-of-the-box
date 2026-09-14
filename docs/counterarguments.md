@@ -123,6 +123,14 @@ repository concedes, and what remains open.
   design therefore forbids scaffolds: two primary arms, greedy `Q:/A:` and CoT-decoding,
   no tools, no exemplars, no reasoning prompt.
 - **Open.** The same question for every agentic result in the literature.
+- **Fly connectome illustration (2026-09-14).** The MaleCNS v1.0 simulation wave puts the
+  same attribution question in plain view for a biological substrate: hobbyist demos map
+  game frames to photoreceptor neurons and descending-neuron readouts to controls by
+  developer choice, add leaky integrate-and-fire dynamics, reward wiring and objectives,
+  so behavioral credit splits between the real wiring and every engineered interface around
+  it. The ablation question - which behavior survives removal of hand-designed encoders,
+  decoders and task tuning - is the same one the study design's scaffold ban operationalizes
+  ([findings](next-investigations.md) 2026-09-14).
 
 ### 7. "Emergence is a mirage."
 
