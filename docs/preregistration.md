@@ -12,7 +12,7 @@ at the timestamp. Sources: [study-design.md](study-design.md) v0.4,
 | Layer | Registration | State |
 |-------|--------------|-------|
 | Computational | OSF registration; AsPredicted timestamp as the public verification URL | Content assembled (this document); submission pending |
-| Human subject | Registration aligned with the IRB protocol, or documented alternative | Tracked in #7 |
+| Human subject | Registration aligned with the [IRB protocol draft](irb-protocol.md) (decision 2026-09-14: no host-institution IRB path; documented alternative recorded on #7) | Protocol drafted (#7); submission only if an IRB path materializes before M4 |
 
 ## Registered content (computational layer)
 

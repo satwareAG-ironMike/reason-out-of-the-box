@@ -1,7 +1,9 @@
 # Version-lock manifest (issue #11)
 
 Status: draft 2026-09-11, issue #11, M1 work package. NOT yet frozen; the freeze happens at
-the issue #11 pre-registration timestamp (OSF + AsPredicted). Submission URLs and the freeze
+the issue #11 pre-registration timestamp (OSF + AsPredicted). Refreshed 2026-09-14:
+document hashes re-captured (unchanged), current Hub revisions captured as draft values.
+Submission URLs and the freeze
 date are recorded in [preregistration.md](preregistration.md). Public-only rule: this
 manifest records hashes, identifiers, and versions only - no secrets, no private
 infrastructure.
@@ -25,21 +27,29 @@ analysis on the archived raw outputs reproduces every confirmatory number bit-fo
 
 | Artifact | Path | SHA-256 | Captured |
 |----------|------|---------|----------|
-| Statistical analysis plan | `docs/analysis-plan.md` | `9ef9b061944cc4d3c5937ee2f0f93f3984f394304d565ae56b8a6573ec68e0d7` | 2026-09-11, re-capture at freeze |
-| Study design | `docs/study-design.md` | `27b0f34543ab50a6547afcc04aee704e41a27dec7cec6a1752895928ccce85a3` | 2026-09-11, re-capture at freeze |
+| Statistical analysis plan | `docs/analysis-plan.md` | `9ef9b061944cc4d3c5937ee2f0f93f3984f394304d565ae56b8a6573ec68e0d7` | 2026-09-11, re-captured 2026-09-14 (unchanged), re-capture at freeze |
+| Study design | `docs/study-design.md` | `27b0f34543ab50a6547afcc04aee704e41a27dec7cec6a1752895928ccce85a3` | 2026-09-11, re-captured 2026-09-14 (unchanged), re-capture at freeze |
 | Frozen model list | `docs/next-investigations.md`, feasibility audit section (closed 2026-09-10) | living document - extract to a frozen snapshot at freeze, then hash it | - |
 
 ## 2. Model checkpoints (Hub IDs + revisions)
 
-All IDs below returned HTTP 200 on 2026-09-10 (feasibility audit, issue #2). The exact Hub
-commit revision per checkpoint is recorded at freeze.
+All IDs below returned HTTP 200 on 2026-09-10 (feasibility audit, issue #2). Current Hub
+revision (API `sha`) per checkpoint captured 2026-09-14 as draft values; the final pin is
+re-captured and recorded at freeze.
 
-| Role | Hub IDs |
-|------|---------|
-| Confirmatory, OLMo 2 | `allenai/OLMo-2-1124-7B`, `allenai/OLMo-2-1124-13B`, `allenai/OLMo-2-0325-32B` |
-| Confirmatory, scale control | `EleutherAI/pythia-1b-deduped`, `EleutherAI/pythia-2.8b-deduped`, `EleutherAI/pythia-6.9b-deduped`, `EleutherAI/pythia-12b-deduped` |
-| Replication | `allenai/Olmo-3-1025-7B`, `allenai/Olmo-3-1125-32B` |
-| Second replication candidate | `swiss-ai/Apertus-8B-2509`, `swiss-ai/Apertus-70B-2509` (base, ungated); 1.5 optional |
+| Role | Hub ID | Current revision (captured 2026-09-14) |
+|------|--------|-----------------------------------------|
+| Confirmatory, OLMo 2 | `allenai/OLMo-2-1124-7B` | `7df9a82518afdecae4e8c026b27adccc8c1f0032` |
+| Confirmatory, OLMo 2 | `allenai/OLMo-2-1124-13B` | `3fefddc1bf18a30e1d9b91000271630718f2aa8b` |
+| Confirmatory, OLMo 2 | `allenai/OLMo-2-0325-32B` | `cc9d3cf9c7230b86ee6b84607b37db1c01e3f1ed` |
+| Confirmatory, scale control | `EleutherAI/pythia-1b-deduped` | `7199d8fc61a6d565cd1f3c62bf11525b563e13b2` |
+| Confirmatory, scale control | `EleutherAI/pythia-2.8b-deduped` | `7d977fed8c4ce9649816af8cd5fe36a639cbe5b2` |
+| Confirmatory, scale control | `EleutherAI/pythia-6.9b-deduped` | `372b1c08d9b5b0fc18ce86bbf294930e26e66ed5` |
+| Confirmatory, scale control | `EleutherAI/pythia-12b-deduped` | `39c1bd94f9dbe4ebd1d191f364cb33a2e5c47707` |
+| Replication | `allenai/Olmo-3-1025-7B` | `a81bae42db3975be1671e27b9c9a56da1a9f980f` |
+| Replication | `allenai/Olmo-3-1125-32B` | `c2b61dae89a1ad10e4ad5653d0e46b590902607b` |
+| Second replication candidate | `swiss-ai/Apertus-8B-2509` (base) | `3162c99675aa588097cecd4a24b9aa1f712af477` |
+| Second replication candidate | `swiss-ai/Apertus-70B-2509` (base) | `379311a08b6e691f7b5cfbc1c408e8fc0c172981` |
 
 Corpora for the contamination audit (d*): `allenai/olmo-mix-1124` + `allenai/dolmino-mix-1124`
 (OLMo 2), `EleutherAI/the_pile_deduplicated` (Pythia), `allenai/dolma3_mix-6T-1025-7B` (OLMo 3
