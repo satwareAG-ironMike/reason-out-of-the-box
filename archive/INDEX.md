@@ -5,14 +5,15 @@ reason out of the box - without training on reasoning examples and hoping it gen
 analogous to how higher animals and humans reason without prior logic training?
 
 **Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
-2026-09-06 (round 8 extension), 2026-09-09 (round 10), 2026-09-14 (round 12) |
+2026-09-06 (round 8 extension), 2026-09-09 (round 10), 2026-09-14 (round 12),
+2026-09-15 (round 13) |
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
 26 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
 round 9 (2026-09-05), 2 papers in round 8 (2026-09-06), 6 papers in round 10 (2026-09-09),
-2 papers in round 12 (2026-09-14):
-88 papers in 11 rounds. Full-text in-body verification was performed for the highest-
+2 papers in round 12 (2026-09-14), 4 papers in round 13 (2026-09-15):
+92 papers in 12 rounds. Full-text in-body verification was performed for the highest-
 weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
@@ -185,6 +186,22 @@ analysis in docs/next-investigations.md findings 2026-09-14.
 | Berg et al. 2026, Sexual dimorphism in the complete Drosophila male CNS connectome (PMID 42691995) | Cell (peer-reviewed) | context | ~166,700 neurons, ~11,710 types; complete male CNS map (brain + optic lobes + VNC); sexual-dimorphism findings; MaleCNS v1.0 dataset released 2026-06-08 |
 | Berg et al. 2025, same title (preprint, PMID 41279223) | bioRxiv (preprint) | context | Version-of-record history; preprint counts differ from final Cell figures - cite Cell |
 
+### Round 13 - The Chinese Room debate: syntax, systems, and computationalism (2026-09-15)
+
+The classical debate behind round 8's syntax-vs-semantics line (Harnad, Lerchner, Deva)
+and behind the recurring public argument "if I did the same calculations an LLM does, by
+hand on paper, would you call the paper sentient?" Archived as the historical root of
+that line, with the canonical anti-, meta-, pro-, and evidence-based positions. All four
+entries full-text-verified `[FT]` (Searle and Dennett from the scanned 1980 BBS issue,
+Chalmers from the author's full text, Butlin et al. from the arXiv v3 full text).
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| [FT] Searle 1980, Minds, Brains, and Programs | Behavioral and Brain Sciences | - theoretical | Chinese Room: "only a syntax but no semantics"; program instantiation never sufficient for intentionality; the open-commentary stream is where the systems and robot replies were born |
+| [FT] Dennett 1980, The Milk of Human Intentionality | Behavioral and Brain Sciences (commentary) | +/- intuition critique | Names the "intuition pump": "not... an engine of discovery, but a persuader"; the argument "relies almost entirely on ill-gotten gains" from "misleadingly presented thought experiments" |
+| [FT] Chalmers 2011, A Computational Foundation for the Study of Cognition | Journal of Cognitive Science | +/- framework | Implementation analysis: mentality as "organizational invariant"; computational sufficiency stated in its strongest form; the premise the hand-execution argument must deny |
+| [FT] Butlin, Long et al. 2023, Consciousness in Artificial Intelligence | arXiv (preprint) | +/- assessment | Theory-derived indicator properties: "no current AI systems are conscious", but "no obvious technical barriers to building AI systems which satisfy these indicators"; the evidence-based replacement for room-style intuitions |
+
 ## Verdict addendum: round 10 - Anthropic insiders cluster (2026-09-09)
 
 - **No consciousness claims in the cluster.** Coxon's entire public corpus and his
@@ -284,6 +301,36 @@ analysis in docs/next-investigations.md findings 2026-09-14.
   balance gains its sharpest anti-functionalist statement plus a measurement framework
   the thesis program may reuse for the M4 human-baseline arm; the overall verdict is
   unchanged.
+
+## Verdict addendum: round 13 - the Chinese Room debate (2026-09-15)
+
+- **The 45-year arc.** Searle (1980) staged the room: program instantiation "is never by
+  itself a sufficient condition of intentionality". The same BBS commentary stream born
+  with it produced the standing replies (systems, robot, virtual mind) and Dennett's
+  meta-critique (the room is an "intuition pump", "a persuader", not "an engine of
+  discovery"). Chalmers (2011) supplied the functionalist foundation the room must
+  attack: implementation is causal-structure mirroring, and mentality is an
+  "organizational invariant". Butlin et al. (2023) show the modern alternative to
+  intuition duels: theory-derived indicator properties, graded assessment, double
+  verdict (no current system is conscious; no obvious technical barrier in principle).
+- **The popular descendant, and why it is not a proof.** The recurring social-media form -
+  "if I did the same calculations an LLM does, by hand on paper, would you call the
+  paper sentient?" - is the room restated. Its conclusion requires the hidden premise
+  that every implementation of the same computation has the same mental status, which is
+  precisely what functionalists deny (Chalmers); the "obvious" non-sentience of paper
+  execution targets the pencil and the human, not the executing system (the systems
+  reply), and Dennett's critique stands: intuitions about unvisualizable scenarios are
+  persuaders, not evidence. Independently, the argument is usually deployed against
+  "AGI" and "superintelligence", which are capability claims orthogonal to sentience
+  (a dog is plausibly sentient and not generally capable; a chess engine is capable and
+  not plausibly sentient), so it is misdirected even if it were sound about sentience.
+- **Connection to this repository's verdict discipline.** Round 8's consciousness
+  balance is carried by measured results (ToM batteries, introspection experiments,
+  self-report sincerity classifiers), not by intuition pumps from either side; this
+  round documents where those intuitions come from and what each is worth. Round 8's
+  Lerchner/Deva debate is the 2026 continuation of the Searle line.
+- **Verdict impact: none.** No entry addresses out-of-the-box reasoning, disclosed
+  training data, or any acceptance criterion; the overall verdict is unchanged.
 
 ## The biological analogy - what cognitive science says
 

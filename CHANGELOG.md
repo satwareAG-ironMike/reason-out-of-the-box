@@ -5,6 +5,36 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-09-15
+
+#### Added
+
+- Archive round 13, the Chinese Room debate (syntax, systems, and computationalism),
+  4 entries, all full-text-verified `[FT]` (Searle and Dennett from the scanned 1980 BBS
+  issue PDF, Chalmers from the author's HTML full text, Butlin et al. from the arXiv v3
+  full text; PhilPapers record IDs SEAMBA, DENTMO-8, CHAACF-2 verified on the record
+  pages; arXiv metadata via API/scrape):
+  - ppSEAMBA Searle 1980, Minds, Brains, and Programs (BBS 3(3), peer-reviewed with open
+    commentary): syntax never sufficient for intentionality; root of round 8's
+    Harnad/Lerchner line
+  - ppDENTMO-8 Dennett 1980, The Milk of Human Intentionality (BBS commentary): names the
+    "intuition pump"; the room "relies almost entirely on ill-gotten gains"; the
+    methodological reason intuition arguments stay out of the evidence column
+  - ppCHAACF-2 Chalmers 2011, A Computational Foundation for the Study of Cognition
+    (Journal of Cognitive Science, peer-reviewed): implementation analysis; mentality as
+    "organizational invariant"; the functionalist premise the hand-execution argument
+    must deny
+  - 2308.08708 Butlin, Long et al. 2023, Consciousness in Artificial Intelligence
+    (arXiv preprint, 19 authors): theory-derived indicator properties; no current system
+    is conscious, no obvious technical barrier in principle
+- archive/INDEX.md: round 13 catalog section with a debate intro, verdict addendum
+  analyzing the popular "run the same math by hand on paper" form (question-begging
+  substrate premise per the systems reply, intuition-pump status per Dennett, sentience
+  vs AGI conflation) and declaring verdict impact: none; counts 88 -> 92 papers,
+  11 -> 12 rounds
+- README.md + AGENTS.md (root and archive): archive count references updated to 92
+  entries, 12 rounds
+
 ### 2026-09-14
 
 #### Added

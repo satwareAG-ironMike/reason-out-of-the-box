@@ -40,7 +40,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 
 | Path | Content |
 |------|---------|
-| `archive/` | 88 peer-reviewed and preprint papers, 11 thematic rounds, per-paper entries |
+| `archive/` | 92 peer-reviewed and preprint papers, 12 thematic rounds, per-paper entries |
 | `archive/INDEX.md` | Master catalog, verdict, evidence matrix, open-problem spec |
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/counterarguments.md` | Claim ladder C1-C5 with evidence status, and the ten recurring counterarguments steelmanned against the archive |
