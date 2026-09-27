@@ -5,6 +5,18 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-09-28
+
+#### Changed
+
+- Housekeeping: closed the complete-but-open ISO-week milestones `2026-W37` and `2026-W38`
+  (all assigned issues closed, 0 open) - milestone state only, no content change
+- M1 verification (progress comments on #7 / #10 / #11): confirmed the in-repo M1
+  work-package artifacts are complete and hash-verified (freeze-integrity: `docs/analysis-plan.md`
+  and `docs/study-design.md` SHA-256 match `docs/version-lock-manifest.md`); the remaining M1
+  gate is the owner-gated OSF + AsPredicted submission, and #7 carries one in-repo gap
+  (consent form + task instructions not yet drafted as separate documents)
+
 ### 2026-09-15
 
 #### Added
