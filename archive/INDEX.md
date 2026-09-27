@@ -6,15 +6,15 @@ analogous to how higher animals and humans reason without prior logic training?
 
 **Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
 2026-09-06 (round 8 extension), 2026-09-09 (round 10), 2026-09-14 (round 12),
-2026-09-15 (round 13) |
+2026-09-15 (round 13), 2026-09-28 (round 14) |
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
 26 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
 round 9 (2026-09-05), 2 papers in round 8 (2026-09-06), 6 papers in round 10 (2026-09-09),
-2 papers in round 12 (2026-09-14), 4 papers in round 13 (2026-09-15):
-92 papers in 12 rounds. Full-text in-body verification was performed for the highest-
-weight papers (marked [FT] below); all other entries rely on verified abstracts plus
+2 papers in round 12 (2026-09-14), 4 papers in round 13 (2026-09-15), 15 papers in round 14
+(2026-09-28): 107 papers in 13 rounds. Full-text in-body verification was performed for the
+highest-weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
 ## Verdict (state of the art, September 2026)
@@ -201,6 +201,39 @@ Chalmers from the author's full text, Butlin et al. from the arXiv v3 full text)
 | [FT] Dennett 1980, The Milk of Human Intentionality | Behavioral and Brain Sciences (commentary) | +/- intuition critique | Names the "intuition pump": "not... an engine of discovery, but a persuader"; the argument "relies almost entirely on ill-gotten gains" from "misleadingly presented thought experiments" |
 | [FT] Chalmers 2011, A Computational Foundation for the Study of Cognition | Journal of Cognitive Science | +/- framework | Implementation analysis: mentality as "organizational invariant"; computational sufficiency stated in its strongest form; the premise the hand-execution argument must deny |
 | [FT] Butlin, Long et al. 2023, Consciousness in Artificial Intelligence | arXiv (preprint) | +/- assessment | Theory-derived indicator properties: "no current AI systems are conscious", but "no obvious technical barriers to building AI systems which satisfy these indicators"; the evidence-based replacement for room-style intuitions |
+
+### Round 14 - Latent reasoning, elicitation, and the H0-b line (2026-09-28)
+
+The latent-reasoning and elicitation literature surveyed on 2026-09-28 (September 2026 arXiv
+plus the foundational ToT/Coconut line it builds on). The cluster circles the H0-b consensus:
+the reasoning is latent in the weights and the open question is how much of it can be
+extracted. Every entry is an elicitation scaffold (DF-Sample, State of Thought, Latent
+Recurrent Thoughts, A*-Thought-V2, BASIN, Abstract-CoT, Coconut, ToT), a mechanistic
+elicitation test (cross-lingual SAE transfer, spurious CoT termination), a theory unification
+of the ICL-as-algorithm line (Bayesian unification, abstract token curriculum), or RLVR
+post-training (teacher curriculum, gradient-aligned rewards), plus one open model for the
+study battery (Hunyuan-A13B). All fifteen are abstract-level (full text not read; no `[FT]`);
+none meets the five acceptance conditions and none demonstrates a base open-data model
+reasoning natively out of the box. The core H1 gap (genuinely novel procedural reasoning, zero
+elicitation) remains unfilled. Overall verdict unchanged.
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| DF-Sample (Mi & Huang 2026) | arXiv (preprint) | +/- H0-b | Training-free, data-free inference-time decision-flow tree; GPQA 45.6% vs power sampling 38.9% and GRPO 39.9%; latent reasoning paths unlocked without RL |
+| Cross-lingual SAE feature transfer (Song et al. 2026) | EMNLP 2026 Findings (peer-reviewed) | +/- H0-b | Sparse autoencoder steering over residual-stream activations: suppression impairs, activation partially restores, target-language reasoning without translation or fine-tuning |
+| Bayesian unification of ICL/SFT/RL (Fan 2026) | arXiv (preprint) | +/- theory | One template (Bayes/Gibbs posterior + forward-KL projection) unifies ICL, SFT, KL-regularized RL; ICL is an amortized projection needing support; R1/o1 = test-time Bayesian search + training-time amortization |
+| Abstract Token Curriculum (Gatmiry et al. 2026) | arXiv (preprint) | +/- theory | Curriculum elicits continuous internal "thoughts" without scratchpad supervision; parity-function theory under single-layer softmax attention; graph reachability and arithmetic |
+| Spurious CoT termination (Koh et al. 2026) | EMNLP 2026 (peer-reviewed) | - control | Injected end-of-think token does not reliably switch reasoning to answering; Exit-token Attention Biasing reduces the effect (four LRMs, five benchmarks); faithfulness/control-relevant (C4) |
+| State of Thought (Gong et al. 2026) | arXiv (preprint) | +/- H0-b | Endogenous reasoning via a 582-parameter controller on frozen backbones; 1.34x-2.51x gains with 62.6% fewer tokens; 38.2%/36.5% mean gains in training-free / embedding-only settings |
+| Latent Recurrent Thoughts (Chen & Fu 2026) | arXiv (preprint) | +/- H0-b | Frozen LLM decodes while a small recurrent reasoner refines continuous latent thoughts; answer supervision only, no traces needed; beats prior frozen-decoder methods and non-thinking CoT prompting |
+| A*-Thought-V2 (Xu et al. 2026) | arXiv (preprint) | +/- H0-b | Geometric hidden-state compression (local-to-global alignment in 3D PCA space); up to +2.6% average, up to 2x shorter responses, 2.29x accuracy per computation unit (Qwen3.5-9B, Qwen3.6-27B) |
+| BASIN structure-aware search (Cheng 2026) | arXiv (preprint) | +/- search | Training-free basin-aware selection fixes "reasoning basin collapse"; beats ToT by up to +22pp (Game of 24) and +6.7pp (MuSR) at matched compute |
+| Teacher-guided RLVR curriculum (Zhu et al. 2026) | EMNLP 2026 Findings (peer-reviewed) | +/- RLVR | Backward-chaining curriculum unlocks otherwise-inert problems; 128 unsolvable problems ~16x data efficiency vs GRPO on 2,000; expands the pass@k boundary |
+| Gradient-aligned rewards (Zheng et al. 2026) | arXiv (preprint) | +/- RLVR | Dense reward from gradient-space cosine similarity (<9% wall-clock); improves over GRPO on Qwen3-4B/8B math; transfers to GPQA Diamond and MMLU-Pro without domain-specific data |
+| Hunyuan-A13B (Tencent 2026) | arXiv technical report (preprint) | context | 80B total / 13B active MoE; 20T-token filtered corpus; SFT + large-scale RL; dual-mode CoT; open candidate for the study battery model list |
+| Tree of Thoughts (Yao et al. 2023) | NeurIPS 2023 (peer-reviewed) | - deliberate search | Foundational deliberate-search scaffold; Game of 24 4% (CoT) -> 74% (ToT); the in-weights contrast and baseline the cluster improves over |
+| Abstract-CoT / Thinking Without Words (Ramji et al. 2026) | arXiv (preprint) | +/- latent | Discrete abstract-token latent CoT via a reserved vocabulary; up to 11.6x fewer reasoning tokens at comparable performance; emergent power-law over the abstract vocabulary |
+| Coconut (Hao et al. 2024) | COLM 2025 (peer-reviewed) | +/- latent | Feed the last hidden state back as the next input embedding (no decoding); continuous thoughts enable breadth-first search; outperforms CoT on logical-reasoning tasks |
 
 ## Verdict addendum: round 10 - Anthropic insiders cluster (2026-09-09)
 

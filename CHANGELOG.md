@@ -7,6 +7,43 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### 2026-09-28
 
+#### Added
+
+- Archive round 14, latent reasoning, elicitation, and the H0-b line, 15 entries, all
+  abstract-level (full text not read; no `[FT]`). None meets the five acceptance
+  conditions and the overall verdict is unchanged; the core H1 gap (genuinely novel
+  procedural reasoning with zero elicitation) remains unfilled:
+  - 2609.12317 Mi & Huang 2026, DF-Sample: training-free decision-flow inference-time
+    search; GPQA 45.6% vs power sampling 38.9% and GRPO 39.9%
+  - 2608.30462 Song et al. 2026, cross-lingual SAE feature transfer (EMNLP 2026
+    Findings): SAE steering over residual-stream activations
+  - 2609.05111 Fan 2026, Bayesian unification of ICL/SFT/RL: one Bayes/posterior +
+    forward-KL projection template
+  - 2609.19717 Gatmiry et al. 2026, Abstract Token Curriculum: elicits continuous
+    internal thoughts; parity-function theory
+  - 2609.03633 Koh et al. 2026, spurious CoT termination (EMNLP 2026): injected
+    end-of-think token does not reliably switch reasoning to answering
+  - 2609.16055 Gong et al. 2026, State of Thought: endogenous reasoning via a
+    582-parameter controller on frozen backbones
+  - 2609.01117 Chen & Fu 2026, Latent Recurrent Thoughts: frozen LLM decodes, small
+    recurrent reasoner refines latents
+  - 2609.07821 Xu et al. 2026, A*-Thought-V2: geometric hidden-state compression
+  - 2609.00738 Cheng 2026, BASIN: training-free basin-aware search fixes "reasoning
+    basin collapse"; beats ToT by up to +22pp
+  - 2609.13997 Zhu et al. 2026, teacher-guided RLVR curriculum (EMNLP 2026 Findings):
+    128 unsolvable problems ~16x data efficiency vs GRPO
+  - 2609.03342 Zheng et al. 2026, gradient-aligned rewards (GAR): dense reward from
+    gradient-space cosine similarity
+  - 2609.27284 Tencent 2026, Hunyuan-A13B: open 80B/13B-active MoE; study-battery
+    candidate
+  - 2305.10601 Yao et al. 2023, Tree of Thoughts (NeurIPS 2023): the foundational
+    deliberate-search scaffold and baseline (followed contained resource)
+  - 2604.22709 Ramji et al. 2026, Abstract-CoT / Thinking Without Words: up to 11.6x
+    fewer reasoning tokens via an abstract-token latent CoT (followed contained resource)
+  - 2412.06769 Hao et al. 2024, Coconut (COLM 2025): continuous-latent reasoning via
+    feeding the last hidden state back as the next input embedding (followed contained
+    resource)
+
 #### Changed
 
 - Housekeeping: closed the complete-but-open ISO-week milestones `2026-W37` and `2026-W38`
