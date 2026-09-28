@@ -44,6 +44,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
     feeding the last hidden state back as the next input embedding (followed contained
     resource)
 
+- `docs/review-rounds/round14-2026-09-28.md` (new): adversarial review of all 15
+  round-14 entries against raw arXiv abstract pages - 15/15 entries confirmed, 0
+  discrepancies, 1 retracted working-note claim (the 2609.13997 "33.1% MATH/NumGym"
+  note was a transcription error absent from the entry); per-claim confrontation per
+  [agent-execution.md](docs/agent-execution.md) section 5
+- `archive/INDEX.md` round-14 section + `archive/AGENTS.md` Purpose: pointer to the review
+  record added
+
 #### Changed
 
 - Housekeeping: closed the complete-but-open ISO-week milestones `2026-W37` and `2026-W38`

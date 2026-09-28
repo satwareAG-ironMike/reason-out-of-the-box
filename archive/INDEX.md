@@ -235,6 +235,8 @@ elicitation) remains unfilled. Overall verdict unchanged.
 | Abstract-CoT / Thinking Without Words (Ramji et al. 2026) | arXiv (preprint) | +/- latent | Discrete abstract-token latent CoT via a reserved vocabulary; up to 11.6x fewer reasoning tokens at comparable performance; emergent power-law over the abstract vocabulary |
 | Coconut (Hao et al. 2024) | COLM 2025 (peer-reviewed) | +/- latent | Feed the last hidden state back as the next input embedding (no decoding); continuous thoughts enable breadth-first search; outperforms CoT on logical-reasoning tasks |
 
+Adversarial review record (per [agent-execution.md](../docs/agent-execution.md) section 5): [round 14 verification, 2026-09-28](../docs/review-rounds/round14-2026-09-28.md) - 15/15 entries confirmed against raw arXiv abstracts, 0 discrepancies, 1 retracted working-note claim.
+
 ## Verdict addendum: round 10 - Anthropic insiders cluster (2026-09-09)
 
 - **No consciousness claims in the cluster.** Coxon's entire public corpus and his
