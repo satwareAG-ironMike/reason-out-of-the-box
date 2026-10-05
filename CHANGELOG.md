@@ -36,6 +36,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   yes/no balanced, answers verified by independent BFS in the selftest;
   byte-identical regeneration verified. `mult_mult` and `dp_puzzle` subtypes
   pending.
+- Round-15 (field origins) ingest: the Dartmouth proposal (McCarthy, Minsky,
+  Rochester, Shannon, 1955-08-31) as
+  `archive/round15-field-origins/ppJOHAPF-3-mccarthy-dartmouth-proposal.md`
+  (PhilPapers [JOHAPF-3](https://philpapers.org/rec/JOHAPF-3); official
+  reprint AI Magazine 27(4), 12-14, 2006). Marked `[FT]`: quotes read from a
+  direct full-text copy of the reformatted 1955 proposal (local PDF, ligature
+  artifacts normalized, note in the entry). Verdict: context - the founding
+  document frames the simulation conjecture and the language/randomness/
+  internal-model/efficiency axes but makes no out-of-the-box claim; overall
+  verdict and evidence matrix unchanged. Archive now 108 entries in 14 rounds
+  (README, root AGENTS.md, archive/AGENTS.md count statements updated).
 
 ### 2026-09-28
 
