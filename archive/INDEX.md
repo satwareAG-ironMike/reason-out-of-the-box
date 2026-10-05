@@ -6,14 +6,14 @@ analogous to how higher animals and humans reason without prior logic training?
 
 **Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
 2026-09-06 (round 8 extension), 2026-09-09 (round 10), 2026-09-14 (round 12),
-2026-09-15 (round 13), 2026-09-28 (round 14) |
+2026-09-15 (round 13), 2026-09-28 (round 14), 2026-10-05 (round 15) |
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
 26 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
 round 9 (2026-09-05), 2 papers in round 8 (2026-09-06), 6 papers in round 10 (2026-09-09),
 2 papers in round 12 (2026-09-14), 4 papers in round 13 (2026-09-15), 15 papers in round 14
-(2026-09-28): 107 papers in 13 rounds. Full-text in-body verification was performed for the
+(2026-09-28), 1 paper in round 15 (2026-10-05): 108 papers in 14 rounds. Full-text in-body verification was performed for the
 highest-weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
@@ -237,6 +237,21 @@ elicitation) remains unfilled. Overall verdict unchanged.
 
 Adversarial review records (per [agent-execution.md](../docs/agent-execution.md) section 5): [round 14 verification, 2026-09-28](../docs/review-rounds/round14-2026-09-28.md) - 15/15 entries confirmed against raw arXiv abstracts, 0 discrepancies, 1 retracted working-note claim; [round 14 full-text pass, 2026-10-05](../docs/review-rounds/round14-fulltext-2026-10-05.md) - 15/15 claims confirmed against arXiv HTML full texts, 0 discrepancies, all 15 entries upgraded to `[FT]`.
 
+### Round 15 - Field origins (2026-10-05)
+
+The founding document of the field, ingested as context rather than evidence. The
+1955 proposal that launched the Dartmouth Summer Research Project and introduced
+the term "artificial intelligence". It frames machine intelligence as a
+simulation problem and anticipates the axes of the modern debate (language as
+internal reasoning medium, controlled randomness, internal world models,
+efficiency theory of computation), but makes no out-of-the-box claim: its program
+is to build and study machines, not to audit what a prebuilt model already can
+do. Verdict: context; overall verdict unchanged.
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| [FT] McCarthy, Minsky, Rochester & Shannon 1955, Dartmouth Proposal | AI Magazine 27(4) 2006 reprint | context | Founding document: simulation conjecture; language, abstractions, self-improvement, randomness axes; no testable out-of-the-box claim |
+
 ## Verdict addendum: round 10 - Anthropic insiders cluster (2026-09-09)
 
 - **No consciousness claims in the cluster.** Coxon's entire public corpus and his
@@ -406,6 +421,8 @@ contamination audit, depth ladders, activation patching, decision table) is draf
 - arXiv IDs in filenames map 1:1 to https://arxiv.org/abs/<id>.
 - PhilPapers records use `pp<RECORD>` filenames mapping to https://philpapers.org/rec/<RECORD>;
   PhilArchive-only papers carry no arXiv ID and are preprints.
-- [FT] = full-text passages read and quoted via firecrawl research read-paper.
+- [FT] = full-text passages read and quoted (firecrawl research read-paper, or
+  direct full text such as a local copy of the reformatted 1955 proposal, with
+  ligature artifacts normalized).
 - Peer-review status: NeurIPS/ICLR/ICML/COLM/Nature Human Behaviour/Nature = peer-reviewed;
   arXiv-only items are flagged as preprints in their entries.
