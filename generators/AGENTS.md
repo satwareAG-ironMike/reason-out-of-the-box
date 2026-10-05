@@ -20,6 +20,13 @@ land one PR at a time (Baby Steps).
   component rules (Webb's "1-4 simultaneous rules" mapped onto tuple components -
   design decision 2026-10-05). Answer format: 8 options (Raven ACMS/Webb
   convention); missing cell fixed at (2,2).
+- Family 2 `ladders.py` (subtype `hop_chain`): universal transitivity rule +
+  shuffled atomic facts over synthetic entity strings + yes/no query; depth k =
+  shortest directed path length of the queried pair. Construction keeps noise
+  components disjoint from the main chain (entity-name uniqueness), so yes items
+  have no shortcut and no items stay unreachable; the selftest re-derives both
+  invariants by independent BFS. Subtypes `mult_mult` and `dp_puzzle` (issue #4
+  list) are pending.
 - Solvability is generation-time policy: for every component, exactly one rule of
   the pool must reproduce both demonstration rows jointly; non-identifiable
   samples are rejected. The selftest re-derives uniqueness from the emitted item.
@@ -49,6 +56,7 @@ land one PR at a time (Baby Steps).
 ## Verification
 
 - `python3 generators/digit_matrices.py --selftest`
+- `python3 generators/ladders.py --selftest`
 - regeneration hash stability: `--generate ... --out f` twice, `sha256sum f` equal;
   manifest `sha256` field equals the file hash
 - repo parity: `scripts/check_links.py`, dash scan, CHANGELOG entry
