@@ -5,6 +5,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-05
+
+#### Added
+
+- `check_archive.py` now validates the archive count statements in `README.md`, root
+  `AGENTS.md`, and `archive/AGENTS.md` against the actual entry/round counts
+  (issue #54): a drifted count or a vanished statement fails the check, closing the
+  gap behind the 2026-09-28 drift incident (92/12 vs INDEX 107/13, fixed manually
+  in #52). Selftest covers both controls (drift mutant, missing statement).
+
 ### 2026-09-28
 
 #### Added
