@@ -14,6 +14,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   (issue #54): a drifted count or a vanished statement fails the check, closing the
   gap behind the 2026-09-28 drift incident (92/12 vs INDEX 107/13, fixed manually
   in #52). Selftest covers both controls (drift mutant, missing statement).
+- Round-14 full-text verification pass: all 15 entries in
+  `archive/round14-latent-reasoning-2026/` verified against their arXiv HTML full
+  texts, 0 discrepancies; all 15 upgraded to `[FT]` and INDEX rows prefixed
+  accordingly (FT total 47 -> 62). Record:
+  `docs/review-rounds/round14-fulltext-2026-10-05.md`. Verdict unchanged: the core
+  H1 gap remains unfilled.
 
 ### 2026-09-28
 
