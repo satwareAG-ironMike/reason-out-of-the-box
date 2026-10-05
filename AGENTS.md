@@ -110,5 +110,6 @@ When the user requests a durable behavior change, record it here or in the relev
 | Path | Scope | File |
 |------|-------|------|
 | `archive/` | Paper archive: 107 entries, 13 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
+| `generators/` | Condition-2 task generators (issue #4): digit matrices shipped; ladders and ARC-style planned; seed policy, solvability and manifest contracts | [AGENTS.md](generators/AGENTS.md) |
 | `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), IRB protocol draft (issue #7), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall); governed by root rules | - |
 | `scripts/` | `check_archive.py` archive consistency checker and `check_links.py` markdown link checker (stdlib, each with `--selftest`); run both before any closeout | - |

@@ -20,6 +20,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   accordingly (FT total 47 -> 62). Record:
   `docs/review-rounds/round14-fulltext-2026-10-05.md`. Verdict unchanged: the core
   H1 gap remains unfilled.
+- Condition-2 task generators, family 1 (issue #4): `generators/digit_matrices.py`,
+  a Webb-style Raven-analogue generator (rule pool: constant, progression,
+  distribution-of-3, AND/OR/XOR; depth = 1-4 simultaneous component rules; 8-option
+  answers; generation-time solvability enforcement). Generated
+  `items/digit_matrices/` levels 1-4, 300 items each (1,200 total) with per-level
+  manifests (content sha256, seed-hash chain); byte-identical regeneration verified
+  across processes. New `generators/AGENTS.md` holds the seed policy and item
+  contract. Human-solvability smoke check (>= 3 humans) still open on issue #4.
 
 ### 2026-09-28
 
