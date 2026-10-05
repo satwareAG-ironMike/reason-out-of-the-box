@@ -43,7 +43,8 @@ verdict, evidence matrix, and the 5-condition open-problem spec live in
 - `python3 scripts/check_archive.py` must print `archive check passed` before closeout:
   filename id matches body link, required fields and sections present, no placeholder
   authors, no em/en dashes, per-round INDEX row count equals entry count, INDEX `[FT]`
-  rows equal entries with "verified from full text"
+  rows equal entries with "verified from full text", and the archive count statements in
+  README.md, root AGENTS.md, and archive/AGENTS.md match the actual entry/round counts
 - `python3 scripts/check_archive.py --selftest` is the negative control (synthetic broken
   archive must fail); `--report` prints metrics (`ft_verified: N/total`)
 - Acceptance ledger for quality campaigns: `GATES.md` (gate-ledger format of the public Leonxlnx/unlazy project), run with

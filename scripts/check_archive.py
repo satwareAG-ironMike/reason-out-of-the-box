@@ -11,6 +11,9 @@ Checks every archive/round*/<id>-<slug>.md entry and archive/INDEX.md:
   - no em/en dashes (project punctuation standard)
   - per-round entry count equals INDEX table row count
   - per-round full-text-verified entries equal INDEX [FT] rows
+  - the archive count statement in README.md, root AGENTS.md, and archive/AGENTS.md
+    matches the actual entry/round counts (files without a statement are skipped;
+    a present file whose statement vanished is an error)
 
 Usage:
   check_archive.py            exit 0 + "archive check passed" only if clean
@@ -29,6 +32,13 @@ ID_FIELDS = ("| arXiv |", "| PMID |", "| PhilPapers |")
 REQUIRED_SECTIONS = ("## Abstract", "## Key findings", "## Relevance to core question", "## Citation")
 FT_MARK = "verified from full text"
 BAD_DASHES = ("\u2014", "\u2013")
+# archive count statements in the parent docs (#54): the 2026-09-28 round-14 ingest
+# drifted README + root AGENTS (92/12 vs INDEX 107/13) and no check caught it
+COUNT_STATEMENTS = (
+    ("README.md", re.compile(r"(\d+) peer-reviewed and preprint papers, (\d+) thematic rounds")),
+    ("AGENTS.md", re.compile(r"(\d+) entries, (\d+) thematic rounds")),
+    ("archive/AGENTS.md", re.compile(r"(\d+) entries in (\d+) thematic rounds")),
+)
 
 
 def check(root: Path) -> dict:
@@ -86,11 +96,27 @@ def check(root: Path) -> dict:
         ft_rows = sum(1 for l in rows if l.startswith("| [FT]"))
         ft_mismatch += abs(ft_rows - ft_entries.get(rnd, 0))
 
+    total = sum(counts.values())
+    rounds = len(counts)
+    for rel, pattern in COUNT_STATEMENTS:
+        path = root / rel
+        if not path.is_file():
+            continue
+        matches = pattern.findall(path.read_text(encoding="utf-8"))
+        if not matches:
+            errors.append(f"{rel}: count statement not found")
+            continue
+        for n_str, r_str in matches:
+            if (int(n_str), int(r_str)) != (total, rounds):
+                errors.append(
+                    f"{rel}: count drift: states {n_str} entries / {r_str} rounds, "
+                    f"archive has {total} / {rounds}")
+
     return {
         "errors": errors,
         "placeholder_authors": placeholder,
         "ft_verified": sum(ft_entries.values()),
-        "total": sum(counts.values()),
+        "total": total,
         "ft_index_mismatch": ft_mismatch,
     }
 
@@ -147,6 +173,19 @@ GOOD_INDEX = """# I
 ## Other
 """
 
+GOOD_README = """# R
+
+| `archive/` | 2 peer-reviewed and preprint papers, 1 thematic rounds, per-paper entries |
+"""
+GOOD_AGENTS = """# A
+
+| `archive/` | Paper archive: 2 entries, 1 thematic rounds |
+"""
+GOOD_ARCHIVE_AGENTS = """# archive
+
+Durable archive of the papers: 2 entries in 1 thematic rounds.
+"""
+
 
 def selftest() -> None:
     with tempfile.TemporaryDirectory() as tmp:
@@ -156,6 +195,9 @@ def selftest() -> None:
         (d / "1234.56789-lovelace-t.md").write_text(GOOD_ENTRY, encoding="utf-8")
         (d / "ppXTEST-hopper-x.md").write_text(GOOD_ENTRY_PP, encoding="utf-8")
         (root / "archive" / "INDEX.md").write_text(GOOD_INDEX, encoding="utf-8")
+        (root / "README.md").write_text(GOOD_README, encoding="utf-8")
+        (root / "AGENTS.md").write_text(GOOD_AGENTS, encoding="utf-8")
+        (root / "archive" / "AGENTS.md").write_text(GOOD_ARCHIVE_AGENTS, encoding="utf-8")
         ok = check(root)
         assert not ok["errors"], ok["errors"]
         assert ok["ft_verified"] == 2 and ok["ft_index_mismatch"] == 0
@@ -166,10 +208,18 @@ def selftest() -> None:
         broken = broken.replace("| Year | 2026 |", "| Year | 2026 \u2014 |")
         (d / "1234.56789-lovelace-t.md").write_text(broken, encoding="utf-8")
         (d / "9999.00000-wrong-id.md").write_text(GOOD_ENTRY, encoding="utf-8")
+        # count-statement controls (#54): dir now holds 3 entries; README deliberately
+        # claims 9 (drift), root AGENTS.md stays correct at 3, archive/AGENTS.md loses
+        # its count statement entirely (not-found control)
+        (root / "README.md").write_text(GOOD_README.replace("2 peer-reviewed", "9 peer-reviewed"), encoding="utf-8")
+        (root / "AGENTS.md").write_text(GOOD_AGENTS.replace("2 entries", "3 entries"), encoding="utf-8")
+        (root / "archive" / "AGENTS.md").write_text("# archive\n\nno count here\n", encoding="utf-8")
         bad = check(root)
         kinds = " ".join(bad["errors"])
         for needle in ("placeholder author", "missing section ## Citation", "em/en dash",
-                       "id 9999.00000 not found", "rows, dir has"):
+                       "id 9999.00000 not found", "rows, dir has",
+                       "README.md: count drift: states 9 entries / 1 rounds, archive has 3",
+                       "archive/AGENTS.md: count statement not found"):
             assert needle in kinds, f"negative control missed: {needle}\n{kinds}"
         assert bad["placeholder_authors"] == 1
         # ft: broken entry lost FT, the pp entry and the wrong-id copy keep it -> 2/2
