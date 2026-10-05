@@ -28,6 +28,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   manifests (content sha256, seed-hash chain); byte-identical regeneration verified
   across processes. New `generators/AGENTS.md` holds the seed policy and item
   contract. Human-solvability smoke check (>= 3 humans) still open on issue #4.
+- Condition-2 task generators, family 2 subtype `hop_chain` (issue #4):
+  `generators/ladders.py` - k-hop relation composition over synthetic entity
+  strings with an explicit transitivity rule (Faith-and-Fate style; the k-hop
+  chains are the Dolma-audit anchor for issue #3). Generated
+  `items/ladders/` levels k in {1, 2, 4, 6, 8}, 300 items each (1,500 total),
+  yes/no balanced, answers verified by independent BFS in the selftest;
+  byte-identical regeneration verified. `mult_mult` and `dp_puzzle` subtypes
+  pending.
 
 ### 2026-09-28
 

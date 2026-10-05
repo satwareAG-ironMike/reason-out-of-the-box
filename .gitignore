@@ -1,3 +1,5 @@
 .firecrawl/
 state-projection.json
 .unlazy/
+__pycache__/
+*.pyc
