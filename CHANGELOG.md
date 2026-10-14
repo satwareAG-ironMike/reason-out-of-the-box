@@ -33,6 +33,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `docs/counterarguments.md`, and a dated pointer in `docs/next-investigations.md`.
   Verdict: the argument is a prior raiser against substrate-based exclusion; machine
   indicator evidence remains unaudited; the out-of-the-box reasoning verdict is unchanged.
+- Nightly consciousness research rounds (issue #65): a systemd user timer fires at 02:00 and 04:00;
+  the runner (outside the repository, public-only rule) rotates across self-hosted inference endpoints
+  with localhost preferred, health-checks each endpoint, and launches one bounded deep-research plus
+  experiment round via an agent CLI with subagent delegation. Tracker: issue #65 round-summary
+  comments; durable findings as deduped issues; repo changes as `research/nightly-*` branches plus PRs.
+- Commit signing rule (root `AGENTS.md` User Preferences): every agent commit is signed with the model
+  it actually ran on, as a final `Model:` trailer, live-detected in the current session.
 
 ### 2026-10-05
 

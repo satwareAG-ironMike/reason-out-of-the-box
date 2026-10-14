@@ -78,6 +78,11 @@ Default section order:
 
 When the user requests a durable behavior change, record it here or in the relevant child AGENTS.md
 
+- Every agent commit must be signed with the model it actually ran on: the commit message ends with a
+  trailer line `Model: <public model name> (<provider/model-id>)`. Detect the model live in the current
+  session (runtime metadata plus a `/v1/models` probe of the serving endpoint), never from memory.
+  No host paths, hostnames, IPs, or device names in the trailer (public-only rule).
+
 ## Project Notes
 
 - This is a research POC (no build, no runtime). Question, verdict, and evidence map live in README.md
@@ -104,6 +109,12 @@ When the user requests a durable behavior change, record it here or in the relev
   scripts/check_links.py` then `set +e; git grep -n -P "\x{2014}|\x{2013}" -- .; r=$?;
   set -e; [ "$r" -eq 1 ]` (strict: passes only when grep reports "no match", fails on
   dashes or grep error)
+- Nightly consciousness research rounds fire at 02:00 and 04:00 via a systemd user timer on the
+  maintainer workstation (issue #65). The runner lives outside this repository (public-only rule: it
+  holds the local inference pool), rotates across self-hosted inference endpoints with localhost
+  preferred, and health-checks each endpoint before use. Each round posts a summary comment on tracker
+  issue #65; findings flow through deduped issues and `research/nightly-*` branches plus PRs (never
+  push to main, never merge).
 
 ## Child DOX Index
 
