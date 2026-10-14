@@ -19,9 +19,16 @@ verdict, evidence matrix, and the 5-condition open-problem spec live in
 ## Local Contracts
 
 - Every paper file is named `<source-id>-<first-author>-<slug>.md` and must contain:
-  source ID link (arXiv, PubMed `pmid<NNNN>`, or PhilPapers `pp<RECORD>`), authors,
+  source ID link (arXiv, PubMed `pmid<NNNN>`, PhilPapers `pp<RECORD>`, or a
+  Crossref-registered DOI `10.<prefix>/<local>`), authors,
   venue, peer-review status, year, archive round, condensed abstract, key findings,
   relevance to the core question, citation
+- DOI-only entries (no arXiv/PubMed/PhilPapers record, e.g. Animal Behaviour and
+  Animal Sentience papers, #63): filename carries the DOI local part
+  (`<doi-local>-<first-author>-<slug>.md`), the body carries
+  `| DOI | [10.<prefix>/<local>](https://doi.org/...) |`, and the Crossref record
+  (title, authors, venue, ISSN) must be verified with the check documented in the
+  round's review-rounds file
 - Peer-review status must be explicit: NeurIPS/ICLR/ICML/COLM/Nature/Nature Human
   Behaviour count as peer-reviewed; arXiv-only and PhilArchive-only entries are
   flagged `preprint` (PhilArchive is an unmoderated server)
@@ -41,10 +48,12 @@ verdict, evidence matrix, and the 5-condition open-problem spec live in
 ## Verification
 
 - `python3 scripts/check_archive.py` must print `archive check passed` before closeout:
-  filename id matches body link, required fields and sections present, no placeholder
-  authors, no em/en dashes, per-round INDEX row count equals entry count, INDEX `[FT]`
-  rows equal entries with "verified from full text", and the archive count statements in
-  README.md, root AGENTS.md, and archive/AGENTS.md match the actual entry/round counts
+  filename id matches body link, DOI-only entries carry the full DOI in the `| DOI |`
+  field with the DOI local part in the filename, required fields and sections present,
+  no placeholder authors, no em/en dashes, per-round INDEX row count equals entry count,
+  INDEX `[FT]` rows equal entries with "verified from full text", and the archive count
+  statements in README.md, root AGENTS.md, and archive/AGENTS.md match the actual
+  entry/round counts
 - `python3 scripts/check_archive.py --selftest` is the negative control (synthetic broken
   archive must fail); `--report` prints metrics (`ft_verified: N/total`)
 - Acceptance ledger for quality campaigns: `GATES.md` (gate-ledger format of the public Leonxlnx/unlazy project), run with

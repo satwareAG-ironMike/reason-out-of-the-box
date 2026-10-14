@@ -2,10 +2,12 @@
 """Consistency checker for the paper archive (stdlib only).
 
 Checks every archive/round*/<id>-<slug>.md entry and archive/INDEX.md:
-  - filename id prefix appears in the entry's arXiv/PMID/PhilPapers link
+  - filename id prefix appears in the entry's arXiv/PMID/PhilPapers/DOI link
     (note: the pp<RECORD> prefix strip matches the record stem only - a link to a
     sibling record sharing the stem, e.g. DEVHTB-3 vs DEVHTB-2, is not caught;
     the [FT] human verification layer is the backstop)
+  - DOI-only entries (#63): the | DOI | field carries the full DOI and the
+    filename must contain the DOI local part (the part after the slash)
   - required table fields and sections present
   - no placeholder author fields (value starting with "(")
   - no em/en dashes (project punctuation standard)
@@ -28,7 +30,7 @@ import tempfile
 from pathlib import Path
 
 REQUIRED_FIELDS = ("| Authors |", "| Venue |", "| Year |", "| Archive round |", "| Archived |")
-ID_FIELDS = ("| arXiv |", "| PMID |", "| PhilPapers |")
+ID_FIELDS = ("| arXiv |", "| PMID |", "| PhilPapers |", "| DOI |")
 REQUIRED_SECTIONS = ("## Abstract", "## Key findings", "## Relevance to core question", "## Citation")
 FT_MARK = "verified from full text"
 BAD_DASHES = ("\u2014", "\u2013")
@@ -63,11 +65,17 @@ def check(root: Path) -> dict:
         id_prefix = entry.name.split("-", 1)[0].removeprefix("pmid").removeprefix("pp")
         if id_prefix not in text:
             errors.append(f"{rel}: id {id_prefix} not found in body")
+        doi_m = re.search(r"\| DOI \| \[(10\.[^\]]+)\]", text)
+        if doi_m:
+            doi = doi_m.group(1)
+            local = doi.split("/", 1)[1] if "/" in doi else doi
+            if local not in entry.name:
+                errors.append(f"{rel}: DOI {doi} local part {local} not in filename")
         for field in REQUIRED_FIELDS:
             if field not in text:
                 errors.append(f"{rel}: missing field {field}")
         if not any(f in text for f in ID_FIELDS):
-            errors.append(f"{rel}: missing arXiv/PMID/PhilPapers field")
+            errors.append(f"{rel}: missing arXiv/PMID/PhilPapers/DOI field")
         for section in REQUIRED_SECTIONS:
             if section not in text:
                 errors.append(f"{rel}: missing section {section}")
