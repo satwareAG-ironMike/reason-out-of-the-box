@@ -2,11 +2,12 @@
 
 ## Purpose
 
-Durable archive of the papers behind the project verdict: 108 entries in 14 thematic rounds
+Durable archive of the papers behind the project verdict: 121 entries in 15 thematic rounds
 (base-model emergence, skeptical, theory and faithfulness, mechanistic and recent, thinking
 and validation, unique idea generation, embodied agents and tools, do LLMs think,
 reasoning traces and 2026 updates, Anthropic insiders, fly brain connectome context, the
-Chinese Room debate, latent reasoning and elicitation, field origins). The
+Chinese Room debate, latent reasoning and elicitation, field origins, insect sentience
+evidence chain). The
 verdict, evidence matrix, and the 5-condition open-problem spec live in
 [INDEX.md](INDEX.md). Round-level adversarial review records (per [agent-execution.md](../docs/agent-execution.md) section 5) live in [docs/review-rounds/](../docs/review-rounds/) (e.g. [round14-2026-09-28.md](../docs/review-rounds/round14-2026-09-28.md)).
 
