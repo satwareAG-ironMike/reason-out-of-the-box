@@ -6,14 +6,15 @@ analogous to how higher animals and humans reason without prior logic training?
 
 **Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
 2026-09-06 (round 8 extension), 2026-09-09 (round 10), 2026-09-14 (round 12),
-2026-09-15 (round 13), 2026-09-28 (round 14), 2026-10-05 (round 15) |
+2026-09-15 (round 13), 2026-09-28 (round 14), 2026-10-05 (round 15), 2026-10-14 (round 16) |
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
 26 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
 round 9 (2026-09-05), 2 papers in round 8 (2026-09-06), 6 papers in round 10 (2026-09-09),
 2 papers in round 12 (2026-09-14), 4 papers in round 13 (2026-09-15), 15 papers in round 14
-(2026-09-28), 1 paper in round 15 (2026-10-05): 108 papers in 14 rounds. Full-text in-body verification was performed for the
+(2026-09-28), 1 paper in round 15 (2026-10-05), 13 papers in round 16 (2026-10-14):
+121 papers in 15 rounds. Full-text in-body verification was performed for the
 highest-weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
@@ -251,6 +252,31 @@ do. Verdict: context; overall verdict unchanged.
 | Paper | Venue | Verdict | Note |
 |-------|-------|---------|------|
 | [FT] McCarthy, Minsky, Rochester & Shannon 1955, Dartmouth Proposal | AI Magazine 27(4) 2006 reprint | context | Founding document: simulation conjecture; language, abstractions, self-improvement, randomness axes; no testable out-of-the-box claim |
+
+### Round 16 - Insect sentience evidence chain (context, 2026-10-14)
+
+Context round for the substrate-threshold argument (counterargument #11,
+docs/claims-insect-sentience.md): the peer-reviewed bee sentience chain (pessimistic and
+optimistic cognitive biases, dopamine-dependent positive states, play, self-protective
+grooming, trade-off modulation of nociception with its full controversy record) plus the
+pain-axis LLM preprint that motivates the machine side. Context/analogy evidence only -
+none of these papers bear on out-of-the-box LLM reasoning; overall verdict unchanged.
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| Tagliabue, Dung & Berg 2026, The Pain Axis: LLMs Represent Self-Directed Harm | arXiv 2609.16247 (preprint) | context | Linear pain direction in 25 open-weight models (2B-72B); steering induces self-harm-adjacent choices 50-94% vs 0-5% unsteered |
+| Bateson et al. 2011, Agitated honeybees pessimistic bias | Current Biology | context | Shaking-induced negative state; ambiguous cues classified as predicting punishment; lower hemolymph monoamines |
+| Solvi et al. 2016, Dopamine-dependent positive states in bumblebees | Science | context | Optimistic bias plus faster foraging reinitiation; abolished by dopamine antagonist fluphenazine |
+| Loukola et al. 2017, Bumblebees improve on observed behavior | Science | context | Live/model demonstration beats ghost demonstration; observers improve instead of copying |
+| Galpayage Dona et al. 2022, Do bumble bees play? | Animal Behaviour | context | Ball rolling meets 5 play criteria; age and sex differences mirror vertebrate play |
+| Gibbons et al. 2022, Motivational trade-offs and nociception | PNAS | context | 55 °C heated feeders; trade-off via learned color cues; erratum 2025 corrected P 0.039 to 0.033 |
+| Gibbons, Sarlak & Chittka 2022, Descending control of nociception in insects? | Proc R Soc B | context | Argues brain-level nociceptive modulation in insects; insects lack opioid system |
+| Gibbons et al. 2024, Self-protective behavior in bumblebees | iScience | context | 65 °C antenna stimulation leads to grooming the stimulated site within 2 min |
+| Gibbons & Chittka 2022, Framework for evaluating pain evidence | Animal Sentience | context | Tightens Crump et al. 8 criteria; false-positive and false-negative risk; precautionary principle |
+| Burns Brown & Birch 2025, When and why trade-offs evidence sentience | Phil Trans B | context | Trade-off evidence depends on the nature of the trade-off and its neural substrate |
+| Read & Nityananda 2026, Trade-off critique | Animal Behaviour | context | Signal-detection re-analysis: no support for the PNAS 2022 conclusions |
+| Gibbons et al. 2026, Reassessment | Animal Behaviour | context | Corrected model beats critique alternatives on all fit metrics; confirms original findings |
+| Read & Nityananda 2026, Revised models response | Animal Behaviour | context | Rebuttal: revised models overfit; no negative interaction; controversy unresolved |
 
 ## Verdict addendum: round 10 - Anthropic insiders cluster (2026-09-09)
 

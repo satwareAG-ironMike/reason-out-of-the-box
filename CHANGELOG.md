@@ -5,6 +5,35 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-14
+
+#### Added
+
+- `check_archive.py` now accepts Crossref-registered DOIs as source IDs (issue #63,
+  test-first: selftest RED commit `75d28a7`, then checker GREEN commit `bcb9c2f`):
+  DOI-only entries (Animal Behaviour, Animal Sentience, and Phil Trans B papers with no
+  arXiv, PubMed, or PhilPapers record) carry a `| DOI |` table field, and the DOI local
+  part must appear in the filename; a mismatch fails the check. Selftest covers the
+  DOI-good control and the DOI-bad mutant. `archive/AGENTS.md` provenance rule extended
+  accordingly.
+- Archive round 16, insect sentience evidence chain: 13 entries in
+  `archive/round16-insect-sentience/`, all verdict "context", all abstract-level (no
+  `[FT]`): the pain-axis LLM preprint (arXiv 2609.16247), the bee valence chain (Bateson
+  2011; Solvi 2016; Loukola 2017; Galpayage Dona 2022 play), the Gibbons nociception
+  chain (PNAS 2022 plus its 2025 erratum, Proc R Soc B 2022, iScience 2024), the Gibbons
+  & Chittka pain-evidence framework, Burns Brown & Birch 2025, and the trade-off dispute
+  (Read & Nityananda critique, Gibbons et al. reassessment, Read & Nityananda response).
+  Verification trail: Crossref works records, PubMed efetch abstracts, OpenAlex abstract
+  reconstruction, arXiv export API; record: `docs/review-rounds/round16-2026-10-14.md`.
+  Archive now 121 entries in 15 rounds; count statements updated in the same commit.
+- `docs/claims-insect-sentience.md`: substrate-threshold claim ledger (bee chain table,
+  trade-off controversy record, steelman with disanalogies and Bayesian hinge,
+  institutional signals for the UK Animal Welfare (Sentience) Act 2022 and Anthropic,
+  play-criteria translation proposal, unverified-claims log), counterargument #11 in
+  `docs/counterarguments.md`, and a dated pointer in `docs/next-investigations.md`.
+  Verdict: the argument is a prior raiser against substrate-based exclusion; machine
+  indicator evidence remains unaudited; the out-of-the-box reasoning verdict is unchanged.
+
 ### 2026-10-05
 
 #### Added

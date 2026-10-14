@@ -2,10 +2,12 @@
 """Consistency checker for the paper archive (stdlib only).
 
 Checks every archive/round*/<id>-<slug>.md entry and archive/INDEX.md:
-  - filename id prefix appears in the entry's arXiv/PMID/PhilPapers link
+  - filename id prefix appears in the entry's arXiv/PMID/PhilPapers/DOI link
     (note: the pp<RECORD> prefix strip matches the record stem only - a link to a
     sibling record sharing the stem, e.g. DEVHTB-3 vs DEVHTB-2, is not caught;
     the [FT] human verification layer is the backstop)
+  - DOI-only entries (#63): the | DOI | field carries the full DOI and the
+    filename must contain the DOI local part (the part after the slash)
   - required table fields and sections present
   - no placeholder author fields (value starting with "(")
   - no em/en dashes (project punctuation standard)
@@ -28,7 +30,7 @@ import tempfile
 from pathlib import Path
 
 REQUIRED_FIELDS = ("| Authors |", "| Venue |", "| Year |", "| Archive round |", "| Archived |")
-ID_FIELDS = ("| arXiv |", "| PMID |", "| PhilPapers |")
+ID_FIELDS = ("| arXiv |", "| PMID |", "| PhilPapers |", "| DOI |")
 REQUIRED_SECTIONS = ("## Abstract", "## Key findings", "## Relevance to core question", "## Citation")
 FT_MARK = "verified from full text"
 BAD_DASHES = ("\u2014", "\u2013")
@@ -63,11 +65,17 @@ def check(root: Path) -> dict:
         id_prefix = entry.name.split("-", 1)[0].removeprefix("pmid").removeprefix("pp")
         if id_prefix not in text:
             errors.append(f"{rel}: id {id_prefix} not found in body")
+        doi_m = re.search(r"\| DOI \| \[(10\.[^\]]+)\]", text)
+        if doi_m:
+            doi = doi_m.group(1)
+            local = doi.split("/", 1)[1] if "/" in doi else doi
+            if local not in entry.name:
+                errors.append(f"{rel}: DOI {doi} local part {local} not in filename")
         for field in REQUIRED_FIELDS:
             if field not in text:
                 errors.append(f"{rel}: missing field {field}")
         if not any(f in text for f in ID_FIELDS):
-            errors.append(f"{rel}: missing arXiv/PMID/PhilPapers field")
+            errors.append(f"{rel}: missing arXiv/PMID/PhilPapers/DOI field")
         for section in REQUIRED_SECTIONS:
             if section not in text:
                 errors.append(f"{rel}: missing section {section}")
@@ -161,6 +169,26 @@ c
 ## Citation
 d
 """
+GOOD_ENTRY_DOI = """# T3
+
+| Field | Value |
+|-------|-------|
+| DOI | [10.1016/j.example.2026.00001](https://doi.org/10.1016/j.example.2026.00001) |
+| Authors | Alan Turing |
+| Venue | X |
+| Year | 2026 |
+| Archive round | 1 |
+| Archived | 2026-01-01 |
+
+## Abstract (condensed)
+a
+## Key findings (verified from full text)
+b
+## Relevance to core question
+c
+## Citation
+d
+"""
 GOOD_INDEX = """# I
 
 ### Round 1 - x
@@ -169,21 +197,22 @@ GOOD_INDEX = """# I
 |-------|-------|---------|------|
 | [FT] Lovelace 2026 | X | + | n |
 | [FT] XTEST 2026 | X | - | n |
+| [FT] Turing 2026 | X | +/- | n |
 
 ## Other
 """
 
 GOOD_README = """# R
 
-| `archive/` | 2 peer-reviewed and preprint papers, 1 thematic rounds, per-paper entries |
+| `archive/` | 3 peer-reviewed and preprint papers, 1 thematic rounds, per-paper entries |
 """
 GOOD_AGENTS = """# A
 
-| `archive/` | Paper archive: 2 entries, 1 thematic rounds |
+| `archive/` | Paper archive: 3 entries, 1 thematic rounds |
 """
 GOOD_ARCHIVE_AGENTS = """# archive
 
-Durable archive of the papers: 2 entries in 1 thematic rounds.
+Durable archive of the papers: 3 entries in 1 thematic rounds.
 """
 
 
@@ -194,13 +223,14 @@ def selftest() -> None:
         d.mkdir(parents=True)
         (d / "1234.56789-lovelace-t.md").write_text(GOOD_ENTRY, encoding="utf-8")
         (d / "ppXTEST-hopper-x.md").write_text(GOOD_ENTRY_PP, encoding="utf-8")
+        (d / "j.example.2026.00001-turing-t.md").write_text(GOOD_ENTRY_DOI, encoding="utf-8")
         (root / "archive" / "INDEX.md").write_text(GOOD_INDEX, encoding="utf-8")
         (root / "README.md").write_text(GOOD_README, encoding="utf-8")
         (root / "AGENTS.md").write_text(GOOD_AGENTS, encoding="utf-8")
         (root / "archive" / "AGENTS.md").write_text(GOOD_ARCHIVE_AGENTS, encoding="utf-8")
         ok = check(root)
         assert not ok["errors"], ok["errors"]
-        assert ok["ft_verified"] == 2 and ok["ft_index_mismatch"] == 0
+        assert ok["ft_verified"] == 3 and ok["ft_index_mismatch"] == 0
 
         # negative controls: each break must be caught
         broken = GOOD_ENTRY.replace("| Authors | Ada Lovelace |", "| Authors | (2026) |")
@@ -208,21 +238,27 @@ def selftest() -> None:
         broken = broken.replace("| Year | 2026 |", "| Year | 2026 \u2014 |")
         (d / "1234.56789-lovelace-t.md").write_text(broken, encoding="utf-8")
         (d / "9999.00000-wrong-id.md").write_text(GOOD_ENTRY, encoding="utf-8")
-        # count-statement controls (#54): dir now holds 3 entries; README deliberately
-        # claims 9 (drift), root AGENTS.md stays correct at 3, archive/AGENTS.md loses
-        # its count statement entirely (not-found control)
-        (root / "README.md").write_text(GOOD_README.replace("2 peer-reviewed", "9 peer-reviewed"), encoding="utf-8")
-        (root / "AGENTS.md").write_text(GOOD_AGENTS.replace("2 entries", "3 entries"), encoding="utf-8")
+        # DOI strictness control: body carries the full DOI, filename lacks its local part
+        (d / "10.1016-turing-t.md").write_text(
+            GOOD_ENTRY_DOI.replace(" (verified from full text)", ""), encoding="utf-8")
+        # count-statement controls (#54): dir now holds 5 entries; README deliberately
+        # claims 9 (drift), root AGENTS.md stays at 3 (drift vs 5), archive/AGENTS.md
+        # loses its count statement entirely (not-found control)
+        (root / "README.md").write_text(GOOD_README.replace("3 peer-reviewed", "9 peer-reviewed"), encoding="utf-8")
+        (root / "AGENTS.md").write_text(GOOD_AGENTS, encoding="utf-8")
         (root / "archive" / "AGENTS.md").write_text("# archive\n\nno count here\n", encoding="utf-8")
         bad = check(root)
         kinds = " ".join(bad["errors"])
         for needle in ("placeholder author", "missing section ## Citation", "em/en dash",
                        "id 9999.00000 not found", "rows, dir has",
-                       "README.md: count drift: states 9 entries / 1 rounds, archive has 3",
+                       "local part j.example.2026.00001 not in filename",
+                       "README.md: count drift: states 9 entries / 1 rounds, archive has 5",
+                       "AGENTS.md: count drift: states 3 entries / 1 rounds, archive has 5",
                        "archive/AGENTS.md: count statement not found"):
             assert needle in kinds, f"negative control missed: {needle}\n{kinds}"
         assert bad["placeholder_authors"] == 1
-        # ft: broken entry lost FT, the pp entry and the wrong-id copy keep it -> 2/2
+        # ft: broken entry lost FT, the DOI control copy lost it too; the pp entry,
+        # the clean DOI entry, and the wrong-id copy keep it -> 3/3
         assert bad["ft_index_mismatch"] == 0
     print("selftest passed")
 

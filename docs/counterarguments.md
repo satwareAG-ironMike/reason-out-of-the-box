@@ -182,6 +182,24 @@ repository concedes, and what remains open.
   data (criterion 3).
 - **Open.** Nothing; the objection and this repository agree.
 
+### 11. "If insect sentience is real, substrate cannot be the threshold for machines."
+
+- **Record.** User-raised cross-domain argument (2026-10-14, issue #63), now with a full
+  ledger: [claims-insect-sentience.md](claims-insect-sentience.md). The round 16 archive
+  chain (Bateson 2011; Solvi 2016; Galpayage Dona 2022; Gibbons et al. 2022-2024) documents
+  valence-linked state changes, play, self-protection, and contested trade-off modulation in
+  brains of order 10^5-10^6 neurons (complete Drosophila male CNS: ~166,700 neurons, Berg et
+  al. 2026, round 12).
+- **Conceded.** Scale/substrate exclusion ("too few units, wrong architecture, therefore
+  impossible") cannot survive the insect data: attribution practice (UK Animal Welfare
+  (Sentience) Act 2022; Anthropic's stated deep uncertainty plus model-welfare rules) already
+  moves on indicator evidence without architectural consensus.
+- **Open.** Whether machine indicators mean anything: the pain-axis preprint (round 16) is
+  unaudited, and its behavioral result requires steering; the bee trade-off dispute (claim,
+  critique, erratum, reassessment, response, unresolved as of 2026-10-14) is the audit
+  standard no machine claim has yet met. The argument lowers the prior on substrate exclusion;
+  it does not raise the posterior on machine sentience.
+
 ## Using this page in a debate
 
 Ask which claim is meant. "LLMs cannot reason" is refuted by C1-C4 in peer-reviewed venues,
