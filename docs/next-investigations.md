@@ -834,3 +834,12 @@ target.
   session). Transformer Circuits fetches 2026-09-11: both URLs retrieved in full;
   "On the Biology of a Large Language Model" confirmed web-only (no arXiv record; citing
   bibliographies list it as an online article).
+
+## Pointer: substrate-threshold ledger (2026-10-14)
+
+Round 16 (insect sentience evidence chain, 13 context entries, issue #63) is ingested. The
+cross-domain substrate-threshold argument now has a claim ledger
+([claims-insect-sentience.md](claims-insect-sentience.md)) and counterargument #11
+([counterarguments.md](counterarguments.md)). The candidate play-criteria indicator protocol
+(Part 5 of the ledger) is a proposal, not an experiment; nothing was added to the M1-M5
+program on 2026-10-14.
