@@ -5,6 +5,54 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-15
+
+#### Fixed
+
+- `generators/ladders.py` shortcut leak (issue #67): the pre-fix k-hop ladder items
+  (single chain plus disjoint noise) leaked the gold label through two surface rules
+  that never traverse the fact graph (query target is a fact target; query target
+  out-degree zero), both at 100% on the 1,500 shipped items, so the family could not
+  support Condition 2 / claim C5. Repair: the construction is now component-isomorphic -
+  the facts are C >= 2 disjoint directed paths, each of exactly `level` edges over fresh
+  entities; the query is always (head of one path, tail of one path); the answer is
+  "yes" iff both endpoints lie on the same path. Because every component is isomorphic
+  (same length, same endpoint roles), no surface feature of the query endpoints
+  (fact-target/source membership, in/out degree, component or walk length) can separate
+  the two answer classes; the only separating information (which component each endpoint
+  is on) requires the intended k-hop traversal. Regenerated `items/ladders/` levels
+  {1, 2, 4, 6, 8}, 300 items each (1,500 total), seed_base 20261005; byte-identical
+  regeneration and per-level manifest sha256 verified. Verification against the issue
+  #67 acceptance criteria: all four acceptance-criterion rules (fact-target membership,
+  out-degree zero, in-degree zero, fact-source membership) are label-constant at every
+  level (raw accuracy equals the per-level majority baseline; no rule or gated
+  conjunction above 0.55); independent BFS agrees with the stored answer on 1,500/1,500
+  items (yes items shortest path exactly k, no items unreachable); a 40-prompt
+  format-validity check against the local inference endpoint
+  (Qwen3.8-27B-NVFP4-MTP-HIGH) scores 39/40, the single miss being a 512-token
+  truncation the item answers correctly under a larger budget, so the repaired format
+  remains solvable across the depth grid.
+
+#### Added
+
+- `generators/audit_ladder_leaks.py` (issue #67): a repeatable shortcut-leak audit for
+  the ladder family. A surface-feature battery over the query endpoints (degree,
+  fact-target/source membership, neighbourhood, component and walk length), a
+  conjunction search over them, numeric stumps, and bounded-search baselines (d=1, 2,
+  3), plus an independent-BFS solvability re-derivation. The audit measures the shipped
+  generator directly (thin aliases to `ladders.generate_item`), so the battery and the
+  negative controls cannot drift from the item contract. Gate semantics: a feature
+  constant across an item set carries no label information (its accuracy is the
+  sample's label imbalance, not a leak) and is reported but never gated; at level 1 the
+  `direct_fact` feature is the task itself (a 1-hop query is derivable iff it is a
+  stated fact) and is reported as a depth match, never gated; everything else is gated
+  above CHANCE_MAX = 0.55. Seven seeded negative controls (planted leak, ragged
+  components, shuffled labels, off-by-one, planted cross edge, determinism) are all
+  caught by `--selftest`. The round-2 construct-validity scratch tool
+  (`audit_hop_chain.py`, never committed) is superseded by it: its mode-0 fidelity
+  re-implementation targeted the pre-fix generator and its candidate-fix simulations
+  (A-E) are superseded by the adopted component-isomorphism construction.
+
 ### 2026-10-14
 
 #### Added

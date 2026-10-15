@@ -22,11 +22,18 @@ land one PR at a time (Baby Steps).
   convention); missing cell fixed at (2,2).
 - Family 2 `ladders.py` (subtype `hop_chain`): universal transitivity rule +
   shuffled atomic facts over synthetic entity strings + yes/no query; depth k =
-  shortest directed path length of the queried pair. Construction keeps noise
-  components disjoint from the main chain (entity-name uniqueness), so yes items
-  have no shortcut and no items stay unreachable; the selftest re-derives both
-  invariants by independent BFS. Subtypes `mult_mult` and `dp_puzzle` (issue #4
-  list) are pending.
+  shortest directed path length of the queried pair. Construction (component
+  isomorphism, issue #67 fix): the facts are C >= 2 disjoint directed paths, each
+  of exactly k edges over fresh entities; the query is always (head of one path,
+  tail of one path); answer "yes" iff both endpoints lie on the same path. Because
+  every component is isomorphic (same length, same endpoint roles), no surface
+  feature of the query endpoints separates the two answer classes, so no item has
+  a shortcut and none stays unreachable; the selftest re-derives both invariants by
+  independent BFS plus a four-rule surface battery (issue #67 acceptance criterion
+  2). `audit_ladder_leaks.py` makes the leak measurement repeatable (feature
+  battery, conjunction search, stumps, bounded-search baselines, independent-BFS
+  solvability; constant features reported but never gated). Subtypes `mult_mult`
+  and `dp_puzzle` (issue #4 list) are pending.
 - Solvability is generation-time policy: for every component, exactly one rule of
   the pool must reproduce both demonstration rows jointly; non-identifiable
   samples are rejected. The selftest re-derives uniqueness from the emitted item.
