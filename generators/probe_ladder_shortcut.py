@@ -52,6 +52,12 @@ Instrument constraints measured on the serving endpoint (2026-10-16):
     that cap: the longest chain available in each arm that is not part of the
     experiment. They are reported in the manifest as instrument validation,
     separate from the 40-prompt experimental budget.
+  - The pool is shared and can stall: a call can hang past the client timeout.
+    Records are therefore appended and fsynced one by one, a stalled item is
+    retried once under a global retry budget (MAX_RETRIES_TOTAL), a still-failed
+    item is recorded as finish_reason="client_error" and marked invalid instead
+    of killing the run, and --resume reuses answered items while re-asking
+    failed ones. Round 5 attempt 1 lost 21 paid answers to exactly this failure.
 
 Endpoint access: the base URL is read from the environment variable
 NIGHTLY_BASE_URL (or --base-url-env NAME). It is never hardcoded, never
@@ -62,7 +68,7 @@ Usage:
   probe_ladder_shortcut.py --selftest
   probe_ladder_shortcut.py --calibrate [--calibrate-item synthetic|fixture|shipped]
                                [--calibrate-level 8] [--calibration-out FILE]
-  probe_ladder_shortcut.py --run [--out-dir DIR] [--max-tokens N]
+  probe_ladder_shortcut.py --run [--out-dir DIR] [--max-tokens N] [--resume]
 
 Exit codes:
   0  selftest passed, or the run completed within budget
@@ -75,6 +81,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import sys
 import time
@@ -116,7 +123,14 @@ CALIBRATION_POLICY = {
 REL = "precedes"
 DECODE_SEED = 20261016
 DEFAULT_MAX_TOKENS = 1536
-HTTP_TIMEOUT_S = 180
+HTTP_TIMEOUT_S = 300
+# A local inference pool is shared and can stall. A stalled call must not take
+# the whole experiment down with it: round 5 attempt 1 died at item 22/40 on a
+# socket timeout and lost all 21 collected answers, because records were only
+# written at the end. So: per-item retry under a global retry budget, records
+# appended as they are produced, and --resume reusing already-answered items.
+MAX_RETRIES_TOTAL = 8
+RETRY_BACKOFF_S = 20
 RUN_ID = "nightly-2026-10-16-0200"
 
 WORD_RE = re.compile(r"\b(yes|no)\b", re.IGNORECASE)
@@ -429,9 +443,23 @@ def process_indicator(item: dict, trace: str) -> dict:
 
 # ---------------- run ----------------
 
+def append_record(path: Path, rec: dict) -> None:
+    """Append one record and force it to disk.
+
+    Crash safety: a run that dies mid-experiment must not lose the answers it
+    already paid for, so records are flushed one by one instead of being
+    written at the end.
+    """
+    with path.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(rec, sort_keys=True) + "\n")
+        fh.flush()
+        os.fsync(fh.fileno())
+
+
 def run(client, cells: list[dict], max_tokens: int, model_info: dict,
         calibration: dict | None, out_dir: Path, commit: str,
-        dry_run: bool, quiet: bool = False) -> int:
+        dry_run: bool, quiet: bool = False, resume: bool = False,
+        retry_backoff_s: int = RETRY_BACKOFF_S) -> int:
     # Prompts are built per cell, in cell order, and hashed once: the hash is
     # the task contract, so the ordering is part of it.
     prompts: list[str] = []
@@ -447,24 +475,90 @@ def run(client, cells: list[dict], max_tokens: int, model_info: dict,
 
     started = time.time()
     n_calls = 0
+    n_attempts = 0
+    n_retries = 0
+    n_resumed = 0
+    n_errors = 0
     records: list[dict] = []
+    out_dir.mkdir(parents=True, exist_ok=True)
+    raw_path = out_dir / "probe_raw.jsonl"
+    prior: dict[tuple[str, int], dict] = {}
+    # The prompt each item would be sent as, keyed the same way records are.
+    # Resume validation is done up front, before the raw file is rewritten, so
+    # a refused resume cannot damage the file it was asked to protect.
+    prompt_of: dict[tuple[str, int], str] = {}
     for cell, cps in zip(cells, per_cell_prompts):
         arm, level = cell["kind"], cell["level"]
+        for (fixture_item, shipped_item), prompt in zip(cell["pairs"], cps):
+            item = fixture_item if arm == "fixture" else shipped_item
+            prompt_of[(f"{arm}_l{level}", item["seed"])] = hashlib.sha256(prompt.encode()).hexdigest()
+    if resume and raw_path.exists():
+        for rec in load_jsonl(raw_path):
+            # First occurrence wins: a timed-out call may still have been
+            # answered server-side, so a later duplicate is not preferred.
+            prior.setdefault((rec["cell"], rec["seed"]), rec)
+        for key, rec in prior.items():
+            if rec.get("finish_reason") == "client_error":
+                continue
+            want = prompt_of.get(key)
+            if want is None:
+                raise RuntimeError(f"resume refused: {key} is not an item of this design")
+            if rec.get("prompt_sha256") != want:
+                raise RuntimeError(f"resume refused: {key} record does not match "
+                                   f"the prompt this run would send")
+    raw_path.write_text("")  # canonical cell order restarts on every run
+    for cell, cps in zip(cells, per_cell_prompts):
+        arm, level = cell["kind"], cell["level"]
+        cell_name = f"{arm}_l{level}"
         items = [f if arm == "fixture" else s for f, s in cell["pairs"]]
         base = baseline_predictions(items)
         for idx, ((fixture_item, shipped_item), prompt) in enumerate(zip(cell["pairs"], cps)):
             item = fixture_item if arm == "fixture" else shipped_item
-            if dry_run:
-                res = {"content": None, "reasoning": "", "finish_reason": "dry_run",
-                       "prompt_tokens": None, "completion_tokens": None,
-                       "latency_s": 0.0}
-            else:
-                res = client.complete(prompt, DECODE_SEED)
-                n_calls += 1
+            prev = prior.get((cell_name, item["seed"]))
+            if prev and prev.get("finish_reason") != "client_error":
+                rec = dict(prev)
+                rec["resumed"] = True
+                records.append(rec)
+                append_record(raw_path, rec)
+                n_resumed += 1
+                if not quiet:
+                    print(f"[{cell_name}] seed={item['seed']} reused from a prior attempt")
+                continue
+            res = None
+            err: Exception | None = None
+            attempts = 0
+            while attempts < 2:
+                attempts += 1
+                try:
+                    if dry_run:
+                        res = {"content": None, "reasoning": "", "finish_reason": "dry_run",
+                               "prompt_tokens": None, "completion_tokens": None,
+                               "latency_s": 0.0}
+                    else:
+                        n_attempts += 1
+                        res = client.complete(prompt, DECODE_SEED)
+                        n_calls += 1
+                    err = None
+                    break
+                except (OSError, RuntimeError, ValueError) as exc:
+                    err = exc
+                    if n_retries >= MAX_RETRIES_TOTAL:
+                        break
+                    n_retries += 1
+                    print(f"[{cell_name}] seed={item['seed']} attempt {attempts} failed: "
+                          f"{type(exc).__name__}: {exc}; retrying in {retry_backoff_s}s "
+                          f"({MAX_RETRIES_TOTAL - n_retries} retries left)", flush=True)
+                    time.sleep(retry_backoff_s)
+            if err is not None:
+                # A failed call is a recorded outcome, not a crash: the item is
+                # marked invalid and the run continues.
+                n_errors += 1
+                res = {"content": None, "reasoning": "", "finish_reason": "client_error",
+                       "prompt_tokens": None, "completion_tokens": None, "latency_s": None}
             ans, method = parse_answer(res["content"])
             gold = item["answer"]
             rec = {
-                "cell": f"{arm}_l{level}", "arm": arm, "level": level,
+                "cell": cell_name, "arm": arm, "level": level,
                 "seed": item["seed"], "seed_hash": item["seed_hash"],
                 "query": item["query"], "n_facts": len(item["facts"]),
                 "gold": gold, "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
@@ -476,19 +570,23 @@ def run(client, cells: list[dict], max_tokens: int, model_info: dict,
                 "completion_tokens": res["completion_tokens"],
                 "reasoning_chars": len(res["reasoning"] or ""),
                 "latency_s": res["latency_s"],
+                "attempts": attempts, "resumed": False,
+                "error": (f"{type(err).__name__}: {err}"[:200] if err else None),
                 "b_majority_correct": base["B_majority"][idx] == gold,
                 "b_direct_correct": base["B_direct"][idx] == gold,
                 "b_leak_sig_correct": base["B_leak_sig"][idx] == gold,
                 "process": process_indicator(item, res["reasoning"] or ""),
             }
             records.append(rec)
+            append_record(raw_path, rec)
             if not dry_run and not quiet:
                 pr = rec["process"]
                 print(f"[{rec['cell']}] seed={rec['seed']} gold={gold} ans={ans} "
                       f"valid={rec['valid']} finish={rec['finish_reason']} "
                       f"comp_tok={rec['completion_tokens']} "
                       f"trace_chars={rec['reasoning_chars']} "
-                      f"named={pr['intermediates_named']}/{pr['intermediates']}")
+                      f"named={pr['intermediates_named']}/{pr['intermediates']} "
+                      f"attempts={attempts}", flush=True)
     ended = time.time()
 
     # cell summaries and exact answering nulls, computed in one place per cell
@@ -584,6 +682,11 @@ def run(client, cells: list[dict], max_tokens: int, model_info: dict,
                      "stream": False, "shots": 0},
         "budget": {"experimental_prompts": EXPERIMENTAL_BUDGET,
                    "experimental_calls_used": n_calls,
+                   "endpoint_attempts": n_attempts,
+                   "retries_used": n_retries,
+                   "retry_budget": MAX_RETRIES_TOTAL,
+                   "items_reused_from_prior_attempt": n_resumed,
+                   "items_recorded_as_client_error": n_errors,
                    "calibration_calls_allowed": MAX_CALIBRATION_CALLS,
                    "calibration_calls_used": len(calibration["calls"])
                    if calibration and calibration.get("calls") else 0},
@@ -935,12 +1038,103 @@ def selftest() -> int:
     check(bool(legacy["deviation"]), "calibration budget deviation is recorded")
     check(normalize_calibration(None) is None, "absent calibration stays absent")
 
+    # 13. resilience: the control plants the exact failure that broke round 5
+    #     attempt 1 (a socket timeout mid-run, which lost all 21 answers already
+    #     paid for because records were only written at the end). The run must
+    #     survive it, record every item, stay inside the retry budget, and be
+    #     resumable without re-asking an answered item.
+    class FlakyClient(MockClient):
+        def complete(self, prompt, seed):
+            self.calls += 1
+            if self.calls == 1:
+                raise TimeoutError("simulated socket timeout")
+            r = super().complete(prompt, seed)
+            r["content"] = f"Answer: {self.items_by_key[prompt]['answer']}"
+            return r
+
+    rc5 = run(FlakyClient("shortcut", items_by_key, 8), cells, 8, {"id": "mock"},
+              None, tmp, "selftest", False, True, retry_backoff_s=0)
+    man5 = json.loads((tmp / "probe_manifest.json").read_text())
+    raw5 = load_jsonl(tmp / "probe_raw.jsonl")
+    check(rc5 == 0, "flaky run rc")
+    check(man5["budget"]["retries_used"] == 1, "flaky run spent exactly one retry")
+    check(man5["budget"]["endpoint_attempts"] == EXPERIMENTAL_BUDGET + 1,
+          "flaky run counts the retried attempt")
+    check(len(raw5) == EXPERIMENTAL_BUDGET, "flaky run recorded every item")
+    check(any(r["attempts"] == 2 for r in raw5), "flaky run recorded the retry")
+    check(all(r["finish_reason"] != "client_error" for r in raw5), "flaky run recovered")
+    check(all(r["resumed"] is False for r in raw5), "flaky run records are fresh")
+
+    # resume reuses answered items: a client that would fail any call proves
+    # that no answered item was re-asked
+    class NoCallClient(MockClient):
+        def complete(self, prompt, seed):
+            self.calls += 1
+            raise RuntimeError("resume must not re-ask an answered item")
+
+    rc6 = run(NoCallClient("garbage", items_by_key, 8), cells, 8, {"id": "mock"},
+              None, tmp, "selftest", False, True, True, retry_backoff_s=0)
+    man6 = json.loads((tmp / "probe_manifest.json").read_text())
+    check(rc6 == 0, "resumed run rc")
+    check(man6["budget"]["experimental_calls_used"] == 0, "resumed run makes no calls")
+    check(man6["budget"]["items_reused_from_prior_attempt"] == EXPERIMENTAL_BUDGET,
+          "resumed run reused every answered item")
+    check(man6["verdict"] == "traversal_consistent", "resumed run reproduces the verdict")
+
+    class DeadClient(MockClient):
+        def complete(self, prompt, seed):
+            self.calls += 1
+            raise TimeoutError("simulated permanent stall")
+
+    rc7 = run(DeadClient("shortcut", items_by_key, 8), cells, 8, {"id": "mock"},
+              None, tmp, "selftest", False, True, retry_backoff_s=0)
+    man7 = json.loads((tmp / "probe_manifest.json").read_text())
+    raw7 = load_jsonl(tmp / "probe_raw.jsonl")
+    check(rc7 == 0, "dead endpoint run still completes")
+    check(man7["budget"]["retries_used"] == MAX_RETRIES_TOTAL, "retry budget is capped")
+    check(man7["budget"]["experimental_calls_used"] == 0, "dead run answered nothing")
+    check(man7["budget"]["items_recorded_as_client_error"] == EXPERIMENTAL_BUDGET,
+          "every failed item is recorded, none dropped")
+    check(len(raw7) == EXPERIMENTAL_BUDGET, "dead run still wrote every record")
+    check(all(r["finish_reason"] == "client_error" and not r["valid"] for r in raw7),
+          "dead run records failures as invalid")
+    check(man7["verdict"] == "inconclusive_no_capability", "dead run claims no capability")
+
+    # a failed record is NOT reused: resume must re-ask it
+    rc8 = run(PerfectMock("shortcut", items_by_key, 8), cells, 8, {"id": "mock"},
+              None, tmp, "selftest", False, True, True, retry_backoff_s=0)
+    man8 = json.loads((tmp / "probe_manifest.json").read_text())
+    check(rc8 == 0, "resume after failure rc")
+    check(man8["budget"]["items_reused_from_prior_attempt"] == 0,
+          "failed records are re-asked, not reused")
+    check(man8["budget"]["experimental_calls_used"] == EXPERIMENTAL_BUDGET,
+          "resume after failure re-asks every item")
+    check(man8["verdict"] == "traversal_consistent", "resume after failure recovers")
+
+    # the resume guard: a stored record that is not an answer to the prompt this
+    # run would send must refuse the resume, and refuse before the raw file is
+    # rewritten
+    raw8 = load_jsonl(tmp / "probe_raw.jsonl")
+    raw8[0] = dict(raw8[0], prompt_sha256="0" * 64)
+    with (tmp / "probe_raw.jsonl").open("w", encoding="utf-8") as fh:
+        for r in raw8:
+            fh.write(json.dumps(r, sort_keys=True) + "\n")
+    before = (tmp / "probe_raw.jsonl").read_text()
+    try:
+        run(NoCallClient("garbage", items_by_key, 8), cells, 8, {"id": "mock"},
+            None, tmp, "selftest", False, True, True, retry_backoff_s=0)
+        fails.append("resume guard did not refuse a mismatched record")
+    except RuntimeError as exc:
+        check("resume refused" in str(exc), "resume guard refuses a mismatched record")
+    check((tmp / "probe_raw.jsonl").read_text() == before,
+          "a refused resume leaves the raw file untouched")
+
     if fails:
         for f in fails:
             print(f"FAIL: {f}")
         print(f"selftest failed ({len(fails)} controls)")
         return 4
-    print("selftest passed (12 control groups)")
+    print("selftest passed (13 control groups)")
     return 0
 
 
@@ -958,6 +1152,9 @@ def main(argv: list[str]) -> int:
     p.add_argument("--calibration-file", default=None,
                    help="embed this calibration record in the run manifest")
     p.add_argument("--run", action="store_true")
+    p.add_argument("--resume", action="store_true",
+                   help="reuse already-answered items from an existing probe_raw.jsonl "
+                        "instead of re-asking the endpoint for them")
     p.add_argument("--dry-run", action="store_true",
                    help="build and hash all 40 prompts, no endpoint call")
     p.add_argument("--out-dir", default=str(REPO / "runs" / RUN_ID))
@@ -969,7 +1166,6 @@ def main(argv: list[str]) -> int:
     if args.selftest:
         return selftest()
 
-    import os
     base = os.environ.get(args.base_url_env)
     if not base:
         print(f"error: {args.base_url_env} is not set (endpoint is env-only)", file=sys.stderr)
@@ -1008,7 +1204,7 @@ def main(argv: list[str]) -> int:
             calib = normalize_calibration(json.loads(Path(args.calibration_file).read_text()))
         cells = matched_cells()
         return run(client, cells, args.max_tokens, model_info, calib,
-                   Path(args.out_dir), args.commit, False)
+                   Path(args.out_dir), args.commit, False, resume=args.resume)
 
     p.print_help()
     return 2

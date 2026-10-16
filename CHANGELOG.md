@@ -5,6 +5,67 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-16
+
+#### Added
+
+- `generators/fixtures/` (issue #67): the pinned pre-fix ladder items as the negative
+  control for the leak gate and the probe. `issue67_prefix_l2.jsonl` and
+  `issue67_prefix_l8.jsonl` hold every 8th line (1-based lines 1, 9, 17, ...) of
+  `items/ladders/l{2,8}.jsonl` at 49ee823, 38 items per level, the corpus that carried
+  the leak;
+  `issue67_prefix.manifest.json` records the extraction rule, the source and fixture
+  sha256s, and the policy that these items are superseded and never enter a study run,
+  a pilot, or the main experiment. `audit_ladder_leaks.py --audit-fixtures` asserts the
+  gate FIRES on them: exit 0 demonstrates detection power, exit 4 means the gate has
+  lost the ability to detect a documented leak.
+- `generators/probe_ladder_shortcut.py` (issue #67): matched-pair shortcut probe. 4
+  cells x 10 items = 40 experimental prompts (pre-fix l2, post-fix l2, pre-fix l8,
+  post-fix l8), paired by seed so the two arms of a level differ only in construction.
+  Zero-shot, temperature 0, one fixed neutral template, one decoding seed, no traversal
+  or chain-of-thought instruction, the item `rule` field withheld from the prompt.
+  Primary metric is balanced accuracy against three a-priori baselines fixed in advance
+  (majority, direct_fact, leak signature) and an exact fair-coin answering null computed
+  with binomial weights (no Monte Carlo); the verdict rule (`inconclusive_no_capability`
+  / `traversal_consistent` / `shortcut_consistent`) is encoded in the instrument. 13
+  selftest control groups, including a mock that answers purely by the pre-fix leak
+  signature and must read as `shortcut_consistent`. Calibration calls (cap 3, seeds
+  asserted outside the 40, worst-case chain length per arm) are recorded as instrument
+  validation, never as experimental data.
+- `runs/` as the record directory for executed runs, with `runs/AGENTS.md` owning the
+  manifest/raw/report contract and the Executed / Reproduced / Validated labels.
+
+#### Changed
+
+- `generators/audit_ladder_leaks.py` is permutation-calibrated instead of absolute. The
+  null is the exact hit-count distribution of the best rule in the audited hypothesis
+  class under label permutation (binomial weights over the bitmask class); a rule is
+  gated only when it beats the class's own constant rule AND clears that null at
+  `NULL_ALPHA = 0.05`. `CHANCE_MAX = 0.55` survives only as a reported legacy floor
+  (`legacy_threshold_leaks`). Features constant across an item set are reported, never
+  gated. Each level now ships its `min_detectable_accuracy`, so every `no_leak` verdict
+  carries its own detection power. Level 1 is relabelled `lookup_control` and excluded
+  from the gate: at k=1 `direct_fact` is the task itself.
+- `docs/counterarguments.md` C5: ladder depth evidence starts at k=2, level 1 is a
+  lookup control and carries no depth evidence.
+
+#### Fixed
+
+- `probe_ladder_shortcut.py` lost a whole experiment to a shared-pool stall: run attempt 1
+  on 2026-10-16 died at item 22/40 on a socket timeout, and because records were only
+  written at the end all 21 answers already paid for were lost. The instrument now appends
+  and fsyncs each record as it is produced, retries a stalled item once under a global
+  retry budget (`MAX_RETRIES_TOTAL = 8`, `RETRY_BACKOFF_S = 20`, client timeout 180s ->
+  300s), records a still-failed item as `finish_reason="client_error"` and invalid instead
+  of killing the run, and adds `--resume`, which reuses answered items and re-asks failed
+  ones. Resume refuses up front (before the raw file is rewritten) if a stored record does
+  not match the prompt this run would send, so a stale raw file cannot be folded into a new
+  design. Selftest control group 13 plants the timeout, asserts the run survives, the
+  retry budget is capped, every failed item is recorded, and resume neither re-asks an
+  answered item nor reuses a failed one. The manifest now reports `endpoint_attempts`,
+  `retries_used`, `retry_budget`, `items_reused_from_prior_attempt` and
+  `items_recorded_as_client_error`, so endpoint load stays auditable against the budget.
+
 ### 2026-10-15
 
 #### Fixed
