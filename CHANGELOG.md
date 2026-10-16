@@ -56,7 +56,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   written at the end all 21 answers already paid for were lost. The instrument now appends
   and fsyncs each record as it is produced, retries a stalled item once under a global
   retry budget (`MAX_RETRIES_TOTAL = 8`, `RETRY_BACKOFF_S = 20`, client timeout 180s ->
-  300s), records a still-failed item as `finish_reason="client_error"` and invalid instead
+  600s, sized from the measured 20-60s idle / 130-145s contended call latency), records a still-failed item as `finish_reason="client_error"` and invalid instead
   of killing the run, and adds `--resume`, which reuses answered items and re-asks failed
   ones. Resume refuses up front (before the raw file is rewritten) if a stored record does
   not match the prompt this run would send, so a stale raw file cannot be folded into a new

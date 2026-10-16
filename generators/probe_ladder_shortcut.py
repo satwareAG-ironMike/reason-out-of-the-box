@@ -123,12 +123,17 @@ CALIBRATION_POLICY = {
 REL = "precedes"
 DECODE_SEED = 20261016
 DEFAULT_MAX_TOKENS = 1536
-HTTP_TIMEOUT_S = 300
+HTTP_TIMEOUT_S = 600
 # A local inference pool is shared and can stall. A stalled call must not take
 # the whole experiment down with it: round 5 attempt 1 died at item 22/40 on a
 # socket timeout and lost all 21 collected answers, because records were only
 # written at the end. So: per-item retry under a global retry budget, records
 # appended as they are produced, and --resume reusing already-answered items.
+# Measured on 2026-10-16: a call takes 20-60s on an idle engine and 130-145s
+# while the engine is busy serving the agent that drives the probe; a worst-case
+# 1536-token generation can therefore exceed a 300s client timeout, and an
+# abandoned request keeps generating server-side and blocks the next one. The
+# timeout is an infra parameter, not part of the pre-registered design.
 MAX_RETRIES_TOTAL = 8
 RETRY_BACKOFF_S = 20
 RUN_ID = "nightly-2026-10-16-0200"

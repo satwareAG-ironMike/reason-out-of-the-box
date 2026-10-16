@@ -68,7 +68,7 @@ land one PR at a time (Baby Steps).
   Resilience is part of the contract (issue #67 round 5: attempt 1 lost 21 paid answers
   to a mid-run socket timeout): records are appended and fsynced one by one, a stalled
   item is retried once under a global budget (`MAX_RETRIES_TOTAL = 8`,
-  `RETRY_BACKOFF_S = 20`, client timeout 300s), a still-failed item is recorded as
+  `RETRY_BACKOFF_S = 20`, client timeout 600s), a still-failed item is recorded as
   `finish_reason="client_error"` and invalid rather than ending the run, and `--resume`
   reuses answered items while re-asking failed ones. Resume validates every stored record
   against the prompt this run would send before rewriting the raw file. The manifest
