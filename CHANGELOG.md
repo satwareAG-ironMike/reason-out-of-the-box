@@ -5,6 +5,40 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-16
+
+#### Added
+
+- `research/AGENTS.md`, the DOX boundary for nightly round artifacts (issue #65): one
+  directory per firing, script plus `raw.jsonl` prompts and raw responses plus
+  `summary.json`, sanitized by construction (no host, IP, endpoint URL, credential or
+  model file path, in model output text as well), protocol caps treated as contractual,
+  and the Executed/Reproduced/Validated label stated per run. Registered in the root
+  Child DOX Index.
+- `research/nightly-2026-10-16-0400/` (nightly round 6): `ladder_depth_probe.py`, a
+  depth-ceiling probe for the k-hop ladder family (stdlib, `--selftest` with 7 controls:
+  byte-identical regeneration against the shipped series, a constant rule at exactly the
+  majority baseline, a perfect rule at 1.0, an inverted rule at 0.0, parser refusals,
+  sanitizer, and two negative controls that must be rejected: a flipped answer and a
+  pre-#69 item), plus `raw.jsonl` (40 prompts and raw responses) and `summary.json`.
+  Result on a local Qwen3.8-Flash-Next class endpoint (arm A, temperature 0,
+  `max_tokens` 2048, grid k in {1,2,3,4,5,6,8,10,12,16}, 2 yes + 2 no per level selected
+  before any call): 40/40 correct, 40/40 format-valid, 0 truncations, no ceiling inside
+  k <= 16, reproducing PR #69's model-facing claim on a second endpoint with an
+  independent harness. New measurement: depth is paid in output tokens
+  (`completion_tokens = -36 + 80k`), and replaying the same completions against fixed
+  budgets loses 26/40 items at 256 tokens, 12/40 at 512 and 4/40 at 1024, so the family
+  is budget-limited rather than depth-limited for an explicit-reasoning endpoint; the
+  `d*+1..d*+4` band cannot be placed from this curve. Recorded in
+  `docs/next-investigations.md`.
+
+#### Fixed
+
+- `generators/AGENTS.md` seed policy stated the digit-matrices forms as family-wide: the
+  per-item seed multiplier is 2_000_000 for `ladders.py` (not 1_000_000) and the ladder
+  `seed_hash` is sha256("family|task_type|level|seed")[:16], so the committed ladder seeds
+  and seed hashes did not follow from the documented rule.
+
 ### 2026-10-15
 
 #### Fixed

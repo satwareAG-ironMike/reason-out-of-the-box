@@ -114,7 +114,8 @@ When the user requests a durable behavior change, record it here or in the relev
   holds the local inference pool), rotates across self-hosted inference endpoints with localhost
   preferred, and health-checks each endpoint before use. Each round posts a summary comment on tracker
   issue #65; findings flow through deduped issues and `research/nightly-*` branches plus PRs (never
-  push to main, never merge).
+  push to main, never merge). Round experiment artifacts (script, prompts, raw responses, scores)
+  land under `research/nightly-YYYY-MM-DD-HHMM/`, see [research/AGENTS.md](research/AGENTS.md).
 
 ## Child DOX Index
 
@@ -125,3 +126,4 @@ When the user requests a durable behavior change, record it here or in the relev
 | `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), IRB protocol draft (issue #7), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall, insect-sentience threshold); governed by root
   rules | - |
 | `scripts/` | `check_archive.py` archive consistency checker and `check_links.py` markdown link checker (stdlib, each with `--selftest`); run both before any closeout | - |
+| `research/` | Nightly round artifacts (issue #65): per-firing directories with probe scripts, prompts, raw responses, scores, sanitization and evidence-label contracts | [AGENTS.md](research/AGENTS.md) |

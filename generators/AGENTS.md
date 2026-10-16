@@ -42,10 +42,15 @@ land one PR at a time (Baby Steps).
   compositional ladders k in {1, 2, 4, 6, 8} hops; ARC-style 1-5 composed
   transforms. The study runs d*+1..d*+4 around the audit ceiling d*.
 - Seed policy: base seed is public (date-based, e.g. 20261005), post-dating model
-  cutoffs; per-item seed = seed_base + 1_000_000 * level + item_index; every item
-  carries `seed` and `seed_hash = sha256("family|level|seed")[:16]`; manifests
-  record count, seed_base, content sha256, and the seed-hash-chain sha256.
-  Reproducibility: regeneration from the seed must be byte-identical.
+  cutoffs; per-item seed = seed_base + multiplier * level + item_index, multiplier
+  1_000_000 for `digit_matrices.py` and 2_000_000 for `ladders.py`; `seed_hash` is
+  sha256("family|level|seed")[:16] for digit matrices and
+  sha256("family|task_type|level|seed")[:16] for ladders (both corrected 2026-10-16: the
+  doc previously stated the digit-matrices forms as if they were family-wide, so the
+  committed ladder seeds and seed hashes did not follow from it). Every item carries
+  `seed` and `seed_hash`; manifests record count, seed_base, content sha256, and the
+  seed-hash-chain sha256. Reproducibility: regeneration from the seed must be
+  byte-identical.
 - Item files: `items/<family>/l<level>.jsonl` + `l<level>.manifest.json`, one JSON
   object per line, sorted keys, compact separators, no em/en dashes. Items and
   seeds are public (public-only rule).
