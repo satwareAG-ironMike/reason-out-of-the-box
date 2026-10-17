@@ -1,0 +1,464 @@
+{
+  "all_cells_pass": true,
+  "alpha": 0.05,
+  "cells": [
+    {
+      "arm": "L",
+      "chains": 12,
+      "edges": 24,
+      "gate": {
+        "battery_rules": 100,
+        "calibrated_threshold": 0.7,
+        "constant_features": [
+          "n_facts_even",
+          "src_indeg_zero",
+          "src_is_fact_source",
+          "src_is_fact_target",
+          "src_is_source_of_first_fact",
+          "src_outdeg_zero",
+          "tgt_indeg_zero",
+          "tgt_is_fact_source",
+          "tgt_is_fact_target",
+          "tgt_outdeg_zero"
+        ],
+        "flagged_rules": [],
+        "gold_yes": 21,
+        "majority_baseline": 0.525,
+        "n": 40,
+        "null_max_p95": 0.7,
+        "observed_max": 0.575,
+        "p_value": 0.9825,
+        "top_rules": [
+          {
+            "accuracy": 0.575,
+            "rule": "conj:~tgt_first_third&tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.55,
+            "rule": "single:tgt_name_lt_src_name->yes"
+          },
+          {
+            "accuracy": 0.55,
+            "rule": "conj:~src_first_third&tgt_last_third"
+          },
+          {
+            "accuracy": 0.55,
+            "rule": "conj:~tgt_first_mention_before_src&tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.55,
+            "rule": "conj:tgt_first_third&~tgt_name_lt_src_name"
+          }
+        ],
+        "verdict": "no leak at family-wise alpha"
+      },
+      "k": 2,
+      "load": {
+        "facts_mean": 24.0,
+        "n": 6,
+        "prompt_chars_mean": 1110.0
+      }
+    },
+    {
+      "arm": "L",
+      "chains": 8,
+      "edges": 24,
+      "gate": {
+        "battery_rules": 130,
+        "calibrated_threshold": 0.725,
+        "constant_features": [
+          "n_facts_even",
+          "src_indeg_zero",
+          "src_is_fact_source",
+          "src_is_fact_target",
+          "src_outdeg_zero",
+          "tgt_indeg_zero",
+          "tgt_is_fact_source",
+          "tgt_is_fact_target",
+          "tgt_outdeg_zero"
+        ],
+        "flagged_rules": [],
+        "gold_yes": 22,
+        "majority_baseline": 0.55,
+        "n": 40,
+        "null_max_p95": 0.725,
+        "observed_max": 0.625,
+        "p_value": 0.7781,
+        "top_rules": [
+          {
+            "accuracy": 0.625,
+            "rule": "conj:~src_first_third&~tgt_last_third"
+          },
+          {
+            "accuracy": 0.625,
+            "rule": "conj:~src_is_source_of_first_fact&~tgt_last_third"
+          },
+          {
+            "accuracy": 0.625,
+            "rule": "conj:~tgt_first_third&~tgt_last_third"
+          },
+          {
+            "accuracy": 0.6,
+            "rule": "single:src_first_third->no"
+          },
+          {
+            "accuracy": 0.6,
+            "rule": "single:tgt_last_third->no"
+          }
+        ],
+        "verdict": "no leak at family-wise alpha"
+      },
+      "k": 3,
+      "load": {
+        "facts_mean": 24.0,
+        "n": 6,
+        "prompt_chars_mean": 1111.5
+      }
+    },
+    {
+      "arm": "L",
+      "chains": 6,
+      "edges": 24,
+      "gate": {
+        "battery_rules": 130,
+        "calibrated_threshold": 0.725,
+        "constant_features": [
+          "n_facts_even",
+          "src_indeg_zero",
+          "src_is_fact_source",
+          "src_is_fact_target",
+          "src_outdeg_zero",
+          "tgt_indeg_zero",
+          "tgt_is_fact_source",
+          "tgt_is_fact_target",
+          "tgt_outdeg_zero"
+        ],
+        "flagged_rules": [],
+        "gold_yes": 24,
+        "majority_baseline": 0.6,
+        "n": 40,
+        "null_max_p95": 0.725,
+        "observed_max": 0.675,
+        "p_value": 0.2893,
+        "top_rules": [
+          {
+            "accuracy": 0.675,
+            "rule": "single:tgt_name_lt_src_name->no"
+          },
+          {
+            "accuracy": 0.675,
+            "rule": "conj:~src_first_third&~tgt_first_third"
+          },
+          {
+            "accuracy": 0.675,
+            "rule": "conj:~src_is_source_of_first_fact&~tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.675,
+            "rule": "conj:~tgt_is_target_of_last_fact&~tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.65,
+            "rule": "single:tgt_first_third->no"
+          }
+        ],
+        "verdict": "no leak at family-wise alpha"
+      },
+      "k": 4,
+      "load": {
+        "facts_mean": 24.0,
+        "n": 6,
+        "prompt_chars_mean": 1111.0
+      }
+    },
+    {
+      "arm": "L",
+      "chains": 4,
+      "edges": 24,
+      "gate": {
+        "battery_rules": 100,
+        "calibrated_threshold": 0.725,
+        "constant_features": [
+          "n_facts_even",
+          "src_indeg_zero",
+          "src_is_fact_source",
+          "src_is_fact_target",
+          "src_outdeg_zero",
+          "tgt_indeg_zero",
+          "tgt_is_fact_source",
+          "tgt_is_fact_target",
+          "tgt_is_target_of_last_fact",
+          "tgt_outdeg_zero"
+        ],
+        "flagged_rules": [],
+        "gold_yes": 19,
+        "majority_baseline": 0.525,
+        "n": 40,
+        "null_max_p95": 0.725,
+        "observed_max": 0.6,
+        "p_value": 0.9776,
+        "top_rules": [
+          {
+            "accuracy": 0.6,
+            "rule": "conj:~tgt_name_longer_than_src&tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.575,
+            "rule": "conj:tgt_first_mention_before_src&~tgt_first_third"
+          },
+          {
+            "accuracy": 0.575,
+            "rule": "conj:tgt_first_third&tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.55,
+            "rule": "single:tgt_last_third->yes"
+          },
+          {
+            "accuracy": 0.55,
+            "rule": "single:tgt_name_lt_src_name->yes"
+          }
+        ],
+        "verdict": "no leak at family-wise alpha"
+      },
+      "k": 6,
+      "load": {
+        "facts_mean": 24.0,
+        "n": 6,
+        "prompt_chars_mean": 1111.0
+      }
+    },
+    {
+      "arm": "L",
+      "chains": 3,
+      "edges": 24,
+      "gate": {
+        "battery_rules": 100,
+        "calibrated_threshold": 0.8,
+        "constant_features": [
+          "n_facts_even",
+          "src_indeg_zero",
+          "src_is_fact_source",
+          "src_is_fact_target",
+          "src_outdeg_zero",
+          "tgt_indeg_zero",
+          "tgt_is_fact_source",
+          "tgt_is_fact_target",
+          "tgt_is_target_of_last_fact",
+          "tgt_outdeg_zero"
+        ],
+        "flagged_rules": [],
+        "gold_yes": 12,
+        "majority_baseline": 0.7,
+        "n": 40,
+        "null_max_p95": 0.8,
+        "observed_max": 0.75,
+        "p_value": 0.5835,
+        "top_rules": [
+          {
+            "accuracy": 0.75,
+            "rule": "conj:~src_first_third&tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.75,
+            "rule": "conj:tgt_last_third&tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.75,
+            "rule": "conj:~tgt_name_longer_than_src&tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.725,
+            "rule": "conj:~src_first_third&tgt_last_third"
+          },
+          {
+            "accuracy": 0.725,
+            "rule": "conj:tgt_first_mention_before_src&tgt_last_third"
+          }
+        ],
+        "verdict": "no leak at family-wise alpha"
+      },
+      "k": 8,
+      "load": {
+        "facts_mean": 24.0,
+        "n": 6,
+        "prompt_chars_mean": 1111.3
+      }
+    },
+    {
+      "arm": "L",
+      "chains": 2,
+      "edges": 24,
+      "gate": {
+        "battery_rules": 130,
+        "calibrated_threshold": 0.725,
+        "constant_features": [
+          "n_facts_even",
+          "src_indeg_zero",
+          "src_is_fact_source",
+          "src_is_fact_target",
+          "src_outdeg_zero",
+          "tgt_indeg_zero",
+          "tgt_is_fact_source",
+          "tgt_is_fact_target",
+          "tgt_outdeg_zero"
+        ],
+        "flagged_rules": [],
+        "gold_yes": 24,
+        "majority_baseline": 0.6,
+        "n": 40,
+        "null_max_p95": 0.725,
+        "observed_max": 0.625,
+        "p_value": 0.8603,
+        "top_rules": [
+          {
+            "accuracy": 0.625,
+            "rule": "single:tgt_first_mention_before_src->yes"
+          },
+          {
+            "accuracy": 0.625,
+            "rule": "conj:~src_first_third&tgt_first_mention_before_src"
+          },
+          {
+            "accuracy": 0.625,
+            "rule": "conj:~src_is_source_of_first_fact&tgt_first_mention_before_src"
+          },
+          {
+            "accuracy": 0.625,
+            "rule": "conj:tgt_first_mention_before_src&~tgt_is_target_of_last_fact"
+          },
+          {
+            "accuracy": 0.6,
+            "rule": "conj:tgt_first_mention_before_src&~tgt_name_longer_than_src"
+          }
+        ],
+        "verdict": "no leak at family-wise alpha"
+      },
+      "k": 12,
+      "load": {
+        "facts_mean": 24.0,
+        "n": 6,
+        "prompt_chars_mean": 1109.5
+      }
+    },
+    {
+      "arm": "X",
+      "chains": 2,
+      "edges": 32,
+      "gate": {
+        "battery_rules": 74,
+        "calibrated_threshold": 0.7,
+        "constant_features": [
+          "n_facts_even",
+          "src_indeg_zero",
+          "src_is_fact_source",
+          "src_is_fact_target",
+          "src_is_source_of_first_fact",
+          "src_outdeg_zero",
+          "tgt_indeg_zero",
+          "tgt_is_fact_source",
+          "tgt_is_fact_target",
+          "tgt_is_target_of_last_fact",
+          "tgt_outdeg_zero"
+        ],
+        "flagged_rules": [],
+        "gold_yes": 23,
+        "majority_baseline": 0.575,
+        "n": 40,
+        "null_max_p95": 0.7,
+        "observed_max": 0.575,
+        "p_value": 1.0,
+        "top_rules": [
+          {
+            "accuracy": 0.575,
+            "rule": "single:tgt_first_third->no"
+          },
+          {
+            "accuracy": 0.575,
+            "rule": "stump:always_yes"
+          },
+          {
+            "accuracy": 0.55,
+            "rule": "single:tgt_first_mention_before_src->yes"
+          },
+          {
+            "accuracy": 0.55,
+            "rule": "single:tgt_last_third->no"
+          },
+          {
+            "accuracy": 0.55,
+            "rule": "single:tgt_name_lt_src_name->yes"
+          }
+        ],
+        "verdict": "no leak at family-wise alpha"
+      },
+      "k": 16,
+      "load": {
+        "facts_mean": 32.0,
+        "n": 2,
+        "prompt_chars_mean": 1414.0
+      }
+    },
+    {
+      "arm": "X",
+      "chains": 2,
+      "edges": 48,
+      "gate": {
+        "battery_rules": 100,
+        "calibrated_threshold": 0.725,
+        "constant_features": [
+          "n_facts_even",
+          "src_indeg_zero",
+          "src_is_fact_source",
+          "src_is_fact_target",
+          "src_outdeg_zero",
+          "tgt_indeg_zero",
+          "tgt_is_fact_source",
+          "tgt_is_fact_target",
+          "tgt_is_target_of_last_fact",
+          "tgt_outdeg_zero"
+        ],
+        "flagged_rules": [],
+        "gold_yes": 19,
+        "majority_baseline": 0.525,
+        "n": 40,
+        "null_max_p95": 0.725,
+        "observed_max": 0.725,
+        "p_value": 0.0723,
+        "top_rules": [
+          {
+            "accuracy": 0.725,
+            "rule": "conj:~src_is_source_of_first_fact&~tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.7,
+            "rule": "single:tgt_name_lt_src_name->no"
+          },
+          {
+            "accuracy": 0.7,
+            "rule": "conj:~src_first_third&~tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.65,
+            "rule": "conj:~tgt_last_third&~tgt_name_lt_src_name"
+          },
+          {
+            "accuracy": 0.65,
+            "rule": "conj:~tgt_name_longer_than_src&~tgt_name_lt_src_name"
+          }
+        ],
+        "verdict": "no leak at family-wise alpha"
+      },
+      "k": 24,
+      "load": {
+        "facts_mean": 48.0,
+        "n": 2,
+        "prompt_chars_mean": 2035.0
+      }
+    }
+  ],
+  "perms": 400,
+  "planned_prompts": 40,
+  "prompt_cap": 40,
+  "seed_base": 20261017
+}

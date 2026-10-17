@@ -5,6 +5,33 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-17
+
+#### Added
+
+- Nightly round 8 (`research/nightly-2026-10-17-0400/`, issue #65 firing 2026-10-17 04:00):
+  `ladder_load_depth.py`, an independent re-implementation (no import from `generators/`, own
+  name pools, own BFS solver, verifier, gate, probe and scorer) of the constant-load hop-chain
+  grid that decouples depth `k` from prompt load `E` (issue #71 criterion 2): arm L holds
+  `E = 24` facts at `k in {2,3,4,6,8,12}` with measured prompt length 1109.5 to 1111.3
+  characters, arm X extends to `k in {16,24}` at `C = 2`. Declared grid, seed-frozen selection
+  rule, fail-closed gate, three-state scoring, `--selftest` (11 controls) green.
+  `gate.json` records the permutation-calibrated gate passing all 8 cells (thresholds 0.700 to
+  0.800, p 0.072 to 1.000).
+- Gate-power measurement (issue #71 criterion 4, #67): the same battery and null run on 6 items
+  versus a 40-item candidate pool gives a calibrated threshold of 1.000 at `n = 6` against
+  0.700 to 0.800 at `n = 40`, and a planted name-order shortcut is missed at `n = 6`
+  (p 0.259, 0 rules flagged) but caught at `n = 40` (p 0.0025, 9 rules flagged). The fixed 0.55
+  threshold would have refused all 8 clean cells of this grid.
+- `d*` procedure as a named trichotomy (`maintained` / `inconclusive` / `collapsed`, plus
+  `budget_limited` and `descriptive` states) with Wilson 95 % bounds against a 0.60 floor, and
+  the certifiability table over items per depth: at 6 items only 6/6 certifies maintained and
+  only 1/6 or worse certifies collapse; 80 % maintained needs 30 items per depth, 73 % needs 60.
+- `probe-attempt.log`: the model-facing arm aborted after 15 of 40 dispatched prompts (12 empty
+  completions, 3 correct at 355 to 557 completion tokens), no `raw.jsonl`, no depth measurement.
+  Recorded as the failure record, with the answer-position estimate shown to be invalid for an
+  endpoint that separates reasoning from content.
+
 ### 2026-10-14
 
 #### Added
