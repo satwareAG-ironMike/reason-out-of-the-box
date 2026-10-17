@@ -1,0 +1,263 @@
+{
+  "artifact_hashes": {
+    "probe_raw.jsonl": "a836abc1dd8a8f438b133a9f1eb4db050370b660ce785a54c244f12ac06d7b34"
+  },
+  "budget": {
+    "calibration_calls_allowed": 3,
+    "calibration_calls_used": 3,
+    "endpoint_attempts": 33,
+    "experimental_calls_used": 33,
+    "experimental_prompts": 40,
+    "items_recorded_as_client_error": 0,
+    "items_reused_from_prior_attempt": 7,
+    "retries_used": 0,
+    "retry_budget": 8
+  },
+  "calibration": {
+    "any_unparsed": false,
+    "calls": [
+      {
+        "completion_tokens": 149,
+        "finish_reason": "stop",
+        "kind": "synthetic",
+        "latency_s": 4.591,
+        "n_facts": 18,
+        "parse_method": "last_word",
+        "parsed_answer": "no",
+        "reasoning_chars": 501,
+        "record_format": "legacy_flat",
+        "requested_max_tokens": 1536,
+        "seed": 999999,
+        "truncated": false
+      },
+      {
+        "completion_tokens": 310,
+        "content_chars": 2,
+        "finish_reason": "stop",
+        "gold_path_len": null,
+        "kind": "fixture",
+        "latency_s": 6.391,
+        "level": 8,
+        "n_facts": 19,
+        "parse_method": "last_word",
+        "parsed_answer": "no",
+        "prompt_chars": 553,
+        "prompt_sha256": "b795f174967b8068148cdf5256e8d8536400d8d5180d057cff471db8b95aba1d",
+        "reasoning_chars": 973,
+        "requested_max_tokens": 3072,
+        "seed": 36261205,
+        "truncated": false
+      },
+      {
+        "completion_tokens": 522,
+        "content_chars": 2,
+        "finish_reason": "stop",
+        "gold_path_len": null,
+        "kind": "shipped",
+        "latency_s": 11.31,
+        "level": 8,
+        "n_facts": 80,
+        "parse_method": "last_word",
+        "parsed_answer": "no",
+        "prompt_chars": 2096,
+        "prompt_sha256": "a4d89b3bbae425c18421e20320ff9a478706bbee37adea7af3587002b0bdaeb5",
+        "reasoning_chars": 1646,
+        "requested_max_tokens": 3072,
+        "seed": 36261303,
+        "truncated": false
+      }
+    ],
+    "deviation": "2026-10-16: the planned single calibration used a synthetic disjoint-pair item that never exercised traversal cost, so two further calibrations were added on generator-produced k=8 items (one per arm, worst-case chain length). The 40-prompt experimental budget is unchanged by this deviation.",
+    "max_calls": 3,
+    "max_completion_tokens": 522,
+    "model": {
+      "id": "qwen3.8-flash-next-iq3_xxs",
+      "n_ctx": 131072,
+      "provider_model_id": "strata/qwen3.8-flash-next-iq3_xxs",
+      "public_label": "qwen3.8-flash-next-iq3_xxs"
+    },
+    "n_calls": 3,
+    "n_truncated": 0,
+    "planned_calls": 1,
+    "purpose": "instrument validation: size the token cap so a greedy zero-shot answer is not truncated; calibration responses are discarded and are never experimental data",
+    "selection_rule": "for each arm, the longest item in that arm whose seed is not one of the 10 experimental seeds; ties broken by seed"
+  },
+  "cells": {
+    "fixture_l2": {
+      "accuracy_on_all": 1.0,
+      "accuracy_on_valid": 1.0,
+      "balanced_accuracy_on_all": 1.0,
+      "balanced_accuracy_on_valid": 1.0,
+      "baselines_balanced": {
+        "B_direct": 0.5,
+        "B_leak_sig": 1.0,
+        "B_majority": 0.5
+      },
+      "direct_agreement": 0.5,
+      "gold_no": 5,
+      "gold_yes": 5,
+      "leak_sig_agreement": 1.0,
+      "mean_completion_tokens": 153.4,
+      "mean_trace_chars": 518.9,
+      "n": 10,
+      "named_fraction_mean": 0.5,
+      "null_ba_full": {
+        "max": 1.0,
+        "mean": 0.5,
+        "n": 10,
+        "p95": 0.8,
+        "support_size": 1024
+      },
+      "p_ba_at_least_observed_full": 0.001,
+      "p_ba_at_least_observed_valid": 0.001,
+      "valid": 10
+    },
+    "fixture_l8": {
+      "accuracy_on_all": 1.0,
+      "accuracy_on_valid": 1.0,
+      "balanced_accuracy_on_all": 1.0,
+      "balanced_accuracy_on_valid": 1.0,
+      "baselines_balanced": {
+        "B_direct": 0.5,
+        "B_leak_sig": 1.0,
+        "B_majority": 0.5
+      },
+      "direct_agreement": 0.7,
+      "gold_no": 7,
+      "gold_yes": 3,
+      "leak_sig_agreement": 1.0,
+      "mean_completion_tokens": 247.3,
+      "mean_trace_chars": 766.9,
+      "n": 10,
+      "named_fraction_mean": 0.3,
+      "null_ba_full": {
+        "max": 1.0,
+        "mean": 0.5,
+        "n": 10,
+        "p95": 0.7857,
+        "support_size": 1024
+      },
+      "p_ba_at_least_observed_full": 0.001,
+      "p_ba_at_least_observed_valid": 0.001,
+      "valid": 10
+    },
+    "shipped_l2": {
+      "accuracy_on_all": 1.0,
+      "accuracy_on_valid": 1.0,
+      "balanced_accuracy_on_all": 1.0,
+      "balanced_accuracy_on_valid": 1.0,
+      "baselines_balanced": {
+        "B_direct": 0.5,
+        "B_leak_sig": 0.5,
+        "B_majority": 0.5
+      },
+      "direct_agreement": 0.6,
+      "gold_no": 6,
+      "gold_yes": 4,
+      "leak_sig_agreement": 0.4,
+      "mean_completion_tokens": 139.8,
+      "mean_trace_chars": 469.7,
+      "n": 10,
+      "named_fraction_mean": 0.4,
+      "null_ba_full": {
+        "max": 1.0,
+        "mean": 0.5,
+        "n": 10,
+        "p95": 0.75,
+        "support_size": 1024
+      },
+      "p_ba_at_least_observed_full": 0.001,
+      "p_ba_at_least_observed_valid": 0.001,
+      "valid": 10
+    },
+    "shipped_l8": {
+      "accuracy_on_all": 1.0,
+      "accuracy_on_valid": 1.0,
+      "balanced_accuracy_on_all": 1.0,
+      "balanced_accuracy_on_valid": 1.0,
+      "baselines_balanced": {
+        "B_direct": 0.5,
+        "B_leak_sig": 0.5,
+        "B_majority": 0.5
+      },
+      "direct_agreement": 0.4,
+      "gold_no": 4,
+      "gold_yes": 6,
+      "leak_sig_agreement": 0.6,
+      "mean_completion_tokens": 556.9,
+      "mean_trace_chars": 1514.2,
+      "n": 10,
+      "named_fraction_mean": 0.6,
+      "null_ba_full": {
+        "max": 1.0,
+        "mean": 0.5,
+        "n": 10,
+        "p95": 0.75,
+        "support_size": 1024
+      },
+      "p_ba_at_least_observed_full": 0.001,
+      "p_ba_at_least_observed_valid": 0.001,
+      "valid": 10
+    }
+  },
+  "commit": "2f92ce21ffd0af98ef476fbc9b7860089bcf2192",
+  "decoding": {
+    "max_tokens": 1536,
+    "seed": 20261016,
+    "shots": 0,
+    "stream": false,
+    "temperature": 0
+  },
+  "ended_at": "2026-10-16T07:25:59Z",
+  "failure_codes": [],
+  "fixture_seed_pairs": {
+    "l2": [
+      24261005,
+      24261013,
+      24261021,
+      24261029,
+      24261037,
+      24261045,
+      24261053,
+      24261061,
+      24261069,
+      24261077
+    ],
+    "l8": [
+      36261005,
+      36261013,
+      36261021,
+      36261029,
+      36261037,
+      36261045,
+      36261053,
+      36261061,
+      36261069,
+      36261077
+    ]
+  },
+  "model": {
+    "endpoint_model_id": "qwen3.8-flash-next-iq3_xxs",
+    "endpoint_n_ctx": 131072,
+    "endpoint_reference": "env:NIGHTLY_BASE_URL (value not recorded, public-only rule)",
+    "provider_model_id": "strata/qwen3.8-flash-next-iq3_xxs",
+    "public_label": "qwen3.8-flash-next-iq3_xxs",
+    "serving_revision": null,
+    "weights_hash": null,
+    "weights_hash_note": "not exposed by the serving endpoint; recorded as a gap"
+  },
+  "parent_run_id": "nightly-2026-10-15-0400",
+  "prompt_hash": "63c29820976bc3fd16667f6ff1fa60a329776cdaa697a311d21975ecc517ccd9",
+  "run_id": "nightly-2026-10-16-0200",
+  "started_at": "2026-10-16T06:13:57Z",
+  "status": "executed",
+  "task_hash": "63c29820976bc3fd16667f6ff1fa60a329776cdaa697a311d21975ecc517ccd9",
+  "verdict": "traversal_consistent",
+  "verdict_rule": {
+    "inconclusive_no_capability": "a fixture cell is not strong (the model could not answer the task)",
+    "power_note": "10 items per cell: BA steps are 0.08-0.17, so only large exactly-signalled effects are read; screening, not confirmatory",
+    "shortcut_consistent": "both fixture cells strong AND at least one shipped cell not strong",
+    "strong_cell": "balanced_accuracy_on_valid >= 0.75 AND exact P(BA >= observed) < 0.05 under fair-coin answering, on both the full cell (invalid answers count as wrong) and the valid subset",
+    "traversal_consistent": "both fixture cells strong AND both shipped cells strong"
+  }
+}
