@@ -5,6 +5,34 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-17
+
+#### Added
+
+- `research/nightly-2026-10-17-0200/ladder_depth_load.py` (nightly round 7, issue #71): an
+  independent structural audit of the shipped ladder corpus. BFS over each item's own fact
+  graph classifies every item as shortcut, exact, longer, or unreachable against the declared
+  depth; measures the reachable closure and facts per item; and builds a level-matched
+  permutation null by re-drawing the query pair from each item's own entity set. 37/37
+  selftest controls pass (planted shortcut, planted negative, cross-relation edge, branching
+  closure, seed determinism, corpus invariants). `depth_load_report.json` pins the sha256 of
+  the five corpus files it measures. Results: 0 derivation shortcuts in 1,500 items (every
+  `yes` item exact at the declared depth, every `no` item unreachable), reachable closure
+  exactly `k+1` at every level, null shortcut band 9-12% for `k >= 2`. No model arm ran this
+  round, so the round is labelled Executed only.
+- `research/AGENTS.md`: DOX child for the nightly round working record (round-directory
+  layout, independence from `generators/`, mandatory `--selftest` negative controls before
+  reporting numbers, sha256-pinned reports, honest Executed/Reproduced/Validated labels,
+  dated corrections instead of silent rewrites). Root Child DOX Index updated.
+
+#### Changed
+
+- `generators/AGENTS.md`: records the ladder depth/load coupling (facts per item equal
+  `C * k` with `C` uniform in `[2, k+2]`, mean `k^2/2 + 2k`, within-level span `2k` to
+  `k(k+2)`, 5x spread at level 8) and the requirement that leak-gate thresholds be calibrated
+  against the level-matched permutation null rather than the fixed 0.55 constant (issue #67
+  criterion 2, issue #71 criterion 4).
+
 ### 2026-10-15
 
 #### Fixed
