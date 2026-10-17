@@ -16,8 +16,9 @@ turnover a depth cliff or a token-budget cliff? (issue #71 acceptance criteria 1
 model-facing half.)
 
 Picked because round 6 measured `k in {1..16}` with the shipped generator, whose fact count
-`E = C * k` grows quadratically in `k`, so depth and prompt load moved together and no
-turnover could appear at all, and because the 2026-10-17 02:00 firing (round 7) spent its
+grows with `k` (measured mean over 200 items per level: 5.0 facts at `k = 2`, 14.1 at `k = 8`,
+26.0 at `k = 16`, about `2.2k + 1.2`), so depth and prompt load moved together and no turnover
+could appear at all, and because the 2026-10-17 02:00 firing (round 7) spent its
 whole window on the CPU-only half of the same question and timed out with no public record of
 its question. Holding `E` fixed and varying `k` alone is the only variant that yields a depth
 axis the study can claim.
@@ -75,7 +76,8 @@ Measured from `gate.json` (40-item pool per cell, 400 permutations, family-wise 
 | X | 24 | 2 | 48 | 2035.0 | 100 | 0.725 | 0.725 | 0.072 | no leak |
 
 Arm L is genuinely constant-load: exactly 24 facts at every depth, prompt length 1109.5 to
-1111.3 characters (0.16 % spread), so `k` varies from 2 to 12 while the prompt does not move.
+1111.5 characters (2.0 character spread, 0.18 %), so `k` varies from 2 to 12 while the prompt
+does not move.
 Issue #71 criterion 2 (depth decoupled from prompt load) is therefore satisfiable in this
 family, and the construction is public in this repository.
 
@@ -118,6 +120,28 @@ Consequences for #71 criterion 4 and for #67:
    the 40-item pool, all above 0.55. The calibrated thresholds are 0.700 to 0.800 at `n = 40`
    and 1.000 at `n = 6`. The fixed threshold is not strict, it is miscalibrated, and it
    produces false leak verdicts on clean items.
+
+Cross-check on the shipped corpus (issue #67). The same battery and the same permutation null,
+run on the first 40 committed items of each shipped level (`items/ladders/l{1,2,4,6,8}.jsonl`,
+no generator re-run, no endpoint):
+
+| level | battery rules | threshold | observed max | p | rules flagged | verdict |
+|-------|---------------|-----------|--------------|---|---------------|---------|
+| l1 | 340 | 0.725 | 1.000 | 0.0025 | 31 | leak |
+| l2 | 340 | 0.800 | 1.000 | 0.0025 | 54 | leak |
+| l4 | 340 | 0.750 | 1.000 | 0.0025 | 46 | leak |
+| l6 | 340 | 0.725 | 1.000 | 0.0025 | 46 | leak |
+| l8 | 340 | 0.725 | 1.000 | 0.0025 | 34 | leak |
+
+An independent implementation flags #67's R1 as `single:tgt_is_fact_target->yes` and its R2 as
+`single:tgt_outdeg_zero->yes`, both at accuracy 1.000 in all five levels, and adds two further
+single-feature predictors at 1.000 that #67 did not name: `single:tgt_indeg_zero->no` and
+`single:tgt_is_fact_source->no`. The leak is not two surface rules but at least 31 to 54 rules
+inside a 340-rule traversal-free battery, so any repair of `generators/ladders.py` should be
+validated against the whole battery rather than against R1 and R2 specifically. In this round's
+own construction the same two features are constant across items (they appear in
+`constant_features` in `gate.json`), which is why they cannot leak here: the
+component-isomorphic construction removes them rather than scoring them out afterwards.
 
 ## Finding 3: `d*` needs a trichotomy, and at 6 items per depth almost nothing is certifiable
 
