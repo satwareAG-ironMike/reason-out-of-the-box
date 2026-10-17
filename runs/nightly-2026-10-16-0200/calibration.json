@@ -1,0 +1,71 @@
+{
+  "calibration": {
+    "any_unparsed": false,
+    "calls": [
+      {
+        "completion_tokens": 149,
+        "finish_reason": "stop",
+        "kind": "synthetic",
+        "latency_s": 4.591,
+        "n_facts": 18,
+        "parse_method": "last_word",
+        "parsed_answer": "no",
+        "reasoning_chars": 501,
+        "record_format": "legacy_flat",
+        "requested_max_tokens": 1536,
+        "seed": 999999,
+        "truncated": false
+      },
+      {
+        "completion_tokens": 310,
+        "content_chars": 2,
+        "finish_reason": "stop",
+        "gold_path_len": null,
+        "kind": "fixture",
+        "latency_s": 6.391,
+        "level": 8,
+        "n_facts": 19,
+        "parse_method": "last_word",
+        "parsed_answer": "no",
+        "prompt_chars": 553,
+        "prompt_sha256": "b795f174967b8068148cdf5256e8d8536400d8d5180d057cff471db8b95aba1d",
+        "reasoning_chars": 973,
+        "requested_max_tokens": 3072,
+        "seed": 36261205,
+        "truncated": false
+      },
+      {
+        "completion_tokens": 522,
+        "content_chars": 2,
+        "finish_reason": "stop",
+        "gold_path_len": null,
+        "kind": "shipped",
+        "latency_s": 11.31,
+        "level": 8,
+        "n_facts": 80,
+        "parse_method": "last_word",
+        "parsed_answer": "no",
+        "prompt_chars": 2096,
+        "prompt_sha256": "a4d89b3bbae425c18421e20320ff9a478706bbee37adea7af3587002b0bdaeb5",
+        "reasoning_chars": 1646,
+        "requested_max_tokens": 3072,
+        "seed": 36261303,
+        "truncated": false
+      }
+    ],
+    "deviation": "2026-10-16: the planned single calibration used a synthetic disjoint-pair item that never exercised traversal cost, so two further calibrations were added on generator-produced k=8 items (one per arm, worst-case chain length). The 40-prompt experimental budget is unchanged by this deviation.",
+    "max_calls": 3,
+    "max_completion_tokens": 522,
+    "model": {
+      "id": "qwen3.8-flash-next-iq3_xxs",
+      "n_ctx": 131072,
+      "provider_model_id": "strata/qwen3.8-flash-next-iq3_xxs",
+      "public_label": "qwen3.8-flash-next-iq3_xxs"
+    },
+    "n_calls": 3,
+    "n_truncated": 0,
+    "planned_calls": 1,
+    "purpose": "instrument validation: size the token cap so a greedy zero-shot answer is not truncated; calibration responses are discarded and are never experimental data",
+    "selection_rule": "for each arm, the longest item in that arm whose seed is not one of the 10 experimental seeds; ties broken by seed"
+  }
+}

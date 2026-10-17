@@ -1,0 +1,69 @@
+{
+  "run_id": "nightly-2026-10-16-0200",
+  "artifact_kind": "sidecar (dated deviation record, written by the round agent after the run)",
+  "purpose": "endpoint usage per invocation: the probe needed three invocations to complete the 40 fixed items, and the manifest only accounts for the last one",
+  "derivation": "counts are line counts of the three invocation logs, which are kept outside the repository (public-only rule: the logs carry local absolute paths) and hash-pinned here per agent-execution section 6",
+  "planned_endpoint_calls": {
+    "experimental": 40,
+    "calibration": 3,
+    "total": 43
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "instrument_commit": "4b4d1a6cca4e010049dcdbbb0374b7e5c9f74dbb",
+      "instrument_sha256": "5eef6794979b5bcfbff250184f2e664d3a25d71b7b8a36fc07e762e58e69efec",
+      "client_timeout_s": 180,
+      "resilience": "none: this revision wrote probe_raw.jsonl only after the whole loop and had no retry path",
+      "items_answered": 21,
+      "failed_attempts": 0,
+      "endpoint_calls": 22,
+      "items_reused": 0,
+      "items_recorded_as_client_error": 0,
+      "outcome": "crashed: uncaught TimeoutError in the client read on the 22nd call (fixture_l8 seed 36261013); the 21 answers already paid for were lost because this revision had not yet written the raw file",
+      "log_sha256": "8ef6882949516e4588f3ac6bc192b83716dc4202d6db4260f00f9815d09203fc",
+      "log_last_write_utc": "2026-10-16T03:10:34Z"
+    },
+    {
+      "attempt": 2,
+      "instrument_commit": "0e5cc6b8a90dc38a2d6afb7e3b7c1b7b84308028",
+      "instrument_sha256": "8022ea111c921e49b45b60b6a6366f229d83e87546300d93bfc4be205ef99594",
+      "client_timeout_s": 300,
+      "resilience": "append-and-fsync per record, one retry per item under a global budget of 8",
+      "items_answered": 7,
+      "failed_attempts": 4,
+      "endpoint_calls": 11,
+      "items_reused": 0,
+      "items_recorded_as_client_error": 0,
+      "outcome": "stopped before the cell finished (no traceback in the log; the process was terminated externally); the 7 answers survived in the raw file and were reused by attempt 3",
+      "log_sha256": "1162f58988c4d618736e673608749db644da8e4e7b963f7c26a7d0525230891f",
+      "log_last_write_utc": "2026-10-16T05:43:12Z"
+    },
+    {
+      "attempt": 3,
+      "instrument_commit": "2f92ce21ffd0af98ef476fbc9b7860089bcf2192",
+      "instrument_sha256": "529fbee59c2ba8a3c5546069dbd0d0f548cb1f98e02c27967291621f8f764f01",
+      "client_timeout_s": 600,
+      "resilience": "as attempt 2, with the client timeout sized from measured call latency",
+      "items_answered": 33,
+      "failed_attempts": 0,
+      "endpoint_calls": 33,
+      "items_reused": 7,
+      "items_recorded_as_client_error": 0,
+      "outcome": "completed: 40/40 items valid, manifest written",
+      "log_sha256": "62206b97559ec2323596028c13fb4a2d7504cb712bae095957a0a842e240ffc9",
+      "log_last_write_utc": "2026-10-16T07:25:59Z"
+    }
+  ],
+  "totals": {
+    "endpoint_calls_all_attempts": 66,
+    "experimental_items_answered": 40,
+    "experimental_prompts": 40,
+    "over_cap_calls": 26,
+    "calibration_calls": 3,
+    "endpoint_calls_total_including_calibration": 69
+  },
+  "resume_guarantee": "the 7 reused records were validated by the resume guard against the prompt this run would send (per-record prompt sha256), so all 40 records carry the same prompt design even though 7 were produced by instrument revision 0e5cc6b",
+  "cause": "the driving agent and the probe target are served by the same inference engine: measured 20-60 s per call on an idle engine and 130-145 s while the driving agent was generating, with abandoned requests continuing to generate server-side and blocking the next call",
+  "corrective_rule": "future rounds start the run detached (setsid nohup with a pidfile) and keep the driving turn minimal until the run finishes, instead of supervising it from a live generation turn"
+}

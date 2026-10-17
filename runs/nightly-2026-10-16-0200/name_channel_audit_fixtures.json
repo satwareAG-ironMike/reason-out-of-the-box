@@ -1,0 +1,380 @@
+{
+  "any_structural_shortcut": [
+    "same_component"
+  ],
+  "any_traversal_free_leak": [],
+  "corpus": "fixtures",
+  "levels": [
+    {
+      "bonferroni_threshold": 0.002381,
+      "features_total": 21,
+      "flagged_traversal_free": [],
+      "gold_yes": 21,
+      "level": 2,
+      "max_structural_accuracy": 1.0,
+      "max_traversal_free_accuracy": 0.5526,
+      "n": 38,
+      "structural": {
+        "same_component": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "hits": 38,
+          "n": 38,
+          "p_value": 0.0,
+          "true_count": 21
+        },
+        "src_component_index_gt_tgt_component_index": {
+          "accuracy": 0.2105,
+          "balanced_accuracy": 0.2353,
+          "hits": 8,
+          "n": 38,
+          "p_value": 0.000472,
+          "true_count": 9
+        },
+        "src_component_index_is_zero": {
+          "accuracy": 0.5789,
+          "balanced_accuracy": 0.591,
+          "hits": 22,
+          "n": 38,
+          "p_value": 0.417692,
+          "true_count": 15
+        },
+        "src_component_index_lt_tgt_component_index": {
+          "accuracy": 0.2368,
+          "balanced_accuracy": 0.2647,
+          "hits": 9,
+          "n": 38,
+          "p_value": 0.001658,
+          "true_count": 8
+        },
+        "tgt_component_index_is_last": {
+          "accuracy": 0.4211,
+          "balanced_accuracy": 0.4594,
+          "hits": 16,
+          "n": 38,
+          "p_value": 0.417692,
+          "true_count": 5
+        }
+      },
+      "structural_reproduces_label": [
+        "same_component"
+      ],
+      "traversal_free": {
+        "src_first_letter_vowel": {
+          "accuracy": 0.4474,
+          "balanced_accuracy": 0.5,
+          "hits": 17,
+          "n": 38,
+          "p_value": 0.627103,
+          "true_count": 0
+        },
+        "src_first_mention_index_lt_tgt_first_mention_index": {
+          "accuracy": 0.4737,
+          "balanced_accuracy": 0.4902,
+          "hits": 18,
+          "n": 38,
+          "p_value": 0.871415,
+          "true_count": 13
+        },
+        "src_is_alphabetically_first": {
+          "accuracy": 0.4211,
+          "balanced_accuracy": 0.4706,
+          "hits": 16,
+          "n": 38,
+          "p_value": 0.417692,
+          "true_count": 1
+        },
+        "src_is_alphabetically_last": {
+          "accuracy": 0.3947,
+          "balanced_accuracy": 0.4356,
+          "hits": 15,
+          "n": 38,
+          "p_value": 0.255875,
+          "true_count": 4
+        },
+        "src_last_letter_eq_tgt_last_letter": {
+          "accuracy": 0.3947,
+          "balanced_accuracy": 0.43,
+          "hits": 15,
+          "n": 38,
+          "p_value": 0.255875,
+          "true_count": 6
+        },
+        "src_name_len_eq_tgt_len": {
+          "accuracy": 0.4474,
+          "balanced_accuracy": 0.472,
+          "hits": 17,
+          "n": 38,
+          "p_value": 0.627103,
+          "true_count": 10
+        },
+        "src_name_len_gt_tgt_len": {
+          "accuracy": 0.4737,
+          "balanced_accuracy": 0.479,
+          "hits": 18,
+          "n": 38,
+          "p_value": 0.871415,
+          "true_count": 17
+        },
+        "src_name_len_is_max": {
+          "accuracy": 0.5263,
+          "balanced_accuracy": 0.5546,
+          "hits": 20,
+          "n": 38,
+          "p_value": 0.871415,
+          "true_count": 9
+        },
+        "src_name_len_is_min": {
+          "accuracy": 0.4211,
+          "balanced_accuracy": 0.4426,
+          "hits": 16,
+          "n": 38,
+          "p_value": 0.417692,
+          "true_count": 11
+        },
+        "src_shares_prefix3_with_a_fact_source": {
+          "accuracy": 0.4737,
+          "balanced_accuracy": 0.5238,
+          "hits": 18,
+          "n": 38,
+          "p_value": 0.871415,
+          "true_count": 1
+        },
+        "src_sorts_before_tgt": {
+          "accuracy": 0.5,
+          "balanced_accuracy": 0.5028,
+          "hits": 19,
+          "n": 38,
+          "p_value": 1.0,
+          "true_count": 18
+        },
+        "tgt_first_letter_vowel": {
+          "accuracy": 0.4474,
+          "balanced_accuracy": 0.5,
+          "hits": 17,
+          "n": 38,
+          "p_value": 0.627103,
+          "true_count": 0
+        },
+        "tgt_is_alphabetically_first": {
+          "accuracy": 0.5526,
+          "balanced_accuracy": 0.5952,
+          "hits": 21,
+          "n": 38,
+          "p_value": 0.627103,
+          "true_count": 4
+        },
+        "tgt_is_alphabetically_last": {
+          "accuracy": 0.5263,
+          "balanced_accuracy": 0.5658,
+          "hits": 20,
+          "n": 38,
+          "p_value": 0.871415,
+          "true_count": 5
+        },
+        "tgt_name_len_is_max": {
+          "accuracy": 0.5526,
+          "balanced_accuracy": 0.584,
+          "hits": 21,
+          "n": 38,
+          "p_value": 0.627103,
+          "true_count": 8
+        },
+        "tgt_name_len_is_min": {
+          "accuracy": 0.4737,
+          "balanced_accuracy": 0.479,
+          "hits": 18,
+          "n": 38,
+          "p_value": 0.871415,
+          "true_count": 17
+        }
+      }
+    },
+    {
+      "bonferroni_threshold": 0.002381,
+      "features_total": 21,
+      "flagged_traversal_free": [],
+      "gold_yes": 16,
+      "level": 8,
+      "max_structural_accuracy": 1.0,
+      "max_traversal_free_accuracy": 0.7105,
+      "n": 38,
+      "structural": {
+        "same_component": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "hits": 38,
+          "n": 38,
+          "p_value": 0.0,
+          "true_count": 16
+        },
+        "src_component_index_gt_tgt_component_index": {
+          "accuracy": 0.5263,
+          "balanced_accuracy": 0.4545,
+          "hits": 20,
+          "n": 38,
+          "p_value": 0.871415,
+          "true_count": 2
+        },
+        "src_component_index_is_zero": {
+          "accuracy": 0.3947,
+          "balanced_accuracy": 0.3835,
+          "hits": 15,
+          "n": 38,
+          "p_value": 0.255875,
+          "true_count": 17
+        },
+        "src_component_index_lt_tgt_component_index": {
+          "accuracy": 0.0526,
+          "balanced_accuracy": 0.0455,
+          "hits": 2,
+          "n": 38,
+          "p_value": 0.0,
+          "true_count": 20
+        },
+        "tgt_component_index_is_last": {
+          "accuracy": 0.4211,
+          "balanced_accuracy": 0.3636,
+          "hits": 16,
+          "n": 38,
+          "p_value": 0.417692,
+          "true_count": 6
+        }
+      },
+      "structural_reproduces_label": [
+        "same_component"
+      ],
+      "traversal_free": {
+        "src_first_letter_vowel": {
+          "accuracy": 0.5789,
+          "balanced_accuracy": 0.5,
+          "hits": 22,
+          "n": 38,
+          "p_value": 0.417692,
+          "true_count": 0
+        },
+        "src_first_mention_index_lt_tgt_first_mention_index": {
+          "accuracy": 0.5,
+          "balanced_accuracy": 0.5,
+          "hits": 19,
+          "n": 38,
+          "p_value": 1.0,
+          "true_count": 19
+        },
+        "src_is_alphabetically_first": {
+          "accuracy": 0.5789,
+          "balanced_accuracy": 0.5085,
+          "hits": 22,
+          "n": 38,
+          "p_value": 0.417692,
+          "true_count": 2
+        },
+        "src_is_alphabetically_last": {
+          "accuracy": 0.6053,
+          "balanced_accuracy": 0.5312,
+          "hits": 23,
+          "n": 38,
+          "p_value": 0.255875,
+          "true_count": 1
+        },
+        "src_last_letter_eq_tgt_last_letter": {
+          "accuracy": 0.6053,
+          "balanced_accuracy": 0.5653,
+          "hits": 23,
+          "n": 38,
+          "p_value": 0.255875,
+          "true_count": 9
+        },
+        "src_name_len_eq_tgt_len": {
+          "accuracy": 0.4211,
+          "balanced_accuracy": 0.3892,
+          "hits": 16,
+          "n": 38,
+          "p_value": 0.417692,
+          "true_count": 12
+        },
+        "src_name_len_gt_tgt_len": {
+          "accuracy": 0.6842,
+          "balanced_accuracy": 0.6506,
+          "hits": 26,
+          "n": 38,
+          "p_value": 0.033552,
+          "true_count": 10
+        },
+        "src_name_len_is_max": {
+          "accuracy": 0.6053,
+          "balanced_accuracy": 0.5483,
+          "hits": 23,
+          "n": 38,
+          "p_value": 0.255875,
+          "true_count": 5
+        },
+        "src_name_len_is_min": {
+          "accuracy": 0.6316,
+          "balanced_accuracy": 0.5795,
+          "hits": 24,
+          "n": 38,
+          "p_value": 0.143307,
+          "true_count": 6
+        },
+        "src_shares_prefix3_with_a_fact_source": {
+          "accuracy": 0.5526,
+          "balanced_accuracy": 0.5028,
+          "hits": 21,
+          "n": 38,
+          "p_value": 0.627103,
+          "true_count": 7
+        },
+        "src_sorts_before_tgt": {
+          "accuracy": 0.4211,
+          "balanced_accuracy": 0.4233,
+          "hits": 16,
+          "n": 38,
+          "p_value": 0.417692,
+          "true_count": 20
+        },
+        "tgt_first_letter_vowel": {
+          "accuracy": 0.5789,
+          "balanced_accuracy": 0.5,
+          "hits": 22,
+          "n": 38,
+          "p_value": 0.417692,
+          "true_count": 0
+        },
+        "tgt_is_alphabetically_first": {
+          "accuracy": 0.6053,
+          "balanced_accuracy": 0.5398,
+          "hits": 23,
+          "n": 38,
+          "p_value": 0.255875,
+          "true_count": 3
+        },
+        "tgt_is_alphabetically_last": {
+          "accuracy": 0.5526,
+          "balanced_accuracy": 0.4773,
+          "hits": 21,
+          "n": 38,
+          "p_value": 0.627103,
+          "true_count": 1
+        },
+        "tgt_name_len_is_max": {
+          "accuracy": 0.4474,
+          "balanced_accuracy": 0.3949,
+          "hits": 17,
+          "n": 38,
+          "p_value": 0.627103,
+          "true_count": 7
+        },
+        "tgt_name_len_is_min": {
+          "accuracy": 0.7105,
+          "balanced_accuracy": 0.6562,
+          "hits": 27,
+          "n": 38,
+          "p_value": 0.013853,
+          "true_count": 5
+        }
+      }
+    }
+  ],
+  "reading": "no traversal-free feature clears the corrected threshold at any level"
+}

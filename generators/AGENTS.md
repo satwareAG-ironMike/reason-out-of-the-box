@@ -44,6 +44,13 @@ land one PR at a time (Baby Steps).
   the smallest rule accuracy that could have flipped the gate, so every `no_leak`
   verdict ships with its detection power. `--audit-generated --count N --seed-base S`
   is the fresh-seed replication path; `--json` writes the full report to stdout.
+  `no_leak` is a statement about the tested class only, and the class is known to be
+  incomplete: the undirected component-membership feature (query source and query
+  target in the same connected component of the fact graph, ignoring edge direction)
+  reproduces the gold label at accuracy 1.0000 on all 300 shipped items at every
+  ladder level, and the 18-feature class contains no relational feature. Widening the
+  class to relational features is open work, tracked on issue #67; until then the
+  shipped corpus is clean under the tested class and leaky under connectivity.
 - Fixtures `generators/fixtures/`: the pinned pre-fix issue #67 items (every 8th
   line of the l2/l8 files at 49ee823) committed as the negative control for the gate
   and the probe. `--audit-fixtures` asserts the gate FIRES on them: exit 0 means
@@ -74,6 +81,16 @@ land one PR at a time (Baby Steps).
   against the prompt this run would send before rewriting the raw file. The manifest
   reports `endpoint_attempts`, `retries_used`, `retry_budget`,
   `items_reused_from_prior_attempt` and `items_recorded_as_client_error`.
+  The instrument ran once (`runs/nightly-2026-10-16-0200`, verdict
+  `traversal_consistent`, all 4 cells strong) and is frozen for that run: do not edit it
+  against that run's artifacts. Two known defects are recorded rather than fixed in place:
+  the per-cell `leak_sig_agreement` and `direct_agreement` fields hold baseline-vs-gold
+  accuracy, not model-vs-baseline agreement (model-vs-baseline is computed by
+  `runs/nightly-2026-10-16-0200/analyze_run.py`), and the fixture arm is degenerate because
+  its leak signature equals the gold label on every item, so it is a capability control and
+  not a shortcut discriminator. The verdict means "not explained by the tested shortcut
+  signatures": it does not separate directed traversal from undirected component clustering,
+  because component membership reproduces the gold label at 1.0000 on the shipped corpus.
 - Solvability is generation-time policy: for every component, exactly one rule of
   the pool must reproduce both demonstration rows jointly; non-identifiable
   samples are rejected. The selftest re-derives uniqueness from the emitted item.

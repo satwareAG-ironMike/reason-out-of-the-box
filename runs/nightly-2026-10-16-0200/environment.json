@@ -1,0 +1,77 @@
+{
+  "artifact_kind": "sidecar (dated deviation: the instrument does not emit an environment block)",
+  "audit_artifact_commands": [
+    "python3 generators/audit_ladder_leaks.py --audit-shipped --json > runs/nightly-2026-10-16-0200/audit_shipped.json",
+    "python3 generators/audit_ladder_leaks.py --audit-fixtures --json > runs/nightly-2026-10-16-0200/audit_fixtures.json",
+    "python3 generators/audit_ladder_leaks.py --audit-generated --count 120 --seed-base 20261016 --json > runs/nightly-2026-10-16-0200/audit_generated.json"
+  ],
+  "declared": "2026-10-16, written by the round agent after the run; the manifest itself is untouched",
+  "deviation": "client timeout was raised 180 s -> 300 s -> 600 s across the three invocations (infra parameter, not part of the pre-registered decoding design); the decoding block in the manifest is unchanged by it",
+  "endpoint": {
+    "model": {
+      "endpoint_model_id": "qwen3.8-flash-next-iq3_xxs",
+      "endpoint_n_ctx": 131072,
+      "endpoint_reference": "env:NIGHTLY_BASE_URL (value not recorded, public-only rule)",
+      "provider_model_id": "strata/qwen3.8-flash-next-iq3_xxs",
+      "public_label": "qwen3.8-flash-next-iq3_xxs",
+      "serving_revision": null,
+      "weights_hash": null,
+      "weights_hash_note": "not exposed by the serving endpoint; recorded as a gap"
+    },
+    "reasoning_channel": "the endpoint returns a separate reasoning_content field alongside content; the probe records its length, not its text",
+    "thinking_toggle_note": "chat_template_kwargs thinking=false is accepted by the endpoint but ignored; the probe therefore sends no such flag and treats the reasoning channel as an observed property of the serving stack, not a controlled variable",
+    "transport": "OpenAI-compatible /v1/chat/completions over HTTP on a self-hosted endpoint; base URL read from NIGHTLY_BASE_URL and never recorded"
+  },
+  "instrument_commit": "2f92ce21ffd0af98ef476fbc9b7860089bcf2192",
+  "measured_call_latency_s": {
+    "contended_engine": [
+      130,
+      145
+    ],
+    "idle_engine": [
+      20,
+      60
+    ],
+    "observed_max_in_run": 345.1
+  },
+  "os": {
+    "arch": "x86_64",
+    "name": "Linux",
+    "note": "host name, device name, and endpoint URL withheld per the public-only rule"
+  },
+  "purpose": "pins the code, corpus, and interpreter the run executed against, per agent-execution section 8 (pinned environment, before/after hashes)",
+  "python": {
+    "implementation": "CPython",
+    "version": "3.14.8"
+  },
+  "run_id": "nightly-2026-10-16-0200",
+  "sha256": {
+    "audit_artifacts": {
+      "audit_fixtures.json": "e860bdbbf2b6c800ae8cfaf1c577a97eb3feb4b0426fd08c0f3eaa9292c552cd",
+      "audit_generated.json": "ecf9d9b0e7a03700d5d5f6091fa9e862ea20c869c527df85747d67a616b2e8ac",
+      "audit_shipped.json": "609481483a3b8f08c4759cc6ef98f95126c688483d1ce647f0ca84a5f3a2db9f"
+    },
+    "corpora": {
+      "items/ladders/l2.jsonl": "0bf2e99d311fceaff02d2186305b5ad0e0ed77b066a67df56b57b849ede16db4",
+      "items/ladders/l8.jsonl": "8b4e36e96651c077e49cd76d5158a54af112610fb5c8f12e51f3357cc9948dd6"
+    },
+    "fixtures": {
+      "generators/fixtures/issue67_prefix.manifest.json": "a1b2e2df1335e49a0ceef7d4415b754795da3815f924d27f6f2e80ad08044be5",
+      "generators/fixtures/issue67_prefix_l2.jsonl": "1917b2735e82cee4e08a1d064ddd3679b689b6895c1f77ef2c907c0963cd8488",
+      "generators/fixtures/issue67_prefix_l8.jsonl": "d1df8a93e9394752601fd6a51d8fb5b77075bb1e1976c21581ec104ceb560272"
+    },
+    "instruments": {
+      "generators/audit_ladder_leaks.py": "aa3972e635f843288a14f0e425d313c0633f21742ff5e4e06dfc27cd69f9f0eb",
+      "generators/ladders.py": "b0d77efd308d249fea77e5fd97e9bef7f5e0fd737b214c2d754cddf970a7f77b",
+      "generators/probe_ladder_shortcut.py": "529fbee59c2ba8a3c5546069dbd0d0f548cb1f98e02c27967291621f8f764f01"
+    },
+    "run_artifacts": {
+      "attempts.json": "bc42d82489461b2a90fe7ef0bd9cc1f9da599ddf2c94aa1c46148a20c42c34d6",
+      "calibration.json": "2cfb66156665576298fa70d47772031eb59494c36758b0b4f9b8bdbba039840c",
+      "probe_manifest.json": "f102ec295d10ed93c9a2b4054395b214781e8702ba8142c1a0a4eb19a88a3c4c",
+      "probe_raw.jsonl": "a836abc1dd8a8f438b133a9f1eb4db050370b660ce785a54c244f12ac06d7b34"
+    }
+  },
+  "tree_clean_at_run": true,
+  "tree_clean_note": "git status showed only the untracked runs/ directory; every file the run read was the committed blob at instrument_commit"
+}

@@ -34,6 +34,28 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   validation, never as experimental data.
 - `runs/` as the record directory for executed runs, with `runs/AGENTS.md` owning the
   manifest/raw/report contract and the Executed / Reproduced / Validated labels.
+- `runs/nightly-2026-10-16-0200/`: the executed matched-pair ladder probe (issue #67) -
+  immutable `probe_manifest.json`, 40 raw records in `probe_raw.jsonl` (sha256
+  `a836abc1…d7b34`), `calibration.json` (3 calls), the `attempts.json` and
+  `environment.json` sidecars, pinned copies of the gate reports (`audit_shipped.json`,
+  `audit_fixtures.json`, `audit_generated.json`), `analyze_run.py` (regenerates every
+  report number from the archived artifacts, 13 seeded-defect controls, `--check` mode),
+  `name_channel_audit.py` (21-feature surface battery: 16 traversal-free name/position
+  features plus 5 structural connectivity features, exact two-sided binomial, Bonferroni
+  correction at 0.05/21, 5 controls) with its pinned outputs
+  `name_channel_audit_shipped.json` and `name_channel_audit_fixtures.json`,
+  `verify_independent.md`, and `report.md`. Result: 66 endpoint calls for the 40-prompt
+  design (26 over cap, caused by two client timeouts and one crash, accounted per attempt),
+  40/40 valid, all 4 cells strong at balanced accuracy 1.0000, exact answering-null
+  P(BA >= 1.0) = 1/1024 and label-permutation-null P(BA >= 1.0) = 1/252, 1/210, 1/120,
+  verdict `traversal_consistent`. Battery result: no traversal-free feature clears the
+  corrected threshold on either corpus (best 0.5700 at shipped l2, p 0.017779 against a
+  threshold of 0.002381), while `same_component` reproduces the gold label at 1.0000 on all
+  300 shipped items per level and on all 38 fixture items per level.
+- `runs/AGENTS.md` now allows run-directory sidecars explicitly: an analysis script, a
+  battery established after the run, pinned copies of cited gate reports, and an attempts
+  record. A sidecar never edits the manifest or the raw records, and a sidecar that
+  supersedes an ad-hoc number makes the earlier number uncitable.
 
 #### Changed
 
@@ -48,6 +70,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   from the gate: at k=1 `direct_fact` is the task itself.
 - `docs/counterarguments.md` C5: ladder depth evidence starts at k=2, level 1 is a
   lookup control and carries no depth evidence.
+- `generators/AGENTS.md`: `no_leak` is stated as a claim about the tested hypothesis class
+  only, and the class is recorded as incomplete. The 2026-10-15 claim that component
+  membership "requires the intended k-hop traversal" is corrected: the undirected
+  component-membership feature (query source and query target in the same connected
+  component of the fact graph, ignoring edge direction) reproduces the gold label at
+  accuracy 1.0000 on all 300 shipped items at every ladder level and on the fixtures, so a
+  model can cluster the fact graph and answer every ladder correctly without following any
+  edge in order. The shipped corpus is clean under the 18-feature class and leaky under
+  connectivity; widening the class to relational features is open work on issue #67. Under a
+  connectivity strategy k is not a difficulty ladder, because connectivity accuracy is 1.0
+  at k=2, 4, 6 and 8.
 
 #### Fixed
 
@@ -65,6 +98,29 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   answered item nor reuses a failed one. The manifest now reports `endpoint_attempts`,
   `retries_used`, `retry_budget`, `items_reused_from_prior_attempt` and
   `items_recorded_as_client_error`, so endpoint load stays auditable against the budget.
+
+#### Literature (provenance verified, no archive entry added)
+
+- The shortcut-learning precedent for the ladder finding is Geirhos, Jacobsen, Michaelis,
+  Zemel, Brendel, Bethge & Wichmann 2020, "Shortcut learning in deep neural networks",
+  Nature Machine Intelligence 2, 665-673, Crossref DOI `10.1038/s42256-020-00257-z`
+  (peer-reviewed). The archive has no entry for it.
+- The multi-hop predecessors the ladder family should be read against are CLUTRR (Sinha,
+  Sodhani, Dong, Pineau & Hamilton, "CLUTRR: A Diagnostic Benchmark for Inductive Reasoning
+  from Text", EMNLP-IJCNLP 2019, 4505-4514, Crossref DOI `10.18653/v1/d19-1458`,
+  arXiv:1908.06177) and ProofWriter (Tafjord, Dalvi & Clark, "ProofWriter: Generating
+  Implications, Proofs, and Abductive Statements over Natural Language", Findings of ACL
+  2021, 3621-3634, Crossref DOI `10.18653/v1/2021.findings-acl.317`, arXiv:2012.13048).
+  Neither is in `archive/INDEX.md`, and no repo file cites either.
+- All three records were verified against the Crossref API on 2026-10-16 (title, authors,
+  venue, pages, year). No archive entry was created because the arXiv export API timed out
+  on every attempt this round, so the full-text check the archive contract requires for
+  quoted entries could not be run; the entries are owed in a follow-up round, with the
+  identifiers recorded here.
+- The gap this round looked for is open in the literature: no published study runs the same
+  model over a corpus where the same relational shortcut is present in one arm and absent in
+  the other with seeds, entity names and chain lengths held fixed. That is the matched-pair
+  design the shipped corpus now provides, which is the round's main research opening.
 
 ### 2026-10-15
 
