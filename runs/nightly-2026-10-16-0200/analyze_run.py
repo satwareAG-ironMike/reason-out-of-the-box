@@ -23,6 +23,8 @@ from __future__ import annotations
 import hashlib
 import itertools
 import json
+import re
+import statistics
 import sys
 from collections import Counter
 from math import comb
@@ -668,6 +670,33 @@ def analyze():
                           f"facts_same {counts['facts_same']}, entity_names_same {counts['entity_names_same']}")
         if counts["query_same"] > 1:
             note_mismatch(f"pairing l{lv}.query_same", "<= 1", counts["query_same"])
+
+    # Transport latency, quoted only from the archived records. probe_raw.jsonl and
+    # calibration.json are hash-pinned above, so editing a latency value fails the
+    # artifact confrontation (asserted by control 3 and control 5). The records carry
+    # latency_s but no absolute timestamp, so this block states no contention claim.
+    lat = [r["latency_s"] for r in recs]
+    tok = [r["completion_tokens"] or 0 for r in recs]
+    mean_lat, mean_tok = sum(lat) / len(lat), sum(tok) / len(tok)
+    cov = sum((a - mean_lat) * (b - mean_tok) for a, b in zip(lat, tok))
+    scale = (sum((a - mean_lat) ** 2 for a in lat) ** 0.5) * (sum((b - mean_tok) ** 2 for b in tok) ** 0.5)
+    cal = json.loads((RUN_DIR / "calibration.json").read_text(encoding="utf-8"))["calibration"]
+    out["latency"] = {
+        "n_records": len(recs),
+        "min_s": min(lat),
+        "mean_s": mean_lat,
+        "median_s": statistics.median(lat),
+        "p90_s": quantile(lat, 0.90),
+        "max_s": max(lat),
+        "records_over_120s": sum(1 for x in lat if x > 120.0),
+        "pearson_latency_vs_completion_tokens": (cov / scale) if scale else None,
+        "median_s_by_arm": {arm: statistics.median([r["latency_s"] for r in recs if r["arm"] == arm])
+                            for arm in sorted({r["arm"] for r in recs})},
+        "calibration_calls": cal["n_calls"],
+        "calibration_latency_s": sorted(c["latency_s"] for c in cal["calls"]),
+        "per_record_absolute_timestamp_present": any(
+            k in r for r in recs for k in ("finished_at", "timestamp", "ts_utc")),
+    }
     return out
 
 
@@ -741,6 +770,27 @@ def selftest() -> int:
     clean = analyze()
     check(not clean["mismatches"], f"control 5: clean artifacts must confront exactly, got {clean['mismatches']}")
     check(clean["verdict_recomputed"] == man["verdict"], "control 5: verdict must recompute identically")
+    # the transport numbers the report quotes must be the archived ones, and the archive
+    # must stay silent about why they are slow
+    lat = clean["latency"]
+    check(lat["n_records"] == 40, "control 5: the latency block must cover all 40 archived records")
+    check(abs(lat["min_s"] - 21.587) < 1e-6 and abs(lat["max_s"] - 345.144) < 1e-6,
+          "control 5: the latency extremes the report cites must be the archived ones")
+    check(abs(lat["mean_s"] - 121.8645) < 1e-3, "control 5: the report's mean latency must be the archived mean")
+    check(lat["min_s"] <= lat["median_s"] <= lat["max_s"],
+          "control 5: the median latency must lie inside the archived range")
+    check(lat["per_record_absolute_timestamp_present"] is False,
+          "control 5: the archive holds no absolute timestamp, so no contention claim is regenerable")
+    check(lat["calibration_calls"] == 3 and len(lat["calibration_latency_s"]) == 3,
+          "control 5: the calibration latencies the report cites must come from the pinned sidecar")
+    # the control-group count the report cites must equal the numbered groups in this file,
+    # so the cited number cannot drift when a control is added or removed (register item D11)
+    cited_groups = 14
+    numbered = sorted({int(n) for n in re.findall(r"# control (\d+):",
+                                                  Path(__file__).read_text(encoding="utf-8"))})
+    check(numbered == list(range(1, cited_groups + 1)),
+          f"control 5: the file must hold exactly the {cited_groups} numbered control groups "
+          f"the report cites, found {numbered}")
 
     # control 6: the fixture arm must be reported as non-discriminating
     for lv in LEVELS:
@@ -929,7 +979,7 @@ def selftest() -> int:
         for f in failures:
             print(f"FAIL {f}")
         return 3
-    print(f"selftest ok: 14 control groups, {len(clean['mismatches'])} mismatches on clean artifacts")
+    print(f"selftest ok: {len(numbered)} control groups, {len(clean['mismatches'])} mismatches on clean artifacts")
     return 0
 
 

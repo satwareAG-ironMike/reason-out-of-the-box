@@ -85,9 +85,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   accuracy 1.0000 on all 300 shipped items at every ladder level and on the fixtures, so a
   model can cluster the fact graph and answer every ladder correctly without following any
   edge in order. The shipped corpus is clean under the 18-feature class and leaky under
-  connectivity; widening the class to relational features is open work on issue #67. Under a
-  connectivity strategy k is not a difficulty ladder, because connectivity accuracy is 1.0
-  at k=2, 4, 6 and 8.
+  connectivity; widening the class to relational features is open work on issue #77 (split
+  from #67, which keeps the generator repair and the fixtures). Under a connectivity strategy
+  k is not a difficulty ladder, because connectivity accuracy is 1.0 at k=2, 4, 6 and 8.
 
 #### Fixed
 
@@ -96,7 +96,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   written at the end all 21 answers already paid for were lost. The instrument now appends
   and fsyncs each record as it is produced, retries a stalled item once under a global
   retry budget (`MAX_RETRIES_TOTAL = 8`, `RETRY_BACKOFF_S = 20`, client timeout 180s ->
-  600s, sized from the measured 20-60s idle / 130-145s contended call latency), records a still-failed item as `finish_reason="client_error"` and invalid instead
+  600s, sized from the call latency archived in `probe_raw.jsonl`: min 21.6s, median
+  125.2s, p90 206.0s, max 345.1s over the 40 records, 22 of them above 120s; the raw
+  records carry `latency_s` but no absolute timestamp, so an idle-versus-contended split is
+  an operator observation and not a regenerable claim, and issue #73 asks for a per-record
+  `finished_at`), records a still-failed item as `finish_reason="client_error"` and invalid instead
   of killing the run, and adds `--resume`, which reuses answered items and re-asks failed
   ones. Resume refuses up front (before the raw file is rewritten) if a stored record does
   not match the prompt this run would send, so a stale raw file cannot be folded into a new
@@ -124,15 +128,37 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `analyze_run.py` gained the pairing block, the full-corpus entailment block that scores both
   conjuncts separately, and control 14, which plants a fixture item whose facts and query are
   copied from its shipped partner and asserts that both the pairing and the entailment
-  confrontations fire. Register item D11 (report says 13 controls, script implements 14) is
-  declined as a false positive in `report.md` section 8.3: the 14th control was added in
-  response to D8, after the register was filed.
+  confrontations fire. Register item D11 is declined as filed in `report.md` section 8.3: it
+  claims the report states 12 control groups while the selftest prints 13, but the report said 13
+  and the script implemented and printed 13 at the commit the register was filed against, so the
+  two agreed. The mismatch of that kind was introduced later, when control 14 was added in response
+  to D1 and D2 without updating the report line; the report now states 14, and the printed count is
+  derived from the script's own numbered group headers and asserted against the cited number, so it
+  cannot drift again.
 - `generators/AGENTS.md` seed policy: the documented `seed_hash` form did not match the
   ladders implementation. `digit_matrices.py` implements `sha256("<family>|<level>|<seed>")
   [:16]`, which is the documented form; `ladders.py` implements
   `sha256("<family>|<task_type>|<level>|<seed>")[:16]`, which also carries the task type.
   Both forms are now recorded, and the ladder form was verified against 300 of 300 items at
   each of the five ladder levels.
+- Round-5 follow-ups filed as their own issues. #77: widen the audited hypothesis class to
+  relational features (`same_component`, `directed_path_exists`, component count and size
+  classes, path-length classes), assert that the widened gate fires on the current shipped
+  corpus the way `--audit-fixtures` asserts the surface gate, repair the generator or restate
+  the task so the label partition is not the component partition, and add a TRAP-style corpus
+  arm (ProofWriter TRAP, arXiv 2012.13048, as used by CLUTRR, arXiv 1908.06177). #78: rename
+  the probe's `leak_sig_agreement` and `direct_agreement` fields to what they measure, add
+  real model-versus-baseline agreement fields, and build a true one-item-two-queries matched
+  pair, blocked on #77 because a traversal-only query on the current corpus is answerable by
+  clustering. The round-5 evidence is recorded as comments on #67, #71 and #73.
+- `analyze_run.py` gained a latency block over the 40 archived records (min, mean, median,
+  p90, max, count above 120 s, per-arm medians, correlation with `completion_tokens`, the
+  calibration latencies from the pinned sidecar, and an assertion that the raw records carry
+  no absolute timestamp), so the transport numbers in `report.md` section 3 are regenerated
+  rather than quoted from operator notes. The report's claim that the calibration calls ran
+  while the engine was uncontended is downgraded to an inference, and the idle-versus-contended
+  latency bands earlier in this entry are replaced by the archived distribution (min 21.587 s,
+  median 125.1585 s, p90 206.005 s, max 345.144 s).
 
 #### Literature (provenance verified, no archive entry added)
 

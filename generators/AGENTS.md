@@ -49,7 +49,8 @@ land one PR at a time (Baby Steps).
   target in the same connected component of the fact graph, ignoring edge direction)
   reproduces the gold label at accuracy 1.0000 on all 300 shipped items at every
   ladder level, and the 18-feature class contains no relational feature. Widening the
-  class to relational features is open work, tracked on issue #67; until then the
+  class to relational features is open work, tracked on issue #77 (split from #67,
+  which keeps the generator repair and the pinned fixtures); until then the
   shipped corpus is clean under the tested class and leaky under connectivity.
 - Fixtures `generators/fixtures/`: the pinned pre-fix issue #67 items (every 8th
   line of the l2/l8 files at 49ee823) committed as the negative control for the gate
@@ -60,8 +61,10 @@ land one PR at a time (Baby Steps).
   `issue67_prefix.manifest.json`.
 - Model-side probe `probe_ladder_shortcut.py` (issue #67): matched-pair shortcut
   probe. 4 cells x 10 items = 40 experimental prompts, fixed budget: pre-fix l2,
-  post-fix l2, pre-fix l8, post-fix l8, paired by seed (the instrument asserts seed
-  identity, so the two arms of a level differ only in construction). Zero-shot,
+  post-fix l2, pre-fix l8, post-fix l8, paired by seed only (the instrument asserts seed
+  identity; the round-5 confrontation shows that a seed-paired pair shares neither the fact
+  chain nor the entity names, so the two arms differ in content as well as construction and
+  this is not a matched pair: issue #78). Zero-shot,
   temperature 0, one fixed neutral template, one decoding seed, no traversal or
   chain-of-thought instruction; the item `rule` field is withheld from the prompt
   because study-design forbids task-specific prompt tokens. Primary metric is
@@ -83,8 +86,9 @@ land one PR at a time (Baby Steps).
   `items_reused_from_prior_attempt` and `items_recorded_as_client_error`.
   The instrument ran once (`runs/nightly-2026-10-16-0200`, verdict
   `traversal_consistent`, all 4 cells strong) and is frozen for that run: do not edit it
-  against that run's artifacts. Two known defects are recorded rather than fixed in place:
-  the per-cell `leak_sig_agreement` and `direct_agreement` fields hold baseline-vs-gold
+  against that run's artifacts. Two further defects are recorded rather than fixed in place
+  (issue #78, together with the seed-only pairing above): the per-cell `leak_sig_agreement` and
+  `direct_agreement` fields hold baseline-vs-gold
   accuracy, not model-vs-baseline agreement (model-vs-baseline is computed by
   `runs/nightly-2026-10-16-0200/analyze_run.py`), and the fixture arm is degenerate because
   its leak signature equals the gold label on every item, so it is a capability control and
