@@ -21,7 +21,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   lost the ability to detect a documented leak.
 - `generators/probe_ladder_shortcut.py` (issue #67): matched-pair shortcut probe. 4
   cells x 10 items = 40 experimental prompts (pre-fix l2, post-fix l2, pre-fix l8,
-  post-fix l8), paired by seed so the two arms of a level differ only in construction.
+  post-fix l8). The design intent was a matched pair, the same item under a
+  shortcut-friendly and a traversal-only query; what the shipped generator provides is
+  pairing by seed only (see the 2026-10-17 entry under Fixed), so the two arms of a level
+  share a seed and not the item.
   Zero-shot, temperature 0, one fixed neutral template, one decoding seed, no traversal
   or chain-of-thought instruction, the item `rule` field withheld from the prompt.
   Primary metric is balanced accuracy against three a-priori baselines fixed in advance
@@ -39,12 +42,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `a836abc1…d7b34`), `calibration.json` (3 calls), the `attempts.json` and
   `environment.json` sidecars, pinned copies of the gate reports (`audit_shipped.json`,
   `audit_fixtures.json`, `audit_generated.json`), `analyze_run.py` (regenerates every
-  report number from the archived artifacts, 13 seeded-defect controls, `--check` mode),
+  report number from the archived artifacts, 14 seeded-defect controls, `--check` mode),
   `name_channel_audit.py` (21-feature surface battery: 16 traversal-free name/position
   features plus 5 structural connectivity features, exact two-sided binomial, Bonferroni
   correction at 0.05/21, 5 controls) with its pinned outputs
   `name_channel_audit_shipped.json` and `name_channel_audit_fixtures.json`,
-  `verify_independent.md`, and `report.md`. Result: 66 endpoint calls for the 40-prompt
+  `verify_independent.md`, `verify_report_v2.md` (a second independent verification, run
+  against the report after the first corrections, carrying an 84-field manifest
+  confrontation, a 40-record confrontation, a 16-feature surface audit built without
+  importing any project script, a seeded-defect recall probe, and a discrepancy register
+  D1-D12), and `report.md`. Result: 66 endpoint calls for the 40-prompt
   design (26 over cap, caused by two client timeouts and one crash, accounted per attempt),
   40/40 valid, all 4 cells strong at balanced accuracy 1.0000, exact answering-null
   P(BA >= 1.0) = 1/1024 and label-permutation-null P(BA >= 1.0) = 1/252, 1/210, 1/120,
@@ -99,6 +106,34 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `retries_used`, `retry_budget`, `items_reused_from_prior_attempt` and
   `items_recorded_as_client_error`, so endpoint load stays auditable against the budget.
 
+- Report claims corrected on 2026-10-17 after the second independent verification
+  (`runs/nightly-2026-10-16-0200/verify_report_v2.md`). The matched-pair claim is downgraded
+  to what the artifacts support: the arms are paired by **seed only**. Each probed fixture
+  item was confronted with the shipped item of the same seed, and at l2 the pairs share
+  neither the fact chain (0 of 10) nor the entity names (0 of 10) nor the queried pair
+  (0 of 10); at l8 they share the queried pair in 1 of 10 pairs. The fixture arm's leak is
+  the target-role signature, not a single-fact entailment: the queried pair is never a
+  stated fact in either arm (0 items at every level of both corpora), while each conjunct of
+  the pre-fix signature alone reproduces the label on all 38 fixture items at both levels and
+  is constant true on the repaired corpus. The restatement measure is described as what it
+  computes (a verbatim-restatement character bound, `len(source) + len(target) +
+  len(relation) + 4` per fact), not as "one mention per fact, longest name first".
+  `process.named_fraction` is stated with its semantics (a gold-no item counts as 0, so the
+  cell mean equals the gold-yes share over 10; the mean over gold-yes items is 1.0000). The
+  endpoint accounting is closed as 61 answered + 4 failed attempts + 1 call in flight.
+  `analyze_run.py` gained the pairing block, the full-corpus entailment block that scores both
+  conjuncts separately, and control 14, which plants a fixture item whose facts and query are
+  copied from its shipped partner and asserts that both the pairing and the entailment
+  confrontations fire. Register item D11 (report says 13 controls, script implements 14) is
+  declined as a false positive in `report.md` section 8.3: the 14th control was added in
+  response to D8, after the register was filed.
+- `generators/AGENTS.md` seed policy: the documented `seed_hash` form did not match the
+  ladders implementation. `digit_matrices.py` implements `sha256("<family>|<level>|<seed>")
+  [:16]`, which is the documented form; `ladders.py` implements
+  `sha256("<family>|<task_type>|<level>|<seed>")[:16]`, which also carries the task type.
+  Both forms are now recorded, and the ladder form was verified against 300 of 300 items at
+  each of the five ladder levels.
+
 #### Literature (provenance verified, no archive entry added)
 
 - The shortcut-learning precedent for the ladder finding is Geirhos, Jacobsen, Michaelis,
@@ -119,8 +154,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   identifiers recorded here.
 - The gap this round looked for is open in the literature: no published study runs the same
   model over a corpus where the same relational shortcut is present in one arm and absent in
-  the other with seeds, entity names and chain lengths held fixed. That is the matched-pair
-  design the shipped corpus now provides, which is the round's main research opening.
+  the other, with the item content held fixed. The shipped corpus does **not** close that gap
+  by itself: the two arms are paired by seed only, so entity names and fact chains differ
+  (see the Fixed entry above). Building a corpus that holds the item fixed and varies only the
+  query, and gating it with a widened class that includes relational features, is the round's
+  main research opening and is open work on issue #67.
 
 ### 2026-10-15
 

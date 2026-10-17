@@ -527,20 +527,71 @@ def analyze():
                 note_mismatch(f"{key}.structural_reproduces_label", ["same_component"],
                               lv["structural_reproduces_label"])
 
-    # 8. traversal entailment: on the repaired corpus the audited shortcut class
-    # is at chance, so a correct answer requires identifying path membership
+    # 8. entailment structure of both arms, over the whole corpora and not only the 10
+    # probed items. This is what pins down which shortcut the fixture arm actually carries:
+    # the queried pair is never a stated fact anywhere in either arm, so the fixture leak is
+    # the target-role signature (query target is a fact target and has out-degree zero),
+    # which reproduces the label exactly on the pre-fix items and is constant on the repaired
+    # ones. On the repaired corpus the audited shortcut class is at chance, so a correct
+    # answer requires identifying path membership.
     out["entailment"] = {}
-    for lv in LEVELS:
-        items = load_items("shipped", lv)
-        base = baselines(items)
-        golds = [it["answer"] for it in items]
-        sig_acc = sum(1 for q, g in zip(base["B_leak_sig"], golds) if q == g) / len(golds)
-        out["entailment"][f"l{lv}"] = {
-            "leak_signature_accuracy_full_corpus": sig_acc,
-            "model_balanced_accuracy_probe": out["cells"][f"shipped_l{lv}"]["balanced_accuracy_on_all"],
-            "read": ("the pre-fix shortcut signature sits at chance on the repaired corpus, "
-                     "so the model's answers there are not produced by that signature"),
-        }
+    for kind in ("shipped", "fixture"):
+        for lv in CORPUS_LEVELS_FOR_CONNECTIVITY[kind]:
+            items = load_items(kind, lv)
+            base = baselines(items)
+            golds = [it["answer"] for it in items]
+            direct_hits = sum(1 for it in items
+                              if any(s == it["query"][0] and t == it["query"][2]
+                                     for s, _, t in it["facts"]))
+            sig_acc = sum(1 for q, g in zip(base["B_leak_sig"], golds) if q == g) / len(golds)
+            # the two conjuncts of the pre-fix signature, scored separately: on the pre-fix
+            # items each one alone reproduces the label, on the repaired items each one is
+            # constant true, which is why the conjunction is constant there too.
+            conjuncts = {}
+            for cname, pred in (("query_target_is_a_fact_target",
+                                 [any(t == it["query"][2] for _, _, t in it["facts"])
+                                  for it in items]),
+                                ("query_target_has_no_outgoing_fact",
+                                 [not adjacency(it["facts"]).get(it["query"][2]) for it in items])):
+                conjuncts[cname] = {
+                    "fraction_true": sum(1 for p in pred if p) / len(pred),
+                    "accuracy_full_corpus": sum(1 for p, g in zip(pred, golds)
+                                                if (p and g == "yes") or (not p and g == "no"))
+                                         / len(golds),
+                }
+            row = {
+                "n": len(items),
+                "gold_yes": sum(1 for g in golds if g == "yes"),
+                "query_pair_is_a_stated_fact_items": direct_hits,
+                "direct_fact_constant": len(set(base["B_direct"])) == 1,
+                "leak_signature_constant": len(set(base["B_leak_sig"])) == 1,
+                "leak_signature_accuracy_full_corpus": sig_acc,
+                "signature_conjuncts": conjuncts,
+            }
+            if kind == "shipped":
+                cell_key = f"shipped_l{lv}"
+                if cell_key in out["cells"]:
+                    row["model_balanced_accuracy_probe"] = out["cells"][cell_key]["balanced_accuracy_on_all"]
+                row["read"] = ("no queried pair is a stated fact in this arm, and the pre-fix "
+                               "signature is constant here, so the model's answers are not "
+                               "produced by either shortcut")
+            else:
+                row["read"] = ("no queried pair is a stated fact here either; the arm's shortcut "
+                               "is the target-role signature, which reproduces the label exactly")
+            out["entailment"][f"{kind}_l{lv}"] = row
+            if direct_hits != 0:
+                note_mismatch(f"entailment[{kind}_l{lv}].query_pair_is_a_stated_fact", 0, direct_hits)
+            if kind == "shipped" and not row["leak_signature_constant"]:
+                note_mismatch(f"entailment[shipped_l{lv}].leak_signature_constant", True, False)
+            if kind == "fixture" and sig_acc != 1.0:
+                note_mismatch(f"entailment[fixture_l{lv}].leak_signature_accuracy", 1.0, sig_acc)
+            for cname, c in row["signature_conjuncts"].items():
+                if kind == "fixture" and c["accuracy_full_corpus"] != 1.0:
+                    note_mismatch(f"entailment[fixture_l{lv}].{cname}.accuracy", 1.0,
+                                  c["accuracy_full_corpus"])
+                if kind == "shipped" and c["fraction_true"] != 1.0:
+                    note_mismatch(f"entailment[shipped_l{lv}].{cname}.fraction_true", 1.0,
+                                  c["fraction_true"])
 
     # 9. connectivity statistics over the full corpora: the numbers behind the claim that
     # undirected component membership determines the label. Components are not stored in
@@ -581,6 +632,42 @@ def analyze():
             if stats["gold_yes_items_with_endpoints_in_different_components"] != 0:
                 note_mismatch(f"connectivity[{kind}_l{lv}].gold_yes_in_different_component", 0,
                               stats["gold_yes_items_with_endpoints_in_different_components"])
+
+    # 10. matched-pair structure at item level. The arms are paired by seed only: the
+    # instrument's design says "same seed, same level, the only difference is the
+    # construction", and the report must not claim more than that. What a pair actually
+    # shares is recomputed here for the 10 probed pairs of each level, so the report's
+    # description of the design is itself a checked claim.
+    out["pairing"] = {}
+    for lv in LEVELS:
+        fixture_seeds = {r["seed"] for r in recs if r["cell"] == f"fixture_l{lv}"}
+        shipped_seeds = {r["seed"] for r in recs if r["cell"] == f"shipped_l{lv}"}
+        if fixture_seeds != shipped_seeds:
+            note_mismatch(f"pairing l{lv}.seeds_match_across_arms", sorted(fixture_seeds),
+                          sorted(shipped_seeds))
+        fix = {it["seed"]: it for it in load_items("fixture", lv)}
+        ship = {it["seed"]: it for it in load_items("shipped", lv)}
+        counts = {"pairs": 0, "query_same": 0, "facts_same": 0, "entity_names_same": 0,
+                  "n_facts_same": 0, "gold_same": 0}
+        for seed in sorted(fixture_seeds & shipped_seeds):
+            f, h = fix[seed], ship[seed]
+            counts["pairs"] += 1
+            counts["query_same"] += int(f["query"] == h["query"])
+            counts["facts_same"] += int(f["facts"] == h["facts"])
+            names_f = {e for fact in f["facts"] for e in (fact[0], fact[2])}
+            names_h = {e for fact in h["facts"] for e in (fact[0], fact[2])}
+            counts["entity_names_same"] += int(names_f == names_h)
+            counts["n_facts_same"] += int(len(f["facts"]) == len(h["facts"]))
+            counts["gold_same"] += int(f["answer"] == h["answer"])
+        out["pairing"][f"l{lv}"] = counts
+        if counts["pairs"] != 10:
+            note_mismatch(f"pairing l{lv}.pairs", 10, counts["pairs"])
+        if counts["facts_same"] != 0 or counts["entity_names_same"] != 0:
+            note_mismatch(f"pairing l{lv}.construction_only",
+                          "no pair shares its fact chain or its entity-name set",
+                          f"facts_same {counts['facts_same']}, entity_names_same {counts['entity_names_same']}")
+        if counts["query_same"] > 1:
+            note_mismatch(f"pairing l{lv}.query_same", "<= 1", counts["query_same"])
     return out
 
 
@@ -662,7 +749,7 @@ def selftest() -> int:
 
     # control 7: the shipped arm must be reported as discriminating
     for lv in LEVELS:
-        check(clean["entailment"][f"l{lv}"]["leak_signature_accuracy_full_corpus"] < 0.6,
+        check(clean["entailment"][f"shipped_l{lv}"]["leak_signature_accuracy_full_corpus"] < 0.6,
               f"control 7: shipped l{lv} leak signature must sit at chance")
 
     # control 8: a record whose prompt hash does not match the rebuilt prompt must
@@ -790,11 +877,59 @@ def selftest() -> int:
     finally:
         corpus_path.write_bytes(real_corpus)
 
+    # control 14: the matched-pair claim. The arms are paired by seed only, so a pair may
+    # not be described as the same item under a different query. The pairing counts are
+    # recomputed here, and a planted pair that really does share its fact chain must break
+    # the confrontation.
+    for lv in LEVELS:
+        p = clean["pairing"][f"l{lv}"]
+        check(p["pairs"] == 10, f"control 14: l{lv} must pair 10 probed seeds")
+        check(p["facts_same"] == 0 and p["entity_names_same"] == 0,
+              f"control 14: l{lv} pairs must share neither the fact chain nor the entity names")
+        check(p["query_same"] <= 1, f"control 14: l{lv} pairs must not share the queried pair")
+    for key, row in clean["entailment"].items():
+        check(row["query_pair_is_a_stated_fact_items"] == 0,
+              f"control 14: {key} must hold no item whose queried pair is a stated fact")
+        for cname, c in row["signature_conjuncts"].items():
+            if key.startswith("fixture"):
+                check(c["accuracy_full_corpus"] == 1.0,
+                      f"control 14: {key}.{cname} must reproduce the label on the pre-fix arm")
+                check(abs(c["fraction_true"] - row["gold_yes"] / row["n"]) < 1e-9,
+                      f"control 14: {key}.{cname} must be true exactly on the gold-yes items")
+            else:
+                check(c["fraction_true"] == 1.0,
+                      f"control 14: {key}.{cname} must be constant true on the repaired arm")
+    for lv in LEVELS:
+        check(clean["entailment"][f"fixture_l{lv}"]["leak_signature_accuracy_full_corpus"] == 1.0,
+              f"control 14: the fixture arm's shortcut must be the target-role signature at 1.0")
+        check(clean["entailment"][f"shipped_l{lv}"]["leak_signature_constant"],
+              f"control 14: the signature must be constant on the repaired arm at l{lv}")
+    fix_path = REPO / "generators" / "fixtures" / "issue67_prefix_l2.jsonl"
+    real_fix = fix_path.read_bytes()
+    fix_lines = real_fix.decode(encoding="utf-8").splitlines()
+    probe_recs = load_jsonl(RUN_DIR / "probe_raw.jsonl")
+    pair_seed = sorted({r["seed"] for r in probe_recs if r["cell"] == "fixture_l2"})[0]
+    partner = {it["seed"]: it for it in load_items("shipped", 2)}[pair_seed]
+    pos = next(i for i, line in enumerate(fix_lines) if json.loads(line)["seed"] == pair_seed)
+    planted = json.loads(fix_lines[pos])
+    planted["facts"] = partner["facts"]
+    planted["query"] = partner["query"]
+    fix_lines[pos] = json.dumps(planted, sort_keys=True)
+    try:
+        fix_path.write_text("\n".join(fix_lines) + "\n", encoding="utf-8")
+        tamped = analyze()
+        check(any(m["field"] == "pairing l2.construction_only" for m in tamped["mismatches"]),
+              "control 14: a planted pair that shares its construction must surface as a pairing mismatch")
+        check(any(m["field"].startswith("entailment[fixture_l2]") for m in tamped["mismatches"]),
+              "control 14: the planted pair must also break the fixture arm's shortcut confrontation")
+    finally:
+        fix_path.write_bytes(real_fix)
+
     if failures:
         for f in failures:
             print(f"FAIL {f}")
         return 3
-    print(f"selftest ok: 13 control groups, {len(clean['mismatches'])} mismatches on clean artifacts")
+    print(f"selftest ok: 14 control groups, {len(clean['mismatches'])} mismatches on clean artifacts")
     return 0
 
 

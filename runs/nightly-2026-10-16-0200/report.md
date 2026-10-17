@@ -1,7 +1,8 @@
 # Nightly round 5: does a live endpoint answer the repaired ladders by shortcut or by traversal?
 
 Run id `nightly-2026-10-16-0200`. Parent run `nightly-2026-10-15-0400` (the corpus repair
-that created the matched pairs). Tracker issue #65, generator issue #67.
+whose regenerated items are seed-paired with the pinned pre-fix controls, 4.6). Tracker
+issue #65, generator issue #67.
 Label: **Executed**. The derived numbers are additionally **Reproduced** by an independent
 recomputation from the archived artifacts (see Verification); the endpoint calls themselves
 were not re-run, because every paid call is charged once. **Validated** is not claimed:
@@ -9,10 +10,13 @@ there is no independent-endpoint or independent-model-family evidence yet.
 
 ## 1. Question
 
-The round-4 audit repaired 186 leaky ladder items and shipped 60 matched pairs: 30 items
-whose queried pair is directly entailed by a single fact, and 30 items with the same seeds
-whose queried pair is not. The leak gate now beats the class's own label-permutation null,
-so the corpus is clean under an 18-feature class. The open question this round:
+The round-4 repair regenerated all 1,500 ladder items under a component-isomorphic
+construction (commit `94f0883`), and pinned 38 pre-fix items per probed level as negative
+controls (`generators/fixtures/issue67_prefix_l{2,8}.jsonl`, every 8th line of the pre-fix
+files at commit `49ee823`). On those pre-fix items the surface rule "the query target is a
+fact target and has out-degree zero" reproduces the gold label on 38/38 items at both levels;
+on the regenerated items the same rule is constant and the 18-feature gate class reports
+`no_leak`. The open question this round:
 
 > Does a live endpoint answer the k-hop ladders because the surface of the query tells it
 > the answer (shortcut), or because it walks the chain (traversal)?
@@ -28,11 +32,23 @@ Three sub-questions, each with its own test:
 Written into the instrument before the first call, and not changed afterwards:
 
 - 4 cells x 10 items = 40 prompts, the cap. Cells: `fixture_l2`, `shipped_l2`,
-  `fixture_l8`, `shipped_l8`. The shipped cells are matched pairs: identical seeds,
-  identical entity names, identical fact chains, differing only in whether the queried pair
-  is one of the facts.
-- Fixture cells are the pinned issue #67 negative controls, where the queried pair is
-  entailed by a single fact on every item.
+  `fixture_l8`, `shipped_l8`. A matched pair is a pre-fix item and the post-fix item generated
+  from the same seed at the same level: same seed, same level, same query shape, and the
+  construction is the only thing the design changes. The pairing is by seed, not by content,
+  and what a pair actually shares is recomputed rather than asserted:
+
+  | Level | pairs | same queried pair | same fact chain | same entity-name set | same fact count | same gold label |
+  |---|---|---|---|---|---|---|
+  | 2 | 10 | 0 | 0 | 0 | 5 | 3 |
+  | 8 | 10 | 1 | 0 | 0 | 0 | 5 |
+
+  No pair shares its fact chain or its entity names. The arms therefore differ in
+  construction, not in item content, and the comparison is arm-level: a pair is not the same
+  item under a different query. An earlier draft of this report claimed the pairs held entity
+  names and fact chains fixed; that claim is corrected here and recorded in section 8.
+- Fixture cells are the pinned issue #67 negative controls. Their shortcut is the target-role
+  signature above, which reproduces the gold label on 38/38 items at both levels. It is not
+  direct entailment: no item in either arm has its queried pair as a stated fact (4.2).
 - One fixed neutral template. No traversal instruction, no chain-of-thought instruction, no
   hint that a chain exists. The item's own `rule`, `answer`, and `chain_len` are withheld.
 - Decoding: zero-shot, temperature 0, `max_tokens` 1536, decoding seed 20261016,
@@ -127,32 +143,48 @@ Column meanings, stated because the instrument's own field names are wrong (see 
   a design fact, and it is why the manifest's misnamed fields are not simply harmless.
 
 On the shipped cells the model disagrees with the entailment signature on 6 of 10 items
-(l2) and 4 of 10 items (l8) while agreeing with the gold label on all 20. On the full
-shipped corpus the entailment signature itself scores 0.4667 (l2) and 0.5233 (l8), that is,
-it is a coin flip: there is no entailment shortcut on the shipped corpus for the model to
-take. So the shipped answers are not entailment-signature answers.
+(l2) and 4 of 10 items (l8) while agreeing with the gold label on all 20. The signature is
+not a usable shortcut on the repaired corpus: `analyze_run.py` evaluates it on **every**
+item of every shipped level, not only the probed sample.
+
+| Corpus | n | items where the query pair is itself a stated fact | entailment-signature accuracy | signature constant? |
+|---|---|---|---|---|
+| shipped l2 | 300 | 0 | 0.4667 | yes |
+| shipped l4 | 300 | 0 | 0.4933 | yes |
+| shipped l6 | 300 | 0 | 0.5533 | yes |
+| shipped l8 | 300 | 0 | 0.5233 | yes |
+| fixture l2 | 38 | 0 | 1.0000 | no |
+| fixture l8 | 38 | 0 | 1.0000 | no |
+
+On the repaired corpus the signature is a constant whose accuracy is a coin flip, so there
+is no entailment shortcut for the model to take, and the shipped answers are not
+entailment-signature answers. On the pre-fix corpora the signature is not constant and
+scores 1.0000, which is the same fact the pinned gate audit reports as a leak.
 
 ### 4.3 Process measures, and what they do not show
 
 | Cell | mean completion tokens | mean reasoning chars | mean facts in item | mean trace/restatement ratio | items above 1.0 |
 |---|---|---|---|---|---|
 | fixture_l2 | 153.4 | 518.9 | 4.9 (4-7) | 4.8392 | 10/10 |
-| fixture_l8 | 247.3 | 766.9 | 13.9 (10-19) | 2.6005 | 10/10 |
 | shipped_l2 | 139.8 | 469.7 | 5.8 (4-8) | 4.2473 | 10/10 |
+| fixture_l8 | 247.3 | 766.9 | 13.9 (10-19) | 2.6005 | 10/10 |
 | shipped_l8 | 556.9 | 1514.2 | 39.2 (16-80) | 2.2099 | 10/10 |
 
-The trace-over-restatement bound counts the shortest possible restatement of the item's own
-facts (one mention per fact, longest name first) and compares it with the number of entity
-mentions in the reasoning trace. Every item in every cell exceeds it. **This is not
-evidence of traversal.** A faithful traversal legitimately restates each relation, so the
-measure cannot separate "restated the premises" from "walked the chain". It is reported as
-a confound, not as a mechanism result. The trace text itself is not archived (public-only
-rule), so no trace-content claim is made.
+The trace-over-restatement ratio compares the length of the reasoning trace in characters
+with a **verbatim-restatement bound**: the character cost of writing out the item's own
+facts, where each fact costs `len(source) + len(target) + len(relation) + 4` characters
+(two names, the relation word, and the spaces and period). Every item in every cell exceeds
+the bound. **This is not evidence of traversal.** A faithful traversal legitimately
+restates each relation, so the measure cannot separate "restated the premises" from "walked
+the chain". It is reported as a confound, not as a mechanism result. The trace text itself
+is not archived (public-only rule), so no trace-content claim is made.
 
 Naming coverage is stronger: every gold-yes item in every cell names all of its own
-intermediate entities (5/5, 3/3, 4/4, 6/6), and `process.named_fraction` means are 0.5,
-0.4, 0.3, 0.6 for fixture_l2, shipped_l2, fixture_l8, shipped_l8. Naming intermediates is
-consistent with traversal but does not exclude a single-pass read of the fact list.
+intermediate entities (5/5, 4/4, 3/3, 6/6 for fixture_l2, shipped_l2, fixture_l8,
+shipped_l8). The `process.named_fraction` means 0.5, 0.4, 0.3, 0.6 for the same cell order
+count a gold-no item as 0, so each mean is just the cell's gold-yes share over 10; the mean
+over gold-yes items alone is 1.0000 in all four cells. Naming intermediates is consistent
+with traversal but does not exclude a single-pass read of the fact list.
 
 ### 4.4 The fixture arm is degenerate
 
@@ -163,6 +195,31 @@ answering by traversal scores 1.0. The fixture arm therefore cannot discriminate
 from traversal at all. It is a capability control: it shows the endpoint answers single-hop
 entailment perfectly, which is what makes the shipped-arm perfect score informative. This is
 a design defect in the arm, recorded here and on issue #67.
+
+The signature that matches gold is **not** the entailment signature of section 4.2. On the
+fixtures the queried pair is never itself a stated fact (0 of 38 at each level), so
+`B_direct` scores 0.5000 and 0.7000 on the probed samples. What matches gold is the
+target-role signature: answer yes exactly when the query's target appears as the target of
+some stated fact and has no outgoing fact. `analyze_run.py` scores the two conjuncts
+separately over the whole corpora, and on the pre-fix items **each conjunct alone**
+reproduces the label:
+
+| Corpus | n | gold yes | conjunct true on | conjunct accuracy vs gold |
+|---|---|---|---|---|
+| fixture l2 | 38 | 21 | query target is a fact target: 0.5526 of items | 1.0000 |
+| fixture l2 | 38 | 21 | query target has no outgoing fact: 0.5526 of items | 1.0000 |
+| fixture l8 | 38 | 16 | query target is a fact target: 0.4211 of items | 1.0000 |
+| fixture l8 | 38 | 16 | query target has no outgoing fact: 0.4211 of items | 1.0000 |
+| shipped l2 | 300 | 140 | both conjuncts: 1.0000 of items | 0.4667 |
+| shipped l8 | 300 | 157 | both conjuncts: 1.0000 of items | 0.5233 |
+
+Each conjunct is true on exactly the gold-yes items of the pre-fix arm, and is true on every
+item of the repaired arm, which is why the conjunction is constant there and gold-equivalent
+here. The pre-fix construction therefore leaks the answer through the queried target's role
+in the fact list, and the repair removed exactly that leak.
+
+The fixture arm is also not a matched-pair arm in the sense the probe's docstring defines:
+see section 4.6.
 
 ### 4.5 Corpus finding: the gate class is too narrow
 
@@ -233,8 +290,37 @@ Consequences:
   p 0.0033, `min_detectable_accuracy` 0.7105 (l2) and 0.7368 (l8). Those numbers are pinned
   in `audit_shipped.json` and `audit_fixtures.json`.
 
-## 5. Deviations (dated 2026-10-16)
+### 4.6 The arms are paired by seed only
 
+The probe's design intent, as written in `generators/probe_ladder_shortcut.py` before the
+run, was a matched pair: the same item under a shortcut-friendly and a traversal-only query.
+`generators/fixtures/issue67_prefix.manifest.json` states the construction that was actually
+built: the fixture item takes the **first `level` facts** of the shipped item carrying the
+same seed, and asks about the first and the last entity of that prefix chain. That is a
+prefix relation, not a same-item relation. `analyze_run.py` now confronts the claim item by
+item, pairing each probed fixture item with the shipped item of the same seed:
+
+| Level | pairs | same seed | same fact chain | same entity names | same queried pair | same n_facts | same gold label |
+|---|---|---|---|---|---|---|---|
+| l2 | 10 | 10 | 0 | 0 | 0 | 5 | 3 |
+| l8 | 10 | 10 | 0 | 0 | 1 | 0 | 5 |
+
+The prefix rule itself holds on all 38 fixture items at both levels. So the two arms share a
+seed and nothing else about the item: different entity names, different fact chains, and at
+l2 not even the same queried pair. Consequences:
+
+- The fixture arm is not "the same item under an easier query". It is a different corpus
+  generated from the same seeds, and its perfect score and the shipped arm's perfect score
+  are answers about different items.
+- The design intent is not met by the shipped generator, and the instrument was not edited
+  mid-run. The claim in this report is the weaker one the artifacts support: the arms are
+  paired by seed.
+- Control 14 in `analyze_run.py --selftest` plants a fixture item whose facts and query are
+  copied from its shipped partner and asserts that the pairing confrontation fires, so a
+  future generator that really does reuse the construction would be caught rather than
+  praised.
+
+## 5. Deviations (dated 2026-10-16)
 1. **Over-cap endpoint usage**: 66 endpoint calls for a 40-prompt design, 26 over cap,
    caused by two client timeouts and one crash. Cause, corrective rule, and per-attempt
    accounting in `attempts.json`.
@@ -265,7 +351,8 @@ Consequences:
 - The verifier used an independent implementation over the archived artifacts, but the same
   model family serves the endpoint, so implementation independence is not model independence.
 - The probe cannot distinguish traversal from connectivity clustering (4.5).
-- The fixture arm cannot test shortcut use (4.4).
+- The fixture arm cannot test shortcut use (4.4), and the arms are paired by seed only, not
+  item-to-item (4.6).
 - The instrument's per-cell fields `leak_sig_agreement` and `direct_agreement` are
   mislabelled: they hold baseline-vs-gold accuracy, not model-vs-baseline agreement. The
   model-vs-baseline numbers in 4.2 come from `analyze_run.py`. The instrument was not
@@ -287,30 +374,93 @@ Consequences:
    relational class, then re-audit the shipped corpus. Widening changes the audit script's
    pinned hash, so it must land as its own issue and its own run, not as an edit inside a
    round that already cited the old hash.
+4. Build a generator that emits a **true** matched pair: one item, two queries, one where the
+   shortcut signature fires and one where it does not, so the two arms differ only in the
+   query. The shipped generator cannot produce this (4.6): it pairs by seed, and a seed-paired
+   pair shares no content.
 
 ## 8. Verification
 
-- `python3 runs/nightly-2026-10-16-0200/analyze_run.py --selftest`: 13 seeded-defect control
+### 8.1 Script gates
+
+- `python3 runs/nightly-2026-10-16-0200/analyze_run.py --selftest`: 14 seeded-defect control
   groups (scorer polarity and leak-signature reproduction, exact null values, shuffled-label
   confrontation, flipped answers in one cell, rewritten raw file hash, planted budget lie,
   clean-artifact confrontation, fixture-arm degeneracy, shipped-arm entailment chance level,
   tampered per-record prompt hash, tampered manifest task hash, tampered pinned environment
   hash, tampered pinned battery report and battery verdict, planted corpus item that breaks
-  connectivity plus cross-implementation agreement of the two component implementations on
-  all 1276 corpus items), 0 mismatches on clean artifacts.
-- `python3 runs/nightly-2026-10-16-0200/analyze_run.py --check`: 0 mismatches. It
-  re-derives every reported number from the raw records, rebuilds all 40 prompts from the
-  corpus and compares them with the archived prompt hashes, confronts the pinned
-  environment hashes against the working tree, and confronts the stored battery report
-  against a fresh in-process run of the battery.
+  connectivity plus a planted fixture item that shares its shipped partner's construction, and
+  cross-implementation agreement of the two component implementations on all 1276 corpus
+  items), 0 mismatches on clean artifacts.
+- `python3 runs/nightly-2026-10-16-0200/analyze_run.py --check`: 0 mismatches. It re-derives
+  every reported number from the raw records, rebuilds all 40 prompts from the corpus and
+  compares them with the archived prompt hashes, confronts the pinned environment hashes
+  against the working tree, confronts the stored battery report against a fresh in-process run
+  of the battery, confronts the pairing counts of section 4.6 and the full-corpus entailment
+  counts of sections 4.2 and 4.4, and asserts the connectivity invariant (no gold-yes item
+  whose endpoints sit in different components) on every corpus.
 - `python3 runs/nightly-2026-10-16-0200/name_channel_audit.py --selftest`: 5 control groups
   (planted name leak detected, seeded label shuffle leaves nothing significant, connectivity
   shortcut detected on the shipped corpus, determinism, fixtures reproduce the pre-fix
   pattern), exit 0.
-- Independent verification: `verify_independent.md` in this directory records a second agent
-  configuration that recomputed the cell metrics, the raw-file hash, the record-versus-
-  manifest consistency, the full-corpus connectivity accuracy, the full-corpus baseline
-  behaviour, and the seeded-defect recall, using code that does not import any project
-  script. It found 3 prose errors in the first draft of this report, all corrected above:
-  the null was described as a label-permutation null, the 4.2 column meanings were stated
-  wrongly, and the latency was quoted from calls whose artifacts do not exist.
+- `python3 generators/audit_ladder_leaks.py --selftest --audit-fixtures --audit-shipped`:
+  selftest ok, fixtures gate `leak`, shipped gate `no_leak`, exit 0. The two JSON reports it
+  prints are byte-identical to the pinned `audit_fixtures.json` and `audit_shipped.json`.
+
+### 8.2 Independent verifications
+
+Two independent verifications are archived in this directory, and they are not collapsed into
+one label.
+
+`verify_independent.md` records a second agent configuration that recomputed the cell metrics,
+the raw-file hash, the record-versus-manifest consistency, the full-corpus connectivity
+accuracy, the full-corpus baseline behaviour, and the seeded-defect recall, using code that
+does not import any project script. It found 3 prose errors in the first draft of this report,
+all corrected: the null was described as a label-permutation null, the 4.2 column meanings were
+stated wrongly, and the latency was quoted from calls whose artifacts do not exist.
+
+`verify_report_v2.md` records a second, later verification against the report as it stood after
+those corrections. It re-verified artifact integrity (12 pinned hashes, the raw-file sha256,
+the prompt-hash chain), confronted 84 manifest fields against its own recomputation (76 exact,
+8 rounding residuals), confronted all 40 archived records against the manifest cell
+assignments, re-ran a 16-feature surface audit of its own construction and reproduced the
+pinned gate reports, and probed seeded-defect recall: 8 of 9 planted defects were recoverable
+from the artifacts and the corpus alone, the 9th (a latency swap between two cells) is
+invisible without the manifest hashes. It filed a discrepancy register D1-D12.
+
+### 8.3 Disposition of the discrepancy register
+
+Every register item was re-checked against the artifacts by the author of this report before
+being accepted or declined.
+
+Accepted and fixed in this report:
+
+- D1: `generators/AGENTS.md` documented `seed_hash` as `sha256("<family>|<task_type>|<seed>")`,
+  which is what `generators/digit_matrices.py` implements but not what `generators/ladders.py`
+  implements. The ladder form includes the level: `sha256("ladders|hop_chain|<level>|<seed>")`
+  truncated to 16 hex characters, verified on 300 of 300 items at each of the five ladder
+  levels. The documentation is corrected in `generators/AGENTS.md`.
+- D2: `process.named_fraction` counts a gold-no item as 0, so the cell mean equals the cell's
+  gold-yes share over 10. Stated in 4.3.
+- D8: the arms are paired by seed only. Stated in 4.6, made regenerable by the pairing block in
+  `analyze_run.py`, and guarded by control 14.
+- D9: the fixture arm's leak is the target-role signature, not a single-fact entailment; the
+  queried pair is never a stated fact in either arm. Stated in 4.4, made regenerable by the
+  entailment block, which now scores both conjuncts separately.
+- D10: the restatement bound is a verbatim-restatement character bound, not "one mention per
+  fact, longest name first". Stated in 4.3.
+- D12: the endpoint accounting closes as 61 answered plus 4 failed attempts plus 1 call that was
+  still in flight when the run was interrupted. Stated in 3.
+
+Declined as filed:
+
+- D11 claimed the report states 13 control groups while `analyze_run.py` implements 14. At the
+  time the register was written the script implemented 13 groups and the report said 13, and the
+  selftest printed 13. The 14th group (the pairing confrontation) was added afterwards, in
+  response to D8, and section 8.1 now states 14. There was no mismatch between report and script
+  when the register was filed, so D11 is recorded as a false positive rather than as a defect
+  that was fixed.
+
+The register itself is left in `verify_report_v2.md` unedited. Verifier findings are not
+rewritten by the author of the verified document; the disposition above is the author's record
+of what was accepted, what was fixed, and what was declined with evidence.

@@ -101,8 +101,11 @@ land one PR at a time (Baby Steps).
   around the audit ceiling d*.
 - Seed policy: base seed is public (date-based, e.g. 20261005), post-dating model
   cutoffs; per-item seed = seed_base + M * level + item_index, M = 1_000_000 for
-  digit matrices and 2_000_000 for ladders; every item carries `seed` and
-  `seed_hash = sha256("family|level|seed")[:16]`; manifests record count, seed_base,
+  digit matrices and 2_000_000 for ladders; every item carries `seed` and `seed_hash`,
+  whose implemented form differs by family and must not be assumed uniform:
+  `digit_matrices.py` uses `sha256("<family>|<level>|<seed>")[:16]`, `ladders.py` uses
+  `sha256("<family>|<task_type>|<level>|<seed>")[:16]` (verified against 300 of 300 items
+  at every level of both families); manifests record count, seed_base,
   content sha256, and the seed-hash-chain sha256. Reproducibility: regeneration from
   the seed must be byte-identical.
 - Item files: `items/<family>/l<level>.jsonl` + `l<level>.manifest.json`, one JSON
