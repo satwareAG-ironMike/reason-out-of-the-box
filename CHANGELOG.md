@@ -88,6 +88,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   connectivity; widening the class to relational features is open work on issue #77 (split
   from #67, which keeps the generator repair and the fixtures). Under a connectivity strategy
   k is not a difficulty ladder, because connectivity accuracy is 1.0 at k=2, 4, 6 and 8.
+- `docs/agent-execution.md` section 5 (2026-10-17): the two operating rules this round established.
+  A verifier's record is archived unedited, and the author of the verified document records a
+  disposition in it (accepted and fixed, or declined with evidence), with a declined item staying
+  visible. A count a report cites from a script (control groups, feature counts, corpus sizes) is
+  emitted by that script and asserted against the cited number, not typed into the report, so a
+  change to the script fails a control instead of leaving the report stale. `runs/AGENTS.md` carries
+  the local version of both rules, and the root and `runs/` Child DOX Index rows now name the
+  regeneration scripts and the verification records, and describe the round-5 probe as seed-paired
+  rather than matched-pair.
 
 #### Fixed
 

@@ -64,9 +64,14 @@ and verified by a different agent configuration.
   re-derives the report numbers from the archived artifacts and exits 3 on any
   mismatch
 - repo parity: `scripts/check_links.py`, dash scan, CHANGELOG entry
+- a verification record in a run directory is never edited after it is written; `report.md`
+  carries the author's disposition of it (accepted and fixed, or declined with evidence), and a
+  declined item stays visible
+- a count a report cites from a script (control groups, feature counts, corpus sizes) is emitted
+  by that script and asserted against the cited number, not typed into the report
 
 ## Child DOX Index
 
 | Path | Scope | File |
 |------|-------|------|
-| `runs/nightly-2026-10-16-0200/` | matched-pair ladder shortcut probe (issue #67): manifest, raw responses, calibration record, attempts and environment sidecars, pinned gate reports, regeneration scripts, round report | [report.md](nightly-2026-10-16-0200/report.md) |
+| `runs/nightly-2026-10-16-0200/` | seed-paired ladder shortcut probe (issue #67): manifest, raw responses, calibration record, attempts and environment sidecars, pinned gate and battery reports, regeneration scripts (`analyze_run.py`, `name_channel_audit.py`), two independent verification records, round report | [report.md](nightly-2026-10-16-0200/report.md) |
