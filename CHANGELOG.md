@@ -13,9 +13,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `ladder_load_depth.py`, an independent re-implementation (no import from `generators/`, own
   name pools, own BFS solver, verifier, gate, probe and scorer) of the constant-load hop-chain
   grid that decouples depth `k` from prompt load `E` (issue #71 criterion 2): arm L holds
-  `E = 24` facts at `k in {2,3,4,6,8,12}` with measured prompt length 1109.5 to 1111.3
-  characters, arm X extends to `k in {16,24}` at `C = 2`. Declared grid, seed-frozen selection
-  rule, fail-closed gate, three-state scoring, `--selftest` (11 controls) green.
+  `E = 24` facts at `k in {2,3,4,6,8,12}` with measured prompt length 1109.5 to 1111.5
+  characters (2.0 character spread, 0.18 %), arm X extends to `k in {16,24}` at `C = 2`.
+  Declared grid, seed-frozen selection rule, fail-closed gate, three-state scoring,
+  `--selftest` (11 controls) green.
   `gate.json` records the permutation-calibrated gate passing all 8 cells (thresholds 0.700 to
   0.800, p 0.072 to 1.000).
 - Gate-power measurement (issue #71 criterion 4, #67): the same battery and null run on 6 items
@@ -23,6 +24,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   0.700 to 0.800 at `n = 40`, and a planted name-order shortcut is missed at `n = 6`
   (p 0.259, 0 rules flagged) but caught at `n = 40` (p 0.0025, 9 rules flagged). The fixed 0.55
   threshold would have refused all 8 clean cells of this grid.
+- Shipped-corpus gate cross-check (issue #67): the same battery run on the first 40 committed
+  items of each shipped level independently reproduces the leak, flags R1 as
+  `single:tgt_is_fact_target->yes` and R2 as `single:tgt_outdeg_zero->yes` at accuracy 1.000 in
+  all five levels, and names two further single-feature predictors at 1.000 that #67 did not
+  (`single:tgt_indeg_zero->no`, `single:tgt_is_fact_source->no`); 31 to 54 rules are flagged per
+  level inside a 340-rule traversal-free battery, so a `generators/ladders.py` repair must be
+  validated against the whole battery.
 - `d*` procedure as a named trichotomy (`maintained` / `inconclusive` / `collapsed`, plus
   `budget_limited` and `descriptive` states) with Wilson 95 % bounds against a 0.60 floor, and
   the certifiability table over items per depth: at 6 items only 6/6 certifies maintained and
