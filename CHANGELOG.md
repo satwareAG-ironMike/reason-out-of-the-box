@@ -59,7 +59,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   is rewritten with API-resolved titles, authors and venues, 2002.05867 is identified as the RuleTaker
   paper, its venue is IJCAI 2020 rather than the unsupported "TACL 2021", and "Language Models with
   Rules" plus "Deriving Rules from Language Models" are recorded as unverified because no arXiv record
-  carries either title.
+  carries either title. The same corrections were published in place on the forge threads where round 10
+  had already posted them (the PR #80 description and comment, and issues #65, #74, #77 and #78) rather
+  than as new issues; the PR description was corrected by prepending a dated corrections section and
+  leaving the original claim record below it.
 - `matched_pair_probe.py --selftest` now passes 45 of 45 and exits 0. As shipped by round 10 it reported
   44 of 45 and exited 1: one check asserted `null_sd == 0.0` and `p_exact == 1.0` for the
   `same_component` shipped null, whose true standard deviation is 19.370824 and whose exact tail
