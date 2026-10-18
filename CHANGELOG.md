@@ -5,6 +5,38 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-18
+
+#### Added
+
+- Nightly round 10 (04:00 slot, issue #65): matched-pair probe of traversal versus undirected
+  connectivity in `research/nightly-2026-10-18-0400/` (`matched_pair_probe.py`, `gate.json`,
+  `raw.jsonl`, `summary.json`, `README.md`). The shipped corpus is shown to be unable to separate the
+  two strategies: across all 1500 items there are 0 queried pairs where connectivity and directed
+  reachability disagree, and 5 direction-blind rules reproduce every gold label at 1.0000
+  (`same_component`, `undirected_connectivity_only`, `target_is_fact_target`,
+  `endpoint_out_degree_zero`, `chain_len_matches_level`; the last is a metadata leak, since item
+  `chain_len` equals `level` for gold-yes items). A 9-item matched corpus built by re-querying real
+  shipped items at k = 4, 6, 8 (forward interior, reverse, forward shifted, cross-component terminal)
+  has 9 disagreeing cells, matched-pair invariants enforced as fatal checks, and a 15-rule
+  direction-blind battery whose best rule reaches only 0.7500, so the corpus is discriminating while
+  the shipped one is not. Probe: 36 prompts, 36/36 answered, 0 transport failures, 0 truncations,
+  every arm 9/9; exact McNemar 0 discordant pairs in both families; the answer pattern matches the
+  directed-traversal oracle on 36/36 cells and 9/9 items and the connectivity oracle on 27/36 cells
+  and 0/9 items. Verdict: the endpoint traverses the chain rather than answering from component
+  membership. This defeats the blocking half of #77 criterion 4 for probing (a matched-pair probe does
+  not have to wait for the generator repair) without cleaning the shipped corpus, which criterion 3
+  still owns. Exact label-shuffle nulls throughout, no Monte Carlo; significance separated from
+  competence (`same_component` reaches p 1.953e-03 on the matched corpus at only 0.7500 accuracy).
+  Literature arm verified against the arXiv export API: CLUTRR 1908.06177, ProofWriter 2012.13048,
+  Soft Reasoners 2002.05867, Language Models with Rules 2112.09054, Greedy Reasoners 2210.01240,
+  OOD deductive capacity 2305.15269, Explicit Planning 2303.15714, Verifier-Guided Proofs 2205.12443,
+  PRover 2010.02830, NeuBAROCO 2306.12567, Hypothesis Search 2309.05660, Neural Theorem Provers
+  1906.06805; the seven IDs earlier rounds mis-pinned are recorded as wrong and RuleTaker's own ID
+  remains unconfirmed. Honest disclosure: the first execution of this round was destroyed by a
+  verifier subagent that switched the shared primary worktree to `main`, and everything published is
+  from a single re-execution (see the round README limits section).
+
 ### 2026-10-14
 
 #### Added
