@@ -1,8 +1,11 @@
 # Nightly round 10 (2026-10-18 04:00): matched-pair probe, traversal versus connectivity
 
 State: **Executed** (probe completed, 36/36 arms answered, gate verified before any prompt was
-spent). Not Reproduced, not Validated: one endpoint, one run, no second endpoint, no independent
-re-run of the probe.
+spent) and **Reproduced at the analysis level**: an independent verifier re-ran `--gate` and
+`--analyze` in a sandbox and regenerated `gate.json` and `summary.json` byte-identically. Not
+Validated: one endpoint, one run, no second endpoint, no independent re-run of the probe. The
+verification record is `docs/review-rounds/nightly10-2026-10-18.md`; the claims it corrected are
+listed under Errata.
 
 ## Question
 
@@ -40,20 +43,25 @@ component" and "directed path exists" are the same predicate. The corpus cannot 
 
 ### The matched corpus
 
-Nine real shipped items, the first usable one per level at k = 4, 6, 8 (usable = gold-yes query
-witnessed by a simple in-degree <= 1, out-degree <= 1 chain of length >= 4, plus a second component
-holding a terminal node whose name length equals the chain terminal). Facts, entity names, fact
-count, and the prompt rendering are the shipped item's, unchanged; the rule sentence and the
-question line are byte-identical to the rounds 8 and 9 probes. Only the queried pair changes.
+Nine real shipped items: the first three usable items per level at k = 4, 6, 8, in file order, which
+is the rule recorded in `gate.json` as `items_per_level: 3` (usable = gold-yes query witnessed by a
+simple in-degree <= 1, out-degree <= 1 chain of length >= 4, plus a second component holding a
+terminal node whose name length equals the chain terminal). Facts, entity names, fact count, and the
+prompt rendering are the shipped item's, unchanged; the rule sentence and the question line are
+byte-identical to the rounds 8 and 9 probes. Only the queried pair changes.
 
 Four arms per item, 36 cells, gold 18 yes / 18 no:
 
 | Arm | Query | Gold | Connectivity says | Reachability says |
 |---|---|---|---|---|
-| F1 | (p_1, p_{k-1}) forward, interior | yes | yes | yes |
-| R1 | (p_{k-1}, p_1) **reverse** | no | **yes** | **no** |
-| F2 | (p_2, p_k) forward, shifted | yes | yes | yes |
+| F1 | (p_1, p_k) forward, one edge short of the terminal | yes | yes | yes |
+| R1 | (p_k, p_1) **reverse** | no | **yes** | **no** |
+| F2 | (p_2, p_{k+1}) forward, shifted by one edge | yes | yes | yes |
 | X | (p_2, m) terminal `m` of another component | no | no | no |
+
+The witnessed chain has k edges and k+1 nodes p_1, ..., p_{k+1}, and the arms are read off that path,
+so F1, R1 and F2 all sit at undirected hop distance k - 1 (7 hops at k = 8) while X has no undirected
+path at all.
 
 The 9 disagreeing cells are exactly the R1 cells: same component, same undirected hop distance,
 opposite gold. Matched-pair invariants are enforced as **fatal checks**, not as reported results:
@@ -64,12 +72,19 @@ connectivity must differ while the shared endpoint, name length, and terminal ou
 
 ### Direction-blind battery
 
-15 rules that cannot express edge direction, plus 2 reference rules that can. A rule "fires" when it
-both beats its exact label-shuffle null (two-sided, Bonferroni alpha = 0.05 / 15 = 3.333e-03) and
-reaches 0.90 accuracy. Nulls are exact: per-item gold-label permutation for the matched corpus
-(exact convolution over items), global gold-label shuffle for the shipped corpus (hypergeometric;
-per-item shuffling is degenerate there because each item carries exactly one queried pair). No
-Monte Carlo anywhere.
+15 rules offered as direction-blind, plus 2 reference rules that express edge direction. A rule
+"fires" when it both beats its exact label-shuffle null (an upper tail, P(hits >= observed), screened
+at the Bonferroni alpha = 0.05 / 15 = 3.333e-03) and reaches 0.90 accuracy. Nulls are exact: per-item
+gold-label permutation for the matched corpus (exact convolution over items), global gold-label
+shuffle for the shipped corpus (hypergeometric; per-item shuffling is degenerate there because each
+item carries exactly one queried pair). No Monte Carlo anywhere.
+
+Direction-blindness is a claim about the battery, not a measured property of it, and the independent
+review measured it: reversing every edge in the corpus leaves 10 of the 15 rules unchanged, while
+`target_is_fact_target` and `source_is_fact_source` flip on all 1500 items, `endpoint_in_degree_zero`
+and `endpoint_out_degree_zero` flip on 754, and `source_is_first_fact_source` flips on 271. Those five
+read fact order or endpoint degree, which tracks direction on this generator even though none of them
+walks an edge. No firing decision changes, but the label is overstated; see Errata.
 
 ## Gate result
 
@@ -102,16 +117,35 @@ Monte Carlo anywhere.
   at p = 1.953e-03, below the Bonferroni bar, yet still only 0.7500 accuracy, because component
   membership correlates with gold there (it is correct on 27 of 36 cells). The accuracy bar is what
   makes the corpus discriminating, not the p-value.
+- The Shipped p column is an underflowed float, not a measured zero. For the five perfect rules the
+  exact tail is 1 / C(1500, 746), about 10^-450, and `float()` renders it as 0.0.
+- The Matched p column is the one-sided upper tail. Doubled for a two-sided reading, `same_component`,
+  `undirected_connectivity_only` and `target_is_fact_target` sit at 3.906e-03, above the 3.333e-03 bar.
+  "No rule fires" is carried by the 0.90 accuracy bar, not by the significance screen.
+- `gate.json` also records `null_min_hits` and `null_max_hits` for each shipped null, and those bounds
+  are the naive intersection bounds rather than the true support [|a + y - n|, n - |a - y|] of the hit
+  count over K in [max(0, a + y - n), min(a, y)], where a is the rule's yes cells and y the gold-yes
+  cells. At least one bound is wrong for all 15 rules: the minimum for 12 (for example 0 instead of 8
+  for `same_component`, 0 instead of 754 for `all_no`) and the maximum for the other 3 (`all_yes`,
+  `source_is_fact_source`, `endpoint_in_degree_zero`, each recorded as 1500 instead of 746). Means,
+  standard deviations, observed hits, z values and p values are all correct, and no firing decision
+  depends on the bounds. They cannot be retrofitted into this round's artifacts because the gate hash
+  is embedded in every `raw.jsonl` record and in `summary.json`; the fix ships with a fresh gate in the
+  round that re-runs the battery. See Errata and issue #77.
 
 Gate hash `e796ca308f26e39da54d174e95fcf76280872285a32af16ad617ddce4d3501a1`.
 
 ## Probe result
 
 36 prompts, temperature 0, max_tokens 2048, concurrency 4, 900 s per-arm deadline, one retry,
-incremental fsynced `raw.jsonl`, resume refuses a raw file carrying a different gate hash. Health
-check 10.2 s before dispatch. Probe wall clock 745.8 s. Transport failures 0. Truncated
-completions (`finish_reason: length`) 0. All 36 answers read from the `content` field, none from
-reasoning text.
+incremental fsynced `raw.jsonl`, resume refuses a raw file carrying a different gate hash. Transport
+failures 0 (36/36 records carry `transport_failure: false`). Truncated completions
+(`finish_reason: length`) 0; all 36 attempts finish `stop` with no `error_class`. All 36 answers read
+from the `content` field, none from reasoning text. The health-check latency of 10.2 s and the probe
+wall clock of 745.8 s are runner-side observations from the round log and no artifact in this directory
+carries them. What the archive does carry is per-attempt `wall_s`: 36 attempts, 9.97 s to 183.6 s each,
+2892.8 s in total, which is consistent with 745.8 s of wall clock at concurrency 4 without recording
+it.
 
 | Arm | Accuracy | Wilson 95% | Mean completion tokens |
 |---|---|---|---|
@@ -178,50 +212,102 @@ generator repair has to satisfy.
   traversal in the answer are the same behavior here only because the trace is consistent with the
   answer in 36/36 records; a model that post-hoc rationalizes would look identical on this
   instrument. The signature table is answer-level and does not depend on the traces.
-- Matched pairs hold name length, hop distance, fact count, degree profile, and prompt length fixed.
-  They do not control for the queried node's position in the fact listing order, which is why
-  `name_first_mention_order` and `name_last_mention_order` are in the battery rather than assumed
-  away.
+- The matched invariants are per family, not global. Within the direction family (F1, R1) the name
+  multiset, undirected hop distance (k - 1), component membership, endpoint degree profile, and prompt
+  length are equal and the gold labels are opposite. Within the component family (F2, X) the shared
+  endpoint, name length, and terminal out-degree 0 are equal while connectivity deliberately differs, so
+  hop distance is not held fixed across that family. Neither family controls for the queried node's
+  position in the fact listing order, which is why `name_first_mention_order` and
+  `name_last_mention_order` are in the battery rather than assumed away.
 - The probe corpus is 9 items drawn from 3 levels. Levels 1 and 2 are not probed; at those depths the
   chain is too short to give a length >= 4 interior witness.
 - **Artifact loss and re-execution.** The first execution of this round completed its gate and had
   dispatched its probe when its branch, commit, and pushed ref were destroyed by a verifier subagent
   that switched the shared primary worktree from a research branch to `main` (its 36-prompt raw
-  archive was in the runner scratch directory and is unrecoverable; only its health-check artifact
-  survives, and it shows a `finish_reason: length` truncation at small `max_tokens`, which is why
-  this run pins `max_tokens` at 2048 and records `finish_reason` per attempt). Everything published
-  here comes from a single re-execution. Round 10 therefore consumed at least 37 and at most 73 probe
-  prompts across both executions against a 40-prompt budget per execution; this published execution
-  used 36 of 40 and spent none of its 4-prompt calibration reserve.
+  archive was in the runner scratch directory and is unrecoverable). Everything published here comes
+  from a single re-execution. The published execution used 36 of its 40-prompt budget and none of its
+  4-prompt calibration reserve, and `raw.jsonl` records exactly that. The wider claim that round 10
+  consumed at least 37 and at most 73 prompts across both executions is a reconstruction from the
+  runner log: no artifact here carries the destroyed execution's prompt count. The same applies to the
+  report that only the first execution's health-check artifact survived, showing a
+  `finish_reason: length` truncation at small `max_tokens`; that artifact is not in this directory and
+  its content cannot be checked from the archive, so the `max_tokens` 2048 pin and the per-attempt
+  `finish_reason` field stand as design decisions whose stated motivation is unverified. The operating
+  model now forbids that verifier operation against the worktree under verification and requires the runner
+  to snapshot the round directory before a verifier pass (`docs/agent-execution.md` section 5).
 - The 15-rule battery is this round's construction. It is not the widened class #77 proposes for
   `generators/audit_ladder_leaks.py`, and it does not change that auditor or its pinned hash.
 
 ## Literature
 
-Verified directly against the arXiv export API during this round, not from memory. These are the
-primaries the matched-pair design stands on:
+Verified against the arXiv export API, not from memory. The table as first published carried eight
+titles that did not match the arXiv record and one entry whose ID belongs to a different paper, so the
+rows below were re-resolved by the independent review of this round (arXiv export API plus OpenAlex DOI
+lookups; the resolution log is in `docs/review-rounds/nightly10-2026-10-18.md`). Venues are quoted from
+the arXiv comment field unless a DOI resolves, and a venue that no record states is marked as such.
+These are the primaries the matched-pair design stands on:
 
 | arXiv | Work | Relevance |
 |---|---|---|
-| 1908.06177 | Sinha, Sodhani, Dong, Pineau, "CLUTRR: A Diagnostic Benchmark for Inductive Reasoning", EMNLP 2019 | multi-hop family with fact-order variants; the forward/reverse split used here is its simplest case |
-| 2012.13048 | Tafjord, Dalvi Mishra, Clark, "ProofWriter: Implication Trees for Analyzing Logical Reasoning", Findings of ACL 2021 | origin of the TRAP arm (#77 criterion 4): premise chains deliberately irrelevant to the queried pair |
-| 2002.05867 | Clark, Tafjord, Richardson, "Transformers as Soft Reasoners over Language", TACL 2021 | the traversal-vs-lookup hypothesis this probe tests |
-| 2112.09054 | Tafjord, Dalvi Mishra, Clark, "Language Models with Rules", AAAI 2022 (RuleTaker/PrOntoQA line) | depth-labeled entailment corpora, the shipped-corpus construction family |
-| 2210.01240 | Saparov, He, "Language Models Are Greedy Reasoners: A Systematic Formal Analysis via ProofWriter", ICLR 2023 | evidence that reasoners shortcut premises rather than traverse them, which is the failure mode the matched pair detects |
-| 2305.15269 | "Uncovering the Capacity of Large Language Models for Deductive Reasoning" (NeurIPS 2023) | OOD deductive capacity, the transfer question this answer does not settle |
-| 2303.15714 | "Explicit Planning Helps Language Models in Logical Reasoning", EMNLP 2023 | intermediate-step planning, the mechanism the token-cost asymmetry hints at |
-| 2205.12443 | "Verifier-Guided Relation Extraction for Logical Reasoning" | supervision that forces traversal rather than connectivity |
-| 2010.02830 | "PRover: A Dataset for Proof and Refinement Generation in Natural Language" | proof-as-output, the trace-level instrument this round only approximates |
-| 2306.12567 | "NeuBAROCO: Combining Neural Networks and Rule-Based Methods for Relational Reasoning" | hybrid neuro-symbolic baseline for the same corpora |
-| 1906.06805 | "Neural Theorem Provers Do Not Learn Rules Without Exploration" | the rule-learning objection behind #77's widened class |
-| 2309.05660 | "Hypothesis Search: Inductive Reasoning with Language Models" | hypothesis-side alternative to chain traversal, not separated by this instrument |
+| 1908.06177 | Sinha, Sodhani, Dong, Pineau, Hamilton, "CLUTRR: A Diagnostic Benchmark for Inductive Reasoning from Text", EMNLP 2019 | multi-hop family with fact-order variants; the forward/reverse split used here is its simplest case |
+| 2012.13048 | Tafjord, Dalvi Mishra, Clark, "ProofWriter: Generating Implications, Proofs, and Abductive Statements over Natural Language", Findings of ACL 2021 | origin of the TRAP arm (#77 criterion 4): premise chains deliberately irrelevant to the queried pair |
+| 2002.05867 | Clark, Tafjord, Richardson, "Transformers as Soft Reasoners over Language", IJCAI 2020 (arXiv comment; the record carries no journal reference or DOI) | the traversal-vs-lookup hypothesis this probe tests, and the RuleTaker paper itself: its abstract names the models RuleTakers |
+| 2112.09054 | Richardson, Sabharwal, "Pushing the Limits of Rule Reasoning in Transformers through Natural Language Satisfiability", AAAI-2022 (PrOntoQA line) | depth-labeled entailment corpora, the shipped-corpus construction family |
+| 2210.01240 | Saparov, He, "Language Models Are Greedy Reasoners: A Systematic Formal Analysis of Chain-of-Thought", ICLR 2023 | evidence that reasoners shortcut premises rather than traverse them, which is the failure mode the matched pair detects |
+| 2305.15269 | Saparov, Pang, Padmakumar, Joshi, Kazemi, Kim, He, "Testing the General Deductive Reasoning Capacity of Large Language Models Using OOD Examples", NeurIPS 2023 | OOD deductive capacity, the transfer question this answer does not settle |
+| 2303.15714 | Zhao, Wang, Yu, Mei, "Explicit Planning Helps Language Models in Logical Reasoning", EMNLP 2023 | intermediate-step planning, the mechanism the token-cost asymmetry hints at |
+| 2205.12443 | Yang, Deng, Chen, "Generating Natural Language Proofs with Verifier-Guided Search", EMNLP 2022 | supervision that forces traversal rather than connectivity |
+| 2010.02830 | Saha, Ghosh, Srivastava, Bansal, "PRover: Proof Generation for Interpretable Reasoning over Rules", EMNLP 2020 main conference (DOI 10.18653/v1/2020.emnlp-main.9) | proof-as-output, the trace-level instrument this round only approximates |
+| 2306.12567 | Ando, Morishita, Abe, Mineshima, Okada, "Evaluating Large Language Models with NeuBAROCO: Syllogistic Reasoning Ability and Human-like Biases", NALOMA IV workshop (no DOI on the record) | hybrid neuro-symbolic baseline for the same corpora |
+| 1906.06805 | de Jong, Sha, "Neural Theorem Provers Do Not Learn Rules Without Exploration", venue not stated on the arXiv record | the rule-learning objection behind #77's widened class |
+| 2309.05660 | Wang, Zelikman, Poesia, Pu, Haber, Goodman, "Hypothesis Search: Inductive Reasoning with Language Models", ICLR 2024 | hypothesis-side alternative to chain traversal, not separated by this instrument |
+
+Two titles this round leaned on have no record to cite. A title search for "Language Models with Rules"
+and for "Deriving Rules from Language Models" returns no arXiv match, and none of Oyvind Tafjord's 63
+arXiv submissions carries either title, so both are recorded as **unverified** rather than cited with a
+venue: the RuleTaker/PrOntoQA work they were meant to point at is 2002.05867 and 2112.09054.
 
 Provenance correction carried forward: the IDs 2301.07330, 2203.14238, 2005.00331, 2210.11845,
 2104.00754, 2002.03673 and 1703.03400 that earlier rounds of this project pinned as
 RuleTaker/PrOntoQA/soft-reasoners primaries are **not** those papers (they are video demoireing,
 Vicsek flocking, phase-field fracture, Patankar-RK stability, Thurston geometries, PU learning, and
-MAML respectively). RuleTaker's own arXiv ID remains unconfirmed by this round; cite 2002.05867 and
-2112.09054 instead. Archive entries for these primaries are still owed on #74.
+MAML respectively; the independent review re-checked all seven against the arXiv record and every one
+of those identifications holds). The gap those IDs were filling is now closed rather than unconfirmed:
+2002.05867 is the RuleTaker paper, because its own abstract introduces the models as RuleTakers, and
+2112.09054 is the PrOntoQA paper, so no separate RuleTaker ID is outstanding. Archive entries for these
+primaries are still owed on #74, and #74 must take the corrected titles above rather than the ones this
+round first published.
+
+## Errata
+
+An independent verification pass (2026-10-18, `docs/review-rounds/nightly10-2026-10-18.md`) recomputed
+every number in this README from `gate.json`, `raw.jsonl`, `summary.json` and `items/ladders/`, with
+independent implementations of the component partition, the reachability search, the hypergeometric and
+convolution nulls, the Wilson interval, and McNemar's test. Every headline number survived. What did not
+survive is the control narrative and the citation table. The corrections below were drafted by the
+verifier directly in the working tree, which contradicted its own read-only report and is recorded as a
+rejected claim in the review record; the runner re-derived every number behind each edit from its own
+independent implementations before adopting the text, and the two conduct rules the incident produced now
+sit in `docs/agent-execution.md` section 5. Corrected in place above:
+
+| Claim as first published | Recomputed |
+|---|---|
+| "the first usable one per level" | the gate selects 3 usable items per level, 9 items in total |
+| Arm notation (p_1, p_{k-1}) and (p_2, p_k) | off by one: F1 is (p_1, p_k), R1 is (p_k, p_1), F2 is (p_2, p_{k+1}) |
+| "15 rules that cannot express edge direction" | overstated: 5 of the 15 change predictions when every edge is reversed |
+| Rule nulls labelled two-sided | they are one-sided upper tails; the two-sided matched p for `same_component` is 3.906e-03, above the 3.333e-03 bar |
+| Shipped p = 0.0 | an underflowed float; the exact tail is 1 / C(1500, 746), about 10^-450 |
+| `gate.json` shipped-null bounds | `null_min_hits` wrong for 12 rules and `null_max_hits` wrong for 3; owed with a fresh gate under #77 |
+| Health check 10.2 s, probe wall clock 745.8 s, 37 to 73 prompts across two executions | runner-side observations, carried by no artifact |
+| "Two real bugs found by those controls" | not carried by any artifact; the selftest as shipped failed 44 of 45 |
+| 8 of 12 literature titles, 2112.09054 attributed to the wrong authors, 2002.05867 as "TACL 2021" | re-resolved against the arXiv export API; the record says IJCAI 2020 and TACL is unsupported |
+| "RuleTaker's own arXiv ID remains unconfirmed" | false: 2002.05867 is the RuleTaker paper |
+
+Two defects in `matched_pair_probe.py`'s selftest are fixed on this branch: the `same_component`
+shipped-null assertion, and the discordant-pairs check whose label contradicted its own assertion. The
+bound formulas in `exact_null_shipped` were deliberately left unchanged, because editing them would
+change `gate.json` and every hash this round published; a comment now records the correct support so a
+later round can fix them together with a fresh gate hash.
 
 ## Reproduce
 
@@ -232,12 +318,25 @@ python3 research/nightly-2026-10-18-0400/matched_pair_probe.py --probe
 python3 research/nightly-2026-10-18-0400/matched_pair_probe.py --analyze
 ```
 
-`--selftest` runs 40+ checks including planted negative controls: a corpus where connectivity and
+`--selftest` runs 45 checks including planted negative controls: a corpus where connectivity and
 reachability agree everywhere must be reported non-discriminating, a rule that is correct on the gold
 labels but wrong on every shuffled null must be caught, `rec["correct"]` must compare against gold
 rather than against "yes", and the hypergeometric null must convert hit counts back to the accuracy
-threshold rather than compare them directly. Two real bugs in this script were found by those
-controls before any prompt was spent.
+threshold rather than compare them directly.
+
+As published the selftest did **not** pass: on the commit this round shipped it reported 44 of 45 and
+exited 1. One check asserted `null_sd == 0.0` and `p_exact == 1.0` for the `same_component` shipped
+null, whose true standard deviation is 19.370824 and whose exact tail underflows to 0.0; another check
+carried the label "0 discordant pairs" over an assertion that 9 discordant pairs appear. Both were
+mistakes in the test rather than in the analysis, and both are fixed on this branch. The claim that the
+controls found two real bugs in the script before any prompt was spent is a runner-side claim that no
+artifact records; what the independent review could confirm is that the shipped-null hit count to
+threshold conversion is implemented correctly.
+
+`--gate` and `--analyze` regenerate `gate.json` and `summary.json` byte-identically to the published
+files, which the independent review verified in a sandbox copy; running them in an archive checkout
+would overwrite the published artifacts. `--probe` needs the inference endpoint and is not runnable
+from an archive checkout.
 
 Artifacts, pinned:
 
@@ -252,6 +351,11 @@ Artifacts, pinned:
 | `items/ladders/l8.jsonl` | `191439a481e2a6344d8bc0f84e9317a76ae55f8452a52de132879e775d632af8` |
 
 `summary.json` records these hashes plus the gate hash, so a re-analysis can be checked against the
-archive it claims to analyze. `raw.jsonl` holds the full completions; entity names are the
-generator's synthetic strings and no host, path, address, or model-file identifier appears in any
-artifact.
+archive it claims to analyze. The script is pinned separately because it changed after the probe ran: the
+version that produced these artifacts is
+`df3fe306920efbc165a8befacda7b51dbf8bea6a6c53ba9316ac4683d24bdaa1`, the corrected version on this branch
+is `e455f4b1cfe542f5bf35eec64c89a0cb65e12849a509d7a3bbb76bf79f708ff1`, and `--gate` and `--analyze`
+regenerate `gate.json` and `summary.json` byte-identically under both, verified in an archive checkout of
+the shipped commit and in a sandbox copy of this branch. `raw.jsonl` holds the full completions; entity
+names are the generator's synthetic strings and no host, path, address, or model-file identifier appears
+in any artifact.

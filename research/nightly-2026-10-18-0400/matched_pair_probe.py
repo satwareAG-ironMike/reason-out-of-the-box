@@ -660,6 +660,15 @@ def exact_null_shipped(rule: str, recs: list, predictions) -> dict:
         var_h = a * (y / n) * (1 - y / n) * ((n - a) / (n - 1))
         sd = 2 * math.sqrt(var_h)
     p = hypergeometric_tail_or_equal(y, n - y, a, k_min)
+    # NOTE (known defect, issue #77 follow-up): the support of hits = 2K + n - y - a
+    # over K in [max(0, a + y - n), min(a, y)] is [|a + y - n|, n - |a - y|]. The
+    # bounds emitted below are wider than that support (they are the naive
+    # intersection bounds), so gate.json and summary.json from round 10 carry
+    # null_min_hits and null_max_hits that are too wide for 12 of 15 rules, and
+    # null_max_hits is wrong for all_yes, source_is_fact_source and
+    # endpoint_in_degree_zero. Fixing the formulas changes gate.json, so it must
+    # ship with a fresh gate hash and a re-run gate; it is not retrofittable into
+    # the round-10 artifacts, whose hashes are bound into raw.jsonl.
     return {"null_mean": round(mean, 6), "null_sd": round(sd, 6),
             "null_min_hits": max(0, a + y - n), "null_max_hits": min(n, a + (n - y)),
             "observed_hits": observed, "rule_yes_cells": a, "gold_yes_cells": y,
@@ -1132,9 +1141,9 @@ def selftest() -> int:
           ship_batt["same_component"]["accuracy"] == 1.0)
     check("shipped exact null for same_component is astronomically small",
           sn["p_exact"] < 1e-100)
-    check("shipped null for same_component has zero width and matches observation",
-          sn["null_sd"] == 0.0 and sn["null_max_hits"] == sn["observed_hits"]
-          and sn["p_exact"] == 1.0)
+    check("shipped null for same_component has nonzero width and the observation "
+          "sits at the attainable maximum",
+          sn["null_sd"] > 0.0 and sn["null_max_hits"] == sn["observed_hits"])
     check("constant rules have a degenerate shipped null centred on the gold base "
           "rate", exact_null_shipped("all_no", recs,
                                      ship_batt["all_no"]["predictions"])["p_exact"]
@@ -1249,7 +1258,7 @@ def selftest() -> int:
                                             "answer_source": "content",
                                             "answer_offset": 0}]})
     sig2 = analyse(conn_fake, items, gate)
-    check("a connectivity-consistent fabrication yields 0 discordant pairs in the "
+    check("a connectivity-consistent fabrication yields 9 discordant pairs in the "
           "direction family",
           sig2["families"]["direction_F1_R1"]["c_second_wrong"] == 9
           and sig2["families"]["direction_F1_R1"]["b_first_wrong"] == 0)
