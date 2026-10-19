@@ -1,8 +1,10 @@
 # Nightly round 11 (2026-10-19 02:00): does the traversal strategy survive at depth 12, 16, 24?
 
-State: **Executed** (probe completed, 36/36 arms answered, gate verified before any prompt
-was spent). Reproduction status is recorded in Errata/Verification below as the verifier
-pass completes. Not Validated: one endpoint, one run, no second endpoint.
+State: **Executed**, and **Reproduced at the analysis level**: an independent read-only
+verifier (fresh non-mutating clone of `f1d0d58`, no endpoint contact) regenerated
+`gate.json` and `summary.json` byte-identically and re-derived every headline number from
+`raw.jsonl` by own BFS. Its adversarial pass corrected seven defects, recorded under Errata
+and verification below. Not Validated: one endpoint, one run, no second endpoint.
 
 ## Question
 
@@ -10,8 +12,7 @@ Round 10 showed, on a matched-pair probe built from shipped ladder items at k = 
 that the probed endpoint follows directed traversal, not undirected connectivity (36/36
 cells matched the traversal oracle; 0 of 9 items were consistent with connectivity). Round
 9 placed the constant-load depth ceiling of the same family at d\* >= 12 on a different
-pool slot. Both runs are single-execution facts on different quantizations of one model
-family.
+pool slot. Both are single-execution results on distinct slots of one model family.
 
 This round asks one question: **does the traversal verdict replicate at depths k = 12, 16,
 24**, i.e. at and above the certified constant-load region, on seed-generated items of the
@@ -27,11 +28,12 @@ independent re-run at a different quantization slot of the pool.
 level at k = 12, 16, 24, `seed_base 20261019`, file order), and independently re-derives
 every gold label by own BFS. The matched-pair construction, the invariant checks and the
 15-rule direction-blind battery follow round 10's corrected script
-(`research/nightly-2026-10-18-0400/matched_pair_probe.py`). Three round-10 verification
+(`research/nightly-2026-10-18-0400/matched_pair_probe.py` on the round-10 branch, PR #80;
+`research/` is not yet on `main`). Three round-10 verification
 findings are fixed here rather than copied:
 
-1. pool-corpus null bounds use the true support `[|a+y-n|, n-|a-y|]` (round-10 verification
-   section 6);
+1. pool-corpus null bounds use the true support `[|a+y-n|, n-|a-y|]` (round-10
+   verification section 5);
 2. both permutation nulls report one-sided and two-sided exact p values and gate firing
    uses the two-sided value against the Bonferroni bar (round-10 verification section 5);
 3. a global attempt budget caps endpoint calls at 40 including the health check and all
@@ -48,7 +50,7 @@ that length, so a "yes" cannot come from any shorter route.
 ### Gate (written before any prompt was spent)
 
 Gate hash `4e3d799b0266e93f8b7068357fba5cff3f994158534175a02209647f1936854c`, schema
-`round11-gate-v3`. `--selftest`: 48 checks, 0 failures.
+`round11-gate-v3`. `--selftest`: 50 checks, 0 failures.
 
 | Corpus | items | connectivity != reachability | best blind rule accuracy | discriminating |
 |---|---|---|---|---|
@@ -85,31 +87,40 @@ been "yes". 36 of 36 completions name every interior node of their chain.
 |---|---|---|---|---|
 | k = 12 | 12 | 12 | 332.3 | 29.9 |
 | k = 16 | 12 | 12 | 398.0 | 33.5 |
-| k = 24 | 12 | 12 | 627.7 | 31.9 |
+| k = 24 | 12 | 12 | 627.7 | 31.8 |
 
 Per arm: F1 9/9 (mean 402.4 tokens), R1 9/9 (452.0), F2 9/9 (481.3), X 9/9 (474.9).
-Direction-family reverse cost: R1 is +12.3 % mean tokens over F1 (round 10 measured +35 %
-on the reverse arm at k <= 8; both are n = 9 per arm, descriptive only). Latency is flat
-in depth (per-level means 29.9 to 33.5 s); completion size grows with depth (+29 tokens
-per hop across levels) but maxes at 878 tokens, far under the 2048 budget, so no answer
-was lost to truncation at any tested depth on this endpoint.
+Direction-family reverse cost: R1 is +12.3 % mean tokens over F1. Round 10 published a
+~35 % reverse-plus-cross-arm figure (226.7 / 214.4 versus 171.9 / 167.9 mean tokens); its
+own artifacts give a strict reverse-only R1 over F1 of +31.9 % (226.667 / 171.889). Both
+rounds are n = 9 per arm, descriptive only. Latency is flat in depth (per-level means 29.9
+to 33.5 s); completion size grows with depth but sub-linearly and unevenly (332.3 to 398.0
+to 627.7 tokens, i.e. +16.4 per hop from 12 to 16 and +28.7 per hop from 16 to 24), maxing
+at 878 tokens, far under the 2048 budget, so no answer was lost to truncation at any
+tested depth on this endpoint.
 
 ## Answer
 
 The traversal verdict replicates. At k = 12, 16 and 24, on nine seed-generated matched
 items, the endpoint answered every arm in the pattern only directed traversal predicts,
 and no item was consistent with the connectivity shortcut. Combined with round 10, the
-same matched-pair signature holds from k = 4 to k = 24 across two quantization slots of
-the same model family (round 10: IQ3_XXS; this round: the pool's `qwen38-flash-next`
-slot, an IQ4_XS-class quantization per its runtime). For #71: there is still no turnover
-to place d\* against, now up to 24 hops on a non-constant-load construction with full
-chain recitation; the truncation cliff round 9 localized (answers lost under small
-budgets) did not bind at 2048.
+matched-pair signature holds from k = 4 to k = 24 across two distinct pool slots of one
+model family: round 10's summary comment on #65 records its endpoint as a
+Qwen3.8-Flash-Next IQ3_XXS deployment, and this round's endpoint self-reports the model ID
+`qwen38-flash-next` from its own model-listing route (the probe script writes no endpoint
+value into any artifact). The claimable fact is "same public family, distinct slots", not a
+controlled quantization comparison. For #71: there is still no turnover to place d\*
+against, now up to 24 hops on a non-constant-load construction with full chain
+recitation; the truncation cliff round 9 localized (answers lost under small budgets) did
+not bind at 2048.
 
 ## Disclosure
 
 - One endpoint family, one run per depth band; the endpoint's training data is
-  undisclosed. Not H1 evidence and not Condition-2 study data.
+  undisclosed. Not H1 evidence and not Condition-2 study data. The 295.6 s run wall and
+  the 2.237 s health-check latency are runner-side observations with no artifact field;
+  the raw-record UTC timestamp window (00:22:08 to 00:27:04, 296 s) corroborates the
+  wall, and attempt `wall_s` sums to 1143.1 s at concurrency 4.
 - Items are generated, not shipped: `items/ladders/` has no level > 8. Reproduction of the
   pool is a command, not a committed file: `python3 -c` with `generators/ladders.py`'s
   `generate_items(level, 300, 20261019)` for level in 12, 16, 24; the byte hashes of the
@@ -117,7 +128,8 @@ budgets) did not bind at 2048.
 - The orchestration session and the probed endpoint are the same public model family this
   round (`qwen38-flash-next`), unlike round 10; verifier independence is therefore carried
   by the verifier pass, not by model diversity.
-- n = 9 per level means each arm-level 9/9 has Wilson 95 % lower bound 0.701: this grid
+- n = 9 per arm (nine items, three per level) means each arm-level 9/9 has Wilson 95 %
+  lower bound 0.701: this grid
   describes and replicates a strategy, it cannot certify a ceiling. The gate certifies
   only that the matched corpus is discriminating under the declared battery.
 - The pool-corpus null on 900 items reports the fixed support bounds; the matched-corpus
@@ -125,11 +137,19 @@ budgets) did not bind at 2048.
 
 ## Errata and verification
 
-To be completed by the independent verifier pass (read-only, per the round-10 process
-fix): regenerate `--selftest`, `--gate` and `--analyze` from the pushed commit and
-confront each published number against `raw.jsonl`. If the verifier regenerates the
-artifacts byte-identically, this round's state upgrades to **Reproduced at the analysis
-level** (round-10 convention) and this section records the record's location.
+An independent read-only verifier (fresh non-mutating clone of `f1d0d58`, no endpoint
+contact) regenerated `gate.json` and `summary.json` byte-identically and re-derived every
+headline number from `raw.jsonl` by own BFS; the full record is
+[`docs/review-rounds/nightly11-2026-10-19.md`](../../docs/review-rounds/nightly11-2026-10-19.md).
+Its adversarial pass corrected seven defects, all shipped in the errata commit: the
+selftest count (50 checks, not the 48 first claimed in the README, CHANGELOG and both
+commit messages; commit messages are immutable and the record is their erratum), a
+misquoted round-10 reverse-arm cost (round 10's strict R1/F1 ratio is +31.9 %; its ~35 %
+headline was reverse-plus-cross-arm), a double-rounded k = 24 latency (31.8 s, not 31.9),
+an overstated token-growth slope (now per-segment +16.4 and +28.7 per hop), a wrong
+round-10 section cross-reference, an unfalsifiable quantization attribution (now "same
+public family, distinct pool slots"), and "n = 9 per level" corrected to "n = 9 per arm".
+None touched the core result. State: **Executed** and **Reproduced at the analysis level**.
 
 ## Files
 

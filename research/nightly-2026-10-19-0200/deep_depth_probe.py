@@ -23,7 +23,7 @@ the invariant checks and the leak battery follow round 10
 Three round-10 verification findings are fixed here rather than copied:
 
 1. the pool-corpus null bounds use the true support [|a+y-n|, n-|a-y|]
-   (round-10 verification section 6);
+   (round-10 verification section 5);
 2. both permutation nulls report one-sided and two-sided exact p values and
    the gate fires on the two-sided value against the Bonferroni bar
    (round-10 verification section 5);

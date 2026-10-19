@@ -16,12 +16,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   oracle, the undirected-connectivity shortcut fails all nine reverse cells, exact
   McNemar shows zero discordant pairs in both matched families, and all 36 completions
   recite the full interior chain. The endpoint is the pool's `qwen38-flash-next` slot, a
-  different quantization from round 10's IQ3_XXS run. Transport hardening: 37 endpoint
+  distinct slot from round 10's (same public model family; not a quantization comparison).
+  Transport hardening: 37 endpoint
   calls under a global 40-attempt cap, zero retries, per-attempt `finished_at`
   timestamps close the named open item of #73. The probe script fixes three round-10
   verification findings instead of copying them (true null support bounds, two-sided
   exact nulls for gate firing, attempt-capped retries) and its `--selftest` passes
-  48 checks.
+  50 checks. Verification record: `docs/review-rounds/nightly11-2026-10-19.md`
+  (byte-identical regeneration of gate and summary; seven documentation errata corrected;
+  state Executed and Reproduced at the analysis level).
 
 ### 2026-10-14
 
