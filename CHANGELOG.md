@@ -5,6 +5,24 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-19
+
+#### Added
+
+- Nightly round 11 research record (`research/nightly-2026-10-19-0200/`, issue #65,
+  refs #71, #73): a matched-pair probe at depths k = 12, 16, 24 on nine seed-generated
+  ladder items (levels beyond the shipped grid, generator hashes pinned in the gate)
+  replicates the round-10 traversal verdict: 36/36 cells match the directed-traversal
+  oracle, the undirected-connectivity shortcut fails all nine reverse cells, exact
+  McNemar shows zero discordant pairs in both matched families, and all 36 completions
+  recite the full interior chain. The endpoint is the pool's `qwen38-flash-next` slot, a
+  different quantization from round 10's IQ3_XXS run. Transport hardening: 37 endpoint
+  calls under a global 40-attempt cap, zero retries, per-attempt `finished_at`
+  timestamps close the named open item of #73. The probe script fixes three round-10
+  verification findings instead of copying them (true null support bounds, two-sided
+  exact nulls for gate firing, attempt-capped retries) and its `--selftest` passes
+  48 checks.
+
 ### 2026-10-14
 
 #### Added
