@@ -5,6 +5,21 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-19
+
+#### Added
+
+- Archive round 17, mechanistic interpretability review: 1 entry in
+  `archive/round17-mechanistic-review-2026/` (Sawant & Krejčí 2026, arXiv:2607.07316,
+  scoping review, preprint), ingested on owner direction with focus on section 3.8
+  "Emergent Symbolic Reasoning Mechanisms", full-text verified (`[FT]`): deduction
+  heads on tree path-finding (Brinkmann et al., arXiv:2402.11917) and the Yang et al.
+  ICML 2025 three-stage symbolic architecture (symbol abstraction, symbolic induction,
+  retrieval). Verdict: +/- mechanism - strengthens the circuit-forms line (Nanda,
+  Olsson), does not meet the acceptance criteria (survey, task-trained or undisclosed
+  models); overall verdict unchanged. Archive now 122 entries in 16 rounds; count
+  statements updated in the same commit.
+
 ### 2026-10-14
 
 #### Added

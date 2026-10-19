@@ -40,7 +40,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 
 | Path | Content |
 |------|---------|
-| `archive/` | 121 peer-reviewed and preprint papers, 15 thematic rounds, per-paper entries |
+| `archive/` | 122 peer-reviewed and preprint papers, 16 thematic rounds, per-paper entries |
 | `archive/INDEX.md` | Master catalog, verdict, evidence matrix, open-problem spec |
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/counterarguments.md` | Claim ladder C1-C5 with evidence status, and the ten recurring counterarguments steelmanned against the archive |
@@ -70,7 +70,7 @@ cross-checked secondary sources.
 | Positive: latent reasoning, elicitation only | 2402.10200, 2212.09196, 2205.11916, 2503.20783, 2504.13837, 2504.19483 |
 | Negative: pattern matching, contamination | 2305.18654, 2405.00332, 2410.05229, 2309.13638 |
 | Formal limits of a forward pass | 2310.07923, 2402.12875, 2604.25800 |
-| Mechanistic: real algorithms do form | 2301.05217, 2209.11895 |
+| Mechanistic: real algorithms do form | 2301.05217, 2209.11895, 2607.07316 |
 | How LLMs validate ideas (self-correction) | 2310.01798, 2207.05221, 2112.00101, 2303.17651, 2305.11738 |
 | Unique idea generation | 2409.04109, 2506.20803, 2606.08251, 2608.19437 |
 | Embodied agents: brain + body + herd | 2305.16291, 2606.15497, 2506.24019, 2607.02329, 2303.11366, 2308.10144, 2302.04761, 2304.03442 |
