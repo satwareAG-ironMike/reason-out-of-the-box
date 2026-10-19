@@ -1,7 +1,7 @@
 # Nightly round 2026-10-17 04:00 (round 8)
 
 Model probed and model that ran this session: Qwen3.8-Flash-Next class local endpoint
-(quantized build, serving id `qwen3.8-flash-next-iq3_xxs`). Evidence label: **Executed** for
+(quantized build). Evidence label: **Executed** for
 the construction, gate and procedure half (offline, deterministic, `--selftest` green, gate
 recorded before any prompt was spent). The model-facing half **did not complete**: the probe
 arm aborted on endpoint transport failure after 15 of 40 dispatched prompts, so this round
