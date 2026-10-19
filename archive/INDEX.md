@@ -6,15 +6,15 @@ analogous to how higher animals and humans reason without prior logic training?
 
 **Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
 2026-09-06 (round 8 extension), 2026-09-09 (round 10), 2026-09-14 (round 12),
-2026-09-15 (round 13), 2026-09-28 (round 14), 2026-10-05 (round 15), 2026-10-14 (round 16) |
+2026-09-15 (round 13), 2026-09-28 (round 14), 2026-10-05 (round 15), 2026-10-14 (round 16), 2026-10-19 (round 17) |
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
 26 papers in rounds 1-4 (2026-09-02), 63 papers in 8 rounds total (2026-09-03), 15 papers in
 round 9 (2026-09-05), 2 papers in round 8 (2026-09-06), 6 papers in round 10 (2026-09-09),
 2 papers in round 12 (2026-09-14), 4 papers in round 13 (2026-09-15), 15 papers in round 14
-(2026-09-28), 1 paper in round 15 (2026-10-05), 13 papers in round 16 (2026-10-14):
-121 papers in 15 rounds. Full-text in-body verification was performed for the
+(2026-09-28), 1 paper in round 15 (2026-10-05), 13 papers in round 16 (2026-10-14), 1 paper in
+round 17 (2026-10-19): 122 papers in 16 rounds. Full-text in-body verification was performed for the
 highest-weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
@@ -277,6 +277,22 @@ none of these papers bear on out-of-the-box LLM reasoning; overall verdict uncha
 | Read & Nityananda 2026, Trade-off critique | Animal Behaviour | context | Signal-detection re-analysis: no support for the PNAS 2022 conclusions |
 | Gibbons et al. 2026, Reassessment | Animal Behaviour | context | Corrected model beats critique alternatives on all fit metrics; confirms original findings |
 | Read & Nityananda 2026, Revised models response | Animal Behaviour | context | Rebuttal: revised models overfit; no negative interaction; controversy unresolved |
+
+### Round 17 - Mechanistic interpretability review (2026-10-19)
+
+A comprehensive 2026 scoping review of mechanistic interpretability, ingested on
+owner direction (2026-10-19) with focus on section 3.8 (emergent symbolic reasoning
+mechanisms). The review surveys circuit analysis, SAE and transcoder decomposition,
+steering vectors, and neurosymbolic rule extraction; section 3.8 catalogs the
+circuit-level candidates for abstract multi-step reasoning (deduction heads,
+Brinkmann et al. arXiv:2402.11917; the three-stage symbolic architecture of Yang
+et al., ICML 2025). Mechanism-level context only: the review runs no experiments of
+its own, and its two key studies are a task-trained synthetic transformer and an
+undisclosed LLM, so none meets the acceptance criteria. Overall verdict unchanged.
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| [FT] Sawant & Krejčí 2026, MI Scoping Review (section 3.8 focus) | arXiv (preprint) | +/- mechanism | Section 3.8: deduction heads on tree path-finding (2402.11917) and the Yang et al. ICML 2025 three-stage symbolic architecture (symbol abstraction, symbolic induction, retrieval); "a degree of symbolic structure can emerge inside Transformers" before any explicit symbolic component |
 
 ## Verdict addendum: round 10 - Anthropic insiders cluster (2026-09-09)
 

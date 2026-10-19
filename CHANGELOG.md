@@ -5,6 +5,28 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-19
+
+#### Added
+
+- Archive round 17, mechanistic interpretability review: 1 entry in
+  `archive/round17-mechanistic-review-2026/` (Sawant & Krejčí 2026, arXiv:2607.07316,
+  scoping review, preprint), ingested on owner direction with focus on section 3.8
+  "Emergent Symbolic Reasoning Mechanisms", full-text verified (`[FT]`): deduction
+  heads on tree path-finding (Brinkmann et al., arXiv:2402.11917) and the Yang et al.
+  ICML 2025 three-stage symbolic architecture (symbol abstraction, symbolic induction,
+  retrieval). Verdict: +/- mechanism - strengthens the circuit-forms line (Nanda,
+  Olsson), does not meet the acceptance criteria (survey, task-trained or undisclosed
+  models); overall verdict unchanged. Archive now 122 entries in 16 rounds; count
+  statements updated in the same commit.
+- Automated repo-round family under tracker #83 (runners live outside this repository,
+  public-only rule): daily PR review at 06:30 (skill-verified validation of open PRs
+  plus the 3 required CI checks, merge-if-green), weekly maintenance Sun 05:00 (branch
+  hygiene, deep skill-verified PR pass), weekly doc collection Sun 08:00 (intro pages
+  synced via the DOX closeout rules), weekly issue audit Sun 09:00 (open issues
+  validated against in-repo knowledge). The merge gate is unchanged: every change
+  reaches main via branch + PR with all 3 CI checks green; agents never push to main
+  and never touch .github or the ruleset.
 ### 2026-10-17
 
 #### Added
