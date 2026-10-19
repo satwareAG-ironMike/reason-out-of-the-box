@@ -22,11 +22,25 @@ land one PR at a time (Baby Steps).
   convention); missing cell fixed at (2,2).
 - Family 2 `ladders.py` (subtype `hop_chain`): universal transitivity rule +
   shuffled atomic facts over synthetic entity strings + yes/no query; depth k =
-  shortest directed path length of the queried pair. Construction keeps noise
-  components disjoint from the main chain (entity-name uniqueness), so yes items
-  have no shortcut and no items stay unreachable; the selftest re-derives both
-  invariants by independent BFS. Subtypes `mult_mult` and `dp_puzzle` (issue #4
-  list) are pending.
+  shortest directed path length of the queried pair. Construction (component
+  isomorphism, issue #67 fix): the facts are C >= 2 disjoint directed paths, each
+  of exactly k edges over fresh entities; the query is always (head of one path,
+  tail of one path); answer "yes" iff both endpoints lie on the same path. Because
+  every component is isomorphic (same length, same endpoint roles), no surface
+  feature of the query endpoints separates the two answer classes, so no item has
+  a shortcut and none stays unreachable; the selftest re-derives both invariants by
+  independent BFS plus a four-rule surface battery (issue #67 acceptance criterion
+  2). `audit_ladder_leaks.py` makes the leak measurement repeatable (feature
+  battery, conjunction search, stumps, bounded-search baselines, independent-BFS
+  solvability; constant features reported but never gated). Gate calibration (issue #71
+  criterion 4): the derivation-shortcut statistic must be read against a level-matched
+  permutation null (re-draw the query pair from the item's own entity set). Measured
+  2026-10-17: null shortcut rate 0% at k=1 and 9-12% at k>=2, while the shipped corpus
+  measures 0 shortcuts in 1,500 items. A fixed 0.55 threshold sits about 5x above that band
+  and would not flag a genuine 10% leak, so gate thresholds are level-matched to the null
+  plus a margin, not constants (`research/nightly-2026-10-17-0200/ladder_depth_load.py`).
+  Subtypes `mult_mult`
+  and `dp_puzzle` (issue #4 list) are pending.
 - Solvability is generation-time policy: for every component, exactly one rule of
   the pool must reproduce both demonstration rows jointly; non-identifiable
   samples are rejected. The selftest re-derives uniqueness from the emitted item.
@@ -34,6 +48,13 @@ land one PR at a time (Baby Steps).
   per-family knobs in `docs/study-design.md`): digit matrices levels 1-4;
   compositional ladders k in {1, 2, 4, 6, 8} hops; ARC-style 1-5 composed
   transforms. The study runs d*+1..d*+4 around the audit ceiling d*.
+- Ladder load is coupled to depth, and the coupling is quadratic: facts per item equal
+  `C * k` with `C` drawn uniformly from `[2, k+2]`, so mean load is `k^2/2 + 2k` and the
+  within-level span is `2k` to `k(k+2)` (measured 2026-10-17: level 8 spans 16-80 facts, a
+  5x range). The level axis is therefore also a load axis, and accuracy measured across
+  levels is confounded until `C` (or total facts) is held fixed. A `(k, C)` factorial is
+  required before `d*+1..d*+4` can be read as a depth band (issue #71 criterion 2;
+  `research/nightly-2026-10-17-0200/`).
 - Seed policy: base seed is public (date-based, e.g. 20261005), post-dating model
   cutoffs; per-item seed = seed_base + 1_000_000 * level + item_index; every item
   carries `seed` and `seed_hash = sha256("family|level|seed")[:16]`; manifests
