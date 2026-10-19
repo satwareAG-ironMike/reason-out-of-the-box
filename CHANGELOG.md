@@ -80,7 +80,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   conjunction above 0.55); independent BFS agrees with the stored answer on 1,500/1,500
   items (yes items shortest path exactly k, no items unreachable); a 40-prompt
   format-validity check against the local inference endpoint
-  (Qwen3.8-27B-NVFP4-MTP-HIGH) scores 39/40, the single miss being a 512-token
+  (a 27B-class local model) scores 39/40, the single miss being a 512-token
   truncation the item answers correctly under a larger budget, so the repaired format
   remains solvable across the depth grid.
 
