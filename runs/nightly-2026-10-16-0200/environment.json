@@ -9,11 +9,11 @@
   "deviation": "client timeout was raised 180 s -> 300 s -> 600 s across the three invocations (infra parameter, not part of the pre-registered decoding design); the decoding block in the manifest is unchanged by it",
   "endpoint": {
     "model": {
-      "endpoint_model_id": "qwen3.8-flash-next-iq3_xxs",
+      "endpoint_model_id": "qwen3.8-flash-next-class",
       "endpoint_n_ctx": 131072,
       "endpoint_reference": "env:NIGHTLY_BASE_URL (value not recorded, public-only rule)",
-      "provider_model_id": "strata/qwen3.8-flash-next-iq3_xxs",
-      "public_label": "qwen3.8-flash-next-iq3_xxs",
+      "provider_model_id": "local/qwen3.8-flash-next-class",
+      "public_label": "qwen3.8-flash-next-class",
       "serving_revision": null,
       "weights_hash": null,
       "weights_hash_note": "not exposed by the serving endpoint; recorded as a gap"

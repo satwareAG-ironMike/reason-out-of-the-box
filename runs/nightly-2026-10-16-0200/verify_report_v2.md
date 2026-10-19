@@ -9,7 +9,7 @@ no network calls, no LLM endpoint calls, and no git or forge calls. It worked re
 the repository except for this single file, and kept its own drivers and evidence outside
 the repository in a scratch directory.
 
-Verifier model: qwen3.8-flash-next-iq3_xxs (strata). Independence limit: this is the same
+Verifier model: qwen3.8-flash-next-class (strata). Independence limit: this is the same
 model id that served the probe endpoint per `environment.json`. The implementation is
 independent; the model is not.
 

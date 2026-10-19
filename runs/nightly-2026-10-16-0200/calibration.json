@@ -57,10 +57,10 @@
     "max_calls": 3,
     "max_completion_tokens": 522,
     "model": {
-      "id": "qwen3.8-flash-next-iq3_xxs",
+      "id": "qwen3.8-flash-next-class",
       "n_ctx": 131072,
-      "provider_model_id": "strata/qwen3.8-flash-next-iq3_xxs",
-      "public_label": "qwen3.8-flash-next-iq3_xxs"
+      "provider_model_id": "local/qwen3.8-flash-next-class",
+      "public_label": "qwen3.8-flash-next-class"
     },
     "n_calls": 3,
     "n_truncated": 0,
