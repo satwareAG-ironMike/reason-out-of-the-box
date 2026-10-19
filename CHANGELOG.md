@@ -19,6 +19,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   Olsson), does not meet the acceptance criteria (survey, task-trained or undisclosed
   models); overall verdict unchanged. Archive now 122 entries in 16 rounds; count
   statements updated in the same commit.
+- Automated repo-round family under tracker #83 (runners live outside this repository,
+  public-only rule): daily PR review at 06:30 (skill-verified validation of open PRs
+  plus the 3 required CI checks, merge-if-green), weekly maintenance Sun 05:00 (branch
+  hygiene, deep skill-verified PR pass), weekly doc collection Sun 08:00 (intro pages
+  synced via the DOX closeout rules), weekly issue audit Sun 09:00 (open issues
+  validated against in-repo knowledge). The merge gate is unchanged: every change
+  reaches main via branch + PR with all 3 CI checks green; agents never push to main
+  and never touch .github or the ruleset.
 
 ### 2026-10-14
 

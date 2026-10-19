@@ -115,6 +115,14 @@ When the user requests a durable behavior change, record it here or in the relev
   preferred, and health-checks each endpoint before use. Each round posts a summary comment on tracker
   issue #65; findings flow through deduped issues and `research/nightly-*` branches plus PRs (never
   push to main, never merge).
+- The automated repo-round family (tracker #83) runs via systemd user timers on the maintainer
+  workstation; all runners live outside this repository (public-only rule: they hold the local
+  inference pool and local state). Cadence: nightly research 02:00+04:00 (#65); daily PR review
+  06:30 (skill-verified validation of open PRs, merge-if-green); weekly maintenance Sun 05:00
+  (branch hygiene, deep PR pass); weekly doc collection Sun 08:00 (intro pages synced via the DOX
+  closeout rules); weekly issue audit Sun 09:00 (open issues validated against in-repo
+  knowledge). The merge gate is unchanged: branch + PR, all 3 CI checks green, squash-merged;
+  agents never push to main and never touch .github or the ruleset. Round summaries post to #83.
 
 ## Child DOX Index
 
