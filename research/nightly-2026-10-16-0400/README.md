@@ -1,6 +1,6 @@
 # Nightly round 2026-10-16 04:00 (round 6, pool slot 2/6)
 
-Model: local Qwen3.8-Flash-Next class endpoint (serving id `qwen38-flash-next`), which is
+Model: local Qwen3.8-Flash-Next class endpoint, which is
 also the model this agent session ran on. Evidence label: **Executed** (single harness,
 exploratory, n = 4 per depth level). Tracker: issue #65, round summary comment
 `2026-10-16 04:00`. Related: #67 (shortcut leak), PR #69 (component-isomorphism repair),

@@ -153,7 +153,7 @@
    "truncations": 0
   }
  ],
- "model_label": "qwen38-flash-next",
+ "model_label": "Qwen3.8-Flash-Next class local endpoint",
  "seed_base": 20261005,
  "selection_rule": "per level, scan the ladder series in generation order and take the first two items with answer yes and the first two with answer no",
  "task_type": "hop_chain",
