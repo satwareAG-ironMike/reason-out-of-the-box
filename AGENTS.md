@@ -129,7 +129,8 @@ When the user requests a durable behavior change, record it here or in the relev
 | Path | Scope | File |
 |------|-------|------|
 | `archive/` | Paper archive: 122 entries, 16 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
-| `generators/` | Condition-2 task generators (issue #4): digit matrices + ladders k-hop shipped; ladders mult_mult/dp_puzzle and ARC-style planned; seed policy, solvability and manifest contracts | [AGENTS.md](generators/AGENTS.md) |
+| `generators/` | Condition-2 task generators (issue #4): digit matrices + ladders k-hop shipped; ladders mult_mult/dp_puzzle and ARC-style planned; seed policy, solvability and manifest contracts; permutation-calibrated leak gate, pinned issue #67 negative-control fixtures and the seed-paired shortcut probe (issue #67; a true matched pair is owed, issue #78) | [AGENTS.md](generators/AGENTS.md) |
 | `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), IRB protocol draft (issue #7), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall, insect-sentience threshold); governed by root
   rules | - |
+| `runs/` | Executed-run record: per-round manifests, raw per-prompt responses, calibration records, regeneration and battery scripts, independent verification records, round reports; immutable manifests, public-only artifacts, Executed/Reproduced/Validated labels | [AGENTS.md](runs/AGENTS.md) |
 | `scripts/` | `check_archive.py` archive consistency checker and `check_links.py` markdown link checker (stdlib, each with `--selftest`); run both before any closeout | - |
