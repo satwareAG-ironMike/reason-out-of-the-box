@@ -5,6 +5,25 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-20
+
+#### Added
+
+- Nightly research round 14 (issue #65, tracker comment posted; serves #71 depth-ceiling
+  placement): `research/nightly-2026-10-20-0400/` replicates the round-11 matched-pair
+  traversal grid (k = 12, 16, 24; nine matched items x four arms = 36 cells; byte-identical
+  prompts, prompt_sha256 identity asserted in the gate against the committed round-11 raw
+  archive `round11_reference_raw.jsonl`) on a 27B-class local endpoint. Result: 36/36
+  cells follow the directed-traversal oracle (connectivity fails exactly the nine R1 cells,
+  0 discordant McNemar pairs in both families), and the verdict is cell-identical to the
+  flash-class round-11 run (36/36 cells agree), so on this corpus the traversal signature
+  is not a property of the flash class; completion style is class-dependent (full interior
+  chain recitation in 18/36 completions vs 36/36 at the flash-class slot, mean completion
+  tokens 407.1, max 853, no truncation at 2048). Gate written before any prompt (schema
+  `round14-gate-v1`, 66-check selftest green); 37 endpoint calls under a 40-attempt cap,
+  zero retries. State: **Executed**; the round-11 independent-verifier standard is deferred
+  this round and disclosed in the round README.
+
 ### 2026-10-19
 
 #### Added
