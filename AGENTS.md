@@ -114,9 +114,11 @@ When the user requests a durable behavior change, record it here or in the relev
   holds the local inference pool), rotates across self-hosted inference endpoints with localhost
   preferred, and health-checks each endpoint before use. Each round posts a summary comment on tracker
   issue #65; findings flow through deduped issues and `research/nightly-*` branches plus PRs (never
-  push to main, never merge). A round whose experiment arm cannot run must say so in its #65 comment
-  and keep the surviving failure record (log, gate output) in its `research/nightly-*` directory;
-  an arm that timed out is never reported as a result.
+  push to main, never merge). Round experiment artifacts (script, prompts, raw responses, scores)
+  land under `research/nightly-YYYY-MM-DD-HHMM/`, see [research/AGENTS.md](research/AGENTS.md). A
+  round whose experiment arm cannot run must say so in its #65 comment and keep the surviving
+  failure record (log, gate output) in its `research/nightly-*` directory; an arm that timed out
+  is never reported as a result.
 - The automated repo-round family (tracker #83) runs via systemd user timers on the maintainer
   workstation; all runners live outside this repository (public-only rule: they hold the local
   inference pool and local state). Cadence: nightly research 02:00+04:00 (#65); daily PR review
@@ -135,4 +137,4 @@ When the user requests a durable behavior change, record it here or in the relev
 | `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), IRB protocol draft (issue #7), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall, insect-sentience threshold); governed by root
   rules | - |
 | `scripts/` | `check_archive.py` archive consistency checker and `check_links.py` markdown link checker (stdlib, each with `--selftest`); run both before any closeout | - |
-| `research/` | Nightly round records (issue #65): one directory per firing named `nightly-YYYY-MM-DD-HHMM` holding the round script, `gate.json`, raw responses or failure log, and a round README with the evidence label; round scripts are independent re-implementations, endpoint hosts and credentials never appear in them; governed by root rules until a child `AGENTS.md` lands (PR #70) | - |
+| `research/` | Nightly round artifacts (issue #65): per-firing directories with probe scripts, prompts, raw responses, scores, sanitization and evidence-label contracts | [AGENTS.md](research/AGENTS.md) |
