@@ -843,3 +843,35 @@ cross-domain substrate-threshold argument now has a claim ledger
 ([counterarguments.md](counterarguments.md)). The candidate play-criteria indicator protocol
 (Part 5 of the ledger) is a proposal, not an experiment; nothing was added to the M1-M5
 program on 2026-10-14.
+
+## Research finding (2026-10-16): the ladder family is budget-limited, not depth-limited
+
+Nightly round 6 (issue #65, artifacts in
+[`research/nightly-2026-10-16-0400/`](../research/nightly-2026-10-16-0400/README.md)) probed
+the component-isomorphic k-hop ladder family (issue #67 fix, PR #69) on a local
+Qwen3.8-Flash-Next class endpoint: 40 prompts, arm A (no elicitation, temperature 0,
+`max_tokens` 2048), depth grid k in {1,2,3,4,5,6,8,10,12,16}, 2 gold-yes plus 2 gold-no items
+per level selected before any call. Result 40/40 correct, 40/40 format-valid, 0 truncations:
+no ceiling inside k <= 16, so the repair closed the leak without making items unreachable.
+
+What binds is the output budget, not the depth. Completion length fits
+`tokens = -36 + 80k` (correlation 0.75 with depth, 0.72 with prompt length), and the answer
+word is emitted only after the traversal is written out, so replaying the same completions
+against fixed budgets loses 26/40 items at 256 tokens, 12/40 at 512, 4/40 at 1024. That is
+the mechanism behind the single miss PR #69 reported at a 512-token budget.
+
+Consequences for the study design and the M2 harness (issue #5):
+
+- A depth curve taken at an open token budget on an explicit-reasoning model is not a depth
+  ceiling and must not be recorded as one; report accuracy against consumed completion tokens,
+  or fix a per-item budget and report accuracy-versus-budget at each depth.
+- The `d*+1..d*+4` band cannot be placed from a curve that does not turn over: extend the grid
+  (k = 20, 24, 32) or move difficulty into the item (distractor chains, contradictory
+  premises), the GSM-Symbolic move (arXiv 2410.05229, ICLR 2025).
+- The condition-1 arms that decide H1 run on base checkpoints that cannot write a traversal at
+  all; a budget-limited ceiling (this endpoint) and a TC0-limited limit (arXiv 2604.25800) are
+  different claims and must not be pooled.
+- Literature gaps found while verifying this (OpenAlex only, arXiv API rate-limited): no
+  verified source pre-registers a confirmatory band at `d*+1..d*+4`, and no verified evidence
+  that quantization or inference precision degrades multi-hop depth reasoning specifically.
+  Both stay open problems for the protocol text, not negative results.

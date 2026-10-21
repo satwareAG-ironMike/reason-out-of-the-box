@@ -5,6 +5,29 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-19
+
+#### Added
+
+- Archive round 17, mechanistic interpretability review: 1 entry in
+  `archive/round17-mechanistic-review-2026/` (Sawant & Krejčí 2026, arXiv:2607.07316,
+  scoping review, preprint), ingested on owner direction with focus on section 3.8
+  "Emergent Symbolic Reasoning Mechanisms", full-text verified (`[FT]`): deduction
+  heads on tree path-finding (Brinkmann et al., arXiv:2402.11917) and the Yang et al.
+  ICML 2025 three-stage symbolic architecture (symbol abstraction, symbolic induction,
+  retrieval). Verdict: +/- mechanism - strengthens the circuit-forms line (Nanda,
+  Olsson), does not meet the acceptance criteria (survey, task-trained or undisclosed
+  models); overall verdict unchanged. Archive now 122 entries in 16 rounds; count
+  statements updated in the same commit.
+- Automated repo-round family under tracker #83 (runners live outside this repository,
+  public-only rule): daily PR review at 06:30 (skill-verified validation of open PRs
+  plus the 3 required CI checks, merge-if-green), weekly maintenance Sun 05:00 (branch
+  hygiene, deep skill-verified PR pass), weekly doc collection Sun 08:00 (intro pages
+  synced via the DOX closeout rules), weekly issue audit Sun 09:00 (open issues
+  validated against in-repo knowledge). The merge gate is unchanged: every change
+  reaches main via branch + PR with all 3 CI checks green; agents never push to main
+  and never touch .github or the ruleset.
+
 ### 2026-10-18
 
 #### Added
@@ -32,6 +55,88 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   unresolvable from this environment); verified animal transitive-inference primary
   Gazes, Chee and Hampton 2012, J. Exp. Psychol. Animal Behavior Processes 38(4):331-345,
   DOI 10.1037/a0030306.
+
+### 2026-10-16
+
+#### Added
+
+- `research/AGENTS.md`, the DOX boundary for nightly round artifacts (issue #65): one
+  directory per firing, script plus `raw.jsonl` prompts and raw responses plus
+  `summary.json`, sanitized by construction (no host, IP, endpoint URL, credential or
+  model file path, in model output text as well), protocol caps treated as contractual,
+  and the Executed/Reproduced/Validated label stated per run. Registered in the root
+  Child DOX Index.
+- `research/nightly-2026-10-16-0400/` (nightly round 6): `ladder_depth_probe.py`, a
+  depth-ceiling probe for the k-hop ladder family (stdlib, `--selftest` with 7 controls:
+  byte-identical regeneration against the shipped series, a constant rule at exactly the
+  majority baseline, a perfect rule at 1.0, an inverted rule at 0.0, parser refusals,
+  sanitizer, and two negative controls that must be rejected: a flipped answer and a
+  pre-#69 item), plus `raw.jsonl` (40 prompts and raw responses) and `summary.json`.
+  Result on a local Qwen3.8-Flash-Next class endpoint (arm A, temperature 0,
+  `max_tokens` 2048, grid k in {1,2,3,4,5,6,8,10,12,16}, 2 yes + 2 no per level selected
+  before any call): 40/40 correct, 40/40 format-valid, 0 truncations, no ceiling inside
+  k <= 16, reproducing PR #69's model-facing claim on a second endpoint with an
+  independent harness. New measurement: depth is paid in output tokens
+  (`completion_tokens = -36 + 80k`), and replaying the same completions against fixed
+  budgets loses 26/40 items at 256 tokens, 12/40 at 512 and 4/40 at 1024, so the family
+  is budget-limited rather than depth-limited for an explicit-reasoning endpoint; the
+  `d*+1..d*+4` band cannot be placed from this curve. Recorded in
+  `docs/next-investigations.md`.
+
+#### Fixed
+
+- `generators/AGENTS.md` seed policy stated the digit-matrices forms as family-wide: the
+  per-item seed multiplier is 2_000_000 for `ladders.py` (not 1_000_000) and the ladder
+  `seed_hash` is sha256("family|task_type|level|seed")[:16], so the committed ladder seeds
+  and seed hashes did not follow from the documented rule.
+
+### 2026-10-15
+
+#### Fixed
+
+- `generators/ladders.py` shortcut leak (issue #67): the pre-fix k-hop ladder items
+  (single chain plus disjoint noise) leaked the gold label through two surface rules
+  that never traverse the fact graph (query target is a fact target; query target
+  out-degree zero), both at 100% on the 1,500 shipped items, so the family could not
+  support Condition 2 / claim C5. Repair: the construction is now component-isomorphic -
+  the facts are C >= 2 disjoint directed paths, each of exactly `level` edges over fresh
+  entities; the query is always (head of one path, tail of one path); the answer is
+  "yes" iff both endpoints lie on the same path. Because every component is isomorphic
+  (same length, same endpoint roles), no surface feature of the query endpoints
+  (fact-target/source membership, in/out degree, component or walk length) can separate
+  the two answer classes; the only separating information (which component each endpoint
+  is on) requires the intended k-hop traversal. Regenerated `items/ladders/` levels
+  {1, 2, 4, 6, 8}, 300 items each (1,500 total), seed_base 20261005; byte-identical
+  regeneration and per-level manifest sha256 verified. Verification against the issue
+  #67 acceptance criteria: all four acceptance-criterion rules (fact-target membership,
+  out-degree zero, in-degree zero, fact-source membership) are label-constant at every
+  level (raw accuracy equals the per-level majority baseline; no rule or gated
+  conjunction above 0.55); independent BFS agrees with the stored answer on 1,500/1,500
+  items (yes items shortest path exactly k, no items unreachable); a 40-prompt
+  format-validity check against the local inference endpoint
+  (a 27B-class local model) scores 39/40, the single miss being a 512-token
+  truncation the item answers correctly under a larger budget, so the repaired format
+  remains solvable across the depth grid.
+
+#### Added
+
+- `generators/audit_ladder_leaks.py` (issue #67): a repeatable shortcut-leak audit for
+  the ladder family. A surface-feature battery over the query endpoints (degree,
+  fact-target/source membership, neighbourhood, component and walk length), a
+  conjunction search over them, numeric stumps, and bounded-search baselines (d=1, 2,
+  3), plus an independent-BFS solvability re-derivation. The audit measures the shipped
+  generator directly (thin aliases to `ladders.generate_item`), so the battery and the
+  negative controls cannot drift from the item contract. Gate semantics: a feature
+  constant across an item set carries no label information (its accuracy is the
+  sample's label imbalance, not a leak) and is reported but never gated; at level 1 the
+  `direct_fact` feature is the task itself (a 1-hop query is derivable iff it is a
+  stated fact) and is reported as a depth match, never gated; everything else is gated
+  above CHANCE_MAX = 0.55. Seven seeded negative controls (planted leak, ragged
+  components, shuffled labels, off-by-one, planted cross edge, determinism) are all
+  caught by `--selftest`. The round-2 construct-validity scratch tool
+  (`audit_hop_chain.py`, never committed) is superseded by it: its mode-0 fidelity
+  re-implementation targeted the pre-fix generator and its candidate-fix simulations
+  (A-E) are superseded by the adopted component-isomorphism construction.
 
 ### 2026-10-14
 
