@@ -28,6 +28,34 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   reaches main via branch + PR with all 3 CI checks green; agents never push to main
   and never touch .github or the ruleset.
 
+### 2026-10-18
+
+#### Added
+
+- Nightly round 9 (issue #65, `research/nightly-2026-10-18-0200/`): the round-8
+  constant-load grid re-run on the faster assigned endpoint with the #73 transport
+  hardening (pre-grid health check, sequential dispatch, per-item 600 s deadline with one
+  retry, incremental fsynced raw archive, empty completions classified `transport_failure`
+  with error class and never `no_answer`, per-arm 3600 s budget). The probe completed:
+  40/40 answered, 40/40 correct, 0 transport failures, all first attempt. No turnover to
+  arm-L `k = 12` (6/6 at every depth, Wilson lower bound 0.6097 above the 0.60 floor),
+  so `d* = 12` within the declared grid, i.e. `d* >= 12`; arm X descriptive 2/2 at
+  `k = 16` and `k = 24`. Budget replay: 25/40 items unreachable at 256 tokens (median
+  completion 404 tokens), 18 at 512, 2 at 1024, 0 at 2048, and every reachable answer is
+  correct (truncation cliff, not reasoning cliff). The three items that survived round 8's
+  transport failure answer correctly on the byte-identical stream. #73 acceptance met
+  (arm ran; the empty-completion and deadline paths are covered by selftest controls 10
+  and 11). `const_load_depth.py` is a self-contained re-implementation (stdlib only, 15
+  selftest controls including stream identity against round 8's published gate record).
+- Round-9 literature verification posted to issue #74 (free scholarly APIs only): CLUTRR
+  (arXiv 1908.06177) verified with venue EMNLP 2019 (ACL Anthology D19-1458); the
+  RuleTaker (pinned arXiv 2301.07330) and PrOntoQA (pinned arXiv 2203.14238) arXiv IDs
+  in #74 point at unrelated papers (FPANet and a Vicsek-model paper respectively) and
+  neither paper resolves in arXiv, Crossref, or OpenAlex (OpenReview-only, forum
+  unresolvable from this environment); verified animal transitive-inference primary
+  Gazes, Chee and Hampton 2012, J. Exp. Psychol. Animal Behavior Processes 38(4):331-345,
+  DOI 10.1037/a0030306.
+
 ### 2026-10-16
 
 #### Added
