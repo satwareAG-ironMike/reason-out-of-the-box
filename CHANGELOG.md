@@ -73,6 +73,82 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   Gazes, Chee and Hampton 2012, J. Exp. Psychol. Animal Behavior Processes 38(4):331-345,
   DOI 10.1037/a0030306.
 
+- Nightly round 10 (04:00 slot, issue #65): matched-pair probe of traversal versus undirected
+  connectivity in `research/nightly-2026-10-18-0400/` (`matched_pair_probe.py`, `gate.json`,
+  `raw.jsonl`, `summary.json`, `README.md`). The shipped corpus is shown to be unable to separate the
+  two strategies: across all 1500 items there are 0 queried pairs where connectivity and directed
+  reachability disagree, and 5 direction-blind rules reproduce every gold label at 1.0000
+  (`same_component`, `undirected_connectivity_only`, `target_is_fact_target`,
+  `endpoint_out_degree_zero`, `chain_len_matches_level`; the last is a metadata leak, since item
+  `chain_len` equals `level` for gold-yes items). A 9-item matched corpus built by re-querying real
+  shipped items at k = 4, 6, 8 (forward interior, reverse, forward shifted, cross-component terminal)
+  has 9 disagreeing cells, matched-pair invariants enforced as fatal checks, and a 15-rule
+  direction-blind battery whose best rule reaches only 0.7500, so the corpus is discriminating while
+  the shipped one is not. Probe: 36 prompts, 36/36 answered, 0 transport failures, 0 truncations,
+  every arm 9/9; exact McNemar 0 discordant pairs in both families; the answer pattern matches the
+  directed-traversal oracle on 36/36 cells and 9/9 items and the connectivity oracle on 27/36 cells
+  and 0/9 items. Verdict: the endpoint traverses the chain rather than answering from component
+  membership. This defeats the blocking half of #77 criterion 4 for probing (a matched-pair probe does
+  not have to wait for the generator repair) without cleaning the shipped corpus, which criterion 3
+  still owns. Exact label-shuffle nulls throughout, no Monte Carlo; significance separated from
+  competence (`same_component` reaches p 1.953e-03 on the matched corpus at only 0.7500 accuracy).
+  Literature arm: CLUTRR 1908.06177, ProofWriter 2012.13048, Soft Reasoners 2002.05867, PrOntoQA
+  2112.09054, Greedy Reasoners 2210.01240, OOD deductive capacity 2305.15269, Explicit Planning
+  2303.15714, Verifier-Guided Proofs 2205.12443, PRover 2010.02830, NeuBAROCO 2306.12567, Hypothesis
+  Search 2309.05660, Neural Theorem Provers 1906.06805; the seven IDs earlier rounds mis-pinned are
+  recorded as wrong. As first published 8 of those 12 titles did not match the arXiv record and the
+  entry claimed RuleTaker's own ID was unconfirmed; both were corrected the same day by the independent
+  verification pass recorded below. Honest disclosure: the first execution of this round was destroyed by
+  a verifier subagent that switched the shared primary worktree to `main`, and everything published is
+  from a single re-execution (see the round README limits section).
+
+#### Fixed
+
+- Independent verification of nightly round 10 (`docs/review-rounds/nightly10-2026-10-18.md`): every
+  quantitative claim in `research/nightly-2026-10-18-0400/README.md` recomputed from `gate.json`,
+  `raw.jsonl`, `summary.json` and `items/ladders/` with independent union-find, BFS, exact
+  `Fraction`-based hypergeometric and convolution nulls, Wilson interval, and McNemar implementations.
+  All headline numbers reproduced, and `--gate` plus `--analyze` regenerate `gate.json` and
+  `summary.json` byte-identically in a sandbox. Corrections landed in the round README: the selection
+  rule is 3 usable items per level, not one; the arm notation is off by one (F1 is (p_1, p_k), R1 is
+  (p_k, p_1), F2 is (p_2, p_{k+1})); "15 rules that cannot express edge direction" is overstated, since
+  reversing every edge changes 5 of the 15; the rule nulls are one-sided upper tails, and the two-sided
+  matched p for `same_component` is 3.906e-03, above the 3.333e-03 Bonferroni bar, so the 0.90 accuracy
+  bar is what makes the corpus discriminating; shipped p 0.0 is an underflowed float for an exact tail of
+  about 10^-450; `gate.json` records `null_min_hits` wrong for 12 rules and `null_max_hits` wrong for 3
+  (the true support is [|a + y - n|, n - |a - y|]), which cannot be retrofitted because the gate hash is
+  embedded in every `raw.jsonl` record and in `summary.json`, so the fix is owed with a fresh gate under
+  #77; the 10.2 s health check, the 745.8 s probe wall clock, the 37-to-73 prompt range and the "two real
+  bugs found by those controls" claim are runner-side statements no artifact carries; the literature table
+  is rewritten with API-resolved titles, authors and venues, 2002.05867 is identified as the RuleTaker
+  paper, its venue is IJCAI 2020 rather than the unsupported "TACL 2021", and "Language Models with
+  Rules" plus "Deriving Rules from Language Models" are recorded as unverified because no arXiv record
+  carries either title. The same corrections were published in place on the forge threads where round 10
+  had already posted them (the PR #80 description and comment, and issues #65, #73, #74, #77 and #78) rather
+  than as new issues; the PR description was corrected by prepending a dated corrections section and
+  leaving the original claim record below it. Issue #73 additionally received the round-10
+  transport record as the artifacts carry it, plus the proposal that future rounds write `started_utc`
+  and `finished_utc` into `summary.json` so that wall-clock claims are archive claims rather than log
+  claims.
+- `matched_pair_probe.py --selftest` now passes 45 of 45 and exits 0. As shipped by round 10 it reported
+  44 of 45 and exited 1: one check asserted `null_sd == 0.0` and `p_exact == 1.0` for the
+  `same_component` shipped null, whose true standard deviation is 19.370824 and whose exact tail
+  underflows to 0.0, and a second check was labelled "0 discordant pairs" over an assertion of 9. Both
+  were defects in the test, not in the analysis; the bound formulas in `exact_null_shipped` are left
+  unchanged on purpose and now carry a comment recording the correct support for the round that re-runs
+  the battery with a fresh gate hash.
+
+#### Changed
+
+- `docs/agent-execution.md` section 5 gains two verification-conduct rules, both learned from this
+  round's verification pass: a verifier is read-only against the worktree under verification (it writes
+  only outside it, never edits a tracked file, never commits or pushes, and never runs `git checkout`,
+  `git switch`, `git branch -D` or `git push --delete` against that worktree or its refs; its findings
+  land as a report the producing agent re-verifies and applies), and the runner snapshots the round
+  directory before any verifier pass, by commit plus push or by a checksummed copy outside the
+  repository. The first execution of round 10 was destroyed by exactly the operation the first rule
+  forbids, and the round-10 verifier patched the working tree while reporting read-only operation.
+
 ### 2026-10-16
 
 #### Added
