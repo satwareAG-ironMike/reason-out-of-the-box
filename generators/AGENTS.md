@@ -22,11 +22,18 @@ land one PR at a time (Baby Steps).
   convention); missing cell fixed at (2,2).
 - Family 2 `ladders.py` (subtype `hop_chain`): universal transitivity rule +
   shuffled atomic facts over synthetic entity strings + yes/no query; depth k =
-  shortest directed path length of the queried pair. Construction keeps noise
-  components disjoint from the main chain (entity-name uniqueness), so yes items
-  have no shortcut and no items stay unreachable; the selftest re-derives both
-  invariants by independent BFS. Subtypes `mult_mult` and `dp_puzzle` (issue #4
-  list) are pending.
+  shortest directed path length of the queried pair. Construction (component
+  isomorphism, issue #67 fix): the facts are C >= 2 disjoint directed paths, each
+  of exactly k edges over fresh entities; the query is always (head of one path,
+  tail of one path); answer "yes" iff both endpoints lie on the same path. Because
+  every component is isomorphic (same length, same endpoint roles), no surface
+  feature of the query endpoints separates the two answer classes, so no item has
+  a shortcut and none stays unreachable; the selftest re-derives both invariants by
+  independent BFS plus a four-rule surface battery (issue #67 acceptance criterion
+  2). `audit_ladder_leaks.py` makes the leak measurement repeatable (feature
+  battery, conjunction search, stumps, bounded-search baselines, independent-BFS
+  solvability; constant features reported but never gated). Subtypes `mult_mult`
+  and `dp_puzzle` (issue #4 list) are pending.
 - Solvability is generation-time policy: for every component, exactly one rule of
   the pool must reproduce both demonstration rows jointly; non-identifiable
   samples are rejected. The selftest re-derives uniqueness from the emitted item.
@@ -35,10 +42,15 @@ land one PR at a time (Baby Steps).
   compositional ladders k in {1, 2, 4, 6, 8} hops; ARC-style 1-5 composed
   transforms. The study runs d*+1..d*+4 around the audit ceiling d*.
 - Seed policy: base seed is public (date-based, e.g. 20261005), post-dating model
-  cutoffs; per-item seed = seed_base + 1_000_000 * level + item_index; every item
-  carries `seed` and `seed_hash = sha256("family|level|seed")[:16]`; manifests
-  record count, seed_base, content sha256, and the seed-hash-chain sha256.
-  Reproducibility: regeneration from the seed must be byte-identical.
+  cutoffs; per-item seed = seed_base + multiplier * level + item_index, multiplier
+  1_000_000 for `digit_matrices.py` and 2_000_000 for `ladders.py`; `seed_hash` is
+  sha256("family|level|seed")[:16] for digit matrices and
+  sha256("family|task_type|level|seed")[:16] for ladders (both corrected 2026-10-16: the
+  doc previously stated the digit-matrices forms as if they were family-wide, so the
+  committed ladder seeds and seed hashes did not follow from it). Every item carries
+  `seed` and `seed_hash`; manifests record count, seed_base, content sha256, and the
+  seed-hash-chain sha256. Reproducibility: regeneration from the seed must be
+  byte-identical.
 - Item files: `items/<family>/l<level>.jsonl` + `l<level>.manifest.json`, one JSON
   object per line, sorted keys, compact separators, no em/en dashes. Items and
   seeds are public (public-only rule).

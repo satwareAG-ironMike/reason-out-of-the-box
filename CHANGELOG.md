@@ -47,6 +47,209 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   reaches main via branch + PR with all 3 CI checks green; agents never push to main
   and never touch .github or the ruleset.
 
+- Nightly round 11 research record (`research/nightly-2026-10-19-0200/`, issue #65,
+  refs #71, #73): a matched-pair probe at depths k = 12, 16, 24 on nine seed-generated
+  ladder items (levels beyond the shipped grid, generator hashes pinned in the gate)
+  replicates the round-10 traversal verdict: 36/36 cells match the directed-traversal
+  oracle, the undirected-connectivity shortcut fails all nine reverse cells, exact
+  McNemar shows zero discordant pairs in both matched families, and all 36 completions
+  recite the full interior chain. The endpoint is the pool's `qwen38-flash-next` slot, a
+  distinct slot from round 10's (same public model family; not a quantization comparison).
+  Transport hardening: 37 endpoint
+  calls under a global 40-attempt cap, zero retries, per-attempt `finished_at`
+  timestamps close the named open item of #73. The probe script fixes three round-10
+  verification findings instead of copying them (true null support bounds, two-sided
+  exact nulls for gate firing, attempt-capped retries) and its `--selftest` passes
+  50 checks. Verification record: `docs/review-rounds/nightly11-2026-10-19.md`
+  (byte-identical regeneration of gate and summary; seven documentation errata corrected;
+  state Executed and Reproduced at the analysis level).
+
+### 2026-10-18
+
+#### Added
+
+- Nightly round 9 (issue #65, `research/nightly-2026-10-18-0200/`): the round-8
+  constant-load grid re-run on the faster assigned endpoint with the #73 transport
+  hardening (pre-grid health check, sequential dispatch, per-item 600 s deadline with one
+  retry, incremental fsynced raw archive, empty completions classified `transport_failure`
+  with error class and never `no_answer`, per-arm 3600 s budget). The probe completed:
+  40/40 answered, 40/40 correct, 0 transport failures, all first attempt. No turnover to
+  arm-L `k = 12` (6/6 at every depth, Wilson lower bound 0.6097 above the 0.60 floor),
+  so `d* = 12` within the declared grid, i.e. `d* >= 12`; arm X descriptive 2/2 at
+  `k = 16` and `k = 24`. Budget replay: 25/40 items unreachable at 256 tokens (median
+  completion 404 tokens), 18 at 512, 2 at 1024, 0 at 2048, and every reachable answer is
+  correct (truncation cliff, not reasoning cliff). The three items that survived round 8's
+  transport failure answer correctly on the byte-identical stream. #73 acceptance met
+  (arm ran; the empty-completion and deadline paths are covered by selftest controls 10
+  and 11). `const_load_depth.py` is a self-contained re-implementation (stdlib only, 15
+  selftest controls including stream identity against round 8's published gate record).
+- Round-9 literature verification posted to issue #74 (free scholarly APIs only): CLUTRR
+  (arXiv 1908.06177) verified with venue EMNLP 2019 (ACL Anthology D19-1458); the
+  RuleTaker (pinned arXiv 2301.07330) and PrOntoQA (pinned arXiv 2203.14238) arXiv IDs
+  in #74 point at unrelated papers (FPANet and a Vicsek-model paper respectively) and
+  neither paper resolves in arXiv, Crossref, or OpenAlex (OpenReview-only, forum
+  unresolvable from this environment); verified animal transitive-inference primary
+  Gazes, Chee and Hampton 2012, J. Exp. Psychol. Animal Behavior Processes 38(4):331-345,
+  DOI 10.1037/a0030306.
+
+- Nightly round 10 (04:00 slot, issue #65): matched-pair probe of traversal versus undirected
+  connectivity in `research/nightly-2026-10-18-0400/` (`matched_pair_probe.py`, `gate.json`,
+  `raw.jsonl`, `summary.json`, `README.md`). The shipped corpus is shown to be unable to separate the
+  two strategies: across all 1500 items there are 0 queried pairs where connectivity and directed
+  reachability disagree, and 5 direction-blind rules reproduce every gold label at 1.0000
+  (`same_component`, `undirected_connectivity_only`, `target_is_fact_target`,
+  `endpoint_out_degree_zero`, `chain_len_matches_level`; the last is a metadata leak, since item
+  `chain_len` equals `level` for gold-yes items). A 9-item matched corpus built by re-querying real
+  shipped items at k = 4, 6, 8 (forward interior, reverse, forward shifted, cross-component terminal)
+  has 9 disagreeing cells, matched-pair invariants enforced as fatal checks, and a 15-rule
+  direction-blind battery whose best rule reaches only 0.7500, so the corpus is discriminating while
+  the shipped one is not. Probe: 36 prompts, 36/36 answered, 0 transport failures, 0 truncations,
+  every arm 9/9; exact McNemar 0 discordant pairs in both families; the answer pattern matches the
+  directed-traversal oracle on 36/36 cells and 9/9 items and the connectivity oracle on 27/36 cells
+  and 0/9 items. Verdict: the endpoint traverses the chain rather than answering from component
+  membership. This defeats the blocking half of #77 criterion 4 for probing (a matched-pair probe does
+  not have to wait for the generator repair) without cleaning the shipped corpus, which criterion 3
+  still owns. Exact label-shuffle nulls throughout, no Monte Carlo; significance separated from
+  competence (`same_component` reaches p 1.953e-03 on the matched corpus at only 0.7500 accuracy).
+  Literature arm: CLUTRR 1908.06177, ProofWriter 2012.13048, Soft Reasoners 2002.05867, PrOntoQA
+  2112.09054, Greedy Reasoners 2210.01240, OOD deductive capacity 2305.15269, Explicit Planning
+  2303.15714, Verifier-Guided Proofs 2205.12443, PRover 2010.02830, NeuBAROCO 2306.12567, Hypothesis
+  Search 2309.05660, Neural Theorem Provers 1906.06805; the seven IDs earlier rounds mis-pinned are
+  recorded as wrong. As first published 8 of those 12 titles did not match the arXiv record and the
+  entry claimed RuleTaker's own ID was unconfirmed; both were corrected the same day by the independent
+  verification pass recorded below. Honest disclosure: the first execution of this round was destroyed by
+  a verifier subagent that switched the shared primary worktree to `main`, and everything published is
+  from a single re-execution (see the round README limits section).
+
+#### Fixed
+
+- Independent verification of nightly round 10 (`docs/review-rounds/nightly10-2026-10-18.md`): every
+  quantitative claim in `research/nightly-2026-10-18-0400/README.md` recomputed from `gate.json`,
+  `raw.jsonl`, `summary.json` and `items/ladders/` with independent union-find, BFS, exact
+  `Fraction`-based hypergeometric and convolution nulls, Wilson interval, and McNemar implementations.
+  All headline numbers reproduced, and `--gate` plus `--analyze` regenerate `gate.json` and
+  `summary.json` byte-identically in a sandbox. Corrections landed in the round README: the selection
+  rule is 3 usable items per level, not one; the arm notation is off by one (F1 is (p_1, p_k), R1 is
+  (p_k, p_1), F2 is (p_2, p_{k+1})); "15 rules that cannot express edge direction" is overstated, since
+  reversing every edge changes 5 of the 15; the rule nulls are one-sided upper tails, and the two-sided
+  matched p for `same_component` is 3.906e-03, above the 3.333e-03 Bonferroni bar, so the 0.90 accuracy
+  bar is what makes the corpus discriminating; shipped p 0.0 is an underflowed float for an exact tail of
+  about 10^-450; `gate.json` records `null_min_hits` wrong for 12 rules and `null_max_hits` wrong for 3
+  (the true support is [|a + y - n|, n - |a - y|]), which cannot be retrofitted because the gate hash is
+  embedded in every `raw.jsonl` record and in `summary.json`, so the fix is owed with a fresh gate under
+  #77; the 10.2 s health check, the 745.8 s probe wall clock, the 37-to-73 prompt range and the "two real
+  bugs found by those controls" claim are runner-side statements no artifact carries; the literature table
+  is rewritten with API-resolved titles, authors and venues, 2002.05867 is identified as the RuleTaker
+  paper, its venue is IJCAI 2020 rather than the unsupported "TACL 2021", and "Language Models with
+  Rules" plus "Deriving Rules from Language Models" are recorded as unverified because no arXiv record
+  carries either title. The same corrections were published in place on the forge threads where round 10
+  had already posted them (the PR #80 description and comment, and issues #65, #73, #74, #77 and #78) rather
+  than as new issues; the PR description was corrected by prepending a dated corrections section and
+  leaving the original claim record below it. Issue #73 additionally received the round-10
+  transport record as the artifacts carry it, plus the proposal that future rounds write `started_utc`
+  and `finished_utc` into `summary.json` so that wall-clock claims are archive claims rather than log
+  claims.
+- `matched_pair_probe.py --selftest` now passes 45 of 45 and exits 0. As shipped by round 10 it reported
+  44 of 45 and exited 1: one check asserted `null_sd == 0.0` and `p_exact == 1.0` for the
+  `same_component` shipped null, whose true standard deviation is 19.370824 and whose exact tail
+  underflows to 0.0, and a second check was labelled "0 discordant pairs" over an assertion of 9. Both
+  were defects in the test, not in the analysis; the bound formulas in `exact_null_shipped` are left
+  unchanged on purpose and now carry a comment recording the correct support for the round that re-runs
+  the battery with a fresh gate hash.
+
+#### Changed
+
+- `docs/agent-execution.md` section 5 gains two verification-conduct rules, both learned from this
+  round's verification pass: a verifier is read-only against the worktree under verification (it writes
+  only outside it, never edits a tracked file, never commits or pushes, and never runs `git checkout`,
+  `git switch`, `git branch -D` or `git push --delete` against that worktree or its refs; its findings
+  land as a report the producing agent re-verifies and applies), and the runner snapshots the round
+  directory before any verifier pass, by commit plus push or by a checksummed copy outside the
+  repository. The first execution of round 10 was destroyed by exactly the operation the first rule
+  forbids, and the round-10 verifier patched the working tree while reporting read-only operation.
+
+### 2026-10-16
+
+#### Added
+
+- `research/AGENTS.md`, the DOX boundary for nightly round artifacts (issue #65): one
+  directory per firing, script plus `raw.jsonl` prompts and raw responses plus
+  `summary.json`, sanitized by construction (no host, IP, endpoint URL, credential or
+  model file path, in model output text as well), protocol caps treated as contractual,
+  and the Executed/Reproduced/Validated label stated per run. Registered in the root
+  Child DOX Index.
+- `research/nightly-2026-10-16-0400/` (nightly round 6): `ladder_depth_probe.py`, a
+  depth-ceiling probe for the k-hop ladder family (stdlib, `--selftest` with 7 controls:
+  byte-identical regeneration against the shipped series, a constant rule at exactly the
+  majority baseline, a perfect rule at 1.0, an inverted rule at 0.0, parser refusals,
+  sanitizer, and two negative controls that must be rejected: a flipped answer and a
+  pre-#69 item), plus `raw.jsonl` (40 prompts and raw responses) and `summary.json`.
+  Result on a local Qwen3.8-Flash-Next class endpoint (arm A, temperature 0,
+  `max_tokens` 2048, grid k in {1,2,3,4,5,6,8,10,12,16}, 2 yes + 2 no per level selected
+  before any call): 40/40 correct, 40/40 format-valid, 0 truncations, no ceiling inside
+  k <= 16, reproducing PR #69's model-facing claim on a second endpoint with an
+  independent harness. New measurement: depth is paid in output tokens
+  (`completion_tokens = -36 + 80k`), and replaying the same completions against fixed
+  budgets loses 26/40 items at 256 tokens, 12/40 at 512 and 4/40 at 1024, so the family
+  is budget-limited rather than depth-limited for an explicit-reasoning endpoint; the
+  `d*+1..d*+4` band cannot be placed from this curve. Recorded in
+  `docs/next-investigations.md`.
+
+#### Fixed
+
+- `generators/AGENTS.md` seed policy stated the digit-matrices forms as family-wide: the
+  per-item seed multiplier is 2_000_000 for `ladders.py` (not 1_000_000) and the ladder
+  `seed_hash` is sha256("family|task_type|level|seed")[:16], so the committed ladder seeds
+  and seed hashes did not follow from the documented rule.
+
+### 2026-10-15
+
+#### Fixed
+
+- `generators/ladders.py` shortcut leak (issue #67): the pre-fix k-hop ladder items
+  (single chain plus disjoint noise) leaked the gold label through two surface rules
+  that never traverse the fact graph (query target is a fact target; query target
+  out-degree zero), both at 100% on the 1,500 shipped items, so the family could not
+  support Condition 2 / claim C5. Repair: the construction is now component-isomorphic -
+  the facts are C >= 2 disjoint directed paths, each of exactly `level` edges over fresh
+  entities; the query is always (head of one path, tail of one path); the answer is
+  "yes" iff both endpoints lie on the same path. Because every component is isomorphic
+  (same length, same endpoint roles), no surface feature of the query endpoints
+  (fact-target/source membership, in/out degree, component or walk length) can separate
+  the two answer classes; the only separating information (which component each endpoint
+  is on) requires the intended k-hop traversal. Regenerated `items/ladders/` levels
+  {1, 2, 4, 6, 8}, 300 items each (1,500 total), seed_base 20261005; byte-identical
+  regeneration and per-level manifest sha256 verified. Verification against the issue
+  #67 acceptance criteria: all four acceptance-criterion rules (fact-target membership,
+  out-degree zero, in-degree zero, fact-source membership) are label-constant at every
+  level (raw accuracy equals the per-level majority baseline; no rule or gated
+  conjunction above 0.55); independent BFS agrees with the stored answer on 1,500/1,500
+  items (yes items shortest path exactly k, no items unreachable); a 40-prompt
+  format-validity check against the local inference endpoint
+  (a 27B-class local model) scores 39/40, the single miss being a 512-token
+  truncation the item answers correctly under a larger budget, so the repaired format
+  remains solvable across the depth grid.
+
+#### Added
+
+- `generators/audit_ladder_leaks.py` (issue #67): a repeatable shortcut-leak audit for
+  the ladder family. A surface-feature battery over the query endpoints (degree,
+  fact-target/source membership, neighbourhood, component and walk length), a
+  conjunction search over them, numeric stumps, and bounded-search baselines (d=1, 2,
+  3), plus an independent-BFS solvability re-derivation. The audit measures the shipped
+  generator directly (thin aliases to `ladders.generate_item`), so the battery and the
+  negative controls cannot drift from the item contract. Gate semantics: a feature
+  constant across an item set carries no label information (its accuracy is the
+  sample's label imbalance, not a leak) and is reported but never gated; at level 1 the
+  `direct_fact` feature is the task itself (a 1-hop query is derivable iff it is a
+  stated fact) and is reported as a depth match, never gated; everything else is gated
+  above CHANCE_MAX = 0.55. Seven seeded negative controls (planted leak, ragged
+  components, shuffled labels, off-by-one, planted cross edge, determinism) are all
+  caught by `--selftest`. The round-2 construct-validity scratch tool
+  (`audit_hop_chain.py`, never committed) is superseded by it: its mode-0 fidelity
+  re-implementation targeted the pre-fix generator and its candidate-fix simulations
+  (A-E) are superseded by the adopted component-isomorphism construction.
+
 ### 2026-10-14
 
 #### Added
