@@ -9,6 +9,22 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 #### Added
 
+- Round 18 nightly probe `research/nightly-2026-10-22-0400/` (issue #65): the
+  round-17 fixed-budget depth curve (repaired ladders family, k = 24, 32, 48,
+  `max_tokens = 2048`) mirrored on a 27B-class local endpoint, on the
+  byte-identical 36-cell grid, with the level-24 cells anchored to the
+  round-16 archive (12 of 12, fail-closed) and every cell paired cross-class
+  to the round-17 archive (36 of 36, fail-closed) before any prompt spent:
+  29 of 36 cells answered, 29 of 29 correct - budget turnover confined to the
+  X arm at k = 24 (0 of 3 there, 1 of 3 at 32 and 48, all seven truncated
+  cells dying at full expected-traversal coverage), no correctness turnover;
+  the declared answerability-decay prediction fails honestly (0.75 / 0.833 /
+  0.833). The cross-class delta on the identical grid is exactly the seven X
+  cells the flash-next class answered via the reasoning fallback and this
+  class truncated; this class is far more token-efficient where it answers
+  (R1 453 vs 1717 tokens, positive-arm token law -61.9 + 22.0k vs -50.8 +
+  33.1k, one reasoning rescue vs 17) and the temperature-0 anchor rerun is
+  token-identical on all twelve L24 pairs (refs #71, #78, #73, #65).
 - Round 17 nightly probe `research/nightly-2026-10-22-0200/` (issue #65): the
   fixed-budget depth curve on the repaired ladders family, extended to
   k = 24, 32, 48 at `max_tokens = 2048` on a flash-next-class local endpoint,
