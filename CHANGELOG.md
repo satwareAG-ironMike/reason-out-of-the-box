@@ -46,6 +46,40 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   validated against in-repo knowledge). The merge gate is unchanged: every change
   reaches main via branch + PR with all 3 CI checks green; agents never push to main
   and never touch .github or the ruleset.
+### 2026-10-17
+
+#### Added
+
+- Nightly round 8 (`research/nightly-2026-10-17-0400/`, issue #65 firing 2026-10-17 04:00):
+  `ladder_load_depth.py`, an independent re-implementation (no import from `generators/`, own
+  name pools, own BFS solver, verifier, gate, probe and scorer) of the constant-load hop-chain
+  grid that decouples depth `k` from prompt load `E` (issue #71 criterion 2): arm L holds
+  `E = 24` facts at `k in {2,3,4,6,8,12}` with measured prompt length 1109.5 to 1111.5
+  characters (2.0 character spread, 0.18 %), arm X extends to `k in {16,24}` at `C = 2`.
+  Declared grid, seed-frozen selection rule, fail-closed gate, three-state scoring,
+  `--selftest` (11 controls) green.
+  `gate.json` records the permutation-calibrated gate passing all 8 cells (thresholds 0.700 to
+  0.800, p 0.072 to 1.000).
+- Gate-power measurement (issue #71 criterion 4, #67): the same battery and null run on 6 items
+  versus a 40-item candidate pool gives a calibrated threshold of 1.000 at `n = 6` against
+  0.700 to 0.800 at `n = 40`, and a planted name-order shortcut is missed at `n = 6`
+  (p 0.259, 0 rules flagged) but caught at `n = 40` (p 0.0025, 9 rules flagged). The fixed 0.55
+  threshold would have refused all 8 clean cells of this grid.
+- Shipped-corpus gate cross-check (issue #67): the same battery run on the first 40 committed
+  items of each shipped level independently reproduces the leak, flags R1 as
+  `single:tgt_is_fact_target->yes` and R2 as `single:tgt_outdeg_zero->yes` at accuracy 1.000 in
+  all five levels, and names two further single-feature predictors at 1.000 that #67 did not
+  (`single:tgt_indeg_zero->no`, `single:tgt_is_fact_source->no`); 31 to 54 rules are flagged per
+  level inside a 340-rule traversal-free battery, so a `generators/ladders.py` repair must be
+  validated against the whole battery.
+- `d*` procedure as a named trichotomy (`maintained` / `inconclusive` / `collapsed`, plus
+  `budget_limited` and `descriptive` states) with Wilson 95 % bounds against a 0.60 floor, and
+  the certifiability table over items per depth: at 6 items only 6/6 certifies maintained and
+  only 1/6 or worse certifies collapse; 80 % maintained needs 30 items per depth, 73 % needs 60.
+- `probe-attempt.log`: the model-facing arm aborted after 15 of 40 dispatched prompts (12 empty
+  completions, 3 correct at 355 to 557 completion tokens), no `raw.jsonl`, no depth measurement.
+  Recorded as the failure record, with the answer-position estimate shown to be invalid for an
+  endpoint that separates reasoning from content.
 
 - Nightly round 11 research record (`research/nightly-2026-10-19-0200/`, issue #65,
   refs #71, #73): a matched-pair probe at depths k = 12, 16, 24 on nine seed-generated
