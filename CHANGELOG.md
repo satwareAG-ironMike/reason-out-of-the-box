@@ -5,6 +5,27 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-22
+
+#### Added
+
+- Round 17 nightly probe `research/nightly-2026-10-22-0200/` (issue #65): the
+  fixed-budget depth curve on the repaired ladders family, extended to
+  k = 24, 32, 48 at `max_tokens = 2048` on a flash-next-class local endpoint,
+  with the k = 24 level cell-paired to round 15 by prompt sha256 (12 of 12,
+  fail-closed before any prompt): 36 of 36 cells answered, 36 of 36 correct -
+  no answerability or correctness turnover inside k = 48; the declared
+  answerability-decay prediction fails honestly. Budget pressure lands on the
+  negative arms: 17 of 36 cells hit the 2048 ceiling (all nine X cells at every
+  level), every one rescued by a yes/no committed mid-trace (median position
+  0.457 of the stream), so at this budget the scarce resource is the
+  answer-surfacing path, not reachability; positive-arm completions fit
+  -50.8 + 33.1k tokens (r = 0.845), under half round 6's open-budget slope -
+  correct answers without full recitation. Anchor rerun: 12 of 12 answers agree
+  with round 15 at temperature 0. Adjacent literature framed at abstract level:
+  the coupling tax (arXiv:2605.07686) and budget-exhaustion non-convergence
+  (arXiv:2607.21433) (refs #71, #78, #73, #65).
+
 ### 2026-10-21
 
 #### Added
