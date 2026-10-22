@@ -5,6 +5,60 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-22
+
+#### Added
+
+- Round 17 nightly probe `research/nightly-2026-10-22-0200/` (issue #65): the
+  fixed-budget depth curve on the repaired ladders family, extended to
+  k = 24, 32, 48 at `max_tokens = 2048` on a flash-next-class local endpoint,
+  with the k = 24 level cell-paired to round 15 by prompt sha256 (12 of 12,
+  fail-closed before any prompt): 36 of 36 cells answered, 36 of 36 correct -
+  no answerability or correctness turnover inside k = 48; the declared
+  answerability-decay prediction fails honestly. Budget pressure lands on the
+  negative arms: 17 of 36 cells hit the 2048 ceiling (all nine X cells at every
+  level), every one rescued by a yes/no committed mid-trace (median position
+  0.457 of the stream), so at this budget the scarce resource is the
+  answer-surfacing path, not reachability; positive-arm completions fit
+  -50.8 + 33.1k tokens (r = 0.845), under half round 6's open-budget slope -
+  correct answers without full recitation. Anchor rerun: 12 of 12 answers agree
+  with round 15 at temperature 0. Adjacent literature framed at abstract level:
+  the coupling tax (arXiv:2605.07686) and budget-exhaustion non-convergence
+  (arXiv:2607.21433) (refs #71, #78, #73, #65).
+
+### 2026-10-21
+
+#### Added
+
+- Round 15 nightly probe `research/nightly-2026-10-21-0200/` (issue #65): the
+  matched-pair traversal grid at k = 12, 16, 24 run for the first time on the repaired
+  ladders family (component isomorphism, issue #69, merged 2026-10-20), on a
+  flash-next-class local endpoint: 36 of 36 cells follow the directed-traversal oracle,
+  the connectivity oracle fails exactly the nine reverse cells, exact McNemar shows zero
+  discordant pairs in both matched families. Corpus pinned by generator sha256 and blob
+  hashes, declared not cell-paired to the pre-repair rounds 10/11/14. All seven
+  2048-token truncations land on negative arms (six at k = 24) with the answer already
+  emitted in the reasoning trace: the scarce resource at k = 24 is the output budget,
+  quantifying round 6's "budget, not depth" per arm (refs #71, #78, #69).
+- Literature update recorded on issue #71 (issue #65 round 15 comment): quantization
+  versus multi-hop reasoning is no longer an evidence vacuum (arXiv:2602.13595,
+  arXiv:2606.00206, arXiv:2606.25519, arXiv:2504.04823; ACL 2026 MixKVQ), so
+  quantization moves from uncontrolled variable to demonstrated confound for
+  cross-endpoint d* placement; no published traversal-specific d* result exists.
+- Round 16 nightly probe `research/nightly-2026-10-21-0400/` (issue #65):
+  cell-paired cross-class probe on the repaired ladders family - round 15's corpus
+  run byte-identically on a 27B-class local endpoint (the pool slot round 14 measured
+  pre-repair), compared cell by cell against the round-15 archive: 33 of 33 answered
+  cells correct, the traversal oracle matches all 36 cells under the disclosed
+  default-match convention, and the first cell-paired cross-class comparison on the
+  repaired family shows 33/33 answer agreement with zero discordant pairs (exact
+  McNemar p = 1.0). The only cross-class delta is the X cells at k = 24: truncated
+  but rescued via the reasoning trace in round 15, unanswerable within 2 x 2048
+  tokens on this class (light-thinker profile, flat latency, all answers from
+  content). Cell pairing verified by per-cell prompt sha256 before any prompt spent
+  (refs #71, #78, #65).
+
+
 ### 2026-10-19
 
 #### Added
