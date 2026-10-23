@@ -93,9 +93,13 @@ surfacing needs is bracketed, not measured: for F1 it lies between 640 and 1280 
 Predictions: **P1 holds** (0, 0, 3, 3 / 0, 0, 0, 0 / 0, 0, 0, 0); **P2 holds** (F1 3 of 3 and
 X 0 of 3 at 2048, F1 >= X at every rung); **P3 holds** (no answer-field answer was wrong at any
 budget); **P4 holds but is weak** - only 1 of 9 cells has both thresholds, so the
-trace-before-surface ordering is barely tested; **P5 holds exactly** - at the 2048 rung all 9
-answers and all 9 completion-token counts reproduce round 17 cell for cell (720 = 720,
-686 = 686, 648 = 648, 2048 = 2048), exact McNemar p = 1.0.
+trace-before-surface ordering is barely tested; **P5 holds on declared answers** - at the 2048
+rung all 9 cell-paired declared answers reproduce round 17, no discordant pair in either
+direction, exact McNemar p = 1.0. Length reproduction is **not testable** against that archive:
+it stores no per-cell completion counts (the gate field `round17_completion_tokens` is null for
+all nine cells), so P5 is a claim about answers, not about token counts. Within this round the
+2048 rung does reproduce the 1280 rung cell for cell: F1 stops at 720, 686 and 648 completion
+tokens at both rungs, R1 and X sit at the ceiling at both.
 
 ## The readout control (post-hoc, declared as post-hoc)
 
@@ -140,8 +144,10 @@ the round's 12-call cap, disclosed. No hosted search or completion provider.
 - **arXiv:2607.11089** Ehab et al., "OS-Pruner: Pruning Chains-of-Thought of Reasoning Models via
   Optimal Stopping" (2026, preprint; API-verified) and **arXiv:2506.13752** Li et al., "Steering
   LLM Thinking with Budget Guidance" (2025, preprint): both presuppose a determinable moment where
-  the answer is ready before generation ends - the round's median-0.457 commitment landmark
-  measures such a moment, though neither asks whether the stopped answer gets emitted.
+  the answer is ready before generation ends. Round 17 measured such a moment on this class (median
+  commitment at 0.4571 of the reasoning stream, max 0.9996); this round's strict-commitment
+  landmarks sit later (median 0.717 mid-trace, 0.995 terminal). Neither thread asks whether the
+  answer stopped at is ever emitted, which is what this round measured.
 - **DOI 10.18653/v1/2025.emnlp-main.504** Tutek et al., "Measuring Chain of Thought Faithfulness
   by Unlearning Reasoning Steps" (EMNLP 2025, peer-reviewed): the causal template for deciding
   which trace steps the emitted answer actually depends on.
@@ -171,6 +177,10 @@ the round's 12-call cap, disclosed. No hosted search or completion provider.
   `--analyze` were re-run at the final HEAD, so `summary.json` is the output of the committed
   code over the committed `raw.jsonl`.
 - Four budget rungs spaced by doubling bracket the surfacing threshold; they do not measure it.
+- Self-audit after posting (2026-10-23): the first version of this record claimed cell-level
+  completion-token reproduction against round 17 and attributed round 17's 0.457 commitment median
+  to this round. Both are corrected above. No measurement, gate or artifact changed; the #65
+  summary comment and the PR body carry the same correction.
 - Prompt load and chain depth stay coupled at k = 24 (issue #71 option 2 remains open).
 - A reasoning-field yes/no is the last such token in a still-running trace. Treating it as the
   model's answer is a convention; this round measures the cost of that convention instead of

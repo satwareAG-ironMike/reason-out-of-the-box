@@ -25,6 +25,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   tokens, while the same grid on the 27B class answers R1 from `content` (refs #71,
   #78, #73, #65).
 
+#### Fixed
+
+- Round 19 record, self-audit against the archives (refs #65): the P5 pairing claim is narrowed to
+  declared answers (9 of 9, exact McNemar p = 1.0) - cell-level completion-token reproduction is
+  not testable because the round-17 archive stores no per-cell counts (gate field
+  `round17_completion_tokens` null); and the 0.457 mid-stream commitment median is attributed to
+  round 17, which measured it, instead of to this round. No measurement, gate, `raw.jsonl` or
+  `summary.json` changed. The same corrections were applied to the round-summary comment on #65,
+  the PR #93 description and issue #94 (rescue counts restated per round: 7, 0, 17, 1 for
+  rounds 15, 16, 17, 18).
+
 ### 2026-10-22
 
 #### Added
