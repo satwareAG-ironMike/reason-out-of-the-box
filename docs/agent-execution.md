@@ -76,6 +76,14 @@ hashes, status, failure codes.
   evidence supports the interpretation).
 - Human review remains mandatory for external submissions, spend, irreversible actions,
   and any human-subject step.
+- **Verifiers are read-only against the worktree under verification.** A verifier writes only outside
+  it: it never edits a tracked file, never commits or pushes, and never runs `git checkout`,
+  `git switch`, `git branch -D`, or `git push --delete` against that worktree or its refs. Its findings
+  land as a report; the producing agent re-verifies each finding and applies the accepted corrections
+  under its own commit.
+- **Snapshot before verification.** The runner commits and pushes the round directory, or writes a
+  checksummed copy of it outside the repository, before any verifier pass, so that a verifier accident
+  cannot destroy an execution's artifacts.
 
 ## 6. Artifacts and archive
 
