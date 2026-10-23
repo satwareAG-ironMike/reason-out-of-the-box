@@ -1,0 +1,326 @@
+{
+  "battery_note": "the full 15-rule battery with exact label-shuffle nulls is recorded in round 15's and round 17's gates on this same corpus; this round re-runs the blind lexical rules and the two oracle references on the nine cells it actually dispatches",
+  "created_at": "2026-10-23T00:27:53Z",
+  "design": {
+    "arms": [
+      "F1",
+      "R1",
+      "X"
+    ],
+    "budgets": [
+      256,
+      640,
+      1280,
+      2048
+    ],
+    "cells": 36,
+    "endpoint_calls_cap": 40,
+    "items": 3,
+    "level": 24,
+    "operating_budget": 2048,
+    "parser": "each field parsed separately for the last standalone yes/no; the round-15/17 declared parser (answer field first, reasoning fallback) is also recorded so the contribution of the fallback is measurable",
+    "retry_policy": "transport failures and empty completions only; truncation and model stops are measured outcomes and are never retried",
+    "temperature": 0.0,
+    "unit_of_analysis": "one (cell, budget) pair"
+  },
+  "endpoint_class": "a flash-next-class local endpoint (the class rounds 15 and 17 measured)",
+  "evidence_label": "Executed",
+  "gate_hash": "407339131d62",
+  "item_source": {
+    "blob_sha256": {
+      "generated/l24.jsonl": "cab16fae867b4791290259ffa451231efd73ef193da96664720fd4686fb7008f"
+    },
+    "generator_path": "generators/ladders.py",
+    "generator_sha256": "b0d77efd308d249fea77e5fd97e9bef7f5e0fd737b214c2d754cddf970a7f77b",
+    "generator_sha256_pin": "b0d77efd308d249fea77e5fd97e9bef7f5e0fd737b214c2d754cddf970a7f77b",
+    "l24_pin_check": {
+      "actual": "cab16fae867b4791290259ffa451231efd73ef193da96664720fd4686fb7008f",
+      "expected": "cab16fae867b4791290259ffa451231efd73ef193da96664720fd4686fb7008f"
+    },
+    "pool_per_level": 300,
+    "scanned": 7,
+    "seed_base": 20261019,
+    "selection": "chain_path rule verbatim from rounds 10/11/15/17 plus the 45000-char context-safety filter",
+    "skipped_over_char_cap": 0
+  },
+  "known_limits": [
+    "n = 3 items per arm: exploratory, not confirmatory",
+    "one endpoint class, one run, quantized local deployment, undisclosed training data: not H1 evidence",
+    "the budget ladder has four rungs: thresholds are bracketed, not measured exactly",
+    "the level-24 corpus keeps prompt load coupled with chain depth (issue #71 option 2 stays open)",
+    "a reasoning-field yes/no is the last such token in a still-running trace: it is evidence that the token is available, not that the model treats it as final"
+  ],
+  "leak_battery": {
+    "bonferroni_alpha": 0.0071428571428571435,
+    "firing_leak_rules": [],
+    "passed": true,
+    "rules": {
+      "all_no": {
+        "accuracy": 0.6666666666666666,
+        "cells": 9,
+        "fires": false,
+        "gold_yes": 3,
+        "hits": 6,
+        "p_two_sided": 0.5078124999999987,
+        "reference": false,
+        "rule": "all_no",
+        "wilson_high": 0.8794161816130891,
+        "wilson_low": 0.35420213558039626
+      },
+      "all_yes": {
+        "accuracy": 0.3333333333333333,
+        "cells": 9,
+        "fires": false,
+        "gold_yes": 3,
+        "hits": 3,
+        "p_two_sided": 0.5078124999999987,
+        "reference": false,
+        "rule": "all_yes",
+        "wilson_high": 0.6457978644196036,
+        "wilson_low": 0.1205838183869109
+      },
+      "directed_reachability": {
+        "accuracy": 1.0,
+        "cells": 9,
+        "fires": false,
+        "gold_yes": 3,
+        "hits": 9,
+        "p_two_sided": 0.00390625,
+        "reference": true,
+        "rule": "directed_reachability",
+        "wilson_high": 1.0,
+        "wilson_low": 0.700854951580456
+      },
+      "dst_is_fact_target": {
+        "accuracy": 0.6666666666666666,
+        "cells": 9,
+        "fires": false,
+        "gold_yes": 3,
+        "hits": 6,
+        "p_two_sided": 0.5078124999999987,
+        "reference": false,
+        "rule": "dst_is_fact_target",
+        "wilson_high": 0.8794161816130891,
+        "wilson_low": 0.35420213558039626
+      },
+      "dst_is_last_fact_object": {
+        "accuracy": 0.6666666666666666,
+        "cells": 9,
+        "fires": false,
+        "gold_yes": 3,
+        "hits": 6,
+        "p_two_sided": 0.5078124999999987,
+        "reference": false,
+        "rule": "dst_is_last_fact_object",
+        "wilson_high": 0.8794161816130891,
+        "wilson_low": 0.35420213558039626
+      },
+      "name_length_src_gt_dst": {
+        "accuracy": 0.5555555555555556,
+        "cells": 9,
+        "fires": false,
+        "gold_yes": 3,
+        "hits": 5,
+        "p_two_sided": 0.9999999999999973,
+        "reference": false,
+        "rule": "name_length_src_gt_dst",
+        "wilson_high": 0.8112214789023354,
+        "wilson_low": 0.26665129349549305
+      },
+      "src_is_first_fact_subject": {
+        "accuracy": 0.6666666666666666,
+        "cells": 9,
+        "fires": false,
+        "gold_yes": 3,
+        "hits": 6,
+        "p_two_sided": 0.5078124999999987,
+        "reference": false,
+        "rule": "src_is_first_fact_subject",
+        "wilson_high": 0.8794161816130891,
+        "wilson_low": 0.35420213558039626
+      },
+      "src_mentioned_after_dst": {
+        "accuracy": 0.7777777777777778,
+        "cells": 9,
+        "fires": false,
+        "gold_yes": 3,
+        "hits": 7,
+        "p_two_sided": 0.1796874999999996,
+        "reference": false,
+        "rule": "src_mentioned_after_dst",
+        "wilson_high": 0.9367748928821533,
+        "wilson_low": 0.45258896910698887
+      },
+      "undirected_connectivity": {
+        "accuracy": 0.6666666666666666,
+        "cells": 9,
+        "fires": false,
+        "gold_yes": 3,
+        "hits": 6,
+        "p_two_sided": 0.5078124999999987,
+        "reference": true,
+        "rule": "undirected_connectivity",
+        "wilson_high": 0.8794161816130891,
+        "wilson_low": 0.35420213558039626
+      }
+    }
+  },
+  "lineage": [
+    {
+      "archive": "research/nightly-2026-10-16-0400/ (on main via PR #70)",
+      "corpus": "repaired family, single-query depth grid k = 1..16, open budget",
+      "endpoint": "flash-next-class local endpoint",
+      "result": "40 of 40 correct; completion tokens = -36 + 80k; the fixed-budget replay lost 26 of 40 items at 256 tokens, 12 of 40 at 512, 4 of 40 at 1024 (arm-blind, pre-repair)",
+      "round": 6
+    },
+    {
+      "archive": "research/nightly-2026-10-21-0200/ (PR #88, open)",
+      "corpus": "repaired matched-pair grid k = 12, 16, 24 at max_tokens 2048",
+      "endpoint": "flash-next-class local endpoint",
+      "result": "36 of 36 answered cells correct; 7 truncations, all on negative arms, all rescued from the reasoning trace",
+      "round": 15
+    },
+    {
+      "archive": "research/nightly-2026-10-21-0400/ (PR #89, open)",
+      "corpus": "same grid, cell-paired to round 15",
+      "endpoint": "27B-class local endpoint",
+      "result": "33 of 33 answered correct; the three X cells at k = 24 unanswerable within 2 x 2048 tokens: trace rescue does not transfer across classes",
+      "round": 16
+    },
+    {
+      "archive": "research/nightly-2026-10-22-0200/ (PR #90, open)",
+      "corpus": "repaired grid at k = 24, 32, 48, max_tokens 2048 (the nine k = 24 cells used here)",
+      "endpoint": "flash-next-class local endpoint",
+      "result": "36 of 36 correct; 17 of 36 at the ceiling, all rescuable from the trace; 9 of 9 X cells at 2048.0 tokens with zero answers in the answer field; median commitment at 0.457 of the reasoning stream",
+      "round": 17
+    },
+    {
+      "archive": "research/nightly-2026-10-22-0400/ (PR #91, open)",
+      "corpus": "the identical 36-cell grid on the 27B class",
+      "endpoint": "27B-class local endpoint",
+      "result": "29 of 36 answered, all correct; turnover confined to the X arm at k = 24 (0 of 3 answered, 1 of 3 at 32 and 48)",
+      "round": 18
+    }
+  ],
+  "matched_corpus": {
+    "cells_per_budget": 9,
+    "cells_where_connectivity_and_reachability_disagree": 3,
+    "items": 3,
+    "violations": []
+  },
+  "pairing": {
+    "cells": [
+      {
+        "arm": "F1",
+        "item_id": "L24-1",
+        "prompt_sha256_12": "f3168b3028ac",
+        "round15_match": true,
+        "round17_answer_source": "content",
+        "round17_completion_tokens": null,
+        "round17_declared_answer": "yes",
+        "round17_match": true
+      },
+      {
+        "arm": "R1",
+        "item_id": "L24-1",
+        "prompt_sha256_12": "3433dea8f4d5",
+        "round15_match": true,
+        "round17_answer_source": "reasoning",
+        "round17_completion_tokens": null,
+        "round17_declared_answer": "no",
+        "round17_match": true
+      },
+      {
+        "arm": "X",
+        "item_id": "L24-1",
+        "prompt_sha256_12": "dcd75e6cd33b",
+        "round15_match": true,
+        "round17_answer_source": "reasoning",
+        "round17_completion_tokens": null,
+        "round17_declared_answer": "no",
+        "round17_match": true
+      },
+      {
+        "arm": "F1",
+        "item_id": "L24-2",
+        "prompt_sha256_12": "29e65e333693",
+        "round15_match": true,
+        "round17_answer_source": "content",
+        "round17_completion_tokens": null,
+        "round17_declared_answer": "yes",
+        "round17_match": true
+      },
+      {
+        "arm": "R1",
+        "item_id": "L24-2",
+        "prompt_sha256_12": "bf9cc2264cb3",
+        "round15_match": true,
+        "round17_answer_source": "reasoning",
+        "round17_completion_tokens": null,
+        "round17_declared_answer": "no",
+        "round17_match": true
+      },
+      {
+        "arm": "X",
+        "item_id": "L24-2",
+        "prompt_sha256_12": "ae3b0a2e3374",
+        "round15_match": true,
+        "round17_answer_source": "reasoning",
+        "round17_completion_tokens": null,
+        "round17_declared_answer": "no",
+        "round17_match": true
+      },
+      {
+        "arm": "F1",
+        "item_id": "L24-3",
+        "prompt_sha256_12": "4903cb6f952e",
+        "round15_match": true,
+        "round17_answer_source": "content",
+        "round17_completion_tokens": null,
+        "round17_declared_answer": "yes",
+        "round17_match": true
+      },
+      {
+        "arm": "R1",
+        "item_id": "L24-3",
+        "prompt_sha256_12": "e98208ee00c1",
+        "round15_match": true,
+        "round17_answer_source": "reasoning",
+        "round17_completion_tokens": null,
+        "round17_declared_answer": "no",
+        "round17_match": true
+      },
+      {
+        "arm": "X",
+        "item_id": "L24-3",
+        "prompt_sha256_12": "87f10b654d6f",
+        "round15_match": true,
+        "round17_answer_source": "reasoning",
+        "round17_completion_tokens": null,
+        "round17_declared_answer": "no",
+        "round17_match": true
+      }
+    ],
+    "expected_cells": 9,
+    "round15_prompt_sha_matches": 9,
+    "round15_raw_sha256": "ec178eeaa9ae3d925108d3dbf85898804fed24a4c60928e659cd0cf56bfc250a",
+    "round17_prompt_sha_matches": 9,
+    "round17_raw_sha256": "3c5a9eeb59ae62ae9bfcec7c15beee02e4e962b306b92805ae86b3410099b4d9",
+    "verified": true
+  },
+  "pool_corpus": {
+    "gold_reach_mismatches": [],
+    "items_total": 300,
+    "pool_items_where_connectivity_and_reachability_disagree": 0
+  },
+  "predictions": {
+    "P1_surfacing_monotonicity": "within each arm, the count of cells with a parseable yes/no in the answer field is non-decreasing across the budget ladder 256, 640, 1280, 2048",
+    "P2_arm_asymmetry_at_operating_point": "at max_tokens 2048 the F1 arm surfaces 3 of 3 answers in the answer field and the X arm surfaces 0 of 3 (the round-17 signature), and F1 surfaces at least as often as X at every budget",
+    "P3_correctness_invariance": "every answer-field answer is correct at every budget: the budget moves surfacing, not correctness",
+    "P4_trace_before_surface": "for every cell, the smallest budget carrying a reasoning-field answer is no larger than the smallest budget carrying an answer-field answer",
+    "P5_operating_point_pairing": "the 2048 rung reproduces round 17's declared answer on all nine cell-paired level-24 cells"
+  },
+  "question": "At fixed depth k = 24 on the repaired ladders family, how does answer surfacing depend on the output-token budget, and how much budget does surfacing need beyond what the reasoning needs?",
+  "schema": "round19-gate-v1",
+  "why": "rounds 15 and 17 recorded 36 of 36 correct on this endpoint class with all nine cross-component answers available only through the reasoning-fallback parse; the answerability measure is therefore convention-loaded, which round 17's next step 1 names as the instrument gap"
+}
