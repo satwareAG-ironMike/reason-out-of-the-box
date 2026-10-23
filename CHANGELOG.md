@@ -5,6 +5,26 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-23
+
+#### Added
+
+- Round 19 nightly probe `research/nightly-2026-10-23-0200/` (issue #65): the budget
+  ladder at fixed depth on the repaired ladders family - the nine level-24 cells
+  (F1, R1, X, three items each) at `max_tokens` 256, 640, 1280, 2048 on a
+  flash-next-class local endpoint, prompt sha256 paired fail-closed to the round-15
+  and round-17 archives (9 of 9 each) before any prompt spent. Surfacing is monotone
+  in budget but arm-specific: F1 surfaces 0, 0, 3, 3 cells (all six surfaced answers
+  correct), R1 and X surface 0 of 3 at every budget up to 2048; answer-field-only
+  accuracy is 6 of 36 while the declared parser reports 9 of 9 answered at every rung
+  including 256 tokens. Post-hoc readout control: the reasoning-fallback token is
+  "no" in 34 of 36 records and its accuracy 24 of 36 equals the constant-"no"
+  baseline exactly; a strict commitment rule keeps 13 of 36 and all 13 agree with
+  gold (F1 7, R1 6, X 0 at every budget). Consequence recorded: at k = 24 on this
+  class the traversal-versus-connectivity discrimination was carried by fallback
+  tokens, while the same grid on the 27B class answers R1 from `content` (refs #71,
+  #78, #73, #65).
+
 ### 2026-10-22
 
 #### Added
