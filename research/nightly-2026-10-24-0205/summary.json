@@ -1,0 +1,536 @@
+{
+  "budget_replay_content_only": {
+    "1024": {
+      "accuracy_over_all": 1.0,
+      "content_answerable_est": 36,
+      "correct": 36,
+      "n": 36
+    },
+    "2048": {
+      "accuracy_over_all": 1.0,
+      "content_answerable_est": 36,
+      "correct": 36,
+      "n": 36
+    },
+    "256": {
+      "accuracy_over_all": 0.1111,
+      "content_answerable_est": 4,
+      "correct": 4,
+      "n": 36
+    },
+    "512": {
+      "accuracy_over_all": 0.8056,
+      "content_answerable_est": 29,
+      "correct": 29,
+      "n": 36
+    }
+  },
+  "d_star": {
+    "content_only": {
+      "budget_limited_depths": [],
+      "d_star": 12,
+      "floor": 0.6,
+      "inconclusive_depths": [],
+      "maintained_depths": [
+        2,
+        3,
+        4,
+        6,
+        8,
+        12
+      ],
+      "min_certify_items": 6,
+      "report": "no collapsed depth within the declared grid (k <= 12); d* >= 12",
+      "rows": [
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 2,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 3,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 4,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 6,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 8,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 12,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        }
+      ],
+      "turnover_at": null
+    },
+    "delivered_or_strict": {
+      "budget_limited_depths": [],
+      "d_star": 12,
+      "floor": 0.6,
+      "inconclusive_depths": [],
+      "maintained_depths": [
+        2,
+        3,
+        4,
+        6,
+        8,
+        12
+      ],
+      "min_certify_items": 6,
+      "report": "no collapsed depth within the declared grid (k <= 12); d* >= 12",
+      "rows": [
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 2,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 3,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 4,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 6,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 8,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 12,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        }
+      ],
+      "turnover_at": null
+    },
+    "loose_fallback": {
+      "budget_limited_depths": [],
+      "d_star": 12,
+      "floor": 0.6,
+      "inconclusive_depths": [],
+      "maintained_depths": [
+        2,
+        3,
+        4,
+        6,
+        8,
+        12
+      ],
+      "min_certify_items": 6,
+      "report": "no collapsed depth within the declared grid (k <= 12); d* >= 12",
+      "rows": [
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 2,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 3,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 4,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 6,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 8,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        },
+        {
+          "accuracy": 1.0,
+          "arm": "L",
+          "correct": 6,
+          "k": 12,
+          "n": 6,
+          "no_answer": 0,
+          "no_answer_rate": 0.0,
+          "status": "maintained",
+          "wilson_lb95": 0.6097,
+          "wilson_ub95": 1.0,
+          "wrong": 0
+        }
+      ],
+      "turnover_at": null
+    }
+  },
+  "fallback_provenance": {
+    "agreement_with_gold": {
+      "mid_trace": 0,
+      "terminal": 24
+    },
+    "classes": {
+      "mid_trace": 3,
+      "terminal": 33
+    },
+    "commit_fraction_median": 0.9916,
+    "loose_fallback_when_content_silent": {
+      "cells": 36,
+      "constant_no_baseline_accuracy": 0.5,
+      "correct": 0
+    }
+  },
+  "per_depth": {
+    "content_only": [
+      {
+        "correct": 6,
+        "k": 2,
+        "mean_completion_tokens": 238.0,
+        "mean_prompt_tokens": 434.8,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 3,
+        "mean_completion_tokens": 322.7,
+        "mean_prompt_tokens": 437.5,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 4,
+        "mean_completion_tokens": 412.2,
+        "mean_prompt_tokens": 436.3,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 6,
+        "mean_completion_tokens": 432.3,
+        "mean_prompt_tokens": 437.5,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 8,
+        "mean_completion_tokens": 456.3,
+        "mean_prompt_tokens": 438.3,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 12,
+        "mean_completion_tokens": 529.2,
+        "mean_prompt_tokens": 440.8,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      }
+    ],
+    "delivered_or_strict": [
+      {
+        "correct": 6,
+        "k": 2,
+        "mean_completion_tokens": 238.0,
+        "mean_prompt_tokens": 434.8,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 3,
+        "mean_completion_tokens": 322.7,
+        "mean_prompt_tokens": 437.5,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 4,
+        "mean_completion_tokens": 412.2,
+        "mean_prompt_tokens": 436.3,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 6,
+        "mean_completion_tokens": 432.3,
+        "mean_prompt_tokens": 437.5,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 8,
+        "mean_completion_tokens": 456.3,
+        "mean_prompt_tokens": 438.3,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 12,
+        "mean_completion_tokens": 529.2,
+        "mean_prompt_tokens": 440.8,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      }
+    ],
+    "loose_fallback": [
+      {
+        "correct": 6,
+        "k": 2,
+        "mean_completion_tokens": 238.0,
+        "mean_prompt_tokens": 434.8,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 3,
+        "mean_completion_tokens": 322.7,
+        "mean_prompt_tokens": 437.5,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 4,
+        "mean_completion_tokens": 412.2,
+        "mean_prompt_tokens": 436.3,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 6,
+        "mean_completion_tokens": 432.3,
+        "mean_prompt_tokens": 437.5,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 8,
+        "mean_completion_tokens": 456.3,
+        "mean_prompt_tokens": 438.3,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      },
+      {
+        "correct": 6,
+        "k": 12,
+        "mean_completion_tokens": 529.2,
+        "mean_prompt_tokens": 440.8,
+        "n": 6,
+        "no_answer": 0,
+        "wrong": 0
+      }
+    ]
+  },
+  "predictions": {
+    "P1_pass": true,
+    "P1_prompt_tokens_max_over_mean_min": 1.0138,
+    "P2_pass_no_content_only_turnover": true,
+    "P3_completion_mean_k12_over_k2": 2.2235,
+    "P3_pass": false,
+    "P4a_delivered_or_strict_correct": "36/36",
+    "P4a_pass": true,
+    "P4b_cells": 0,
+    "P4b_fallback_no_share_when_content_silent": null,
+    "P4b_pass": false
+  },
+  "records": 36,
+  "totals": {
+    "answered": {
+      "content_only": 36,
+      "delivered_or_strict": 36,
+      "loose_fallback": 36
+    },
+    "correct": {
+      "content_only": 36,
+      "delivered_or_strict": 36,
+      "loose_fallback": 36
+    },
+    "errors": 0,
+    "outcomes": {
+      "answered_in_answer_field": 36
+    }
+  }
+}

@@ -5,6 +5,30 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-24
+
+#### Added
+
+- Nightly research round 21 (issue #65, tracker comment posted; serves #71 criterion 2 / option 2
+  and #94): `research/nightly-2026-10-24-0205/` runs the constant-load depth arm that round 8
+  designed but never measured (its probe died on transport failure after 15 of 40 prompts):
+  E = 24 facts fixed, hop depth k in {2, 3, 4, 6, 8, 12}, C = 24/k disjoint directed paths,
+  6 items per depth, 36 prompts + 2 health calls of the 40 cap, temperature 0, on a
+  flash-next-class local endpoint. The #94 readout stack (content_only / loose_fallback /
+  delivered_or_strict) is declared before dispatch, with the strict rule and echo test vendored
+  verbatim from round 19 and asserted by `--selftest` (323 checks); the vendored rule reproduces
+  round 19's archived control exactly (13 of 36 kept, all gold-agreeing). Result: **36 of 36
+  cells answered in the answer field and 36 of 36 correct at every depth under all three
+  readouts; every depth `maintained` (Wilson lb 0.6097), d\* >= 12, no turnover within the grid
+  at constant load** - the round-19 negative-arm surfacing failure is therefore a joint
+  prompt-load x budget effect, not depth per se. Declared P3 fails honestly: mean completion
+  tokens grow 2.22x from k = 2 to k = 12 at constant load (+29.1 tokens/hop), so depth costs
+  generation, not within-grid correctness; P4b is vacuous (the answer field never went silent).
+  Gate `d39ceb84` (schema `round21-gate-v1`): leak battery on the whole 40-item pool per cell, no
+  cell flagged (best 0.70 vs threshold 0.725); constant load visible in the tokenizer (mean
+  prompt tokens 434.8..440.8). State: **Executed**, exploratory (6 items per depth, one class).
+  The 2026-10-23 04:00 firing (round 20) left no record; disclosed on #65.
+
 ### 2026-10-20
 
 #### Added
