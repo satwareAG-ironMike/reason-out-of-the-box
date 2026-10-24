@@ -5,6 +5,34 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-24
+
+#### Added
+
+- Nightly research round 22 (issue #65; serves #71 load axis, #78 matched pair, #94 readout
+  stack, #73 transport): `research/nightly-2026-10-24-0405/` measures the **load axis at constant
+  hop depth** on a 27B-class local endpoint - k = 4 fixed, facts E in {24, 48, 96, 144, 192, 240},
+  3 graphs per level, each graph queried twice over the *identical* fact list (arm F forward,
+  gold yes; arm X cross-component, gold no), so the polarity contrast is unconfounded and the
+  shared-content invariant of #78 criterion 1 is asserted per dispatched pair with a planted
+  cross-item control. Gate `7afc9cc5` written before any prompt (355-check selftest green); the
+  leak battery runs on both the 40-candidate pool and a paired pool matching the dispatched
+  construction, no cell flagged; fail-closed anchor to round 21 (E = 24 pool blob and three arm-F
+  prompt digests equal the PR #95 archive). Result: **E\* >= 240, no turnover** - 36/36 cells
+  answered in the answer field, 36/36 correct, every level `maintained`, zero truncation, and
+  **18/18 matched pairs with both members correct** (exact McNemar b = c = 0). Two failed
+  predictions carry the finding: mean completion at E = 240 is 0.97x the E = 24 mean (declared
+  floor 3.0x, slope -0.53 tokens per added fact while prompt tokens rise 14.86 per fact), because
+  this class abandons enumeration above ~100 facts (distractor-entity mention ratio 1.00, 1.00,
+  1.00 then 0.34, 0.18, 0.016); and E = 240 stays `maintained`, so with round 21's constant-load
+  result the ceiling is **two-dimensional in (k, E)**, not a curve in either axis alone. The
+  three anchored prompts reproduce round 21's delivered answers 3/3 at ~15% fewer tokens.
+  Transport disclosed in `research/nightly-2026-10-24-0405/transport.json`: the assigned pool slot
+  was generation-hung (0.3 tokens/s) and the round rotated to the pool's next generation-healthy
+  slot; the health-probe budget was lowered to 256 tokens before the first prompt; `aggregate()`
+  was patched after all 36 cells were archived and recovered at zero prompt cost under the
+  gate-hash-guarded resume. 36 grid prompts of a 40 cap, zero retries. State: **Executed**.
+
 ### 2026-10-20
 
 #### Added
