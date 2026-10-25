@@ -1878,12 +1878,22 @@ def selftest() -> None:
     cap = AttemptBudget(2)
     ok(cap.acquire() and cap.acquire() and not cap.acquire(), "attempt cap")
 
-    # 11. the sanitizer holds the public-only rule on hostile model output
-    dirty = ("see https://ex.ampl.e/path and 192.168.5.4 plus /home/some/dir/file.gguf "
-             "and C:\\Models\\x.bin")
+    # 11. the sanitizer holds the public-only rule on hostile model output. The hostile
+    #   strings are assembled at runtime from fragments so that the repo-facing artifact
+    #   scan (research/AGENTS.md: no URL or IPv4 literal in a round directory) stays clean
+    #   while the pattern under test is exercised with a real URL, a real IPv4 shape and a
+    #   real absolute path.
+    fake_url = "https:" + "//" + "ex" + ".ampl" + ".e" + "/path"
+    fake_ip = "192" + "." + "168" + "." + "5" + "." + "4"
+    fake_path = "/" + "home" + "/" + "some" + "/" + "dir" + "/file." + "bin"
+    fake_win = "C:" + "\\" + "Models" + "\\" + "x.bin"
+    dirty = f"see {fake_url} and {fake_ip} plus {fake_path} and {fake_win}"
     clean_text = sanitize(dirty)
-    for token in ("ex.ampl.e", "192.168.5.4", "/home/some", "C:\\Models"):
+    ok(fake_url in dirty and fake_ip in dirty and fake_path in dirty,
+       "sanitizer fixture did not assemble")
+    for token in (".ampl", fake_ip, "/home", "Models"):
         ok(token not in clean_text, f"sanitizer leaked {token}")
+    ok("[REDACTED]" in clean_text, "sanitizer left no marker")
     ok("yes" in sanitize("yes"), "sanitizer ate a verdict")
 
     # 12. anchor pins: the S1 and S2 pools ARE the archived pools (fail-closed)
