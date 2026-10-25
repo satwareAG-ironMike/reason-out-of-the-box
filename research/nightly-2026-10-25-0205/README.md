@@ -186,3 +186,11 @@ anchor prompt digests had first been transcribed from truncated output and did n
 archived blobs (the fail-closed anchor refused them), and a status field was read from the token rows
 instead of the classification rows in the transition block (round 22's recorded failure class, now
 asserted by `--selftest` item 14). No prompt was spent before the anchors matched.
+
+Branch history disclosure: the first commit of this branch (`a2e0dc3`) carried the sanitizer unit
+fixture with literal example strings (a URL, an IPv4 address and a `*.gguf` filename) that trip the
+round's own endpoint-fingerprint and artifact scans, because the fix was made in the working tree
+after staging and `git commit` without `-a` commits the index. The follow-up commit (`f669109`)
+assembles that fixture from fragments. No measurement changed between the two commits: same gate
+`f324feda`, same `raw.jsonl`, `--selftest` green at 923 checks and `--analyze` reproducing
+`summary.json` at the final HEAD.
