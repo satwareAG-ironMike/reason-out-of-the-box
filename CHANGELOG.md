@@ -5,6 +5,33 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-25
+
+#### Added
+
+- Nightly research round 23 (issue #65, tracker comment posted; serves #71, #94, #78):
+  `research/nightly-2026-10-25-0205/` walks the (hop depth k, fact count E) frontier on a
+  flash-next-class local endpoint - a monotone staircase S1..S6 in which consecutive cells
+  change exactly one axis: (4,24), (4,96), (8,96), (8,192), (12,192), (16,192), 18 matched
+  pairs, 36 prompts + 1 health call under the 40 cap. S1 and S2 are anchored by pool blob
+  and prompt digest to round 21's k = 4 level and round 22's E = 96 level, so the walk is a
+  continuation of both archived single-axis curves rather than a new grid; the anchors are
+  fail-closed (gate and probe refuse on mismatch, a tamper control asserts the refusal).
+  Result: the frontier is inside the walk - first non-maintained cell (k = 8, E = 192),
+  `budget_limited` at (12,192) and (16,192), maintained at E <= 96 for k = 4 and k = 8 - and
+  the failure is surfacing, not correctness: 25 of 25 delivered answers are correct, zero
+  wrong answers, all 11 failures `length` truncations at 2048 with the answer field silent.
+  The three declared readouts diverge for the first time in this archive (#94): 25/25
+  content-only, 28/28 delivered-or-strict, 33/36 under the archived loose fallback, whose
+  three false rescues are all instruction-echo tokens from the prompt's own "yes or no"
+  phrase; 10 of the 11 fallback tokens on silent cells are "no" (baseline 0.50). This class
+  shows no enumeration switch (3.98x output growth, distractor-mention ratio 0.51..0.64 at
+  192 facts) where round 22's 27B class measured 0.97x and 0.016 at 240. Discordance b = 4,
+  c = 1, exact McNemar p = 0.375 (directionally the fragile negative arm, not separable at
+  18 pairs). Gate `f324feda` written before any prompt (schema `round23-gate-v1`, 921-check
+  selftest green, no cell flagged on either pool), zero retries, zero transport errors.
+  State: **Executed**.
+
 ### 2026-10-20
 
 #### Added
