@@ -5,6 +5,25 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-25
+
+#### Added
+
+- Nightly research round 24 (issue #65, tracker comment posted; serves #71's two named next
+  steps): `research/nightly-2026-10-25-0405/` bisects the (k, E) frontier on the flash-next-class
+  local endpoint - load arm at fixed depth k = 8 through E in {112, 128, 160} and depth arm at
+  fixed safe load E = 96 through k in {12, 16}, 3 matched pairs per cell (36 prompts + 1 health
+  call, gate `85e70f3f` written before dispatch, fail-closed blob/digest anchor of cell L0 to
+  round 23's maintained S3 level). Result: the load arm is maintained all the way to E = 160
+  (24/24 delivered and correct), narrowing the k = 8 frontier to (160, 192), while the depth arm
+  turns over at (16, 96) (5/6 delivered, one truncation with the answer field silent) - so E\*
+  shrinks as k grows and the ceiling is a joint (k, E, budget) surface, not a load-only curve;
+  zero wrong answers grid-wide, no enumeration switch (mention ratio 0.68-1.00), and cost laws
+  +7.89 tok/fact at k = 8 and +29.36 tok/hop at E = 96 (the depth slope reproducing round 21 at
+  12x lower load) place the silence onset in the upper tail of the enumeration-length
+  distribution, not its mean. State: **Executed**; exploratory; every ceiling conditional on the
+  2048-token cap.
+
 ### 2026-10-20
 
 #### Added
