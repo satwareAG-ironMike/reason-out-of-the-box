@@ -1,0 +1,21 @@
+{
+  "attempt_cap": 40,
+  "chosen_concurrency": 4,
+  "estimate_per_item_s": 69.214,
+  "health": {
+    "completion_tokens": 37,
+    "finished_at": "2026-10-21T00:29:32Z",
+    "latency_s": 0.955,
+    "ok": true,
+    "outcome": "answered",
+    "prompt_tokens": 59,
+    "started_at": "2026-10-21T00:29:32Z"
+  },
+  "phase1_walls": [
+    32.322,
+    34.607
+  ],
+  "phase2_wall_s": 627.8,
+  "resumed_cells": 0,
+  "total_endpoint_calls_including_health": 37
+}

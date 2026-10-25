@@ -5,6 +5,26 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-21
+
+#### Added
+
+- Round 15 nightly probe `research/nightly-2026-10-21-0200/` (issue #65): the
+  matched-pair traversal grid at k = 12, 16, 24 run for the first time on the repaired
+  ladders family (component isomorphism, issue #69, merged 2026-10-20), on a
+  flash-next-class local endpoint: 36 of 36 cells follow the directed-traversal oracle,
+  the connectivity oracle fails exactly the nine reverse cells, exact McNemar shows zero
+  discordant pairs in both matched families. Corpus pinned by generator sha256 and blob
+  hashes, declared not cell-paired to the pre-repair rounds 10/11/14. All seven
+  2048-token truncations land on negative arms (six at k = 24) with the answer already
+  emitted in the reasoning trace: the scarce resource at k = 24 is the output budget,
+  quantifying round 6's "budget, not depth" per arm (refs #71, #78, #69).
+- Literature update recorded on issue #71 (issue #65 round 15 comment): quantization
+  versus multi-hop reasoning is no longer an evidence vacuum (arXiv:2602.13595,
+  arXiv:2606.00206, arXiv:2606.25519, arXiv:2504.04823; ACL 2026 MixKVQ), so
+  quantization moves from uncontrolled variable to demonstrated confound for
+  cross-endpoint d* placement; no published traversal-specific d* result exists.
+
 ### 2026-10-20
 
 #### Added
