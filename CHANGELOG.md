@@ -5,6 +5,74 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-23
+
+#### Added
+
+- Round 19 nightly probe `research/nightly-2026-10-23-0200/` (issue #65): the budget
+  ladder at fixed depth on the repaired ladders family - the nine level-24 cells
+  (F1, R1, X, three items each) at `max_tokens` 256, 640, 1280, 2048 on a
+  flash-next-class local endpoint, prompt sha256 paired fail-closed to the round-15
+  and round-17 archives (9 of 9 each) before any prompt spent. Surfacing is monotone
+  in budget but arm-specific: F1 surfaces 0, 0, 3, 3 cells (all six surfaced answers
+  correct), R1 and X surface 0 of 3 at every budget up to 2048; answer-field-only
+  accuracy is 6 of 36 while the declared parser reports 9 of 9 answered at every rung
+  including 256 tokens. Post-hoc readout control: the reasoning-fallback token is
+  "no" in 34 of 36 records and its accuracy 24 of 36 equals the constant-"no"
+  baseline exactly; a strict commitment rule keeps 13 of 36 and all 13 agree with
+  gold (F1 7, R1 6, X 0 at every budget). Consequence recorded: at k = 24 on this
+  class the traversal-versus-connectivity discrimination was carried by fallback
+  tokens, while the same grid on the 27B class answers R1 from `content` (refs #71,
+  #78, #73, #65).
+
+#### Fixed
+
+- Round 19 record, self-audit against the archives (refs #65): the P5 pairing claim is narrowed to
+  declared answers (9 of 9, exact McNemar p = 1.0) - cell-level completion-token reproduction is
+  not testable because the round-17 archive stores no per-cell counts (gate field
+  `round17_completion_tokens` null); and the 0.457 mid-stream commitment median is attributed to
+  round 17, which measured it, instead of to this round. No measurement, gate, `raw.jsonl` or
+  `summary.json` changed. The same corrections were applied to the round-summary comment on #65,
+  the PR #93 description and issue #94 (rescue counts restated per round: 7, 0, 17, 1 for
+  rounds 15, 16, 17, 18).
+
+### 2026-10-22
+
+#### Added
+
+- Round 18 nightly probe `research/nightly-2026-10-22-0400/` (issue #65): the
+  round-17 fixed-budget depth curve (repaired ladders family, k = 24, 32, 48,
+  `max_tokens = 2048`) mirrored on a 27B-class local endpoint, on the
+  byte-identical 36-cell grid, with the level-24 cells anchored to the
+  round-16 archive (12 of 12, fail-closed) and every cell paired cross-class
+  to the round-17 archive (36 of 36, fail-closed) before any prompt spent:
+  29 of 36 cells answered, 29 of 29 correct - budget turnover confined to the
+  X arm at k = 24 (0 of 3 there, 1 of 3 at 32 and 48, all seven truncated
+  cells dying at full expected-traversal coverage), no correctness turnover;
+  the declared answerability-decay prediction fails honestly (0.75 / 0.833 /
+  0.833). The cross-class delta on the identical grid is exactly the seven X
+  cells the flash-next class answered via the reasoning fallback and this
+  class truncated; this class is far more token-efficient where it answers
+  (R1 453 vs 1717 tokens, positive-arm token law -61.9 + 22.0k vs -50.8 +
+  33.1k, one reasoning rescue vs 17) and the temperature-0 anchor rerun is
+  token-identical on all twelve L24 pairs (refs #71, #78, #73, #65).
+- Round 17 nightly probe `research/nightly-2026-10-22-0200/` (issue #65): the
+  fixed-budget depth curve on the repaired ladders family, extended to
+  k = 24, 32, 48 at `max_tokens = 2048` on a flash-next-class local endpoint,
+  with the k = 24 level cell-paired to round 15 by prompt sha256 (12 of 12,
+  fail-closed before any prompt): 36 of 36 cells answered, 36 of 36 correct -
+  no answerability or correctness turnover inside k = 48; the declared
+  answerability-decay prediction fails honestly. Budget pressure lands on the
+  negative arms: 17 of 36 cells hit the 2048 ceiling (all nine X cells at every
+  level), every one rescued by a yes/no committed mid-trace (median position
+  0.457 of the stream), so at this budget the scarce resource is the
+  answer-surfacing path, not reachability; positive-arm completions fit
+  -50.8 + 33.1k tokens (r = 0.845), under half round 6's open-budget slope -
+  correct answers without full recitation. Anchor rerun: 12 of 12 answers agree
+  with round 15 at temperature 0. Adjacent literature framed at abstract level:
+  the coupling tax (arXiv:2605.07686) and budget-exhaustion non-convergence
+  (arXiv:2607.21433) (refs #71, #78, #73, #65).
+
 ### 2026-10-21
 
 #### Added
@@ -24,6 +92,18 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   arXiv:2606.00206, arXiv:2606.25519, arXiv:2504.04823; ACL 2026 MixKVQ), so
   quantization moves from uncontrolled variable to demonstrated confound for
   cross-endpoint d* placement; no published traversal-specific d* result exists.
+- Round 16 nightly probe `research/nightly-2026-10-21-0400/` (issue #65):
+  cell-paired cross-class probe on the repaired ladders family - round 15's corpus
+  run byte-identically on a 27B-class local endpoint (the pool slot round 14 measured
+  pre-repair), compared cell by cell against the round-15 archive: 33 of 33 answered
+  cells correct, the traversal oracle matches all 36 cells under the disclosed
+  default-match convention, and the first cell-paired cross-class comparison on the
+  repaired family shows 33/33 answer agreement with zero discordant pairs (exact
+  McNemar p = 1.0). The only cross-class delta is the X cells at k = 24: truncated
+  but rescued via the reasoning trace in round 15, unanswerable within 2 x 2048
+  tokens on this class (light-thinker profile, flat latency, all answers from
+  content). Cell pairing verified by per-cell prompt sha256 before any prompt spent
+  (refs #71, #78, #65).
 
 ### 2026-10-20
 
