@@ -105,7 +105,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   content). Cell pairing verified by per-cell prompt sha256 before any prompt spent
   (refs #71, #78, #65).
 
-||||||| 0fdea31
 ### 2026-10-20
 
 #### Added
