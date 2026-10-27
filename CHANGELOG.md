@@ -5,6 +5,28 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-27
+
+#### Added
+
+- Nightly research round 31 (issue #65, tracker comment posted):
+  `research/nightly-2026-10-27-0439/` cross-class replication of the round-24 six-cell
+  (k, E) bisection grid on a new endpoint class (a 27B-class local model under NVFP4
+  4-bit floating point quantization, vLLM serving, multi-token-prediction speculative
+  decoding), on byte-identical prompts digest-pinned to the round-24 flash-next archive
+  (all-cell fail-closed anchor, gate `8d9c445f`, schema `round31-gate-v1`). Result: the
+  frontier structure transfers verbatim - maintained through (k = 8, E = 160), turnover
+  at (16, 96) reproduced by the same single arm-X truncation at 2048 (5/6 delivered and
+  correct, answer field silent), zero wrong answers, 35/35 cross-class answer agreement.
+  P1 fails as declared (the k = 16 turnover is shared across classes, not a flash-next
+  artifact); P4 fails on both axes: the enumeration cost law is not class-invariant
+  (per-fact slope -6.01 vs round 24's +7.89; per-hop slope -27.13 vs +29.36, both outside
+  the declared [0.5x, 2.0x] band and both negative), with the distractor-mention ratio
+  0.0 in every cell vs 0.68-1.00 on the flash-next class: this class does not enumerate
+  the irrelevant components, and the load insensitivity is a 27B-class property
+  (consistent with round 22's load-free-to-240 behavior), not a quantization artifact.
+  State Executed, n = 6 per cell exploratory (refs #71, #94, #78, #73, #65).
+
 ### 2026-10-21
 
 #### Added
