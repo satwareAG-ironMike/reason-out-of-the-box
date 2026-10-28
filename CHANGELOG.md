@@ -5,6 +5,34 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-28
+
+#### Added
+
+- Round 33 nightly probe `research/nightly-2026-10-28-0400/` (issue #65): the first
+  test-retest measurement of the nightly frontier instrument itself. Round 24's (k, E) grid
+  re-run byte-identically (36 digest-pinned prompts, temperature 0, gate `979585cd`) on the
+  flash-next class that produced it, three days later: all seven declared predictions pass.
+  The six cell statuses repeat (five maintained, D2 inconclusive through one 2048-token
+  truncation on the *same prompt digest* as round 24's), 35 of 35 delivered answers agree,
+  the delivered/silent pattern is identical at 36 of 36 prompts (McNemar b = c = 0), the cost
+  law reproduces (+7.686 tokens/fact against +7.885, +29.563 tokens/hop against +29.363,
+  ratios 0.974 and 1.007), the grid-mean distractor-mention ratio is identical (0.8922), and
+  32 of 36 completions are token-for-token identical (Pearson 0.995, Spearman 0.9938, median
+  deviation 0, one item +16.9%). Consequence for #71: a single-run n=6 verdict on this class
+  is a repeatable measurement, and round 31's cross-class cost-law conclusion is now bounded
+  by a measured noise floor (run-to-run slope ratios 0.97 and 1.01 against cross-class ratios
+  -0.76 and -0.92), not merely asserted. Independent audit of round 31's published slopes from
+  its archived per-prompt lengths: -6.010357 and -27.125 (refs #71, #94, #65).
+
+#### Changed
+
+- Nightly protocol gap filed as issue #100 (round 33): neither the study design nor the M2
+  inference harness (#5) records an identical-prompt self-agreement control, so no archived
+  cell verdict can separate measurement from decoding noise; the fix is a repeated identical
+  run per cell reported as raw-output and parsed-answer agreement, per-cell Wilson intervals,
+  and a McNemar-style paired test against the archived run (prior art arXiv:2408.04667).
+
 ### 2026-10-21
 
 #### Added
@@ -86,8 +114,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   replicates the round-10 traversal verdict: 36/36 cells match the directed-traversal
   oracle, the undirected-connectivity shortcut fails all nine reverse cells, exact
   McNemar shows zero discordant pairs in both matched families, and all 36 completions
-  recite the full interior chain. The endpoint is the pool's `qwen38-flash-next` slot, a
-  distinct slot from round 10's (same public model family; not a quantization comparison).
+  recite the full interior chain. The endpoint is a flash-next-class slot of the local
+  pool, a distinct slot from round 10's (same public model family; not a quantization
+  comparison).
   Transport hardening: 37 endpoint
   calls under a global 40-attempt cap, zero retries, per-attempt `finished_at`
   timestamps close the named open item of #73. The probe script fixes three round-10
