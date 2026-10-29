@@ -32,6 +32,67 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   selftest green, no cell flagged on either pool), zero retries, zero transport errors.
   State: **Executed**.
 
+### 2026-10-24
+
+#### Added
+
+- Nightly research round 22 (issue #65; serves #71 load axis, #78 matched pair, #94 readout
+  stack, #73 transport): `research/nightly-2026-10-24-0405/` measures the **load axis at constant
+  hop depth** on a 27B-class local endpoint - k = 4 fixed, facts E in {24, 48, 96, 144, 192, 240},
+  3 graphs per level, each graph queried twice over the *identical* fact list (arm F forward,
+  gold yes; arm X cross-component, gold no), so the polarity contrast is unconfounded and the
+  shared-content invariant of #78 criterion 1 is asserted per dispatched pair with a planted
+  cross-item control. Gate `7afc9cc5` written before any prompt (355-check selftest green); the
+  leak battery runs on both the 40-candidate pool and a paired pool matching the dispatched
+  construction, no cell flagged; fail-closed anchor to round 21 (E = 24 pool blob and three arm-F
+  prompt digests equal the PR #95 archive). Result: **E\* >= 240, no turnover** - 36/36 cells
+  answered in the answer field, 36/36 correct, every level `maintained`, zero truncation, and
+  **18/18 matched pairs with both members correct** (exact McNemar b = c = 0). Two failed
+  predictions carry the finding: mean completion at E = 240 is 0.97x the E = 24 mean (declared
+  floor 3.0x, slope -0.53 tokens per added fact while prompt tokens rise 14.86 per fact), because
+  this class abandons enumeration above ~100 facts (distractor-entity mention ratio 1.00, 1.00,
+  1.00 then 0.34, 0.18, 0.016); and E = 240 stays `maintained`, so with round 21's constant-load
+  result the ceiling is **two-dimensional in (k, E)**, not a curve in either axis alone. The
+  three anchored prompts reproduce round 21's delivered answers 3/3 at ~15% fewer tokens.
+  Transport disclosed in `research/nightly-2026-10-24-0405/transport.json`: the assigned pool slot
+  was generation-hung (0.3 tokens/s) and the round rotated to the pool's next generation-healthy
+  slot; the health-probe budget was lowered to 256 tokens before the first prompt; `aggregate()`
+  was patched after all 36 cells were archived and recovered at zero prompt cost under the
+  gate-hash-guarded resume. 36 grid prompts of a 40 cap, zero retries. State: **Executed**.
+
+### 2026-10-21
+
+#### Added
+
+- Round 15 nightly probe `research/nightly-2026-10-21-0200/` (issue #65): the
+  matched-pair traversal grid at k = 12, 16, 24 run for the first time on the repaired
+  ladders family (component isomorphism, issue #69, merged 2026-10-20), on a
+  flash-next-class local endpoint: 36 of 36 cells follow the directed-traversal oracle,
+  the connectivity oracle fails exactly the nine reverse cells, exact McNemar shows zero
+  discordant pairs in both matched families. Corpus pinned by generator sha256 and blob
+  hashes, declared not cell-paired to the pre-repair rounds 10/11/14. All seven
+  2048-token truncations land on negative arms (six at k = 24) with the answer already
+  emitted in the reasoning trace: the scarce resource at k = 24 is the output budget,
+  quantifying round 6's "budget, not depth" per arm (refs #71, #78, #69).
+- Literature update recorded on issue #71 (issue #65 round 15 comment): quantization
+  versus multi-hop reasoning is no longer an evidence vacuum (arXiv:2602.13595,
+  arXiv:2606.00206, arXiv:2606.25519, arXiv:2504.04823; ACL 2026 MixKVQ), so
+  quantization moves from uncontrolled variable to demonstrated confound for
+  cross-endpoint d* placement; no published traversal-specific d* result exists.
+- Round 16 nightly probe `research/nightly-2026-10-21-0400/` (issue #65):
+  cell-paired cross-class probe on the repaired ladders family - round 15's corpus
+  run byte-identically on a 27B-class local endpoint (the pool slot round 14 measured
+  pre-repair), compared cell by cell against the round-15 archive: 33 of 33 answered
+  cells correct, the traversal oracle matches all 36 cells under the disclosed
+  default-match convention, and the first cell-paired cross-class comparison on the
+  repaired family shows 33/33 answer agreement with zero discordant pairs (exact
+  McNemar p = 1.0). The only cross-class delta is the X cells at k = 24: truncated
+  but rescued via the reasoning trace in round 15, unanswerable within 2 x 2048
+  tokens on this class (light-thinker profile, flat latency, all answers from
+  content). Cell pairing verified by per-cell prompt sha256 before any prompt spent
+  (refs #71, #78, #65).
+
+
 ### 2026-10-20
 
 #### Added
