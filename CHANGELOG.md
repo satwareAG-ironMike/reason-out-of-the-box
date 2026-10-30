@@ -5,6 +5,27 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-30
+
+#### Added
+
+- Nightly research round 37 (issue #65, tracker comment posted; serves #100, #94, #71,
+  #73): `research/nightly-2026-10-30-0400/` re-runs round 31's digest-pinned (k, E)
+  frontier grid on the same endpoint class (a 27B-class local model under NVFP4
+  quantization, vLLM serving, multi-token-prediction speculative decoding), with round
+  33's retest instrument retargeted to round 31's archive (gate `b90335f1`, schema
+  `round37-gate-v1`, 992-check selftest, 37 of the 40-call cap, zero transport errors).
+  Result: the single-run surface of round 31 does NOT repeat on its own class - the
+  (16, 96) turnover cell is now maintained (6/6, all correct, zero truncations grid-wide),
+  the delivery pattern moves 35 of 36 (round 31's single silent prompt delivered at 803
+  tokens), the per-prompt length structure is not repeatable (Spearman 0.17, one of 36
+  token-identical) and the per-hop cost slope falls outside its declared band (-9.48
+  against -27.13, band [-54.26, -13.565]), while the answers (35/35 agreement, 36/36
+  correct) and the non-enumerating style (distractor-mention ratio 0.0) hold. The
+  round-31 cross-class cost-law conclusion is therefore not separable from this class's
+  run noise; the archived (16, 96) ceiling now stands on two agreeing runs on the
+  flash-next class and two disagreeing surfaces on this class. State: **Executed**.
+
 ### 2026-10-25
 
 #### Added
