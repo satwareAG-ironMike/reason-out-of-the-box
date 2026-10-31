@@ -263,3 +263,28 @@ finishes; `--analyze` rebuilds `summary.json` from the archived raw records alon
 noise floor (fixed bootstrap seed). The panel slope basis (2 items per cell) is deliberately not
 comparable to the published full-design slopes (6 per cell), which the script carries as constants
 and `--selftest` recomputes from the same archives.
+
+## Addendum (appended 2026-10-31, after the PR opened; the record above is unchanged)
+
+Disclosure found while re-checking the transcribed archives against the raw records, and it qualifies
+finding 6 and the class-identity diagnostic:
+
+- **The other class's transcribed transcripts collapse to two hashes.** Round 37's sanitized
+  `content + U+0000 + reasoning` digest is `e799bb67aa4b` for all six arm-F digests and
+  `588bf483d9c6` for all six arm-X digests across the 12 panel prompts, because that deployment answers
+  with a bare "yes" or "no" in the content field and exposes no reasoning text at all (4 to 5 content
+  characters, 0 reasoning characters, while `completion_tokens` reports 182 to 1355). So the cross-class
+  TARr of 0.0 over the 24 joinable pairs says only that a several-hundred-token answer string is not
+  byte-identical to a five-character one. It is **not** evidence about trace divergence, and no
+  byte-level class-identity statement can be made on that class from these archives in either
+  direction. Length-based comparisons (`abs_rel_dev`) and answer comparisons (TARa 1.00 cross-class) are
+  unaffected and remain the cross-class quantities.
+- For the same reason, the class-identity diagnostic should be read as: 30 of 36 dispatches byte-identical
+  to round 24 and 27 to round 33 (this class), against **0 to round 37**, where the 0 is partly an
+  artifact of the collapse above. Median relative length deviation is 0.0 against round 24 and round 33,
+  0.847 against round 37 and 1.247 against round 31; the length deviation, not the byte identity, is the
+  load-bearing part of the identity claim.
+- Consequence carried forward to #100 and #94: a deployment that does not expose its reasoning channel
+  makes every trace-level quantity in this program unmeasurable on it, whatever its accuracy. Any
+  cross-class trace claim needs the reasoning text to be surfaced and archived on both sides, or it has
+  to be stated as an answer-level claim only.
