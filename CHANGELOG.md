@@ -26,7 +26,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   the irrelevant components, and the load insensitivity is a 27B-class property
   (consistent with round 22's load-free-to-240 behavior), not a quantization artifact.
   State Executed, n = 6 per cell exploratory (refs #71, #94, #78, #73, #65).
-||||||| 6219acf
 ### 2026-10-25
 
 #### Added
