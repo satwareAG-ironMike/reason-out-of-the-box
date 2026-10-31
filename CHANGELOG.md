@@ -5,6 +5,46 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-10-31
+
+#### Added
+
+- Nightly research round 38 (issue #65, tracker comment posted; serves #100, #71, #94, #73):
+  `research/nightly-2026-10-31-0228/` holds one firing fixed and varies the conditions inside it,
+  so the variance in an archived cell verdict is attributed instead of assumed. 12 digest-pinned
+  prompts (arm F and arm X of the first matched pair of each of round 24's six (k, E) cells,
+  selected by the archived order before any outcome) dispatched three times in one session in an
+  ABABA order - serialized, then at the archived concurrency of 2, then serialized - 36 dispatches
+  + 1 health call under the 40 cap, gate `eac3acca` (schema `round38-gate-v1`, 266-check selftest
+  green, structural pin to round 24's corpus fail-closed) written before any prompt was spent.
+  Result: **within the session the answer is byte-stable and the dispatch mode moves the trace but
+  never the verdict**. Serialized-versus-serialized TARr 0.9167 (11 of 12 prompts byte-identical
+  over 25 minutes); serialized-versus-batched TARr 0.875 with two prompts moving (D2 arm X
+  1619 to 1913 tokens, +18.2 percent, returning to 1619 when serialized; L3 arm F +1.0 percent and
+  *staying*, which is drift the ABABA bracket separates from the mode effect), TARa 1.00 in both
+  within-run strata and 1.00 cross-class over 48 pairs. Noise floors now measured rather than
+  assumed (0.99 quantile of each stratum's own propagated slope distribution): determinism 0.18
+  tokens/fact and 1.50 tokens/hop, mode change 2.95 and 24.5, cross-firing up to 2.97 and 24.5 - so
+  P2's 1.74x depth slope (43.25 against 24.875) is inside its own floor and no slope difference this
+  round is certifiable as a change (N6). **What fails is delivery: the deepest load cell no longer
+  delivers.** L3 arm X (`d548b1f9681c`, k = 8, E = 160) truncated at 2048 in all three passes with
+  byte-identical output where rounds 24 and 33 delivered the same prompt's correct "no" at 2043
+  tokens: the archived maintained status of (8, 160) sits on a 5-token margin out of 2048
+  (0.24 percent of the budget), so the load ceiling is a statement about `max_tokens` and must be
+  re-placed under the pre-registered 4096 before it can be quoted (#71, #12). Delivery 33 of 36,
+  content-only accuracy 33 of 33 delivered correct, and the only answer disagreement anywhere is
+  that one digest (cross-firing TARa 0.9286; delivered-only TARa 1.00 in all five strata).
+  #100's acceptance criteria 1 and 2 land here: per-cell (TARr, TARa) and Wilson intervals on both
+  denominators (per item n = 2, e.g. [0.342, 1.0] for a perfect cell, [0.095, 0.906] for L3; per
+  dispatch n = 6), plus flip rates propagated to a six-item cell - at least one delivery flip on a
+  re-run 0.36 (0.62 at the interval's upper bound), at least one material length move 0.13 (0.40).
+  Cross-class: the load-axis gap is resolvable against both classes' floors (-13.6 and -16.6
+  tokens/fact against a union floor of 12.41) while the depth-axis gap is not (+43.8 and -51.1
+  against 148.07, the other class's single-pair floor exceeding the class difference). P1 reproduces
+  round 24 byte-for-byte on 11 of 12 prompts and 30 of the 36 dispatches match it, against 0 of 36
+  for the other class. Zero retries, zero transport errors, throughput 5.5 to 67 tok/s within one
+  session (wall clock is transport, reported as such). State: **Executed**.
+
 ### 2026-10-25
 
 #### Added
