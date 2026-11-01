@@ -5,6 +5,35 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-01
+
+#### Added
+
+- Nightly research round 40 (issue #65; serves #100, #71, #94, #73, #85):
+  `research/nightly-2026-11-01-0204/` re-runs round 38's 12 digest-pinned panel (pair 0 of
+  each of round 24's six (k, E) cells) on a 27B-class local endpoint whose health prompt
+  exposed a non-empty `reasoning_content` field, where the class's two archived firings
+  (rounds 31 and 37) probed with the identical inherited stack exposed none. 36 dispatches
+  in three ABABA passes (P1 serialized, P2 paired-2, P3 serialized) + 1 health call, 37 of
+  the 40-call cap, gate `b8fb56ee` (schema `round40-gate-v1`) written before any prompt,
+  98-check selftest, zero retries, zero transport errors. Result: the 27B class's
+  "zero-trace" status is a deployment property, not a class property - all 36 dispatches
+  expose full reasoning via `reasoning_content` (631 to 4,233 characters, median 1,848)
+  against bare 0-to-3-character answers, and even the visible surface differs from round 37
+  (bare "yes"/"no" versus "\n\nyes"/"\n\nno", 0 of 12 content-only hash matches). The
+  round-38 addendum's cross-class unmeasurability condition is met: full-text byte identity
+  against round 38 P1 is a measured 0 of 12 (Wilson upper bound 0.242) with parsed-answer
+  agreement 10 of 10 both-delivered. The round-38 load-axis class gap does not reproduce
+  under the N6 guard once the 27B side exposes its channel (delta -18.549 tokens per fact
+  inside the union floor q99 26.742; round 38's resolvable contrast was trace-exposing
+  flash against the zero-trace 27B deployment), and billed-length variation within the 27B
+  class is as large as the class difference (median relative deviation 0.2696 against round
+  31 and 0.8593 against round 37, cross-class medians 1.48 to 3.32). New budget boundary:
+  (8, 128) arm X truncates at 2048 in all three passes where rounds 31 (383), 37 (746) and
+  flash (1,700) completed; delivery 33 of 36, all delivered answers correct, within-run
+  byte-stable on every prompt (pooled TARr 1.0, zero token change). Predictions T1, T2,
+  T3, T4, N1, N2, N3 pass; T5, N4, N5 fail. State: **Executed**.
+
 ### 2026-10-25
 
 #### Added
