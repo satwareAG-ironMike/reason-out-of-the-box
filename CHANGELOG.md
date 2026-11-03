@@ -69,6 +69,36 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   slot; the health-probe budget was lowered to 256 tokens before the first prompt; `aggregate()`
   was patched after all 36 cells were archived and recovered at zero prompt cost under the
   gate-hash-guarded resume. 36 grid prompts of a 40 cap, zero retries. State: **Executed**.
+### 2026-10-23
+
+#### Added
+
+- Round 19 nightly probe `research/nightly-2026-10-23-0200/` (issue #65): the budget
+  ladder at fixed depth on the repaired ladders family - the nine level-24 cells
+  (F1, R1, X, three items each) at `max_tokens` 256, 640, 1280, 2048 on a
+  flash-next-class local endpoint, prompt sha256 paired fail-closed to the round-15
+  and round-17 archives (9 of 9 each) before any prompt spent. Surfacing is monotone
+  in budget but arm-specific: F1 surfaces 0, 0, 3, 3 cells (all six surfaced answers
+  correct), R1 and X surface 0 of 3 at every budget up to 2048; answer-field-only
+  accuracy is 6 of 36 while the declared parser reports 9 of 9 answered at every rung
+  including 256 tokens. Post-hoc readout control: the reasoning-fallback token is
+  "no" in 34 of 36 records and its accuracy 24 of 36 equals the constant-"no"
+  baseline exactly; a strict commitment rule keeps 13 of 36 and all 13 agree with
+  gold (F1 7, R1 6, X 0 at every budget). Consequence recorded: at k = 24 on this
+  class the traversal-versus-connectivity discrimination was carried by fallback
+  tokens, while the same grid on the 27B class answers R1 from `content` (refs #71,
+  #78, #73, #65).
+
+#### Fixed
+
+- Round 19 record, self-audit against the archives (refs #65): the P5 pairing claim is narrowed to
+  declared answers (9 of 9, exact McNemar p = 1.0) - cell-level completion-token reproduction is
+  not testable because the round-17 archive stores no per-cell counts (gate field
+  `round17_completion_tokens` null); and the 0.457 mid-stream commitment median is attributed to
+  round 17, which measured it, instead of to this round. No measurement, gate, `raw.jsonl` or
+  `summary.json` changed. The same corrections were applied to the round-summary comment on #65,
+  the PR #93 description and issue #94 (rescue counts restated per round: 7, 0, 17, 1 for
+  rounds 15, 16, 17, 18).
 
 ### 2026-10-22
 
