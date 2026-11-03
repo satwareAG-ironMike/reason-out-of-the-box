@@ -36,6 +36,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   deployment). Transport: 87,190 prompt / 43,604 completion tokens, ~43.5 t/s single stream,
   1015.8 s wall, zero retries. State: **Executed**.
 
+- Archive round 18, AI consciousness scepticism: anchor Seth/Block/Tononi *Nature* comment
+  plus seven notes from the anchor's own reference list (Nagel 1974, Yu et al. 2015,
+  Vallor 2024, Suleyman 2026, Turing 1936/37, McCulloch & Pitts 1943, Searle 2017), landed
+  from the long-open round-18 branch. The entries were brought to the current entry format
+  (Archived dates, Citation sections, filename id alignment); three further anchor targets
+  (Seth's 2025 target article, Block's reply, the Ben-Zion safeguards comment) are recorded
+  as planned entries, not yet archived. Archive now 130 entries in 17 rounds; count
+  statements updated in the same commit.
+
 #### Fixed
 
 - Branch-cleanup merge debris in this file (from the PR #76/#72 squash batch): removed two stray
