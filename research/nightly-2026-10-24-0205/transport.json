@@ -1,0 +1,36 @@
+{
+  "attempts_per_cell": [
+    1
+  ],
+  "cell_retries": 0,
+  "cells": 36,
+  "dispatch": {
+    "chosen_concurrency": 1,
+    "endpoint_calls_total": 38,
+    "phase1_sequential_cells": [
+      {
+        "level": 2,
+        "wall_s": 4.319
+      },
+      {
+        "level": 2,
+        "wall_s": 10.255
+      }
+    ],
+    "phase2_cells": 34,
+    "phase2_mean_wall_by_depth": {
+      "12": 16.3,
+      "2": 7.82,
+      "3": 44.03,
+      "4": 22.78,
+      "6": 12.58,
+      "8": 13.07
+    },
+    "phase2_total_wall_s": 683.8
+  },
+  "est_field_note": "The per-record est_content_answer_tokens field in raw.jsonl carries the pre-fix position estimate (missing the reasoning-prefix offset); summary.json budget replay recomputes the corrected estimate from the archived attempt fields, per the committed analyze code.",
+  "health_calls": 2,
+  "health_note": "first firing ok in 1.712 s; one further health call during the gate-verified --resume that rebuilt summary.json after the analysis patch; zero cell prompts spent on the resume",
+  "patch_disclosure": "The probe crashed AFTER all 36 cells were measured and recorded (analysis-time results store missing in the ported two-phase transport); the dispatch and measurement code paths that produced raw.jsonl were not changed. The store bug was fixed, --selftest re-run green (323 checks), and summary.json regenerated at the final HEAD via --resume (gate-hash-guarded, zero prompts) plus --analyze. raw.jsonl is untouched: 36 records, one attempt each, uniform gate hash d39ceb847eae48e09940a67dbbd0967b00dd3d7e41ab7cfe066fea466b759851.",
+  "unique_cells": 36
+}
