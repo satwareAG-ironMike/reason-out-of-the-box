@@ -71,11 +71,26 @@ hashes, status, failure codes.
   Periodic seeded-defect tests (plant wrong units, shuffled labels, a wrong seed, a fake
   citation, an off-by-one n) measure verifier recall.
 - **Self-approval is not evidence.**
+- **A verifier's record is archived unedited.** The author of the verified document does not
+  rewrite it. The author records a disposition in the verified document: accepted and fixed, or
+  declined with evidence. A declined item stays visible.
+- **A claim about what a script prints is derived, not typed.** Counts a report cites from a
+  script (control groups, feature counts, corpus sizes) must be emitted by the script and asserted
+  against the cited number, so a change to the script fails a control instead of leaving the
+  report stale.
 - **Labels, never collapsed**: *Executed* (the run completed), *Reproduced* (an independent
   rerun regenerates the result within a pre-declared tolerance), *Validated* (independent
   evidence supports the interpretation).
 - Human review remains mandatory for external submissions, spend, irreversible actions,
   and any human-subject step.
+- **Verifiers are read-only against the worktree under verification.** A verifier writes only outside
+  it: it never edits a tracked file, never commits or pushes, and never runs `git checkout`,
+  `git switch`, `git branch -D`, or `git push --delete` against that worktree or its refs. Its findings
+  land as a report; the producing agent re-verifies each finding and applies the accepted corrections
+  under its own commit.
+- **Snapshot before verification.** The runner commits and pushes the round directory, or writes a
+  checksummed copy of it outside the repository, before any verifier pass, so that a verifier accident
+  cannot destroy an execution's artifacts.
 
 ## 6. Artifacts and archive
 
