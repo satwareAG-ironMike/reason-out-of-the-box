@@ -1,0 +1,275 @@
+{
+  "arms": {
+    "F1": {
+      "accuracy": 1.0,
+      "answer_source_content": 9,
+      "answer_source_reasoning": 0,
+      "answered": 9,
+      "correct": 9,
+      "finish_reason_length": 0,
+      "mean_completion_tokens": 899.778,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    },
+    "F2": {
+      "accuracy": 1.0,
+      "answer_source_content": 9,
+      "answer_source_reasoning": 0,
+      "answered": 9,
+      "correct": 9,
+      "finish_reason_length": 0,
+      "mean_completion_tokens": 762.111,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    },
+    "R1": {
+      "accuracy": 1.0,
+      "answer_source_content": 6,
+      "answer_source_reasoning": 3,
+      "answered": 9,
+      "correct": 9,
+      "finish_reason_length": 3,
+      "mean_completion_tokens": 1336.889,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    },
+    "X": {
+      "accuracy": 1.0,
+      "answer_source_content": 5,
+      "answer_source_reasoning": 4,
+      "answered": 9,
+      "correct": 9,
+      "finish_reason_length": 4,
+      "mean_completion_tokens": 1733.444,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    }
+  },
+  "families": {
+    "component_F2_X": {
+      "b_first_wrong": 0,
+      "both_right": 9,
+      "both_wrong": 0,
+      "c_second_wrong": 0,
+      "p_exact_mcnemar": 1.0,
+      "pairs": 9,
+      "skipped_unanswered": 0
+    },
+    "direction_F1_R1": {
+      "b_first_wrong": 0,
+      "both_right": 9,
+      "both_wrong": 0,
+      "c_second_wrong": 0,
+      "p_exact_mcnemar": 1.0,
+      "pairs": 9,
+      "skipped_unanswered": 0
+    }
+  },
+  "gate_hash": "10f569414bbf19b6e280cb8497f353408545bc48d6d37e698407b88693e9b26b",
+  "gate_sha256": "0a05912550fa430f667836f7f6a46434396a1f7ceedb9622a029da620ed93a6d",
+  "item_source": {
+    "blob_sha256": {
+      "generated/l12.jsonl": "91edd2b445d651595f0789ed0febf8387f23c7142c10d66211be7bcc955722b7",
+      "generated/l16.jsonl": "6252af48c3bf9eca4b6a2c5d5b3ff348b26e5507e955e3f2189b016a6eb61b18",
+      "generated/l24.jsonl": "cab16fae867b4791290259ffa451231efd73ef193da96664720fd4686fb7008f"
+    },
+    "generator_sha256": "b0d77efd308d249fea77e5fd97e9bef7f5e0fd737b214c2d754cddf970a7f77b"
+  },
+  "lineage": {
+    "cell_paired": false,
+    "lineage": [
+      {
+        "archive": "research/nightly-2026-10-18-0400/ (PR #80, open)",
+        "corpus": "pre-repair matched-pair grid k = 4, 6, 8",
+        "endpoint": "flash-class local endpoint",
+        "result": "36 of 36 cells followed directed traversal",
+        "round": 10
+      },
+      {
+        "archive": "research/nightly-2026-10-19-0200/raw.jsonl at branch tip a47ffa4 (PR #81, open), sha256 f5a77a4685ad6ef4",
+        "corpus": "pre-repair matched-pair grid k = 12, 16, 24",
+        "endpoint": "flash-class local endpoint",
+        "result": "36 of 36 cells followed directed traversal",
+        "round": 11
+      },
+      {
+        "archive": "research/nightly-2026-10-20-0400/raw.jsonl at branch tip 7c41754 (PR #87, open), sha256 29315280068d0ecc",
+        "corpus": "pre-repair matched-pair grid k = 12, 16, 24, cell-paired to round 11",
+        "endpoint": "27B-class local endpoint",
+        "result": "36 of 36 cells, zero disagreements with round 11",
+        "round": 14
+      },
+      {
+        "archive": "research/nightly-2026-10-16-0400/ (on main via PR #70)",
+        "corpus": "repaired family, single-query depth grid k = 1..16",
+        "endpoint": "flash-next-class local endpoint",
+        "result": "40 of 40 correct, no turnover within k <= 16",
+        "round": 6
+      }
+    ],
+    "lineage_facts": {
+      "round11_flash_class_pre_repair": "36 of 36 correct; per-level mean completion tokens 332.3 / 398.0 / 627.7; 36 of 36 chain recitations",
+      "round14_27b_class_pre_repair_cell_paired_to_round11": "36 of 36 correct, zero disagreements with round 11; per-level mean completion tokens 326.8 / 396.1 / 498.5; 18 of 36 chain recitations",
+      "round6_flash_next_class_repaired_single_query": "40 of 40 correct up to k = 16, no turnover; the direction arms tested here were not part of that design"
+    }
+  },
+  "per_level": {
+    "12": {
+      "answered": 12,
+      "cells": 12,
+      "correct": 12,
+      "mean_completion_tokens": 1179.667,
+      "mean_wall_s": 46.899,
+      "outcomes": {
+        "answered": 12
+      }
+    },
+    "16": {
+      "answered": 12,
+      "cells": 12,
+      "correct": 12,
+      "mean_completion_tokens": 995.833,
+      "mean_wall_s": 53.883,
+      "outcomes": {
+        "answered": 12
+      }
+    },
+    "24": {
+      "answered": 12,
+      "cells": 12,
+      "correct": 12,
+      "mean_completion_tokens": 1373.667,
+      "mean_wall_s": 65.419,
+      "outcomes": {
+        "answered": 12
+      }
+    }
+  },
+  "raw_sha256": "ec178eeaa9ae3d925108d3dbf85898804fed24a4c60928e659cd0cf56bfc250a",
+  "reasoning": {
+    "arms": {
+      "F1": {
+        "answer_source_content": 9,
+        "answer_source_reasoning": 0,
+        "finish_reason_length": 0,
+        "mean_completion_tokens": 899.778,
+        "mean_content_chars": 3.0,
+        "mean_reasoning_chars": 2188.444,
+        "reasoning_char_share": 0.9986,
+        "records": 9
+      },
+      "F2": {
+        "answer_source_content": 9,
+        "answer_source_reasoning": 0,
+        "finish_reason_length": 0,
+        "mean_completion_tokens": 762.111,
+        "mean_content_chars": 3.0,
+        "mean_reasoning_chars": 1907.111,
+        "reasoning_char_share": 0.9984,
+        "records": 9
+      },
+      "R1": {
+        "answer_source_content": 6,
+        "answer_source_reasoning": 3,
+        "finish_reason_length": 3,
+        "mean_completion_tokens": 1336.889,
+        "mean_content_chars": 1.333,
+        "mean_reasoning_chars": 3186.444,
+        "reasoning_char_share": 0.9996,
+        "records": 9
+      },
+      "X": {
+        "answer_source_content": 5,
+        "answer_source_reasoning": 4,
+        "finish_reason_length": 4,
+        "mean_completion_tokens": 1733.444,
+        "mean_content_chars": 1.111,
+        "mean_reasoning_chars": 4634.889,
+        "reasoning_char_share": 0.9998,
+        "records": 9
+      }
+    },
+    "overall": {
+      "mean_completion_tokens": 1183.056,
+      "mean_content_chars": 2.111,
+      "mean_reasoning_char_share": 0.9993,
+      "mean_reasoning_chars": 2979.222,
+      "note": "completion_tokens cover reasoning plus content; char shares are a proxy split (no per-field token count in the API usage)",
+      "records": 36
+    }
+  },
+  "records": 36,
+  "records_naming_all_interior_nodes": 19,
+  "seed_base": 20261019,
+  "signature_table": {
+    "connectivity": {
+      "cells": 36,
+      "cells_matching": 27,
+      "items": 9,
+      "items_matching_all_four": 0
+    },
+    "constant_no": {
+      "cells": 36,
+      "cells_matching": 18,
+      "items": 9,
+      "items_matching_all_four": 0
+    },
+    "constant_yes": {
+      "cells": 36,
+      "cells_matching": 18,
+      "items": 9,
+      "items_matching_all_four": 0
+    },
+    "traversal": {
+      "cells": 36,
+      "cells_matching": 36,
+      "items": 9,
+      "items_matching_all_four": 9
+    }
+  },
+  "transport": {
+    "attempt_cap": 40,
+    "chosen_concurrency": 4,
+    "estimate_per_item_s": 69.214,
+    "health": {
+      "completion_tokens": 37,
+      "finished_at": "2026-10-21T00:29:32Z",
+      "latency_s": 0.955,
+      "ok": true,
+      "outcome": "answered",
+      "prompt_tokens": 59,
+      "started_at": "2026-10-21T00:29:32Z"
+    },
+    "phase1_walls": [
+      32.322,
+      34.607
+    ],
+    "phase2_wall_s": 627.8,
+    "resumed_cells": 0,
+    "total_endpoint_calls_including_health": 37
+  }
+}
