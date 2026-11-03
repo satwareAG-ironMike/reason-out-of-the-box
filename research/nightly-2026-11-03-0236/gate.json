@@ -1,0 +1,178 @@
+{
+  "base_gate_sha256": "6b9378997e9b72e2e02649decc5291541a9b07bf1661fc34a39115756b2ff241",
+  "base_instrument": "research/nightly-2026-10-25-0205/frontier_walk_probe.py",
+  "baselines": {
+    "archived_loose_fallback_correct": 8,
+    "constant_no_correct": 7,
+    "constant_yes_correct": 4,
+    "note": "mode C must strictly exceed the archived 8/11 loose-fallback line on the same items to count as a gain; a tie is not a gain"
+  },
+  "cells": [
+    {
+      "arch_distractor_ratio_mean": 1.0,
+      "cell": "S4",
+      "n": 2,
+      "seeds": [
+        28501026,
+        28501028
+      ]
+    },
+    {
+      "arch_distractor_ratio_mean": 0.9333,
+      "cell": "S5",
+      "n": 4,
+      "seeds": [
+        32421024,
+        32421025,
+        32421025,
+        32421026
+      ]
+    },
+    {
+      "arch_distractor_ratio_mean": 0.7626,
+      "cell": "S6",
+      "n": 5,
+      "seeds": [
+        36381024,
+        36381025,
+        36381025,
+        36381027,
+        36381027
+      ]
+    }
+  ],
+  "census": {
+    "declared_extension": "per-message field census on every dispatch: field names plus the reasoning-supplying field, merge rule reasoning_content if non-empty, else reasoning, else none; record-only, the scoring channel stays the inherited byte-identical one"
+  },
+  "concurrency": 2,
+  "decision_table": {
+    "partial": "mode C delivers between the floors",
+    "policy_artifact": "mode C delivers >= 7/11, every delivered answer correct, and scores > 8/11 (strictly above the archived loose-fallback line)",
+    "policy_immovable": "both modes deliver <= 2/11",
+    "surfacing_only": "mode C delivers >= 7/11 but the delivered verdict quality does not (accuracy at or below the archived line, or a wrong delivered answer)"
+  },
+  "gate_blob_sha256": "8bbbb25c4955751c0950a37d28c2f487fbfb7f80deac6500c90501bd45e4556c",
+  "gold_no": 7,
+  "gold_yes": 4,
+  "max_tokens": 2048,
+  "modes": {
+    "A": {
+      "calls": 11,
+      "knob_tail": null
+    },
+    "A2": {
+      "calls": 3,
+      "duplicates": [
+        28501026,
+        32421024,
+        36381024
+      ],
+      "knob_tail": null
+    },
+    "B": {
+      "calls": 5,
+      "cell": "S6",
+      "knob_tail": "Answer with exactly one word: yes or no before any reasoning, then you may add reasoning."
+    },
+    "C": {
+      "calls": 11,
+      "knob_tail": "Without repeating any fact, answer with exactly one word: yes or no."
+    }
+  },
+  "pairs": [
+    {
+      "chains": 24,
+      "cross_item_sha256": "0c1211cb066349c47cb025d849b3de7d8f2a7bc7094b234f859cc7df5c25bfc3",
+      "forward_item_sha256": "c3caf99633335f43a0938eb0959df36d939edd85e3caf456cb0516892af3941f",
+      "k": 8,
+      "seed": 28501026
+    },
+    {
+      "chains": 24,
+      "cross_item_sha256": "806f8fc6d7bf086844b130d91bad27d6e8352d0ec7ad40b0a8770ec28be20533",
+      "forward_item_sha256": "5c07e087717d10ce6dc4c2928639b72a00267af56f6ebd71f67788270489f522",
+      "k": 8,
+      "seed": 28501028
+    },
+    {
+      "chains": 16,
+      "cross_item_sha256": "8264fa8b0340debf9482da667e3b7a2cadc52cceb2f0a83dccd4d60132b3eca6",
+      "forward_item_sha256": "9164e1c8cca7559d2e7003aa35f446eae43178082f2838ad759e1e1ef8c84f68",
+      "k": 12,
+      "seed": 32421024
+    },
+    {
+      "chains": 16,
+      "cross_item_sha256": "4ab38e9c7b8b504d2ea63e3964053f6bf2e8d82c13c2351e0bab75ce1dbbab62",
+      "forward_item_sha256": "1b1c75053a1352cad3c4cf0c317d5854d2cf1ae3a0ad5e55d6c8a817165e45f1",
+      "k": 12,
+      "seed": 32421025
+    },
+    {
+      "chains": 16,
+      "cross_item_sha256": "cd7a40007b1960dbf208f93f23f857e2cd13c06c0116596bc08f44ea82af0184",
+      "forward_item_sha256": "f38cc179a4257f2895ae3fdadf7ca686adb4308140752012304ec08cda9e0465",
+      "k": 12,
+      "seed": 32421026
+    },
+    {
+      "chains": 12,
+      "cross_item_sha256": "8d528a4f0bdcd6e0a89d63ad93b36047ee28dc5dc9f66abf15dd312c9dcbb884",
+      "forward_item_sha256": "62f9ad6662955b81ddcd7ea76adefc45ac13d0309b7b7c2b173aacd7a0f9a4af",
+      "k": 16,
+      "seed": 36381024
+    },
+    {
+      "chains": 12,
+      "cross_item_sha256": "8072d1ca188b3415f4358ccd45e9a5908ae6e8f33b54b919e6fb5e667eb20205",
+      "forward_item_sha256": "e5b2d7477071b60299b0a747558ceb4db23e5b3efb2f7a62ffd43731ffee5a45",
+      "k": 16,
+      "seed": 36381025
+    },
+    {
+      "chains": 12,
+      "cross_item_sha256": "c02e38e757ce3e0040a95db3ba5e45bafdf3ba47d3dc29787b1a7b9188accdc7",
+      "forward_item_sha256": "bfd8ccf2497e8a9807ed958a300b59c51312ca7fd21224c9b12be7e3b5518269",
+      "k": 16,
+      "seed": 36381027
+    }
+  ],
+  "panel_n": 11,
+  "planned_calls": 31,
+  "predictions": {
+    "N1_census_channel_open": true,
+    "N2_duplicate_pairs_byte_identical_ge": 2,
+    "P1_panel_digests_reproduce_archive": true,
+    "P2_modeA_truncated_ge": 9,
+    "P2b_modeA_delivered_le": 2,
+    "P3_modeC_delivered_ge": 7,
+    "P4_modeC_correct_ge": 9,
+    "P4b_modeC_wrong_delivered_le": 0,
+    "P5_modeC_mean_completion_over_modeA_le": 0.5,
+    "P6_modeC_distractor_ratio_drop_ge": 0.15,
+    "P7_modeC_reasoning_nonzero_ge": 9,
+    "P8_modeB_delivered_ge": 3,
+    "P9_calls_within_cap": true
+  },
+  "prompt_cap": 40,
+  "question": "whether the flash-next class's load ceiling (the round-23 budget_limited label of the E = 192 cells, recorded on this same class) is a property of the task or of the model's surface output policy, and whether the round-42 27B-class knob result (delivery moves, budget not reclaimed, no trace text on that deployment) transfers to the source class",
+  "readouts_inherited": [
+    "content_only",
+    "loose_fallback",
+    "delivered_or_strict"
+  ],
+  "readouts_local": [
+    "content_last_answer",
+    "content_last_offset",
+    "content_answer_words",
+    "content_one_word",
+    "content_answer_leading",
+    "reasoning_nonzero",
+    "field_conflict",
+    "census"
+  ],
+  "schema": "round44-gate-v1",
+  "selection_rule": "every round-23 record whose attempt 1 reached the max_tokens cap with the answer field silent (finish_reason length, content_answer null), taken in full; duplicates are the first panel entry of each cell, dispatched a second time in mode A",
+  "temperature": 0.0,
+  "wall_guard_s": 2400
+}

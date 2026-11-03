@@ -5,6 +5,37 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-03
+
+#### Added
+
+- Nightly research round 44 (issue #65; serves #71, #100, #105; refs #94, #73, #65, #108):
+  `research/nightly-2026-11-03-0236/` is the flash-class firing of the output-policy knob that
+  round 42 deferred and round 41 lost - the same 11 round-23 cap-truncated items (S4 to S6 at
+  E = 192) re-dispatched on a flash-next-class endpoint in modes A (archived prompt, 11), C
+  (no-repetition one-liner, 11), B (ordering one-liner, S6 only, 5), plus 3 duplicate mode-A
+  self-agreement dispatches and 1 census health call; 31 of the 40-call cap. Instrument: the
+  round-42 script ported byte-identically except the gate schema, the gate question and a
+  vendored `ROUND42_REFERENCE` (comparison constants transcribed programmatically from the
+  round-42 archive with planted-slip selftest controls), so prediction values stay byte-equal
+  across the two firings. Gate `8bbbb25c` (schema `round44-gate-v1`) frozen before dispatch.
+  Result (tier `surfacing_only`): the ceiling is class-tied - mode A truncates 8/11 (archived
+  11/11; round 42 on the 27B class: 1/11), the three escapes being the shortest traversals
+  (P2/P2b miss by one item); mode C delivers 7/11, a strict superset of mode A's three, all
+  correct, zero wrong, but the strict line 7/11 does not exceed the archived 8/11 loose line
+  (P4 fails; paired McNemar b = 0, c = 4, p = 0.125); cost ratio C over A 0.6756 (P5 fails at
+  the 0.50 ceiling, a partial re-claim, the opposite direction from round 42's 1.1255 measured
+  on a ceiling-free firing); mode B 2/5 (P8 fails, the pre-reasoning ordering is not followed
+  on this deployment). The mechanism is measurable for the first time (census open via
+  `reasoning_content` on 30/30 dispatches, P7 floor 11/11, P6 drop 0.3467): delivery is an
+  exact function of instruction obedience - all 7 obeying items suppress trace enumeration
+  (distractor ratio 0.000 to 0.048) and deliver in 262 to 931 tokens, all 4 disobedient items
+  keep enumerating (0.936 to 1.000) and truncate; disobedience is polarity-and-depth bound
+  (arm F 4/4 obey; arm X 2/2 at k = 8, 1/2 at k = 12, 0/3 at k = 16). N2: 3/3 duplicate pairs
+  byte-identical and token-identical (TARr 1.0; round 42's counter quirk re-attributed to its
+  deployment). Transport: 87,190 prompt / 43,604 completion tokens, ~43.5 t/s single stream,
+  1015.8 s wall, zero retries. State: **Executed**.
+
 ### 2026-10-25
 
 #### Added
