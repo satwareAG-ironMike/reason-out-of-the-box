@@ -6,7 +6,7 @@ analogous to how higher animals and humans reason without prior logic training?
 
 **Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
 2026-09-06 (round 8 extension), 2026-09-09 (round 10), 2026-09-14 (round 12),
-2026-09-15 (round 13), 2026-09-28 (round 14), 2026-10-05 (round 15), 2026-10-14 (round 16), 2026-10-19 (round 17) |
+2026-09-15 (round 13), 2026-09-28 (round 14), 2026-10-05 (round 15), 2026-10-14 (round 16), 2026-10-19 (round 17), 2026-10-25 (round 18) |
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
@@ -14,9 +14,33 @@ research suite (semantic arXiv search, metadata inspection, full-text passage ve
 round 9 (2026-09-05), 2 papers in round 8 (2026-09-06), 6 papers in round 10 (2026-09-09),
 2 papers in round 12 (2026-09-14), 4 papers in round 13 (2026-09-15), 15 papers in round 14
 (2026-09-28), 1 paper in round 15 (2026-10-05), 13 papers in round 16 (2026-10-14), 1 paper in
-round 17 (2026-10-19): 122 papers in 16 rounds. Full-text in-body verification was performed for the
+round 17 (2026-10-19), 8 papers in round 18 (2026-10-25): 130 papers in 17 rounds. Full-text in-body verification was performed for the
 highest-weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
+
+### Round 18 - AI consciousness scepticism (2026-10-25)
+
+Anchor: Seth, Block & Tononi, *Nature* comment "Three reasons why AI is not
+conscious and perhaps never will be" (2026), the strongest public statement of the
+anti-consciousness position: a philosophical position paper with no benchmark, no
+model and no experiment, archived as context for the consciousness-claims ledger.
+The seven notes are entries from the anchor's own reference list (anchor references
+5, 6, 7, 8, 11, 12 and 22), archived to make the anchor's claims checkable; none is
+evidence for or against reasoning ability. Three further targets the anchor cites
+(Seth's 2025 target article, Block's "Can only meat machines be conscious?" reply
+and the Ben-Zion safeguards comment) are planned entries and not yet archived.
+Overall verdict unchanged.
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| Seth, Block & Tononi 2026, Three reasons why AI is not conscious (anchor) | Nature (comment) | context | Three sceptical reasons (subjective experience, biological intentionality, computational abstraction); position paper, no benchmark or model |
+| [FT] Nagel 1974, What is it like to be a bat? | J. Philosophy (peer-reviewed) | context | Anchor ref 5: subjective character of experience; "absence of behavioural evidence is not evidence of absence" cuts both ways |
+| Yu et al. 2015, Complete primary cerebellar agenesis | Brain (peer-reviewed letter) | context | Anchor ref 6: consciousness retained without a cerebellum; a case against structure-function inference |
+| Vallor 2024, The AI Mirror | OUP (scholarly monograph) | context | Anchor ref 7: why consciousness attribution to AI is psychologically tempting; intuitions are a poor guide |
+| Suleyman 2026, AI is programmed to hijack human empathy | Nature (World View comment) | context | Anchor ref 8: argument against anthropomorphism and the commercial incentives shaping consciousness claims |
+| Turing 1936/37, On Computable Numbers | Proc. LMS (peer-reviewed) | context | Anchor ref 11: computation as a mathematical notion, not a theory of mind; Turing's own doubts about brain-machine identity |
+| McCulloch & Pitts 1943, A Logical Calculus of Ideas Immanent in Nervous Activity | Bull. Math. Biophysics (peer-reviewed) | context | Anchor ref 12: the neural-network abstraction the computational view of mind rests on |
+| Searle 2017, Biological Naturalism | Wiley Blackwell chapter (editorially reviewed) | context | Anchor ref 22: the strongest "biology is special" claim, source of the anchor's third reason |
 
 ## Verdict (state of the art, September 2026)
 

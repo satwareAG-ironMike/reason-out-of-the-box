@@ -10,8 +10,7 @@
 | Status | Scholarly monograph (editorial and peer review), not peer reviewed as a journal article; publisher record only, no full text accessed |
 | Relevance | anchor reference 7 |
 | Archive round | 18 - AI consciousness scepticism (context) |
-| Citation | Vallor, S., *The AI Mirror: What AI Can't Teach Us About Hating Work and Loving Life*, Oxford University Press, 2024 |
-
+| Archived | 2026-10-25 |
 ## Summary
 
 Vallor argues that AI systems mirror human values and behaviour back to us, and that
@@ -48,7 +47,7 @@ What the anchor relies on (2026-10-19, ref 7), verified from accessible sources:
 
 Philosophical analysis drawing on the history of technology and moral psychology.
 
-## Relevance to the core question
+## Relevance to core question
 
 Supports the anchor's psychological claim about why consciousness attribution to AI
 is tempting, and supports the broader claim that our intuitions are a poor guide.
@@ -61,5 +60,9 @@ confidence in any verdict about consciousness, including sceptical ones.
 
 ## Cross-references
 
-- [Suleyman on empathy hijacking](../round18-ai-consciousness-scepticism/d41586-026-00834-z-suleyman-ai-programmed-to-hijack-human-empathy-we-must-resist-that.md)
-- [anthropomorphic attachment study](../round14-latent-reasoning-2026/pmids39009891-halas-emotional-attachment-to-chatgpt.md)
+- [Suleyman on empathy hijacking](../round18-ai-consciousness-scepticism/d41586-026-00834-z-suleyman-ai-is-programmed-to-hijack-human-empathy-we-must-resist-that.md)
+- anthropomorphic attachment study (planned entry, not archived)
+
+## Citation
+
+Vallor, S., *The AI Mirror: What AI Can't Teach Us About Hating Work and Loving Life*, Oxford University Press, 2024

@@ -9,8 +9,7 @@
 | Status | Peer-reviewed journal article; abstract-level verification, not full-text verified |
 | Relevance | anchor reference 12 |
 | Archive round | 18 - AI consciousness scepticism (context) |
-| Citation | McCulloch, W. S. and Pitts, W., "A Logical Calculus of the Ideas Immanent in Nervous Activity", *Bulletin of Mathematical Biophysics*, 5: 115-133, 1943 (reprinted in *Bulletin of Mathematical Biology*, 86: 27, 2024) |
-
+| Archived | 2026-11-02 |
 ## Summary
 
 McCulloch and Pitts define neural nets as logical calculi and show that networks of
@@ -47,7 +46,7 @@ summaries:
 
 Mathematical logic (the first complete formal model of neural computation).
 
-## Relevance to the core question
+## Relevance to core question
 
 Anchor references 11-14 (Turing, McCulloch-Pitts, Kleene, Cobb) support the second
 reason's premise that the computational view of mind is a mathematical abstraction,
@@ -64,5 +63,9 @@ oscillation) that the anchor's second reason claims matter. Seth's target articl
 ## Cross-references
 
 - [Turing on computable numbers](../round18-ai-consciousness-scepticism/ppTUROCN-turing-on-computable-numbers-entscheidungsproblem.md)
-- [the Kleene and Cobb citations](archive/INDEX.md#round-18--ai-consciousness-scepticism-2026-10-24)
-- [Seth's target on biological naturalism](../round18-ai-consciousness-scepticism/S0140525X25000032-seth-conscious-ai-biological-naturalism.md)
+- [the Kleene and Cobb citations](../INDEX.md#round-18--ai-consciousness-scepticism-2026-10-25)
+- Seth's target on biological naturalism (planned entry, not archived)
+
+## Citation
+
+McCulloch, W. S. and Pitts, W., "A Logical Calculus of the Ideas Immanent in Nervous Activity", *Bulletin of Mathematical Biophysics*, 5: 115-133, 1943 (reprinted in *Bulletin of Mathematical Biology*, 86: 27, 2024)

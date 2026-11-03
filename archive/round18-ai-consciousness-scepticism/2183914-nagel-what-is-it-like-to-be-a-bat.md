@@ -7,11 +7,10 @@
 | Authors | Thomas Nagel (Institute for Advanced Study) |
 | Year | 1974 |
 | Venue | The Journal of Philosophy 71(4): 435-450 (reprinted in *Minds and Nature: Essays as*Philosophical Essays*, Cambridge University Press 2017, chapter 9) |
-| Status | [FT] Peer-reviewed journal article; full text read from the JSTOR scan of the printed pages 435-450 (OCR verified) |
+| Status | Peer-reviewed journal article; verified from full text (JSTOR scan of the printed pages 435-450, OCR verified) |
 | Relevance | anchor reference 5 |
 | Archive round | 18 - AI consciousness scepticism (context) |
-| Citation | Nagel, T., "What is it like to be a bat?", *The Journal of Philosophy*, 71(4): 435-450, 1974; also reprinted in *Minds and Nature*, Cambridge University Press, 2017, chapter 9 |
-
+| Archived | 2026-10-25 |
 ## Summary
 
 The anchor for all three sceptical arguments. Nagel defines consciousness by the
@@ -78,7 +77,7 @@ absence of a conception of the relation between subjective and objective is what
 makes the problem of mind and body intractable, and this is the point of the bat
 example").
 
-## Relevance to the core question
+## Relevance to core question
 
 The anchor's first reason ("AI could lack subjective experience") is Nagel's
 position. His own framing of the limits of extrapolation is double-edged: absence of
@@ -97,5 +96,9 @@ uncertainty rather than for capability limits.
 
 ## Cross-references
 
-- [Seth's biological naturalism](../round18-ai-consciousness-scepticism/S0140525X25000032-seth-conscious-ai-biological-naturalism.md)
-- [Block's reply](../round18-ai-consciousness-scepticism/pmids41062360-block-can-only-meat-machines-be-conscious.md)
+- Seth's biological naturalism (planned entry, not archived)
+- Block's reply (planned entry, not archived)
+
+## Citation
+
+Nagel, T., "What is it like to be a bat?", *The Journal of Philosophy*, 71(4): 435-450, 1974; also reprinted in *Minds and Nature*, Cambridge University Press, 2017, chapter 9

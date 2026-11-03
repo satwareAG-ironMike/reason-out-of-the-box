@@ -10,8 +10,7 @@
 | Status | Editorial comment (editorially reviewed, not peer reviewed); verified from the Crossref and PubMed records (title and abstract) |
 | Relevance | anchor reference 8 |
 | Archive round | 18 - AI consciousness scepticism (context) |
-| Citation | Suleyman, M., "AI is programmed to hijack human empathy - we must resist that", *Nature*, 651(8106): 559, 2026 |
-
+| Archived | 2026-10-25 |
 ## Summary
 
 Suleyman argues that AI systems are designed to exploit human empathy and that this
@@ -43,7 +42,7 @@ No quantitative extraction (comment; abstract only). What the anchor relies on
 
 Comment; first-person analysis by a company CEO.
 
-## Relevance to the core question
+## Relevance to core question
 
 An argument against anthropomorphism and an example of the commercial incentive
 structure that shapes consciousness claims. The anchor's first reason cites Suleyman's
@@ -59,4 +58,8 @@ absence of consciousness.
 ## Cross-references
 
 - [Vallor's AI Mirror](../round18-ai-consciousness-scepticism/ppVALTAM-vallor-ai-mirror-what-ai-can-t-teach-us-about-hating-work-and-loving-life.md)
-- [Ben-Zion on emotionally responsive AI safeguards](../round18-ai-consciousness-scepticism/d41586-025-02031-w-benzion-mandatory-safeguards-emotionally-responsive-ai.md)
+- Ben-Zion on emotionally responsive AI safeguards (planned entry, not archived)
+
+## Citation
+
+Suleyman, M., "AI is programmed to hijack human empathy - we must resist that", *Nature*, 651(8106): 559, 2026

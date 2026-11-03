@@ -10,8 +10,7 @@
 | Status | Peer-reviewed journal article; abstract-level verification from the PhilPapers and Crossref records (no full text accessed; the original article is open access through the LMS and archive copies) |
 | Relevance | anchor reference 11 |
 | Archive round | 18 - AI consciousness scepticism (context) |
-| Citation | Turing, A. M., "On Computable Numbers, with an Application to the Entscheidungsproblem", *Proceedings of the London Mathematical Society*, s2-42(1): 230-265, 1936/1937 |
-
+| Archived | 2026-10-25 |
 ## Summary
 
 Turing's definition of computability: what a machine can do, and the limits of what
@@ -57,7 +56,7 @@ No quantitative extraction (foundational mathematics). What the anchor relies on
 Mathematical foundations (the Turing machine model, the halting problem, ordinal
 logic).
 
-## Relevance to the core question
+## Relevance to core question
 
 Supports the anchor's framing of computation as a mathematical notion, not a theory of
 mind, and Turing's own skepticism about identifying brains with Turing machines.
@@ -72,5 +71,9 @@ position is nuanced, and the anchor uses him selectively.
 
 ## Cross-references
 
-- [McCulloch and Pitts](../round18-ai-consciousness-scepticism/bf02478259-mcculloch-pitts-logical-calculus-ideas-nervous-activity.md)
-- [Marcus on the computation wall](../round7-embodied-tools/2203.14140-mMarcus-stolen-legacy.md)
+- [McCulloch and Pitts](../round18-ai-consciousness-scepticism/BF02478259-mcculloch-pitts-logical-calculus-ideas-immanent-nervous-activity.md)
+- Marcus on the computation wall (planned entry, not archived)
+
+## Citation
+
+Turing, A. M., "On Computable Numbers, with an Application to the Entscheidungsproblem", *Proceedings of the London Mathematical Society*, s2-42(1): 230-265, 1936/1937

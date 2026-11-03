@@ -11,8 +11,7 @@
 | Status | Peer-reviewed journal letter; abstract-level verification, no PubMed abstract record and no accessible full text |
 | Relevance | anchor reference 6 |
 | Archive round | 18 - AI consciousness scepticism (context) |
-| Citation | Yu, M. et al., "A new case of complete primary cerebellar agenesis: clinical and imaging findings in a living patient", *Brain*, 138(6): e353, 2015 (published online 2014-08-22) |
-
+| Archived | 2026-10-25 |
 ## Summary
 
 A living patient born without a cerebellum. The case is cited in the anchor's second
@@ -48,7 +47,7 @@ Case report with clinical examination and neuroimaging, published as a letter
 (with PMC metadata but without full-text deposit); responding to Liu et al. (2010),
 who reported a different cerebellar agenesis case.
 
-## Relevance to the core question
+## Relevance to core question
 
 The anchor cites this patient as a case where consciousness is retained without a
 cerebellum, which is a reason against structure-function inference (a C1/C3 case
@@ -65,5 +64,9 @@ patient's consciousness.
 
 ## Cross-references
 
-- [Seth's target on biological naturalism](../round18-ai-consciousness-scepticism/S0140525X25000032-seth-conscious-ai-biological-naturalism.md)
-- [Seth's author response](../round18-ai-consciousness-scepticism/S0140525X26106906-seth-the-stuff-matters.md)
+- Seth's target on biological naturalism (planned entry, not archived)
+- Seth's author response (planned entry, not archived)
+
+## Citation
+
+Yu, M. et al., "A new case of complete primary cerebellar agenesis: clinical and imaging findings in a living patient", *Brain*, 138(6): e353, 2015 (published online 2014-08-22)
