@@ -114,7 +114,8 @@ When the user requests a durable behavior change, record it here or in the relev
   holds the local inference pool), rotates across self-hosted inference endpoints with localhost
   preferred, and health-checks each endpoint before use. Each round posts a summary comment on tracker
   issue #65; findings flow through deduped issues and `research/nightly-*` branches plus PRs (never
-  push to main, never merge).
+  push to main, never merge). Round experiment artifacts (script, prompts, raw responses, scores)
+  land under `research/nightly-YYYY-MM-DD-HHMM/`, see [research/AGENTS.md](research/AGENTS.md).
 - The automated repo-round family (tracker #83) runs via systemd user timers on the maintainer
   workstation; all runners live outside this repository (public-only rule: they hold the local
   inference pool and local state). Cadence: nightly research 02:00+04:00 (#65); daily PR review
@@ -134,3 +135,4 @@ When the user requests a durable behavior change, record it here or in the relev
   rules | - |
 | `runs/` | Executed-run record: per-round manifests, raw per-prompt responses, calibration records, regeneration and battery scripts, independent verification records, round reports; immutable manifests, public-only artifacts, Executed/Reproduced/Validated labels | [AGENTS.md](runs/AGENTS.md) |
 | `scripts/` | `check_archive.py` archive consistency checker and `check_links.py` markdown link checker (stdlib, each with `--selftest`); run both before any closeout | - |
+| `research/` | Nightly round artifacts (issue #65): per-firing directories with probe scripts, prompts, raw responses, scores, sanitization and evidence-label contracts | [AGENTS.md](research/AGENTS.md) |
