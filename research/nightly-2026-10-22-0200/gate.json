@@ -1,0 +1,712 @@
+{
+  "alpha": 0.05,
+  "anchor_pairing": {
+    "archive": "research/nightly-2026-10-21-0200/raw.jsonl",
+    "archive_present": true,
+    "archive_sha256": "ec178eeaa9ae3d925108d3dbf85898804fed24a4c60928e659cd0cf56bfc250a",
+    "expected_cells": 12,
+    "mismatches": [],
+    "prompt_sha_matches": 12,
+    "verified": true
+  },
+  "blind_rule_count": 15,
+  "bonferroni_alpha": 0.003333333333,
+  "corpus_identity_primary": {
+    "n_cells": 36,
+    "statistic": "the generator module sha256 and the three pool blob hashes pin this round's corpus; the anchor level adds 12 prompt sha256 equalities against the round-15 archive"
+  },
+  "cross_round_reference": {
+    "cell_paired_to_round15_level24": true,
+    "endpoint_classes": "this round: flash-next-class local endpoint (self-hosted, public class name only)",
+    "lineage": [
+      {
+        "archive": "research/nightly-2026-10-16-0400/ (on main via PR #70)",
+        "corpus": "repaired family, single-query depth grid k = 1..16, open budget",
+        "endpoint": "flash-next-class local endpoint",
+        "result": "40 of 40 correct, no turnover within k <= 16; completion tokens = -36 + 80k; fixed-budget replay lost 26/40 items at 256 tokens, 12/40 at 512, 4/40 at 1024",
+        "round": 6
+      },
+      {
+        "archive": "research/nightly-2026-10-21-0200/ (PR #88, open)",
+        "corpus": "repaired matched-pair grid k = 12, 16, 24 at max_tokens 2048 (anchor level 24 cell-paired to this round by prompt sha256)",
+        "endpoint": "flash-next-class local endpoint",
+        "result": "36 of 36 answered cells correct; 7 truncations, all negative arms, all rescued from the reasoning trace; k = 24 answered 12 of 12 with 6 finish_reason = length",
+        "round": 15
+      },
+      {
+        "archive": "research/nightly-2026-10-21-0400/ (PR #89, open)",
+        "corpus": "repaired matched-pair grid k = 12, 16, 24, cell-paired to round 15",
+        "endpoint": "27B-class local endpoint",
+        "result": "33 of 33 answered correct; the three X cells at k = 24 unanswerable within 2 x 2048 tokens (trace rescue did not transfer across classes)",
+        "round": 16
+      }
+    ],
+    "purpose": "levels 32/48 are new corpus: no cell-paired prior exists. The level-24 cells are cell-paired to round 15 (same class, same budget, same selection rule) and double as a temperature-0 rerun test. Rounds 10/11/14 ran the pre-repair corpus; round 6 shares the family and class with a single-query design."
+  },
+  "discrimination": {
+    "definition": "a corpus is discriminating when no direction-blind rule in the battery both beats its exact label-shuffle null (two-sided, Bonferroni) and reaches the accuracy bar",
+    "matched_discriminating": true,
+    "max_blind_accuracy_matched": 0.75,
+    "max_blind_accuracy_pool": 1.0,
+    "note": "the accuracy bar is the load-bearing criterion; a direction-blind rule can beat the label-shuffle null on the matched corpus while still missing the bar",
+    "pool_discriminating": false,
+    "rules_firing_matched": [],
+    "rules_firing_pool": [
+      "same_component",
+      "undirected_connectivity_only",
+      "chain_len_matches_level"
+    ]
+  },
+  "gate_hash": "5e6ce0d6e7975c52d364aa7edcbecd3adecb306fcad537e83a6264c2627305f0",
+  "item_source": {
+    "blob_sha256": {
+      "generated/l24.jsonl": "cab16fae867b4791290259ffa451231efd73ef193da96664720fd4686fb7008f",
+      "generated/l32.jsonl": "3781a95da04b90ce0895b0314b7f159fa18f299537e082fa34166abb4075b5ff",
+      "generated/l48.jsonl": "f4dee382fb3c7be31a6836434e3b1ffe5856bfaaf19f4aa9270e287b36755288"
+    },
+    "generate_items": {
+      "level 24": "count 300, seed_base 20261019",
+      "level 32": "count 300, seed_base 20261019",
+      "level 48": "count 300, seed_base 20261019"
+    },
+    "generator": "generators/ladders.py",
+    "generator_sha256": "b0d77efd308d249fea77e5fd97e9bef7f5e0fd737b214c2d754cddf970a7f77b",
+    "generator_sha256_pin": "b0d77efd308d249fea77e5fd97e9bef7f5e0fd737b214c2d754cddf970a7f77b",
+    "l24_pin_check": {
+      "actual": "cab16fae867b4791290259ffa451231efd73ef193da96664720fd4686fb7008f",
+      "expected": "cab16fae867b4791290259ffa451231efd73ef193da96664720fd4686fb7008f",
+      "note": "the level-24 blob must equal the round-15 pin (repaired generator, byte-identical regeneration from seed_base 20261019); levels 32/48 are new at this seed base and are pinned by this gate"
+    }
+  },
+  "matched_corpus": {
+    "arms": [
+      "F1",
+      "R1",
+      "F2",
+      "X"
+    ],
+    "cells": 36,
+    "cells_where_connectivity_and_reachability_disagree": 9,
+    "invariant_violations": [],
+    "items": 9,
+    "levels": [
+      24,
+      32,
+      48
+    ]
+  },
+  "min_accuracy": 0.9,
+  "new_measurements": {
+    "commit_fraction": "answer_offset / reasoning length when the answer came from the reasoning field on a finish_reason = length completion (where in the stream the decision was made)",
+    "coverage_ratio": "ordered_prefix_hops / expected length, computed on truncated F1/F2/X cells (P3)",
+    "expected_traversal": "F1: the full witnessed path p_0..p_k; F2 and X: p_1..p_k (the queried source component from the query source); R1: undefined (its query source is a path tail with no out-edge), recorded as null",
+    "headroom_tokens": "MAX_TOKENS - completion_tokens on answered cells",
+    "ordered_prefix_hops": "length of the longest prefix of the expected traversal whose entity names appear in order in reasoning+content (substring matching, the round-15 recitation convention)"
+  },
+  "null_model": {
+    "matched": "per-item gold-label shuffle preserving the per-item gold-yes count; exact convolution, no Monte Carlo",
+    "pool": "global gold-label shuffle preserving the pool gold-yes count; per-item shuffling is degenerate because each pool item carries exactly one queried pair",
+    "tail_note": "firing uses the two-sided exact p value against the Bonferroni bar; both tails are recorded"
+  },
+  "outcome_classification": {
+    "abandoned_budget": "the cell was not dispatched because a declared budget was exhausted; never scored",
+    "answered": "a yes/no token was parsed (content first, reasoning fallback)",
+    "empty_completion": "completion_tokens 0: a transport failure (issue #73)",
+    "no_answer_stop": "finish_reason stop with no parseable yes/no: a model outcome",
+    "note": "correctness is scored only on answered cells",
+    "transport_<class>": "endpoint error class: a transport failure",
+    "truncated_no_answer": "finish_reason length with no parseable yes/no: a budget outcome, not a transport failure (issue #71: state which resource is scarce)"
+  },
+  "pool_corpus": {
+    "cells_where_connectivity_and_reachability_disagree": 0,
+    "gold_reach_mismatches": [],
+    "items": 900,
+    "levels": {
+      "24": {
+        "component_reach_disagree": 0,
+        "facts_max": 624,
+        "facts_min": 48,
+        "gold_no": 155,
+        "gold_yes": 145,
+        "items": 300,
+        "reach_mismatch": 0
+      },
+      "32": {
+        "component_reach_disagree": 0,
+        "facts_max": 1088,
+        "facts_min": 64,
+        "gold_no": 160,
+        "gold_yes": 140,
+        "items": 300,
+        "reach_mismatch": 0
+      },
+      "48": {
+        "component_reach_disagree": 0,
+        "facts_max": 2400,
+        "facts_min": 96,
+        "gold_no": 133,
+        "gold_yes": 167,
+        "items": 300,
+        "reach_mismatch": 0
+      }
+    }
+  },
+  "predictions": {
+    "P1_correctness_holds": "every answered cell is correct (budget-limited turnover; rounds 6 and 15 mechanism)",
+    "P2_answerability_decay": "answered fraction is non-increasing in k across (24, 32, 48) with at least one strict drop at 32 or 48, and at the deepest level with any truncation F1 answered >= X answered",
+    "P3_truncation_is_late": "the median coverage_ratio of the expected traversal over truncated F1/F2/X cells is >= 0.8 (the budget dies near the end of the replay, not in preamble)",
+    "declared_before_first_prompt": true,
+    "falsification_reading": "P1 failing at a level with >= 8 answered cells is a correctness ceiling inside (24, 48] for this (family, endpoint, budget)",
+    "turnover_rule": "no_turnover_within_grid if every level answers 12 of 12 with all correct; budget_turnover if every answered cell is correct and some level answers fewer than 12; correctness_turnover if some level has wrong answered cells and every level answers >= 6; mixed otherwise"
+  },
+  "primary_statistic": {
+    "n_pairs": 9,
+    "secondary": "two-sided exact McNemar on the matched (F2, X) pairs",
+    "test": "two-sided exact McNemar on the matched (F1, R1) pairs",
+    "unit": "item"
+  },
+  "probe_budget": {
+    "attempt_cap_total": 40,
+    "dispatch_prompts": 36,
+    "health_prompts": 1,
+    "item_deadline_s": 900,
+    "level_budget_s": 1500,
+    "max_prompts": 40,
+    "max_tokens": 2048,
+    "phase2_budget_s": 2400,
+    "retries": "one retry per cell, transport_* and empty_completion outcomes only (declared refinement vs round 16: truncation is a measured outcome, never retried), global attempt cap enforced",
+    "temperature": 0.0
+  },
+  "question": "Where does answerable depth on the repaired ladders family turn over at the fixed 2048-token completion budget on this endpoint class, and is the turnover an answerability (budget) collapse with answered cells still correct, or a correctness collapse?",
+  "reference_rule_count": 2,
+  "reference_rules": [
+    {
+      "matched_accuracy": 1.0,
+      "pool_accuracy": 1.0,
+      "rule": "directed_reachability"
+    },
+    {
+      "matched_accuracy": 1.0,
+      "pool_accuracy": 0.9477777778,
+      "rule": "chain_position_order"
+    }
+  ],
+  "rules": [
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max_hits": 18,
+        "null_mean": 18.0,
+        "null_min_hits": 18,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "z_observed": null
+      },
+      "matched_p_one_sided_upper": 1.0,
+      "matched_p_two_sided": 1.0,
+      "pool_accuracy": 0.5022222222,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 452,
+        "null_mean": 452.0,
+        "null_min_hits": 452,
+        "null_sd": 0.0,
+        "observed_hits": 452,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "rule_yes_cells": 900,
+        "z_observed": null
+      },
+      "pool_p_one_sided_upper": 1.0,
+      "pool_p_two_sided": 1.0,
+      "rule": "all_yes"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max_hits": 18,
+        "null_mean": 18.0,
+        "null_min_hits": 18,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "z_observed": null
+      },
+      "matched_p_one_sided_upper": 1.0,
+      "matched_p_two_sided": 1.0,
+      "pool_accuracy": 0.4977777778,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 448,
+        "null_mean": 448.0,
+        "null_min_hits": 448,
+        "null_sd": 0.0,
+        "observed_hits": 448,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "rule_yes_cells": 0,
+        "z_observed": null
+      },
+      "pool_p_one_sided_upper": 1.0,
+      "pool_p_two_sided": 1.0,
+      "rule": "all_no"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": true,
+      "matched_accuracy": 0.75,
+      "matched_null": {
+        "null_max_hits": 27,
+        "null_mean": 18.0,
+        "null_min_hits": 9,
+        "null_sd": 3.0,
+        "observed_hits": 27,
+        "p_one_sided_upper": 0.001953,
+        "p_two_sided": 0.003906,
+        "z_observed": 3.0
+      },
+      "matched_p_one_sided_upper": 0.001953,
+      "matched_p_two_sided": 0.003906,
+      "pool_accuracy": 1.0,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 900,
+        "null_mean": 450.008889,
+        "null_min_hits": 4,
+        "null_sd": 15.008044,
+        "observed_hits": 900,
+        "p_one_sided_upper": 4.489e-270,
+        "p_two_sided": 8.978e-270,
+        "rule_yes_cells": 452,
+        "z_observed": 29.9833
+      },
+      "pool_p_one_sided_upper": 4.489e-270,
+      "pool_p_two_sided": 8.978e-270,
+      "rule": "same_component"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.3055555556,
+      "matched_null": {
+        "null_max_hits": 31,
+        "null_mean": 18.0,
+        "null_min_hits": 5,
+        "null_sd": 3.21455,
+        "observed_hits": 11,
+        "p_one_sided_upper": 0.9949,
+        "p_two_sided": 0.0572,
+        "z_observed": -2.1776
+      },
+      "matched_p_one_sided_upper": 0.9949,
+      "matched_p_two_sided": 0.0572,
+      "pool_accuracy": 0.4977777778,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 900,
+        "null_mean": 450.008889,
+        "null_min_hits": 4,
+        "null_sd": 15.008044,
+        "observed_hits": 448,
+        "p_one_sided_upper": 0.5795,
+        "p_two_sided": 0.9464,
+        "rule_yes_cells": 452,
+        "z_observed": -0.1339
+      },
+      "pool_p_one_sided_upper": 0.5795,
+      "pool_p_two_sided": 0.9464,
+      "rule": "name_first_mention_order"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.3611111111,
+      "matched_null": {
+        "null_max_hits": 29,
+        "null_mean": 18.0,
+        "null_min_hits": 7,
+        "null_sd": 3.109126,
+        "observed_hits": 13,
+        "p_one_sided_upper": 0.9759,
+        "p_two_sided": 0.1944,
+        "z_observed": -1.6082
+      },
+      "matched_p_one_sided_upper": 0.9759,
+      "matched_p_two_sided": 0.1944,
+      "pool_accuracy": 0.4977777778,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 900,
+        "null_mean": 450.008889,
+        "null_min_hits": 4,
+        "null_sd": 15.008044,
+        "observed_hits": 448,
+        "p_one_sided_upper": 0.5795,
+        "p_two_sided": 0.9464,
+        "rule_yes_cells": 452,
+        "z_observed": -0.1339
+      },
+      "pool_p_one_sided_upper": 0.5795,
+      "pool_p_two_sided": 0.9464,
+      "rule": "name_last_mention_order"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max_hits": 28,
+        "null_mean": 18.0,
+        "null_min_hits": 8,
+        "null_sd": 3.05505,
+        "observed_hits": 18,
+        "p_one_sided_upper": 0.6276,
+        "p_two_sided": 1.0,
+        "z_observed": -0.0
+      },
+      "matched_p_one_sided_upper": 0.6276,
+      "matched_p_two_sided": 1.0,
+      "pool_accuracy": 0.4944444444,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 885,
+        "null_mean": 450.075556,
+        "null_min_hits": 19,
+        "null_sd": 14.997479,
+        "observed_hits": 445,
+        "p_one_sided_upper": 0.6574,
+        "p_two_sided": 0.7857,
+        "rule_yes_cells": 467,
+        "z_observed": -0.3384
+      },
+      "pool_p_one_sided_upper": 0.6574,
+      "pool_p_two_sided": 0.7857,
+      "rule": "name_alphabetical_order"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max_hits": 18,
+        "null_mean": 18.0,
+        "null_min_hits": 18,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "z_observed": null
+      },
+      "matched_p_one_sided_upper": 1.0,
+      "matched_p_two_sided": 1.0,
+      "pool_accuracy": 0.5011111111,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 451,
+        "null_mean": 448.013333,
+        "null_min_hits": 445,
+        "null_sd": 1.730106,
+        "observed_hits": 451,
+        "p_one_sided_upper": 0.1263,
+        "p_two_sided": 0.2525,
+        "rule_yes_cells": 3,
+        "z_observed": 1.7263
+      },
+      "pool_p_one_sided_upper": 0.1263,
+      "pool_p_two_sided": 0.2525,
+      "rule": "source_is_first_fact_source"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.75,
+      "matched_null": {
+        "null_max_hits": 27,
+        "null_mean": 18.0,
+        "null_min_hits": 9,
+        "null_sd": 3.0,
+        "observed_hits": 27,
+        "p_one_sided_upper": 0.001953,
+        "p_two_sided": 0.003906,
+        "z_observed": 3.0
+      },
+      "matched_p_one_sided_upper": 0.001953,
+      "matched_p_two_sided": 0.003906,
+      "pool_accuracy": 0.5022222222,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 452,
+        "null_mean": 452.0,
+        "null_min_hits": 452,
+        "null_sd": 0.0,
+        "observed_hits": 452,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "rule_yes_cells": 900,
+        "z_observed": null
+      },
+      "pool_p_one_sided_upper": 1.0,
+      "pool_p_two_sided": 1.0,
+      "rule": "target_is_fact_target"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max_hits": 18,
+        "null_mean": 18.0,
+        "null_min_hits": 18,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "z_observed": null
+      },
+      "matched_p_one_sided_upper": 1.0,
+      "matched_p_two_sided": 1.0,
+      "pool_accuracy": 0.5022222222,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 452,
+        "null_mean": 452.0,
+        "null_min_hits": 452,
+        "null_sd": 0.0,
+        "observed_hits": 452,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "rule_yes_cells": 900,
+        "z_observed": null
+      },
+      "pool_p_one_sided_upper": 1.0,
+      "pool_p_two_sided": 1.0,
+      "rule": "source_is_fact_source"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max_hits": 36,
+        "null_mean": 18.0,
+        "null_min_hits": 0,
+        "null_sd": 3.464102,
+        "observed_hits": 18,
+        "p_one_sided_upper": 0.6154,
+        "p_two_sided": 1.0,
+        "z_observed": 0.0
+      },
+      "matched_p_one_sided_upper": 0.6154,
+      "matched_p_two_sided": 1.0,
+      "pool_accuracy": 0.5022222222,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 452,
+        "null_mean": 452.0,
+        "null_min_hits": 452,
+        "null_sd": 0.0,
+        "observed_hits": 452,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "rule_yes_cells": 900,
+        "z_observed": null
+      },
+      "pool_p_one_sided_upper": 1.0,
+      "pool_p_two_sided": 1.0,
+      "rule": "endpoint_in_degree_zero"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max_hits": 36,
+        "null_mean": 18.0,
+        "null_min_hits": 0,
+        "null_sd": 3.464102,
+        "observed_hits": 18,
+        "p_one_sided_upper": 0.6154,
+        "p_two_sided": 1.0,
+        "z_observed": 0.0
+      },
+      "matched_p_one_sided_upper": 0.6154,
+      "matched_p_two_sided": 1.0,
+      "pool_accuracy": 0.5022222222,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 452,
+        "null_mean": 452.0,
+        "null_min_hits": 452,
+        "null_sd": 0.0,
+        "observed_hits": 452,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "rule_yes_cells": 900,
+        "z_observed": null
+      },
+      "pool_p_one_sided_upper": 1.0,
+      "pool_p_two_sided": 1.0,
+      "rule": "endpoint_out_degree_zero"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": true,
+      "matched_accuracy": 0.75,
+      "matched_null": {
+        "null_max_hits": 27,
+        "null_mean": 18.0,
+        "null_min_hits": 9,
+        "null_sd": 3.0,
+        "observed_hits": 27,
+        "p_one_sided_upper": 0.001953,
+        "p_two_sided": 0.003906,
+        "z_observed": 3.0
+      },
+      "matched_p_one_sided_upper": 0.001953,
+      "matched_p_two_sided": 0.003906,
+      "pool_accuracy": 1.0,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 900,
+        "null_mean": 450.008889,
+        "null_min_hits": 4,
+        "null_sd": 15.008044,
+        "observed_hits": 900,
+        "p_one_sided_upper": 4.489e-270,
+        "p_two_sided": 8.978e-270,
+        "rule_yes_cells": 452,
+        "z_observed": 29.9833
+      },
+      "pool_p_one_sided_upper": 4.489e-270,
+      "pool_p_two_sided": 8.978e-270,
+      "rule": "undirected_connectivity_only"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max_hits": 18,
+        "null_mean": 18.0,
+        "null_min_hits": 18,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "z_observed": null
+      },
+      "matched_p_one_sided_upper": 1.0,
+      "matched_p_two_sided": 1.0,
+      "pool_accuracy": 0.5022222222,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 452,
+        "null_mean": 452.0,
+        "null_min_hits": 452,
+        "null_sd": 0.0,
+        "observed_hits": 452,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "rule_yes_cells": 900,
+        "z_observed": null
+      },
+      "pool_p_one_sided_upper": 1.0,
+      "pool_p_two_sided": 1.0,
+      "rule": "fact_count_threshold"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": true,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max_hits": 18,
+        "null_mean": 18.0,
+        "null_min_hits": 18,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "z_observed": null
+      },
+      "matched_p_one_sided_upper": 1.0,
+      "matched_p_two_sided": 1.0,
+      "pool_accuracy": 1.0,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 900,
+        "null_mean": 450.008889,
+        "null_min_hits": 4,
+        "null_sd": 15.008044,
+        "observed_hits": 900,
+        "p_one_sided_upper": 4.489e-270,
+        "p_two_sided": 8.978e-270,
+        "rule_yes_cells": 452,
+        "z_observed": 29.9833
+      },
+      "pool_p_one_sided_upper": 4.489e-270,
+      "pool_p_two_sided": 8.978e-270,
+      "rule": "chain_len_matches_level"
+    },
+    {
+      "fires_matched": false,
+      "fires_pool": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max_hits": 18,
+        "null_mean": 18.0,
+        "null_min_hits": 18,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "z_observed": null
+      },
+      "matched_p_one_sided_upper": 1.0,
+      "matched_p_two_sided": 1.0,
+      "pool_accuracy": 0.4977777778,
+      "pool_null": {
+        "gold_yes_cells": 452,
+        "null_max_hits": 448,
+        "null_mean": 448.0,
+        "null_min_hits": 448,
+        "null_sd": 0.0,
+        "observed_hits": 448,
+        "p_one_sided_upper": 1.0,
+        "p_two_sided": 1.0,
+        "rule_yes_cells": 0,
+        "z_observed": null
+      },
+      "pool_p_one_sided_upper": 1.0,
+      "pool_p_two_sided": 1.0,
+      "rule": "relation_word_copy"
+    }
+  ],
+  "schema": "round17-gate-v1",
+  "seed_base": 20261019,
+  "selection_rule": {
+    "items_per_level": 3,
+    "levels": [
+      24,
+      32,
+      48
+    ],
+    "order": "generated file order, first usable items per level",
+    "pool_per_level": 300,
+    "usable": "gold-yes query witnessed by a simple in-degree<=1 out-degree<=1 chain of length >= 4, plus a second component holding a terminal node (in-degree 1, out-degree 0) whose name length equals the chain terminal, and every rendered arm prompt within MAX_PROMPT_CHARS = 45000 (context-safety filter, applied identically at every level)"
+  },
+  "transport_policy": {
+    "concurrency_rule": "largest of {4, 2, 1} such that estimate * remaining / concurrency * 1.25 <= phase2_budget_s; ties to the smaller concurrency; the measured values and the choice are recorded in summary.json",
+    "fail_closed": "--probe refuses to run unless the anchor pairing verification passes 12 of 12 against the in-tree round-15 archive",
+    "health_check": "one trivial completion, verified non-empty and answer-parseable, before any grid prompt (issue #73)",
+    "level_budget": "each level group is dispatched as a group with a LEVEL_BUDGET_S wall budget from group start; cells that would start after the group deadline or the phase-2 deadline are written with outcome abandoned_budget and are never scored (issue #73: a killed arm is not a result)",
+    "measurement": "the first two grid cells dispatch sequentially; their wall times measure the endpoint; per-item estimate is max(wall_0, wall_1) * 2.0 (depth factor for the k = 48 items); both calls count in the 40-attempt cap",
+    "raw_archive": "incremental: one flushed raw.jsonl line per completed cell, fsynced (issue #73)"
+  }
+}
