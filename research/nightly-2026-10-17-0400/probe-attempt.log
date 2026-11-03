@@ -1,0 +1,16 @@
+planned prompts: 40 (cap 40), gate: all cells pass
+k= 2 C=12 gold= no pred=None no_answer ctok=    0 pos=   -1
+k= 2 C=12 gold=yes pred=None no_answer ctok=    0 pos=   -1
+k= 2 C=12 gold=yes pred=None no_answer ctok=    0 pos=   -1
+k= 2 C=12 gold=yes pred=None no_answer ctok=    0 pos=   -1
+k= 2 C=12 gold= no pred=None no_answer ctok=    0 pos=   -1
+k= 3 C= 8 gold=yes pred=None no_answer ctok=    0 pos=   -1
+k= 3 C= 8 gold=yes pred=None no_answer ctok=    0 pos=   -1
+k= 2 C=12 gold= no pred=None no_answer ctok=    0 pos=   -1
+k= 3 C= 8 gold= no pred=  no   correct ctok=  416 pos=    1
+k= 3 C= 8 gold= no pred=  no   correct ctok=  557 pos=    1
+k= 3 C= 8 gold=yes pred=None no_answer ctok=    0 pos=   -1
+k= 3 C= 8 gold= no pred=None no_answer ctok=    0 pos=   -1
+k= 4 C= 6 gold=yes pred= yes   correct ctok=  355 pos=    1
+k= 4 C= 6 gold= no pred=None no_answer ctok=    0 pos=   -1
+k= 4 C= 6 gold= no pred=None no_answer ctok=    0 pos=   -1

@@ -1,0 +1,266 @@
+{
+  "corpus_sha256": {
+    "l1.jsonl": "d4ba3584f4d45225accf8000f2089c29efebf4513762a779c1af471b420cef29",
+    "l2.jsonl": "0bf2e99d311fceaff02d2186305b5ad0e0ed77b066a67df56b57b849ede16db4",
+    "l4.jsonl": "3d92f74241ef72635ef974a5d6b7ae3d55305a8c3b159c7c89f8c350856582ae",
+    "l6.jsonl": "b026b2b3a0e033c2df019028f6506dc5658e46fd6b9ff6574cc162c92695bbe1",
+    "l8.jsonl": "8b4e36e96651c077e49cd76d5158a54af112610fb5c8f12e51f3357cc9948dd6"
+  },
+  "levels": {
+    "1": {
+      "measured": {
+        "answers": {
+          "no": 152,
+          "yes": 148
+        },
+        "declared_chain_len": [
+          1
+        ],
+        "facts_per_item": {
+          "max": 3,
+          "mean": 2.5,
+          "median": 2.0,
+          "min": 2,
+          "spread": 1.5
+        },
+        "items": 300,
+        "kinds": {
+          "exact": 148,
+          "longer": 0,
+          "shortcut": 0,
+          "unreachable": 152
+        },
+        "reachable_closure": [
+          2
+        ],
+        "shortcut_rate": 0.0
+      },
+      "permutation_null": {
+        "depth_histogram": {
+          "1": 117,
+          "None": 783
+        },
+        "draws": 900,
+        "kinds": {
+          "exact": 117,
+          "longer": 0,
+          "shortcut": 0,
+          "unreachable": 783
+        },
+        "rates": {
+          "exact": 0.13,
+          "longer": 0.0,
+          "shortcut": 0.0,
+          "unreachable": 0.87
+        }
+      }
+    },
+    "2": {
+      "measured": {
+        "answers": {
+          "no": 160,
+          "yes": 140
+        },
+        "declared_chain_len": [
+          2
+        ],
+        "facts_per_item": {
+          "max": 8,
+          "mean": 6.08,
+          "median": 6.0,
+          "min": 4,
+          "spread": 2.0
+        },
+        "items": 300,
+        "kinds": {
+          "exact": 140,
+          "longer": 0,
+          "shortcut": 0,
+          "unreachable": 160
+        },
+        "reachable_closure": [
+          3
+        ],
+        "shortcut_rate": 0.0
+      },
+      "permutation_null": {
+        "depth_histogram": {
+          "1": 84,
+          "2": 37,
+          "None": 779
+        },
+        "draws": 900,
+        "kinds": {
+          "exact": 37,
+          "longer": 0,
+          "shortcut": 84,
+          "unreachable": 779
+        },
+        "rates": {
+          "exact": 0.0411,
+          "longer": 0.0,
+          "shortcut": 0.0933,
+          "unreachable": 0.8656
+        }
+      }
+    },
+    "4": {
+      "measured": {
+        "answers": {
+          "no": 152,
+          "yes": 148
+        },
+        "declared_chain_len": [
+          4
+        ],
+        "facts_per_item": {
+          "max": 24,
+          "mean": 15.43,
+          "median": 16.0,
+          "min": 8,
+          "spread": 3.0
+        },
+        "items": 300,
+        "kinds": {
+          "exact": 148,
+          "longer": 0,
+          "shortcut": 0,
+          "unreachable": 152
+        },
+        "reachable_closure": [
+          5
+        ],
+        "shortcut_rate": 0.0
+      },
+      "permutation_null": {
+        "depth_histogram": {
+          "1": 53,
+          "2": 36,
+          "3": 22,
+          "4": 13,
+          "None": 776
+        },
+        "draws": 900,
+        "kinds": {
+          "exact": 13,
+          "longer": 0,
+          "shortcut": 111,
+          "unreachable": 776
+        },
+        "rates": {
+          "exact": 0.0144,
+          "longer": 0.0,
+          "shortcut": 0.1233,
+          "unreachable": 0.8622
+        }
+      }
+    },
+    "6": {
+      "measured": {
+        "answers": {
+          "no": 134,
+          "yes": 166
+        },
+        "declared_chain_len": [
+          6
+        ],
+        "facts_per_item": {
+          "max": 48,
+          "mean": 30.32,
+          "median": 30.0,
+          "min": 12,
+          "spread": 4.0
+        },
+        "items": 300,
+        "kinds": {
+          "exact": 166,
+          "longer": 0,
+          "shortcut": 0,
+          "unreachable": 134
+        },
+        "reachable_closure": [
+          7
+        ],
+        "shortcut_rate": 0.0
+      },
+      "permutation_null": {
+        "depth_histogram": {
+          "1": 30,
+          "2": 18,
+          "3": 17,
+          "4": 15,
+          "5": 8,
+          "6": 5,
+          "None": 807
+        },
+        "draws": 900,
+        "kinds": {
+          "exact": 5,
+          "longer": 0,
+          "shortcut": 88,
+          "unreachable": 807
+        },
+        "rates": {
+          "exact": 0.0056,
+          "longer": 0.0,
+          "shortcut": 0.0978,
+          "unreachable": 0.8967
+        }
+      }
+    },
+    "8": {
+      "measured": {
+        "answers": {
+          "no": 143,
+          "yes": 157
+        },
+        "declared_chain_len": [
+          8
+        ],
+        "facts_per_item": {
+          "max": 80,
+          "mean": 46.48,
+          "median": 48.0,
+          "min": 16,
+          "spread": 5.0
+        },
+        "items": 300,
+        "kinds": {
+          "exact": 157,
+          "longer": 0,
+          "shortcut": 0,
+          "unreachable": 143
+        },
+        "reachable_closure": [
+          9
+        ],
+        "shortcut_rate": 0.0
+      },
+      "permutation_null": {
+        "depth_histogram": {
+          "1": 18,
+          "2": 24,
+          "3": 10,
+          "4": 17,
+          "5": 13,
+          "6": 10,
+          "7": 3,
+          "None": 805
+        },
+        "draws": 900,
+        "kinds": {
+          "exact": 0,
+          "longer": 0,
+          "shortcut": 95,
+          "unreachable": 805
+        },
+        "rates": {
+          "exact": 0.0,
+          "longer": 0.0,
+          "shortcut": 0.1056,
+          "unreachable": 0.8944
+        }
+      }
+    }
+  }
+}
