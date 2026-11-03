@@ -115,7 +115,10 @@ When the user requests a durable behavior change, record it here or in the relev
   preferred, and health-checks each endpoint before use. Each round posts a summary comment on tracker
   issue #65; findings flow through deduped issues and `research/nightly-*` branches plus PRs (never
   push to main, never merge). Round experiment artifacts (script, prompts, raw responses, scores)
-  land under `research/nightly-YYYY-MM-DD-HHMM/`, see [research/AGENTS.md](research/AGENTS.md).
+  land under `research/nightly-YYYY-MM-DD-HHMM/`, see [research/AGENTS.md](research/AGENTS.md). A
+  round whose experiment arm cannot run must say so in its #65 comment and keep the surviving
+  failure record (log, gate output) in its `research/nightly-*` directory; an arm that timed out
+  is never reported as a result.
 - The automated repo-round family (tracker #83) runs via systemd user timers on the maintainer
   workstation; all runners live outside this repository (public-only rule: they hold the local
   inference pool and local state). Cadence: nightly research 02:00+04:00 (#65); daily PR review
