@@ -71,6 +71,13 @@ hashes, status, failure codes.
   Periodic seeded-defect tests (plant wrong units, shuffled labels, a wrong seed, a fake
   citation, an off-by-one n) measure verifier recall.
 - **Self-approval is not evidence.**
+- **A verifier's record is archived unedited.** The author of the verified document does not
+  rewrite it. The author records a disposition in the verified document: accepted and fixed, or
+  declined with evidence. A declined item stays visible.
+- **A claim about what a script prints is derived, not typed.** Counts a report cites from a
+  script (control groups, feature counts, corpus sizes) must be emitted by the script and asserted
+  against the cited number, so a change to the script fails a control instead of leaving the
+  report stale.
 - **Labels, never collapsed**: *Executed* (the run completed), *Reproduced* (an independent
   rerun regenerates the result within a pre-declared tolerance), *Validated* (independent
   evidence supports the interpretation).

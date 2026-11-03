@@ -1,0 +1,16 @@
+{
+ "completion_tokens": 38,
+ "finished_at": "2026-11-01T03:01:14Z",
+ "latency_s": 1.093,
+ "message_fields": [
+  "content",
+  "reasoning_content",
+  "role"
+ ],
+ "ok": true,
+ "outcome": "answered_in_answer_field",
+ "prompt_tokens": 59,
+ "reasoning_chars": 151,
+ "reasoning_field": "reasoning_content",
+ "started_at": "2026-11-01T03:01:14Z"
+}
