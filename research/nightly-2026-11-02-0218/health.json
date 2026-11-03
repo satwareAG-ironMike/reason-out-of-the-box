@@ -1,0 +1,23 @@
+{
+  "census": {
+    "fields": [
+      "audio",
+      "content",
+      "function_call",
+      "reasoning",
+      "refusal",
+      "role"
+    ],
+    "reasoning_content_chars": 0,
+    "reasoning_field_chars": 82,
+    "reasoning_source": "reasoning",
+    "trace_chars_total": 82
+  },
+  "completion_tokens": 23,
+  "finished_at": "2026-11-02T01:46:41Z",
+  "latency_s": 6.906,
+  "ok": true,
+  "outcome": "answered_in_answer_field",
+  "prompt_tokens": 59,
+  "started_at": "2026-11-02T01:46:41Z"
+}

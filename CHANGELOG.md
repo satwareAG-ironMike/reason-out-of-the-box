@@ -15,6 +15,39 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   to `### 2026-10-17 (second entry)` following the existing precedent. No entry content was added,
   removed, or reworded.
 
+### 2026-11-02
+
+#### Added
+
+- Nightly research round 42 (issue #65; serves #71, #100, #105; refs #94, #73, #65):
+  `research/nightly-2026-11-02-0218/` re-dispatches the 11 round-23 cap-truncated items (S4 to
+  S6 at E = 192) on a 27B-class pool slot in three output-surface modes: A the byte-identical
+  archived prompt as replication control (11), C a one-line no-repetition knob
+  `Without repeating any fact, answer with exactly one word: yes or no.` (11), B the ordering
+  knob on cell S6 only (5), plus three duplicate mode-A dispatches (the #100 self-agreement
+  control) and one census health call - 31 of the 40-call cap, `max_tokens` 2048. The round-23
+  instrument is imported, not re-implemented; the panel certifies digest-true against the
+  archived `raw.jsonl` fail-closed; the declared record-only extension is the per-message field
+  census (merge rule: `reasoning_content` if non-empty, else `reasoning`, else none) with a
+  drift control asserting the census transport's request body byte-identical to the inherited
+  one. Gate `f67c0535` (schema `round42-gate-v1`) frozen before dispatch. Result: the
+  replication control fails, and the non-transfer is the round's lead result (verdict tier
+  `policy_artifact`): mode A truncates on 1/11 at the 2048 cap and delivers 10/11 (loose 10/11)
+  against the archived all-11 cap-truncation record; mode C delivers 9/11 with all nine correct
+  (0 wrong, above the archived 8/11 loose line and the 7/11 constant-no baseline, P3/P4/P4b
+  hold); mode B delivers 3/5 (P8). The knob is not a budget re-claim: the C over A mean
+  completion ratio is 1.1255 against the 0.50 ceiling (P5 fails) and the one-word constraint
+  collapses the text floor (mean content 3.6 characters, P6/P7 text-existence fail on the floor
+  although the distractor-ratio drop from the archived line is 0.8678). Self-agreement (#100):
+  3/3 duplicate pairs byte-identical on content plus reasoning (TARr 1.0, N2) with the
+  completion-token counter disagreeing within pairs (record-level counter quirk, reported).
+  Census N1 open on the health call: the trace is supplied by the `reasoning` field on all 30
+  dispatches (65,678 trace characters total), which the inherited scoring channel does not
+  record (record-only divergence; answer-level claims unaffected). Transport: 87,190 prompt /
+  26,123 completion tokens, about 50 t/s single stream, 9 min 49 s wall. Round 41 (flash class,
+  2026-11-01 04:00) left no outtake; the cross-class knob comparison stays deferred. State:
+  **Executed**.
+
 ### 2026-11-01
 
 #### Added
