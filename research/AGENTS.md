@@ -1,47 +1,49 @@
-# research/
+# research
 
 ## Purpose
 
-Working record of the nightly consciousness-research rounds (tracker issue #65): one
-directory per round holding that round's script, its machine-readable report, and its
-README. Consolidated durable findings live in `docs/`, not here.
+Per-round artifacts of the nightly consciousness research rounds (tracker issue #65): the
+exact script, prompts, raw model responses and scores behind each round's summary comment,
+so any round can be re-run and audited instead of being taken on trust.
 
 ## Ownership
 
-- Each `nightly-*` directory belongs to the round that created it and is not edited after
-  the round except to correct an error, in which case the correction is dated in the README.
-- Root `AGENTS.md` owns the round protocol (timer, dedup, branch plus PR, no merge) and the
-  public-only rule. This file owns the layout and quality bar of a round directory.
+The nightly agent that ran the round writes its own round directory and its PR. The
+maintainer owns deletion or relocation. Durable conclusions do not stay here: they move to
+`docs/` (ledgers, study design), `archive/` (papers), `CHANGELOG.md`, or an issue.
 
 ## Local Contracts
 
-- Directory name: `nightly-YYYY-MM-DD-HHMM`, matching the timer slot it ran in.
-- Every round directory carries `README.md` with: question, method, results, findings,
-  limits, reproduce.
-- Round scripts are stdlib-only, deterministic, and import nothing from `generators/`: a
-  round's measurement must be an independent verifier of the corpus, not a re-run of the
-  generator that produced it (`docs/agent-execution.md`, verifier independence).
-- Every round script ships `--selftest` with negative controls (planted leak, planted
-  negative, synthetic branching, seed determinism, and a check against the corpus it
-  measures). Numbers are reported only after the controls pass.
-- Every report pins the sha256 of each corpus file it measures.
-- State the label honestly: Executed, Reproduced, or Validated. A round with no model arm
-  claims neither Reproduced nor Validated.
-- No hostname, IP, device name, model-file path, credential, or session state in any file
-  or in history (public-only rule). Endpoint behaviour may be described in timings only.
-- A published error is corrected by a dated correction, in the tracker comment and in the
-  README. Do not silently rewrite a posted number.
-- Findings that become durable move to `docs/next-investigations.md` and cite the round
-  directory they came from.
+- One directory per firing, named `nightly-YYYY-MM-DD-HHMM` in the firing timezone, matching
+  the round branch `research/nightly-YYYY-MM-DD-HHMM`. Never reuse a directory.
+- Contents of a round that ran an experiment: `README.md` (question, method, selection rule,
+  how to reproduce, results), the script (stdlib-only, `--selftest` with arithmetic and
+  negative controls, house style), `raw.jsonl` (one record per prompt: prompt, raw response,
+  score), `summary.json` (aggregates), `run.log` stays local (it can carry endpoint noise).
+- Sanitized by construction, public-only rule: no hostname, IP, endpoint URL, credential,
+  device name, or model file path in any file, including model output text; scripts strip
+  them before writing. Refer to a serving model by public name only. Scripts read
+  `NIGHTLY_BASE_URL`, `NIGHTLY_MODEL_ID`, `NIGHTLY_API_KEY` from the environment and never
+  write them anywhere.
+- Caps from the round protocol are contractual, not advisory: at most 40 prompts,
+  `max_tokens <= 2048`, free scholarly APIs only, no metered or hosted providers.
+- Evidence label per `docs/agent-execution.md`: a nightly run is `Executed` unless an
+  independent second implementation reproduces it (`Reproduced`) or the pre-registered
+  decision table covers it (`Validated`). Small n per level is exploratory and must say so.
+- A round directory is append-only after its PR opens; a later round opens a new directory.
+- Unattributed artifacts (left by a killed firing, no round directory) must not be swept in
+  by `git add -A`; they get provenance or deletion as an owner decision.
 
 ## Verification
 
-- `python3 <round script> --selftest` passes before any number is reported.
-- Root CI parity before pushing: `scripts/check_archive.py`, `scripts/check_links.py`, and
-  the dash scan, per root `AGENTS.md`.
+- `python3 research/<round>/<script>.py --selftest` on the round branch
+- artifact scan: `git grep -n -E "https?://|([0-9]{1,3}\.){3}[0-9]{1,3}" -- research/<round>`
+  returns nothing but allowed public reference links (arXiv, DOI, the repository itself)
+- repo parity: `scripts/check_archive.py`, `scripts/check_links.py`, strict dash scan,
+  CHANGELOG entry
 
 ## Child DOX Index
 
 | Path | Scope | File |
 |------|-------|------|
-| - | no durable sub-boundary yet | - |
+| - | nightly round artifact directories, none durable yet | - |

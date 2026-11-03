@@ -1,0 +1,282 @@
+{
+  "arms": {
+    "F1": {
+      "accuracy": 1.0,
+      "answer_source_content": 9,
+      "answer_source_reasoning": 0,
+      "answered": 9,
+      "correct": 9,
+      "finish_reason_length": 0,
+      "mean_completion_tokens": 309.889,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    },
+    "F2": {
+      "accuracy": 1.0,
+      "answer_source_content": 9,
+      "answer_source_reasoning": 0,
+      "answered": 9,
+      "correct": 9,
+      "finish_reason_length": 0,
+      "mean_completion_tokens": 320.889,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    },
+    "R1": {
+      "accuracy": 1.0,
+      "answer_source_content": 9,
+      "answer_source_reasoning": 0,
+      "answered": 9,
+      "correct": 9,
+      "finish_reason_length": 0,
+      "mean_completion_tokens": 493.778,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    },
+    "X": {
+      "accuracy": 1.0,
+      "answer_source_content": 9,
+      "answer_source_reasoning": 0,
+      "answered": 9,
+      "correct": 9,
+      "finish_reason_length": 0,
+      "mean_completion_tokens": 503.889,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    }
+  },
+  "cross_class": {
+    "agreement": 1.0,
+    "cells_agree": 36,
+    "cells_compared": 36,
+    "cells_disagree": 0,
+    "completion_token_ratio_this_round_over_round11": {
+      "12": 0.9832,
+      "16": 0.9952,
+      "24": 0.7942
+    },
+    "disagreements": [],
+    "per_level": {
+      "12": {
+        "agree": 12,
+        "compared": 12
+      },
+      "16": {
+        "agree": 12,
+        "compared": 12
+      },
+      "24": {
+        "agree": 12,
+        "compared": 12
+      }
+    },
+    "reference": "research/nightly-2026-10-19-0200/raw.jsonl, branch research/nightly-2026-10-19-0200 at commit a47ffa4 (round 11, flash-class local endpoint)",
+    "reference_sha256": "f5a77a4685ad6ef44d2f1871c1c264be9fd82584db5f767df5f75f97fbf77f68",
+    "reference_signature": {
+      "connectivity": {
+        "cells_matching": 27,
+        "items_matching_all_four": 0
+      },
+      "traversal": {
+        "cells_matching": 36,
+        "items_matching_all_four": 9
+      }
+    },
+    "reference_unanswered": 0,
+    "this_round_unanswered": 0,
+    "wall_s_ratio_this_round_over_round11": {
+      "12": 1.1875,
+      "16": 0.9228,
+      "24": 0.9586
+    }
+  },
+  "families": {
+    "component_F2_X": {
+      "b_first_wrong": 0,
+      "both_right": 9,
+      "both_wrong": 0,
+      "c_second_wrong": 0,
+      "p_exact_mcnemar": 1.0,
+      "pairs": 9,
+      "skipped_unanswered": 0
+    },
+    "direction_F1_R1": {
+      "b_first_wrong": 0,
+      "both_right": 9,
+      "both_wrong": 0,
+      "c_second_wrong": 0,
+      "p_exact_mcnemar": 1.0,
+      "pairs": 9,
+      "skipped_unanswered": 0
+    }
+  },
+  "gate_hash": "c1c747214417cde57c3555a602de4c0786cb8c6b7f9c3ac3539281b277b3eced",
+  "gate_sha256": "4c9d1c7b9dc78a2e04d15beb028819d7c025fa11a85133aab284e7ffcc8e8918",
+  "item_source": {
+    "blob_sha256": {
+      "generated/l12.jsonl": "305e8d4ca0483ee67d493c91a0d88ea5aacdc77bdee2e0ad06e01d42a85266fe",
+      "generated/l16.jsonl": "8a41995c9fe887b3eadfb3be8d5bcaf2d3574e58d2a4193d714c540fda5d3afd",
+      "generated/l24.jsonl": "e9f5d19c161526f508db309045e295eeea00f7c144458b9ea513ec39f9d6a90f"
+    },
+    "generator_sha256": "15fcab2866cda65fb57db85f819f740f2ca9ab734d50d696b6bcc0a3c118111e"
+  },
+  "per_level": {
+    "12": {
+      "answered": 12,
+      "cells": 12,
+      "correct": 12,
+      "mean_completion_tokens": 326.75,
+      "mean_wall_s": 35.472,
+      "outcomes": {
+        "answered": 12
+      }
+    },
+    "16": {
+      "answered": 12,
+      "cells": 12,
+      "correct": 12,
+      "mean_completion_tokens": 396.083,
+      "mean_wall_s": 30.945,
+      "outcomes": {
+        "answered": 12
+      }
+    },
+    "24": {
+      "answered": 12,
+      "cells": 12,
+      "correct": 12,
+      "mean_completion_tokens": 498.5,
+      "mean_wall_s": 30.53,
+      "outcomes": {
+        "answered": 12
+      }
+    }
+  },
+  "raw_sha256": "29315280068d0ecc1cd9253e919d75aabc4756b141bae9396265d1859b610bb4",
+  "reasoning": {
+    "arms": {
+      "F1": {
+        "answer_source_content": 9,
+        "answer_source_reasoning": 0,
+        "finish_reason_length": 0,
+        "mean_completion_tokens": 309.889,
+        "mean_content_chars": 3.0,
+        "mean_reasoning_chars": 780.0,
+        "reasoning_char_share": 0.9962,
+        "records": 9
+      },
+      "F2": {
+        "answer_source_content": 9,
+        "answer_source_reasoning": 0,
+        "finish_reason_length": 0,
+        "mean_completion_tokens": 320.889,
+        "mean_content_chars": 3.0,
+        "mean_reasoning_chars": 798.0,
+        "reasoning_char_share": 0.9963,
+        "records": 9
+      },
+      "R1": {
+        "answer_source_content": 9,
+        "answer_source_reasoning": 0,
+        "finish_reason_length": 0,
+        "mean_completion_tokens": 493.778,
+        "mean_content_chars": 2.0,
+        "mean_reasoning_chars": 1368.556,
+        "reasoning_char_share": 0.9985,
+        "records": 9
+      },
+      "X": {
+        "answer_source_content": 9,
+        "answer_source_reasoning": 0,
+        "finish_reason_length": 0,
+        "mean_completion_tokens": 503.889,
+        "mean_content_chars": 2.0,
+        "mean_reasoning_chars": 1366.333,
+        "reasoning_char_share": 0.9985,
+        "records": 9
+      }
+    },
+    "overall": {
+      "mean_completion_tokens": 407.111,
+      "mean_content_chars": 2.5,
+      "mean_reasoning_char_share": 0.9977,
+      "mean_reasoning_chars": 1078.222,
+      "note": "completion_tokens cover reasoning plus content; char shares are a proxy split (no per-field token count in the API usage)",
+      "records": 36
+    }
+  },
+  "records": 36,
+  "records_naming_all_interior_nodes": 18,
+  "seed_base": 20261019,
+  "signature_table": {
+    "connectivity": {
+      "cells": 36,
+      "cells_matching": 27,
+      "items": 9,
+      "items_matching_all_four": 0
+    },
+    "constant_no": {
+      "cells": 36,
+      "cells_matching": 18,
+      "items": 9,
+      "items_matching_all_four": 0
+    },
+    "constant_yes": {
+      "cells": 36,
+      "cells_matching": 18,
+      "items": 9,
+      "items_matching_all_four": 0
+    },
+    "traversal": {
+      "cells": 36,
+      "cells_matching": 36,
+      "items": 9,
+      "items_matching_all_four": 9
+    }
+  },
+  "transport": {
+    "attempt_cap": 40,
+    "chosen_concurrency": 4,
+    "estimate_per_item_s": 36.332,
+    "health": {
+      "completion_tokens": 23,
+      "finished_at": "2026-10-20T02:32:05Z",
+      "latency_s": 3.125,
+      "ok": true,
+      "outcome": "answered",
+      "prompt_tokens": 17,
+      "started_at": "2026-10-20T02:32:05Z"
+    },
+    "phase1_walls": [
+      12.894,
+      18.166
+    ],
+    "phase2_wall_s": 373.1,
+    "resumed_cells": 0,
+    "total_endpoint_calls_including_health": 37
+  }
+}

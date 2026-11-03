@@ -1,0 +1,591 @@
+{
+  "alpha": 0.05,
+  "blind_rule_count": 15,
+  "bonferroni_alpha": 0.003333333333,
+  "discrimination": {
+    "definition": "a corpus is discriminating when no direction-blind rule in the battery both beats its exact label-shuffle null and reaches the accuracy bar",
+    "matched_discriminating": true,
+    "max_blind_accuracy_matched": 0.75,
+    "max_blind_accuracy_shipped": 1.0,
+    "note": "significance is not competence: a direction-blind rule can beat the label-shuffle null on the matched corpus while still missing the bar, because component membership correlates with the gold label there. The bar is what makes the corpus discriminating.",
+    "rules_firing_matched": [],
+    "rules_firing_shipped": [
+      "same_component",
+      "target_is_fact_target",
+      "endpoint_out_degree_zero",
+      "undirected_connectivity_only",
+      "chain_len_matches_level"
+    ],
+    "shipped_discriminating": false
+  },
+  "gate_hash": "e796ca308f26e39da54d174e95fcf76280872285a32af16ad617ddce4d3501a1",
+  "matched_corpus": {
+    "arms": [
+      "F1",
+      "R1",
+      "F2",
+      "X"
+    ],
+    "cells": 36,
+    "cells_where_connectivity_and_reachability_disagree": 9,
+    "invariant_violations": [],
+    "items": 9,
+    "levels": [
+      4,
+      6,
+      8
+    ]
+  },
+  "min_accuracy": 0.9,
+  "null_model": {
+    "matched": "per-item gold-label shuffle preserving the per-item gold-yes count; exact convolution, no Monte Carlo",
+    "shipped": "global gold-label shuffle preserving the corpus gold-yes count; per-item shuffling is degenerate because each shipped item carries exactly one queried pair"
+  },
+  "primary_statistic": {
+    "n_pairs": 9,
+    "secondary": "two-sided exact McNemar on the matched (F2, X) pairs",
+    "test": "two-sided exact McNemar on the matched (F1, R1) pairs",
+    "unit": "item"
+  },
+  "probe_budget": {
+    "calibration_reserve": 4,
+    "concurrency": 4,
+    "dispatch_prompts": 36,
+    "item_deadline_s": 900,
+    "max_prompts": 40,
+    "max_tokens": 2048,
+    "retries_per_item": 1,
+    "temperature": 0.0
+  },
+  "reference_rule_count": 2,
+  "reference_rules": [
+    {
+      "matched_accuracy": 1.0,
+      "rule": "directed_reachability",
+      "shipped_accuracy": 1.0
+    },
+    {
+      "matched_accuracy": 1.0,
+      "rule": "chain_position_order",
+      "shipped_accuracy": 0.706
+    }
+  ],
+  "rules": [
+    {
+      "fires_matched": false,
+      "fires_shipped": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max": 18,
+        "null_mean": 18.0,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_exact": 1.0,
+        "z_observed": null
+      },
+      "matched_p_exact": 1.0,
+      "rule": "all_yes",
+      "shipped_accuracy": 0.4973333333,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1500,
+        "null_mean": 746.0,
+        "null_min_hits": 746,
+        "null_sd": 0.0,
+        "observed_hits": 746,
+        "p_exact": 1.0,
+        "rule_yes_cells": 1500,
+        "z_observed": null
+      },
+      "shipped_p_exact": 1.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max": 18,
+        "null_mean": 18.0,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_exact": 1.0,
+        "z_observed": null
+      },
+      "matched_p_exact": 1.0,
+      "rule": "all_no",
+      "shipped_accuracy": 0.5026666667,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 754,
+        "null_mean": 754.0,
+        "null_min_hits": 0,
+        "null_sd": 0.0,
+        "observed_hits": 754,
+        "p_exact": 1.0,
+        "rule_yes_cells": 0,
+        "z_observed": null
+      },
+      "shipped_p_exact": 1.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": true,
+      "matched_accuracy": 0.75,
+      "matched_null": {
+        "null_max": 27,
+        "null_mean": 18.0,
+        "null_sd": 3.0,
+        "observed_hits": 27,
+        "p_exact": 0.001953,
+        "z_observed": 3.0
+      },
+      "matched_p_exact": 0.001953,
+      "rule": "same_component",
+      "shipped_accuracy": 1.0,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1500,
+        "null_mean": 750.021333,
+        "null_min_hits": 0,
+        "null_sd": 19.370824,
+        "observed_hits": 1500,
+        "p_exact": 0.0,
+        "rule_yes_cells": 746,
+        "z_observed": 38.7169
+      },
+      "shipped_p_exact": 0.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": false,
+      "matched_accuracy": 0.3333333333,
+      "matched_null": {
+        "null_max": 32,
+        "null_mean": 18.0,
+        "null_sd": 3.265986,
+        "observed_hits": 12,
+        "p_exact": 0.9857,
+        "z_observed": -1.8371
+      },
+      "matched_p_exact": 0.9857,
+      "rule": "name_first_mention_order",
+      "shipped_accuracy": 0.4506666667,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1418,
+        "null_mean": 750.458667,
+        "null_min_hits": 0,
+        "null_sd": 19.243328,
+        "observed_hits": 676,
+        "p_exact": 1.0,
+        "rule_yes_cells": 664,
+        "z_observed": -3.8693
+      },
+      "shipped_p_exact": 1.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": false,
+      "matched_accuracy": 0.5555555556,
+      "matched_null": {
+        "null_max": 32,
+        "null_mean": 18.0,
+        "null_sd": 3.265986,
+        "observed_hits": 20,
+        "p_exact": 0.3789,
+        "z_observed": 0.6124
+      },
+      "matched_p_exact": 0.3789,
+      "rule": "name_last_mention_order",
+      "shipped_accuracy": 0.4506666667,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1418,
+        "null_mean": 750.458667,
+        "null_min_hits": 0,
+        "null_sd": 19.243328,
+        "observed_hits": 676,
+        "p_exact": 1.0,
+        "rule_yes_cells": 664,
+        "z_observed": -3.8693
+      },
+      "shipped_p_exact": 1.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": false,
+      "matched_accuracy": 0.5833333333,
+      "matched_null": {
+        "null_max": 31,
+        "null_mean": 18.0,
+        "null_sd": 3.21455,
+        "observed_hits": 21,
+        "p_exact": 0.2657,
+        "z_observed": 0.9333
+      },
+      "matched_p_exact": 0.2657,
+      "rule": "name_alphabetical_order",
+      "shipped_accuracy": 0.4986666667,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1476,
+        "null_mean": 750.149333,
+        "null_min_hits": 0,
+        "null_sd": 19.357595,
+        "observed_hits": 748,
+        "p_exact": 0.5646,
+        "rule_yes_cells": 722,
+        "z_observed": -0.111
+      },
+      "shipped_p_exact": 0.5646
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": false,
+      "matched_accuracy": 0.4166666667,
+      "matched_null": {
+        "null_max": 23,
+        "null_mean": 18.0,
+        "null_sd": 2.081666,
+        "observed_hits": 15,
+        "p_exact": 0.9792,
+        "z_observed": -1.4412
+      },
+      "matched_p_exact": 0.9792,
+      "rule": "source_is_first_fact_source",
+      "shipped_accuracy": 0.522,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1025,
+        "null_mean": 752.554667,
+        "null_min_hits": 0,
+        "null_sd": 14.905742,
+        "observed_hits": 783,
+        "p_exact": 0.02402,
+        "rule_yes_cells": 271,
+        "z_observed": 2.0425
+      },
+      "shipped_p_exact": 0.02402
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": true,
+      "matched_accuracy": 0.75,
+      "matched_null": {
+        "null_max": 27,
+        "null_mean": 18.0,
+        "null_sd": 3.0,
+        "observed_hits": 27,
+        "p_exact": 0.001953,
+        "z_observed": 3.0
+      },
+      "matched_p_exact": 0.001953,
+      "rule": "target_is_fact_target",
+      "shipped_accuracy": 1.0,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1500,
+        "null_mean": 750.021333,
+        "null_min_hits": 0,
+        "null_sd": 19.370824,
+        "observed_hits": 1500,
+        "p_exact": 0.0,
+        "rule_yes_cells": 746,
+        "z_observed": 38.7169
+      },
+      "shipped_p_exact": 0.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max": 18,
+        "null_mean": 18.0,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_exact": 1.0,
+        "z_observed": null
+      },
+      "matched_p_exact": 1.0,
+      "rule": "source_is_fact_source",
+      "shipped_accuracy": 0.4973333333,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1500,
+        "null_mean": 746.0,
+        "null_min_hits": 746,
+        "null_sd": 0.0,
+        "observed_hits": 746,
+        "p_exact": 1.0,
+        "rule_yes_cells": 1500,
+        "z_observed": null
+      },
+      "shipped_p_exact": 1.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max": 36,
+        "null_mean": 18.0,
+        "null_sd": 3.464102,
+        "observed_hits": 18,
+        "p_exact": 0.6154,
+        "z_observed": 0.0
+      },
+      "matched_p_exact": 0.6154,
+      "rule": "endpoint_in_degree_zero",
+      "shipped_accuracy": 0.4973333333,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1500,
+        "null_mean": 746.0,
+        "null_min_hits": 746,
+        "null_sd": 0.0,
+        "observed_hits": 746,
+        "p_exact": 1.0,
+        "rule_yes_cells": 1500,
+        "z_observed": null
+      },
+      "shipped_p_exact": 1.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": true,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max": 36,
+        "null_mean": 18.0,
+        "null_sd": 3.464102,
+        "observed_hits": 18,
+        "p_exact": 0.6154,
+        "z_observed": 0.0
+      },
+      "matched_p_exact": 0.6154,
+      "rule": "endpoint_out_degree_zero",
+      "shipped_accuracy": 1.0,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1500,
+        "null_mean": 750.021333,
+        "null_min_hits": 0,
+        "null_sd": 19.370824,
+        "observed_hits": 1500,
+        "p_exact": 0.0,
+        "rule_yes_cells": 746,
+        "z_observed": 38.7169
+      },
+      "shipped_p_exact": 0.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": true,
+      "matched_accuracy": 0.75,
+      "matched_null": {
+        "null_max": 27,
+        "null_mean": 18.0,
+        "null_sd": 3.0,
+        "observed_hits": 27,
+        "p_exact": 0.001953,
+        "z_observed": 3.0
+      },
+      "matched_p_exact": 0.001953,
+      "rule": "undirected_connectivity_only",
+      "shipped_accuracy": 1.0,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1500,
+        "null_mean": 750.021333,
+        "null_min_hits": 0,
+        "null_sd": 19.370824,
+        "observed_hits": 1500,
+        "p_exact": 0.0,
+        "rule_yes_cells": 746,
+        "z_observed": 38.7169
+      },
+      "shipped_p_exact": 0.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max": 18,
+        "null_mean": 18.0,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_exact": 1.0,
+        "z_observed": null
+      },
+      "matched_p_exact": 1.0,
+      "rule": "fact_count_threshold",
+      "shipped_accuracy": 0.4566666667,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1427,
+        "null_mean": 750.410667,
+        "null_min_hits": 0,
+        "null_sd": 19.268739,
+        "observed_hits": 685,
+        "p_exact": 0.9997,
+        "rule_yes_cells": 673,
+        "z_observed": -3.3947
+      },
+      "shipped_p_exact": 0.9997
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": true,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max": 18,
+        "null_mean": 18.0,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_exact": 1.0,
+        "z_observed": null
+      },
+      "matched_p_exact": 1.0,
+      "rule": "chain_len_matches_level",
+      "shipped_accuracy": 1.0,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 1500,
+        "null_mean": 750.021333,
+        "null_min_hits": 0,
+        "null_sd": 19.370824,
+        "observed_hits": 1500,
+        "p_exact": 0.0,
+        "rule_yes_cells": 746,
+        "z_observed": 38.7169
+      },
+      "shipped_p_exact": 0.0
+    },
+    {
+      "fires_matched": false,
+      "fires_shipped": false,
+      "matched_accuracy": 0.5,
+      "matched_null": {
+        "null_max": 18,
+        "null_mean": 18.0,
+        "null_sd": 0.0,
+        "observed_hits": 18,
+        "p_exact": 1.0,
+        "z_observed": null
+      },
+      "matched_p_exact": 1.0,
+      "rule": "relation_word_copy",
+      "shipped_accuracy": 0.5026666667,
+      "shipped_null": {
+        "gold_yes_cells": 746,
+        "null_max_hits": 754,
+        "null_mean": 754.0,
+        "null_min_hits": 0,
+        "null_sd": 0.0,
+        "observed_hits": 754,
+        "p_exact": 1.0,
+        "rule_yes_cells": 0,
+        "z_observed": null
+      },
+      "shipped_p_exact": 1.0
+    }
+  ],
+  "schema": "round10-gate-v2",
+  "seed_base": 20261018,
+  "selection_rule": {
+    "items_per_level": 3,
+    "levels": [
+      4,
+      6,
+      8
+    ],
+    "order": "file order, first usable item per level",
+    "usable": "gold-yes query witnessed by a simple in-degree<=1 out-degree<=1 chain of length >= 4, plus a second component holding a terminal node (in-degree 1, out-degree 0) whose name length equals the chain terminal"
+  },
+  "shipped_corpus": {
+    "cells_where_connectivity_and_reachability_disagree": 0,
+    "files": [
+      "items/ladders/l1.jsonl",
+      "items/ladders/l2.jsonl",
+      "items/ladders/l4.jsonl",
+      "items/ladders/l6.jsonl",
+      "items/ladders/l8.jsonl"
+    ],
+    "gold_reach_mismatches": [],
+    "items": 1500,
+    "levels": {
+      "1": {
+        "chain_len": {
+          "1": 152,
+          "None": 148
+        },
+        "component_reach_disagree": 0,
+        "facts_max": 5,
+        "facts_min": 2,
+        "gold_no": 148,
+        "gold_yes": 152,
+        "items": 300,
+        "reach_mismatch": 0,
+        "sha256": "86ce1a8fbec3c1b8c887cb65ccc95eabf32544fec28da321457f686a73d66797"
+      },
+      "2": {
+        "chain_len": {
+          "2": 145,
+          "None": 155
+        },
+        "component_reach_disagree": 0,
+        "facts_max": 7,
+        "facts_min": 3,
+        "gold_no": 155,
+        "gold_yes": 145,
+        "items": 300,
+        "reach_mismatch": 0,
+        "sha256": "81a34ec7abcdbd3cd85ef3f6cc18fa187caa9f10f6aa39d1c65c9238513840fb"
+      },
+      "4": {
+        "chain_len": {
+          "4": 156,
+          "None": 144
+        },
+        "component_reach_disagree": 0,
+        "facts_max": 11,
+        "facts_min": 5,
+        "gold_no": 144,
+        "gold_yes": 156,
+        "items": 300,
+        "reach_mismatch": 0,
+        "sha256": "92b3d33b17e463b73110337e368091500d2dedecaf6071daf67691c20ab8d261"
+      },
+      "6": {
+        "chain_len": {
+          "6": 148,
+          "None": 152
+        },
+        "component_reach_disagree": 0,
+        "facts_max": 15,
+        "facts_min": 7,
+        "gold_no": 152,
+        "gold_yes": 148,
+        "items": 300,
+        "reach_mismatch": 0,
+        "sha256": "62f66dc265f09691182b825c45b57f5c34a2e8816fe381a051428b97eab17348"
+      },
+      "8": {
+        "chain_len": {
+          "8": 145,
+          "None": 155
+        },
+        "component_reach_disagree": 0,
+        "facts_max": 19,
+        "facts_min": 9,
+        "gold_no": 155,
+        "gold_yes": 145,
+        "items": 300,
+        "reach_mismatch": 0,
+        "sha256": "191439a481e2a6344d8bc0f84e9317a76ae55f8452a52de132879e775d632af8"
+      }
+    }
+  }
+}
