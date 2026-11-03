@@ -1,0 +1,1182 @@
+{
+  "anchor_vs_round16": {
+    "answer_agreements": 12,
+    "available": true,
+    "cells": 12,
+    "note": "round 16 spent two attempts on its truncated X cells; this round declares no retry on truncation (the row attempts fields make the asymmetry explicit)",
+    "rows": [
+      {
+        "answer_agrees": true,
+        "answer_round16": "yes",
+        "answer_this": "yes",
+        "attempts_round16": 1,
+        "attempts_this": 1,
+        "cell": [
+          "L24-1",
+          "F1"
+        ],
+        "completion_tokens_round16": 424,
+        "completion_tokens_this": 424,
+        "outcome_round16": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": "yes",
+        "answer_this": "yes",
+        "attempts_round16": 1,
+        "attempts_this": 1,
+        "cell": [
+          "L24-1",
+          "F2"
+        ],
+        "completion_tokens_round16": 483,
+        "completion_tokens_this": 483,
+        "outcome_round16": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": "no",
+        "answer_this": "no",
+        "attempts_round16": 1,
+        "attempts_this": 1,
+        "cell": [
+          "L24-1",
+          "R1"
+        ],
+        "completion_tokens_round16": 401,
+        "completion_tokens_this": 401,
+        "outcome_round16": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": null,
+        "answer_this": null,
+        "attempts_round16": 2,
+        "attempts_this": 1,
+        "cell": [
+          "L24-1",
+          "X"
+        ],
+        "completion_tokens_round16": 2048,
+        "completion_tokens_this": 2048,
+        "outcome_round16": "truncated_no_answer",
+        "outcome_this": "truncated_no_answer"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": "yes",
+        "answer_this": "yes",
+        "attempts_round16": 1,
+        "attempts_this": 1,
+        "cell": [
+          "L24-2",
+          "F1"
+        ],
+        "completion_tokens_round16": 465,
+        "completion_tokens_this": 465,
+        "outcome_round16": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": "yes",
+        "answer_this": "yes",
+        "attempts_round16": 1,
+        "attempts_this": 1,
+        "cell": [
+          "L24-2",
+          "F2"
+        ],
+        "completion_tokens_round16": 455,
+        "completion_tokens_this": 455,
+        "outcome_round16": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": "no",
+        "answer_this": "no",
+        "attempts_round16": 1,
+        "attempts_this": 1,
+        "cell": [
+          "L24-2",
+          "R1"
+        ],
+        "completion_tokens_round16": 576,
+        "completion_tokens_this": 576,
+        "outcome_round16": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": null,
+        "answer_this": null,
+        "attempts_round16": 2,
+        "attempts_this": 1,
+        "cell": [
+          "L24-2",
+          "X"
+        ],
+        "completion_tokens_round16": 2048,
+        "completion_tokens_this": 2048,
+        "outcome_round16": "truncated_no_answer",
+        "outcome_this": "truncated_no_answer"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": "yes",
+        "answer_this": "yes",
+        "attempts_round16": 1,
+        "attempts_this": 1,
+        "cell": [
+          "L24-3",
+          "F1"
+        ],
+        "completion_tokens_round16": 419,
+        "completion_tokens_this": 419,
+        "outcome_round16": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": "yes",
+        "answer_this": "yes",
+        "attempts_round16": 1,
+        "attempts_this": 1,
+        "cell": [
+          "L24-3",
+          "F2"
+        ],
+        "completion_tokens_round16": 451,
+        "completion_tokens_this": 451,
+        "outcome_round16": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": "no",
+        "answer_this": "no",
+        "attempts_round16": 1,
+        "attempts_this": 1,
+        "cell": [
+          "L24-3",
+          "R1"
+        ],
+        "completion_tokens_round16": 350,
+        "completion_tokens_this": 350,
+        "outcome_round16": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round16": null,
+        "answer_this": null,
+        "attempts_round16": 2,
+        "attempts_this": 1,
+        "cell": [
+          "L24-3",
+          "X"
+        ],
+        "completion_tokens_round16": 2048,
+        "completion_tokens_this": 2048,
+        "outcome_round16": "truncated_no_answer",
+        "outcome_this": "truncated_no_answer"
+      }
+    ]
+  },
+  "arms": {
+    "F1": {
+      "accuracy": 1.0,
+      "answer_source_content": 9,
+      "answer_source_reasoning": 0,
+      "answered": 9,
+      "correct": 9,
+      "mean_completion_tokens": 656.556,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    },
+    "F2": {
+      "accuracy": 1.0,
+      "answer_source_content": 9,
+      "answer_source_reasoning": 0,
+      "answered": 9,
+      "correct": 9,
+      "mean_completion_tokens": 745.333,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    },
+    "R1": {
+      "accuracy": 1.0,
+      "answer_source_content": 9,
+      "answer_source_reasoning": 0,
+      "answered": 9,
+      "correct": 9,
+      "mean_completion_tokens": 453.0,
+      "outcomes": {
+        "answered": 9
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    },
+    "X": {
+      "accuracy": 1.0,
+      "answer_source_content": 1,
+      "answer_source_reasoning": 1,
+      "answered": 2,
+      "correct": 2,
+      "mean_completion_tokens": 1877.0,
+      "outcomes": {
+        "answered": 2,
+        "truncated_no_answer": 7
+      },
+      "prompts": 9,
+      "wilson95": [
+        0.34238,
+        1.0
+      ]
+    }
+  },
+  "cross_class_vs_round17": {
+    "answer_agreements": 29,
+    "answer_disagreements": 0,
+    "archive_sha256": "3c5a9eeb59ae62ae9bfcec7c15beee02e4e962b306b92805ae86b3410099b4d9",
+    "available": true,
+    "both_answered": 29,
+    "both_answered_mcnemar": {
+      "b_this_wrong_round17_right": 0,
+      "c_this_right_round17_wrong": 0,
+      "p_exact_mcnemar": 1.0
+    },
+    "joined_cells": 36,
+    "mean_completion_tokens_by_arm": {
+      "F1": {
+        "round17": 1105.778,
+        "this": 656.556
+      },
+      "F2": {
+        "round17": 1141.333,
+        "this": 745.333
+      },
+      "R1": {
+        "round17": 1716.778,
+        "this": 453.0
+      },
+      "X": {
+        "round17": 2048.0,
+        "this": 1877.0
+      }
+    },
+    "only_round17_answered": 7,
+    "only_this_answered": 0,
+    "reasoning_rescues_round17": 17,
+    "reasoning_rescues_this": 1,
+    "reference": "research/nightly-2026-10-22-0200/raw.jsonl",
+    "reference_class": "flash-next-class local endpoint (round 17)",
+    "rows": [
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L24-1",
+          "F1"
+        ],
+        "completion_tokens_round17": 720,
+        "completion_tokens_this": 424,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "content",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L24-1",
+          "R1"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 401,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L24-1",
+          "F2"
+        ],
+        "completion_tokens_round17": 609,
+        "completion_tokens_this": 483,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": null,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "none",
+        "answer_this": null,
+        "both_answered": false,
+        "cell": [
+          "L24-1",
+          "X"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 2048,
+        "correct_round17": 1,
+        "correct_this": null,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "truncated_no_answer"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "content",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L24-2",
+          "R1"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 576,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L24-2",
+          "F1"
+        ],
+        "completion_tokens_round17": 686,
+        "completion_tokens_this": 465,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L24-2",
+          "F2"
+        ],
+        "completion_tokens_round17": 902,
+        "completion_tokens_this": 455,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": null,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "none",
+        "answer_this": null,
+        "both_answered": false,
+        "cell": [
+          "L24-2",
+          "X"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 2048,
+        "correct_round17": 1,
+        "correct_this": null,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "truncated_no_answer"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L24-3",
+          "F1"
+        ],
+        "completion_tokens_round17": 648,
+        "completion_tokens_this": 419,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "content",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L24-3",
+          "R1"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 350,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L24-3",
+          "F2"
+        ],
+        "completion_tokens_round17": 590,
+        "completion_tokens_this": 451,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": null,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "none",
+        "answer_this": null,
+        "both_answered": false,
+        "cell": [
+          "L24-3",
+          "X"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 2048,
+        "correct_round17": 1,
+        "correct_this": null,
+        "level": 24,
+        "outcome_round17": "answered",
+        "outcome_this": "truncated_no_answer"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L32-1",
+          "F1"
+        ],
+        "completion_tokens_round17": 1183,
+        "completion_tokens_this": 690,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L32-1",
+          "F2"
+        ],
+        "completion_tokens_round17": 800,
+        "completion_tokens_this": 704,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": null,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "none",
+        "answer_this": null,
+        "both_answered": false,
+        "cell": [
+          "L32-1",
+          "X"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 2048,
+        "correct_round17": 1,
+        "correct_this": null,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "truncated_no_answer"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "content",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L32-1",
+          "R1"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 540,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L32-2",
+          "F1"
+        ],
+        "completion_tokens_round17": 1190,
+        "completion_tokens_this": 681,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L32-2",
+          "R1"
+        ],
+        "completion_tokens_round17": 618,
+        "completion_tokens_this": 446,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L32-2",
+          "F2"
+        ],
+        "completion_tokens_round17": 1197,
+        "completion_tokens_this": 678,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "reasoning",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L32-2",
+          "X"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 2048,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L32-3",
+          "F1"
+        ],
+        "completion_tokens_round17": 799,
+        "completion_tokens_this": 627,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L32-3",
+          "R1"
+        ],
+        "completion_tokens_round17": 497,
+        "completion_tokens_this": 356,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L32-3",
+          "F2"
+        ],
+        "completion_tokens_round17": 1323,
+        "completion_tokens_this": 624,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": null,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "none",
+        "answer_this": null,
+        "both_answered": false,
+        "cell": [
+          "L32-3",
+          "X"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 2048,
+        "correct_round17": 1,
+        "correct_this": null,
+        "level": 32,
+        "outcome_round17": "answered",
+        "outcome_this": "truncated_no_answer"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L48-1",
+          "F1"
+        ],
+        "completion_tokens_round17": 1496,
+        "completion_tokens_this": 802,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "content",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L48-1",
+          "R1"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 446,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": null,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "none",
+        "answer_this": null,
+        "both_answered": false,
+        "cell": [
+          "L48-1",
+          "X"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 2048,
+        "correct_round17": 1,
+        "correct_this": null,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "truncated_no_answer"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L48-1",
+          "F2"
+        ],
+        "completion_tokens_round17": 1549,
+        "completion_tokens_this": 991,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L48-2",
+          "F1"
+        ],
+        "completion_tokens_round17": 1267,
+        "completion_tokens_this": 893,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "content",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L48-2",
+          "R1"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 342,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L48-2",
+          "F2"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 1416,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "content",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L48-2",
+          "X"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 509,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L48-3",
+          "F1"
+        ],
+        "completion_tokens_round17": 1963,
+        "completion_tokens_this": 908,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "content",
+        "answer_this": "no",
+        "both_answered": true,
+        "cell": [
+          "L48-3",
+          "R1"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 620,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": true,
+        "answer_round17": "yes",
+        "answer_source_round17": "content",
+        "answer_source_this": "content",
+        "answer_this": "yes",
+        "both_answered": true,
+        "cell": [
+          "L48-3",
+          "F2"
+        ],
+        "completion_tokens_round17": 1254,
+        "completion_tokens_this": 906,
+        "correct_round17": 1,
+        "correct_this": 1,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "answered"
+      },
+      {
+        "answer_agrees": null,
+        "answer_round17": "no",
+        "answer_source_round17": "reasoning",
+        "answer_source_this": "none",
+        "answer_this": null,
+        "both_answered": false,
+        "cell": [
+          "L48-3",
+          "X"
+        ],
+        "completion_tokens_round17": 2048,
+        "completion_tokens_this": 2048,
+        "correct_round17": 1,
+        "correct_this": null,
+        "level": 48,
+        "outcome_round17": "answered",
+        "outcome_this": "truncated_no_answer"
+      }
+    ],
+    "this_class": "27B-class local endpoint (this round)",
+    "truncation_counts_by_arm": {
+      "F1": {
+        "round17": 0,
+        "this": 0
+      },
+      "F2": {
+        "round17": 0,
+        "this": 0
+      },
+      "R1": {
+        "round17": 0,
+        "this": 0
+      },
+      "X": {
+        "round17": 0,
+        "this": 7
+      }
+    }
+  },
+  "families": {
+    "component_F2_X": {
+      "b_first_wrong": 0,
+      "both_right": 2,
+      "both_wrong": 0,
+      "c_second_wrong": 0,
+      "p_exact_mcnemar": 1.0,
+      "pairs": 2,
+      "skipped_unanswered": 7
+    },
+    "direction_F1_R1": {
+      "b_first_wrong": 0,
+      "both_right": 9,
+      "both_wrong": 0,
+      "c_second_wrong": 0,
+      "p_exact_mcnemar": 1.0,
+      "pairs": 9,
+      "skipped_unanswered": 0
+    }
+  },
+  "gate_hash": "68745581fff326a76d630b5d6523754e4424c89a0478970112f5b31436bc8926",
+  "gate_sha256": "b66142f4f79c0b6b861a5ef63f9588706def24055f0dbbfc864a3f3f63dcf3a0",
+  "item_source": {
+    "blob_sha256": {
+      "generated/l24.jsonl": "cab16fae867b4791290259ffa451231efd73ef193da96664720fd4686fb7008f",
+      "generated/l32.jsonl": "3781a95da04b90ce0895b0314b7f159fa18f299537e082fa34166abb4075b5ff",
+      "generated/l48.jsonl": "f4dee382fb3c7be31a6836434e3b1ffe5856bfaaf19f4aa9270e287b36755288"
+    },
+    "generator_sha256": "b0d77efd308d249fea77e5fd97e9bef7f5e0fd737b214c2d754cddf970a7f77b"
+  },
+  "mid_stream_commitment": {
+    "answered_cells": 29,
+    "max_commit_fraction": 0.4014,
+    "median_commit_fraction": 0.4014,
+    "reasoning_rescues": 1
+  },
+  "per_level": {
+    "24": {
+      "accuracy_answered": 1.0,
+      "answered": 9,
+      "answered_per_arm": {
+        "F1": 3,
+        "F2": 3,
+        "R1": 3,
+        "X": 0
+      },
+      "cells": 12,
+      "correct": 9,
+      "max_completion_tokens": 2048,
+      "mean_completion_tokens": 847.333,
+      "mean_headroom_answered": 1600.889,
+      "median_truncation_coverage_ratio": 1.0,
+      "outcomes": {
+        "answered": 9,
+        "truncated_no_answer": 3
+      },
+      "wilson95": [
+        0.700855,
+        1.0
+      ]
+    },
+    "32": {
+      "accuracy_answered": 1.0,
+      "answered": 10,
+      "answered_per_arm": {
+        "F1": 3,
+        "F2": 3,
+        "R1": 3,
+        "X": 1
+      },
+      "cells": 12,
+      "correct": 10,
+      "max_completion_tokens": 2048,
+      "mean_completion_tokens": 957.5,
+      "mean_headroom_answered": 1308.6,
+      "median_truncation_coverage_ratio": 1.0,
+      "outcomes": {
+        "answered": 10,
+        "truncated_no_answer": 2
+      },
+      "wilson95": [
+        0.722467,
+        1.0
+      ]
+    },
+    "48": {
+      "accuracy_answered": 1.0,
+      "answered": 10,
+      "answered_per_arm": {
+        "F1": 3,
+        "F2": 3,
+        "R1": 3,
+        "X": 1
+      },
+      "cells": 12,
+      "correct": 10,
+      "max_completion_tokens": 2048,
+      "mean_completion_tokens": 994.083,
+      "mean_headroom_answered": 1264.7,
+      "median_truncation_coverage_ratio": 1.0,
+      "outcomes": {
+        "answered": 10,
+        "truncated_no_answer": 2
+      },
+      "wilson95": [
+        0.722467,
+        1.0
+      ]
+    }
+  },
+  "predictions": {
+    "P1_correctness_holds": true,
+    "P2_answerability_decay": false,
+    "P2_answered_fraction_by_level": {
+      "24": 0.75,
+      "32": 0.8333,
+      "48": 0.8333
+    },
+    "P3_median_truncation_coverage": 1.0,
+    "P3_supported": true,
+    "P3_threshold": 0.8,
+    "P4_cross_class_agreement": true,
+    "P4_note": "None is vacuous (reference archive absent, or no cell answered on both classes)"
+  },
+  "raw_sha256": "a82a2c5b3cb67651047bea5615c31d026b920711908c37c9700c18142bbeef02",
+  "records": 36,
+  "records_naming_all_interior_nodes": 2,
+  "seed_base": 20261019,
+  "signature_table": {
+    "connectivity": {
+      "cells": 36,
+      "cells_matching": 27,
+      "items": 9,
+      "items_matching_all_four": 0
+    },
+    "constant_no": {
+      "cells": 36,
+      "cells_matching": 18,
+      "items": 9,
+      "items_matching_all_four": 0
+    },
+    "constant_yes": {
+      "cells": 36,
+      "cells_matching": 18,
+      "items": 9,
+      "items_matching_all_four": 0
+    },
+    "traversal": {
+      "cells": 36,
+      "cells_matching": 36,
+      "items": 9,
+      "items_matching_all_four": 9
+    }
+  },
+  "token_law": {
+    "answered_stop_cells": 18,
+    "censored_truncated_cells": 0,
+    "intercept": -61.929,
+    "pearson_r": 0.8794,
+    "slope_tokens_per_hop": 22.006
+  },
+  "transport": {
+    "attempt_cap": 40,
+    "chosen_concurrency": 4,
+    "estimate_per_item_s": 16.69,
+    "health": {
+      "completion_tokens": 23,
+      "finished_at": "2026-10-22T02:34:32Z",
+      "latency_s": 4.135,
+      "ok": true,
+      "outcome": "answered",
+      "prompt_tokens": 17,
+      "started_at": "2026-10-22T02:34:32Z"
+    },
+    "phase1_walls": [
+      8.345,
+      6.261
+    ],
+    "phase2_wall_s": 547.6,
+    "resumed_cells": 0,
+    "total_endpoint_calls_including_health": 37
+  },
+  "turnover_classification": "budget_turnover"
+}

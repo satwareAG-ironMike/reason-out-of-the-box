@@ -115,7 +115,10 @@ When the user requests a durable behavior change, record it here or in the relev
   preferred, and health-checks each endpoint before use. Each round posts a summary comment on tracker
   issue #65; findings flow through deduped issues and `research/nightly-*` branches plus PRs (never
   push to main, never merge). Round experiment artifacts (script, prompts, raw responses, scores)
-  land under `research/nightly-YYYY-MM-DD-HHMM/`, see [research/AGENTS.md](research/AGENTS.md).
+  land under `research/nightly-YYYY-MM-DD-HHMM/`, see [research/AGENTS.md](research/AGENTS.md). A
+  round whose experiment arm cannot run must say so in its #65 comment and keep the surviving
+  failure record (log, gate output) in its `research/nightly-*` directory; an arm that timed out
+  is never reported as a result.
 - The automated repo-round family (tracker #83) runs via systemd user timers on the maintainer
   workstation; all runners live outside this repository (public-only rule: they hold the local
   inference pool and local state). Cadence: nightly research 02:00+04:00 (#65); daily PR review
@@ -130,8 +133,9 @@ When the user requests a durable behavior change, record it here or in the relev
 | Path | Scope | File |
 |------|-------|------|
 | `archive/` | Paper archive: 122 entries, 16 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
-| `generators/` | Condition-2 task generators (issue #4): digit matrices + ladders k-hop shipped; ladders mult_mult/dp_puzzle and ARC-style planned; seed policy, solvability and manifest contracts | [AGENTS.md](generators/AGENTS.md) |
+| `generators/` | Condition-2 task generators (issue #4): digit matrices + ladders k-hop shipped; ladders mult_mult/dp_puzzle and ARC-style planned; seed policy, solvability and manifest contracts; permutation-calibrated leak gate, pinned issue #67 negative-control fixtures and the seed-paired shortcut probe (issue #67; a true matched pair is owed, issue #78) | [AGENTS.md](generators/AGENTS.md) |
 | `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), IRB protocol draft (issue #7), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall, insect-sentience threshold); governed by root
   rules | - |
+| `runs/` | Executed-run record: per-round manifests, raw per-prompt responses, calibration records, regeneration and battery scripts, independent verification records, round reports; immutable manifests, public-only artifacts, Executed/Reproduced/Validated labels | [AGENTS.md](runs/AGENTS.md) |
 | `scripts/` | `check_archive.py` archive consistency checker and `check_links.py` markdown link checker (stdlib, each with `--selftest`); run both before any closeout | - |
 | `research/` | Nightly round artifacts (issue #65): per-firing directories with probe scripts, prompts, raw responses, scores, sanitization and evidence-label contracts | [AGENTS.md](research/AGENTS.md) |

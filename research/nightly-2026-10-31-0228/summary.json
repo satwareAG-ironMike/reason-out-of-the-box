@@ -1,0 +1,2629 @@
+{
+  "cell_accuracy_wilson": {
+    "D1": {
+      "delivered_dispatches": 6,
+      "digests": [
+        "3a378f98a2b0a41f6fef81c7f0529dcb8264e5cea3dacbf45ddef7b25125a873",
+        "b3e37ce3f7f1df518ccfde8ec1c6831680e23e6fb404ed30bd325d41d7f7e491"
+      ],
+      "per_dispatch": {
+        "accuracy": 1.0,
+        "caveat": "dispatches of the same item are not independent; effective_n is the honest denominator",
+        "correct": 6,
+        "effective_n": 2,
+        "n_dispatches": 6,
+        "wilson_high": 1.0,
+        "wilson_low": 0.6097
+      },
+      "per_item": {
+        "accuracy": 1.0,
+        "correct": 2,
+        "n_items": 2,
+        "unit": "distinct prompt digest, majority over its dispatches",
+        "wilson_high": 1.0,
+        "wilson_low": 0.3424
+      }
+    },
+    "D2": {
+      "delivered_dispatches": 6,
+      "digests": [
+        "74388a9a6f4d5549a343593617388774e7adf5dae49681704ac3f3eed7a9c834",
+        "de5ed21b32895e67bd295d1b63df3245e57634d0b07da4ba92e9442cd1e0fead"
+      ],
+      "per_dispatch": {
+        "accuracy": 1.0,
+        "caveat": "dispatches of the same item are not independent; effective_n is the honest denominator",
+        "correct": 6,
+        "effective_n": 2,
+        "n_dispatches": 6,
+        "wilson_high": 1.0,
+        "wilson_low": 0.6097
+      },
+      "per_item": {
+        "accuracy": 1.0,
+        "correct": 2,
+        "n_items": 2,
+        "unit": "distinct prompt digest, majority over its dispatches",
+        "wilson_high": 1.0,
+        "wilson_low": 0.3424
+      }
+    },
+    "L0": {
+      "delivered_dispatches": 6,
+      "digests": [
+        "b20d7fd289fd6f181fb05aebf9ae6526c041870e09c711ae60a7100cb5ca313b",
+        "ddb9421bc3e7c63dcae14af51cdb6b5e6347ff569b21683558c0f9fa409b6402"
+      ],
+      "per_dispatch": {
+        "accuracy": 1.0,
+        "caveat": "dispatches of the same item are not independent; effective_n is the honest denominator",
+        "correct": 6,
+        "effective_n": 2,
+        "n_dispatches": 6,
+        "wilson_high": 1.0,
+        "wilson_low": 0.6097
+      },
+      "per_item": {
+        "accuracy": 1.0,
+        "correct": 2,
+        "n_items": 2,
+        "unit": "distinct prompt digest, majority over its dispatches",
+        "wilson_high": 1.0,
+        "wilson_low": 0.3424
+      }
+    },
+    "L1": {
+      "delivered_dispatches": 6,
+      "digests": [
+        "31636587257e460c48810a5498e9fee105559cf3425a7262ff909b3a9f8427bc",
+        "d2ab3a4e71b559b5605e3689658d8f3dfc93efaf7b6f85e74c246e7674f5ced2"
+      ],
+      "per_dispatch": {
+        "accuracy": 1.0,
+        "caveat": "dispatches of the same item are not independent; effective_n is the honest denominator",
+        "correct": 6,
+        "effective_n": 2,
+        "n_dispatches": 6,
+        "wilson_high": 1.0,
+        "wilson_low": 0.6097
+      },
+      "per_item": {
+        "accuracy": 1.0,
+        "correct": 2,
+        "n_items": 2,
+        "unit": "distinct prompt digest, majority over its dispatches",
+        "wilson_high": 1.0,
+        "wilson_low": 0.3424
+      }
+    },
+    "L2": {
+      "delivered_dispatches": 6,
+      "digests": [
+        "29635c816e9cf67dbcf54cc78b935840e8b8435d079eba3a5ee79ddaf2b2e32d",
+        "54d8b96f74e74bb2fa315f1de73e5812682def9773dc88843a81e93d62a7be5c"
+      ],
+      "per_dispatch": {
+        "accuracy": 1.0,
+        "caveat": "dispatches of the same item are not independent; effective_n is the honest denominator",
+        "correct": 6,
+        "effective_n": 2,
+        "n_dispatches": 6,
+        "wilson_high": 1.0,
+        "wilson_low": 0.6097
+      },
+      "per_item": {
+        "accuracy": 1.0,
+        "correct": 2,
+        "n_items": 2,
+        "unit": "distinct prompt digest, majority over its dispatches",
+        "wilson_high": 1.0,
+        "wilson_low": 0.3424
+      }
+    },
+    "L3": {
+      "delivered_dispatches": 3,
+      "digests": [
+        "4ed1d525026f2f7c43149d7ef8d3d5df040b274f830c8f6fb1f1f0788463cb18",
+        "d548b1f9681cf082174cf141f33e0f34a65b98cf2504111e36284bdf287386cc"
+      ],
+      "per_dispatch": {
+        "accuracy": 0.5,
+        "caveat": "dispatches of the same item are not independent; effective_n is the honest denominator",
+        "correct": 3,
+        "effective_n": 2,
+        "n_dispatches": 6,
+        "wilson_high": 0.8124,
+        "wilson_low": 0.1876
+      },
+      "per_item": {
+        "accuracy": 0.5,
+        "correct": 1,
+        "n_items": 2,
+        "unit": "distinct prompt digest, majority over its dispatches",
+        "wilson_high": 0.9055,
+        "wilson_low": 0.0945
+      }
+    }
+  },
+  "class_identity_diagnostic": {
+    "R24": {
+      "abs_rel_dev_max": 0.1665,
+      "abs_rel_dev_median": 0.0,
+      "answer_agreement": 0.9167,
+      "class_of_firing": "this class",
+      "raw_output_identical": "30/36"
+    },
+    "R31": {
+      "abs_rel_dev_max": 1.5911,
+      "abs_rel_dev_median": 1.2472,
+      "answer_agreement": 0.9167,
+      "class_of_firing": "other class",
+      "raw_output_identical": "n/a"
+    },
+    "R33": {
+      "abs_rel_dev_max": 0.1665,
+      "abs_rel_dev_median": 0.0,
+      "answer_agreement": 0.9167,
+      "class_of_firing": "this class",
+      "raw_output_identical": "27/36"
+    },
+    "R37": {
+      "abs_rel_dev_max": 1.5929,
+      "abs_rel_dev_median": 0.8474,
+      "answer_agreement": 0.9167,
+      "class_of_firing": "other class",
+      "raw_output_identical": "0/36"
+    }
+  },
+  "delivery": {
+    "correct_content_only": 33,
+    "delivered": 33,
+    "dispatches": 36,
+    "outcomes": {
+      "answered_in_answer_field": 33,
+      "trace_only": 3
+    },
+    "retried": 0,
+    "truncated": 3
+  },
+  "gate_hash": "eac3acca041fbb23c292150655c0864f17984d08afcba37964e975970d9b86aa",
+  "gate_schema": "round38-gate-v1",
+  "generated_at": "2026-10-31T02:50:48Z",
+  "labels": {
+    "class_identity": "an inference from the pool slot and the served model id, not a fingerprint; see class_identity_diagnostic",
+    "evidence": "Executed",
+    "per_cell_n": "2 distinct items per cell (6 dispatches): exploratory, no cell verdict is re-placed",
+    "why": "one endpoint, one firing, no independent second implementation, not covered by the pre-registered decision table"
+  },
+  "noise_floors_and_verdicts": {
+    "cross_class": [
+      {
+        "delta_depth": 43.75,
+        "delta_load": -13.5634,
+        "depth_verdict": "not separable from run noise",
+        "floor_other_class_depth_q99": 148.07,
+        "floor_other_class_load_q99": 12.4063,
+        "floor_this_class_depth_q99": 24.545,
+        "floor_this_class_load_q99": 2.9737,
+        "load_verdict": "resolvable",
+        "note": "the other class's floor rests on ONE pair of firings (rounds 31 and 37), so resolvable here means beyond the largest noise either class has demonstrated, not beyond a replicated bound",
+        "other_class": "R31",
+        "pair": [
+          "R24",
+          "R31"
+        ],
+        "ratio_depth": 2.7588,
+        "ratio_load": -0.2496,
+        "this_class": "R24",
+        "union_floor_depth": 148.07,
+        "union_floor_load": 12.4063
+      },
+      {
+        "delta_depth": -51.125,
+        "delta_load": -16.6402,
+        "depth_verdict": "not separable from run noise",
+        "floor_other_class_depth_q99": 148.07,
+        "floor_other_class_load_q99": 12.4063,
+        "floor_this_class_depth_q99": 24.545,
+        "floor_this_class_load_q99": 2.9737,
+        "load_verdict": "resolvable",
+        "note": "the other class's floor rests on ONE pair of firings (rounds 31 and 37), so resolvable here means beyond the largest noise either class has demonstrated, not beyond a replicated bound",
+        "other_class": "R37",
+        "pair": [
+          "R24",
+          "R37"
+        ],
+        "ratio_depth": -1.0553,
+        "ratio_load": -0.533,
+        "this_class": "R24",
+        "union_floor_depth": 148.07,
+        "union_floor_load": 12.4063
+      },
+      {
+        "delta_depth": 42.875,
+        "delta_load": -13.6509,
+        "depth_verdict": "not separable from run noise",
+        "floor_other_class_depth_q99": 148.07,
+        "floor_other_class_load_q99": 12.4063,
+        "floor_this_class_depth_q99": 24.545,
+        "floor_this_class_load_q99": 2.9737,
+        "load_verdict": "resolvable",
+        "note": "the other class's floor rests on ONE pair of firings (rounds 31 and 37), so resolvable here means beyond the largest noise either class has demonstrated, not beyond a replicated bound",
+        "other_class": "R31",
+        "pair": [
+          "R33",
+          "R31"
+        ],
+        "ratio_depth": 2.665,
+        "ratio_load": -0.2476,
+        "this_class": "R33",
+        "union_floor_depth": 148.07,
+        "union_floor_load": 12.4063
+      },
+      {
+        "delta_depth": -52.0,
+        "delta_load": -16.7277,
+        "depth_verdict": "not separable from run noise",
+        "floor_other_class_depth_q99": 148.07,
+        "floor_other_class_load_q99": 12.4063,
+        "floor_this_class_depth_q99": 24.545,
+        "floor_this_class_load_q99": 2.9737,
+        "load_verdict": "resolvable",
+        "note": "the other class's floor rests on ONE pair of firings (rounds 31 and 37), so resolvable here means beyond the largest noise either class has demonstrated, not beyond a replicated bound",
+        "other_class": "R37",
+        "pair": [
+          "R33",
+          "R37"
+        ],
+        "ratio_depth": -1.0194,
+        "ratio_load": -0.5288,
+        "this_class": "R33",
+        "union_floor_depth": 148.07,
+        "union_floor_load": 12.4063
+      }
+    ],
+    "per_stratum": {
+      "cross_class": {
+        "n_pairs_of_firings": 4,
+        "pairs": [
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 737.5,
+              "D2": 797.0,
+              "L0": 248.0,
+              "L1": 894.0,
+              "L2": 286.5,
+              "L3": 290.5
+            },
+            "delta_depth": 43.75,
+            "delta_load": -13.5634,
+            "depth_a": 24.875,
+            "depth_b": 68.625,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 63.9669,
+            "floor_depth_q99": 184.3368,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 7.0221,
+            "floor_load_q99": 20.5236,
+            "load_a": 10.8545,
+            "load_b": -2.7089,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R24",
+              "R31"
+            ],
+            "ratio_depth": 2.7588,
+            "ratio_load": -0.2496
+          },
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 359.0,
+              "D2": 597.5,
+              "L0": 807.5,
+              "L1": 476.0,
+              "L2": 1050.5,
+              "L3": 310.0
+            },
+            "delta_depth": -51.125,
+            "delta_load": -16.6402,
+            "depth_a": 24.875,
+            "depth_b": -26.25,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 41.355,
+            "floor_depth_q99": 151.6043,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 5.4638,
+            "floor_load_q99": 19.7863,
+            "load_a": 10.8545,
+            "load_b": -5.7857,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R24",
+              "R37"
+            ],
+            "ratio_depth": -1.0553,
+            "ratio_load": -0.533
+          },
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1172.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 737.5,
+              "D2": 797.0,
+              "L0": 248.0,
+              "L1": 894.0,
+              "L2": 286.5,
+              "L3": 290.5
+            },
+            "delta_depth": 42.875,
+            "delta_load": -13.6509,
+            "depth_a": 25.75,
+            "depth_b": 68.625,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 64.2371,
+            "floor_depth_q99": 184.4378,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 7.0306,
+            "floor_load_q99": 20.5441,
+            "load_a": 10.942,
+            "load_b": -2.7089,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R33",
+              "R31"
+            ],
+            "ratio_depth": 2.665,
+            "ratio_load": -0.2476
+          },
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1172.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 359.0,
+              "D2": 597.5,
+              "L0": 807.5,
+              "L1": 476.0,
+              "L2": 1050.5,
+              "L3": 310.0
+            },
+            "delta_depth": -52.0,
+            "delta_load": -16.7277,
+            "depth_a": 25.75,
+            "depth_b": -26.25,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 41.2574,
+            "floor_depth_q99": 151.9516,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 5.4739,
+            "floor_load_q99": 19.8399,
+            "load_a": 10.942,
+            "load_b": -5.7857,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R33",
+              "R37"
+            ],
+            "ratio_depth": -1.0194,
+            "ratio_load": -0.5288
+          }
+        ]
+      },
+      "cross_firing": {
+        "n_pairs_of_firings": 7,
+        "pairs": [
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1172.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "delta_depth": 0.875,
+            "delta_load": 0.0875,
+            "depth_a": 24.875,
+            "depth_b": 25.75,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 0.0,
+            "floor_depth_q99": 1.8812,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 0.0,
+            "floor_load_q99": 0.226,
+            "load_a": 10.8545,
+            "load_b": 10.942,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R24",
+              "R33"
+            ],
+            "ratio_depth": 1.0352,
+            "ratio_load": 1.0081
+          },
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1902.0
+            },
+            "delta_depth": 0.0,
+            "delta_load": 0.0401,
+            "depth_a": 24.875,
+            "depth_b": 24.875,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 0.0,
+            "floor_depth_q99": 0.3604,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 0.0,
+            "floor_load_q99": 0.0439,
+            "load_a": 10.8545,
+            "load_b": 10.8946,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R24",
+              "P1"
+            ],
+            "ratio_depth": 1.0,
+            "ratio_load": 1.0037
+          },
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 1260.0,
+              "D2": 1525.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1911.0
+            },
+            "delta_depth": 18.375,
+            "delta_load": 0.1848,
+            "depth_a": 24.875,
+            "depth_b": 43.25,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 0.385,
+            "floor_depth_q99": 24.545,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 0.1713,
+            "floor_load_q99": 2.9467,
+            "load_a": 10.8545,
+            "load_b": 11.0393,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R24",
+              "P2"
+            ],
+            "ratio_depth": 1.7387,
+            "ratio_load": 1.017
+          },
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1911.0
+            },
+            "delta_depth": 0.0,
+            "delta_load": 0.1848,
+            "depth_a": 24.875,
+            "depth_b": 24.875,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 0.0236,
+            "floor_depth_q99": 1.5036,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 0.0192,
+            "floor_load_q99": 0.1958,
+            "load_a": 10.8545,
+            "load_b": 11.0393,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R24",
+              "P3"
+            ],
+            "ratio_depth": 1.0,
+            "ratio_load": 1.017
+          },
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1172.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1902.0
+            },
+            "delta_depth": -0.875,
+            "delta_load": -0.0474,
+            "depth_a": 25.75,
+            "depth_b": 24.875,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 0.0552,
+            "floor_depth_q99": 1.7091,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 0.023,
+            "floor_load_q99": 0.2328,
+            "load_a": 10.942,
+            "load_b": 10.8946,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R33",
+              "P1"
+            ],
+            "ratio_depth": 0.966,
+            "ratio_load": 0.9957
+          },
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1172.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 1260.0,
+              "D2": 1525.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1911.0
+            },
+            "delta_depth": 17.5,
+            "delta_load": 0.0973,
+            "depth_a": 25.75,
+            "depth_b": 43.25,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 0.8448,
+            "floor_depth_q99": 24.4722,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 0.2047,
+            "floor_load_q99": 2.9737,
+            "load_a": 10.942,
+            "load_b": 11.0393,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R33",
+              "P2"
+            ],
+            "ratio_depth": 1.6796,
+            "ratio_load": 1.0089
+          },
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1172.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1899.5
+            },
+            "cell_means_b": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1911.0
+            },
+            "delta_depth": -0.875,
+            "delta_load": 0.0973,
+            "depth_a": 25.75,
+            "depth_b": 24.875,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 0.2474,
+            "floor_depth_q99": 1.9422,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 0.0582,
+            "floor_load_q99": 0.3443,
+            "load_a": 10.942,
+            "load_b": 11.0393,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R33",
+              "P3"
+            ],
+            "ratio_depth": 0.966,
+            "ratio_load": 1.0089
+          }
+        ]
+      },
+      "other_class": {
+        "n_pairs_of_firings": 1,
+        "pairs": [
+          {
+            "cell_means_a": {
+              "D1": 737.5,
+              "D2": 797.0,
+              "L0": 248.0,
+              "L1": 894.0,
+              "L2": 286.5,
+              "L3": 290.5
+            },
+            "cell_means_b": {
+              "D1": 359.0,
+              "D2": 597.5,
+              "L0": 807.5,
+              "L1": 476.0,
+              "L2": 1050.5,
+              "L3": 310.0
+            },
+            "delta_depth": -94.875,
+            "delta_load": -3.0768,
+            "depth_a": 68.625,
+            "depth_b": -26.25,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 40.6269,
+            "floor_depth_q99": 148.07,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 3.3364,
+            "floor_load_q99": 12.4063,
+            "load_a": -2.7089,
+            "load_b": -5.7857,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "R31",
+              "R37"
+            ],
+            "ratio_depth": -0.3825,
+            "ratio_load": 2.1358
+          }
+        ]
+      },
+      "within_run_mode_change": {
+        "n_pairs_of_firings": 2,
+        "pairs": [
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1902.0
+            },
+            "cell_means_b": {
+              "D1": 1260.0,
+              "D2": 1525.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1911.0
+            },
+            "delta_depth": 18.375,
+            "delta_load": 0.1447,
+            "depth_a": 24.875,
+            "depth_b": 43.25,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 0.385,
+            "floor_depth_q99": 24.545,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 0.1679,
+            "floor_load_q99": 2.948,
+            "load_a": 10.8946,
+            "load_b": 11.0393,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "P1",
+              "P2"
+            ],
+            "ratio_depth": 1.7387,
+            "ratio_load": 1.0133
+          },
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1525.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1911.0
+            },
+            "cell_means_b": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1911.0
+            },
+            "delta_depth": -18.375,
+            "delta_load": 0.0,
+            "depth_a": 43.25,
+            "depth_b": 24.875,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 0.0,
+            "floor_depth_q99": 24.545,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 0.0,
+            "floor_load_q99": 2.9924,
+            "load_a": 11.0393,
+            "load_b": 11.0393,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "P2",
+              "P3"
+            ],
+            "ratio_depth": 0.5751,
+            "ratio_load": 1.0
+          }
+        ]
+      },
+      "within_run_same_mode": {
+        "n_pairs_of_firings": 1,
+        "pairs": [
+          {
+            "cell_means_a": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1902.0
+            },
+            "cell_means_b": {
+              "D1": 1260.0,
+              "D2": 1378.5,
+              "L0": 1179.5,
+              "L1": 1435.0,
+              "L2": 1544.5,
+              "L3": 1911.0
+            },
+            "delta_depth": 0.0,
+            "delta_load": 0.1447,
+            "depth_a": 24.875,
+            "depth_b": 24.875,
+            "depth_verdict": "not separable from run noise",
+            "floor_depth_q50": 0.0,
+            "floor_depth_q99": 1.5036,
+            "floor_is_zero": {
+              "depth": false,
+              "load": false
+            },
+            "floor_load_q50": 0.0,
+            "floor_load_q99": 0.1805,
+            "load_a": 10.8946,
+            "load_b": 11.0393,
+            "load_verdict": "not separable from run noise",
+            "pair": [
+              "P1",
+              "P3"
+            ],
+            "ratio_depth": 1.0,
+            "ratio_load": 1.0133
+          }
+        ]
+      }
+    },
+    "rule": "a difference counts as a change only beyond the 0.99 quantile of its own condition's floor",
+    "zero_floor_meaning": "a floor of zero means that condition produced no measurable variation at all: it is a determinism result, not a bound. A nonzero difference measured against a zero floor is not certified as a change until the floor itself has replicates"
+  },
+  "panel": {
+    "cells": [
+      "D1",
+      "D2",
+      "L0",
+      "L1",
+      "L2",
+      "L3"
+    ],
+    "digests": 12,
+    "dispatches": 36,
+    "dispatches_expected": 36,
+    "items_per_cell": 2,
+    "passes": [
+      "P1",
+      "P2",
+      "P3"
+    ]
+  },
+  "panel_slopes": {
+    "P1": {
+      "cell_means": {
+        "D1": 1260.0,
+        "D2": 1378.5,
+        "L0": 1179.5,
+        "L1": 1435.0,
+        "L2": 1544.5,
+        "L3": 1902.0
+      },
+      "depth": 24.875,
+      "depth_r": 0.994,
+      "load": 10.8946,
+      "load_r": 0.9931,
+      "note": "panel basis: 2 items per cell"
+    },
+    "P2": {
+      "cell_means": {
+        "D1": 1260.0,
+        "D2": 1525.5,
+        "L0": 1179.5,
+        "L1": 1435.0,
+        "L2": 1544.5,
+        "L3": 1911.0
+      },
+      "depth": 43.25,
+      "depth_r": 0.9555,
+      "load": 11.0393,
+      "load_r": 0.9934,
+      "note": "panel basis: 2 items per cell"
+    },
+    "P3": {
+      "cell_means": {
+        "D1": 1260.0,
+        "D2": 1378.5,
+        "L0": 1179.5,
+        "L1": 1435.0,
+        "L2": 1544.5,
+        "L3": 1911.0
+      },
+      "depth": 24.875,
+      "depth_r": 0.994,
+      "load": 11.0393,
+      "load_r": 0.9934,
+      "note": "panel basis: 2 items per cell"
+    },
+    "R24": {
+      "cell_means": {
+        "D1": 1260.0,
+        "D2": 1378.5,
+        "L0": 1179.5,
+        "L1": 1435.0,
+        "L2": 1544.5,
+        "L3": 1899.5
+      },
+      "depth": 24.875,
+      "depth_r": 0.994,
+      "load": 10.8545,
+      "load_r": 0.993,
+      "note": "panel basis: 2 items per cell"
+    },
+    "R31": {
+      "cell_means": {
+        "D1": 737.5,
+        "D2": 797.0,
+        "L0": 248.0,
+        "L1": 894.0,
+        "L2": 286.5,
+        "L3": 290.5
+      },
+      "depth": 68.625,
+      "depth_r": 0.9112,
+      "load": -2.7089,
+      "load_r": -0.2387,
+      "note": "panel basis: 2 items per cell"
+    },
+    "R33": {
+      "cell_means": {
+        "D1": 1260.0,
+        "D2": 1378.5,
+        "L0": 1172.5,
+        "L1": 1435.0,
+        "L2": 1544.5,
+        "L3": 1899.5
+      },
+      "depth": 25.75,
+      "depth_r": 0.9962,
+      "load": 10.942,
+      "load_r": 0.9922,
+      "note": "panel basis: 2 items per cell"
+    },
+    "R37": {
+      "cell_means": {
+        "D1": 359.0,
+        "D2": 597.5,
+        "L0": 807.5,
+        "L1": 476.0,
+        "L2": 1050.5,
+        "L3": 310.0
+      },
+      "depth": -26.25,
+      "depth_r": -0.4679,
+      "load": -5.7857,
+      "load_r": -0.4762,
+      "note": "panel basis: 2 items per cell"
+    }
+  },
+  "per_cell_selfagreement_and_wilson": {
+    "D1": {
+      "accuracy_per_dispatch": 1.0,
+      "accuracy_per_item": 1.0,
+      "agreement": {
+        "cross_firing": {
+          "n_pairs": 14,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 14
+        },
+        "within_run_mode_change": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 4
+        },
+        "within_run_same_mode": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 2
+        }
+      },
+      "effective_n_items": 2,
+      "wilson_per_dispatch": [
+        0.6097,
+        1.0
+      ],
+      "wilson_per_item": [
+        0.3424,
+        1.0
+      ]
+    },
+    "D2": {
+      "accuracy_per_dispatch": 1.0,
+      "accuracy_per_item": 1.0,
+      "agreement": {
+        "cross_firing": {
+          "n_pairs": 14,
+          "tara": 1.0,
+          "tarr": 0.8571,
+          "tarr_joinable_pairs": 14
+        },
+        "within_run_mode_change": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 0.5,
+          "tarr_joinable_pairs": 4
+        },
+        "within_run_same_mode": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 2
+        }
+      },
+      "effective_n_items": 2,
+      "wilson_per_dispatch": [
+        0.6097,
+        1.0
+      ],
+      "wilson_per_item": [
+        0.3424,
+        1.0
+      ]
+    },
+    "L0": {
+      "accuracy_per_dispatch": 1.0,
+      "accuracy_per_item": 1.0,
+      "agreement": {
+        "cross_firing": {
+          "n_pairs": 14,
+          "tara": 1.0,
+          "tarr": 0.7143,
+          "tarr_joinable_pairs": 14
+        },
+        "within_run_mode_change": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 4
+        },
+        "within_run_same_mode": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 2
+        }
+      },
+      "effective_n_items": 2,
+      "wilson_per_dispatch": [
+        0.6097,
+        1.0
+      ],
+      "wilson_per_item": [
+        0.3424,
+        1.0
+      ]
+    },
+    "L1": {
+      "accuracy_per_dispatch": 1.0,
+      "accuracy_per_item": 1.0,
+      "agreement": {
+        "cross_firing": {
+          "n_pairs": 14,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 14
+        },
+        "within_run_mode_change": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 4
+        },
+        "within_run_same_mode": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 2
+        }
+      },
+      "effective_n_items": 2,
+      "wilson_per_dispatch": [
+        0.6097,
+        1.0
+      ],
+      "wilson_per_item": [
+        0.3424,
+        1.0
+      ]
+    },
+    "L2": {
+      "accuracy_per_dispatch": 1.0,
+      "accuracy_per_item": 1.0,
+      "agreement": {
+        "cross_firing": {
+          "n_pairs": 14,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 14
+        },
+        "within_run_mode_change": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 4
+        },
+        "within_run_same_mode": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 2
+        }
+      },
+      "effective_n_items": 2,
+      "wilson_per_dispatch": [
+        0.6097,
+        1.0
+      ],
+      "wilson_per_item": [
+        0.3424,
+        1.0
+      ]
+    },
+    "L3": {
+      "accuracy_per_dispatch": 0.5,
+      "accuracy_per_item": 0.5,
+      "agreement": {
+        "cross_firing": {
+          "n_pairs": 14,
+          "tara": 0.5714,
+          "tarr": 0.2857,
+          "tarr_joinable_pairs": 14
+        },
+        "within_run_mode_change": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 0.75,
+          "tarr_joinable_pairs": 4
+        },
+        "within_run_same_mode": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 0.5,
+          "tarr_joinable_pairs": 2
+        }
+      },
+      "effective_n_items": 2,
+      "wilson_per_dispatch": [
+        0.1876,
+        0.8124
+      ],
+      "wilson_per_item": [
+        0.0945,
+        0.9055
+      ]
+    }
+  },
+  "per_item_flip_risk": {
+    "cross_firing": {
+      "delivery": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 6,
+        "p_at_least_one_of_six_at_rate": 0.359,
+        "p_at_least_one_of_six_at_upper_bound": 0.6153,
+        "pairs": 84,
+        "rate": 0.0714,
+        "rate_wilson_high": 0.1472,
+        "rate_wilson_low": 0.0331
+      },
+      "material_length_move": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 2,
+        "p_at_least_one_of_six_at_rate": 0.1346,
+        "p_at_least_one_of_six_at_upper_bound": 0.4043,
+        "pairs": 84,
+        "rate": 0.0238,
+        "rate_wilson_high": 0.0827,
+        "rate_wilson_low": 0.0066
+      },
+      "pairs": 84,
+      "parsed_answer": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 6,
+        "p_at_least_one_of_six_at_rate": 0.359,
+        "p_at_least_one_of_six_at_upper_bound": 0.6153,
+        "pairs": 84,
+        "rate": 0.0714,
+        "rate_wilson_high": 0.1472,
+        "rate_wilson_low": 0.0331
+      },
+      "raw_output": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 16,
+        "p_at_least_one_of_six_at_rate": 0.7186,
+        "p_at_least_one_of_six_at_upper_bound": 0.8689,
+        "pairs": 84,
+        "rate": 0.1905,
+        "rate_wilson_high": 0.2872,
+        "rate_wilson_low": 0.1208
+      }
+    },
+    "within_run_mode_change": {
+      "delivery": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 0,
+        "p_at_least_one_of_six_at_rate": 0.0,
+        "p_at_least_one_of_six_at_upper_bound": 0.5897,
+        "pairs": 24,
+        "rate": 0.0,
+        "rate_wilson_high": 0.138,
+        "rate_wilson_low": 0.0
+      },
+      "material_length_move": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 2,
+        "p_at_least_one_of_six_at_rate": 0.4067,
+        "p_at_least_one_of_six_at_upper_bound": 0.8338,
+        "pairs": 24,
+        "rate": 0.0833,
+        "rate_wilson_high": 0.2585,
+        "rate_wilson_low": 0.0232
+      },
+      "pairs": 24,
+      "parsed_answer": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 0,
+        "p_at_least_one_of_six_at_rate": 0.0,
+        "p_at_least_one_of_six_at_upper_bound": 0.5897,
+        "pairs": 24,
+        "rate": 0.0,
+        "rate_wilson_high": 0.138,
+        "rate_wilson_low": 0.0
+      },
+      "raw_output": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 3,
+        "p_at_least_one_of_six_at_rate": 0.5512,
+        "p_at_least_one_of_six_at_upper_bound": 0.8921,
+        "pairs": 24,
+        "rate": 0.125,
+        "rate_wilson_high": 0.31,
+        "rate_wilson_low": 0.0434
+      }
+    },
+    "within_run_same_mode": {
+      "delivery": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 0,
+        "p_at_least_one_of_six_at_rate": 0.0,
+        "p_at_least_one_of_six_at_upper_bound": 0.8111,
+        "pairs": 12,
+        "rate": 0.0,
+        "rate_wilson_high": 0.2425,
+        "rate_wilson_low": 0.0
+      },
+      "material_length_move": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 0,
+        "p_at_least_one_of_six_at_rate": 0.0,
+        "p_at_least_one_of_six_at_upper_bound": 0.8111,
+        "pairs": 12,
+        "rate": 0.0,
+        "rate_wilson_high": 0.2425,
+        "rate_wilson_low": 0.0
+      },
+      "pairs": 12,
+      "parsed_answer": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 0,
+        "p_at_least_one_of_six_at_rate": 0.0,
+        "p_at_least_one_of_six_at_upper_bound": 0.8111,
+        "pairs": 12,
+        "rate": 0.0,
+        "rate_wilson_high": 0.2425,
+        "rate_wilson_low": 0.0
+      },
+      "raw_output": {
+        "assumption": "items flip independently; only the within-run stratum tests this",
+        "flips": 1,
+        "p_at_least_one_of_six_at_rate": 0.4067,
+        "p_at_least_one_of_six_at_upper_bound": 0.9272,
+        "pairs": 12,
+        "rate": 0.0833,
+        "rate_wilson_high": 0.3539,
+        "rate_wilson_low": 0.0149
+      }
+    }
+  },
+  "predictions": {
+    "N1": {
+      "measured_tarr_grid": 0.9167,
+      "measured_tarr_worst_cell": 0.5,
+      "n_pairs": 12,
+      "pass": true,
+      "threshold_cell": 0.5,
+      "threshold_grid": 0.9
+    },
+    "N2": {
+      "measured_tarr_grid": 0.875,
+      "n_pairs": 24,
+      "pass": false,
+      "threshold_tarr": 1.0,
+      "threshold_token_change": 0,
+      "worst_abs_token_change": 294,
+      "worst_change_detail": {
+        "arm": "X",
+        "cell": "D2",
+        "pair": [
+          "P1",
+          "P2"
+        ],
+        "tokens": [
+          1619,
+          1913
+        ]
+      }
+    },
+    "N3": {
+      "measured_tara_by_stratum": {
+        "cross_class": 1.0,
+        "cross_firing": 0.9286,
+        "other_class": 1.0,
+        "within_run_mode_change": 1.0,
+        "within_run_same_mode": 1.0
+      },
+      "pass": false,
+      "threshold": 1.0
+    },
+    "N4": {
+      "correct_content_only": 33,
+      "delivered": 33,
+      "dispatches": 36,
+      "pass": false,
+      "threshold_correct": 36,
+      "threshold_delivered": 36
+    },
+    "N5": {
+      "band_depth": [
+        12.4375,
+        49.75
+      ],
+      "band_load": [
+        5.4272,
+        21.709
+      ],
+      "pass": true,
+      "per_pass": {
+        "P1": {
+          "depth": 24.875,
+          "depth_in_band": true,
+          "depth_ratio_vs_reference": 1.0,
+          "load": 10.8946,
+          "load_in_band": true,
+          "load_ratio_vs_reference": 1.0037
+        },
+        "P2": {
+          "depth": 43.25,
+          "depth_in_band": true,
+          "depth_ratio_vs_reference": 1.7387,
+          "load": 11.0393,
+          "load_in_band": true,
+          "load_ratio_vs_reference": 1.017
+        },
+        "P3": {
+          "depth": 24.875,
+          "depth_in_band": true,
+          "depth_ratio_vs_reference": 1.0,
+          "load": 11.0393,
+          "load_in_band": true,
+          "load_ratio_vs_reference": 1.017
+        }
+      },
+      "reference": "R24",
+      "reference_depth": 24.875,
+      "reference_load": 10.8545
+    },
+    "N6": {
+      "criterion": "a slope difference counts as a change only beyond the 0.99 quantile of the same-class floor of its own stratum; a stratum whose floor rests on a single observed pair is reported as not separable, never as a change",
+      "cross_class": [
+        {
+          "delta_depth": 43.75,
+          "delta_load": -13.5634,
+          "depth_verdict": "not separable from run noise",
+          "floor_other_class_depth_q99": 148.07,
+          "floor_other_class_load_q99": 12.4063,
+          "floor_this_class_depth_q99": 24.545,
+          "floor_this_class_load_q99": 2.9737,
+          "load_verdict": "resolvable",
+          "note": "the other class's floor rests on ONE pair of firings (rounds 31 and 37), so resolvable here means beyond the largest noise either class has demonstrated, not beyond a replicated bound",
+          "other_class": "R31",
+          "pair": [
+            "R24",
+            "R31"
+          ],
+          "ratio_depth": 2.7588,
+          "ratio_load": -0.2496,
+          "this_class": "R24",
+          "union_floor_depth": 148.07,
+          "union_floor_load": 12.4063
+        },
+        {
+          "delta_depth": -51.125,
+          "delta_load": -16.6402,
+          "depth_verdict": "not separable from run noise",
+          "floor_other_class_depth_q99": 148.07,
+          "floor_other_class_load_q99": 12.4063,
+          "floor_this_class_depth_q99": 24.545,
+          "floor_this_class_load_q99": 2.9737,
+          "load_verdict": "resolvable",
+          "note": "the other class's floor rests on ONE pair of firings (rounds 31 and 37), so resolvable here means beyond the largest noise either class has demonstrated, not beyond a replicated bound",
+          "other_class": "R37",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "ratio_depth": -1.0553,
+          "ratio_load": -0.533,
+          "this_class": "R24",
+          "union_floor_depth": 148.07,
+          "union_floor_load": 12.4063
+        },
+        {
+          "delta_depth": 42.875,
+          "delta_load": -13.6509,
+          "depth_verdict": "not separable from run noise",
+          "floor_other_class_depth_q99": 148.07,
+          "floor_other_class_load_q99": 12.4063,
+          "floor_this_class_depth_q99": 24.545,
+          "floor_this_class_load_q99": 2.9737,
+          "load_verdict": "resolvable",
+          "note": "the other class's floor rests on ONE pair of firings (rounds 31 and 37), so resolvable here means beyond the largest noise either class has demonstrated, not beyond a replicated bound",
+          "other_class": "R31",
+          "pair": [
+            "R33",
+            "R31"
+          ],
+          "ratio_depth": 2.665,
+          "ratio_load": -0.2476,
+          "this_class": "R33",
+          "union_floor_depth": 148.07,
+          "union_floor_load": 12.4063
+        },
+        {
+          "delta_depth": -52.0,
+          "delta_load": -16.7277,
+          "depth_verdict": "not separable from run noise",
+          "floor_other_class_depth_q99": 148.07,
+          "floor_other_class_load_q99": 12.4063,
+          "floor_this_class_depth_q99": 24.545,
+          "floor_this_class_load_q99": 2.9737,
+          "load_verdict": "resolvable",
+          "note": "the other class's floor rests on ONE pair of firings (rounds 31 and 37), so resolvable here means beyond the largest noise either class has demonstrated, not beyond a replicated bound",
+          "other_class": "R37",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "ratio_depth": -1.0194,
+          "ratio_load": -0.5288,
+          "this_class": "R33",
+          "union_floor_depth": 148.07,
+          "union_floor_load": 12.4063
+        }
+      ],
+      "cross_firing_any_change_detected": false,
+      "cross_firing_pairs_judged": 7,
+      "pass": true,
+      "within_run_any_change_detected": false,
+      "within_run_pairs_judged": 3
+    },
+    "failed": [
+      "N2",
+      "N3",
+      "N4"
+    ],
+    "passed": [
+      "N1",
+      "N5",
+      "N6"
+    ]
+  },
+  "published_full_design_slopes": {
+    "R24": {
+      "basis": "all-cell (no truncation in this firing)",
+      "depth_tok_per_hop": 29.3542,
+      "load_tok_per_fact": 7.8854
+    },
+    "R31": {
+      "basis": "uncensored (D2 censored through one 2048-token truncation)",
+      "depth_tok_per_hop": -27.125,
+      "depth_tok_per_hop_all_cell": 60.4583,
+      "load_tok_per_fact": -6.0107
+    },
+    "R33": {
+      "basis": "all-cell (no truncation in this firing)",
+      "depth_tok_per_hop": 29.5625,
+      "load_tok_per_fact": 7.6869
+    },
+    "R37": {
+      "basis": "all-cell (no truncation in this firing)",
+      "depth_tok_per_hop": -9.4792,
+      "load_tok_per_fact": -5.1899
+    }
+  },
+  "schema": "round38-summary-v1",
+  "self_agreement": {
+    "cross_class": {
+      "abs_rel_dev_max": 1.5892,
+      "abs_rel_dev_median": 1.1743,
+      "abs_rel_dev_p90": 1.5187,
+      "answer_discordant": 0,
+      "correctness_agreement": 1.0,
+      "delivery_agreement": 1.0,
+      "delivery_discordant": 0,
+      "discordant": [
+        {
+          "arm": "F",
+          "cell": "L0",
+          "digest": "b20d7fd289fd",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1101,
+            1024
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L0",
+          "digest": "ddb9421bc3e7",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1258,
+            591
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L1",
+          "digest": "d2ab3a4e71b5",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1239,
+            182
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L1",
+          "digest": "31636587257e",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1631,
+            770
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L2",
+          "digest": "29635c816e9c",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1389,
+            1355
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L2",
+          "digest": "54d8b96f74e7",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1700,
+            746
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L3",
+          "digest": "4ed1d525026f",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1756,
+            201
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            2043,
+            419
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "D1",
+          "digest": "3a378f98a2b0",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1185,
+            221
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "D1",
+          "digest": "b3e37ce3f7f1",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1335,
+            497
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "D2",
+          "digest": "74388a9a6f4d",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1138,
+            325
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "D2",
+          "digest": "de5ed21b3289",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R37"
+          ],
+          "tokens": [
+            1619,
+            870
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L0",
+          "digest": "b20d7fd289fd",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1087,
+            1024
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L0",
+          "digest": "ddb9421bc3e7",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1258,
+            591
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L1",
+          "digest": "d2ab3a4e71b5",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1239,
+            182
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L1",
+          "digest": "31636587257e",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1631,
+            770
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L2",
+          "digest": "29635c816e9c",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1389,
+            1355
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L2",
+          "digest": "54d8b96f74e7",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1700,
+            746
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L3",
+          "digest": "4ed1d525026f",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1756,
+            201
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            2043,
+            419
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "D1",
+          "digest": "3a378f98a2b0",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1185,
+            221
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "D1",
+          "digest": "b3e37ce3f7f1",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1335,
+            497
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "D2",
+          "digest": "74388a9a6f4d",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1138,
+            325
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "D2",
+          "digest": "de5ed21b3289",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "R37"
+          ],
+          "tokens": [
+            1619,
+            870
+          ]
+        }
+      ],
+      "material_moves": 42,
+      "n_pairs": 48,
+      "per_cell": {
+        "D1": {
+          "n_pairs": 8,
+          "tara": 1.0,
+          "tarr": 0.0,
+          "tarr_joinable_pairs": 4
+        },
+        "D2": {
+          "n_pairs": 8,
+          "tara": 1.0,
+          "tarr": 0.0,
+          "tarr_joinable_pairs": 4
+        },
+        "L0": {
+          "n_pairs": 8,
+          "tara": 1.0,
+          "tarr": 0.0,
+          "tarr_joinable_pairs": 4
+        },
+        "L1": {
+          "n_pairs": 8,
+          "tara": 1.0,
+          "tarr": 0.0,
+          "tarr_joinable_pairs": 4
+        },
+        "L2": {
+          "n_pairs": 8,
+          "tara": 1.0,
+          "tarr": 0.0,
+          "tarr_joinable_pairs": 4
+        },
+        "L3": {
+          "n_pairs": 8,
+          "tara": 1.0,
+          "tarr": 0.0,
+          "tarr_joinable_pairs": 4
+        }
+      },
+      "raw_discordant": 24,
+      "raw_unjoinable_pairs": 24,
+      "tara": 1.0,
+      "tara_delivered_only": 1.0,
+      "tarr": 0.0,
+      "tarr_joinable_pairs": 24
+    },
+    "cross_firing": {
+      "abs_rel_dev_max": 0.1665,
+      "abs_rel_dev_median": 0.0,
+      "abs_rel_dev_p90": 0.0102,
+      "answer_discordant": 6,
+      "correctness_agreement": 1.0,
+      "delivery_agreement": 0.9286,
+      "delivery_discordant": 6,
+      "discordant": [
+        {
+          "arm": "F",
+          "cell": "L0",
+          "digest": "b20d7fd289fd",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "R33"
+          ],
+          "tokens": [
+            1101,
+            1087
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "P1"
+          ],
+          "tokens": [
+            2043,
+            2048
+          ]
+        },
+        {
+          "answers": [
+            "no",
+            null
+          ],
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "parsed_answer",
+          "pair": [
+            "R24",
+            "P1"
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L3",
+          "digest": "4ed1d525026f",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "P2"
+          ],
+          "tokens": [
+            1756,
+            1774
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "P2"
+          ],
+          "tokens": [
+            2043,
+            2048
+          ]
+        },
+        {
+          "answers": [
+            "no",
+            null
+          ],
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "parsed_answer",
+          "pair": [
+            "R24",
+            "P2"
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "D2",
+          "digest": "de5ed21b3289",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "P2"
+          ],
+          "tokens": [
+            1619,
+            1913
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L3",
+          "digest": "4ed1d525026f",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "P3"
+          ],
+          "tokens": [
+            1756,
+            1774
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "raw_output",
+          "pair": [
+            "R24",
+            "P3"
+          ],
+          "tokens": [
+            2043,
+            2048
+          ]
+        },
+        {
+          "answers": [
+            "no",
+            null
+          ],
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "parsed_answer",
+          "pair": [
+            "R24",
+            "P3"
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L0",
+          "digest": "b20d7fd289fd",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "P1"
+          ],
+          "tokens": [
+            1087,
+            1101
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "P1"
+          ],
+          "tokens": [
+            2043,
+            2048
+          ]
+        },
+        {
+          "answers": [
+            "no",
+            null
+          ],
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "parsed_answer",
+          "pair": [
+            "R33",
+            "P1"
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L0",
+          "digest": "b20d7fd289fd",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "P2"
+          ],
+          "tokens": [
+            1087,
+            1101
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L3",
+          "digest": "4ed1d525026f",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "P2"
+          ],
+          "tokens": [
+            1756,
+            1774
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "P2"
+          ],
+          "tokens": [
+            2043,
+            2048
+          ]
+        },
+        {
+          "answers": [
+            "no",
+            null
+          ],
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "parsed_answer",
+          "pair": [
+            "R33",
+            "P2"
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "D2",
+          "digest": "de5ed21b3289",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "P2"
+          ],
+          "tokens": [
+            1619,
+            1913
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L0",
+          "digest": "b20d7fd289fd",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "P3"
+          ],
+          "tokens": [
+            1087,
+            1101
+          ]
+        },
+        {
+          "arm": "F",
+          "cell": "L3",
+          "digest": "4ed1d525026f",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "P3"
+          ],
+          "tokens": [
+            1756,
+            1774
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "raw_output",
+          "pair": [
+            "R33",
+            "P3"
+          ],
+          "tokens": [
+            2043,
+            2048
+          ]
+        },
+        {
+          "answers": [
+            "no",
+            null
+          ],
+          "arm": "X",
+          "cell": "L3",
+          "digest": "d548b1f9681c",
+          "kind": "parsed_answer",
+          "pair": [
+            "R33",
+            "P3"
+          ]
+        }
+      ],
+      "material_moves": 2,
+      "n_pairs": 84,
+      "per_cell": {
+        "D1": {
+          "n_pairs": 14,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 14
+        },
+        "D2": {
+          "n_pairs": 14,
+          "tara": 1.0,
+          "tarr": 0.8571,
+          "tarr_joinable_pairs": 14
+        },
+        "L0": {
+          "n_pairs": 14,
+          "tara": 1.0,
+          "tarr": 0.7143,
+          "tarr_joinable_pairs": 14
+        },
+        "L1": {
+          "n_pairs": 14,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 14
+        },
+        "L2": {
+          "n_pairs": 14,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 14
+        },
+        "L3": {
+          "n_pairs": 14,
+          "tara": 0.5714,
+          "tarr": 0.2857,
+          "tarr_joinable_pairs": 14
+        }
+      },
+      "raw_discordant": 16,
+      "raw_unjoinable_pairs": 0,
+      "tara": 0.9286,
+      "tara_delivered_only": 1.0,
+      "tarr": 0.8095,
+      "tarr_joinable_pairs": 84
+    },
+    "other_class": {
+      "abs_rel_dev_max": 1.5081,
+      "abs_rel_dev_median": 0.5137,
+      "abs_rel_dev_p90": 1.3032,
+      "answer_discordant": 0,
+      "correctness_agreement": 1.0,
+      "delivery_agreement": 1.0,
+      "delivery_discordant": 0,
+      "discordant": [],
+      "material_moves": 9,
+      "n_pairs": 12,
+      "per_cell": {
+        "D1": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": null,
+          "tarr_joinable_pairs": 0
+        },
+        "D2": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": null,
+          "tarr_joinable_pairs": 0
+        },
+        "L0": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": null,
+          "tarr_joinable_pairs": 0
+        },
+        "L1": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": null,
+          "tarr_joinable_pairs": 0
+        },
+        "L2": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": null,
+          "tarr_joinable_pairs": 0
+        },
+        "L3": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": null,
+          "tarr_joinable_pairs": 0
+        }
+      },
+      "raw_discordant": 0,
+      "raw_unjoinable_pairs": 12,
+      "tara": 1.0,
+      "tara_delivered_only": 1.0,
+      "tarr": null,
+      "tarr_joinable_pairs": 0
+    },
+    "within_run_mode_change": {
+      "abs_rel_dev_max": 0.1665,
+      "abs_rel_dev_median": 0.0,
+      "abs_rel_dev_p90": 0.0071,
+      "answer_discordant": 0,
+      "correctness_agreement": 1.0,
+      "delivery_agreement": 1.0,
+      "delivery_discordant": 0,
+      "discordant": [
+        {
+          "arm": "F",
+          "cell": "L3",
+          "digest": "4ed1d525026f",
+          "kind": "raw_output",
+          "pair": [
+            "P1",
+            "P2"
+          ],
+          "tokens": [
+            1756,
+            1774
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "D2",
+          "digest": "de5ed21b3289",
+          "kind": "raw_output",
+          "pair": [
+            "P1",
+            "P2"
+          ],
+          "tokens": [
+            1619,
+            1913
+          ]
+        },
+        {
+          "arm": "X",
+          "cell": "D2",
+          "digest": "de5ed21b3289",
+          "kind": "raw_output",
+          "pair": [
+            "P2",
+            "P3"
+          ],
+          "tokens": [
+            1913,
+            1619
+          ]
+        }
+      ],
+      "material_moves": 2,
+      "n_pairs": 24,
+      "per_cell": {
+        "D1": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 4
+        },
+        "D2": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 0.5,
+          "tarr_joinable_pairs": 4
+        },
+        "L0": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 4
+        },
+        "L1": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 4
+        },
+        "L2": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 4
+        },
+        "L3": {
+          "n_pairs": 4,
+          "tara": 1.0,
+          "tarr": 0.75,
+          "tarr_joinable_pairs": 4
+        }
+      },
+      "raw_discordant": 3,
+      "raw_unjoinable_pairs": 0,
+      "tara": 1.0,
+      "tara_delivered_only": 1.0,
+      "tarr": 0.875,
+      "tarr_joinable_pairs": 24
+    },
+    "within_run_same_mode": {
+      "abs_rel_dev_max": 0.0102,
+      "abs_rel_dev_median": 0.0,
+      "abs_rel_dev_p90": 0.0,
+      "answer_discordant": 0,
+      "correctness_agreement": 1.0,
+      "delivery_agreement": 1.0,
+      "delivery_discordant": 0,
+      "discordant": [
+        {
+          "arm": "F",
+          "cell": "L3",
+          "digest": "4ed1d525026f",
+          "kind": "raw_output",
+          "pair": [
+            "P1",
+            "P3"
+          ],
+          "tokens": [
+            1756,
+            1774
+          ]
+        }
+      ],
+      "material_moves": 0,
+      "n_pairs": 12,
+      "per_cell": {
+        "D1": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 2
+        },
+        "D2": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 2
+        },
+        "L0": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 2
+        },
+        "L1": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 2
+        },
+        "L2": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 1.0,
+          "tarr_joinable_pairs": 2
+        },
+        "L3": {
+          "n_pairs": 2,
+          "tara": 1.0,
+          "tarr": 0.5,
+          "tarr_joinable_pairs": 2
+        }
+      },
+      "raw_discordant": 1,
+      "raw_unjoinable_pairs": 0,
+      "tara": 1.0,
+      "tara_delivered_only": 1.0,
+      "tarr": 0.9167,
+      "tarr_joinable_pairs": 12
+    }
+  },
+  "transport": {
+    "calls_used": 37,
+    "max_tokens": 2048,
+    "note": "passes 1 and 3 are serialized, pass 2 runs at the concurrency the archived rounds on this class used",
+    "per_pass": {
+      "P1": {
+        "attempt_wall_s_sum": 1191.5,
+        "completion_tokens": 17399,
+        "concurrency": 1,
+        "correct": 11,
+        "delivered": 11,
+        "finished_at": "2026-10-31T02:33:26Z",
+        "items": 12,
+        "mode": "serial",
+        "prompt_tokens": 20846,
+        "retries": 0,
+        "started_at": "2026-10-31T02:13:35Z",
+        "transport_errors": 0,
+        "truncations": 1
+      },
+      "P2": {
+        "attempt_wall_s_sum": 941.2,
+        "completion_tokens": 17711,
+        "concurrency": 2,
+        "correct": 11,
+        "delivered": 11,
+        "finished_at": "2026-10-31T02:41:36Z",
+        "items": 12,
+        "mode": "paired",
+        "prompt_tokens": 20846,
+        "retries": 0,
+        "started_at": "2026-10-31T02:33:26Z",
+        "transport_errors": 0,
+        "truncations": 1
+      },
+      "P3": {
+        "attempt_wall_s_sum": 291.1,
+        "completion_tokens": 17417,
+        "concurrency": 1,
+        "correct": 11,
+        "delivered": 11,
+        "finished_at": "2026-10-31T02:46:27Z",
+        "items": 12,
+        "mode": "serial",
+        "prompt_tokens": 20846,
+        "retries": 0,
+        "started_at": "2026-10-31T02:41:36Z",
+        "transport_errors": 0,
+        "truncations": 1
+      }
+    },
+    "prompt_cap": 40,
+    "temperature": 0.0
+  }
+}
