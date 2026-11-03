@@ -1,0 +1,34 @@
+{
+  "extraction": {
+    "first_n": 38,
+    "rule": "every 8th line of the source file (1-based line numbers 1, 9, 17, ...), first 38 lines",
+    "source_commit": "49ee823",
+    "source_commit_note": "last commit on main whose ladder items carry the issue #67 leak; the repair landed in 94f0883",
+    "source_files": {
+      "items/ladders/l2.jsonl": "81a34ec7abcdbd3cd85ef3f6cc18fa187caa9f10f6aa39d1c65c9238513840fb",
+      "items/ladders/l8.jsonl": "191439a481e2a6344d8bc0f84e9317a76ae55f8452a52de132879e775d632af8"
+    }
+  },
+  "files": {
+    "issue67_prefix_l2.jsonl": {
+      "count": 38,
+      "level": 2,
+      "seed_base": 20261005,
+      "sha256": "1917b2735e82cee4e08a1d064ddd3679b689b6895c1f77ef2c907c0963cd8488"
+    },
+    "issue67_prefix_l8.jsonl": {
+      "count": 38,
+      "level": 8,
+      "seed_base": 20261005,
+      "sha256": "d1df8a93e9394752601fd6a51d8fb5b77075bb1e1976c21581ec104ceb560272"
+    }
+  },
+  "matched_pairs": "item i of a fixture and item i of the shipped post-fix file share the same seed (seed_base + 2000000*level + line_index), so the leaky and repaired constructions are compared seed by seed",
+  "policy": [
+    "negative-control fixture for generators/audit_ladder_leaks.py and generators/probe_ladder_shortcut.py only",
+    "these items carry the issue #67 shortcut leak and are superseded: they must never enter a study run, a pilot, or the main experiment",
+    "they are committed so that the gate's detection power and the issue #67 before/after claim are testable from the tree without checking out history"
+  ],
+  "purpose": "pinned pre-fix k-hop ladder items (issue #67 negative control)",
+  "task_type": "hop_chain"
+}
