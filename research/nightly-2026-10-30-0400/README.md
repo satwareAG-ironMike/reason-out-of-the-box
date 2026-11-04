@@ -98,8 +98,11 @@ zero transport errors, zero abandoned cells, 21,530 completion tokens.
    fires: the cross-class slope gap between round 31 and round 24 (recomputed ratios:
    load -1.31, depth -0.22) is not separable from run-to-run variation on this class
    (this run against round 31: load ratio 0.86, depth ratio 0.35).
-5. **R5 passes: the non-enumerating signature is stable.** Grid-mean distractor-mention
-   ratio 0.0, all six cells 0.0, exactly round 31's class signature.
+5. **R5 as written is not a measurement (erratum, issue #113): the round's archive carries no
+   reasoning text.** Grid-mean distractor-mention ratio 0.0, all six cells 0.0, exactly round 31's
+   class signature - but with the trace channel closed (no trace token on any prompt, disclosed
+   below), the ratio is structural 0.0 and cannot separate enumerating from non-enumerating
+   behaviour; the stability claim is an answer-level claim only (issue #105).
 6. **R6 fails: the per-prompt length structure did not repeat.** Spearman 0.17 against
    round 31 (floor 0.80; Pearson 0.01). One of 36 prompts is token-identical to round
    31; 27 of 36 moved more than 20 percent; median relative deviation 0.61, p90 3.95,
