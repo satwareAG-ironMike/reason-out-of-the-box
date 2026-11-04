@@ -151,8 +151,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   instrument is imported, not re-implemented; the panel certifies digest-true against the
   archived `raw.jsonl` fail-closed; the declared record-only extension is the per-message field
   census (merge rule: `reasoning_content` if non-empty, else `reasoning`, else none) with a
-  drift control asserting the census transport's request body byte-identical to the inherited
-  one. Gate `f67c0535` (schema `round42-gate-v1`) frozen before dispatch. Result: the
+  drift control; the control round-trips the literal body dict, so it certifies the literal
+  rather than the inherited request-body construction (byte identity against the inherited
+  transport holds per recomputation, issue #113). Gate `f67c0535` (schema `round42-gate-v1`) frozen before dispatch. Result: the
   replication control fails, and the non-transfer is the round's lead result (verdict tier
   `policy_artifact`): mode A truncates on 1/11 at the 2048 cap and delivers 10/11 (loose 10/11)
   against the archived all-11 cap-truncation record; mode C delivers 9/11 with all nine correct
