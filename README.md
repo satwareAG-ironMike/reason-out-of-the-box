@@ -40,7 +40,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 
 | Path | Content |
 |------|---------|
-| `archive/` | 130 peer-reviewed and preprint papers, 17 thematic rounds, per-paper entries |
+| `archive/` | 141 peer-reviewed and preprint papers, 19 thematic rounds, per-paper entries |
 | `archive/INDEX.md` | Master catalog, verdict, evidence matrix, open-problem spec |
 | `docs/acceptance-criteria.md` | The three criteria (peer-reviewed, no reasoning-example training, disclosed training data) and a transparency audit |
 | `docs/counterarguments.md` | Claim ladder C1-C5 with evidence status, and the ten recurring counterarguments steelmanned against the archive |
@@ -50,7 +50,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 | `docs/version-lock-manifest.md` | Version-lock manifest (issue #11): freeze semantics, artifact hashes, model Hub IDs, capture procedure |
 | `docs/irb-protocol.md` | IRB protocol draft (issue #7): design, sample size/precision target, recruitment, consent, data handling, privacy, IRB path decision 2026-09-14 |
 | `docs/agent-execution.md` | Program operating model (issue #39): full agent execution, 2026 scientific standards (confrontation, verifier independence, Executed/Reproduced/Validated), resource policy, M1-M5 mapping |
-| `docs/next-investigations.md` | 2026-09-03, 2026-09-10, 2026-09-11 and 2026-09-14 scans plus the 2026-10-14 substrate-threshold pointer and the 2026-10-16 ladder-depth finding: investigation fields, feasibility audit (closed), frozen model list, round-11 candidates, thesis timeline (M1-M5), fly connectome research, insect-sentience ledger pointer, ladder family budget-limited not depth-limited |
+| `docs/next-investigations.md` | 2026-09-03, 2026-09-10, 2026-09-11 and 2026-09-14 scans plus the 2026-10-14 substrate-threshold pointer and the 2026-10-16 ladder-depth finding: investigation fields, feasibility audit (closed), frozen model list, round-11 candidates, thesis timeline (M1-M5), fly connectome research, insect-sentience ledger pointer, ladder family budget-limited not depth-limited, the 2026-11-04 ladder-ceiling class-tied reclassification (rounds 42/44/46) and the late-2026 weight-space-programming scan |
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |
 | `docs/claims-marcus-wall.md` | Claim ledger: Marcus "Deep Learning Is Hitting a Wall" (2022), judged against evidence through 2026 |
 | `CHANGELOG.md` | Change history |
@@ -86,10 +86,14 @@ Public research archive at https://github.com/satwareAG-ironMike/reason-out-of-t
 (`main` is branch-protected). The 2026-09-03, 2026-09-10, 2026-09-11 and 2026-09-14 scans
 re-confirmed the verdict; the 2026-10-16 research finding records the first merged
 experimental record, the ladder family being budget-limited rather than depth-limited.
-Since 2026-10-16 the nightly research program (issue #65) has produced nine merged rounds
-on the repaired ladders family: the matched-pair traversal verdict replicates across depth
-and model class, and the ceilings observed so far are output-budget truncations, not wrong
-answers. The remaining gap is experimental, not bibliographic. The thesis program (study design
+Since 2026-10-16 the nightly research program (issue #65) has run to round 46 (30 archived
+round records on main): the matched-pair traversal verdict replicates across depth and model
+class, and the ceilings observed so far are output-budget truncations, not wrong answers.
+Rounds 42, 44 and 46 re-attribute that ceiling: it is class-tied and firing-state dependent
+(11/11 truncations on the flash class's archive versus 1-2/11 on a 27B class for the same 11
+items), and the E = 192 cap-truncation is a surface output-policy artifact, not a property of
+the task, so a truncated verdict must not be recorded as a depth limit. The remaining gap is
+experimental, not bibliographic. The thesis program (study design
 execution on open-data models) is tracked in the [issue board](https://github.com/satwareAG-ironMike/reason-out-of-the-box/issues)
 under milestones M1 (protocol freeze + pre-registration, 2026-09-30) to M5 (paper +
 public release, 2027-04-30); see [docs/next-investigations.md](docs/next-investigations.md).

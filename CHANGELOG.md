@@ -54,6 +54,41 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   verdict. arXiv:2611.05341 recorded as archive-eligible (preprint status); the Sparks
   blog is a non-archive source under the provenance rule; no study-design change.
 
+- Archive round 19 - Weight-space programming applications (issue #115): one entry,
+  `archive/round19-weight-space-audit/2611.05341-nusrat-wsp-clinical-network-audit.md`,
+  Nusrat & Nusrat 2026, "Weight-space programming for auditing clinical decision networks"
+  (arXiv preprint, physics.med-ph/cs.AI, 2026-11-03). `[FT]` (read-paper full text): named the
+  broken rule in 16/18 flawed networks (95% CI 67-97%), median 3 parameters changed; cleared 2/5
+  healthy, found 1/3 hidden triggers; black-box testing found the confounds and shift faster; the
+  authors bound it at "cannot certify that a network is correct". Verdict context: the only
+  peer-reviewable record in the weight-editing wave, reads as obstacle removal, not a new general
+  reasoning module; changes no acceptance criterion.
+- Archive round 20 - Comparative transitive inference and its controls (issue #74): ten entries in
+  `archive/round20-comparative-ti/`, the comparative-TI evidence the central analogy leaned on but
+  never carried. Machine rule-reasoning benchmarks (CLUTRR, arXiv:1908.06177, EMNLP 2019;
+  RuleTaker/Entailment Bank, arXiv:2002.05867, IJCAI 2020; PrOntoQA, arXiv:2210.01240, ICLR 2023),
+  machine TI diagnostics (arXiv:2410.20200 EMNLP 2024; arXiv:2506.04289; arXiv:2611.00387), and
+  human/animal TI baselines with the paired-associate critique (Frank 2005 PMID 16248338;
+  Vasconcelos 2008 PMID 18423898; Moses 2006 PMID 16503340; Jensen 2017 PMID 28333486). All
+  provenance verified against arXiv abstract pages and the PubMed/Crossref records; no `[FT]`
+  (abstract-level). Context and control, not machine evidence for the thesis. Reconciles the INDEX
+  question-analogy line and the former line-458 animal-cognition exclusion.
+
+#### Changed
+
+- `docs/next-investigations.md`: new finding "the E = 192 ladder ceiling is class-tied and
+  firing-state dependent" folding rounds 42, 44 and 46: the round-23 cap-truncation record does not
+  transfer across classes (11/11 flash-class archive versus 10/11 and 2/11 delivered on the 27B
+  class, same 11 items), delivery under a fixed cap is a function of no-repetition instruction
+  obedience not depth, and the output-policy knobs move the delivery surface without reclaiming
+  budget (completion ratios 1.1255 / 0.6756 / 1.0237; bounded knob worst at 6/11, 1.3089 over the
+  ban). Sharpens the 2026-10-16 budget-limited finding: a truncated verdict is a class-and-firing
+  statement, not a depth ceiling, and must not enter `d*`. Closes #108.
+- README.md Status and Layout: nightly program restated verifiably as "run to round 46 (30 archived
+  round records on main)" (was "nine merged rounds"), with the class-tied E = 192 reclassification;
+  archive counts 130/17 to 141/19 (also root AGENTS.md and archive/AGENTS.md); next-investigations
+  Layout row updated.
+
 ### 2026-11-03
 
 #### Added

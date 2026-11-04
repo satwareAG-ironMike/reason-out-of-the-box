@@ -2,7 +2,9 @@
 
 **Question under investigation**: Is there a single peer-reviewed paper proving an LLM can
 reason out of the box - without training on reasoning examples and hoping it generalizes -
-analogous to how higher animals and humans reason without prior logic training?
+analogous to how higher animals and humans reason without prior logic training? (The animal/human
+analogy is evidence-backed in round 20: comparative transitive inference, contested between reasoning
+and associative readings.)
 
 **Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
 2026-09-06 (round 8 extension), 2026-09-09 (round 10), 2026-09-14 (round 12),
@@ -14,7 +16,7 @@ research suite (semantic arXiv search, metadata inspection, full-text passage ve
 round 9 (2026-09-05), 2 papers in round 8 (2026-09-06), 6 papers in round 10 (2026-09-09),
 2 papers in round 12 (2026-09-14), 4 papers in round 13 (2026-09-15), 15 papers in round 14
 (2026-09-28), 1 paper in round 15 (2026-10-05), 13 papers in round 16 (2026-10-14), 1 paper in
-round 17 (2026-10-19), 8 papers in round 18 (2026-10-25): 130 papers in 17 rounds. Full-text in-body verification was performed for the
+round 17 (2026-10-19), 8 papers in round 18 (2026-10-25), 1 paper in round 19 (2026-11-04), 10 papers in round 20 (2026-11-04): 141 papers in 19 rounds. Full-text in-body verification was performed for the
 highest-weight papers (marked [FT] below); all other entries rely on verified abstracts plus
 cross-checked secondary sources.
 
@@ -318,6 +320,44 @@ undisclosed LLM, so none meets the acceptance criteria. Overall verdict unchange
 |-------|-------|---------|------|
 | [FT] Sawant & Krejčí 2026, MI Scoping Review (section 3.8 focus) | arXiv (preprint) | +/- mechanism | Section 3.8: deduction heads on tree path-finding (2402.11917) and the Yang et al. ICML 2025 three-stage symbolic architecture (symbol abstraction, symbolic induction, retrieval); "a degree of symbolic structure can emerge inside Transformers" before any explicit symbolic component |
 
+### Round 19 - Weight-space programming applications (2026-11-04)
+
+The one archive-eligible record from the owner-directed late-2026 weight-space-programming (WSP)
+scan (issue #115): a controlled audit of whether a frontier model, given only a clinical protocol and
+a small network's weights, can find and repair planted flaws. The originating WSP blog is a web-only
+source and stays non-archive; this preprint is the peer-reviewable application the field produced. It
+reads the weight-editing capability as obstacle removal (read/write weights with no gradient or task
+training), not a new general reasoning module, and the authors bound it at "cannot certify that a
+network is correct". Overall verdict unchanged.
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| [FT] Nusrat & Nusrat 2026, WSP for auditing clinical decision networks | arXiv (preprint) | context | Named the broken rule in 16/18 flawed networks (95% CI 67-97%), median 3 parameters changed; cleared 2/5 healthy, found 1/3 triggers; black-box testing found the confounds and shift faster |
+
+### Round 20 - Comparative transitive inference and its controls (2026-11-04)
+
+The comparative-transitive-inference (TI) evidence the central analogy leaned on but never carried
+(issue #74): the published rule-reasoning benchmarks that neighbour the ladder family and #71's depth
+ceiling (CLUTRR, RuleTaker/Entailment Bank, PrOntoQA), the machine TI diagnostics, and the human and
+animal TI baselines with the paired-associate critique. This round is context and control, not machine
+evidence for the thesis: no entry is a base open-data model reasoning out of the box. Its role is to
+make the "as higher animals reason" analogy checkable and to fix the control any TI pass - animal,
+human or machine - must clear: that the pass reflects inference, not reinforcement history or a surface
+cue. Verdict unchanged; the analogy is now cited to contested evidence rather than assumed.
+
+| Paper | Venue | Verdict | Note |
+|-------|-------|---------|------|
+| Sinha et al. 2019, CLUTRR | EMNLP 2019 (peer-reviewed) | - | Multi-hop kinship; a symbolic-input GNN generalizes over held-out rule combinations and BERT/MAC do not; all models task-trained |
+| Clark et al. 2020, RuleTaker / Entailment Bank | IJCAI 2020 (peer-reviewed) | - | 99% accuracy, 95%+ beyond trained chain depth, but trained on the synthetic rule family: depth-generalization is not out-of-the-box |
+| Saparov & He 2023, PrOntoQA (Greedy Reasoners) | ICLR 2023 (peer-reviewed) | +/- | Local deduction steps correct; fails proof planning when several steps branch; symbolic world model, instruction-tuned models |
+| Mehrafarin et al. 2024, transitive reasoning diagnostic | EMNLP 2024 main (peer-reviewed) | - | LLaMA 2 / Flan-T5 pass partly on word-overlap cues in QASC and Bamboogle; overlap, prior-knowledge and entity controls |
+| Geerts et al. 2025, relational reasoning inductive bias | arXiv (preprint) | +/- | In-weights learns a linear embedding (true TI); in-context defaults to match-and-copy unless the data forces it; congruency probe |
+| Russin et al. 2026, geometric vs algebraic inference | arXiv (preprint) | +/- | Humans, from-scratch nets and LLMs; opposing geometric/algebraic signatures; a TI pass alone is not diagnostic without causal probes |
+| Frank et al. 2005, when logic fails (human TI) | Memory & Cognition (peer-reviewed) | - | Humans prevented from explicit hierarchy show TI from associative strength (B over E only, else chance): even humans pass without inference |
+| Vasconcelos 2008, TI in non-human animals (review) | Behavioural Processes (peer-reviewed) | - | Field review: reinforcement-history accounts better placed than cognitive ones; animal TI "a property of reinforcement history" |
+| Moses et al. 2006, human TI strategy vs species | Neuropsychologia (peer-reviewed) | +/- | Human TI tracks reporting the hierarchy, not the associative strategy; the same behavior does not read across species automatically |
+| Jensen et al. 2017, TI humans and macaques massed training | J Comparative Psychology (peer-reviewed) | +/- | Reward perturbation: associative models fail to predict the TI pattern, monkeys generalize to novel stimuli; the control design the thesis needs |
+
 ## Verdict addendum: round 10 - Anthropic insiders cluster (2026-09-09)
 
 - **No consciousness claims in the cluster.** Coxon's entire public corpus and his
@@ -455,9 +495,13 @@ undisclosed LLM, so none meets the acceptance criteria. Overall verdict unchange
   present before individual learning. But evolution is a selection process over architectures,
   not next-token training - the analogy holds at the level of "installs priors before
   individual experience," fails at data efficiency and novelty handling.
-- Animal cognition literature (exclusion, transitive inference in primates/corvids) is itself
-  contested between "genuine reasoning" and "associative learning" readings - the same debate
-  as for LLMs, with the same unresolved measurement problem.
+- The comparative-TI literature is now archived in round 20 (it was an exclusion until 2026-11-04,
+  issue #74). It is contested between "genuine reasoning" and "associative learning" readings -
+  Vasconcelos 2008 and Frank 2005 read the pass as reinforcement history or association even in
+  humans, Jensen 2017 reports a pattern the associative account does not predict - the same debate as
+  for LLMs, with the same unresolved measurement problem. The analogy therefore points at a dispute,
+  not a settled result, and round 20 supplies the control any TI pass (animal, human or machine) has
+  to clear before it counts as inference.
 - The one clean disanalogy: a child infers an ARC-style rule from two examples with zero
   search budget; o3 needed massive test-time compute at ~$4,560/task (Dec 2024) for
   near-human ARC-AGI-1 scores. Architecture-plus-feeble-data beats data-plus-brute-compute,
