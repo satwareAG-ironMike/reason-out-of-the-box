@@ -95,8 +95,8 @@ Declared predictions, fixed in `gate.json` before any prompt was spent (schema
 
 Class caveat, declared: the NVFP4/vLLM deployment differs from the flash-next class on two
 axes at once (quantization format and serving runtime; the flash-next class ran on a quantized
-local deployment with undisclosed training data, per its own round-22 record). This is a class
-replication, not a controlled quantization experiment; the
+local deployment with undisclosed training data, per its own round-21/23/24 records, which name
+no format). This is a class replication, not a controlled quantization experiment; the
 cross-class delta spans model class + quantization + runtime and is recorded as such. At
 temperature 0 the multi-token-prediction draft acceptance is deterministic, so the
 completions are the underlying model's greedy outputs; that is an assumption about the
