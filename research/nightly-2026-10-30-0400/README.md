@@ -1,6 +1,7 @@
 # Round 37 (2026-10-30 04:00): same-class retest on the 27B NVFP4/vLLM class - the (16, 96)
 turnover, the delivery pattern and the per-prompt cost law do not repeat across one re-run,
-while the answers and the non-enumerating style do
+while the answers do (the style half of this headline is answer-level only: R5 erratum below,
+issue #113)
 
 Question, method and verdict summary posted on tracker issue #65
 (`https://github.com/satwareAG-ironMike/reason-out-of-the-box/issues/65`); this directory is
@@ -102,7 +103,9 @@ zero transport errors, zero abandoned cells, 21,530 completion tokens.
    reasoning text.** Grid-mean distractor-mention ratio 0.0, all six cells 0.0, exactly round 31's
    class signature - but with the trace channel closed (no trace token on any prompt, disclosed
    below), the ratio is structural 0.0 and cannot separate enumerating from non-enumerating
-   behaviour; the stability claim is an answer-level claim only (issue #105).
+   behaviour; the stability claim is an answer-level claim only (issue #105). The frozen
+   `summary.json` outcome stays as written (`R5_pass: true`, grid mean 0.0); the annotation
+   lives here, the archive record is immutable (research/AGENTS.md, issue #120).
 6. **R6 fails: the per-prompt length structure did not repeat.** Spearman 0.17 against
    round 31 (floor 0.80; Pearson 0.01). One of 36 prompts is token-identical to round
    31; 27 of 36 moved more than 20 percent; median relative deviation 0.61, p90 3.95,
@@ -127,12 +130,17 @@ round 24) did not repeat: L0 arm F is 1024 / 272 / 1031 this time.
 
 ## What this means for the program
 
-- On this class, the answers and the class-level enumeration style are stable across runs
-  (R2 and R5 pass; 36/36 correct in both runs), while the delivery surface at the
+- On this class, the answers are stable across runs (R2 pass; 36/36 correct in both
+  runs). The style half of the original claim (R5: the class-level enumeration style
+  is stable) is answer-level only: the 0.0 distractor-mention ratio repeats, but it is
+  structural under the closed trace channel and cannot separate enumerating from
+  non-enumerating behaviour (erratum, issue #113; census contract in
+  research/AGENTS.md). The delivery surface at the
   turnover cell and the per-prompt length structure are not (R1, R3 and R6 fail). On the
   flash-next class (round 33) both were stable: the same silent digest in two runs and
   32 of 36 token-identical completions. The stability of the surfacing collapse is
-  itself a class-level property.
+  itself a class-level property (content channel; the trace channel is closed on this
+  deployment).
 - Consequence for #100: the per-class self-agreement control now exists for both classes,
   and on this class a single-run n=6 verdict surface is NOT a repeatable measurement: the
   (16, 96) turnover round 31 confirmed here did not hold on re-run, and the class-level

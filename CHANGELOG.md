@@ -5,6 +5,28 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-05
+
+#### Fixed
+
+- Issue #120 group 1 (forward-only annotations; no scored result, gate digest or archive
+  record changes): the retracted statements still live on main are annotated at their sites -
+  round 37's headline ("while the answers do"; the style half is answer-level only), its
+  "what this means" bullets (R5's 0.0 ratio is structural under the closed trace channel;
+  the surfacing-collapse stability is a content-channel statement) and a note that the
+  frozen `summary.json` `R5_pass: true` stays as written with the annotation in the README;
+  round 31's three re-derived sentences (27B-class-property inference, "4-5x cheaper
+  enumeration", budget-replay explanation) are restated at answer level; the frozen
+  round-31 script's "GGUF deployment" docstring carries the format-undisclosed description
+  from the erratum; the 2026-10-30 and 2026-10-31 CHANGELOG entries are annotated in place
+  (non-enumerating-style hold; load-axis resolvable verdict measured against the zero-trace
+  27B deployment, not reproduced under the round-40 N6 guard).
+- Issue #120 group 3: `research/AGENTS.md` gains the errata carve-out (forward-only errata
+  may annotate a merged round's README prose and the matching CHANGELOG entry, and edit
+  instrument docstrings comment-only; `raw.jsonl`, `summary.json`, `gate.json` stay
+  immutable), resolving the practice-vs-contract disagreement and covering the frozen
+  script docstring edit.
+
 ### 2026-11-04
 
 #### Added
@@ -263,7 +285,11 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   dispatch n = 6), plus flip rates propagated to a six-item cell - at least one delivery flip on a
   re-run 0.36 (0.62 at the interval's upper bound), at least one material length move 0.13 (0.40).
   Cross-class: the load-axis gap is resolvable against both classes' floors (-13.6 and -16.6
-  tokens/fact against a union floor of 12.41) while the depth-axis gap is not (+43.8 and -51.1
+  tokens/fact against a union floor of 12.41) - measured against the zero-trace 27B
+  deployment; round 40's trace-exposing 27B firing does not reproduce it under the N6 guard
+  (delta -18.549 against the union floor q99 of 26.742, not resolvable; re-attribution in
+  research/nightly-2026-10-31-0228/README.md, issues #105/#120) - while the depth-axis gap
+  is not (+43.8 and -51.1
   against 148.07, the other class's single-pair floor exceeding the class difference). P1 reproduces
   round 24 byte-for-byte on 11 of 12 prompts and 30 of the 36 dispatches match it, against 0 of 36
   for the other class. Zero retries, zero transport errors, throughput 5.5 to 67 tok/s within one
@@ -285,7 +311,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   tokens), the per-prompt length structure is not repeatable (Spearman 0.17, one of 36
   token-identical) and the per-hop cost slope falls outside its declared band (-9.48
   against -27.13, band [-54.26, -13.565]), while the answers (35/35 agreement, 36/36
-  correct) and the non-enumerating style (distractor-mention ratio 0.0) hold. The
+  correct) hold; the "non-enumerating style (distractor-mention ratio 0.0) hold" half of
+  this sentence is answer-level only, the ratio being structural under the closed trace
+  channel (erratum in research/nightly-2026-10-30-0400/README.md, issues #113/#120). The
   round-31 cross-class cost-law conclusion is therefore not separable from this class's
   run noise; the archived (16, 96) ceiling now stands on two agreeing runs on the
   flash-next class and two disagreeing surfaces on this class. State: **Executed**.

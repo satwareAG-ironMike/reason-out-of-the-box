@@ -169,16 +169,21 @@ the 0.60 floor), single-axis load transitions all maintained to maintained.
   completion length still does not ramp with irrelevant load, but that is answer-level evidence
   only (issue #105).
   Round 22's 27B-class load-free-to-240 behavior is thus a 27B-class property, not a
-  quantization artifact.
+  quantization artifact (that inference rested on the signature above, which the erratum
+  re-attributes to the closed trace channel; the load behavior itself is answer-level and
+  stands).
 - P6 passes: all three L0 arm-F prompts deliver "yes" as round 24 recorded, at 196 / 1024 /
   191 completion tokens versus the flash-next 1101 / 1098 / 1050: the anchor reproduces the
-  answer at a 4-5x cheaper enumeration.
+  answer at a 4-5x cheaper completion (enumeration characterized from the content channel;
+  the trace channel is closed on this deployment, erratum above, issues #113/#105).
 - P7 passes: all 36 prompt digests and all 6 pool blobs equal round 24's gate (structural,
   verified by `--gate`; gate `8d9c445f`).
 - Budget replay (character-proportional estimate): 17/36 answers would surface at 256
   tokens, 25/36 at 512, 34/36 at 1024, 35/36 at 2048 - the surfacing curve is far steeper
-  than round 24's (1/36 at 256, 35/36 at 2048) because the non-enumerating style keeps the
-  verdict inside small budgets.
+  than round 24's (1/36 at 256, 35/36 at 2048); the original explanation ("the
+  non-enumerating style keeps the verdict inside small budgets") stands at answer level
+  only, the style characterization being structural under the closed trace channel
+  (erratum above, issues #113/#105).
 - Polarity direction (McNemar over the 18 matched pairs): b = 1 (the D2 pair: forward
   delivered, its cross partner silent), c = 0, p = 1.0, under-powered as expected.
 
