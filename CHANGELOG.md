@@ -111,6 +111,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   every round's `raw.jsonl` from round 40 onward; trace claims must state the exposure setting of
   each side; a zero-trace claim is an answer-level claim only; class-level trace statements need a
   same-class pair with the channel exposed on both sides).
+- Fourth CI check, the serving-id guard (issue #85, owner go 2026-11-04): `scripts/check_serving_ids.py`
+  (stdlib, `--selftest` negative control) scans every tracked file for endpoint serving ids - host:port
+  literals (RFC 5737 documentation ranges exempt for the sanitizer fixtures), lowercase GGUF model file
+  names, and quantization-tagged deployment labels - wired into `.github/workflows/ci.yml` as the
+  `serving-id guard (endpoint leak)` job so a leaked serving id fails at PR time instead of at weekly
+  review. Root AGENTS.md CI and local-parity lists updated to four checks.
 
 ### 2026-11-03
 

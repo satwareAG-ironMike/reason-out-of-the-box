@@ -102,13 +102,16 @@ When the user requests a durable behavior change, record it here or in the relev
 - No em dashes in any file (project punctuation standard)
 - Changes of substance get a CHANGELOG.md entry under [Unreleased] until a version is cut
 - CI: GitHub Actions run on every push and PR - archive consistency (`scripts/check_archive.py`),
-  markdown hygiene (em/en dashes, `scripts/check_links.py`), and a full-history gitleaks secret
-  scan. The single action is SHA-pinned; the workflow is read-only (`permissions: contents: read`)
+  markdown hygiene (em/en dashes, `scripts/check_links.py`), a full-history gitleaks secret
+  scan, and a serving-id guard (`scripts/check_serving_ids.py`, endpoint host:port / GGUF file
+  names / quantization-tagged deployment labels, issue #85). The single action is SHA-pinned;
+  the workflow is read-only (`permissions: contents: read`)
 - Local CI parity before pushing: `python3 scripts/check_archive.py --selftest && python3
   scripts/check_archive.py` then `python3 scripts/check_links.py --selftest && python3
   scripts/check_links.py` then `set +e; git grep -n -P "\x{2014}|\x{2013}" -- .; r=$?;
   set -e; [ "$r" -eq 1 ]` (strict: passes only when grep reports "no match", fails on
-  dashes or grep error)
+  dashes or grep error) then `python3 scripts/check_serving_ids.py --selftest && python3
+  scripts/check_serving_ids.py`
 - Nightly consciousness research rounds fire at 02:00 and 04:00 via a systemd user timer on the
   maintainer workstation (issue #65). The runner lives outside this repository (public-only rule: it
   holds the local inference pool), rotates across self-hosted inference endpoints with localhost
@@ -137,5 +140,5 @@ When the user requests a durable behavior change, record it here or in the relev
 | `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), IRB protocol draft (issue #7), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall, insect-sentience threshold); governed by root
   rules | - |
 | `runs/` | Executed-run record: per-round manifests, raw per-prompt responses, calibration records, regeneration and battery scripts, independent verification records, round reports; immutable manifests, public-only artifacts, Executed/Reproduced/Validated labels | [AGENTS.md](runs/AGENTS.md) |
-| `scripts/` | `check_archive.py` archive consistency checker and `check_links.py` markdown link checker (stdlib, each with `--selftest`); run both before any closeout | - |
+| `scripts/` | `check_archive.py` archive consistency checker, `check_links.py` markdown link checker and `check_serving_ids.py` endpoint serving-id guard (issue #85; stdlib, each with `--selftest`); run all three before any closeout | - |
 | `research/` | Nightly round artifacts (issue #65): per-firing directories with probe scripts, prompts, raw responses, scores, sanitization and evidence-label contracts | [AGENTS.md](research/AGENTS.md) |
