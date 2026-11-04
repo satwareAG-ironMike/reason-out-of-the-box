@@ -5,6 +5,26 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-04
+
+#### Added
+
+- `docs/next-investigations.md`: late-2026 field scan on out-of-the-box reasoning via
+  direct weight editing (owner-directed, 2026-11-04; Perplexity search plus full primary-page
+  fetches, all URLs live-checked). Findings: a single originating claim exists
+  (Takehi, Teoh, Zhang and Khattab, "Sparks of Weight-Space Programming", MIT CSAIL,
+  2026-11-02, web-only source); all other late-2026 projects are replications, tooling,
+  benchmarks, or audits of that blog - 11 direct projects plus a curated index, two
+  Claude-based prompt-exact replications, one applied preprint (arXiv:2611.05341,
+  clinical-network auditing, 2026-11-03) and one from-scratch construction study.
+  Classification: the flagship Qwen3.5-0.8B edit (131,072 weights, 0.016%) is
+  loop-obstacle removal, not a new general reasoning module - consistent with the
+  authors' Gemma 3 270M negative control, the local same-context A/B verification, and the
+  thinking-off baseline (46.4% MATH-500 on the unedited model in the `weightspace`
+  replication). WSP is therefore not a counterexample to the repo's "from nothing"
+  verdict. arXiv:2611.05341 recorded as archive-eligible (preprint status); the Sparks
+  blog is a non-archive source under the provenance rule; no study-design change.
+
 ### 2026-11-03
 
 #### Added

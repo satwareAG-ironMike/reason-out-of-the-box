@@ -875,3 +875,98 @@ Consequences for the study design and the M2 harness (issue #5):
   verified source pre-registers a confirmatory band at `d*+1..d*+4`, and no verified evidence
   that quantization or inference precision degrades multi-hop depth reasoning specifically.
   Both stay open problems for the protocol text, not negative results.
+
+## Research findings (2026-11-04): late-2026 field scan, out-of-the-box reasoning via weight editing
+
+Owner-directed 2026-11-04: search online for projects from late 2026 that help a model
+"reason out of the box", i.e. that make reasoning available without task training. Method:
+Perplexity multi-source search (year recency) plus full fetch of each primary page (GitHub
+README, original blog, arXiv abstract) on 2026-11-04; every URL below was live-checked that
+day. All sources are public; local replication records from the faster-llama POC host stay
+outside this repository (public-only rule).
+
+### Verdict
+
+One originating claim exists: **Sparks of Weight-Space Programming** (Takehi, Teoh, Zhang,
+Khattab, MIT CSAIL, 2026-11-02; blog + released experiment artifacts, web-only source).
+It reports that GPT-6 Astra reads, edits and writes neural-network weights directly, with no
+gradients or training. Every other late-2026 project found is a replication, tool,
+benchmark, or audit of that one blog; no second project claims a new general reasoning
+capability acquired through weight editing.
+
+The blog's flagship result (experiment 8) is an edit of Qwen3.5-0.8B: 131,072 of ~752M
+weights (0.016%), 64 MLP down-projection output columns in layers 15 and 19, no gradients.
+MATH-500 7.9 -> 48.1%, GSM8K 13.8 -> 67.1%, IFEval 21.0 -> 62.3%; the share of MATH-500
+answers hitting the 32,768-token limit falls from 93% to 33%. The authors' own follow-up on
+Gemma 3 270M (a model that does not loop) shows no comparable gain: "editing weights could
+remove an obstacle that hid an ability, but it could not add an ability the model lacked".
+Classification for this repository: **loop-obstacle removal, not a new general reasoning
+module**. A local same-context A/B on the Qwen3.5-0.8B pair confirmed the mechanism
+(base: content-free repetition loop to the token cap; edited checkpoint: terminates around
+6.7k tokens and emits the boxed answer; the local dequantized diff matches the published
+delta and the tensor hashes match the published checkpoint), and a thinking-off sampling
+baseline in the `weightspace` replication (46.4% MATH-500 on the unedited model) matches
+the loop-removal reading: the capability was latent, the edit only unblocks it.
+
+### Direct WSP replications and tooling (all live-checked 2026-11-04)
+
+| Project | What it is | Dated state |
+|---------|------------|-------------|
+| [openwsp/openwsp](https://github.com/openwsp/openwsp) | Independent replication of experiment 8 plus tooling: Python weight kernel, forward-pass service, versioned edit format (CLI/SDK/MCP) | Live replication paused at 38/50 passes (provider workspace disabled, incident recorded); earlier API attempt 4/50; no final live benchmark; the published checkpoint calibrates to 50.6% MATH-500 vs the blog's 48.1%, base 7.2% vs 7.9% |
+| [alan-turing-institute/weights_editing](https://github.com/alan-turing-institute/weights_editing) | Cross-model replication with the authors' byte-exact prompts (experiments 1, 2, 5; 3, 4, 6-8 dropped) | GPT-6 Astra 12/12 games + 9/9 shapes; Claude Opus 5.5 12/12 + 8/9; both fall to chance on shuffled-weight controls; Astra reproduces the published MinAtar Breakout/Asterix scores, Seaquest about half |
+| [leofmarciano/weightspace](https://github.com/leofmarciano/weightspace) ([PyPI](https://pypi.org/project/weightspace/)) | General LLM weight-editing harness: read/fix/write/improve, budgeted forward passes, edit tracking | Own experiment-8 run: base MATH-500 8.4%, published checkpoint 52.4%, a 4-neuron Opus edit 40.0% (thinking on); the thinking-off base alone scores 46.4%, above every edit - direct evidence for the loop-removal reading |
+| [adiant211/wspacetest](https://github.com/adiant211/wspacetest) | CPU re-check of the blog's claims | Edits rebuild bit-for-bit; loop-entry test: repetition after restart falls 50.7% -> 27.7%; a scripted pipeline rediscovers the exact edit in 5-6 CPU-minutes and a blind neuron scan finds layers 15/19 without hints; the MATH-500 jump itself was not re-run |
+| [alexcarterhq/wspbench](https://github.com/alexcarterhq/wspbench) | Controlled benchmark: behavior probes vs behavior+weights, hidden-example preservation | 80-session run: GPT-6.1 Sol repaired 14/32 faults with behavior alone, 30/32 with weights, scripted solver 5/32; all clean controls preserved |
+| [Unjuno/beyond-math-weight-space-programming](https://github.com/Unjuno/beyond-math-weight-space-programming) | Audit of the released non-math records plus paired non-math probes | Rescores IFEval/GPQA/MMLU-Pro records without regenerating outputs; 24-task paired suite: EOS completion 11/24 -> 24/24, strict task success 4/16 -> 6/16 - a completion/repetition signal, not established general non-math capability; the original 50-pass edit search was not reproduced |
+| [FiveTechSoft/weights](https://github.com/FiveTechSoft/weights) | WSP toolkit for production quantized GGUF (MiMo-V2.6-Distill-Qwen-9B, Q6_K), declarative WSP-Lang, WSP-40 challenge engine, semantic-centroid steering | 66 commits of research journal; claims (e.g. 0.00018% behavior steering) are not independently benchmarked |
+| [xero00000/weight-space-programming](https://github.com/xero00000/weight-space-programming) | Agent skill: CPU helpers for safetensors inspection/comparison/direction-projection, exact-revision Qwen reproduction guide, closed-form toy circuits | Helper tests cover projection geometry and toy domains only; the helper does not discover directions or run inference |
+| [shivanshtalwar0/weight-space-programming](https://github.com/shivanshtalwar0/weight-space-programming) | Quant-aware WSP on Qwen3.8-27B (4-bit only), agent harness + 9 failure probes | 3 graded tasks: 2/3 base and 2/3 patched - not distinguishable at n=3; no failure probe fired, so the loop had no target |
+| [nihilistau/weight-space-claude](https://github.com/nihilistau/weight-space-claude), [EphraiemSarabamoun/weight-space-programming-opus](https://github.com/EphraiemSarabamoun/weight-space-programming-opus) | Claude Opus 5.5 replications of the authors' verbatim prompts (experiments 1-6) | Opus 5.5 matches Astra on game/shape identification, beats PPO-100M on all three MinAtar games (Astra-level Breakout, below on Seaquest/Asterix); not an experiment-8 replication |
+| [brighterr/awesome-wsp](https://github.com/brighterr/awesome-wsp) | Curated index of WSP papers, code and benchmarks (last curated 2026-11-03) | Entry point for the cluster; inclusion is not independent reproduction |
+
+### Applications, construction and audits outside the direct line
+
+- [arXiv:2611.05341](https://arxiv.org/abs/2611.05341) (2026-11-03, preprint):
+  "Weight-space programming for auditing clinical decision networks". Claude Opus 5.5
+  blind-audits small radiotherapy screening networks (433-4,801 parameters): names the
+  broken rule in 16/18 flawed networks (95% CI 67-97%) and repairs each with a median of 3
+  parameters. Stated limit: can locate and repair planted flaws, cannot yet certify a
+  network is correct. **Archive-eligible** (arXiv record; preprint status).
+- [csinva.io WSP from scratch](https://csinva.io/weight-space-programming-autoresearch/analyze/toy_examples/report.html)
+  (2026-11-02, blog + [repo](https://github.com/csinva/weight-space-programming-autoresearch)):
+  Claude writes small transformers by hand for 13 known-algorithm tasks; 959 saved programs,
+  all ten algorithmic tasks (addition, multiplication, sorting, parity, GCD, ...) reach 100%
+  within three attempts, then simplify. From-scratch construction, not editing an existing
+  model; toy scale.
+- [ctrimm/weight-space-programming](https://github.com/ctrimm/weight-space-programming)
+  ("Weight-Space Programming for the Social Safety Net", CC BY 4.0, 2026): constructs
+  networks implementing stipulated piecewise-linear formulae with protocols and trained
+  comparators; simplified formula experiments, not operational benefit calculators.
+- Foundational, pre-2026 tools named by the originating blog: Tracr compiles RASP programs
+  into transformer weights (arXiv:2301.05062), Learning Transformer Programs trains
+  transformers that decompile to readable code (arXiv:2306.01128), ROME edits factual
+  associations in GPT (arXiv:2202.05262), and the task-arithmetic line edits models by
+  adding task vectors, with the follow-up "Editing Models with Task Arithmetic"
+  (arXiv:2212.04089, API-verified 2026-11-04). AdderBoard, which showed coding agents
+  hand-setting tiny-transformer weights, is web-only and non-archive.
+
+### Relation to the core question of this repository
+
+- WSP is **not** a counterexample to the repo's "from nothing" verdict: no published
+  late-2026 weight edit adds a general reasoning capability to a model that did not already
+  carry it. The Qwen result is an obstacle removal that unblocks latent capability
+  (Gemma control, thinking-off baseline, and the Beyond Math completion signal all
+  converge on this reading); the strongest available evidence against a general-
+  reasoning reading is the authors' own negative control.
+- The 2026-09-11 scan's lead 2609.10210 ("Through the Looking Glass: Directly Reading and
+  Writing Transformers") is the methodological forerunner; the Sparks blog is the first
+  frontier-model instance, and the WSPBench-family benchmarks are the authors' announced
+  follow-up work.
+- Field velocity note: at least six independent replications, two benchmark efforts and one
+  applied preprint appeared within 48 hours of the 2026-11-02 blog post; the cluster is
+  active and fast-moving, so a re-scan is due before M3 if weight-editing arms enter the
+  study design.
+- Archive eligibility: arXiv:2611.05341 is archive-eligible (queue as a candidate round;
+  preprint status, physics.med-ph). The Sparks blog has no arXiv/PubMed/PhilPapers record
+  and is a non-archive source under the provenance rule; its released artifacts (logs,
+  checkpoint, edit diff) are public and linkable from the doc as they are here.
