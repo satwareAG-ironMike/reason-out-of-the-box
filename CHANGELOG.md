@@ -350,7 +350,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   shrinks as k grows and the ceiling is a joint (k, E, budget) surface, not a load-only curve;
   zero wrong answers grid-wide, no enumeration switch (mention ratio 0.68-1.00), and cost laws
   +7.89 tok/fact at k = 8 and +29.36 tok/hop at E = 96 (the depth slope reproducing round 21 at
-  12x lower load) place the silence onset in the upper tail of the enumeration-length
+  4x higher fact load) place the silence onset in the upper tail of the enumeration-length
   distribution, not its mean. State: **Executed**; exploratory; every ceiling conditional on the
   2048-token cap.
 ### 2026-10-24
