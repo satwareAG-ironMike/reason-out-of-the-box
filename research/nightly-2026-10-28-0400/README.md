@@ -108,7 +108,9 @@ Endpoint read from `NIGHTLY_BASE_URL`, `NIGHTLY_MODEL_ID`, `NIGHTLY_API_KEY`; no
 endpoint-specific is written anywhere; stored model text passes a sanitizer (URLs, IP
 addresses, absolute paths). Health probe, then 36 prompts (18 matched pairs), `max_tokens`
 2048, `temperature` 0.0, concurrency auto-selected from the phase-1 measured rate. This round:
-37 of the 40-call cap, zero retries, zero transport errors, no resume.
+38 of the 40-call cap (1 health call plus 36 prompt dispatches plus 1 disclosed retry), one
+transport error (a TimeoutError at the 600 s per-item deadline, retried once; disclosure below),
+no resume.
 
 ```
 python3 research/nightly-2026-10-28-0400/retest_repeatability_probe.py --selftest
@@ -176,8 +178,8 @@ completions token-for-token identical to the archived run.
   512, 4 at 1024, 35 at 2048 - identical to round 24's replay counters.
 - **Transport disclosure:** one item (L2 arm X, digest `1de707958baa...`) hit the 600 s
   per-item deadline and was retried once, delivering 1883 completion tokens, exactly the
-  archived length for that digest. Dispatch window 57.2 min at ~42 tok/s with concurrency 2;
-  47,529 completion tokens; 37 of 40 calls; zero abandoned cells.
+  archived length for that digest. Dispatch window 57.2 min over 47,529 completion tokens:
+  13.9 tok/s aggregate (~6.9 per stream at concurrency 2); 38 of 40 calls; zero abandoned cells.
 
 
 ## Evidence label
