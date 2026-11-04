@@ -197,7 +197,11 @@ three failures are the finding.
    #94's point that the fallback token's position, not its value, is what needs the test.
 10. **Cross-class resolvability, judged against both classes' own floors.** The load-axis gap
     between this class and the 27B-class endpoint is resolvable: deltas -13.6 and -16.6 tokens per
-    fact against a union floor of 12.41. The depth-axis gap is not: deltas +43.8 and -51.1 tokens
+    fact against a union floor of 12.41. Re-attribution (issue #105, round 40): this verdict was
+    measured against the zero-trace 27B deployment; round 40's trace-exposing 27B firing does not
+    reproduce it under the N6 guard (delta -18.549 against the union floor q99 of 26.742, not
+    resolvable on either axis) - billed length is a deployment-scale quantity. The depth-axis gap
+    is not: deltas +43.8 and -51.1 tokens
     per hop against a union floor of 148.07, because the other class's own run-to-run depth floor
     (its two firings differ by 94.9 tokens per hop) is larger than the class difference. "Resolvable"
     here means beyond the largest noise either class has demonstrated, not beyond a replicated
