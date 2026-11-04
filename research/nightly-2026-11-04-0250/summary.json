@@ -1,0 +1,372 @@
+{
+  "checks": {
+    "N1_census_channel_open": true,
+    "N1_census_health_source": "reasoning_content",
+    "N2_duplicate_pairs_byte_identical_ge": true,
+    "N2_duplicate_tarr": 1.0,
+    "P2_modeA_truncated_ge": false,
+    "P2b_modeA_delivered_le": false,
+    "P3_modeC_delivered_ge": true,
+    "P4_modeC_correct_ge": false,
+    "P4b_zero_wrong_delivered": true,
+    "P5_cost_ratio_le_ceiling": false,
+    "P6_manipulation_check": false,
+    "P7_modeC_max_answer_words_in_content": 1,
+    "P7_modeC_one_word_rate": 0.7273,
+    "P7_text_existence": true,
+    "P8_modeD_delivered_ge": false,
+    "P8b_zero_wrong_delivered_modeD": true,
+    "P8c_modeD_reasoning_nonzero_count": 11,
+    "P8c_modeD_text_existence": true,
+    "baselines": {
+      "archived_loose_line_correct": "8/11",
+      "constant_no_correct": "7/11",
+      "constant_yes_correct": "4/11",
+      "modeA_loose_correct": "11/11",
+      "modeC_beats_archived_loose_line": false,
+      "modeC_beats_constant_no": true,
+      "modeC_correct_over_all": "8/11",
+      "modeD_beats_archived_loose_line": false,
+      "modeD_beats_constant_no": false,
+      "modeD_correct_over_all": "6/11",
+      "panel_golds": "4 yes / 7 no"
+    },
+    "cost_ratio_modeC_over_modeA": 1.0237,
+    "cost_ratio_modeD_over_modeA": 1.3399,
+    "cost_ratio_modeD_over_modeC": 1.3089,
+    "distractor_ratio_archived_mean": 0.8678,
+    "distractor_ratio_drop_archived_minus_modeC": 0.5948,
+    "distractor_ratio_drop_modeA_minus_modeC": 0.0103,
+    "distractor_ratio_drop_modeA_minus_modeD": -0.0944,
+    "distractor_ratio_drop_modeC_minus_modeD": -0.1047,
+    "paired_correct_modeA_vs_modeC": {
+      "mode_a_only": 2,
+      "mode_b_only": 1,
+      "n_paired": 11,
+      "p_exact_mcnemar": 1.0
+    },
+    "paired_correct_modeC_vs_modeD": {
+      "mode_a_only": 3,
+      "mode_b_only": 1,
+      "n_paired": 11,
+      "p_exact_mcnemar": 0.625
+    },
+    "paired_delivery_modeA_vs_modeC": {
+      "mode_a_only": 2,
+      "mode_b_only": 1,
+      "n_paired": 11,
+      "p_exact_mcnemar": 1.0
+    },
+    "paired_delivery_modeC_vs_modeD": {
+      "mode_a_only": 3,
+      "mode_b_only": 1,
+      "n_paired": 11,
+      "p_exact_mcnemar": 0.625
+    },
+    "text_existence_report": {
+      "accepted_for_text_derived_claims": true,
+      "floor": 9,
+      "modeC_content_chars_mean": 1.7,
+      "modeC_reasoning_chars": {
+        "max": 5334,
+        "median": 1427,
+        "min": 752
+      },
+      "modeC_reasoning_nonzero_count": 11
+    },
+    "text_existence_report_modeD": {
+      "accepted_for_text_derived_claims": true,
+      "floor": 9,
+      "modeD_content_chars_mean": 1.4,
+      "modeD_reasoning_chars": {
+        "max": 6210,
+        "median": 4618,
+        "min": 1239
+      },
+      "modeD_reasoning_nonzero_count": 11
+    }
+  },
+  "dispatch_planned": 36,
+  "duplicates": {
+    "byte_identical_pairs": 3,
+    "n_pairs": 3,
+    "pairs": [
+      {
+        "byte_identical": true,
+        "cell": "S4",
+        "dup_completion_tokens": 1831,
+        "orig_completion_tokens": 1831,
+        "seed_pair": [
+          28501026,
+          28501026
+        ],
+        "token_identical": true
+      },
+      {
+        "byte_identical": true,
+        "cell": "S5",
+        "dup_completion_tokens": 441,
+        "orig_completion_tokens": 441,
+        "seed_pair": [
+          32421024,
+          32421024
+        ],
+        "token_identical": true
+      },
+      {
+        "byte_identical": true,
+        "cell": "S6",
+        "dup_completion_tokens": 1893,
+        "orig_completion_tokens": 1893,
+        "seed_pair": [
+          36381024,
+          36381024
+        ],
+        "token_identical": true
+      }
+    ],
+    "tarr": 1.0,
+    "token_identical_pairs": 3
+  },
+  "endpoint_calls_cap": 40,
+  "endpoint_calls_used": 37,
+  "gate_hash": "f091f0b126ea35b772d652c76bf79bca280f09c9ee7a60d2cedc839df7da8631",
+  "modes": {
+    "A": {
+      "answer_leading": 9,
+      "attempts_used": 11,
+      "census": {
+        "fields_seen": [
+          "content",
+          "reasoning_content",
+          "role"
+        ],
+        "reasoning_source_counts": {
+          "reasoning_content": 11
+        },
+        "trace_chars_total_max": 5334,
+        "trace_chars_total_median": 1532,
+        "trace_chars_total_min": 698
+      },
+      "completion_tokens_max": 2048,
+      "completion_tokens_mean": 1043.8,
+      "completion_tokens_median": 593,
+      "content_chars_mean": 2.0,
+      "correct_over_all": 9,
+      "correct_over_all_rate": 0.8182,
+      "delivered": 9,
+      "delivered_correct": 9,
+      "delivered_or_strict_correct": 9,
+      "delivered_rate": 0.8182,
+      "delivered_wilson_95": [
+        0.523,
+        0.9486
+      ],
+      "distractor_ratio_max": 1.0,
+      "distractor_ratio_mean": 0.2833,
+      "distractor_ratio_min": 0.0,
+      "error_classes": [],
+      "field_conflicts": 1,
+      "loose_fallback_correct": 11,
+      "max_answer_words_in_content": 1,
+      "n": 11,
+      "no_answer_at_all": 0,
+      "one_word_answer_field": 9,
+      "reasoning_chars_max": 5334,
+      "reasoning_chars_median": 1532,
+      "reasoning_chars_min": 698,
+      "reasoning_chars_nonzero": 11,
+      "truncated_at_cap": 2,
+      "wrong_delivered": 0
+    },
+    "C": {
+      "answer_leading": 8,
+      "attempts_used": 11,
+      "census": {
+        "fields_seen": [
+          "content",
+          "reasoning_content",
+          "role"
+        ],
+        "reasoning_source_counts": {
+          "reasoning_content": 11
+        },
+        "trace_chars_total_max": 5334,
+        "trace_chars_total_median": 1427,
+        "trace_chars_total_min": 752
+      },
+      "completion_tokens_max": 2048,
+      "completion_tokens_mean": 1068.5,
+      "completion_tokens_median": 536,
+      "content_chars_mean": 1.7,
+      "correct_over_all": 8,
+      "correct_over_all_rate": 0.7273,
+      "delivered": 8,
+      "delivered_correct": 8,
+      "delivered_or_strict_correct": 9,
+      "delivered_rate": 0.7273,
+      "delivered_wilson_95": [
+        0.4344,
+        0.9025
+      ],
+      "distractor_ratio_max": 1.0,
+      "distractor_ratio_mean": 0.273,
+      "distractor_ratio_min": 0.0,
+      "error_classes": [],
+      "field_conflicts": 0,
+      "loose_fallback_correct": 10,
+      "max_answer_words_in_content": 1,
+      "n": 11,
+      "no_answer_at_all": 0,
+      "one_word_answer_field": 8,
+      "reasoning_chars_max": 5334,
+      "reasoning_chars_median": 1427,
+      "reasoning_chars_min": 752,
+      "reasoning_chars_nonzero": 11,
+      "truncated_at_cap": 3,
+      "wrong_delivered": 0
+    },
+    "D": {
+      "answer_leading": 6,
+      "attempts_used": 11,
+      "census": {
+        "fields_seen": [
+          "content",
+          "reasoning_content",
+          "role"
+        ],
+        "reasoning_source_counts": {
+          "reasoning_content": 11
+        },
+        "trace_chars_total_max": 6210,
+        "trace_chars_total_median": 4618,
+        "trace_chars_total_min": 1239
+      },
+      "completion_tokens_max": 2048,
+      "completion_tokens_mean": 1398.6,
+      "completion_tokens_median": 1931,
+      "content_chars_mean": 1.4,
+      "correct_over_all": 6,
+      "correct_over_all_rate": 0.5455,
+      "delivered": 6,
+      "delivered_correct": 6,
+      "delivered_or_strict_correct": 8,
+      "delivered_rate": 0.5455,
+      "delivered_wilson_95": [
+        0.2801,
+        0.7873
+      ],
+      "distractor_ratio_max": 1.0,
+      "distractor_ratio_mean": 0.3777,
+      "distractor_ratio_min": 0.0,
+      "error_classes": [],
+      "field_conflicts": 0,
+      "loose_fallback_correct": 10,
+      "max_answer_words_in_content": 1,
+      "n": 11,
+      "no_answer_at_all": 0,
+      "one_word_answer_field": 6,
+      "reasoning_chars_max": 6210,
+      "reasoning_chars_median": 4618,
+      "reasoning_chars_min": 1239,
+      "reasoning_chars_nonzero": 11,
+      "truncated_at_cap": 5,
+      "wrong_delivered": 0
+    }
+  },
+  "round42_reference": {
+    "constants": {
+      "basis_note": "mode A delivered where the round-23 flash-class archive truncated: the truncation record did not transfer to the 27B firing; mode C delivered 9/11 all correct but cost slightly more than mode A and the deployment stored no trace text, so the text-derived claims were refused by the P7 floor",
+      "class": "27B-class local endpoint, pool slot 6/6",
+      "cost_ratio_modeC_over_modeA": 1.1255,
+      "dispatch_trace_chars_nonzero": 0,
+      "distractor_ratio_archived_mean": 0.8678,
+      "modeA": {
+        "completion_tokens_mean": 761.8,
+        "correct_over_all": 10,
+        "delivered": 10,
+        "n": 11,
+        "truncated_at_cap": 1
+      },
+      "modeB": {
+        "delivered": 3,
+        "n": 5,
+        "truncated_at_cap": 2
+      },
+      "modeC": {
+        "completion_tokens_mean": 857.4,
+        "correct_over_all": 9,
+        "delivered": 9,
+        "n": 11,
+        "truncated_at_cap": 2,
+        "wrong_delivered": 0
+      },
+      "n1_census_health_source": "reasoning",
+      "n2_duplicate_tarr": 1.0,
+      "raw_blob_sha256": "bc73f3d0c803a9f46054b0f2d051ced1b5ef09c2df3cc955ae2aec5de9135602",
+      "summary_blob_sha256": "cbe87ffdcd05b030c51157c1dc68189062d1e089b787af9f16fc059c9e039e96",
+      "tier": "policy_artifact"
+    },
+    "violations": []
+  },
+  "round44_reference": {
+    "constants": {
+      "basis_note": "mode A truncated 8/11 where the round-23 archive reads 11/11 and the round-42 27B-class firing read 1/11: the ceiling is class-tied; mode C delivered 7/11 all correct, an exact function of no-repetition obedience (7/7 obeying items deliver, 4/4 disobedient truncate at the cap), with disobedience on the negative cross-check arm at depth (X obedience 2/2 at k = 8, 1/2 at k = 12, 0/3 at k = 16); the cost ratio 0.6756 is the ceiling-present state of the knob's state-dependent effect (#108)",
+      "class": "flash-next-class local endpoint (the class the round-23 archive measured)",
+      "cost_ratio_modeC_over_modeA": 0.6756,
+      "dispatch_trace_chars_nonzero": 30,
+      "modeA": {
+        "completion_tokens_mean": 1636.9,
+        "correct_over_all": 3,
+        "delivered": 3,
+        "n": 11,
+        "truncated_at_cap": 8
+      },
+      "modeC": {
+        "completion_tokens_mean": 1105.9,
+        "correct_over_all": 7,
+        "delivered": 7,
+        "n": 11,
+        "truncated_at_cap": 4,
+        "wrong_delivered": 0
+      },
+      "modeC_x_obedient_by_cell": {
+        "S4": [
+          2,
+          2
+        ],
+        "S5": [
+          1,
+          2
+        ],
+        "S6": [
+          0,
+          3
+        ]
+      },
+      "n1_census_health_source": "reasoning_content",
+      "obedience_threshold": 0.1,
+      "raw_blob_sha256": "ce6e822682d542cc86970ec86d976a73724c0574e97d349a56b1caee7e11651a",
+      "summary_blob_sha256": "ff6cc94bde4c2c58791c267c9cb5c2cd7a3179ab9896b4d2d82b5fb2649af9eb",
+      "tier": "surfacing_only"
+    },
+    "violations": []
+  },
+  "transport": {
+    "attempts_total": 36,
+    "completion_tokens_total": 42785,
+    "dispatch_records": 36,
+    "prompt_tokens_total": 104689,
+    "single_stream_tokens_per_second": 18.77
+  },
+  "verdict": {
+    "all_registered_predictions_met": false,
+    "beats_archived_loose_line": false,
+    "census_claims_accepted": true,
+    "modeD_beats_archived_loose_line": false,
+    "modeD_tier": "bounded_loss",
+    "replication_tarr": 1.0,
+    "tier": "surfacing_only"
+  },
+  "wall_seconds": 2298.2
+}

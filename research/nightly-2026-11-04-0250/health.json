@@ -1,0 +1,20 @@
+{
+  "census": {
+    "fields": [
+      "content",
+      "reasoning_content",
+      "role"
+    ],
+    "reasoning_content_chars": 151,
+    "reasoning_field_chars": 0,
+    "reasoning_source": "reasoning_content",
+    "trace_chars_total": 151
+  },
+  "completion_tokens": 38,
+  "finished_at": "2026-11-04T03:03:37Z",
+  "latency_s": 1.205,
+  "ok": true,
+  "outcome": "answered_in_answer_field",
+  "prompt_tokens": 59,
+  "started_at": "2026-11-04T03:03:37Z"
+}

@@ -9,6 +9,35 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 #### Added
 
+- Nightly research round 46 (issue #65; serves #71, #100, #105; refs #94, #73, #65, #108):
+  `research/nightly-2026-11-04-0250/` is the 27B-class re-fire of the output-policy knob plus
+  the bounded single-pass knob - the same 11 round-23 cap-truncated items (S4 to S6 at
+  E = 192) re-dispatched on a 27B-class endpoint in modes A (archived prompt, 11), C
+  (no-repetition one-liner, 11) and D (`You may state each fact at most once, then answer
+  with exactly one word: yes or no.`, the bounded single-pass knob filed on #71, 11),
+  plus 3 duplicate mode-A self-agreement dispatches and 1 census health call; 37 of the
+  40-call cap. Instrument: the round-44 script ported byte-identically except the gate
+  schema, the gate question, the mode-D arm and two vendored references
+  (`ROUND42_REFERENCE` unchanged, `ROUND44_REFERENCE` added, both with archive blob
+  digests and planted-slip selftest controls); prediction rows P1 to P7, P9, N1, N2 stay
+  byte-equal to the round-42 / round-44 gate, P8 is re-registered for mode D, P8b / P8c
+  are new. Gate `f091f0b1` (schema `round46-gate-v1`) frozen before dispatch. Result
+  (tier `surfacing_only`, mode-D tier `bounded_loss`): the ceiling re-confirms class-tied
+  - mode A truncates 2/11 (archive 11/11, round 42 1/11, round 44 8/11), P2/P2b fail as
+  the shared-table flash-class rows; mode C delivers 8/11 all correct, cost ratio 1.0237
+  (P4/P5/P6 fail), losing one net delivery against mode A including a gold-yes forward
+  item (paired A-only 2, C-only 1, p = 1.0), with disobedience no longer confined to the
+  cross-check arm; mode D delivers 6/11 all correct, truncates 5/11, cost ratio 1.3089
+  over the ban (P8 fails), and triggers the enumeration it bounds on an item the ban
+  delivered (536 tokens at dr 0.0051 becomes 2048 at dr 0.8923) - the #71 bounded-knob
+  discriminator reads negative on the 27B class; one S6 X item truncates under all three
+  modes, and under mode D its trace (6210 chars) is the longest of the round with a low
+  distractor ratio (cap consumption by non-enumerating work). Census open via
+  `reasoning_content` on 36/36 dispatches (P7/P8c 11/11 per mode): first trace-exposed
+  27B firing, the class-specific obedience reading is measurable. N2: 3/3 duplicate
+  pairs byte- and token-identical (TARr 1.0). Transport: 104,689 prompt / 42,785
+  completion tokens, ~18.8 t/s single stream, 2298.2 s wall, zero retries. State:
+  **Executed**.
 - `docs/next-investigations.md`: late-2026 field scan on out-of-the-box reasoning via
   direct weight editing (owner-directed, 2026-11-04; Perplexity search plus full primary-page
   fetches, all URLs live-checked). Findings: a single originating claim exists
