@@ -876,6 +876,47 @@ Consequences for the study design and the M2 harness (issue #5):
   that quantization or inference precision degrades multi-hop depth reasoning specifically.
   Both stay open problems for the protocol text, not negative results.
 
+## Research findings (2026-11-04): the E = 192 ladder ceiling is class-tied and firing-state dependent (rounds 42, 44, 46)
+
+Nightly rounds 42, 44 and 46 (issue #65; artifacts in
+[`research/nightly-2026-11-02-0218/`](../research/nightly-2026-11-02-0218/README.md),
+[`research/nightly-2026-11-03-0236/`](../research/nightly-2026-11-03-0236/README.md) and
+[`research/nightly-2026-11-04-0250/`](../research/nightly-2026-11-04-0250/README.md)) put one
+question to the k-hop ladder family. The round-23 archive (flash-next class) labelled the E = 192
+cells `budget_limited`: all 11 panel items ran to the 2048-token output cap with the answer field
+silent (loose-fallback line 8/11). Is that a property of the task (the 192-cell traversal genuinely
+needs more than 2048 tokens), or of the model's surface output policy (the class's enumerating trace
+consumes the budget before the verdict surfaces)? Same 11 archived items, same 2048 cap, re-dispatched
+across two model classes and a one-line output-policy knob:
+
+- The truncation record is class-tied, not a task property. On the flash-next class the ceiling
+  reproduces (round 44: mode A, the byte-identical archived prompt, truncates 8/11); on a 27B-class
+  endpoint it largely does not (round 42: mode A delivered 10/11; round 46 re-fire: mode A truncated
+  2/11). Same prompts, different truncation surface.
+- Under a fixed cap, verdict delivery tracks instruction obedience, not depth. Round 44: every item
+  that obeyed the one-line no-repetition instruction (stopped enumerating) delivered its answer (7/7),
+  every item that kept enumerating truncated (4/4), and the disobedience concentrated on the negative
+  cross-check arm at depth. Round 46 reproduced the obedience coupling and found the ban itself
+  cost-neutral on the 27B class (mode C / mode A completion ratio 1.0237).
+- The knobs move the surface; they do not reclaim the budget. Round 42 (27B, decision-table tier
+  `policy_artifact`): the no-repetition ban delivered 9/11 all correct but cost slightly more than the
+  control (ratio 1.1255 against the 0.50 re-claim ceiling), so it re-labelled items rather than freeing
+  tokens. Round 46 (27B, tier `surfacing_only`, mode-D tier `bounded_loss`): the bounded single-pass
+  permission was the worst mode on both axes (6/11 delivered, D/C cost ratio 1.3089), pushing one item
+  into enumeration that the ban had delivered while the ban itself lost one forward item the bounded
+  knob delivered.
+
+Consequence for the study design and issue #71 (this sharpens the 2026-10-16 finding above, that the
+ladder family is budget-limited rather than depth-limited): a per-item verdict recorded as
+`budget_limited` from a truncated run is a statement about a model class and a firing state, not about
+the task, and must not enter a depth ceiling `d*` or the `d*+1..d*+4` band. Three firings on the same
+11 items disagree on truncation purely by class (11/11 on the flash class's archive versus 1-2/11 on
+the 27B class). The load ceiling those rounds saw is an output-policy and surfacing artifact on an
+enumerating endpoint; whether the ladder family has a genuine depth limit stays open, and deciding it
+needs a budget-controlled or answer-token-first protocol, not a raw truncation count. Evidence label:
+`Executed` (exploratory, n = 11 panel items, one endpoint per firing). No acceptance criterion
+changes; the strict verdict is unchanged. This closes issue #108.
+
 ## Research findings (2026-11-04): late-2026 field scan, out-of-the-box reasoning via weight editing
 
 Owner-directed 2026-11-04: search online for projects from late 2026 that help a model
