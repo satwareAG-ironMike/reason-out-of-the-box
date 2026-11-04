@@ -31,6 +31,10 @@ maintainer owns deletion or relocation. Durable conclusions do not stay here: th
   independent second implementation reproduces it (`Reproduced`) or the pre-registered
   decision table covers it (`Validated`). Small n per level is exploratory and must say so.
 - A round directory is append-only after its PR opens; a later round opens a new directory.
+- Errata carve-out (issue #120): forward-only errata may annotate a merged round's
+  `README.md` prose and the matching CHANGELOG entry, and may edit instrument docstrings
+  (comment-only, no code change); `raw.jsonl`, `summary.json` and `gate.json` stay
+  immutable in all cases.
 - Trace-exposure census (issue #105): from round 40 onward every round's `raw.jsonl` carries the
   field census (per-record message field names plus the reasoning-supplying field, merge rule
   `reasoning_content` if non-empty, else `reasoning`, else empty). Cross-class and cross-firing

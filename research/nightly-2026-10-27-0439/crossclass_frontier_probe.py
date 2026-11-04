@@ -55,7 +55,9 @@ floor 0.60).
 
 Class caveat, declared: the NVFP4 deployment differs from the flash-next class on TWO
 axes at once (quantization format and serving runtime; the flash-next class ran on a
-GGUF deployment). This is a class replication, not a controlled quantization
+quantized local deployment with undisclosed training data, per its own round-21/23/24
+records, which name no format; the earlier "GGUF" attribution was dropped as unsupported,
+issue #113). This is a class replication, not a controlled quantization
 experiment; the cross-class delta spans model class + quantization + runtime and is
 recorded as such. At temperature 0 the MTP draft acceptance is deterministic, so the
 completions are the underlying model's greedy outputs; that is an assumption about the
