@@ -90,7 +90,7 @@ python3 research/nightly-2026-10-25-0405/frontier_bisect_probe.py --analyze
   token was correct by accident with no strict commitment (issue #94, provenance `mid_trace`).
 - No enumeration switch: distractor-mention ratio 0.68 to 1.00 in every cell (P3 pass).
 - Cost laws (uncensored means): +7.89 tokens/fact at k = 8 (r = 0.931), +29.36 tokens/hop at
-  E = 96 (r = 0.909, reproducing round 21's ~29 tok/hop at 12x lower load); two-factor over cell
+  E = 96 (r = 0.909, reproducing round 21's ~29 tok/hop at 4x higher fact load); two-factor over cell
   means gives a positive hop x fact interaction (+0.394, r2 0.87, one cell censored; descriptive).
   The silence onset at (16, 96) sits well below the mean-cost extrapolation of the cap: the
   frontier is where the upper tail of enumeration length crosses 2048, not where the mean does.

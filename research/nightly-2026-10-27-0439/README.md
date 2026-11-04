@@ -24,7 +24,7 @@ Motivation, from the archive:
 - round 24 (PR #98): the k = 8 load frontier maintained through E = 96, 112, 128, 160; the
   depth arm at E = 96 maintained at k = 12, non-maintained at k = 16 (turnover cell D2).
 - round 23 (PR #97): (8, 192) non-maintained on the flash-next class, 4/6 delivered.
-- round 22 (PR #96): load at k = 4 free to E = 240 on a 27B-class deployment (GGUF), with
+- round 22 (PR #96): load at k = 4 free to E = 240 on a 27B-class deployment, with
   an enumeration switch above ~100 facts that the flash-next class does not make: the
   cross-class cost structure was already suspect.
 - round 6: no verified evidence that quantization or inference precision degrades multi-hop
@@ -94,8 +94,9 @@ Declared predictions, fixed in `gate.json` before any prompt was spent (schema
   (structural; true by construction, asserted by `--gate`).
 
 Class caveat, declared: the NVFP4/vLLM deployment differs from the flash-next class on two
-axes at once (quantization format and serving runtime; the flash-next class ran on a GGUF
-deployment). This is a class replication, not a controlled quantization experiment; the
+axes at once (quantization format and serving runtime; the flash-next class ran on a quantized
+local deployment with undisclosed training data, per its own round-21/23/24 records, which name
+no format). This is a class replication, not a controlled quantization experiment; the
 cross-class delta spans model class + quantization + runtime and is recorded as such. At
 temperature 0 the multi-token-prediction draft acceptance is deterministic, so the
 completions are the underlying model's greedy outputs; that is an assumption about the
@@ -161,10 +162,12 @@ the 0.60 floor), single-axis load transitions all maintained to maintained.
   cell means: -27.13 tokens/hop (2 points, L0 and D1) against the band [14.68, 58.72]
   (round 24: +29.36). Descriptive fits: load law n = 4 r = -0.934; depth law including the
   censored D2 mean n = 3, +60.46 tokens/hop (r = 0.767); two-factor over the six cell means
-  r2 = 0.695 (descriptive only). The class-specific signature is the distractor-mention
-  ratio: 0.0 in every cell here versus 0.68 to 1.00 on the flash-next class - this class
-  does not enumerate the irrelevant components, so completion length is set by the forward
-  chain traversal plus a wide per-prompt tail, and does not ramp with irrelevant load.
+  r2 = 0.695 (descriptive only). The class-specific signature as recorded is the distractor-mention
+  ratio: 0.0 in every cell here versus 0.68 to 1.00 on the flash-next class. Erratum (issue #113):
+  with the trace channel closed on this deployment (no reasoning text archived), the 0.0 is
+  structural and cannot establish that this class does not enumerate the irrelevant components;
+  completion length still does not ramp with irrelevant load, but that is answer-level evidence
+  only (issue #105).
   Round 22's 27B-class load-free-to-240 behavior is thus a 27B-class property, not a
   quantization artifact.
 - P6 passes: all three L0 arm-F prompts deliver "yes" as round 24 recorded, at 196 / 1024 /

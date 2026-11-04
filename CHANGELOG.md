@@ -89,6 +89,29 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   archive counts 130/17 to 141/19 (also root AGENTS.md and archive/AGENTS.md); next-investigations
   Layout row updated.
 
+#### Fixed
+
+- Errata per issue #113 (forward-only; no scored result changes, wording and coverage level only):
+  round 24's depth arm reproduces round 21's ~29 tok/hop at 4x higher fact load, not "12x lower"
+  (E = 96 vs E = 24), in `research/nightly-2026-10-25-0405/README.md` and the 2026-10-25 CHANGELOG
+  entry; round 31's unsupported GGUF format attribution for the flash-next class dropped (its
+  round-22 record names no format) and its 0.0 distractor-mention signature re-attributed to the
+  closed trace channel (structural, answer-level only); round 33's transport accounting corrected
+  to 38 of 40 calls (1 health + 36 prompt dispatches + 1 disclosed retry, one TimeoutError) with
+  the rate on one declared basis (13.9 tok/s aggregate over 57.2 min, ~6.9 per stream at
+  concurrency 2); round 37's R5 re-stated - with the trace channel closed the 0.0 ratio is
+  structural, not a measurement of the non-enumerating signature; round 42's drift-control claim
+  re-stated to what the selftest executes (round-trips the literal body dict; does not inspect the
+  inherited request-body construction; byte identity against the inherited transport holds per
+  recomputation).
+- Issue #105 in-repo re-attribution: round 38's load-axis resolvable verdict annotated as measured
+  against the zero-trace 27B deployment (round 40's trace-exposing firing does not reproduce it
+  under the N6 guard: delta -18.549 against the union floor q99 of 26.742, not resolvable), and
+  the trace-exposure census added to the `research/AGENTS.md` local contracts (field census in
+  every round's `raw.jsonl` from round 40 onward; trace claims must state the exposure setting of
+  each side; a zero-trace claim is an answer-level claim only; class-level trace statements need a
+  same-class pair with the channel exposed on both sides).
+
 ### 2026-11-03
 
 #### Added
@@ -151,8 +174,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   instrument is imported, not re-implemented; the panel certifies digest-true against the
   archived `raw.jsonl` fail-closed; the declared record-only extension is the per-message field
   census (merge rule: `reasoning_content` if non-empty, else `reasoning`, else none) with a
-  drift control asserting the census transport's request body byte-identical to the inherited
-  one. Gate `f67c0535` (schema `round42-gate-v1`) frozen before dispatch. Result: the
+  drift control; the control round-trips the literal body dict, so it certifies the literal
+  rather than the inherited request-body construction (byte identity against the inherited
+  transport holds per recomputation, issue #113). Gate `f67c0535` (schema `round42-gate-v1`) frozen before dispatch. Result: the
   replication control fails, and the non-transfer is the round's lead result (verdict tier
   `policy_artifact`): mode A truncates on 1/11 at the 2048 cap and delivers 10/11 (loose 10/11)
   against the archived all-11 cap-truncation record; mode C delivers 9/11 with all nine correct
@@ -350,7 +374,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   shrinks as k grows and the ceiling is a joint (k, E, budget) surface, not a load-only curve;
   zero wrong answers grid-wide, no enumeration switch (mention ratio 0.68-1.00), and cost laws
   +7.89 tok/fact at k = 8 and +29.36 tok/hop at E = 96 (the depth slope reproducing round 21 at
-  12x lower load) place the silence onset in the upper tail of the enumeration-length
+  4x higher fact load) place the silence onset in the upper tail of the enumeration-length
   distribution, not its mean. State: **Executed**; exploratory; every ceiling conditional on the
   2048-token cap.
 ### 2026-10-24

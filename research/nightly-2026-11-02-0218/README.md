@@ -76,8 +76,10 @@ Declared extension of the inherited readout stack (record-only; the scoring chan
 inherited byte-identical one): the **field census** on every dispatch - the completion
 message's field names plus the reasoning-supplying field, merge rule `reasoning_content` if
 non-empty, else `reasoning`, else none (the extension round 40 declared on its panel). The
-census transport's request body is byte-identical to the inherited one (the drift control is
-asserted in `--selftest`); when the channel is closed on the health call (N1), every
+census transport's request body is byte-identical to the inherited one; the `--selftest` drift
+control round-trips its own literal body dict, so it certifies the literal rather than the
+inherited request-body construction (byte identity against the inherited transport holds per
+recomputation, issue #113); when the channel is closed on the health call (N1), every
 trace-derived claim in this round is refused, and the round reports at answer level.
 
 The three duplicate dispatches (A2) are the same-prompt self-agreement control that issue
