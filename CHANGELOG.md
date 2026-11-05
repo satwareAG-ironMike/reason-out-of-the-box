@@ -39,6 +39,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `research/nightly-2026-11-04-0250/policy_knob_probe.py`; all three `--selftest` runs stay
   green before and after (verified locally; the round-44/46 vendored ROUND42_REFERENCE is
   JSON constants, not a digest of any script file).
+- Issue #120 group 4 (round 21 annotated forward-only; round 38 verified): the ~33
+  tokens/hop citation in `research/nightly-2026-10-24-0205/README.md` now attributes the fit
+  to the same-class round 17 (-50.8 + 33.1 * k, r = 0.845, at coupled load) instead of
+  round 18 (a 27B-class firing whose record carries the same slope), and the declared grid
+  cites round 9's arm L as the design source (same constant load, same k set, 36 dispatches;
+  different seed_base and prompt instances). Round 38's "--selftest with 266 checks" claim
+  at `research/nightly-2026-10-31-0228/README.md` was re-verified by running the archived
+  selftest on 2026-11-05: "selftest: 266 checks passed" (rc=0) - the claim is accurate and
+  needs no amendment.
 
 ### 2026-11-04
 

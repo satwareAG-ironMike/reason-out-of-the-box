@@ -36,8 +36,10 @@ entity-name pools, so a shared bug cannot hide a leak. The shipped corpus on `ma
 
 Declared grid, seed-frozen (`seed_base 20261024`): arm L constant load E = 24 facts,
 k in {2, 3, 4, 6, 8, 12}, C = 24/k disjoint directed paths, 6 items per depth (3 yes, 3 no) =
-36 prompts; `max_tokens = 2048`, `temperature = 0.0`, one sample per item, no exemplars, no chain
-of thought requested. Health probe first, then two-phase dispatch (two sequential throughput cells,
+36 prompts (arm L is the arm-L design of round 9,
+`research/nightly-2026-10-18-0200/README.md`: same constant load, same k set, 36 dispatches,
+different seed_base and prompt instances); `max_tokens = 2048`, `temperature = 0.0`, one sample
+per item, no exemplars, no chain of thought requested. Health probe first, then two-phase dispatch (two sequential throughput cells,
 then concurrency chosen from the measured rate), incremental fsync'd `raw.jsonl`, `--resume`
 refusing unless every stored record carries the current gate hash. There is no cell pairing: this
 construction shares no prompt with any archived round; comparisons to rounds 15..19 are
@@ -109,8 +111,9 @@ answer, not on trace rescue.
 Predictions: **P1 pass** (mean prompt tokens max/min 1.0138; the tokenizer sees the constant
 load). **P2 pass** (no collapsed, no budget-limited depth under `content_only`). **P3 fail**:
 mean completion tokens at k = 12 are 2.2235x the k = 2 mean - the token law is *not* primarily
-load-driven: +29.1 tokens per hop at constant prompt load, close to the ~33 tokens/hop measured
-at coupled load (round 18), so what depth costs is generation, not (within this grid)
+load-driven: +29.1 tokens per hop at constant prompt load, close to the ~33 tokens/hop of the
+same-class round 17 fit (-50.8 + 33.1 * k, r = 0.845, at coupled load; round 18's 27B-class
+record carries the same slope), so what depth costs is generation, not (within this grid)
 correctness. **P4a pass** (`delivered_or_strict` 36/36, trivially via content). **P4b vacuous**:
 zero cells where the answer field was silent, so the #94 fallback skew had nothing to bite on;
 the skew is a coupled-load phenomenon (k = 24 with ~264 facts), not a depth phenomenon at E = 24.
