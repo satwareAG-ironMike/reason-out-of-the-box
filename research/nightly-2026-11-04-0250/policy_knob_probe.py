@@ -42,9 +42,12 @@ import, not re-implemented; the census transport and the decision machinery are
 carried from the round-44 instrument so this firing differs from rounds 42 and 44
 only in the serving class and the mode-D arm. The panel is certified digest-true
 against the archived round-23 raw.jsonl (on main) before anything is dispatched.
-The one declared extension is the census channel: a local transport that is
-byte-identical to the inherited request construction (the drift control is
-asserted in --selftest) and records the message field census on every dispatch.
+The one declared extension is the census channel: a local transport whose
+request body is byte-identical to the inherited request construction (the
+--selftest drift control round-trips the literal body dict and certifies the
+literal, not the inherited request-body construction; byte identity against the
+inherited transport holds per recomputation, issue #113) and records the message
+field census on every dispatch.
 
 Usage: --selftest | --gate | --probe | --analyze
 """
@@ -331,9 +334,10 @@ def census_source(reasoning_content: str, reasoning: str) -> str:
 
 def census_call(prompt: str, max_tokens: int, deadline_s: int) -> dict:
     """Local transport: byte-identical request to the inherited B.call_endpoint
-    (the --selftest drift control pins the body construction), plus the per-message
-    field census. The scoring channel ('content', 'reasoning') is byte-identical to
-    the inherited transport's output; the census is record-only."""
+    (the --selftest drift control round-trips this literal body dict; it certifies
+    the literal, not the inherited request-body construction - issue #113), plus
+    the per-message field census. The scoring channel ('content', 'reasoning') is
+    byte-identical to the inherited transport's output; the census is record-only."""
     key = os.environ.get("NIGHTLY_API_KEY", "").strip()
     model = os.environ.get("NIGHTLY_MODEL_ID", "").strip()
     body = json.dumps({"model": model,
@@ -1024,11 +1028,14 @@ def synth(entry: dict, mode: str, content: str, reasoning: str, ctok: int) -> di
 
 
 def _drift_control() -> None:
-    """The census transport's request body must be byte-identical in structure to the
-    inherited B.call_endpoint's: same key set, same values, same order-independent
-    JSON payload. The inherited construction is re-derived here from its source-level
-    shape; any drift in the inherited function's body keys or temperature constant
-    breaks this assertion."""
+    """Round-trip the census transport's literal body dict: same key set, same
+    values, same order-independent JSON payload as the literal built in this
+    function. This certifies the literal, not the inherited B.call_endpoint's
+    request-body construction - the inherited function is not inspected here, so
+    drift in its body keys cannot break this assertion (issue #113). Byte identity
+    against the inherited transport holds per recomputation; the inherited
+    constants (B.MAX_TOKENS, B.TEMPERATURE) are still asserted against their
+    archived values."""
     prompt = "probe prompt"
     model = "some-model"
     os.environ["NIGHTLY_MODEL_ID"] = model
@@ -1299,8 +1306,8 @@ def selftest() -> None:
     assert evaluate(a_run + build("C", perfect), gate, with_health())["verdict"]["tier"] \
         == "insufficient_data"
     print("selftest ok: panel 11 (4 gold yes / 7 gold no), one-line knob delta (ban + "
-          "bounded), digest-true reconstruction, census merge rule and drift control, "
-          "duplicate tarr controls, tiers A-E and modeD gain/parity/loss negative "
+          "bounded), digest-true reconstruction, census merge rule and literal-body drift "
+          "control, duplicate tarr controls, tiers A-E and modeD gain/parity/loss negative "
           "controls, mcnemar 11:0 exact p = 1/1024, vendored round-42 and round-44 "
           "reference consistency with planted-slip controls")
 

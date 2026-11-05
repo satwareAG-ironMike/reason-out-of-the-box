@@ -26,6 +26,19 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   instrument docstrings comment-only; `raw.jsonl`, `summary.json`, `gate.json` stay
   immutable), resolving the practice-vs-contract disagreement and covering the frozen
   script docstring edit.
+- Issue #120 group 2 (comment-only; no behavior change): the drift-control docstrings that
+  still promise a certification the instruments do not deliver are restated at all 12 sites
+  (the 10 line-referenced by the issue plus the ported `_drift_control` docstrings in rounds
+  44 and 46 that carry the same false sentence): the `--selftest` drift control round-trips
+  the literal body dict and certifies the literal, not the inherited `B.call_endpoint`
+  request-body construction; the inherited function is not inspected, so drift in its body
+  keys cannot break the assertion; byte identity against the inherited transport holds per
+  recomputation, and the inherited constants are still asserted against their archived
+  values. `research/nightly-2026-11-02-0218/policy_knob_probe.py`,
+  `research/nightly-2026-11-03-0236/policy_knob_probe.py` and
+  `research/nightly-2026-11-04-0250/policy_knob_probe.py`; all three `--selftest` runs stay
+  green before and after (verified locally; the round-44/46 vendored ROUND42_REFERENCE is
+  JSON constants, not a digest of any script file).
 
 ### 2026-11-04
 
