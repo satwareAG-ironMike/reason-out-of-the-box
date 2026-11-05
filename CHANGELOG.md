@@ -7,6 +7,46 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### 2026-11-05
 
+#### Added
+
+- Nightly research round 48 (issue #65; serves #71, #100, #105; refs #94, #73,
+  #65, #108): `research/nightly-2026-11-05-0229/` is the test-retest re-fire of
+  the round-46 27B-class knob battery - the same 11 round-23 cap-truncated items
+  (S4 to S6 at E = 192) re-dispatched on a new 27B-class endpoint in modes A
+  (archived prompt, 11), C (no-repetition one-liner, 11) and D (the bounded
+  single-pass knob, 11), plus 3 duplicate mode-A self-agreement dispatches and 1
+  census health call; 37 of the 40-call cap. Instrument: the round-46 script
+  ported byte-identically except the gate schema, the gate question, two vendored
+  references (`ROUND44_REFERENCE` kept, `ROUND46_REFERENCE` added, both with
+  archive blob digests and planted-slip selftest controls) and the six new
+  re-fire rows R1 to R6 (the shared rows P1 to P9, N1, N2 stay byte-equal to the
+  round-46 gate, so the four firings 42/44/46/48 score one table); the archived
+  round-46 `raw.jsonl` blob is pinned fail-closed and is the join target for R6.
+  Gate `294ed5bd` (schema `round48-gate-v1`) frozen before dispatch. Result
+  (tier `policy_artifact`, mode-D tier `bounded_gain`, repeat tier `partial` 4/5
+  of R1-R5): the class-tied ceiling holds on a third 27B firing (mode A
+  truncates 1/11 against the registered <= 3/11 band, against 8/11 to 11/11 on
+  the flash class); the ban delivers 9/11 all correct at cost ratio 1.0982 (the
+  fourth ceiling-free 27B data point of the state-dependent cost ledger: 1.1255,
+  1.0237, 1.0982 against the ceiling-present flash firing's 0.6756); the
+  round-46 `bounded_loss` readout does not repeat - the bounded knob is the best
+  delivery mode on this firing (10/11, beating the ban by one item, paired
+  C-only 0 / D-only 1, p = 1.0) while the cost direction holds (ratio 1.1224
+  over the ban; 1.3089 in round 46), so the mode-D tier is a firing-state
+  property on the 27B class. The census exposure state flipped between the two
+  27B-class firings (round 46: `reasoning_content`; this firing: `reasoning`,
+  with a different message field set marking a different serving revision): the
+  inherited scoring channel records 0 trace chars on all 36 dispatches, so P7
+  and P8c refuse the text-derived claims as pre-registered and the 27B class is
+  now measured under all three exposure states (#105). R6: 0/36 dispatch records
+  byte-identical to the archived round-46 firing (3/36 content-identical), a
+  cross-firing class statement, not a within-firing restatement. N2: 2/3
+  duplicate pairs byte-identical (TARr 0.6667) but 0/3 token-identical, one pair
+  diverging on the answer (the duplicate truncated at 2048 on a 4,341-char
+  trace where the original delivered in 596 tokens): within-firing trace
+  non-determinism on this deployment state. Transport: 104,689 prompt /
+  33,564 completion tokens, ~67.9 tokens/s single stream, wall 508.7 s.
+
 #### Fixed
 
 - Issue #120 group 1 (forward-only annotations; no scored result, gate digest or archive
