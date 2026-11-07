@@ -104,7 +104,7 @@ firing's per-item stops in parentheses):
 
 | k | gold-yes delivered / correct (this firing) | reference firing | gold-no delivered / correct (this firing) | reference firing |
 |---|---|---|---|---|
-| 16 | 2 / 2 (345, 336) | not dispatched | 2 / 2 (475, 446) | not dispatched |
+| 16 | 2 / 2 (345, 327) | not dispatched | 2 / 2 (475, 446) | not dispatched |
 | 24 | 2 / 2 (464, 474) | 2 / 2 (771, 666) | 2 / 2 (763, 1222) | 2 / 2 (1556, 1556) |
 | 32 | 2 / 2 (604, 577) | 2 / 2 (985, 845) | 2 / 2 (1806, 1775) | 2 / 1 (1556, 1556) |
 | 40 | 2 / 2 (715, 731) | 2 / 2 (1153, 1059) | 0 / 0 (both censored at 2048) | 2 / 2 (1556, 1556) |
