@@ -5,6 +5,30 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-07
+
+#### Added
+
+- Nightly research round 52 (issue #65; serves #71, #100, #105; refs #126, #129, #94, #73):
+  `research/nightly-2026-11-07-0319/` re-dispatches the round-51 load-floor items byte-identically
+  (22 pinned prompt digests certified fail-closed before dispatch, plus 4 same-construction anchors
+  at k = 16) on a 27B-class local endpoint: cells k = 16..48 (4 items each), the two unselected
+  k = 48 floor items (both gold-no) at stage extra, and two k = 48 duplicate re-dispatches as the
+  issue #100 control; 25 of the 40-call cap, `max_tokens` 2048, `temperature 0.0`, concurrency 2,
+  zero transport errors, 16,672 prompt and 27,673 completion tokens. Gate `0b0e8d77`
+  (schema `round52-gate-v1`) frozen and pinned before dispatch. Result (tier
+  `cross_path_cliff_class_invariant`, flags `wall_is_label_split`,
+  `self_agreement_holds_at_temperature_0`): the k = 48 cross-path boundary is class-shared (1 of 4
+  correct here versus 0 of 2 on the reference firing) but the wall's mode is class-split (three of
+  four censored at the 2,048 cap here against two delivered-wrong there); the 1,556-token pin is
+  not reproduced (7 distinct delivered negative stops, none at 1,556); the issue #126
+  zero-truncation claim does not transfer to the ladder family on this class (6 of 6 gold-no at
+  k = 40/48 censored, positive arm 10 of 10 delivered); self-agreement at temperature 0 holds 2 of
+  2 including the censored pair; the single cross-class discordance (McNemar b = 0, c = 1, p = 1.0
+  over 12 delivered pairs) is the item the small class answered wrong. 73 selftest checks; the
+  instrument's own summary-write crash post-dispatch is disclosed and rescored offline at zero
+  prompt cost.
+
 ### 2026-11-05
 
 #### Fixed
