@@ -39,6 +39,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   serving-id digest identical). The runner's abnormal-end record for this firing (exit 124 at the
   90-minute window) post-dates a completed dispatch and is stated in the round README.
 
+#### Changed
+
+- `research/AGENTS.md` states the same-firing resume boundary that this round had to operate in:
+  immutability of `raw.jsonl`, `summary.json` and `gate.json` binds when the round's PR opens; a
+  resume in the same firing may rebuild `summary.json` and re-emit `gate.json` only with `raw.jsonl`
+  and the gate blob byte-unchanged, the instrument change disclosed in the README, and a
+  `registered: false` marker plus planted-slip controls on any column added after the dispatch. No
+  registered row or tier may move in a resume (refs #65).
+
 ### 2026-11-05
 
 #### Fixed
