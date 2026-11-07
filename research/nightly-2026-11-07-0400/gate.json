@@ -1,0 +1,224 @@
+{
+  "archived_reference": {
+    "branches": {
+      "round 48": "research/nightly-2026-11-05-0229 (#125)",
+      "round 49": "origin/research/nightly-2026-11-05-0400 (#127)",
+      "round 50": "research/nightly-2026-11-06-0259 (#128)",
+      "round 51": "research/nightly-2026-11-06-0433 (#130)"
+    },
+    "note": "quoted from four round directories that are open PRs, not main; vendored because the post-merge tree, not this firing, is what certifies them; no verdict of this round depends on them",
+    "pin_signature": {
+      "round 48": {
+        "at_cap": 5,
+        "at_pin": 0,
+        "marker": null,
+        "records": 36,
+        "utilisations_at_pin": []
+      },
+      "round 49": {
+        "at_cap": 0,
+        "at_pin": 33,
+        "marker": 33,
+        "records": 36,
+        "utilisations_at_pin": [
+          0.7598
+        ]
+      },
+      "round 50": {
+        "at_cap": 5,
+        "at_pin": 0,
+        "marker": 0,
+        "records": 31,
+        "utilisations_at_pin": []
+      },
+      "round 51": {
+        "at_cap": 0,
+        "at_pin": 8,
+        "marker": 9,
+        "records": 20,
+        "utilisations_at_pin": [
+          0.7598
+        ]
+      }
+    },
+    "raw_sha256": {
+      "round 48": "736d93119b9748b189d98aed59172bc54d79f5371bb19b25ee57811192de31fb",
+      "round 49": "b140458952955711974bb2013e714cdea08dab012f2f0cf94140969c841f7f48",
+      "round 50": "e2a9d47ecb69e40e4e908df9adf20362ea6f9ff9e0430516148a5e4c8021041f",
+      "round 51": "fbfa4fde59f43ea3f484b4205b5beff11d2add27e6c3f60e210ca092e3452f7a"
+    },
+    "trace_exposure": {
+      "round 48": {
+        "fields": [
+          "audio",
+          "content",
+          "function_call",
+          "reasoning",
+          "refusal",
+          "role"
+        ],
+        "reasoning_source": "reasoning",
+        "text_stored": false
+      },
+      "round 49": {
+        "fields": [
+          "content",
+          "reasoning_content",
+          "role"
+        ],
+        "reasoning_source": "reasoning_content",
+        "text_stored": true
+      },
+      "round 50": {
+        "fields": [
+          "content",
+          "reasoning_content",
+          "role"
+        ],
+        "reasoning_source": "reasoning_content",
+        "text_stored": true
+      },
+      "round 51": {
+        "fields": [
+          "content",
+          "reasoning_content"
+        ],
+        "reasoning_source": "reasoning_content",
+        "text_stored": true
+      }
+    }
+  },
+  "arms": {
+    "as_is": "the round-6/50/51 template, certified byte-identical to the archived rows",
+    "enumerate": "same facts, same query, reachable set asked for first (a task variant: it cannot show the as-is task is solvable, only whether an as-is failure co-occurs with a self-organized search)",
+    "listing": "non-ladder control, no relation and no entities, asked to write 1..4000 and then DONE"
+  },
+  "budget": {
+    "call_cap": 40,
+    "caps": [
+      512,
+      1024,
+      1536,
+      2048
+    ],
+    "dispatch_budget_s": 900,
+    "max_tokens_cap": 2048,
+    "planned_calls": 15,
+    "temperature": 0.0
+  },
+  "dispatch_order": "health, cap-2048 as-is pair, duplicate control, gold-yes natural-stop control, enumerate pair, listing at 2048, cap-1536 pair, listing at 1024, cap-1024 pair, cap-512 pair: the decisive same-prompt anchors go first so a wall-clock cutoff costs the low-cap rungs and not the replication",
+  "flags": [
+    "C6 == 2 of 2 AND tier serving_budget_hook -> enumerate_arm_recovers_label_and_tier_is_hook",
+    "C9 > 0 -> marker_not_locked_to_predicted_hook",
+    "R1 coverage_ratio < 1.0 in both as-is cap-2048 records -> traversal_unfinished_at_hook"
+  ],
+  "hypotheses": {
+    "H1_proportional_budget": "the stop lands at 1556*cap//2048 (band 8 tokens) with finish_reason stop and the marker sentence present at every cap",
+    "H2_absolute_budget": "for every cap below the pin the output reaches the cap itself with finish_reason length, no marker and no answer",
+    "H3_no_serving_budget": "lengths track the task; the marker appears wherever the model writes it; the pin is a property of the family on the class"
+  },
+  "items": {
+    "facts": 96,
+    "level": 48,
+    "rule": "three seeds certified against the archived digests before any dispatch: the two k = 48 gold-no items round 51 delivered wrong, and the gold-yes item whose archived natural stop 1310 sits below the pin",
+    "seed_base": 20261005
+  },
+  "question_blob": "Does the 1,556-token stop that two firings on this deployment produced at the 2048 cap come from the traversal or from a budget in the serving stack? Hold the prompt bytes fixed, move the requested cap to 512, 1024 and 1536, and ask whether the stop length and the self-termination marker move with the cap.",
+  "readout_policy": "the answer channel only for every verdict (issue #94); trace text is stored for marker position, listing extent and entity coverage only, never as a verdict",
+  "rows": [
+    {
+      "admits_tier": [
+        "serving_budget_hook"
+      ],
+      "band": "6 of 6",
+      "id": "C1",
+      "kind": "predicted",
+      "text": "the cap ladder below the pin lands at the predicted hook: 6 records (2 items x caps 512, 1024, 1536), measured tokens within 8 of 1556*cap//2048, finish_reason stop, marker present"
+    },
+    {
+      "admits_tier": [
+        "absolute_pin"
+      ],
+      "band": "reported; 5 of 6 or more refuses C1 and the H1 reading",
+      "id": "C2",
+      "kind": "alternative",
+      "text": "the absolute-budget signature at the same 6 records: tokens equal the requested cap, finish_reason length, no marker"
+    },
+    {
+      "admits_tier": [
+        "serving_budget_hook"
+      ],
+      "band": "0 disagreements",
+      "id": "C3",
+      "kind": "predicted",
+      "text": "the marker appears in every predicted-hook record and in no natural-stop record (0 disagreements)"
+    },
+    {
+      "admits_tier": [
+        "serving_budget_hook"
+      ],
+      "band": "1 of 1",
+      "id": "C4",
+      "kind": "control",
+      "text": "the gold-yes item whose archived natural stop was 1310 stays below the hook at cap 2048: delivered, finish_reason stop, no marker, tokens below 1556"
+    },
+    {
+      "admits_tier": [
+        "serving_budget_hook"
+      ],
+      "band": "2 of 2",
+      "id": "C5",
+      "kind": "control",
+      "text": "the non-ladder listing control is cut by the same hook at caps 2048 and 1024 (predicted lengths, marker present, DONE absent)"
+    },
+    {
+      "admits_tier": [],
+      "band": "2 of 2 for the recovery flag; 0 of 2 keeps the ceiling",
+      "id": "C6",
+      "kind": "mechanism",
+      "text": "the enumerate arm delivers the gold label on both items round 51 delivered wrong, and its own list equals the independent BFS reachable set"
+    },
+    {
+      "admits_tier": [],
+      "band": "1 of 1",
+      "id": "C7",
+      "kind": "control",
+      "text": "issue #100 self-agreement: the duplicate re-dispatch of the same request is byte-identical to its twin (trace and answer)"
+    },
+    {
+      "admits_tier": [],
+      "band": "2 of 2",
+      "id": "C8",
+      "kind": "control",
+      "text": "same-prompt cross-firing against the archived rows of round 51 on the certified pair: same finish_reason and same answer-channel readout for both items, with the serving-id digest comparison stated"
+    },
+    {
+      "admits_tier": [],
+      "band": "reported",
+      "id": "C9",
+      "kind": "anomaly",
+      "text": "markers that appear below the predicted hook are counted as anomalies, never as hook hits (round 51's archived rung record is one: marker at 532 tokens where the prediction was 778)"
+    },
+    {
+      "admits_tier": [],
+      "band": "every record censused",
+      "id": "N1",
+      "kind": "census",
+      "text": "issue #105 field census on every record: the message field names and the reasoning-supplying field (reasoning_content if non-empty, else reasoning, else empty)"
+    },
+    {
+      "admits_tier": [],
+      "band": "reported",
+      "id": "R1",
+      "kind": "reported",
+      "text": "traversal completeness at the hook, as-is cap-2048 records only: the fraction of the item's entities the run mentioned before the cut, and whether the query target was mentioned"
+    }
+  ],
+  "schema": "round53-gate-v1",
+  "tier_rule": [
+    "serving_budget_hook if C1 >= 5 of 6 and C2 <= 1 of 6 and C5 == 2 of 2",
+    "absolute_pin if C2 >= 5 of 6",
+    "no_serving_budget if C1 <= 2 of 6 and C5 == 0 of 2",
+    "unresolved otherwise"
+  ]
+}
