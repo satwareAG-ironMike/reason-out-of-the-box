@@ -88,13 +88,13 @@ When the user requests a durable behavior change, record it here or in the relev
 - This is a research POC (no build, no runtime). Question, verdict, and evidence map live in README.md
 - The thesis program (M1-M5) runs on AI agents under docs/agent-execution.md; the repository is the public record; standards are enforced (confrontation records, verifier independence, Executed/Reproduced/Validated labels); resources stay minimal
 - Git: `main`, remote github.com/satwareAG-ironMike/reason-out-of-the-box - protected by the
-  `main-integrity-gate` ruleset: no force pushes, no branch deletion, linear history,
-  all 3 CI checks required on every commit reaching `main`, no bypass actors. Human
-  review requirement removed 2026-09-06 by owner decision. Every change reaches `main`
-  via PR, squash-merged once the 3 checks are green (repo-level auto-merge is off, so
-  `gh pr merge --auto` is refused; watch the checks, then merge); direct pushes are
-  rejected (GH013) because a pushed commit must already carry the 3 passing checks.
-  Never edit the ruleset without explicit user instruction
+  `main-integrity-gate` ruleset: no force pushes, no branch deletion, linear history, the 3
+  ruleset-required status checks (named in the CI bullet below) enforced on every commit
+  reaching `main`, no bypass actors. Human review requirement removed 2026-09-06 by owner
+  decision. Every change reaches `main` via PR, squash-merged once those checks are green
+  (repo-level auto-merge is off, so `gh pr merge --auto` is refused; watch the checks, then
+  merge); direct pushes are rejected (GH013) because a pushed commit must already carry the
+  passing checks. Never edit the ruleset without explicit user instruction
 - Public-only rule: the repository holds only public resources (papers, open repositories, published tools). No personal data, device or network inventories, session state, credentials, or private discussion content - in files or in history
 - Paper provenance rule: every archive entry must carry a source ID (arXiv, PubMed,
   or PhilPapers record), authors, venue, year, and peer-review status; entries with
@@ -104,7 +104,9 @@ When the user requests a durable behavior change, record it here or in the relev
 - CI: GitHub Actions run on every push and PR - archive consistency (`scripts/check_archive.py`),
   markdown hygiene (em/en dashes, `scripts/check_links.py`), a full-history gitleaks secret
   scan, and a serving-id guard (`scripts/check_serving_ids.py`, endpoint host:port / GGUF file
-  names / quantization-tagged deployment labels, issue #85). The single action is SHA-pinned;
+  names / quantization-tagged deployment labels, issue #85). The first three are the
+  ruleset-required checks; the serving-id guard job (owner go 2026-11-04) runs on every push
+  and PR but is not in the ruleset's required list. The single action is SHA-pinned;
   the workflow is read-only (`permissions: contents: read`)
 - Local CI parity before pushing: `python3 scripts/check_archive.py --selftest && python3
   scripts/check_archive.py` then `python3 scripts/check_links.py --selftest && python3
@@ -128,8 +130,9 @@ When the user requests a durable behavior change, record it here or in the relev
   06:30 (skill-verified validation of open PRs, merge-if-green); weekly maintenance Sun 05:00
   (branch hygiene, deep PR pass); weekly doc collection Sun 08:00 (intro pages synced via the DOX
   closeout rules); weekly issue audit Sun 09:00 (open issues validated against in-repo
-  knowledge). The merge gate is unchanged: branch + PR, all 3 CI checks green, squash-merged;
-  agents never push to main and never touch .github or the ruleset. Round summaries post to #83.
+  knowledge). The merge gate is unchanged: branch + PR, the 3 ruleset-required checks green,
+  squash-merged; agents never push to main and never touch .github or the ruleset. Round
+  summaries post to #83.
 
 ## Child DOX Index
 
@@ -137,8 +140,8 @@ When the user requests a durable behavior change, record it here or in the relev
 |------|-------|------|
 | `archive/` | Paper archive: 141 entries, 19 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
 | `generators/` | Condition-2 task generators (issue #4): digit matrices + ladders k-hop shipped; ladders mult_mult/dp_puzzle and ARC-style planned; seed policy, solvability and manifest contracts; permutation-calibrated leak gate, pinned issue #67 negative-control fixtures and the seed-paired shortcut probe (issue #67; a true matched pair is owed, issue #78) | [AGENTS.md](generators/AGENTS.md) |
-| `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), IRB protocol draft (issue #7), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall, insect-sentience threshold); governed by root
+| `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), IRB protocol draft (issue #7), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall, insect-sentience threshold, round-level adversarial review records in review-rounds/); governed by root
   rules | - |
 | `runs/` | Executed-run record: per-round manifests, raw per-prompt responses, calibration records, regeneration and battery scripts, independent verification records, round reports; immutable manifests, public-only artifacts, Executed/Reproduced/Validated labels | [AGENTS.md](runs/AGENTS.md) |
 | `scripts/` | `check_archive.py` archive consistency checker, `check_links.py` markdown link checker and `check_serving_ids.py` endpoint serving-id guard (issue #85; stdlib, each with `--selftest`); run all three before any closeout | - |
-| `research/` | Nightly round artifacts (issue #65): per-firing directories with probe scripts, prompts, raw responses, scores, sanitization and evidence-label contracts | [AGENTS.md](research/AGENTS.md) |
+| `research/` | Nightly round artifacts (issue #65): per-firing directories with probe scripts, prompts, raw responses, scores, sanitization and evidence-label contracts, the trace-exposure census (issue #105) and the forward-only errata carve-out over immutable raw records (issue #120) | [AGENTS.md](research/AGENTS.md) |
