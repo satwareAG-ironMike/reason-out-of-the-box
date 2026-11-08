@@ -5,6 +5,55 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-06
+
+#### Added
+
+- Nightly research round 51 (issue #65; serves #71, #126, #94, #100, #105; refs #73, #65):
+  `research/nightly-2026-11-06-0433/` is the per-item output-budget ladder at the generator's load
+  floor, the route round 50 named as the only way to `d*`. Selection rule: facts = 2k exactly (two
+  disjoint k-edge paths, the smallest item the shipped generator can build at that depth), first two
+  gold-yes and two gold-no in generation order, cells k = 8, 16, 24, 32, 40, 48 at `max_tokens`
+  2048, temperature 0; stage 2 re-dispatches the identical prompt of the smallest-seed gold-yes item
+  of each cell at 24, 32, 40, 48 at rungs floor(0.8L/64)*64 and floor(0.5L/64)*64 of that item's own
+  measured natural stop, plus two identical re-dispatches as the issue #100 control. Gate
+  `60b0d62c` (schema `round51-gate-v1`) frozen before dispatch; 109 `--selftest` checks; 20 of the
+  40-call cap dispatched (1 health, 16 stage 1, 4 stage 2), 14,846 prompt / 23,370 completion tokens.
+  Result (tier `capability_bound_floor_depth`, flag `early_commitment_observed`): 16 of 16 stage-1
+  records delivered with `finish_reason` stop - the 2048 cap binds nowhere on this family out to
+  k = 48, confirming issue #126 - and 13 of 16 are correct (0.8125, CI 0.5699..0.9341); the three
+  failures are all cross-path (gold-no) items that answered "yes": both at k = 48 and one at k = 32,
+  so the wall at the load floor is a wrong answer rather than a running-out and `d*` sits as an
+  accuracy interval 40 < d* <= 48 (F1 pass 4/4, F2 fail at 3 wrong, F3 fail at 6/6 delivered).
+  Every one of the eight gold-no records stopped at exactly 1556 completion tokens at every depth
+  while the gold-yes arm climbs 718.5, 915.0, 1106.0, 1409.5 (F4 slope 28.3 tokens/hop, inside the
+  registered band, between round 50's 31.3 and round 6's 80), so the label-split cost ratio F5
+  collapses 2.1656 -> 1.7005 -> 1.4069 -> 1.1039 with depth: the negative arm is length-pinned and
+  the budget belongs to the label, not to k. Stage 2: both 0.8-rungs delivered and were correct at
+  78% of their own natural stop (532 tokens at rung 1024 against L = 1310; 876 at rung 896 against
+  L = 1153), both 0.5-rungs hit the rung with no answer token (I1 fail 2 of 4, so the wall is not a
+  completeness wall), and prefix identity fails (I2, 0 of 2 candidates): the same prompt at
+  temperature 0 on the same endpoint shares 0.9509, 0.0667, 0.6243 and 0.9911 of its undisturbed
+  output at the four rungs, un-ordered by rung, so `one_dispatch_predicts_rungs` is refused and a
+  budget ladder must spend a dispatch per rung. Free cross-firing control: the k = 32 floor cell is
+  byte-for-byte round 50's M32 item set (digest-pinned) and reproduces 3 of 4 finish states, with
+  the item round 50 truncated at the cap (84261050, length at 2048) delivering here at 1556 with
+  stop and being one of the three wrong answers; round 50's 12-hex model digest and this round's
+  16-hex digest (c62b81e96826354e) do not match on their shared prefix, so the two firings are
+  different deployments of one class and the digest width is now fixed at 16 for issue #100.
+  Zero-prompt finding 1: the level-49 `entity pool exhausted` raise is a collision ceiling on item
+  size and not on depth (pool 2700 names, `ladders._entity` at 100 rejection tries, an item at
+  level 49 with C = 50 needs 2550 names); item-by-item scans generate 285 of 300 at 49, 284 at 50
+  and 178 at 64 and still find load-floor items (5, 6, 1), so `k > 48` is reachable on the floor
+  family and the fix is generator-side - filed as a new issue against `generators/`. Cutoff
+  disclosed: the firing lost its first hour to a transcription defect (the vendored round-50
+  reference digests were 12-hex against the archive's 16-hex field, so `certify_reference` refused
+  all 12 rows and would not dispatch; repaired by programmatic re-extraction, nothing dispatched
+  against an uncertified reference), and the resumed pass was terminated by its 700 s guard, so the
+  k = 8 and k = 16 cells, the k = 24 and k = 32 interrupt candidates and both duplicate controls were
+  never dispatched - N2 did not run (an absence, not a disagreement), I1 and I2 rest on 4 dispatches
+  and 2 candidates, and the round stays Executed, not Reproduced or Validated.
+
 ### 2026-11-05
 
 #### Added
