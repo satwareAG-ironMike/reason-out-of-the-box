@@ -1,0 +1,210 @@
+{
+  "budget": {
+    "call_cap": 40,
+    "dispatch_budget_s": 1380,
+    "max_tokens": 2048,
+    "temperature": 0.0
+  },
+  "cells": {
+    "dispatch_order": "levels descending in both stages: the wall question lives in the deep cells, so a wall-clock cutoff costs the shallow law anchors (k = 8, 16) and not the wall",
+    "levels": [
+      8,
+      16,
+      24,
+      32,
+      40,
+      48
+    ],
+    "rule": "first two gold-yes and first two gold-no in generation order with facts == 2*level exactly; 4 items per cell; constant baseline 0.50 per cell",
+    "stage1_calls": 24,
+    "stage2": {
+      "candidate_rule": "smallest-seed gold-yes item in the cell",
+      "dup_levels": [
+        40,
+        48
+      ],
+      "interrupt_levels": [
+        24,
+        32,
+        40,
+        48
+      ],
+      "rung_rule": "floor(frac*L/64)*64 at frac in {0.8, 0.5}, L = the stage-1 natural stop; a truncated candidate is censored and unscored"
+    }
+  },
+  "flags": [
+    "I1 fail -> early_commitment_observed (the wall is not a completeness wall)",
+    "I2 pass -> one_dispatch_predicts_rungs (budget ladder cost is 1 prompt per item)",
+    "any gold-no truncation -> wall_is_label_split, reported beside the tier"
+  ],
+  "generator_ceiling": {
+    "correction": "the level-49 whole-series call is where the ceiling shows, but the same scan done item by item still yields load-floor items (C = 2, 2*(level+1) names) at 49, 50 and 64, so depth beyond 48 is reachable on the floor family; this round stays registered at 48",
+    "first_failing_item_index": 16,
+    "floor_family_counts": {
+      "8": 58,
+      "16": 22,
+      "24": 14,
+      "32": 12,
+      "40": 9,
+      "48": 6
+    },
+    "max_entities_at_max_level": 2450,
+    "max_entities_by_level": {
+      "8": 90,
+      "16": 306,
+      "24": 650,
+      "32": 1122,
+      "40": 1722,
+      "48": 2450
+    },
+    "measured_max_level": 48,
+    "mechanism": "an item draws C*(level+1) fresh synthetic names with the chain count C uniform in 2..level+2, and ladders._entity allows 100 rejection tries per name against a pool of 2700 names: the raise is a collision ceiling on item size, not a ceiling on depth",
+    "past_ceiling_scans": {
+      "49": {
+        "first_raise_index": 16,
+        "floor_items": 5,
+        "generated": 285,
+        "max_names": 2500,
+        "raised": 15,
+        "scanned": 300
+      },
+      "50": {
+        "first_raise_index": 29,
+        "floor_items": 6,
+        "generated": 284,
+        "max_names": 2448,
+        "raised": 16,
+        "scanned": 300
+      },
+      "64": {
+        "first_raise_index": 4,
+        "floor_items": 1,
+        "generated": 178,
+        "max_names": 2470,
+        "raised": 122,
+        "scanned": 300
+      }
+    },
+    "pool_names": 2700,
+    "rejection_tries": 100,
+    "whole_series_call_dies_at": 49
+  },
+  "load_floor": {
+    "facts": [
+      16,
+      32,
+      48,
+      64,
+      80,
+      96
+    ],
+    "levels": [
+      8,
+      16,
+      24,
+      32,
+      40,
+      48
+    ],
+    "note": "facts >= 2k is a generator invariant, so a constant-prompt depth ladder cannot pass k = 32 (round 50's band ends there)"
+  },
+  "question": "Where does the per-item output budget cross the 2048 cap on the ladder family at the generator's load floor (facts = 2k), and does a trace cut below its own measured natural stop still yield a verdict?",
+  "readout_policy": "answer field only; the trace-recovery rules stay refused after round 50's calibration failure at 0.5652, so no claim in this round rests on a trace-derived verdict. Trace text is stored for prefix identity and length only.",
+  "reference": {
+    "round50_raw_blob_sha256": "e2a9d47ecb69e40e4e908df9adf20362ea6f9ff9e0430516148a5e4c8021041f",
+    "round50_rows": 12,
+    "round6_fit": "completion_tokens = -36 + 80k"
+  },
+  "rows": [
+    {
+      "arm": "gold-yes at levels 40 and 48",
+      "band": "delivered >= 3 of 4",
+      "id": "F1",
+      "kind": "prediction",
+      "statement": "the positive arm delivers at least 3 of 4 at the two deepest cells"
+    },
+    {
+      "arm": "all 24 stage-1 records",
+      "band": "delivered-wrong == 0",
+      "id": "F2",
+      "kind": "prediction",
+      "statement": "no delivered record is wrong anywhere on the floor ladder"
+    },
+    {
+      "arm": "gold-no at levels 32, 40, 48",
+      "band": "delivered <= 3 of 6",
+      "id": "F3",
+      "kind": "prediction",
+      "statement": "the negative arm delivers at most 3 of 6 at k >= 32 on the floor"
+    },
+    {
+      "arm": "gold-yes uncensored natural stops",
+      "band": [
+        15.0,
+        50.0
+      ],
+      "id": "F4",
+      "kind": "prediction",
+      "statement": "the positive arm's natural stop grows with depth on the floor at 15 to 50 tokens per hop, against round 6's 80 and round 50's 31.3"
+    },
+    {
+      "arm": "label-split cost",
+      "band": "reported or refused",
+      "id": "F5",
+      "kind": "readout",
+      "statement": "mean natural stop of gold-no over gold-yes per cell, over uncensored records only; reportable when at least 3 of the cells 24, 32, 40, 48 carry at least one uncensored negative"
+    },
+    {
+      "arm": "stage-2 interrupt dispatches",
+      "band": "delivered <= 1 of 8",
+      "id": "I1",
+      "kind": "prediction",
+      "statement": "cutting a delivered item below its own natural stop surfaces no verdict: at most 1 of 8 interrupt dispatches delivers"
+    },
+    {
+      "arm": "prefix determinism",
+      "band": "candidates passing >= 3 of 4",
+      "id": "I2",
+      "kind": "readout",
+      "statement": "an interrupted output is the prefix of the same item's delivered output on at least 3 of 4 candidates (longest-common-prefix ratio >= 0.90 at both rungs), which is what a per-item budget ladder needs in order to need only one dispatch per item"
+    },
+    {
+      "arm": "issue #105 exposure",
+      "band": "share >= 0.90",
+      "id": "N1",
+      "kind": "census",
+      "statement": "the reasoning-supplying field is open on at least 90% of records"
+    },
+    {
+      "arm": "issue #100 self-agreement",
+      "band": "byte_identical >= 2 of 2",
+      "id": "N2",
+      "kind": "control",
+      "statement": "both in-firing duplicate re-dispatches are byte-identical"
+    },
+    {
+      "arm": "cross-firing replicate",
+      "band": "reproduced >= 3 of 4",
+      "id": "N3",
+      "kind": "control",
+      "statement": "the k = 32 floor cell is round 50's archived M32 item set (digest pinned) and reproduces its per-item finish state on at least 3 of 4"
+    }
+  ],
+  "schema": "round51-gate-v1",
+  "serves": [
+    "#71",
+    "#126",
+    "#94",
+    "#100",
+    "#105",
+    "#73",
+    "#65"
+  ],
+  "tier_rule": [
+    "F2 fail -> capability_bound_floor_depth (a delivered answer is wrong: an accuracy ceiling is placed)",
+    "F1 fail -> wall_reaches_both_arms (the positive arm no longer delivers: the cap binds on the traversal at every label)",
+    "F1 pass and F3 pass -> label_split_wall (positives deliver, negatives die)",
+    "F1 pass and F3 fail -> no_wall_inside_generator_ceiling (nothing dies to k = 48)",
+    "otherwise -> ambiguous"
+  ]
+}

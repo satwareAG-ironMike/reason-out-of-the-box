@@ -1,0 +1,17 @@
+{
+  "census": {
+    "fields": [
+      "content",
+      "reasoning_content"
+    ],
+    "reasoning_content_chars": 267,
+    "reasoning_field_chars": 0,
+    "reasoning_source": "reasoning_content"
+  },
+  "completion_tokens": 70,
+  "finish_reason": "stop",
+  "model_digest": "c62b81e96826354e",
+  "ok": true,
+  "probe": "health",
+  "wall_s": 11.174
+}
