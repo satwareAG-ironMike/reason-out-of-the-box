@@ -9,6 +9,48 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 #### Added
 
+- Nightly research round 50 (issue #65; serves #71, #94, #126, #100, #105; refs #73):
+  `research/nightly-2026-11-06-0259/` separates depth from input load, and computation from
+  surfacing, on the k-hop ladder family - 7 cells on a flash-next-class endpoint: the four
+  archived round-6 k = 8 anchor items (seeds asserted, round-6 `raw.jsonl` blob `21987bdf`
+  pinned fail-closed), a matched-load depth ladder k = 8/16/24/32 selected inside a 64-72
+  fact band so the prompt size is held constant while depth grows 4x and the chain count
+  falls 8 to 2, a 3x-load arm at k = 16 and k = 32 (192 facts), 3 duplicate re-dispatches
+  (#100) and 1 census call: 32 of the 40-call cap, `max_tokens` 2048, `temperature` 0.0,
+  zero retries. Instrument `depth_load_probe.py` (stdlib, `--selftest` 157 checks: planted
+  capability-bound and surfacing-bound firings must receive different tiers, a zero-trace
+  deployment must refuse the trace rows, a planted wrong-verdict trace must score as
+  capability, a planted `DUP-`-label pair must join); gate `round50-gate-v1` (blob
+  `a805acd9`) frozen before dispatch and pinned in the instrument. Result (tier
+  `ambiguous`, 6 of 6 scored rows pass): **23 delivered records, 23 correct, 0 delivered
+  wrong, 5 non-deliveries all `finish_reason = length` at 2048**, so this firing's accuracy
+  loss is entirely a delivery loss and `d*` stays unplaced (the accuracy curve never turns
+  over, only the delivery curve); at matched load accuracy is 4/4 at k = 8 and 16 and 3/4 at
+  k = 24 and 32, tripling the input at k = 16 costs nothing (H16 4/4) while tripling it at
+  k = 32 costs three of four verdicts (H32 1/4 delivered, mean 1,719.8 tokens), so load and
+  depth interact on delivery, not correctness; round 6's 80-token-per-hop law does not
+  transfer to constant load (20.9 estimated verdict-position slope against the registered
+  [55, 110] band, 31.3 completion tokens per hop), so a depth curve that does not pin the
+  fact count measures depth and load together. The decisive row refused itself as
+  pre-registered: the trace-verdict recovery rule calibrated at 0.5652 (13/23) against
+  delivered answers, under the 0.75 floor, and the capture mechanism is identified - in 10
+  of 10 disagreements the last standalone yes/no of the trace is the `no` inside the model's
+  own instruction-to-self tail (`Need final exactly one word: yes. Ensure no extra.`, on 16
+  of 23 traces), which is issue #94's unprovenanced-fallback defect on a new design and puts
+  the rounds 42-49 trace-derived measures under the same doubt; post-hoc and unscored, a
+  cue-anchored rule agrees on 20/23 but recovers no verdict from any of the five truncated
+  traces (5,069-6,796 characters, cut mid-enumeration), so "computed it, never surfaced it"
+  is not supported here either. Controls: census open via `reasoning_content` on 31/31;
+  self-agreement 3/3 byte-identical and 3/3 token-identical. Instrument defect disclosed and
+  fixed in the same firing: the #100 join had keyed on the cell label while duplicates are
+  labelled `DUP-`, so the first aggregation paired 0 records; re-keyed to seed plus prompt
+  digest and re-aggregated with `--rescore` from byte-identical raw data (`raw.jsonl` blob
+  `e2a9d47e` before and after, zero new endpoint calls, `gate.json` untouched).
+
+### 2026-11-06 (second entry)
+
+#### Added
+
 - Nightly research round 51 (issue #65; serves #71, #126, #94, #100, #105; refs #73, #65):
   `research/nightly-2026-11-06-0433/` is the per-item output-budget ladder at the generator's load
   floor, the route round 50 named as the only way to `d*`. Selection rule: facts = 2k exactly (two

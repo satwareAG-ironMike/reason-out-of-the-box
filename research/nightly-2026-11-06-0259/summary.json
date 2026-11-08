@@ -1,0 +1,307 @@
+{
+ "aggregation": {
+  "mode": "rescore",
+  "note": "recomputed from the dispatched raw.jsonl without any new endpoint call; the duplicate join was corrected from a cell-label key to seed plus prompt digest, which is what the #100 control means",
+  "raw_records": 31,
+  "raw_sha256": "e2a9d47ecb69e40e4e908df9adf20362ea6f9ff9e0430516148a5e4c8021041f"
+ },
+ "bands": {
+  "high": [
+   180,
+   200
+  ],
+  "matched": [
+   64,
+   72
+  ]
+ },
+ "cells": [
+  {
+   "accuracy": 1.0,
+   "cell": "A08",
+   "completion_tokens_mean": 349.8,
+   "constant_no_baseline": 0.5,
+   "constant_yes_baseline": 0.5,
+   "correct": 4,
+   "delivered": 4,
+   "gold_yes": 2,
+   "level": 8,
+   "n": 4,
+   "n_chains": 2,
+   "n_facts": 16,
+   "trace_agrees_delivered": 4,
+   "trace_correct": 4,
+   "trace_recovered": 4,
+   "truncated": 0,
+   "verdict_pos_est_mean": 348.8
+  },
+  {
+   "accuracy": 1.0,
+   "cell": "M08",
+   "completion_tokens_mean": 753.5,
+   "constant_no_baseline": 0.5,
+   "constant_yes_baseline": 0.5,
+   "correct": 4,
+   "delivered": 4,
+   "gold_yes": 2,
+   "level": 8,
+   "n": 4,
+   "n_chains": 8,
+   "n_facts": 64,
+   "trace_agrees_delivered": 3,
+   "trace_correct": 3,
+   "trace_recovered": 4,
+   "truncated": 0,
+   "verdict_pos_est_mean": 752.5
+  },
+  {
+   "accuracy": 1.0,
+   "cell": "M16",
+   "completion_tokens_mean": 929.2,
+   "constant_no_baseline": 0.5,
+   "constant_yes_baseline": 0.5,
+   "correct": 4,
+   "delivered": 4,
+   "gold_yes": 2,
+   "level": 16,
+   "n": 4,
+   "n_chains": 4,
+   "n_facts": 64,
+   "trace_agrees_delivered": 2,
+   "trace_correct": 2,
+   "trace_recovered": 4,
+   "truncated": 0,
+   "verdict_pos_est_mean": 928.2
+  },
+  {
+   "accuracy": 0.75,
+   "cell": "M24",
+   "completion_tokens_mean": 1433.5,
+   "constant_no_baseline": 0.5,
+   "constant_yes_baseline": 0.5,
+   "correct": 3,
+   "delivered": 3,
+   "gold_yes": 2,
+   "level": 24,
+   "n": 4,
+   "n_chains": 3,
+   "n_facts": 72,
+   "trace_agrees_delivered": 1,
+   "trace_correct": 2,
+   "trace_recovered": 4,
+   "truncated": 1,
+   "verdict_pos_est_mean": 1227.7
+  },
+  {
+   "accuracy": 0.75,
+   "cell": "M32",
+   "completion_tokens_mean": 1420.8,
+   "constant_no_baseline": 0.5,
+   "constant_yes_baseline": 0.5,
+   "correct": 3,
+   "delivered": 3,
+   "gold_yes": 2,
+   "level": 32,
+   "n": 4,
+   "n_chains": 2,
+   "n_facts": 64,
+   "trace_agrees_delivered": 1,
+   "trace_correct": 2,
+   "trace_recovered": 4,
+   "truncated": 1,
+   "verdict_pos_est_mean": 1210.7
+  },
+  {
+   "accuracy": 1.0,
+   "cell": "H16",
+   "completion_tokens_mean": 1263.5,
+   "constant_no_baseline": 0.5,
+   "constant_yes_baseline": 0.5,
+   "correct": 4,
+   "delivered": 4,
+   "gold_yes": 2,
+   "level": 16,
+   "n": 4,
+   "n_chains": 12,
+   "n_facts": 192,
+   "trace_agrees_delivered": 2,
+   "trace_correct": 2,
+   "trace_recovered": 4,
+   "truncated": 0,
+   "verdict_pos_est_mean": 1262.5
+  },
+  {
+   "accuracy": 0.25,
+   "cell": "H32",
+   "completion_tokens_mean": 1719.8,
+   "constant_no_baseline": 0.5,
+   "constant_yes_baseline": 0.5,
+   "correct": 1,
+   "delivered": 1,
+   "gold_yes": 2,
+   "level": 32,
+   "n": 4,
+   "n_chains": 6,
+   "n_facts": 192,
+   "trace_agrees_delivered": 0,
+   "trace_correct": 3,
+   "trace_recovered": 4,
+   "truncated": 3,
+   "verdict_pos_est_mean": 734
+  },
+  {
+   "accuracy": 1.0,
+   "cell": "DUP-M16",
+   "completion_tokens_mean": 682,
+   "constant_no_baseline": 0.0,
+   "constant_yes_baseline": 1.0,
+   "correct": 1,
+   "delivered": 1,
+   "gold_yes": 1,
+   "level": 16,
+   "n": 1,
+   "n_chains": 4,
+   "n_facts": 64,
+   "trace_agrees_delivered": 0,
+   "trace_correct": 0,
+   "trace_recovered": 1,
+   "truncated": 0,
+   "verdict_pos_est_mean": 681
+  },
+  {
+   "accuracy": 1.0,
+   "cell": "DUP-M24",
+   "completion_tokens_mean": 861,
+   "constant_no_baseline": 0.0,
+   "constant_yes_baseline": 1.0,
+   "correct": 1,
+   "delivered": 1,
+   "gold_yes": 1,
+   "level": 24,
+   "n": 1,
+   "n_chains": 3,
+   "n_facts": 72,
+   "trace_agrees_delivered": 0,
+   "trace_correct": 0,
+   "trace_recovered": 1,
+   "truncated": 0,
+   "verdict_pos_est_mean": 860
+  },
+  {
+   "accuracy": 1.0,
+   "cell": "DUP-M32",
+   "completion_tokens_mean": 988,
+   "constant_no_baseline": 0.0,
+   "constant_yes_baseline": 1.0,
+   "correct": 1,
+   "delivered": 1,
+   "gold_yes": 1,
+   "level": 32,
+   "n": 1,
+   "n_chains": 2,
+   "n_facts": 64,
+   "trace_agrees_delivered": 0,
+   "trace_correct": 0,
+   "trace_recovered": 1,
+   "truncated": 0,
+   "verdict_pos_est_mean": 987
+  }
+ ],
+ "family": "ladders",
+ "gate": {
+  "blob_sha256": "a805acd978d3f14350246cff86f988fdc93978709b28957613ff8b82e3e470c4",
+  "calibration": 0.5652,
+  "checks": {
+   "D1_anchor_round6_items_ge": {
+    "result": true,
+    "threshold": 0.75,
+    "value": 1.0
+   },
+   "D2_shallow_matched_accuracy_ge": {
+    "result": true,
+    "threshold": 0.875,
+    "value": 1.0
+   },
+   "D3_load_at_depth16_ge": {
+    "result": true,
+    "threshold": 0.75,
+    "value": 1.0
+   },
+   "D4_no_ceiling_at_matched_k32_ge": {
+    "result": true,
+    "threshold": 0.75,
+    "value": 0.75
+   },
+   "D5_load_does_not_help_at_depth": {
+    "result": true,
+    "threshold": 0.0,
+    "value": 0.5
+   },
+   "D6_matched_above_baseline_ge": {
+    "result": true,
+    "threshold": 0.625,
+    "value": 0.875
+   },
+   "N1_census_channel_open": {
+    "result": true,
+    "trace_open": true,
+    "value": "reasoning_content"
+   },
+   "N2_duplicate_pairs_byte_identical_ge": {
+    "answer_identical": 3,
+    "n_pairs": 3,
+    "result": true,
+    "threshold": 2,
+    "token_identical": 3,
+    "value": 3
+   },
+   "N3_trace_recovery_calibration_ge": {
+    "n_calibrated": 23,
+    "result": false,
+    "threshold": 0.75,
+    "value": 0.5652
+   },
+   "R_depth_turnover_at_matched_load": {
+    "turnover": true,
+    "value": 0.25
+   },
+   "R_verdict_position_slope": {
+    "band": [
+     55,
+     110
+    ],
+    "result": false,
+    "value": 20.924
+   },
+   "T1_undelivered_trace_correct": {
+    "admissible": false,
+    "n_undelivered_with_trace": 5,
+    "result": "refused",
+    "value": 1.0
+   }
+  },
+  "tier": "ambiguous",
+  "trace_open": true
+ },
+ "max_tokens": 2048,
+ "model_class": "a flash-next-class local endpoint",
+ "model_id_digest": "4075b5949b2b",
+ "outcomes": {
+  "delivered_correct": 23,
+  "undelivered_truncated": 5
+ },
+ "schema": "round50-summary-v1",
+ "seed_base": 20261005,
+ "selection_rule": "per cell, scan the level's series in generation order and take the first two items with answer yes and the first two with answer no inside the cell's fact-count band; the anchor cell A08 uses round 6's rule with no band",
+ "task_type": "hop_chain",
+ "temperature": 0,
+ "transport": {
+  "completion_tokens": 34011,
+  "dispatches": 31,
+  "duplicates": 3,
+  "errors": 0,
+  "experimental": 28,
+  "prompt_tokens": 27980,
+  "wall_s_total": 1641.8
+ }
+}
