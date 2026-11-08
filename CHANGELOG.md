@@ -96,6 +96,51 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   non-determinism on this deployment state. Transport: 104,689 prompt /
   33,564 completion tokens, ~67.9 tokens/s single stream, wall 508.7 s.
 
+- Nightly research round 49 (issue #65; serves #71, #100, #94; opens #126; refs #105,
+  #73, #108, #65): `research/nightly-2026-11-05-0400/` is the flash-class A/C/D firing the
+  #71 bounded-knob discriminator was owed - the same 11 round-23 cap-truncated items
+  (S4 to S6 at E = 192, 4 gold-yes / 7 gold-no) re-dispatched on a flash-next-class
+  endpoint in modes A (archived prompt, 11), C (no-repetition one-liner, 11) and D
+  (`You may state each fact at most once, then answer with exactly one word: yes or no.`,
+  the bounded permission, 11 - the first mode-D dispatches ever on this class; mode B's 5
+  ordering cells dropped to stay inside the cap), plus 3 duplicate mode-A self-agreement
+  dispatches and 1 census health call; 37 of the 40-call cap. Instrument: the round-48
+  script ported byte-identically except the gate schema, the class rows, the gate question
+  and the reference retarget (`ROUND44_REFERENCE` as the same-class join target and band
+  source, `ROUND46_REFERENCE` as the mode-D cross-class constant source, both pinned
+  fail-closed with a planted duplicate-record control over both archives); re-fire rows
+  F1 to F5 fixed before dispatch from the two archived firings only, F6 the
+  firing-identity readout, and P1 to P9, N1, N2 byte-equal to the round-46/48 gates so the
+  firings 42, 44, 46, 48 and 49 score one table. Gate `9109bf71` (schema
+  `round49-gate-v1`) frozen before dispatch and pinned in the instrument as
+  `ROUND49_GATE_BLOB_SHA256`. Result (tier `surfacing_only`, mode-D tier `bounded_loss`,
+  repeat tier `divergent`, 1 of 5 rows met): the class ceiling does not re-present - mode
+  A delivers 11/11 at mean 1,464.6 completion tokens with 0 truncations against round 44's
+  8/11 at 1,636.9 on the same class and the same items, and the truncation ledger 8/11,
+  2/11, 1/11, 0/11 (rounds 44, 46, 48, 49) makes the wall a property of the serving build
+  rather than of the model class; 33 of 36 dispatch records finish `stop` at exactly 1,556
+  completion tokens (492 under the cap, `finish_reason` never `length`), so the knobs move
+  output length only through 3 exceptions: C/A 0.9578 (F2 fails against the flash band
+  [0.50, 0.90], round 44 read 0.6756), D/C 1.1092 (F4 holds, 0.013 from round 48's 1.1224
+  on the 27B class - the permission's cost direction is the family's only cross-class
+  transfer so far), and F3 fails with mode D delivering 11/11 and scoring the best 6/11
+  while the tier rule still prints `bounded_loss` on any wrong delivery in mode D (the ban
+  delivered 7 wrong answers in the same firing). No mode beats a baseline (A 3/11, C 4/11,
+  D 6/11 against constant-no 7/11 and the archived loose-fallback line 8/11); P6 fails on
+  a flash-class firing for the first time (A minus C 0.0911 against the 0.15 floor and
+  round 44's 0.3467) and the permission moves repetition the wrong way (A minus D -0.0808,
+  C minus D -0.1719). Census open via `reasoning_content` on 36/36 dispatches and on the
+  health call (the round-44 state, the opposite of round 48's flipped `reasoning` state);
+  F6 reads 0/25 byte-identical and 5/25 content-identical over the 25 joinable (mode, seed)
+  keys (11 A + 11 C + 3 A2, verified against the archive before the gate was frozen); N2
+  self-agreement 2/3 byte-identical and 3/3 token-identical, every pair at 1,556 tokens.
+  Transport 104,689 prompt / 53,326 completion tokens, 36 dispatches in 1,095 s wall across
+  2 streams, zero retries. Opens #126: the panel's cap-bound selection premise (the items
+  chosen because they truncated at 2048 on the round-23 build) no longer holds on the
+  current builds, so the ceiling-conditioned rows F1 to F3 are untestable as registered and
+  the battery needs either a re-registered cap or a panel re-derived under the build that
+  is serving.
+
 #### Fixed
 
 - Issue #120 group 1 (forward-only annotations; no scored result, gate digest or archive
