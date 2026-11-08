@@ -53,6 +53,12 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 | `docs/next-investigations.md` | 2026-09-03, 2026-09-10, 2026-09-11 and 2026-09-14 scans plus the 2026-10-14 substrate-threshold pointer and the 2026-10-16 ladder-depth finding: investigation fields, feasibility audit (closed), frozen model list, round-11 candidates, thesis timeline (M1-M5), fly connectome research, insect-sentience ledger pointer, ladder family budget-limited not depth-limited, the 2026-11-04 ladder-ceiling class-tied reclassification (rounds 42/44/46) and the late-2026 weight-space-programming scan |
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |
 | `docs/claims-marcus-wall.md` | Claim ledger: Marcus "Deep Learning Is Hitting a Wall" (2022), judged against evidence through 2026 |
+| `docs/claims-insect-sentience.md` | Claim ledger: insect sentience as a substrate threshold, judged against the round-16 evidence chain |
+| `docs/review-rounds/` | Round-level adversarial review records for the archive rounds and the nightly rounds |
+| `generators/` | Condition-2 task generators (issue #4): digit matrices and k-hop ladders, solvability and seed policy, permutation-calibrated leak gate with pinned negative-control fixtures |
+| `runs/` | Executed-run record: manifests, raw per-prompt responses, calibration records, regeneration scripts, independent verification records, round report |
+| `research/` | Nightly round artifacts (issue #65): one directory per firing with script, prompts, raw responses and scores |
+| `scripts/` | Archive consistency, markdown link and serving-id guard checks, each stdlib-only with a `--selftest` negative control |
 | `CHANGELOG.md` | Change history |
 
 ## Method
@@ -74,28 +80,42 @@ cross-checked secondary sources.
 | How LLMs validate ideas (self-correction) | 2310.01798, 2207.05221, 2112.00101, 2303.17651, 2305.11738 |
 | Unique idea generation | 2409.04109, 2506.20803, 2606.08251, 2608.19437 |
 | Embodied agents: brain + body + herd | 2305.16291, 2606.15497, 2506.24019, 2607.02329, 2303.11366, 2308.10144, 2302.04761, 2304.03442 |
-| Do LLMs think or feel (Hinton, Lemoine) | PMID 38769463, PMID 39471222, PMID 41551539, 2601.01828, 2601.15334, 2303.07103, 2210.13966, PMID 40013231 |
+| Do LLMs think or feel (Hinton, Lemoine, and the 2026 scepticism anchor) | PMID 38769463, PMID 39471222, PMID 41551539, 2601.01828, 2601.15334, 2303.07103, 2210.13966, PMID 40013231, 10.1038/d41586-026-03313-7 |
 | Novel-task testbed | 2505.11831, 2603.13372 |
 | Reasoning traces: hidden-monitor inference, error detection, planning | 2603.16928, 2505.11824, 2502.07202, 2608.03291, 2603.21286, 2604.06427 |
 | ICL as algorithm (bounds and mechanisms) | 2208.01066, 2211.15661, 2512.16902 |
 | Task generators + corpus audit (study infrastructure) | 2404.07353, 2511.00162, 2310.20707, 2608.05148 |
+| Animal analogy: transitive inference and its controls | 1908.06177, 2002.05867, 2210.01240, 2410.20200, 2506.04289, 2611.00387, PMID 18423898, PMID 16248338, PMID 16503340, PMID 28333486 |
+| Weight-space programming: obstacle removal, not new reasoning | 2611.05341 |
 
 ## Status
 
 Public research archive at https://github.com/satwareAG-ironMike/reason-out-of-the-box
-(`main` is branch-protected). The 2026-09-03, 2026-09-10, 2026-09-11 and 2026-09-14 scans
-re-confirmed the verdict; the 2026-10-16 research finding records the first merged
-experimental record, the ladder family being budget-limited rather than depth-limited.
-Since 2026-10-16 the nightly research program (issue #65) has run to round 46 (30 archived
-round records on main): the matched-pair traversal verdict replicates across depth and model
-class, and the ceilings observed so far are output-budget truncations, not wrong answers.
-Rounds 42, 44 and 46 re-attribute that ceiling: it is class-tied and firing-state dependent
-(11/11 truncations on the flash class's archive versus 1-2/11 on a 27B class for the same 11
-items), and the E = 192 cap-truncation is a surface output-policy artifact, not a property of
-the task, so a truncated verdict must not be recorded as a depth limit. The remaining gap is
-experimental, not bibliographic. The thesis program (study design
-execution on open-data models) is tracked in the [issue board](https://github.com/satwareAG-ironMike/reason-out-of-the-box/issues)
-under milestones M1 (protocol freeze + pre-registration, 2026-09-30) to M5 (paper +
-public release, 2027-04-30); see [docs/next-investigations.md](docs/next-investigations.md).
+(`main` is branch-protected). The 2026-09-03, 2026-09-10, 2026-09-11 and 2026-09-14 scans and
+the 2026-11-04 weight-space-programming field scan re-confirmed the verdict: the late-2026
+weight-editing line reads as loop-obstacle removal rather than a new general reasoning module,
+so it is no counterexample to the "from nothing" claim. The 2026-10-16 research finding records
+the first merged experimental record, the ladder family being budget-limited rather than
+depth-limited. Since 2026-10-16 the nightly research program (issue #65) has run to round 46
+(30 archived round records on main): the matched-pair traversal verdict replicates across depth
+and model class, and the ceilings observed so far are output-budget truncations, not wrong
+answers. Rounds 42, 44 and 46 re-attribute that ceiling: it is class-tied and firing-state
+dependent (11/11 truncations on the flash class's archive versus 1-2/11 on a 27B class for the
+same 11 items), and the E = 192 cap-truncation is a surface output-policy artifact, not a
+property of the task, so a truncated verdict must not be recorded as a depth limit. Two
+record-integrity rules bind every reading of that archive: a cross-class or cross-firing trace
+claim must state each side's trace exposure and is an answer-level claim against a zero-trace
+deployment (issue #105), and errata are forward-only, so a merged `raw.jsonl`, `summary.json`
+and `gate.json` stay immutable while round prose and CHANGELOG entries carry the annotation
+(issue #120, which annotated the retracted round-31 and round-37 statements and closed the 4
+verified defect classes of issue #113). The remaining gap is experimental, not bibliographic,
+and the open experimental problems are named on the board: the ladder depth ceiling d* (#71),
+the missing same-prompt self-agreement control (#100), the probe readout provenance (#94) and
+the audited leak class not yet widened to relational features (#77). The thesis program (study
+design execution on open-data models) is tracked in the [issue board](https://github.com/satwareAG-ironMike/reason-out-of-the-box/issues)
+under milestones M1 (protocol freeze + pre-registration, 2026-09-30) to M5 (paper + public
+release, 2027-04-30); as of 2026-11-08 M1 (pre-registration #11, IRB path #7) and M2 (pilot run
+#8) are past their due dates and still open, with the generator half of M2 (issue #4) partly
+shipped; see [docs/next-investigations.md](docs/next-investigations.md).
 University students can join the thesis program: apply via bewerbung@satware.com or
 message https://github.com/satwareAG-ironMike.
