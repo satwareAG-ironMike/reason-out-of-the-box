@@ -1,0 +1,19 @@
+{
+ "census": {
+  "fields": [
+   "content",
+   "reasoning_content",
+   "role"
+  ],
+  "reasoning_content_chars": 213,
+  "reasoning_field_chars": 0,
+  "reasoning_source": "reasoning_content",
+  "trace_chars": 213
+ },
+ "completion_tokens": 52,
+ "error": null,
+ "latency_s": 1.22,
+ "ok": true,
+ "outcome": "answered_in_answer_field",
+ "prompt_tokens": 123
+}
