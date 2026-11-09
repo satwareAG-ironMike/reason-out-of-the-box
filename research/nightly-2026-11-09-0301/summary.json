@@ -1,0 +1,69 @@
+{
+  "criteria": {
+    "C1": {
+      "correct": 4,
+      "n": 4,
+      "pass": true
+    },
+    "C2": {
+      "correct": 5,
+      "n": 7,
+      "pass": false
+    },
+    "C3": {
+      "correct": 3,
+      "n": 4,
+      "verdict": "no_ceiling"
+    },
+    "C4": {
+      "delivery_bound": true,
+      "delivery_deep": 0.5,
+      "delivery_shallow": 1.0,
+      "drop": 0.5
+    },
+    "C5": {
+      "name_agreement": 2,
+      "pairs": [
+        {
+          "name_agrees": true,
+          "pair": [
+            "L32A_j32",
+            "L32A_j32_dup"
+          ],
+          "tokens_agree": true
+        },
+        {
+          "name_agrees": true,
+          "pair": [
+            "L48_j48",
+            "L48_j48_dup"
+          ],
+          "tokens_agree": true
+        }
+      ],
+      "pass": true
+    },
+    "C6": {
+      "admissible": false,
+      "gap": 0.0,
+      "gold_rate": 0.6667,
+      "n": 3,
+      "pass": false,
+      "pseudo_rate": 0.6667
+    }
+  },
+  "dispatch": {
+    "calibration_calls": 1,
+    "call_cap": 40,
+    "dispatched": 29,
+    "not_dispatched": [],
+    "planned": 29,
+    "retries_used": 0,
+    "wall_s": 504.441
+  },
+  "flags": [
+    "delivery_bound_loss",
+    "trace_provenance_refused"
+  ],
+  "tier": "controls_invalid"
+}
