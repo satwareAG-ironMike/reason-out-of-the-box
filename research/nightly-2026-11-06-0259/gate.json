@@ -1,0 +1,59 @@
+{
+ "caps": {
+  "dispatch_planned": 32,
+  "max_tokens": 2048,
+  "prompts": 40
+ },
+ "evidence_label": "Executed",
+ "not_a_claim": "n = 4 per cell is exploratory depth resolution; one endpoint, one firing; a trace-recovered verdict is not evidence the model computed anything (claim ladder C4), it is a readout of what the surfaced text says; the char-proportional verdict position is an estimate, not a tokenizer measurement",
+ "question": "When ladder accuracy fails at high hop depth at matched input load, is the failure in the traversal (capability) or in the delivery of the verdict through the 2048-token cap (surfacing)?",
+ "reference_firings": {
+  "issue126": "the archived cap-bound selection premise no longer holds on the current builds: round 49 read 0/11 truncations at 2048",
+  "round6": {
+   "anchor_answers": {
+    "36261005": "no",
+    "36261006": "no",
+    "36261013": "yes",
+    "36261017": "yes"
+   },
+   "anchor_completion_tokens": {
+    "36261005": 340,
+    "36261006": 570,
+    "36261013": 447,
+    "36261017": 191
+   },
+   "anchor_seeds": [
+    36261005,
+    36261006,
+    36261013,
+    36261017
+   ],
+   "blob_sha256": "21987bdfb456c8a44449221defc006623870efb574cd7fe31919a073616e544e",
+   "path": "research/nightly-2026-10-16-0400/raw.jsonl",
+   "readout": "40/40 correct, 0 truncations at k <= 16; completion_tokens = -36 + 80k; the verdict is emitted after the traversal"
+  }
+ },
+ "rows": {
+  "D1_anchor_round6_items_ge": "the four archived round-6 k=8 items (same seeds, same template) stay at or above 3/4 delivered accuracy on this firing (round 6 read 4/4)",
+  "D2_shallow_matched_accuracy_ge": "matched-load cells M08+M16 stay at or above 7/8 delivered accuracy",
+  "D3_load_at_depth16_ge": "tripling the input load at k=16 (192 facts) keeps accuracy at or above 3/4 (round 6's k=16 items averaged 232 facts and read 4/4)",
+  "D4_no_ceiling_at_matched_k32_ge": "at matched load, k=32 stays at or above 3/4 delivered accuracy: no depth ceiling inside 4x the archived grid at constant prompt size",
+  "D5_load_does_not_help_at_depth": "matched-minus-high accuracy at k=32 >= 0: load does not improve accuracy at fixed depth",
+  "D6_matched_above_baseline_ge": "matched-load accuracy at or above 10/16, i.e. strictly above the 0.50 constant baseline the balanced cells put there by construction",
+  "N1_census_channel_open": "issue #105: the reasoning-supplying field is non-empty on the health call and on >= 90% of dispatched records; otherwise every trace-derived row is refused and the round is an answer-level claim only",
+  "N2_duplicate_pairs_byte_identical_ge": "issue #100: at least 2 of the 3 duplicate pairs byte-identical (answer field and trace), token-count identity reported alongside",
+  "N3_trace_recovery_calibration_ge": "the trace-recovery rule (last standalone yes/no of the trace) agrees with the delivered answer field on >= 75% of delivered records; if it does not, T1 and the slope row are refused, not reported",
+  "R_depth_turnover_at_matched_load": "readout, never a tier by itself: M08 minus M32 accuracy >= 0.25 marks a turnover inside the grid extension",
+  "R_verdict_position_slope": "readout: OLS slope of the estimated verdict surface position against depth over the matched cells, round 6's law predicts 80 tokens per hop, band [55, 110]",
+  "T1_undelivered_trace_correct": "the decisive row: among undelivered records with trace text, the trace-recovered verdict equals gold in >= 2/3 => surfacing_bound; below that => capability_bound; admissible only if N1 and N3 hold"
+ },
+ "schema": "round50-gate-v1",
+ "tier_rule": [
+  "N1 not open => answer_level_only",
+  "D1 below 0.75 => anchor_broken",
+  "T1 capability_bound and a registered turnover => capability_bound_depth",
+  "T1 surfacing_bound => surfacing_bound",
+  "no undelivered record and D4 holds => no_ceiling_measured",
+  "otherwise => ambiguous"
+ ]
+}
