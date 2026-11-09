@@ -5,6 +5,48 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-07
+
+#### Added
+
+- Nightly research round 53 (issue #65; serves #100, #105; refs #94, #73, #125, #127, #128, #130):
+  `research/nightly-2026-11-07-0400/` is the cap-move test of the 1,556 stop - the round-51 `k = 48`
+  load-floor prompts (96 facts, 98 entities, two disjoint 48-edge paths) re-dispatched with the
+  prompt bytes held fixed while the requested cap moves 2048 / 1536 / 1024 / 512, on the two gold-no
+  items round 51 delivered wrong (116261051, 116261076), their duplicate re-dispatch, the gold-yes
+  control 116261338 (archived natural stop 1310), an enumerate arm (list the reachable set before
+  answering) and a non-ladder listing control (`count 1 to 4000`, caps 2048 and 1024); 15 planned
+  calls of the 40-call cap (14 records plus the 256-token census health call), `temperature 0.0`,
+  305.729 s wall, 11,283 prompt and 16,549 completion tokens, no dropped call and no timed-out arm.
+  Gate `1f78366a` (schema `round53-gate-v1`) frozen and re-pinned from the placeholder before any
+  dispatch, item digests certified against the archived rows first (`068bc6a1fb0620fb`,
+  `ffc75c928f37f0d9`, `87e36020f5c31c93`, byte-identical to round 51). Result (tier
+  `no_serving_budget`, flag `marker_not_locked_to_predicted_hook`): the pin is neither proportional
+  nor cap-absolute - the ladder stopped at 1044 at cap 1536 (predicted 1167) and at 532 at cap 1024
+  (predicted 778), C1 0 of 6 and C2 2 of 6, the listing control was never cut at the predicted hook
+  (C5 0 of 2); the marker appears in 11 of 14 records including both listing controls and both
+  enumerate records (159 and 157 tokens above the hook) and is absent only where the output is hard
+  truncated (both cap-512 records, `length`, no answer line). Every one of the seven pinned ladder
+  records stopped 492 tokens below its requested cap; that reserve is reported as an explicitly
+  post-hoc column (`summary.json.stop_offsets`, `registered: false`, added after the tier rule was
+  frozen, gate blob and `gate.json` byte-unchanged by it, selftest controls planted for it) and no
+  verdict of the round rests on it. Two registered failures are filed as findings of their own: the
+  duplicate re-dispatch of a byte-identical prompt diverged (same 1,556 tokens, same `stop`, same
+  marker count, traces sharing only a 108-character prefix, answers `no` then `yes`; C7 0 of 1,
+  issue #100), and both enumerate arms listed exactly the 49 BFS-reachable entities with the query
+  target absent and still answered `yes` against gold `no` (C6 0 of 2). Same-prompt cross-firing
+  against round 51 reproduces the finish state on both items and the verdict on one (C8 1 of 2,
+  serving-id digest identical). The runner's abnormal-end record for this firing (exit 124 at the
+  90-minute window) post-dates a completed dispatch and is stated in the round README.
+
+#### Changed
+
+- `research/AGENTS.md` states the same-firing resume boundary that this round had to operate in:
+  immutability of `raw.jsonl`, `summary.json` and `gate.json` binds when the round's PR opens; a
+  resume in the same firing may rebuild `summary.json` and re-emit `gate.json` only with `raw.jsonl`
+  and the gate blob byte-unchanged, the instrument change disclosed in the README, and a
+  `registered: false` marker plus planted-slip controls on any column added after the dispatch. No
+  registered row or tier may move in a resume (refs #65).
 ### 2026-11-06
 
 #### Added
