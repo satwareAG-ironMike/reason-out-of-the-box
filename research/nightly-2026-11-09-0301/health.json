@@ -1,0 +1,12 @@
+{
+  "completion_tokens": 55,
+  "fields": [
+    "content",
+    "reasoning_content",
+    "role"
+  ],
+  "finish_reason": "stop",
+  "model_digest": "4075b5949b2b0487",
+  "reasoning_field": "reasoning_content",
+  "trace_chars": 205
+}
