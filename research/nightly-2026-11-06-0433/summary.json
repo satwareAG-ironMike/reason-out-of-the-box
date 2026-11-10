@@ -1,0 +1,572 @@
+{
+  "answer_level_ledger": {
+    "accuracy_over_delivered": [
+      0.5699,
+      0.9341
+    ],
+    "accuracy_over_n": [
+      0.5699,
+      0.9341
+    ],
+    "delivered": 16,
+    "delivered_correct": 13,
+    "delivered_wrong": 3,
+    "undelivered_other": 0,
+    "undelivered_truncated": 0
+  },
+  "completion_tokens": 23370,
+  "cross_firing": {
+    "detail": [
+      {
+        "archived_finish": "stop",
+        "archived_stop": 1646,
+        "digest_ok": true,
+        "joined": true,
+        "outcome_ok": true,
+        "seed": 84261011,
+        "this_finish": "stop",
+        "this_stop": 1556
+      },
+      {
+        "archived_finish": "length",
+        "archived_stop": 2048,
+        "digest_ok": true,
+        "joined": true,
+        "outcome_ok": false,
+        "seed": 84261050,
+        "this_finish": "stop",
+        "this_stop": 1556
+      },
+      {
+        "archived_finish": "stop",
+        "archived_stop": 988,
+        "digest_ok": true,
+        "joined": true,
+        "outcome_ok": true,
+        "seed": 84261142,
+        "this_finish": "stop",
+        "this_stop": 985
+      },
+      {
+        "archived_finish": "stop",
+        "archived_stop": 1001,
+        "digest_ok": true,
+        "joined": true,
+        "outcome_ok": true,
+        "seed": 84261174,
+        "this_finish": "stop",
+        "this_stop": 845
+      }
+    ],
+    "n_cell": 4,
+    "n_joined": 4,
+    "n_reproduced": 3
+  },
+  "dispatches": 20,
+  "duplicates": [],
+  "gate": {
+    "band_basis": {
+      "F4": "round 6's fitted 80 tokens/hop (a depth-and-load law) and round 50's 31.3/hop at pinned load; band 15..50 is that pair widened, not a new claim"
+    },
+    "flags": [
+      "early_commitment_observed"
+    ],
+    "rows": {
+      "F1": {
+        "delivered": 4,
+        "n": 4,
+        "pass": true
+      },
+      "F2": {
+        "delivered_wrong": 3,
+        "n": 16,
+        "pass": false,
+        "wrong_seeds": [
+          116261051,
+          116261076,
+          84261050
+        ]
+      },
+      "F3": {
+        "delivered": 6,
+        "n": 6,
+        "pass": false
+      },
+      "F4": {
+        "n_points": 8,
+        "pass": true,
+        "points": [
+          [
+            24,
+            666
+          ],
+          [
+            24,
+            771
+          ],
+          [
+            32,
+            845
+          ],
+          [
+            32,
+            985
+          ],
+          [
+            40,
+            1059
+          ],
+          [
+            40,
+            1153
+          ],
+          [
+            48,
+            1310
+          ],
+          [
+            48,
+            1509
+          ]
+        ],
+        "slope_tokens_per_hop": 28.3
+      },
+      "F5": {
+        "per_cell": [
+          {
+            "censored_no": 0,
+            "level": 24,
+            "mean_no_stop": 1556.0,
+            "mean_yes_stop": 718.5,
+            "ratio": 2.1656
+          },
+          {
+            "censored_no": 0,
+            "level": 32,
+            "mean_no_stop": 1556.0,
+            "mean_yes_stop": 915.0,
+            "ratio": 1.7005
+          },
+          {
+            "censored_no": 0,
+            "level": 40,
+            "mean_no_stop": 1556.0,
+            "mean_yes_stop": 1106.0,
+            "ratio": 1.4069
+          },
+          {
+            "censored_no": 0,
+            "level": 48,
+            "mean_no_stop": 1556.0,
+            "mean_yes_stop": 1409.5,
+            "ratio": 1.1039
+          }
+        ],
+        "reportable_cells": 4,
+        "reported": true,
+        "statement": "mean natural stop of gold-no over gold-yes per cell, over uncensored records only; reportable when at least 3 of the cells 24, 32, 40, 48 carry at least one uncensored negative"
+      },
+      "I1": {
+        "censored_candidates": 0,
+        "delivered": 2,
+        "interrupt_dispatches": 4,
+        "pass": false
+      },
+      "I2": {
+        "candidates": 2,
+        "items": [
+          {
+            "censored": false,
+            "gold": "yes",
+            "interrupt_answers": [
+              {
+                "completion_tokens": 532,
+                "correct": true,
+                "declared": "yes",
+                "finish_reason": "stop",
+                "rung": 1024
+              }
+            ],
+            "interrupt_delivered": 1,
+            "lcp_ratios": [
+              0.9509,
+              0.0667
+            ],
+            "level": 48,
+            "natural_stop": 1310,
+            "rungs": [
+              1024,
+              640
+            ],
+            "seed": 116261338
+          },
+          {
+            "censored": false,
+            "gold": "yes",
+            "interrupt_answers": [
+              {
+                "completion_tokens": 876,
+                "correct": true,
+                "declared": "yes",
+                "finish_reason": "stop",
+                "rung": 896
+              }
+            ],
+            "interrupt_delivered": 1,
+            "lcp_ratios": [
+              0.6243,
+              0.9911
+            ],
+            "level": 40,
+            "natural_stop": 1153,
+            "rungs": [
+              896,
+              576
+            ],
+            "seed": 100261062
+          }
+        ],
+        "pass": false,
+        "passing": 0
+      },
+      "N1": {
+        "censored_records": 0,
+        "exposed": 20,
+        "fields_seen": [
+          "content",
+          "reasoning_content"
+        ],
+        "health_fields": [
+          "content",
+          "reasoning_content"
+        ],
+        "health_source": "reasoning_content",
+        "n": 20,
+        "pass": true
+      },
+      "N2": {
+        "byte_identical": 0,
+        "joined": 0,
+        "pairs": [],
+        "pass": false
+      },
+      "N3": {
+        "detail": [
+          {
+            "archived_finish": "stop",
+            "archived_stop": 1646,
+            "digest_ok": true,
+            "joined": true,
+            "outcome_ok": true,
+            "seed": 84261011,
+            "this_finish": "stop",
+            "this_stop": 1556
+          },
+          {
+            "archived_finish": "length",
+            "archived_stop": 2048,
+            "digest_ok": true,
+            "joined": true,
+            "outcome_ok": false,
+            "seed": 84261050,
+            "this_finish": "stop",
+            "this_stop": 1556
+          },
+          {
+            "archived_finish": "stop",
+            "archived_stop": 988,
+            "digest_ok": true,
+            "joined": true,
+            "outcome_ok": true,
+            "seed": 84261142,
+            "this_finish": "stop",
+            "this_stop": 985
+          },
+          {
+            "archived_finish": "stop",
+            "archived_stop": 1001,
+            "digest_ok": true,
+            "joined": true,
+            "outcome_ok": true,
+            "seed": 84261174,
+            "this_finish": "stop",
+            "this_stop": 845
+          }
+        ],
+        "n_cell": 4,
+        "n_joined": 4,
+        "n_reproduced": 3,
+        "pass": true
+      }
+    },
+    "tier": "capability_bound_floor_depth"
+  },
+  "gate_blob_sha256": "60b0d62c165f8c2a225a4eeb499e456859c281c4d30b64855c6a4dc3bf247716",
+  "gate_schema": "round51-gate-v1",
+  "grid_table": [
+    {
+      "accuracy_over_delivered": 1.0,
+      "accuracy_over_n": 1.0,
+      "arm": "yes",
+      "cell": "F024",
+      "censored": 0,
+      "chains": 2,
+      "correct": 2,
+      "delivered": 2,
+      "facts": 48,
+      "level": 24,
+      "max_stop_tokens": 771,
+      "mean_stop_tokens": 718.5,
+      "mean_trace_chars": 2025.5,
+      "n": 2,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 1.0,
+      "accuracy_over_n": 1.0,
+      "arm": "no",
+      "cell": "F024",
+      "censored": 0,
+      "chains": 2,
+      "correct": 2,
+      "delivered": 2,
+      "facts": 48,
+      "level": 24,
+      "max_stop_tokens": 1556,
+      "mean_stop_tokens": 1556.0,
+      "mean_trace_chars": 4322.0,
+      "n": 2,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 1.0,
+      "accuracy_over_n": 1.0,
+      "arm": "all",
+      "cell": "F024",
+      "censored": 0,
+      "chains": 2,
+      "correct": 4,
+      "delivered": 4,
+      "facts": 48,
+      "level": 24,
+      "max_stop_tokens": 1556,
+      "mean_stop_tokens": 1137.2,
+      "mean_trace_chars": 3173.8,
+      "n": 4,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 1.0,
+      "accuracy_over_n": 1.0,
+      "arm": "yes",
+      "cell": "F032",
+      "censored": 0,
+      "chains": 2,
+      "correct": 2,
+      "delivered": 2,
+      "facts": 64,
+      "level": 32,
+      "max_stop_tokens": 985,
+      "mean_stop_tokens": 915.0,
+      "mean_trace_chars": 2581.0,
+      "n": 2,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 0.5,
+      "accuracy_over_n": 0.5,
+      "arm": "no",
+      "cell": "F032",
+      "censored": 0,
+      "chains": 2,
+      "correct": 1,
+      "delivered": 2,
+      "facts": 64,
+      "level": 32,
+      "max_stop_tokens": 1556,
+      "mean_stop_tokens": 1556.0,
+      "mean_trace_chars": 4572.0,
+      "n": 2,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 0.75,
+      "accuracy_over_n": 0.75,
+      "arm": "all",
+      "cell": "F032",
+      "censored": 0,
+      "chains": 2,
+      "correct": 3,
+      "delivered": 4,
+      "facts": 64,
+      "level": 32,
+      "max_stop_tokens": 1556,
+      "mean_stop_tokens": 1235.5,
+      "mean_trace_chars": 3576.5,
+      "n": 4,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 1.0,
+      "accuracy_over_n": 1.0,
+      "arm": "yes",
+      "cell": "F040",
+      "censored": 0,
+      "chains": 2,
+      "correct": 2,
+      "delivered": 2,
+      "facts": 80,
+      "level": 40,
+      "max_stop_tokens": 1153,
+      "mean_stop_tokens": 1106.0,
+      "mean_trace_chars": 2954.5,
+      "n": 2,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 1.0,
+      "accuracy_over_n": 1.0,
+      "arm": "no",
+      "cell": "F040",
+      "censored": 0,
+      "chains": 2,
+      "correct": 2,
+      "delivered": 2,
+      "facts": 80,
+      "level": 40,
+      "max_stop_tokens": 1556,
+      "mean_stop_tokens": 1556.0,
+      "mean_trace_chars": 4436.5,
+      "n": 2,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 1.0,
+      "accuracy_over_n": 1.0,
+      "arm": "all",
+      "cell": "F040",
+      "censored": 0,
+      "chains": 2,
+      "correct": 4,
+      "delivered": 4,
+      "facts": 80,
+      "level": 40,
+      "max_stop_tokens": 1556,
+      "mean_stop_tokens": 1331.0,
+      "mean_trace_chars": 3695.5,
+      "n": 4,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 1.0,
+      "accuracy_over_n": 1.0,
+      "arm": "yes",
+      "cell": "F048",
+      "censored": 0,
+      "chains": 2,
+      "correct": 2,
+      "delivered": 2,
+      "facts": 96,
+      "level": 48,
+      "max_stop_tokens": 1509,
+      "mean_stop_tokens": 1409.5,
+      "mean_trace_chars": 3877.5,
+      "n": 2,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 0.0,
+      "accuracy_over_n": 0.0,
+      "arm": "no",
+      "cell": "F048",
+      "censored": 0,
+      "chains": 2,
+      "correct": 0,
+      "delivered": 2,
+      "facts": 96,
+      "level": 48,
+      "max_stop_tokens": 1556,
+      "mean_stop_tokens": 1556.0,
+      "mean_trace_chars": 4201.0,
+      "n": 2,
+      "truncated": 0
+    },
+    {
+      "accuracy_over_delivered": 0.5,
+      "accuracy_over_n": 0.5,
+      "arm": "all",
+      "cell": "F048",
+      "censored": 0,
+      "chains": 2,
+      "correct": 2,
+      "delivered": 4,
+      "facts": 96,
+      "level": 48,
+      "max_stop_tokens": 1556,
+      "mean_stop_tokens": 1482.8,
+      "mean_trace_chars": 4039.2,
+      "n": 4,
+      "truncated": 0
+    }
+  ],
+  "ladder": {
+    "items": [
+      {
+        "censored": false,
+        "gold": "yes",
+        "interrupt_answers": [
+          {
+            "completion_tokens": 532,
+            "correct": true,
+            "declared": "yes",
+            "finish_reason": "stop",
+            "rung": 1024
+          }
+        ],
+        "interrupt_delivered": 1,
+        "lcp_ratios": [
+          0.9509,
+          0.0667
+        ],
+        "level": 48,
+        "natural_stop": 1310,
+        "rungs": [
+          1024,
+          640
+        ],
+        "seed": 116261338
+      },
+      {
+        "censored": false,
+        "gold": "yes",
+        "interrupt_answers": [
+          {
+            "completion_tokens": 876,
+            "correct": true,
+            "declared": "yes",
+            "finish_reason": "stop",
+            "rung": 896
+          }
+        ],
+        "interrupt_delivered": 1,
+        "lcp_ratios": [
+          0.6243,
+          0.9911
+        ],
+        "level": 40,
+        "natural_stop": 1153,
+        "rungs": [
+          896,
+          576
+        ],
+        "seed": 100261062
+      }
+    ],
+    "n_candidates": 2
+  },
+  "model_digest": "c62b81e96826354e",
+  "prompt_tokens": 14846,
+  "retries": 0,
+  "transport_errors": 0,
+  "wall_s": 1093.9
+}

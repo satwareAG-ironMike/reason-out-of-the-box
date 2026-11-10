@@ -1,0 +1,400 @@
+{
+  "checks": {
+    "F1_modeA_truncated_ge_flash_band": false,
+    "F2_cost_ratio_modeC_over_modeA_within_flash_band": false,
+    "F3_modeD_delivered_le": false,
+    "F4_cost_ratio_modeD_over_modeC_ge": true,
+    "F5_modeD_distractor_ratio_drop_ge": false,
+    "F6_round44_dispatch_identity": {
+      "byte_identical": 0,
+      "content_identical": 5,
+      "n_paired": 25
+    },
+    "N1_census_channel_open": true,
+    "N1_census_health_source": "reasoning_content",
+    "N2_duplicate_pairs_byte_identical_ge": true,
+    "N2_duplicate_tarr": 0.6667,
+    "P2_modeA_truncated_ge": false,
+    "P2b_modeA_delivered_le": false,
+    "P3_modeC_delivered_ge": true,
+    "P4_modeC_correct_ge": false,
+    "P4b_zero_wrong_delivered": false,
+    "P5_cost_ratio_le_ceiling": false,
+    "P6_manipulation_check": false,
+    "P7_modeC_max_answer_words_in_content": 1,
+    "P7_modeC_one_word_rate": 1.0,
+    "P7_text_existence": true,
+    "P8_modeD_delivered_ge": true,
+    "P8b_zero_wrong_delivered_modeD": false,
+    "P8c_modeD_reasoning_nonzero_count": 11,
+    "P8c_modeD_text_existence": true,
+    "baselines": {
+      "archived_loose_line_correct": "8/11",
+      "constant_no_correct": "7/11",
+      "constant_yes_correct": "4/11",
+      "modeA_loose_correct": "3/11",
+      "modeC_beats_archived_loose_line": false,
+      "modeC_beats_constant_no": false,
+      "modeC_correct_over_all": "4/11",
+      "modeD_beats_archived_loose_line": false,
+      "modeD_beats_constant_no": false,
+      "modeD_correct_over_all": "6/11",
+      "panel_golds": "4 yes / 7 no"
+    },
+    "cost_ratio_modeC_over_modeA": 0.9578,
+    "cost_ratio_modeD_over_modeA": 1.0624,
+    "cost_ratio_modeD_over_modeC": 1.1092,
+    "distractor_ratio_archived_mean": 0.8678,
+    "distractor_ratio_drop_archived_minus_modeC": 0.1004,
+    "distractor_ratio_drop_modeA_minus_modeC": 0.0911,
+    "distractor_ratio_drop_modeA_minus_modeD": -0.0808,
+    "distractor_ratio_drop_modeC_minus_modeD": -0.1719,
+    "paired_correct_modeA_vs_modeC": {
+      "mode_a_only": 0,
+      "mode_b_only": 1,
+      "n_paired": 11,
+      "p_exact_mcnemar": 1.0
+    },
+    "paired_correct_modeC_vs_modeD": {
+      "mode_a_only": 1,
+      "mode_b_only": 3,
+      "n_paired": 11,
+      "p_exact_mcnemar": 0.625
+    },
+    "paired_delivery_modeA_vs_modeC": {
+      "mode_a_only": 0,
+      "mode_b_only": 0,
+      "n_paired": 11,
+      "p_exact_mcnemar": 1.0
+    },
+    "paired_delivery_modeC_vs_modeD": {
+      "mode_a_only": 0,
+      "mode_b_only": 0,
+      "n_paired": 11,
+      "p_exact_mcnemar": 1.0
+    },
+    "repeat_rows_met": 1,
+    "repeat_rows_ran": 5,
+    "repeat_rows_refused": [],
+    "repeat_tier": "divergent",
+    "text_existence_report": {
+      "accepted_for_text_derived_claims": true,
+      "floor": 9,
+      "modeC_content_chars_mean": 3.0,
+      "modeC_reasoning_chars": {
+        "max": 3434,
+        "median": 3378,
+        "min": 1363
+      },
+      "modeC_reasoning_nonzero_count": 11
+    },
+    "text_existence_report_modeD": {
+      "accepted_for_text_derived_claims": true,
+      "floor": 9,
+      "modeD_content_chars_mean": 2.6,
+      "modeD_reasoning_chars": {
+        "max": 3455,
+        "median": 3394,
+        "min": 3375
+      },
+      "modeD_reasoning_nonzero_count": 11
+    }
+  },
+  "dispatch_planned": 36,
+  "duplicates": {
+    "byte_identical_pairs": 2,
+    "n_pairs": 3,
+    "pairs": [
+      {
+        "byte_identical": true,
+        "cell": "S4",
+        "dup_completion_tokens": 1556,
+        "orig_completion_tokens": 1556,
+        "seed_pair": [
+          28501026,
+          28501026
+        ],
+        "token_identical": true
+      },
+      {
+        "byte_identical": true,
+        "cell": "S5",
+        "dup_completion_tokens": 1556,
+        "orig_completion_tokens": 1556,
+        "seed_pair": [
+          32421024,
+          32421024
+        ],
+        "token_identical": true
+      },
+      {
+        "byte_identical": false,
+        "cell": "S6",
+        "dup_completion_tokens": 1556,
+        "orig_completion_tokens": 1556,
+        "seed_pair": [
+          36381024,
+          36381024
+        ],
+        "token_identical": true
+      }
+    ],
+    "tarr": 0.6667,
+    "token_identical_pairs": 3
+  },
+  "endpoint_calls_cap": 40,
+  "endpoint_calls_used": 37,
+  "gate_hash": "9109bf712db53aa4833c812b26f2499ec79be1b8aa9630204f40d0bbdf1fb186",
+  "modes": {
+    "A": {
+      "answer_leading": 11,
+      "attempts_used": 11,
+      "census": {
+        "fields_seen": [
+          "content",
+          "reasoning_content",
+          "role"
+        ],
+        "reasoning_source_counts": {
+          "reasoning_content": 11
+        },
+        "trace_chars_total_max": 3432,
+        "trace_chars_total_median": 3387,
+        "trace_chars_total_min": 1566
+      },
+      "completion_tokens_max": 1556,
+      "completion_tokens_mean": 1464.6,
+      "completion_tokens_median": 1556,
+      "content_chars_mean": 2.9,
+      "correct_over_all": 3,
+      "correct_over_all_rate": 0.2727,
+      "delivered": 11,
+      "delivered_correct": 3,
+      "delivered_or_strict_correct": 3,
+      "delivered_rate": 1.0,
+      "delivered_wilson_95": [
+        0.7412,
+        1.0
+      ],
+      "distractor_ratio_max": 0.9733,
+      "distractor_ratio_mean": 0.8585,
+      "distractor_ratio_min": 0.0,
+      "error_classes": [],
+      "field_conflicts": 9,
+      "loose_fallback_correct": 3,
+      "max_answer_words_in_content": 1,
+      "n": 11,
+      "no_answer_at_all": 0,
+      "one_word_answer_field": 11,
+      "reasoning_chars_max": 3432,
+      "reasoning_chars_median": 3387,
+      "reasoning_chars_min": 1566,
+      "reasoning_chars_nonzero": 11,
+      "truncated_at_cap": 0,
+      "wrong_delivered": 8
+    },
+    "C": {
+      "answer_leading": 11,
+      "attempts_used": 11,
+      "census": {
+        "fields_seen": [
+          "content",
+          "reasoning_content",
+          "role"
+        ],
+        "reasoning_source_counts": {
+          "reasoning_content": 11
+        },
+        "trace_chars_total_max": 3434,
+        "trace_chars_total_median": 3378,
+        "trace_chars_total_min": 1363
+      },
+      "completion_tokens_max": 1556,
+      "completion_tokens_mean": 1402.8,
+      "completion_tokens_median": 1556,
+      "content_chars_mean": 3.0,
+      "correct_over_all": 4,
+      "correct_over_all_rate": 0.3636,
+      "delivered": 11,
+      "delivered_correct": 4,
+      "delivered_or_strict_correct": 4,
+      "delivered_rate": 1.0,
+      "delivered_wilson_95": [
+        0.7412,
+        1.0
+      ],
+      "distractor_ratio_max": 0.9626,
+      "distractor_ratio_mean": 0.7674,
+      "distractor_ratio_min": 0.0,
+      "error_classes": [],
+      "field_conflicts": 8,
+      "loose_fallback_correct": 4,
+      "max_answer_words_in_content": 1,
+      "n": 11,
+      "no_answer_at_all": 0,
+      "one_word_answer_field": 11,
+      "reasoning_chars_max": 3434,
+      "reasoning_chars_median": 3378,
+      "reasoning_chars_min": 1363,
+      "reasoning_chars_nonzero": 11,
+      "truncated_at_cap": 0,
+      "wrong_delivered": 7
+    },
+    "D": {
+      "answer_leading": 11,
+      "attempts_used": 11,
+      "census": {
+        "fields_seen": [
+          "content",
+          "reasoning_content",
+          "role"
+        ],
+        "reasoning_source_counts": {
+          "reasoning_content": 11
+        },
+        "trace_chars_total_max": 3455,
+        "trace_chars_total_median": 3394,
+        "trace_chars_total_min": 3375
+      },
+      "completion_tokens_max": 1556,
+      "completion_tokens_mean": 1556.0,
+      "completion_tokens_median": 1556,
+      "content_chars_mean": 2.6,
+      "correct_over_all": 6,
+      "correct_over_all_rate": 0.5455,
+      "delivered": 11,
+      "delivered_correct": 6,
+      "delivered_or_strict_correct": 6,
+      "delivered_rate": 1.0,
+      "delivered_wilson_95": [
+        0.7412,
+        1.0
+      ],
+      "distractor_ratio_max": 0.9679,
+      "distractor_ratio_mean": 0.9393,
+      "distractor_ratio_min": 0.9026,
+      "error_classes": [],
+      "field_conflicts": 7,
+      "loose_fallback_correct": 6,
+      "max_answer_words_in_content": 1,
+      "n": 11,
+      "no_answer_at_all": 0,
+      "one_word_answer_field": 11,
+      "reasoning_chars_max": 3455,
+      "reasoning_chars_median": 3394,
+      "reasoning_chars_min": 3375,
+      "reasoning_chars_nonzero": 11,
+      "truncated_at_cap": 0,
+      "wrong_delivered": 5
+    }
+  },
+  "round44_reference": {
+    "constants": {
+      "basis_note": "mode A truncated 8/11 where the round-23 archive reads 11/11 and the round-42 27B-class firing read 1/11: the ceiling is class-tied; mode C delivered 7/11 all correct, an exact function of no-repetition obedience (7/7 obeying items deliver, 4/4 disobedient truncate at the cap), with disobedience on the negative cross-check arm at depth (X obedience 2/2 at k = 8, 1/2 at k = 12, 0/3 at k = 16); the cost ratio 0.6756 is the ceiling-present state of the knob's state-dependent effect (#108)",
+      "class": "flash-next-class local endpoint (the class the round-23 archive measured)",
+      "cost_ratio_modeC_over_modeA": 0.6756,
+      "dispatch_trace_chars_nonzero": 30,
+      "modeA": {
+        "completion_tokens_mean": 1636.9,
+        "correct_over_all": 3,
+        "delivered": 3,
+        "n": 11,
+        "truncated_at_cap": 8
+      },
+      "modeC": {
+        "completion_tokens_mean": 1105.9,
+        "correct_over_all": 7,
+        "delivered": 7,
+        "n": 11,
+        "truncated_at_cap": 4,
+        "wrong_delivered": 0
+      },
+      "modeC_x_obedient_by_cell": {
+        "S4": [
+          2,
+          2
+        ],
+        "S5": [
+          1,
+          2
+        ],
+        "S6": [
+          0,
+          3
+        ]
+      },
+      "n1_census_health_source": "reasoning_content",
+      "obedience_threshold": 0.1,
+      "raw_blob_sha256": "ce6e822682d542cc86970ec86d976a73724c0574e97d349a56b1caee7e11651a",
+      "summary_blob_sha256": "ff6cc94bde4c2c58791c267c9cb5c2cd7a3179ab9896b4d2d82b5fb2649af9eb",
+      "tier": "surfacing_only"
+    },
+    "violations": []
+  },
+  "round46_reference": {
+    "constants": {
+      "basis_note": "mode A truncates 2/11 on the 27B class against the archived 11/11 and the flash class's 8/11: the ceiling is class-tied; the ban delivers 8/11 all correct at cost ratio 1.0237 over mode A (state-dependent cost effect, issue #108); the bounded single-pass knob is bounded_loss: 6/11 delivered, 5/11 truncated, cost ratio 1.3089 over the ban - the permission demonstrably triggered the enumeration it bounds on one item, while the ban lost a forward item the bounded knob delivered; the per-item obedience split is an exploratory post-hoc readout, not a scored row",
+      "class": "27B-class local endpoint, pool slot 6/6",
+      "cost_ratio_modeC_over_modeA": 1.0237,
+      "cost_ratio_modeD_over_modeA": 1.3399,
+      "cost_ratio_modeD_over_modeC": 1.3089,
+      "dispatch_trace_chars_nonzero": 36,
+      "modeA": {
+        "completion_tokens_mean": 1043.8,
+        "correct_over_all": 9,
+        "delivered": 9,
+        "n": 11,
+        "truncated_at_cap": 2
+      },
+      "modeC": {
+        "completion_tokens_mean": 1068.5,
+        "correct_over_all": 8,
+        "delivered": 8,
+        "n": 11,
+        "truncated_at_cap": 3,
+        "wrong_delivered": 0
+      },
+      "modeD": {
+        "completion_tokens_mean": 1398.6,
+        "correct_over_all": 6,
+        "delivered": 6,
+        "n": 11,
+        "truncated_at_cap": 5,
+        "wrong_delivered": 0
+      },
+      "modeD_tier": "bounded_loss",
+      "n1_census_health_source": "reasoning_content",
+      "n2_duplicate_tarr": 1.0,
+      "raw_blob_sha256": "aeac64d768e91171b20bfff31d2771cb09fbd83dddb60c2cf398dd7e8c7310f2",
+      "summary_blob_sha256": "bf4635e663ccb62eb7f9afabb2332414108ba423066850289b5338cacaadf448",
+      "tier": "surfacing_only"
+    },
+    "violations": []
+  },
+  "transport": {
+    "attempts_total": 36,
+    "completion_tokens_total": 53326,
+    "dispatch_records": 36,
+    "prompt_tokens_total": 104689,
+    "single_stream_tokens_per_second": 49.21
+  },
+  "verdict": {
+    "all_registered_predictions_met": false,
+    "beats_archived_loose_line": false,
+    "census_claims_accepted": true,
+    "modeD_beats_archived_loose_line": false,
+    "modeD_tier": "bounded_loss",
+    "repeat_rows_met": 1,
+    "repeat_rows_ran": 5,
+    "repeat_rows_refused": [],
+    "repeat_tier": "divergent",
+    "replication_tarr": 0.6667,
+    "round44_dispatch_identity": {
+      "byte_identical": 0,
+      "content_identical": 5,
+      "n_paired": 25
+    },
+    "tier": "surfacing_only"
+  },
+  "wall_seconds": 1095.4
+}

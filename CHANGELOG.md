@@ -26,8 +26,183 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   second same-class pair with the reasoning channel open on both sides; the gold-yes natural stop
   is 838 (round 52: 840, flash class: 1,310); the issue #100 duplicate control fails (the twin
   was censored at 2,048, the duplicate stopped at 1,798 and declared the correct gold label).
+### 2026-11-06
+
+#### Added
+
+- Nightly research round 50 (issue #65; serves #71, #94, #126, #100, #105; refs #73):
+  `research/nightly-2026-11-06-0259/` separates depth from input load, and computation from
+  surfacing, on the k-hop ladder family - 7 cells on a flash-next-class endpoint: the four
+  archived round-6 k = 8 anchor items (seeds asserted, round-6 `raw.jsonl` blob `21987bdf`
+  pinned fail-closed), a matched-load depth ladder k = 8/16/24/32 selected inside a 64-72
+  fact band so the prompt size is held constant while depth grows 4x and the chain count
+  falls 8 to 2, a 3x-load arm at k = 16 and k = 32 (192 facts), 3 duplicate re-dispatches
+  (#100) and 1 census call: 32 of the 40-call cap, `max_tokens` 2048, `temperature` 0.0,
+  zero retries. Instrument `depth_load_probe.py` (stdlib, `--selftest` 157 checks: planted
+  capability-bound and surfacing-bound firings must receive different tiers, a zero-trace
+  deployment must refuse the trace rows, a planted wrong-verdict trace must score as
+  capability, a planted `DUP-`-label pair must join); gate `round50-gate-v1` (blob
+  `a805acd9`) frozen before dispatch and pinned in the instrument. Result (tier
+  `ambiguous`, 6 of 6 scored rows pass): **23 delivered records, 23 correct, 0 delivered
+  wrong, 5 non-deliveries all `finish_reason = length` at 2048**, so this firing's accuracy
+  loss is entirely a delivery loss and `d*` stays unplaced (the accuracy curve never turns
+  over, only the delivery curve); at matched load accuracy is 4/4 at k = 8 and 16 and 3/4 at
+  k = 24 and 32, tripling the input at k = 16 costs nothing (H16 4/4) while tripling it at
+  k = 32 costs three of four verdicts (H32 1/4 delivered, mean 1,719.8 tokens), so load and
+  depth interact on delivery, not correctness; round 6's 80-token-per-hop law does not
+  transfer to constant load (20.9 estimated verdict-position slope against the registered
+  [55, 110] band, 31.3 completion tokens per hop), so a depth curve that does not pin the
+  fact count measures depth and load together. The decisive row refused itself as
+  pre-registered: the trace-verdict recovery rule calibrated at 0.5652 (13/23) against
+  delivered answers, under the 0.75 floor, and the capture mechanism is identified - in 10
+  of 10 disagreements the last standalone yes/no of the trace is the `no` inside the model's
+  own instruction-to-self tail (`Need final exactly one word: yes. Ensure no extra.`, on 16
+  of 23 traces), which is issue #94's unprovenanced-fallback defect on a new design and puts
+  the rounds 42-49 trace-derived measures under the same doubt; post-hoc and unscored, a
+  cue-anchored rule agrees on 20/23 but recovers no verdict from any of the five truncated
+  traces (5,069-6,796 characters, cut mid-enumeration), so "computed it, never surfaced it"
+  is not supported here either. Controls: census open via `reasoning_content` on 31/31;
+  self-agreement 3/3 byte-identical and 3/3 token-identical. Instrument defect disclosed and
+  fixed in the same firing: the #100 join had keyed on the cell label while duplicates are
+  labelled `DUP-`, so the first aggregation paired 0 records; re-keyed to seed plus prompt
+  digest and re-aggregated with `--rescore` from byte-identical raw data (`raw.jsonl` blob
+  `e2a9d47e` before and after, zero new endpoint calls, `gate.json` untouched).
+
+### 2026-11-06 (second entry)
+
+#### Added
+
+- Nightly research round 51 (issue #65; serves #71, #126, #94, #100, #105; refs #73, #65):
+  `research/nightly-2026-11-06-0433/` is the per-item output-budget ladder at the generator's load
+  floor, the route round 50 named as the only way to `d*`. Selection rule: facts = 2k exactly (two
+  disjoint k-edge paths, the smallest item the shipped generator can build at that depth), first two
+  gold-yes and two gold-no in generation order, cells k = 8, 16, 24, 32, 40, 48 at `max_tokens`
+  2048, temperature 0; stage 2 re-dispatches the identical prompt of the smallest-seed gold-yes item
+  of each cell at 24, 32, 40, 48 at rungs floor(0.8L/64)*64 and floor(0.5L/64)*64 of that item's own
+  measured natural stop, plus two identical re-dispatches as the issue #100 control. Gate
+  `60b0d62c` (schema `round51-gate-v1`) frozen before dispatch; 109 `--selftest` checks; 20 of the
+  40-call cap dispatched (1 health, 16 stage 1, 4 stage 2), 14,846 prompt / 23,370 completion tokens.
+  Result (tier `capability_bound_floor_depth`, flag `early_commitment_observed`): 16 of 16 stage-1
+  records delivered with `finish_reason` stop - the 2048 cap binds nowhere on this family out to
+  k = 48, confirming issue #126 - and 13 of 16 are correct (0.8125, CI 0.5699..0.9341); the three
+  failures are all cross-path (gold-no) items that answered "yes": both at k = 48 and one at k = 32,
+  so the wall at the load floor is a wrong answer rather than a running-out and `d*` sits as an
+  accuracy interval 40 < d* <= 48 (F1 pass 4/4, F2 fail at 3 wrong, F3 fail at 6/6 delivered).
+  Every one of the eight gold-no records stopped at exactly 1556 completion tokens at every depth
+  while the gold-yes arm climbs 718.5, 915.0, 1106.0, 1409.5 (F4 slope 28.3 tokens/hop, inside the
+  registered band, between round 50's 31.3 and round 6's 80), so the label-split cost ratio F5
+  collapses 2.1656 -> 1.7005 -> 1.4069 -> 1.1039 with depth: the negative arm is length-pinned and
+  the budget belongs to the label, not to k. Stage 2: both 0.8-rungs delivered and were correct at
+  78% of their own natural stop (532 tokens at rung 1024 against L = 1310; 876 at rung 896 against
+  L = 1153), both 0.5-rungs hit the rung with no answer token (I1 fail 2 of 4, so the wall is not a
+  completeness wall), and prefix identity fails (I2, 0 of 2 candidates): the same prompt at
+  temperature 0 on the same endpoint shares 0.9509, 0.0667, 0.6243 and 0.9911 of its undisturbed
+  output at the four rungs, un-ordered by rung, so `one_dispatch_predicts_rungs` is refused and a
+  budget ladder must spend a dispatch per rung. Free cross-firing control: the k = 32 floor cell is
+  byte-for-byte round 50's M32 item set (digest-pinned) and reproduces 3 of 4 finish states, with
+  the item round 50 truncated at the cap (84261050, length at 2048) delivering here at 1556 with
+  stop and being one of the three wrong answers; round 50's 12-hex model digest and this round's
+  16-hex digest (c62b81e96826354e) do not match on their shared prefix, so the two firings are
+  different deployments of one class and the digest width is now fixed at 16 for issue #100.
+  Zero-prompt finding 1: the level-49 `entity pool exhausted` raise is a collision ceiling on item
+  size and not on depth (pool 2700 names, `ladders._entity` at 100 rejection tries, an item at
+  level 49 with C = 50 needs 2550 names); item-by-item scans generate 285 of 300 at 49, 284 at 50
+  and 178 at 64 and still find load-floor items (5, 6, 1), so `k > 48` is reachable on the floor
+  family and the fix is generator-side - filed as a new issue against `generators/`. Cutoff
+  disclosed: the firing lost its first hour to a transcription defect (the vendored round-50
+  reference digests were 12-hex against the archive's 16-hex field, so `certify_reference` refused
+  all 12 rows and would not dispatch; repaired by programmatic re-extraction, nothing dispatched
+  against an uncertified reference), and the resumed pass was terminated by its 700 s guard, so the
+  k = 8 and k = 16 cells, the k = 24 and k = 32 interrupt candidates and both duplicate controls were
+  never dispatched - N2 did not run (an absence, not a disagreement), I1 and I2 rest on 4 dispatches
+  and 2 candidates, and the round stays Executed, not Reproduced or Validated.
 
 ### 2026-11-05
+
+#### Added
+
+- Nightly research round 48 (issue #65; serves #71, #100, #105; refs #94, #73,
+  #65, #108): `research/nightly-2026-11-05-0229/` is the test-retest re-fire of
+  the round-46 27B-class knob battery - the same 11 round-23 cap-truncated items
+  (S4 to S6 at E = 192) re-dispatched on a new 27B-class endpoint in modes A
+  (archived prompt, 11), C (no-repetition one-liner, 11) and D (the bounded
+  single-pass knob, 11), plus 3 duplicate mode-A self-agreement dispatches and 1
+  census health call; 37 of the 40-call cap. Instrument: the round-46 script
+  ported byte-identically except the gate schema, the gate question, two vendored
+  references (`ROUND44_REFERENCE` kept, `ROUND46_REFERENCE` added, both with
+  archive blob digests and planted-slip selftest controls) and the six new
+  re-fire rows R1 to R6 (the shared rows P1 to P9, N1, N2 stay byte-equal to the
+  round-46 gate, so the four firings 42/44/46/48 score one table); the archived
+  round-46 `raw.jsonl` blob is pinned fail-closed and is the join target for R6.
+  Gate `294ed5bd` (schema `round48-gate-v1`) frozen before dispatch. Result
+  (tier `policy_artifact`, mode-D tier `bounded_gain`, repeat tier `partial` 4/5
+  of R1-R5): the class-tied ceiling holds on a third 27B firing (mode A
+  truncates 1/11 against the registered <= 3/11 band, against 8/11 to 11/11 on
+  the flash class); the ban delivers 9/11 all correct at cost ratio 1.0982 (the
+  fourth ceiling-free 27B data point of the state-dependent cost ledger: 1.1255,
+  1.0237, 1.0982 against the ceiling-present flash firing's 0.6756); the
+  round-46 `bounded_loss` readout does not repeat - the bounded knob is the best
+  delivery mode on this firing (10/11, beating the ban by one item, paired
+  C-only 0 / D-only 1, p = 1.0) while the cost direction holds (ratio 1.1224
+  over the ban; 1.3089 in round 46), so the mode-D tier is a firing-state
+  property on the 27B class. The census exposure state flipped between the two
+  27B-class firings (round 46: `reasoning_content`; this firing: `reasoning`,
+  with a different message field set marking a different serving revision): the
+  inherited scoring channel records 0 trace chars on all 36 dispatches, so P7
+  and P8c refuse the text-derived claims as pre-registered and the 27B class is
+  now measured under all three exposure states (#105). R6: 0/36 dispatch records
+  byte-identical to the archived round-46 firing (3/36 content-identical), a
+  cross-firing class statement, not a within-firing restatement. N2: 2/3
+  duplicate pairs byte-identical (TARr 0.6667) but 0/3 token-identical, one pair
+  diverging on the answer (the duplicate truncated at 2048 on a 4,341-char
+  trace where the original delivered in 596 tokens): within-firing trace
+  non-determinism on this deployment state. Transport: 104,689 prompt /
+  33,564 completion tokens, ~67.9 tokens/s single stream, wall 508.7 s.
+
+- Nightly research round 49 (issue #65; serves #71, #100, #94; opens #126; refs #105,
+  #73, #108, #65): `research/nightly-2026-11-05-0400/` is the flash-class A/C/D firing the
+  #71 bounded-knob discriminator was owed - the same 11 round-23 cap-truncated items
+  (S4 to S6 at E = 192, 4 gold-yes / 7 gold-no) re-dispatched on a flash-next-class
+  endpoint in modes A (archived prompt, 11), C (no-repetition one-liner, 11) and D
+  (`You may state each fact at most once, then answer with exactly one word: yes or no.`,
+  the bounded permission, 11 - the first mode-D dispatches ever on this class; mode B's 5
+  ordering cells dropped to stay inside the cap), plus 3 duplicate mode-A self-agreement
+  dispatches and 1 census health call; 37 of the 40-call cap. Instrument: the round-48
+  script ported byte-identically except the gate schema, the class rows, the gate question
+  and the reference retarget (`ROUND44_REFERENCE` as the same-class join target and band
+  source, `ROUND46_REFERENCE` as the mode-D cross-class constant source, both pinned
+  fail-closed with a planted duplicate-record control over both archives); re-fire rows
+  F1 to F5 fixed before dispatch from the two archived firings only, F6 the
+  firing-identity readout, and P1 to P9, N1, N2 byte-equal to the round-46/48 gates so the
+  firings 42, 44, 46, 48 and 49 score one table. Gate `9109bf71` (schema
+  `round49-gate-v1`) frozen before dispatch and pinned in the instrument as
+  `ROUND49_GATE_BLOB_SHA256`. Result (tier `surfacing_only`, mode-D tier `bounded_loss`,
+  repeat tier `divergent`, 1 of 5 rows met): the class ceiling does not re-present - mode
+  A delivers 11/11 at mean 1,464.6 completion tokens with 0 truncations against round 44's
+  8/11 at 1,636.9 on the same class and the same items, and the truncation ledger 8/11,
+  2/11, 1/11, 0/11 (rounds 44, 46, 48, 49) makes the wall a property of the serving build
+  rather than of the model class; 33 of 36 dispatch records finish `stop` at exactly 1,556
+  completion tokens (492 under the cap, `finish_reason` never `length`), so the knobs move
+  output length only through 3 exceptions: C/A 0.9578 (F2 fails against the flash band
+  [0.50, 0.90], round 44 read 0.6756), D/C 1.1092 (F4 holds, 0.013 from round 48's 1.1224
+  on the 27B class - the permission's cost direction is the family's only cross-class
+  transfer so far), and F3 fails with mode D delivering 11/11 and scoring the best 6/11
+  while the tier rule still prints `bounded_loss` on any wrong delivery in mode D (the ban
+  delivered 7 wrong answers in the same firing). No mode beats a baseline (A 3/11, C 4/11,
+  D 6/11 against constant-no 7/11 and the archived loose-fallback line 8/11); P6 fails on
+  a flash-class firing for the first time (A minus C 0.0911 against the 0.15 floor and
+  round 44's 0.3467) and the permission moves repetition the wrong way (A minus D -0.0808,
+  C minus D -0.1719). Census open via `reasoning_content` on 36/36 dispatches and on the
+  health call (the round-44 state, the opposite of round 48's flipped `reasoning` state);
+  F6 reads 0/25 byte-identical and 5/25 content-identical over the 25 joinable (mode, seed)
+  keys (11 A + 11 C + 3 A2, verified against the archive before the gate was frozen); N2
+  self-agreement 2/3 byte-identical and 3/3 token-identical, every pair at 1,556 tokens.
+  Transport 104,689 prompt / 53,326 completion tokens, 36 dispatches in 1,095 s wall across
+  2 streams, zero retries. Opens #126: the panel's cap-bound selection premise (the items
+  chosen because they truncated at 2048 on the round-23 build) no longer holds on the
+  current builds, so the ceiling-conditioned rows F1 to F3 are untestable as registered and
+  the battery needs either a re-registered cap or a panel re-derived under the build that
+  is serving.
 
 #### Fixed
 

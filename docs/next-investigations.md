@@ -1011,3 +1011,57 @@ the loop-removal reading: the capability was latent, the edit only unblocks it.
   preprint status, physics.med-ph). The Sparks blog has no arXiv/PubMed/PhilPapers record
   and is a non-archive source under the provenance rule; its released artifacts (logs,
   checkpoint, edit diff) are public and linkable from the doc as they are here.
+
+## Research finding (2026-11-06): at constant input load the ladder family shows no accuracy ceiling inside k = 32, and the 80-token-per-hop law was a depth-plus-load law (round 50)
+
+Nightly round 50 (issue #65, artifacts in
+[`research/nightly-2026-11-06-0259/`](../research/nightly-2026-11-06-0259/README.md), PR #128)
+ran the load decoupling that the 2026-10-16 finding above asked for. The shipped generator draws
+the chain count uniformly from `[2, k+2]`, so `facts = chains * k` and every archived depth curve
+moved depth and prompt size together. Round 50 selected items inside a fixed fact-count band,
+holding the prompt at 64-72 facts while depth ran k = 8, 16, 24, 32 (distractor chains falling 8
+to 2, the conservative direction), with 3x-load arms at 192 facts at k = 16 and k = 32 and the
+four archived round-6 k = 8 items as a same-seed anchor. 28 experimental records, `max_tokens`
+2048, `temperature` 0.0, gate `round50-gate-v1` frozen before dispatch. Evidence label:
+`Executed` (exploratory, n = 4 per cell, one endpoint, one firing).
+
+- Accuracy does not turn over anywhere in the extension: 23 delivered records, 23 correct, zero
+  delivered wrong, and 5 non-deliveries that are all `finish_reason = length` at exactly 2048.
+  Delivered accuracy is 4/4 at k = 8 and k = 16 and 3/4 at k = 24 and k = 32, both misses
+  truncations. The curve that bends with depth at constant load is the delivery curve, so `d*`
+  cannot be placed from accuracy and the `d*+1..d*+4` band stays unplaceable.
+- Depth and load interact, on delivery rather than correctness: tripling the prompt at k = 16
+  costs nothing (4/4 delivered, mean 1,263.5 tokens) while tripling it at k = 32 costs three of
+  four verdicts (1/4 delivered, mean 1,719.8 tokens).
+- The length law is a two-variable law. Round 6's `completion_tokens = -36 + 80k` fitted a series
+  whose fact count grew with depth; at pinned prompt size the slope is 31.3 completion tokens per
+  hop and the estimated verdict surface position grows at 20.9 per hop (against a registered band
+  of [55, 110]). A budget derived from the 80-per-hop number over-provisions deep items by roughly
+  2.5x, and any depth curve that does not record the fact count measures two things at once.
+- The cheap route to separating computation from surfacing does not work on this deployment
+  family. The pre-registered trace-recovery rule (last standalone yes/no) calibrated at 0.5652
+  against the items that delivered, under its 0.75 floor, so the surfacing row was refused as
+  registered; the capture mechanism is the model's own instruction-to-self tail
+  (`Need final exactly one word: yes. Ensure no extra.`), on 16 of 23 traces and the captured token
+  in 10 of 10 disagreements (issue #94). A cue-anchored rule, reported post-hoc and unscored,
+  recovers no verdict at all from the five truncated traces (5,069 to 6,796 characters, cut
+  mid-enumeration), so the cap cuts the traversal before any commitment exists in the surfaced
+  text. What remains is the expensive route this doc already asked for: a per-item budget ladder
+  reported as accuracy and delivery against budget at each depth.
+- Consequence for the panel rule in issue #126: the 2048 cap still binds on the current builds
+  wherever the work is put (1 of 4 truncated at k = 32 with 64 facts, 3 of 4 at 192 facts), so a
+  cap-bound panel can be re-derived from (depth, fact-count) coordinates under the serving build
+  instead of by walking the archived firing, provided the panel records the fact count next to the
+  depth.
+
+Primary sources located by this round, all abstract-level unless stated: arXiv:2505.15684
+(ThinkLess, Li, Gao, Li, Wu, 2025) names the mechanism ("excessive length of reasoning tokens ...
+may even truncate final answers under context limits") and terminates reasoning early;
+arXiv:2604.12426 (Curth, Lawrence, Karmalkar, Prasad, 2026, ICLR 2026 workshop per the record)
+reads when a multi-hop answer becomes available internally versus when it is emitted;
+arXiv:2410.05229 (GSM-Symbolic, ICLR 2025) is the parameter-varying analogue of the load control;
+arXiv:2305.18654 (Faith and Fate) is the lineage anchor. Gaps, stated as searched-for and not
+found: no work that varies queried-path depth while holding the input fact count fixed, none that
+names a depth-ceiling-versus-budget-surfacing taxonomy, and none that recovers a truncated verdict
+from a truncated trace or from hidden states. No acceptance criterion changes; the strict verdict
+is unchanged.
