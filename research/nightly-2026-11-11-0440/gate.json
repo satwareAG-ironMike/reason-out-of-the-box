@@ -1,0 +1,417 @@
+{
+  "certification": {
+    "n_facts": 96,
+    "seed": 116261051,
+    "yesno_digest16": "068bc6a1fb0620fb"
+  },
+  "gate_sha256": "8aeb5ec66178de93f745228da063c37f4087ad44264bd7fb1ced97af11990344",
+  "spec": {
+    "arms": {
+      "ban": "the same bytes plus one clause banning written intermediate names",
+      "free": "round 55's template, byte-identical, chain may be written"
+    },
+    "cells": [
+      {
+        "gold": "stonsh",
+        "j": 1,
+        "kind": "name",
+        "label": "F_L8_j1",
+        "level": 8,
+        "mode": "free",
+        "prompt_sha256": "6e33c155a722711b94f7661587b5581422e689f50ba45a867e325df3c836dbee",
+        "seed": 36261005
+      },
+      {
+        "gold": "stonsh",
+        "j": 1,
+        "kind": "name",
+        "label": "B_L8_j1",
+        "level": 8,
+        "mode": "ban",
+        "prompt_sha256": "49ce3fe74f212aaf20eb691f358aff156e61aa7dfd8f8f0efe963fff1c30a2b1",
+        "seed": 36261005
+      },
+      {
+        "gold": "brep",
+        "j": 2,
+        "kind": "name",
+        "label": "F_L8_j2",
+        "level": 8,
+        "mode": "free",
+        "prompt_sha256": "79c89f4a5e9e0e44411e8560f9acc512bbb6856b6664943f21fbb5803532781d",
+        "seed": 36261005
+      },
+      {
+        "gold": "brep",
+        "j": 2,
+        "kind": "name",
+        "label": "B_L8_j2",
+        "level": 8,
+        "mode": "ban",
+        "prompt_sha256": "354a714c327e5c2fffb1913e5e363cd2f31abd3fa14c51b7f964a4ad890e6423",
+        "seed": 36261005
+      },
+      {
+        "gold": "zish",
+        "j": 8,
+        "kind": "name",
+        "label": "F_L8_j8",
+        "level": 8,
+        "mode": "free",
+        "prompt_sha256": "4f1fdb53f99a46ebbf6259ffbe2f04a990332b3416a6b22c42e1dab9230dbd53",
+        "seed": 36261005
+      },
+      {
+        "gold": "zish",
+        "j": 8,
+        "kind": "name",
+        "label": "B_L8_j8",
+        "level": 8,
+        "mode": "ban",
+        "prompt_sha256": "7b250f1a3a9373815553c825d6ee1c2e5918fd611a69b9dbf68a55396114547f",
+        "seed": 36261005
+      },
+      {
+        "gold": "NONE",
+        "j": 9,
+        "kind": "off_end",
+        "label": "F_L8_offend",
+        "level": 8,
+        "mode": "free",
+        "prompt_sha256": "40ab806f7c5dec6dc1d3a7ee6ba6e8841a84f330677e0e70f05bebb6ab674ad1",
+        "seed": 36261005
+      },
+      {
+        "gold": "NONE",
+        "j": 9,
+        "kind": "off_end",
+        "label": "B_L8_offend",
+        "level": 8,
+        "mode": "ban",
+        "prompt_sha256": "acd9e603f90c466f9dcff0ce338a03d9e75c2b428163351677ea53d886a9fc9e",
+        "seed": 36261005
+      },
+      {
+        "gold": "NONE",
+        "j": 17,
+        "kind": "off_end",
+        "label": "F_L16_offend",
+        "level": 16,
+        "mode": "free",
+        "prompt_sha256": "515a50f2c6478f796b0b46744566c670eb696da3581350968480ee363461dcd3",
+        "seed": 52261033
+      },
+      {
+        "gold": "NONE",
+        "j": 17,
+        "kind": "off_end",
+        "label": "B_L16_offend",
+        "level": 16,
+        "mode": "ban",
+        "prompt_sha256": "bb86b3027783f6b4ed575952df7437f675c29a4154aded7d275f62bb448ed3c8",
+        "seed": 52261033
+      },
+      {
+        "gold": "NONE",
+        "j": 33,
+        "kind": "off_end",
+        "label": "F_L32A_offend",
+        "level": 32,
+        "mode": "free",
+        "prompt_sha256": "cbd27af78988945009fce3608b9b7ebe9cc4e3bac6a4a2ed01c8192843c095b9",
+        "seed": 84261011
+      },
+      {
+        "gold": "NONE",
+        "j": 33,
+        "kind": "off_end",
+        "label": "B_L32A_offend",
+        "level": 32,
+        "mode": "ban",
+        "prompt_sha256": "ae629b91c9f46365563258ba648e9e4b454ebcb67255939148020fd2ae660291",
+        "seed": 84261011
+      },
+      {
+        "gold": "NONE",
+        "j": 49,
+        "kind": "off_end",
+        "label": "F_L48_offend",
+        "level": 48,
+        "mode": "free",
+        "prompt_sha256": "e07afb24060fd6523c44f8c7147ae5e08e2b55a0131dcc2e14742f7452c45747",
+        "seed": 116261051
+      },
+      {
+        "gold": "NONE",
+        "j": 49,
+        "kind": "off_end",
+        "label": "B_L48_offend",
+        "level": 48,
+        "mode": "ban",
+        "prompt_sha256": "7a7f7156dec44b54980db32e32257756a61e90e59dc0c3f1e4b4cb7d8fc065ff",
+        "seed": 116261051
+      },
+      {
+        "gold": "NONE",
+        "j": 1,
+        "kind": "dead_end",
+        "label": "F_L48_deadend",
+        "level": 48,
+        "mode": "free",
+        "prompt_sha256": "184a5d4d226419826ecf250366ce9f04a96ac0c56f68819f361fba7be0f76597",
+        "seed": 116261051
+      },
+      {
+        "gold": "NONE",
+        "j": 1,
+        "kind": "dead_end",
+        "label": "B_L48_deadend",
+        "level": 48,
+        "mode": "ban",
+        "prompt_sha256": "fcc9e2162822877febea8d925e64eb3cd44b6757769f9be53679a05a1675351e",
+        "seed": 116261051
+      },
+      {
+        "gold": "sterk",
+        "j": 32,
+        "kind": "name",
+        "label": "F_L32A_j32",
+        "level": 32,
+        "mode": "free",
+        "prompt_sha256": "a8697dfb826079fc9be40fae6e6a8a78c915e1b16d5c066311eb438c9f694c53",
+        "seed": 84261011
+      },
+      {
+        "gold": "sterk",
+        "j": 32,
+        "kind": "name",
+        "label": "B_L32A_j32",
+        "level": 32,
+        "mode": "ban",
+        "prompt_sha256": "4970b1a8716fb3e4a6892998f2b6446ddb8a2bd01d35788db76a7d5ee41c6d88",
+        "seed": 84261011
+      },
+      {
+        "gold": "whesh",
+        "j": 32,
+        "kind": "name",
+        "label": "F_L48_j32",
+        "level": 48,
+        "mode": "free",
+        "prompt_sha256": "6f19b9f8c406d70313e6f598c99a982855aa4f51e43af4ff9b60d3819f82e054",
+        "seed": 116261051
+      },
+      {
+        "gold": "whesh",
+        "j": 32,
+        "kind": "name",
+        "label": "B_L48_j32",
+        "level": 48,
+        "mode": "ban",
+        "prompt_sha256": "2ec9d5fd966e6edc1af05ff45e48775ff28a4a59f181cd2b81e9f65e118e32b4",
+        "seed": 116261051
+      },
+      {
+        "gold": "spog",
+        "j": 48,
+        "kind": "name",
+        "label": "F_L48_j48",
+        "level": 48,
+        "mode": "free",
+        "prompt_sha256": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+        "seed": 116261051
+      },
+      {
+        "gold": "spog",
+        "j": 48,
+        "kind": "name",
+        "label": "B_L48_j48",
+        "level": 48,
+        "mode": "ban",
+        "prompt_sha256": "8decdd5b35b01b1533e699c3c7e3ef256cfe0e086862d1b410fedd11a11dde00",
+        "seed": 116261051
+      },
+      {
+        "gold": "trackst",
+        "j": 8,
+        "kind": "name",
+        "label": "F_L48_j8",
+        "level": 48,
+        "mode": "free",
+        "prompt_sha256": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260",
+        "seed": 116261051
+      },
+      {
+        "gold": "trackst",
+        "j": 8,
+        "kind": "name",
+        "label": "B_L48_j8",
+        "level": 48,
+        "mode": "ban",
+        "prompt_sha256": "3aab0158a5fbd728102c92b002e10e2da121b43ca5e692696776315c0d5f7f41",
+        "seed": 116261051
+      },
+      {
+        "gold": "flixm",
+        "j": 16,
+        "kind": "name",
+        "label": "F_L48_j16",
+        "level": 48,
+        "mode": "free",
+        "prompt_sha256": "7f6bbe18f35294e11fdfba70a4fbd2f0243f00ebf123b75348ff9074161340b1",
+        "seed": 116261051
+      },
+      {
+        "gold": "flixm",
+        "j": 16,
+        "kind": "name",
+        "label": "B_L48_j16",
+        "level": 48,
+        "mode": "ban",
+        "prompt_sha256": "31e418feeac852f4a3d73f76fa9a7b30ed5b89804ac1ee36980f975f586a542b",
+        "seed": 116261051
+      },
+      {
+        "gold": "brixt",
+        "j": 2,
+        "kind": "name",
+        "label": "F_L16_j2",
+        "level": 16,
+        "mode": "free",
+        "prompt_sha256": "d6ab0cf6a2435f476c41d27cb722cf5b7613f0e90df016872d80df531cedd973",
+        "seed": 52261033
+      },
+      {
+        "gold": "brixt",
+        "j": 2,
+        "kind": "name",
+        "label": "B_L16_j2",
+        "level": 16,
+        "mode": "ban",
+        "prompt_sha256": "c0f86ea6fa0d5c6f644a64fe31680f2db7849641daf411ce9d4f0fa2373c7510",
+        "seed": 52261033
+      },
+      {
+        "gold": "brond",
+        "j": 16,
+        "kind": "name",
+        "label": "F_L16_j16",
+        "level": 16,
+        "mode": "free",
+        "prompt_sha256": "a22f1d12cc743d194ee386939eeb8d4998a8e2fc28c59b70b16ee2e9a5db1f30",
+        "seed": 52261033
+      },
+      {
+        "gold": "brond",
+        "j": 16,
+        "kind": "name",
+        "label": "B_L16_j16",
+        "level": 16,
+        "mode": "ban",
+        "prompt_sha256": "5a8a3280d1f9725c9bfa7442f52bc5940f82b701c008fb3795640f4c5fcaad23",
+        "seed": 52261033
+      },
+      {
+        "gold": "stonnd",
+        "j": 2,
+        "kind": "name",
+        "label": "F_L32A_j2",
+        "level": 32,
+        "mode": "free",
+        "prompt_sha256": "7572f321ee70c82c3e457476f19541fe0fd0048070129241d6097356add3696f",
+        "seed": 84261011
+      },
+      {
+        "gold": "stonnd",
+        "j": 2,
+        "kind": "name",
+        "label": "B_L32A_j2",
+        "level": 32,
+        "mode": "ban",
+        "prompt_sha256": "a12ea7a482966b6b47dfd4a0b1693f85c639b8a7d4edc68d0832795524e8134e",
+        "seed": 84261011
+      },
+      {
+        "gold": "crux",
+        "j": 16,
+        "kind": "name",
+        "label": "F_L32A_j16",
+        "level": 32,
+        "mode": "free",
+        "prompt_sha256": "40909990f780674a7d93d9df15d819e43fedb57c4e0df326c56290084242d4c7",
+        "seed": 84261011
+      },
+      {
+        "gold": "crux",
+        "j": 16,
+        "kind": "name",
+        "label": "B_L32A_j16",
+        "level": 32,
+        "mode": "ban",
+        "prompt_sha256": "33c01161186c46addf31211412036f89fe91f0f1c011746b58729f8755e20ebc",
+        "seed": 84261011
+      },
+      {
+        "gold": "sterk",
+        "j": 32,
+        "kind": "dup",
+        "label": "F_L32A_j32_dup",
+        "level": 32,
+        "mode": "free",
+        "prompt_sha256": "a8697dfb826079fc9be40fae6e6a8a78c915e1b16d5c066311eb438c9f694c53",
+        "seed": 84261011
+      },
+      {
+        "gold": "whesh",
+        "j": 32,
+        "kind": "dup",
+        "label": "B_L48_j32_dup",
+        "level": 48,
+        "mode": "ban",
+        "prompt_sha256": "2ec9d5fd966e6edc1af05ff45e48775ff28a4a59f181cd2b81e9f65e118e32b4",
+        "seed": 116261051
+      }
+    ],
+    "criteria": {
+      "C1_ban_shallow_competence": {
+        "statement": "the ban arm declares the correct terminal on at least 2 of 3 of B_L8_j1, B_L8_j2, B_L8_j8",
+        "threshold": "2/3"
+      },
+      "C2_none_controls_honest": {
+        "statement": "at least 9 of the 10 NONE-gold calls declare NONE, and no NONE-gold call declares an entity name from its own item",
+        "threshold": "9/10 and 0 name-on-NONE"
+      },
+      "C3_matched_deep": {
+        "statement": "correct deliveries over the three matched deep pairs (j = 32 on L32A, j = 32 and j = 48 on L48), free against ban",
+        "threshold": "reported as a 3/3 pair, no band"
+      },
+      "C4_cost_law": {
+        "statement": "least-squares slope of completion tokens against j on the four L48 depth rungs, per arm; growth if slope >= 10 tokens per hop (one fifth of round 6's 80 tokens per hop free-writing law)",
+        "threshold": "10 tokens/hop"
+      },
+      "C5_self_agreement": {
+        "statement": "both re-dispatch pairs agree on the declared name and on tokens",
+        "threshold": "2/2"
+      },
+      "C6_trace_provenance": {
+        "statement": "among undelivered name-gold records, gold-terminal-in-trace minus pseudo-gold-in-trace is at least 0.50, else the trace readout is refused",
+        "threshold": "0.50"
+      }
+    },
+    "dispatch": {
+      "archived_k48_certification": {
+        "seed": 116261051,
+        "yesno_digest16": "068bc6a1fb0620fb"
+      },
+      "call_cap": 40,
+      "dispatch_budget_s": 1500,
+      "growth_tokens_per_hop": 10.0,
+      "max_tokens_cap": 2048,
+      "planned_calls": 36,
+      "temperature": 0.0
+    },
+    "question": "On one load-floor ladder item, with the fact block fixed and only the step count j and the output permission moved, does banning the written traversal (a) collapse terminal-name accuracy, (b) preserve it at a token cost that still grows with depth, or (c) preserve it at flat cost?",
+    "schema": "round60-gate-v1",
+    "tier_rule": "controls_invalid if C2 fails; else ban_not_followed if the ban arm's mean visible answer length is at least half the free arm's on matched in-band cells; else no_ceiling_both_modes if both arms deliver at least 2 of 3 deep; else internalized_flat_cost if the ban arm delivers at least 2 of 3 deep, the free arm at most 1 of 3, and the ban arm's C4 slope is below 10 tokens per hop; else cost_migrated_to_hidden_channel on the same delivery split with a C4 slope at or above 10; else externalized_chain_required if the free arm delivers at least 2 of 3 and the ban arm at most 1 of 3; else unresolved"
+  }
+}
