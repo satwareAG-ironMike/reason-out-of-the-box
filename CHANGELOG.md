@@ -5,6 +5,40 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-11
+
+#### Added
+
+- Nightly research round 59 (issue #65; serves #71, #94, #100, #105, #129; refs #73, #83, #137):
+  `research/nightly-2026-11-11-0318/` asks which single wall law explains the flash class on the
+  load-floor ladder family - 17 name cells over four items at 32, 64, 96 and 128 facts, `j` from 8 to
+  32 on every item and out to 40 at 96 facts and 48 at 128 facts, 6 `NONE` controls fired first, one
+  256-token rung and 2 byte-identical re-dispatches: 26 dispatches of the 40-call cap plus a health
+  and a calibration call, `max_tokens` 2048, `temperature` 0.0, 0 retries. Instrument
+  `wall_transfer_probe_r59.py` (stdlib, `--selftest` 129 checks), gate `round59-gate-v1` (blob
+  `f9a2c845`) frozen before the first dispatch, and the issue #137 row-and-blob guard implemented
+  round-side as `--check-readme` with five planted negatives. Result (tier `controls_invalid`, flag
+  `self_agreement_split`): **the registered wall is absent on this build.** All 17 name cells and 5
+  of 6 controls produced an answer field at `finish_reason = stop`, the largest completion anywhere
+  under the 2,048 cap is 1,558, 16 of 26 records sit in a 1,556 to 1,558 band and zero cells are
+  cap-bound, so the cap never binds and what the grid measures is round 49's self-imposed 1,557 token
+  stop. The four frozen laws fit 6, 11, 11 and 14 of the 17 name cells and only `step40_wall` reaches
+  the registered line, and its three disagreements are exactly the three cells where the answer is
+  wrong. Accuracy turns over instead of delivery: 14 of 14 correct at `j <= 32`, 0 of 3 at `j >= 40`,
+  and every failure is a node of the asked path at a different index (`trudsh` sits at step 38 against
+  an asked 40, `cruk` at step 1 against an asked 48, `spog` is the 48-step endpoint and is named at an
+  asked 40 and again at `j = 49` where the links have run out) plus one name that is not in the item's
+  130-name vocabulary at all (`cruuk`). Both duplicate pairs split at `temperature` 0.0 (`NONE` 1,556
+  against `spog` 1,557; `trudsh` 1,558 against `NONE` 1,556), so the failing regime is not
+  reproducible and one dispatch at `j >= 40` is not a measurement. The `C2` control gate broke on two
+  control failures (`L48_offend` named the path endpoint, `L64_offend` named the fabricated name), so
+  `C3`'s met criterion is reported rather than promoted, and the issue #94 order-based readout got no
+  data at all (`n = 0`: every name cell produced an answer, so nothing was withheld under the
+  surface). Cross-build readouts: 8 of 9 shared coordinates agree with the landed round-55 flash grid
+  (`L48_j32` is an extension, censored at 2,048 there and `stop` with the correct name here) and 12
+  of 16 with the killed round-58 27B firing, which is disclosed as uncommitted provenance and gates
+  nothing.
+
 ### 2026-11-06
 
 #### Added

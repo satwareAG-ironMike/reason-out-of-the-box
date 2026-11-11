@@ -1,0 +1,14 @@
+{
+  "completion_tokens": 60,
+  "fields": [
+    "content",
+    "reasoning_content",
+    "role"
+  ],
+  "finish_reason": "stop",
+  "id": "H0",
+  "model_digest": "c62b81e96826354e",
+  "prompt_sha256": "f0c183f26f409a46d4f9ae16a76ab8acdd18ccdf7954573e84635cfefc6ca447",
+  "reasoning_field": "reasoning_content",
+  "trace_chars": 227
+}

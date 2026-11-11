@@ -1,0 +1,27 @@
+{
+  "cap": 512,
+  "census": {
+    "fields": [
+      "content",
+      "reasoning_content",
+      "role"
+    ],
+    "reasoning_field": "reasoning_content"
+  },
+  "completion_tokens": 154,
+  "content": "brep",
+  "correct": true,
+  "declared": "brep",
+  "delivered": true,
+  "finish_reason": "stop",
+  "gold": "brep",
+  "j": 2,
+  "label": "calibrate",
+  "level": 8,
+  "model_digest": "c62b81e96826354e",
+  "note": "one format call on a level-8 load-floor item outside the grid, to confirm the registered response format parses on this build before any dispatch; it is not experimental data and is not in raw.jsonl",
+  "prompt_sha256": "79c89f4a5e9e0e44411e8560f9acc512bbb6856b6664943f21fbb5803532781d",
+  "prompt_tokens": 260,
+  "trace_chars": 585,
+  "wall_s": 10.33
+}

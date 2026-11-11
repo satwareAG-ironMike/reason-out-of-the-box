@@ -43,12 +43,22 @@ maintainer owns deletion or relocation. Durable conclusions do not stay here: th
   least one same-class pair with the channel exposed on both sides.
 - Unattributed artifacts (left by a killed firing, no round directory) must not be swept in
   by `git add -A`; they get provenance or deletion as an owner decision.
+- Row-and-blob guard (issue #137), round-side until the repo-level checker lands: a round script may
+  expose `--check-readme`, which fails that round's own `README.md` when it quotes a gate-row id the
+  frozen `gate.json` does not define (criterion ids, the health id, and an item shorthand that
+  prefixes a cell label are defined; a cell label like `L48_j40` is not a row id), when its pinned
+  blob differs from the compact sorted-key sha256 of `gate.json` with its own `blob` field removed,
+  when any `raw.jsonl` record carries a different blob, or when it cites a 64 hex blob that is
+  neither this gate's nor a certified archive's.
 
 ## Verification
 
 - `python3 research/<round>/<script>.py --selftest` on the round branch
+- `python3 research/<round>/<script>.py --check-readme` where the round ships the issue #137 guard
 - artifact scan: `git grep -n -E "https?://|([0-9]{1,3}\.){3}[0-9]{1,3}" -- research/<round>`
-  returns nothing but allowed public reference links (arXiv, DOI, the repository itself)
+  returns nothing but allowed public reference links (arXiv, DOI, the repository itself) and the
+  sanitizer fixtures a `--selftest` needs (RFC 5737 documentation addresses, `.invalid` domains,
+  dummy paths); a real endpoint, host or address never appears
 - repo parity: `scripts/check_archive.py`, `scripts/check_links.py`, strict dash scan,
   CHANGELOG entry
 

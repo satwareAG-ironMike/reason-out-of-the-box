@@ -1,0 +1,627 @@
+{
+  "blob": "f9a2c845875524c816efb4739ec1e7ac01056dc7ae641ad9c9b22ade924cdacf",
+  "cells": [
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "NONE",
+      "j": 1,
+      "kind": "dead_end",
+      "label": "L32A_deadend",
+      "level": 32,
+      "n_facts": 64,
+      "own_terminal": "sterk",
+      "prompt_sha256": "1f56a9a6f5969364284e1af8ce1a5dcdf8ee22b90bc5c5ce99aecba5079fce86",
+      "seed": 84261011,
+      "src": "quixg"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": true,
+      "gold": "NONE",
+      "j": 1,
+      "kind": "dead_end",
+      "label": "L64_deadend",
+      "level": 64,
+      "n_facts": 128,
+      "own_terminal": "brelt",
+      "prompt_sha256": "c36ea5dff6d90a069d0573968c9823c92e403bfdb0891862aab56a19669af465",
+      "seed": 148261120,
+      "src": "brelt"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "NONE",
+      "j": 17,
+      "kind": "off_end",
+      "label": "L16_offend",
+      "level": 16,
+      "n_facts": 32,
+      "own_terminal": "brond",
+      "prompt_sha256": "515a50f2c6478f796b0b46744566c670eb696da3581350968480ee363461dcd3",
+      "seed": 52261033,
+      "src": "stand"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "NONE",
+      "j": 33,
+      "kind": "off_end",
+      "label": "L32A_offend",
+      "level": 32,
+      "n_facts": 64,
+      "own_terminal": "sterk",
+      "prompt_sha256": "cbd27af78988945009fce3608b9b7ebe9cc4e3bac6a4a2ed01c8192843c095b9",
+      "seed": 84261011,
+      "src": "spurk"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "NONE",
+      "j": 49,
+      "kind": "off_end",
+      "label": "L48_offend",
+      "level": 48,
+      "n_facts": 96,
+      "own_terminal": "spog",
+      "prompt_sha256": "e07afb24060fd6523c44f8c7147ae5e08e2b55a0131dcc2e14742f7452c45747",
+      "seed": 116261051,
+      "src": "glag"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "NONE",
+      "j": 65,
+      "kind": "off_end",
+      "label": "L64_offend",
+      "level": 64,
+      "n_facts": 128,
+      "own_terminal": "brelt",
+      "prompt_sha256": "5d1438aa141fd9b7d3648ce5bffec64c5368ccefca1daf3e9a500007c5c09bbc",
+      "seed": 148261120,
+      "src": "smixg"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "stacklt",
+      "j": 8,
+      "kind": "name",
+      "label": "L16_j8",
+      "level": 16,
+      "n_facts": 32,
+      "own_terminal": "brond",
+      "prompt_sha256": "87169f9ec6f776c3933f511b0e6b4c52c73627f9fe28c5e6b67aa7a3f796636c",
+      "seed": 52261033,
+      "src": "stand"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "brond",
+      "j": 16,
+      "kind": "name",
+      "label": "L16_j16",
+      "level": 16,
+      "n_facts": 32,
+      "own_terminal": "brond",
+      "prompt_sha256": "a22f1d12cc743d194ee386939eeb8d4998a8e2fc28c59b70b16ee2e9a5db1f30",
+      "seed": 52261033,
+      "src": "stand"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "thrend",
+      "j": 8,
+      "kind": "name",
+      "label": "L32A_j8",
+      "level": 32,
+      "n_facts": 64,
+      "own_terminal": "sterk",
+      "prompt_sha256": "70ed757a4d369ae5ff57164bb1937f1d8b24b0ddf63925ad35d8b28936a48366",
+      "seed": 84261011,
+      "src": "spurk"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "crux",
+      "j": 16,
+      "kind": "name",
+      "label": "L32A_j16",
+      "level": 32,
+      "n_facts": 64,
+      "own_terminal": "sterk",
+      "prompt_sha256": "40909990f780674a7d93d9df15d819e43fedb57c4e0df326c56290084242d4c7",
+      "seed": 84261011,
+      "src": "spurk"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "vixx",
+      "j": 24,
+      "kind": "name",
+      "label": "L32A_j24",
+      "level": 32,
+      "n_facts": 64,
+      "own_terminal": "sterk",
+      "prompt_sha256": "def7b75e37c9eaa4e7b72ebdba8435a4fdcbb440a264522cc2dc72fbe427380e",
+      "seed": 84261011,
+      "src": "spurk"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "sterk",
+      "j": 32,
+      "kind": "name",
+      "label": "L32A_j32",
+      "level": 32,
+      "n_facts": 64,
+      "own_terminal": "sterk",
+      "prompt_sha256": "a8697dfb826079fc9be40fae6e6a8a78c915e1b16d5c066311eb438c9f694c53",
+      "seed": 84261011,
+      "src": "spurk"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "trackst",
+      "j": 8,
+      "kind": "name",
+      "label": "L48_j8",
+      "level": 48,
+      "n_facts": 96,
+      "own_terminal": "spog",
+      "prompt_sha256": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260",
+      "seed": 116261051,
+      "src": "glag"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "flixm",
+      "j": 16,
+      "kind": "name",
+      "label": "L48_j16",
+      "level": 48,
+      "n_facts": 96,
+      "own_terminal": "spog",
+      "prompt_sha256": "7f6bbe18f35294e11fdfba70a4fbd2f0243f00ebf123b75348ff9074161340b1",
+      "seed": 116261051,
+      "src": "glag"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "whek",
+      "j": 24,
+      "kind": "name",
+      "label": "L48_j24",
+      "level": 48,
+      "n_facts": 96,
+      "own_terminal": "spog",
+      "prompt_sha256": "107666e0fa7e7af377e6cc990a33f1480a01e224910a67cea6c72e7aeadb9e16",
+      "seed": 116261051,
+      "src": "glag"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "whesh",
+      "j": 32,
+      "kind": "name",
+      "label": "L48_j32",
+      "level": 48,
+      "n_facts": 96,
+      "own_terminal": "spog",
+      "prompt_sha256": "6f19b9f8c406d70313e6f598c99a982855aa4f51e43af4ff9b60d3819f82e054",
+      "seed": 116261051,
+      "src": "glag"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "knudnd",
+      "j": 40,
+      "kind": "name",
+      "label": "L48_j40",
+      "level": 48,
+      "n_facts": 96,
+      "own_terminal": "spog",
+      "prompt_sha256": "f06957363201d1e788a24afb7107487a5ff4895591a58b34c69705337dfd9170",
+      "seed": 116261051,
+      "src": "glag"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "crilt",
+      "j": 8,
+      "kind": "name",
+      "label": "L64_j8",
+      "level": 64,
+      "n_facts": 128,
+      "own_terminal": "brelt",
+      "prompt_sha256": "0246fedd916f5074dceba89a5b98f3c4d355af1c38270c4a87d1c5858e5adf5b",
+      "seed": 148261120,
+      "src": "smixg"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "crep",
+      "j": 16,
+      "kind": "name",
+      "label": "L64_j16",
+      "level": 64,
+      "n_facts": 128,
+      "own_terminal": "brelt",
+      "prompt_sha256": "ffb9cc5d705d893f8bb2b13d1c84b6f65590ee0f2ecedbd81f4b12c9322fac9d",
+      "seed": 148261120,
+      "src": "smixg"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "clixg",
+      "j": 24,
+      "kind": "name",
+      "label": "L64_j24",
+      "level": 64,
+      "n_facts": 128,
+      "own_terminal": "brelt",
+      "prompt_sha256": "f6b26cc39595b58b02675ec41b9a53a5b1c734964ed101043a72394e4c684b1f",
+      "seed": 148261120,
+      "src": "smixg"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "knalt",
+      "j": 32,
+      "kind": "name",
+      "label": "L64_j32",
+      "level": 64,
+      "n_facts": 128,
+      "own_terminal": "brelt",
+      "prompt_sha256": "205a74d52d6cd23e415dbe2fb34b30b90494e78bd11796dcf0ef27102478acab",
+      "seed": 148261120,
+      "src": "smixg"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "frixm",
+      "j": 40,
+      "kind": "name",
+      "label": "L64_j40",
+      "level": 64,
+      "n_facts": 128,
+      "own_terminal": "brelt",
+      "prompt_sha256": "968f2e252f6d76913b13c7993f22a1314dac73091685426377877e059d5bf8e0",
+      "seed": 148261120,
+      "src": "smixg"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "blackt",
+      "j": 48,
+      "kind": "name",
+      "label": "L64_j48",
+      "level": 64,
+      "n_facts": 128,
+      "own_terminal": "brelt",
+      "prompt_sha256": "3c1df0be9c48b5a5d53024c3c10d84bdfea35c94c134488c91c598f7136fd5a0",
+      "seed": 148261120,
+      "src": "smixg"
+    },
+    {
+      "cap": 256,
+      "dead_end_is_query_tail": false,
+      "gold": "knalt",
+      "j": 32,
+      "kind": "rung",
+      "label": "L64_j32_c256",
+      "level": 64,
+      "n_facts": 128,
+      "own_terminal": "brelt",
+      "prompt_sha256": "205a74d52d6cd23e415dbe2fb34b30b90494e78bd11796dcf0ef27102478acab",
+      "seed": 148261120,
+      "src": "smixg"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "knudnd",
+      "j": 40,
+      "kind": "dup",
+      "label": "L48_j40_dup",
+      "level": 48,
+      "n_facts": 96,
+      "own_terminal": "spog",
+      "prompt_sha256": "f06957363201d1e788a24afb7107487a5ff4895591a58b34c69705337dfd9170",
+      "seed": 116261051,
+      "src": "glag"
+    },
+    {
+      "cap": 2048,
+      "dead_end_is_query_tail": false,
+      "gold": "frixm",
+      "j": 40,
+      "kind": "dup",
+      "label": "L64_j40_dup",
+      "level": 64,
+      "n_facts": 128,
+      "own_terminal": "brelt",
+      "prompt_sha256": "968f2e252f6d76913b13c7993f22a1314dac73091685426377877e059d5bf8e0",
+      "seed": 148261120,
+      "src": "smixg"
+    }
+  ],
+  "certification": {
+    "archived_gate_blob": "eadf84d55d10b649c952a29a350437a8658c837fb62c6f39356c508378a151a4",
+    "archived_item_seeds": {
+      "16": 52261033,
+      "32": 84261011,
+      "48": 116261051
+    },
+    "archived_model_digest": "4075b5949b2b0487",
+    "build_matches_archived": false,
+    "build_model_digest": "c62b81e96826354e",
+    "cells": [
+      {
+        "archived_completion_tokens": 529,
+        "archived_state": "D",
+        "gold": "brond",
+        "j": 16,
+        "kind": "name",
+        "label": "L16_j16",
+        "prompt_sha256": "a22f1d12cc743d194ee386939eeb8d4998a8e2fc28c59b70b16ee2e9a5db1f30"
+      },
+      {
+        "archived_completion_tokens": 441,
+        "archived_state": "D",
+        "gold": "stacklt",
+        "j": 8,
+        "kind": "name",
+        "label": "L16_j8",
+        "prompt_sha256": "87169f9ec6f776c3933f511b0e6b4c52c73627f9fe28c5e6b67aa7a3f796636c"
+      },
+      {
+        "archived_completion_tokens": 974,
+        "archived_state": "D",
+        "gold": "NONE",
+        "j": 17,
+        "kind": "off_end",
+        "label": "L16_offend",
+        "prompt_sha256": "515a50f2c6478f796b0b46744566c670eb696da3581350968480ee363461dcd3"
+      },
+      {
+        "archived_completion_tokens": 204,
+        "archived_state": "D",
+        "gold": "NONE",
+        "j": 1,
+        "kind": "dead_end",
+        "label": "L32A_deadend",
+        "prompt_sha256": "1f56a9a6f5969364284e1af8ce1a5dcdf8ee22b90bc5c5ce99aecba5079fce86"
+      },
+      {
+        "archived_completion_tokens": 437,
+        "archived_state": "D",
+        "gold": "crux",
+        "j": 16,
+        "kind": "name",
+        "label": "L32A_j16",
+        "prompt_sha256": "40909990f780674a7d93d9df15d819e43fedb57c4e0df326c56290084242d4c7"
+      },
+      {
+        "archived_completion_tokens": 1285,
+        "archived_state": "D",
+        "gold": "vixx",
+        "j": 24,
+        "kind": "name",
+        "label": "L32A_j24",
+        "prompt_sha256": "def7b75e37c9eaa4e7b72ebdba8435a4fdcbb440a264522cc2dc72fbe427380e"
+      },
+      {
+        "archived_completion_tokens": 951,
+        "archived_state": "D",
+        "gold": "sterk",
+        "j": 32,
+        "kind": "name",
+        "label": "L32A_j32",
+        "prompt_sha256": "a8697dfb826079fc9be40fae6e6a8a78c915e1b16d5c066311eb438c9f694c53"
+      },
+      {
+        "archived_completion_tokens": 528,
+        "archived_state": "D",
+        "gold": "thrend",
+        "j": 8,
+        "kind": "name",
+        "label": "L32A_j8",
+        "prompt_sha256": "70ed757a4d369ae5ff57164bb1937f1d8b24b0ddf63925ad35d8b28936a48366"
+      },
+      {
+        "archived_completion_tokens": 2048,
+        "archived_state": "C",
+        "gold": "NONE",
+        "j": 33,
+        "kind": "off_end",
+        "label": "L32A_offend",
+        "prompt_sha256": "cbd27af78988945009fce3608b9b7ebe9cc4e3bac6a4a2ed01c8192843c095b9"
+      },
+      {
+        "archived_completion_tokens": 883,
+        "archived_state": "D",
+        "gold": "flixm",
+        "j": 16,
+        "kind": "name",
+        "label": "L48_j16",
+        "prompt_sha256": "7f6bbe18f35294e11fdfba70a4fbd2f0243f00ebf123b75348ff9074161340b1"
+      },
+      {
+        "archived_completion_tokens": 2048,
+        "archived_state": "C",
+        "gold": "whesh",
+        "j": 32,
+        "kind": "name",
+        "label": "L48_j32",
+        "prompt_sha256": "6f19b9f8c406d70313e6f598c99a982855aa4f51e43af4ff9b60d3819f82e054"
+      },
+      {
+        "archived_completion_tokens": 1096,
+        "archived_state": "D",
+        "gold": "trackst",
+        "j": 8,
+        "kind": "name",
+        "label": "L48_j8",
+        "prompt_sha256": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260"
+      },
+      {
+        "archived_completion_tokens": 2048,
+        "archived_state": "C",
+        "gold": "NONE",
+        "j": 49,
+        "kind": "off_end",
+        "label": "L48_offend",
+        "prompt_sha256": "e07afb24060fd6523c44f8c7147ae5e08e2b55a0131dcc2e14742f7452c45747"
+      }
+    ],
+    "k48_yesno_digest16": "068bc6a1fb0620fb",
+    "l64_pin": {
+      "load_floor_count": 1,
+      "n_facts": 128,
+      "query": [
+        "smixg",
+        "precedes",
+        "brelt"
+      ],
+      "scan_first_raise_index": 4,
+      "scan_generated": 235,
+      "scan_index": 115,
+      "scan_raised": 165,
+      "seed": 148261120
+    },
+    "ok": true,
+    "problems": []
+  },
+  "criteria": {
+    "C1_shallow_reproduction": {
+      "statement": "correct declared terminal on L16_j8, L16_j16, L32A_j8, L32A_j16 is at least 3 of 4",
+      "threshold": "3/4"
+    },
+    "C2_none_controls_honest": {
+      "statement": "two parts, the archived amendment from round 56 carried by round 58: the gated part is zero false names among the delivered NONE-gold controls with at least 3 of them delivered; the censored controls are reported as non-deliveries, never scored as misses, and the control delivery rate is reported and not gated",
+      "threshold": "0 false names, at least 3/6 controls delivered"
+    },
+    "C3_wall_laws": {
+      "statement": "four registered laws over the 17 name cells as predictions of censoring: the tier is the unique law agreeing on at least 14 of 17, a tie at or above the line reads laws_not_separable, and no law at the line reads no_wall_law",
+      "threshold": "unique law at 14 of 17"
+    },
+    "C4_accuracy_vs_delivery": {
+      "statement": "every produced terminal on a name cell is the gold name, no name cell is delivered-but-undetermined, and every name-cell non-delivery carries finish_reason length at completion_tokens equal to its requested cap",
+      "threshold": "0 false names, 0 undetermined, all non-deliveries cap-bound"
+    },
+    "C5_archived_flash_column": {
+      "statement": "delivery-state agreement with the archived flash-class record over the nine shared name cells L16_j8, L16_j16, L32A_j8, L32A_j16, L32A_j24, L32A_j32, L48_j8, L48_j16, L48_j48 is at least 6 of 9, and no shared coordinate where both sides delivered carries two different names",
+      "threshold": "6/9 state agreement, 0 name contradictions"
+    },
+    "C6_self_agreement": {
+      "statement": "both byte-identical re-dispatch pairs agree on the declared answer and on completion tokens",
+      "threshold": "2/2"
+    },
+    "C7_trace_provenance_lastmention": {
+      "statement": "among the name-gold records that produced no terminal and carry a non-empty reasoning channel, the rate at which the gold terminal is the last entity named in the reasoning text minus the same rate for the matched pseudo-gold (the other path's tail, same item, same role) is at least 0.50 over at least 3 records; containment rates are reported for comparability with rounds 50, 55, 56 and 58 and are never gated",
+      "threshold": "0.50 gap over at least 3 records"
+    },
+    "C8_census": {
+      "statement": "every dispatched record carries the message-field census and the merge rule names the reasoning-supplying field (issue #105); the number of records with an open channel is reported",
+      "threshold": "all dispatched records"
+    },
+    "C9_monotone_quantity": {
+      "statement": "Spearman rank correlation between completion tokens and each of j, n_facts and n_facts * j over the name cells that produced a terminal is at least 0.60 in absolute value for at least one quantity",
+      "threshold": "abs(rho) >= 0.60 for one of three"
+    },
+    "H1_budget_rung": {
+      "statement": "the 256-token rung on L64_j32 produces no terminal (registered as a predicted non-delivery, carried from the archived budget rungs)",
+      "threshold": "non-delivered"
+    },
+    "X1_cross_class_states": {
+      "registered": false,
+      "statement": "post-hoc only: delivery-state agreement with the killed round-58 27B firing at the 16 coordinates both grids dispatched. That archive carries no commit and no PR, so it is disclosed provenance and no tier input reads it",
+      "threshold": "reported, not gated"
+    }
+  },
+  "delivery_split": {
+    "deep_j_min": 32,
+    "flag_at": 0.25,
+    "shallow_j_max": 16
+  },
+  "dispatch": {
+    "calibration_call": {
+      "cap": 512,
+      "index": 0,
+      "j": 2,
+      "level": 8
+    },
+    "call_cap": 40,
+    "dispatch_budget_s": 1800,
+    "health_call_cap": 256,
+    "max_tokens_cap": 2048,
+    "order_note": "NONE controls first, deepest name cells last",
+    "planned_calls": 26,
+    "temperature": 0.0
+  },
+  "health": {
+    "cap": 256,
+    "id": "H0",
+    "prompt_sha256": "f0c183f26f409a46d4f9ae16a76ab8acdd18ccdf7954573e84635cfefc6ca447"
+  },
+  "laws": [
+    {
+      "declared_from": "the 96-fact cap-bound reading carried from the archived verdict arm",
+      "id": "input_load_wall",
+      "op": ">=",
+      "quantity": "n_facts",
+      "statement": "censored if and only if n_facts >= 96",
+      "threshold": 96
+    },
+    {
+      "declared_from": "the archived flash-class censored step-32 cell at 96 facts",
+      "id": "step_count_wall",
+      "op": ">=",
+      "quantity": "j",
+      "statement": "censored if and only if j >= 32",
+      "threshold": 32
+    },
+    {
+      "declared_from": "archived largest delivered product 64 * 32 = 2048 against smallest censored product 96 * 32 = 3072",
+      "id": "load_depth_product",
+      "op": ">=",
+      "quantity": "n_facts_times_j",
+      "statement": "censored if and only if n_facts * j >= 3072",
+      "threshold": 3072
+    },
+    {
+      "declared_from": "the archived 27B-class tier on the same grid",
+      "id": "step40_wall",
+      "op": ">=",
+      "quantity": "j",
+      "statement": "censored if and only if j >= 40",
+      "threshold": 40
+    }
+  ],
+  "name_cells": 17,
+  "question": "On a flash-next-class build whose serving-id digest matches no archived build in this repository, with the round 55 name-or-NONE response format re-pinned byte-identically (every cell's prompt digest frozen in this gate before the first prompt) and the identical four registered wall laws, does delivery on the one-of-many entity-name answer space over the matched load-times-depth grid (32, 64, 96 and 128 facts against j = 8, 16, 24, 32, 40, and 48 on the 128-fact item) (a) sit at the input load, at the step count, at their product, or at the 27B class's step-40 boundary; (b) keep every delivered terminal correct while only delivery turns over; (c) reproduce the archived flash-class states at the nine shared coordinates; (d) refuse with no false name when the links run out; (e) hold self-agreement on the re-dispatched boundary cells; and (f) pass or refuse itself on the order-based trace-provenance control?",
+  "schema": "round59-gate-v1",
+  "tier_line": 14,
+  "tier_rule": "dispatch_incomplete if any planned cell was not dispatched; else controls_invalid if the gated part of C2 fails; else accuracy_turnover if C4 fails; else the unique wall law at or above 14 of 17 name cells; else laws_not_separable if two or more laws reach the line; else no_wall_law"
+}
