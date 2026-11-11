@@ -5,6 +5,36 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-11
+
+#### Added
+
+- Nightly research round 60 (issue #65; serves #71, #94, #100, #105, #126; refs #73, #67):
+  `research/nightly-2026-11-11-0440/` withdraws the permission to write the chain and asks what is
+  left - 36 cells on a flash-next-class endpoint (18 per arm), the arms a minimal pair (round 55's
+  name template against the same bytes plus an 81-character clause banning written intermediate
+  names, pair asserted byte-wise), pinned load-floor items with the `k = 48` fact block certified
+  against archived digest `068bc6a1fb0620fb`, 10 NONE-gold controls, 2 byte-identical re-dispatch
+  pairs, `max_tokens` 2048, `temperature` 0, zero retries, dispatch wall 633.0 s. Instrument
+  `internalized_traversal_probe.py` (stdlib, `--selftest` 139 checks: planted wrong gold, planted
+  name-on-NONE, planted inputs for all six tiers, sanitizer, census merge rule, exact slope
+  arithmetic); gate `round60-gate-v1` (blob `8aeb5ec6`) frozen before dispatch and stamped on every
+  record. Result (tier `controls_invalid`: 7 of 10 NONE controls declared NONE, 0 named an entity,
+  3 were non-deliveries at exactly 2,048 tokens): **the visible answer channel is already
+  answer-only in both arms** (mean 4.31 characters free against 4.69 under the ban, `content` and
+  `reasoning_content` present on 36 of 36), so an output-permission knob is bolted to a channel
+  that spends nothing; 21 of 21 delivered names correct with 0 wrong names and 3 undelivered cells
+  all at the cap; **one matched deep pair flips from truncation to a correct name under the ban**
+  (`j = 32` on the 96-fact item: free truncated at 2,048, ban delivered correct at 1,080 tokens)
+  and the byte-identical re-dispatch reproduces it at the same 1,080 tokens and 2,860 trace
+  characters; the ban buys no cheaper traversal (cost slope +36.64 tokens/hop ban against +30.49
+  free, both inflated by cap-censored cells); the deep off-end controls die at the cap while the
+  path-tail dead-end control on the same item refuses at 1,002 and 130 tokens, which is the
+  controls-design gap that invalidated the gate; and the trace provenance row refuses itself with
+  the mechanism on the record (gold 3/3 and matched pseudo-gold 3/3 in the undelivered traces, gap
+  0.00). Consequence for #71: no ceiling on this family can be priced in visible-output tokens on
+  this build, and the `d*` procedure must name the channel it prices.
+
 ### 2026-11-06
 
 #### Added
