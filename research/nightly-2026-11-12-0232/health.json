@@ -1,0 +1,1 @@
+{"completion_tokens": 76, "content": "yes", "finish_reason": "stop", "message_fields": ["content", "reasoning_content", "role"], "model_digest": "86d6f3507f8725bf", "prompt_tokens": 115, "reasoning_chars": 277, "reasoning_field": "reasoning_content", "wall_s": 98.738}

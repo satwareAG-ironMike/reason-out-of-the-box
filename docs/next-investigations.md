@@ -1065,3 +1065,35 @@ found: no work that varies queried-path depth while holding the input fact count
 names a depth-ceiling-versus-budget-surfacing taxonomy, and none that recovers a truncated verdict
 from a truncated trace or from hidden states. No acceptance criterion changes; the strict verdict
 is unchanged.
+
+## Research findings (2026-11-12)
+
+Round 61 (rate-limited 27B-class firing, `research/nightly-2026-11-12-0232/`) maps the measured
+ladder wall onto the theory and registers the single remaining discriminator:
+
+- Theory mapping (gate rows T1 through T4, all re-verified at work-record level on 2026-11-12,
+  one OpenAlex call): the TC-level barrier for learnable chain-of-thought under standard
+  positional encodings (arXiv:2604.25800), the C-RASP characterization of length generalization
+  for regular languages under NoPE (arXiv:2608.13433, RoPE caveat on record), the second
+  encoding-specific remedy via depth-tracking encoding plus halting at 280 parameters
+  (arXiv:2608.31067), and the in-repo row (the ladder item is two-path BFS in the NC class at
+  every tested depth, 128 facts at k = 64). The measured walls (round 52: 27B-class yes/no censor
+  at k = 48; round 59: flash-class position errors at j >= 40) therefore sit in the
+  deployment's encoding and output budget, not in task complexity: two independent
+  encoding-specific remedies move the wall with the encoding.
+- Registered prediction P1 (owed to the next healthy 27B-class firing): on the core panel's four
+  endpoint cells past the old generator ceiling (k = 48, 49, 50, 64 at each item's deepest j, cap
+  2048), at least 3 of 4 delivering the correct terminal makes the wall an output-budget and
+  output-policy artifact (issue #126 reading); at most 1 of 4 (censor at the cap or a position
+  error on the right path, the round-59 shape) keeps the length-generalization reading (T1 through
+  T3) alive on the 27B class. The panel is the cleanest remaining discriminator because the
+  27B-class yes/no arm already censors at k = 48 while the name arm had never run at depth on the
+  class; round 61's E1 adds the first 27B-class name-arm data point (shallow j = 8, correct).
+- Firing record: the 27B slot served at about 1 completion token per second under a co-fired load
+  (a concurrent flash-class nightly round plus a heavy local process on the shared inference host,
+  9 GB of swap). The pre-gate rate measurement (census 1.7 and 0.9 tok/s, full calibration 1.01
+  tok/s) set the scope: 2 shallow cells dispatched (E1 anchor correct, R1 dead-end correctly
+  refused), 6 calls of the 40-call cap, the panel registered rather than dispatched. Consequence
+  for the runner: co-fired rounds can starve a shared inference host below the rate at which a
+  registered panel is deliverable, so panel-scale commitments should gate on a pre-dispatch rate
+  measurement; a pool/runner-side fix is an owner decision.

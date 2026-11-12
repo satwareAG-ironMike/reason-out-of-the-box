@@ -5,6 +5,29 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-12
+
+#### Added
+
+- Nightly research round 61 (issue #65; serves #129, #126, #105, #71; refs #65, #105, #126, #129):
+  `research/nightly-2026-11-12-0232/` places the measured ladder wall where the theory places it:
+  a literature-first round on a rate-limited 27B-class endpoint (about 1 completion token per second
+  under a co-fired load, measured pre-gate) records the shallow anchor cell (the archived k = 48 anchor
+  item at j = 8: correct, 1123 tokens, 843.0 s) and the one-step dead-end NONE control (k = 49:
+  correctly refused, 1025 tokens), and registers the now-generatable k > 48 core panel (issue #129) as
+  the single remaining discriminator - at least 3 of 4 endpoint cells delivering the correct terminal
+  makes the wall an output-budget and output-policy artifact (the issue #126 reading), at most 1 of 4
+  (censor at the cap or a position error on the right path, the round-59 shape) keeps the
+  length-generalization reading alive on the 27B class. The four theory rows (TC-level barrier
+  arXiv:2604.25800, C-RASP characterization arXiv:2608.13433, encoding-specific remedies
+  arXiv:2608.31067, in-repo NC-class task complexity) are re-verified at work-record level against one
+  OpenAlex call (with arXiv:2211.15661 as context). Instrument `name_walk_probe_r61.py` (stdlib,
+  `--selftest` 113 checks); gate `round61-gate-v1` (blob `d29e33cf`) frozen before dispatch; 6 calls of
+  the 40-call cap, `max_tokens` 2048, temperature 0.0, 0 retries; tier
+  `literature_synthesis_rate_limited_record`, flags `endpoint_rate_limited` and
+  `dead_end_control_refused` (informational); label `Executed`, small-n exploratory (2 dispatched
+  cells, n = 1 each).
+
 ### 2026-11-06
 
 #### Added
