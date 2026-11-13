@@ -5,6 +5,39 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-13
+
+#### Added
+
+- Nightly research round 63 (issue #65; serves #129, #71, #126, #100, #105):
+  `research/nightly-2026-11-13-0348/` dispatches the k > 48 name-walk panel that the
+  round-61 gate registered as owed (issue #129) on a healthy 27B-class local endpoint:
+  8 planned cells (two dead-end NONE controls, the four registered endpoint cells at
+  k = 48/49/50/64 and each item's deepest step, one byte-identical re-dispatch pair, one
+  anchor liveness cell), `max_tokens` 2048, `temperature` 0.0, zero retries, 0
+  not_dispatched, 11 calls of the 40-call cap. The plan was selected by the frozen
+  pre-dispatch rate measurement (123.4 tok/s against the 10 tok/s threshold, the
+  standing round-61 rule), and the k = 48 anchor item was re-certified byte-identical
+  against the archived yes/no digest `068bc6a1fb0620fb` before any prompt was spent
+  (N3). Result (tier `panel_delivered`): **1 of 4 endpoint cells delivered the correct
+  terminal** (the k = 50 item at j = 50, 1,956 tokens), the other three censored at
+  the 2,048 cap with empty answer channels, so the registered discriminator resolves at
+  the 1-of-4 branch: the length-generalization reading (T1-T3) survives on the 27B
+  class and the output-budget artifact reading (the issue #126 reading, which needed
+  3 of 4) is not supported on this class at these depths. The byte-identical
+  re-dispatch of the delivered cell was itself censored at the cap (issue #100:
+  self-agreement on delivery fails when the completion length sits near the budget,
+  while the declared answer agrees whenever both sides deliver), the same anchor
+  prompt measured 1,113 / 306 completion tokens across two dispatches of one firing
+  (completion-token counts at temperature 0 are run properties on this
+  multi-token-prediction serving stack), and this firing's trace channel is the
+  `reasoning` field against `reasoning_content` on the round-61 27B-class firing
+  (issue #105: the exposure setting is a deployment property; every raw record
+  carries the census). Instrument `name_walk_panel_r63.py` (stdlib, `--selftest`
+  102 checks, `--measure` / `--freeze` / `--run` / `--rescore` / `--check-readme`);
+  gate `round63-gate-v1` (blob `8ae5029d`) frozen before dispatch. Evidence label
+  `Executed`, small-n exploratory.
+
 ### 2026-11-06
 
 #### Added

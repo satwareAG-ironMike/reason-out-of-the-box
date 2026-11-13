@@ -1,0 +1,205 @@
+{
+ "blob": "8ae5029d565181681e3d47cf2cabfe691f1985370999fd0eaa8e9d12e4704950",
+ "cells": [
+  {
+   "cap": 2048,
+   "gold": "NONE",
+   "item_key": "A49",
+   "j": 1,
+   "kind": "dead_end",
+   "label": "A49_deadend",
+   "level": 49,
+   "prompt_sha256": "8a6aadff52bf045290536c44d8877c330582f51a7e18c4150def8cbfd3499f27",
+   "seed": 118261016
+  },
+  {
+   "cap": 2048,
+   "gold": "NONE",
+   "item_key": "C64",
+   "j": 1,
+   "kind": "dead_end",
+   "label": "C64_deadend",
+   "level": 64,
+   "prompt_sha256": "c36ea5dff6d90a069d0573968c9823c92e403bfdb0891862aab56a19669af465",
+   "seed": 148261120
+  },
+  {
+   "cap": 2048,
+   "gold": "spog",
+   "item_key": "A48",
+   "j": 48,
+   "kind": "name",
+   "label": "A48_j48",
+   "level": 48,
+   "prompt_sha256": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+   "seed": 116261051
+  },
+  {
+   "cap": 2048,
+   "gold": "studnd",
+   "item_key": "A49",
+   "j": 49,
+   "kind": "name",
+   "label": "A49_j49",
+   "level": 49,
+   "prompt_sha256": "0d61f97016e61b4da797c84f4139ca72ac0e94001739c429a7d91140a304ec59",
+   "seed": 118261016
+  },
+  {
+   "cap": 2048,
+   "gold": "prish",
+   "item_key": "B50",
+   "j": 50,
+   "kind": "name",
+   "label": "B50_j50",
+   "level": 50,
+   "prompt_sha256": "c15a68eb63cc474457ebe6f8ee806f6e0182d38967bfdbe67726417c272e5362",
+   "seed": 120261132
+  },
+  {
+   "cap": 2048,
+   "gold": "brelt",
+   "item_key": "C64",
+   "j": 64,
+   "kind": "name",
+   "label": "C64_j64",
+   "level": 64,
+   "prompt_sha256": "c1ef6c20bfd84e2fd30a6eaefa22caf1dfb4663280b0824cac72e89f298eea7e",
+   "seed": 148261120
+  },
+  {
+   "cap": 2048,
+   "gold": "prish",
+   "item_key": "B50",
+   "j": 50,
+   "kind": "dup",
+   "label": "B50_j50_dup",
+   "level": 50,
+   "prompt_sha256": "c15a68eb63cc474457ebe6f8ee806f6e0182d38967bfdbe67726417c272e5362",
+   "seed": 120261132
+  },
+  {
+   "cap": 2048,
+   "gold": "trackst",
+   "item_key": "A48",
+   "j": 8,
+   "kind": "name",
+   "label": "A48_j8",
+   "level": 48,
+   "prompt_sha256": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260",
+   "seed": 116261051
+  }
+ ],
+ "criteria": {
+  "E1_anchor_liveness": {
+   "statement": "the k = 48 anchor cell A48_j8 (archived seed 116261051, j = 8, cap 2048) delivers the correct terminal on this firing; it is a cross-firing duplicate of the round-61 E1 record (1123 tokens) and a within-firing duplicate of the pre-gate calibration dispatch on the same prompt",
+   "threshold": "delivered and correct, when the cell is in the selected plan"
+  },
+  "E2_census_trace_exposure": {
+   "statement": "the 256-token census call answers the two-fact transitivity query correctly and exposes the trace in the reasoning_content channel (issue #105 firing-state census; any cross-class trace claim must state both sides' exposure)",
+   "threshold": "correct content and non-empty reasoning channel"
+  },
+  "N3_anchor_certification": {
+   "statement": "pre-dispatch, fatal: the k = 48 anchor item regenerates from the shipped generator with seed 116261051 and its archived yes/no prompt digest 068bc6a1fb0620fb (rounds 51/52/53/54), and every item in the set is a load-floor, component-isomorphic item (issue #67 guards)",
+   "threshold": "certified before any prompt is spent"
+  },
+  "P1_panel_prediction": {
+   "statement": "DISCRIMINATOR (registered in the round-61 gate, owed to this firing): on the four endpoint cells, at least 3 of 4 delivering the correct terminal makes the wall an output-budget and output-policy artifact (the issue #126 reading); at most 1 of 4 delivering keeps the length-generalization reading (T1-T3) alive on the 27B class; exactly 2 of 4 is inconclusive and P1 stays owed. All four endpoint cells must be recorded (delivered or censored at the cap) for the count to be evaluable; partial dispatch leaves P1 owed for the unrecorded endpoint cells",
+   "threshold": "3+ of 4 correct: output-budget reading; 1 or fewer of 4 correct: length-generalization reading; 2 of 4: inconclusive"
+  },
+  "R1_dead_end_controls": {
+   "statement": "VALIDITY GATE: both dead-end NONE controls (A49 and C64, one step by design, the round-60 lesson: off-end controls at depth inherit truncation) declare NONE; if either names an entity where the links have run out the firing is flagged controls_invalid and the P1 evaluation is uncertified",
+   "threshold": "both controls declare NONE"
+  }
+ },
+ "dispatch": {
+  "archived_k48_certification": {
+   "seed": 116261051,
+   "yesno_digest16": "068bc6a1fb0620fb"
+  },
+  "call_cap": 40,
+  "dispatch_budget_s": 3000,
+  "max_tokens_cap": 2048,
+  "planned_calls": 8,
+  "pre_gate_calls": 3,
+  "r61_e1_record": {
+   "tokens": 1123
+  },
+  "rate_measurement": {
+   "calibration": {
+    "cap": 2048,
+    "completion_tokens": 1113,
+    "declared": "trackst",
+    "finish_reason": "stop",
+    "j": 8,
+    "label": "A48_j8",
+    "level": 48,
+    "note": "cross-firing duplicate of the round-61 E1 record (1123 tokens on the identical prompt); temperature 0.0",
+    "tok_per_s": 123.447,
+    "wall_s": 9.016
+   },
+   "census": [
+    {
+     "call": 1,
+     "cap": 256,
+     "completion_tokens": 69,
+     "content": "\n\nyes",
+     "tok_per_s": 81.948,
+     "wall_s": 0.842
+    },
+    {
+     "call": 2,
+     "cap": 256,
+     "completion_tokens": 69,
+     "content": "\n\nyes",
+     "tok_per_s": 82.241,
+     "wall_s": 0.839
+    }
+   ],
+   "plan_rule": {
+    "rate_core_plan": 5.0,
+    "rate_full_plan": 10.0
+   },
+   "rate_tok_per_s": 123.447,
+   "selected_panel": "r63"
+  },
+  "temperature": 0.0,
+  "workers": 2
+ },
+ "panel": 8,
+ "panel_name": "r63",
+ "plan_rule": {
+  "note": "standing round-61 rule: gate panel-scale commitments on a pre-dispatch rate measurement. Measured by two 256-token census calls plus one full-cap calibration dispatch on the anchor cell, all before the gate is frozen; the selected panel is a function of the measured rate, not of mid-run conditions. Worst-case panel arithmetic: the full plan is 16,384 completion tokens and the trimmed plan 12,288, against the frozen 3,000 s dispatch budget",
+  "rate_core_plan": 5.0,
+  "rate_full_plan": 10.0,
+  "worst_case_tokens": {
+   "r63": 16384,
+   "r63core": 12288
+  }
+ },
+ "question": "Does the k > 48 name-walk panel (issue #129) discriminate the two wall readings on the 27B class, as registered by the round-61 gate row P1_owed_panel_prediction? Registered discriminator: on the core panel's four endpoint cells (A48_j48, A49_j49, B50_j50, C64_j64, cap 2048), at least 3 of 4 delivering the correct terminal makes the wall an output-budget and output-policy artifact (the issue #126 reading); at most 1 of 4 delivering (censor at the cap or a position error on the right path, the round-59 shape) keeps the length-generalization reading (T1-T3) alive on the 27B class. The 27B-class yes/no arm already censors at k = 48 (round 52) while the name arm had never fired on the class; the round-61 E1 record added the first shallow data point (correct, 1123 tokens).",
+ "schema": "round63-gate-v1",
+ "theory": {
+  "T1_tc0_bound": {
+   "source": "arXiv:2604.25800",
+   "statement": "learnable chain-of-thought length-generalizes only within TC0 under standard positional encodings and a finite alphabet; the signpost-token remedy shows the barrier is encoding-specific, not universal",
+   "verification": "carried from the round-61 gate (work-record verified 2026-11-12, OpenAlex: title, authors, year; no quote taken); not re-verified this firing"
+  },
+  "T2_crasp_characterization": {
+   "source": "arXiv:2608.13433",
+   "statement": "complete characterization of length generalization for regular languages under NoPE: it holds iff the syntactic monoid decomposes into loop-balanced integer counters (C-RASP); a near-binary split on 175 languages and 10x data does not rescue the failing class. Caveat on record: NoPE theory; the deployed models use RoPE",
+   "verification": "carried from the round-61 gate (work-record verified 2026-11-12)"
+  },
+  "T3_encoding_specific_remedies": {
+   "source": "arXiv:2608.31067 (with arXiv:2604.25800)",
+   "statement": "depth-tracking positional encoding plus halting gives exact length generalization on Boolean evaluation, ListOps and modular arithmetic with 280 parameters: the second encoding-specific remedy after the signpost tokens, i.e. the wall moves with the encoding",
+   "verification": "carried from the round-61 gate (work-record verified 2026-11-12)"
+  },
+  "T4_task_complexity_not_the_wall": {
+   "source": "in-repo measurement (rounds 51/52/59)",
+   "statement": "the ladder item at any tested depth is a two-path BFS problem in NC1 (128 facts at k = 64); the task stays computationally trivial while the observed walls sit at output budget (2048 cap, round 52) and step position (j >= 40, round 59), so the wall is a length-generalization and output-budget property of the deployment, not a task-complexity limit",
+   "verification": "executed in-repo records, no external source"
+  }
+ },
+ "tier_rule": "panel state drives the verdict tier: panel_delivered (all four endpoint cells recorded), panel_partial (two or three of four recorded), panel_starved (one or fewer recorded; P1 stays owed and the measured rate is the record). The P1 criterion carries the discriminator count and the reading; a controls_invalid firing downgrades the P1 evaluation to uncertified. The verdict is recorded against the dispatched plan only; a cell that did not dispatch is not reported as a result."
+}

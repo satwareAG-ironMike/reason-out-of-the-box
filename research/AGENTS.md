@@ -20,6 +20,10 @@ maintainer owns deletion or relocation. Durable conclusions do not stay here: th
   how to reproduce, results), the script (stdlib-only, `--selftest` with arithmetic and
   negative controls, house style), `raw.jsonl` (one record per prompt: prompt, raw response,
   score), `summary.json` (aggregates), `run.log` stays local (it can carry endpoint noise).
+  A round whose dispatch plan was selected by a frozen pre-dispatch rate measurement
+  (standing round-61 rule, from round 63) also keeps that measurement record
+  (`measure.json`, pre-gate census and calibration calls plus the plan selection) in the
+  directory; the frozen gate's dispatch block carries the same data as its input.
 - Sanitized by construction, public-only rule: no hostname, IP, endpoint URL, credential,
   device name, or model file path in any file, including model output text; scripts strip
   them before writing. Refer to a serving model by public name only. Scripts read
