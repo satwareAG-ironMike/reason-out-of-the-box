@@ -1,0 +1,1 @@
+{"completion_tokens": 69, "content": "\n\nyes", "finish_reason": "stop", "message_fields": ["audio", "content", "function_call", "reasoning", "refusal", "role"], "model_digest": "26df9af5972ff312", "prompt_tokens": 115, "reasoning_chars": 239, "reasoning_field": "reasoning", "wall_s": 1.225}

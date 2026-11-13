@@ -1,0 +1,38 @@
+{
+ "calibration": {
+  "cap": 2048,
+  "completion_tokens": 1113,
+  "declared": "trackst",
+  "finish_reason": "stop",
+  "j": 8,
+  "label": "A48_j8",
+  "level": 48,
+  "note": "cross-firing duplicate of the round-61 E1 record (1123 tokens on the identical prompt); temperature 0.0",
+  "tok_per_s": 123.447,
+  "wall_s": 9.016
+ },
+ "census": [
+  {
+   "call": 1,
+   "cap": 256,
+   "completion_tokens": 69,
+   "content": "\n\nyes",
+   "tok_per_s": 81.948,
+   "wall_s": 0.842
+  },
+  {
+   "call": 2,
+   "cap": 256,
+   "completion_tokens": 69,
+   "content": "\n\nyes",
+   "tok_per_s": 82.241,
+   "wall_s": 0.839
+  }
+ ],
+ "plan_rule": {
+  "rate_core_plan": 5.0,
+  "rate_full_plan": 10.0
+ },
+ "rate_tok_per_s": 123.447,
+ "selected_panel": "r63"
+}
