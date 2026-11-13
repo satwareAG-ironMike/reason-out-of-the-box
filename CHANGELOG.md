@@ -5,6 +5,41 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-13
+
+#### Added
+
+- Nightly research round 64 (issue #65; serves #71, #94, #100, #105, #126, #129, #139, #141;
+  refs #73): `research/nightly-2026-11-13-0441/` runs the first non-recall answer channel in this
+  program, a forced-choice recognition arm over the same name-walk item and the same asked step as
+  the free-response recall arm, five options (the gold, three in-item distractors at adjacent step
+  positions, and `NONE`), so a deep failure can be read as a lost readout rather than a missing
+  walk. 23 cells on a flash-next-class endpoint at `max_tokens` 2048 and `temperature` 0.0, 28 calls
+  inside the 40-call cap, 0 retries; the recall arm reproduces four archived prompts byte-wise, and
+  controls use the one-step path-tail shape the issue #139 fix prescribes. Instrument
+  `recall_recognition_probe_r64.py` (stdlib, `--selftest` 177 checks: planted off-item option,
+  planted off-options answer, planted wrong-step and other-component signatures, binomial arithmetic
+  on both sides of alpha, plan selection against every frozen threshold, a planted controls failure,
+  the rescore wall basis, and the issue #137 guard against a README with four planted defects); gate
+  `round64-gate-v1` (blob `298e21f4`) frozen before dispatch. Result (tier
+  `representation_failure`, n 5, m 1, exact binomial 0.6723, flag `cap_truncation_present`):
+  **12 delivered records, 12 correct, 0 wrong names, and 11 records censored at exactly 2,048
+  tokens with an empty answer channel**, so the tier is produced by censoring rather than by
+  evidence about representation, since on 4 of the 5 recall-missed cells the recognition arm
+  censored too and never expressed a choice; the two cells where both channels could answer split
+  one way each (the `k = 64` item at `j = 48` censors in recall and delivers the correct terminal
+  in recognition at 1,602 tokens, the `k = 40` item at `j = 40` delivers in recall at 1,779 tokens
+  and censors in recognition), so the channels are not ordered by difficulty and the wall crossing
+  point sits in the completion length and not in the asked step. Also on the record: the issue #139
+  shallow control shape certified a deep-ladder firing for the first time (`F1` and `F2` both 4/4
+  where rounds 55, 59 and 60 scored `controls_invalid`, controls costing 145 to 1,016 tokens instead
+  of the whole cap); the issue #126 premise is contradicted on this firing (the 2,048 wall is 11 of
+  23 records, so its presence is a per-firing endpoint property); the issue #105 census is
+  `reasoning_content` on 23 of 23, a fourth same-class firing with the channel exposed; the issue
+  #100 duplicate pair agrees only vacuously (both sides censored); and the wrong-step signature
+  round 59 recorded does not re-present on this build, which ties the wall *mode* to the serving
+  identity rather than to the class.
+
 ### 2026-11-06
 
 #### Added
