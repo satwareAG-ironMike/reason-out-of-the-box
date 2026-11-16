@@ -5,6 +5,35 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-16
+
+#### Added
+
+- Nightly research round 70 (issue #65; serves #71, #94, #100, #105, #126, #129, #137, #139, #145,
+  refs #73, #141, #150): `research/nightly-2026-11-16-0412/` asks whether a name the record contains
+  and the answer field omits is **accessible for report**, with a paired context manipulation on the
+  name-walk ladder: 6 deep cells (terminals at j = 48/50/64 plus mid-path j = 40/42/56 on three
+  load-floor items), 2 past-the-tail `NONE` controls and the `j = 8` anchor, every non-anchor cell
+  replayed as a two-turn conversation where arm A keeps the turn-1 non-report channel and arm B keeps
+  only the turn-1 answer field, both scored against the generator's own solver so the trace is never
+  a scorer (issue #94). 27 of 40 prompts, 0 transport errors, 416.2 s dispatch wall; instrument
+  `readout_recovery_r70.py` (stdlib, `--selftest` 92 checks, three prompt digests asserted against
+  the round-63 pins so the build is the only variable) with gate `round70-gate-v1` (blob `41369020`)
+  frozen before dispatch. Result on the build pinned as `4075b5949b2b0487`: **6 of 6 deep turn-1
+  cells censor at 2,048 with reserve 0 and `gold_in_trace` true**, so `n_eligible = 0` and the panel
+  is `inconclusive_budget` under issue #145; the wall on this build is cap-bound (`L3` fits 11
+  records, the 1,556 to 1,558 self-stop band and the 492 reserve fit none), so the wall's mode is
+  build-tied in the opposite direction from rounds 59 and 69 on the byte-identical M4 cells; and
+  **arm A recovers the correct terminal in 5 of 6 against arm B 0 of 6**, 5 of 5 discordant pairs
+  A-only (exact two-sided binomial 0.0625, exploratory), zero false names in any arm. The registered
+  downgrade fires and the verdict ships as `readout_gated_downgraded_to_tail_copy`: in 5 of 5
+  recoveries the emitted name is the last vocabulary name of the restored draft, and because the
+  draft always stops at the asked step, this design cannot separate readout from copying. Issue #139
+  re-presents on a third digest (0 of 2 controls refuse, both truncate); `H1_answer_stability` is
+  empty at `n_held = 0`; the anchor prompt self-agrees at 1,096 tokens across two dispatches
+  (issue #100). Rows `V0` to `V3`, `X2`, `H1`, `S1`, `W2`, `M4` are named in the instrument, not in
+  the frozen gate, and no `--check-readme` guard ran this round (issue #137).
+
 ### 2026-11-06
 
 #### Added
