@@ -1,0 +1,274 @@
+{
+ "blob": "7d574b8e74e3bc245557d37f8232db92e27380b6a71eeb421888d9a347a61865",
+ "cells": [
+  {
+   "cap": 2048,
+   "gold": "NONE",
+   "item_key": "A49",
+   "j": 1,
+   "kind": "dead_end",
+   "label": "A49_deadend",
+   "level": 49,
+   "path_len": 0,
+   "prompt_sha256": "8a6aadff52bf045290536c44d8877c330582f51a7e18c4150def8cbfd3499f27",
+   "seed": 118261016
+  },
+  {
+   "cap": 2048,
+   "gold": "NONE",
+   "item_key": "C64",
+   "j": 1,
+   "kind": "dead_end",
+   "label": "C64_deadend",
+   "level": 64,
+   "path_len": 0,
+   "prompt_sha256": "c36ea5dff6d90a069d0573968c9823c92e403bfdb0891862aab56a19669af465",
+   "seed": 148261120
+  },
+  {
+   "cap": 2048,
+   "gold": "spog",
+   "item_key": "A48",
+   "j": 48,
+   "kind": "name",
+   "label": "A48_j48",
+   "level": 48,
+   "path_len": 48,
+   "prompt_sha256": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+   "seed": 116261051
+  },
+  {
+   "cap": 2048,
+   "gold": "studnd",
+   "item_key": "A49",
+   "j": 49,
+   "kind": "name",
+   "label": "A49_j49",
+   "level": 49,
+   "path_len": 49,
+   "prompt_sha256": "0d61f97016e61b4da797c84f4139ca72ac0e94001739c429a7d91140a304ec59",
+   "seed": 118261016
+  },
+  {
+   "cap": 2048,
+   "gold": "prish",
+   "item_key": "B50",
+   "j": 50,
+   "kind": "name",
+   "label": "B50_j50",
+   "level": 50,
+   "path_len": 50,
+   "prompt_sha256": "c15a68eb63cc474457ebe6f8ee806f6e0182d38967bfdbe67726417c272e5362",
+   "seed": 120261132
+  },
+  {
+   "cap": 2048,
+   "gold": "brelt",
+   "item_key": "C64",
+   "j": 64,
+   "kind": "name",
+   "label": "C64_j64",
+   "level": 64,
+   "path_len": 64,
+   "prompt_sha256": "c1ef6c20bfd84e2fd30a6eaefa22caf1dfb4663280b0824cac72e89f298eea7e",
+   "seed": 148261120
+  },
+  {
+   "cap": 2048,
+   "gold": "prish",
+   "item_key": "B50",
+   "j": 50,
+   "kind": "dup",
+   "label": "B50_j50_dup",
+   "level": 50,
+   "path_len": 50,
+   "prompt_sha256": "c15a68eb63cc474457ebe6f8ee806f6e0182d38967bfdbe67726417c272e5362",
+   "seed": 120261132
+  },
+  {
+   "cap": 2048,
+   "gold": "trackst",
+   "item_key": "A48",
+   "j": 8,
+   "kind": "name",
+   "label": "A48_j8",
+   "level": 48,
+   "path_len": 48,
+   "prompt_sha256": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260",
+   "seed": 116261051
+  }
+ ],
+ "criteria": {
+  "E1_anchor_liveness": {
+   "statement": "the k = 48 anchor cell A48_j8 (archived seed 116261051, j = 8, cap 2048) delivers the correct terminal on this build; the same prompt delivered correctly at 1,123 tokens on the round-61 build and at 1,113 tokens on the round-63 build, so this record is the third point of a cross-build test-retest of the shallow rung",
+   "threshold": "delivered and correct, when the cell is in the selected plan"
+  },
+  "E2_census_trace_exposure": {
+   "statement": "the 256-token census call answers the two-fact transitivity query correctly and names the reasoning-supplying field of this firing (issue #105; any cross-build trace claim must state both sides' exposure)",
+   "threshold": "correct content and non-empty reasoning channel"
+  },
+  "N3_anchor_certification": {
+   "statement": "pre-dispatch, fatal: the k = 48 anchor item regenerates from the shipped generator with seed 116261051 and its archived yes/no prompt digest 068bc6a1fb0620fb (rounds 51/52/53/54), every item in the set is a load-floor, component-isomorphic item (issue #67 guards), and every cell prompt digest equals the round-63 matched-pair pin, so the build is the only difference between the two firings",
+   "threshold": "certified before any prompt is spent"
+  },
+  "P1_panel_prediction": {
+   "statement": "DISCRIMINATOR as registered by the round-61 gate, rule unchanged: on the four endpoint cells, 3 or 4 delivering the correct terminal makes the wall an output-budget and output-policy artifact (issue #126); 1 or fewer keeps the length-generalization reading (T1-T3) alive; exactly 2 of 4 is inconclusive and P1 stays owed. All four endpoint cells must be recorded for the count to be evaluable; a cell that did not dispatch is not reported as a result. Row S1 states whether the count is carried by deliveries or by non-deliveries.",
+   "threshold": "3+ of 4 correct: output-budget reading; 1 or fewer of 4 correct: length-generalization reading; 2 of 4: inconclusive"
+  },
+  "R1_dead_end_controls": {
+   "statement": "VALIDITY GATE: both dead-end NONE controls (A49 and C64, one step by design, the round-60 lesson: off-end controls at depth inherit truncation; certified on this build family by the issue #139 fix) declare NONE; if either names an entity where the links have run out the firing is flagged controls_invalid and the P1 evaluation is uncertified",
+   "threshold": "both controls declare NONE"
+  },
+  "S1_delivery_census": {
+   "statement": "REPORT ROW (issue #145): every recorded endpoint cell is classified delivered_correct, delivered_wrong_on_right_path (the round-59 signature: a name on the asked path at the wrong step), delivered_wrong_off_path (a name of the same item that is not on the asked path), declared_none_on_name_gold (a refusal where a terminal was asked), delivered_no_item_name (a non-empty answer field carrying no entity name of that item and no NONE), censored_at_cap (the finish reason is length: the requested cap cut the output before an answer landed, whether the field is empty or holds a fragment) or no_answer_field (the record stopped on its own without writing an answer), and n_eligible (the cells that put a readable answer on the wire) is reported beside n and the correct count. When the panel lands on the 1-or-fewer branch and every non-correct endpoint cell of that branch is a non-delivery (a cap censor or an empty answer field), the branch was produced by the output budget and not by the model's behavior on the task, and the outcome carries the name inconclusive_budget with P1 owed for the reading. A branch carried by a named-but-wrong terminal or a delivered refusal is delivery_backed and stays evaluable, because a name read out of a cell that never put an answer on the wire is not evidence about the task while a named wrong terminal is",
+   "threshold": "reachable whenever at least one endpoint cell is recorded"
+  },
+  "W2_wall_signature_census": {
+   "statement": "REPORT ROW: for every recorded cell the reserve below the requested cap (cap minus completion_tokens) and the finish reason are fitted against the three archived wall laws (L1 the 1,556 to 1,558 self-stop band at finish stop, L2 the 492-token reserve, L3 the cap-bound reserve at or below 19) and the modal shape is reported per cell. On this build L1 is the archived signature, so a re-presenting L1 fit is a test-retest of the round-59 wall mode and a re-presenting L3 fit moves that wall mode from build-tied to firing-tied",
+   "threshold": "reported for every recorded cell"
+  },
+  "X1_stopping_build_prediction": {
+   "statement": "REGISTERED PREDICTION (round 64, PR #144, unmerged at this firing): on the build that stops by itself, a wrong position should coincide with a self-truncated trace and the emitted name should be the last position its own trace reached. This firing runs on that build, so the prediction is tested here rather than restated. Evaluated per named-but-wrong endpoint cell: is the declared name the last generator-vocab name in that record's own trace, does its position on the asked path equal the furthest position along that path the trace names, and did the record stop on its own (finish stop with a reserve above 19 tokens below the requested cap). Reachable when at least one endpoint cell names a terminal the solver did not accept; with no named cell the row reports not_evaluable_no_named_cell and the prediction stays owed",
+   "threshold": "supported when every named-but-wrong cell satisfies all three measures; refuted when any named-but-wrong cell fails one; not_evaluable_no_named_cell with no named cell"
+  }
+ },
+ "dispatch": {
+  "call_cap": 40,
+  "cell_floor_s": 120,
+  "dispatch_budget_s": 3000,
+  "max_tokens_cap": 2048,
+  "model_digest": "c62b81e96826354e",
+  "planned_calls": 8,
+  "pre_gate_calls": 3,
+  "rate_measurement": {
+   "calibration": {
+    "cap": 2048,
+    "completion_tokens": 359,
+    "correct": true,
+    "declared": "trackst",
+    "finish_reason": "stop",
+    "gold": "trackst",
+    "j": 8,
+    "label": "A48_j8",
+    "level": 48,
+    "note": "cross-build duplicate of the round-61 (1,123 tokens) and round-63 (1,113 tokens) records on the identical prompt; temperature 0.0; the calibration dispatch runs alone, so it is also this firing's host-rate record",
+    "reserve_tokens": 1689,
+    "tok_per_s": 17.744,
+    "wall_s": 20.232
+   },
+   "census": [
+    {
+     "call": 1,
+     "cap": 256,
+     "completion_tokens": 60,
+     "content": "yes",
+     "tok_per_s": 0.548,
+     "wall_s": 109.521
+    },
+    {
+     "call": 2,
+     "cap": 256,
+     "completion_tokens": 60,
+     "content": "yes",
+     "tok_per_s": 2.008,
+     "wall_s": 29.875
+    }
+   ],
+   "dispatch_shape": {
+    "note": "one worker, cells in panel order (issue #73)",
+    "workers": 1
+   },
+   "model_digest": "c62b81e96826354e",
+   "plan_rule": {
+    "rate_core_plan": 5.0,
+    "rate_full_plan": 10.0
+   },
+   "rate_tok_per_s": 17.744,
+   "selected_panel": "r69"
+  },
+  "temperature": 0.0,
+  "workers": 1
+ },
+ "panel": 8,
+ "panel_name": "r69",
+ "pins": {
+  "anchor_records": {
+   "round61": {
+    "record": "round-61 gate E1 row, PR #142, unmerged here",
+    "tokens": 1123
+   },
+   "round63": {
+    "record": "round-63 pre-gate calibration, PR #143, unmerged here",
+    "tokens": 1113
+   }
+  },
+  "archived_k48": {
+   "seed": 116261051,
+   "yesno_digest16": "068bc6a1fb0620fb"
+  },
+  "matched_pair": {
+   "prompt_sha256": {
+    "A48_j48": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+    "A48_j8": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260",
+    "A49_deadend": "8a6aadff52bf045290536c44d8877c330582f51a7e18c4150def8cbfd3499f27",
+    "A49_j49": "0d61f97016e61b4da797c84f4139ca72ac0e94001739c429a7d91140a304ec59",
+    "B50_j50": "c15a68eb63cc474457ebe6f8ee806f6e0182d38967bfdbe67726417c272e5362",
+    "B50_j50_dup": "c15a68eb63cc474457ebe6f8ee806f6e0182d38967bfdbe67726417c272e5362",
+    "C64_deadend": "c36ea5dff6d90a069d0573968c9823c92e403bfdb0891862aab56a19669af465",
+    "C64_j64": "c1ef6c20bfd84e2fd30a6eaefa22caf1dfb4663280b0824cac72e89f298eea7e"
+   },
+   "record": "round-63 gate cells, PR #143, unmerged at this firing"
+  }
+ },
+ "plan_rule": {
+  "note": "standing round-61 rule: gate panel-scale commitments on a pre-dispatch rate measurement. Measured by two 256-token census calls plus one full-cap calibration dispatch on the anchor cell, all before the gate is frozen; the selected panel is a function of the measured rate, not of mid-run conditions. Worst-case panel arithmetic: the full plan is 16,384 completion tokens and the trimmed plan 12,288, against the frozen 3,000 s dispatch budget. Dispatch runs on one worker (issue #73), so a cell's wall time and rate belong to that cell",
+  "rate_core_plan": 5.0,
+  "rate_full_plan": 10.0,
+  "worst_case_tokens": {
+   "r69": 16384,
+   "r69core": 12288
+  }
+ },
+ "question": "Does the k > 48 name-walk panel discriminate the two wall readings on the flash-next-class build whose serving identity is the pinned model digest c62b81e96826354e? Row P1 was registered by the round-61 gate on the four endpoint cells (A48_j48, A49_j49, B50_j50, C64_j64, cap 2048, name arm): 3 or 4 of 4 delivering the correct terminal makes the measured wall an output-budget and output-policy artifact (the issue #126 reading), 1 or fewer keeps the length-generalization reading (T1-T3) alive, 2 of 4 is inconclusive. The 27B side of the split was dispatched by round 63 on a build with a different digest and returned 1 of 4. This firing dispatches the identical eight cells (byte-identical items, seeds, golds, caps and prompts, asserted in --selftest against the round-63 pins) on the build that already returned 2 of 4 on the same four labels (round 49) and that is the only build in this record to have named a wrong terminal (rounds 37, 38, 47, 49, 59). The panel's wall mode was called build-tied by round 64; this firing is the test-retest of that claim on the tie's own side.",
+ "schema": "round69-gate-v1",
+ "theory": {
+  "T1_tc0_bound": {
+   "source": "arXiv:2604.25800",
+   "statement": "learnable chain-of-thought length-generalizes only within TC0 under standard positional encodings and a finite alphabet; the signpost-token remedy shows the barrier is encoding-specific, not universal",
+   "verification": "OpenAlex work record re-read in this session 2026-11-16 (work-record level: title, authors, year; no quote taken)"
+  },
+  "T2_crasp_characterization": {
+   "source": "arXiv:2608.13433",
+   "statement": "complete characterization of length generalization for regular languages under NoPE: it holds iff the syntactic monoid decomposes into loop-balanced integer counters (C-RASP); a near-binary split on 175 languages and 10x data does not rescue the failing class. Caveat on record: NoPE theory; the deployed models use RoPE",
+   "verification": "OpenAlex work record re-read in this session 2026-11-16 (work-record level: title, authors, year; no quote taken)"
+  },
+  "T3_encoding_specific_remedies": {
+   "source": "arXiv:2608.31067 (with arXiv:2604.25800)",
+   "statement": "depth-tracking positional encoding plus halting gives exact length generalization on Boolean evaluation, ListOps and modular arithmetic with 280 parameters: the second encoding-specific remedy after the signpost tokens, i.e. the wall moves with the encoding",
+   "verification": "OpenAlex work record re-read in this session 2026-11-16 (also verified at work-record level in the round-61 gate; title, authors, year; no quote taken)"
+  },
+  "T4_task_complexity_not_the_wall": {
+   "source": "in-repo measurement (rounds 51/52/59)",
+   "statement": "the ladder item at any tested depth is a two-path BFS problem in NC1 (128 facts at k = 64); the task stays computationally trivial while the observed walls sit at output budget (2048 cap, round 52) and step position (j >= 40, round 59), so the wall is a length-generalization and output-budget property of the deployment, not a task-complexity limit",
+   "verification": "executed in-repo records, no external source"
+  }
+ },
+ "tier_rule": "panel state drives the verdict tier exactly as registered: panel_delivered (all four endpoint cells recorded), panel_partial (two or three of four recorded), panel_starved (one or fewer recorded; P1 stays owed and the measured rate is the record). Row P1 carries the discriminator count and the reading; a controls_invalid firing downgrades the P1 evaluation to uncertified. Row S1 attaches the eligibility state to the reading: when every non-correct endpoint cell is a non-delivery the reading is named inconclusive_budget and P1 stays owed for the reading while the count stays on the record. A cell that did not dispatch is never reported as a result. Row X1 is evaluated on its own reachability rule and never moves the tier.",
+ "wall_laws": {
+  "L1_self_stop_band": {
+   "basis": "16 of 26 records sit in the 1,556 to 1,558 token band, zero cells cap-bound",
+   "source": "round 59 (PR #140, unmerged here), the same serving build as this firing",
+   "test": "1556 <= completion_tokens <= 1558 and finish_reason == 'stop'"
+  },
+  "L2_reserve_492": {
+   "basis": "every pinned ladder record stops 492 tokens below its requested cap",
+   "source": "round 53 (PR #131, unmerged here), a flash-class build with a different digest",
+   "test": "cap - completion_tokens == 492"
+  },
+  "L3_cap_bound": {
+   "basis": "the 27B-class cap ladder is cap-bound at every rung below the pin; issue #141 records the same shape on the deep cells (reserve 0 or 2)",
+   "source": "round 54 (PR #133, unmerged here), a 27B-class build",
+   "test": "cap - completion_tokens <= 19"
+  }
+ }
+}
