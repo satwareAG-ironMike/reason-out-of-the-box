@@ -5,6 +5,40 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-17
+
+#### Added
+
+- Nightly research round 72 (issue #65; serves #71, #94, #100, #105, #126, #129, #139,
+  #145, #152, refs #73, #141): `research/nightly-2026-11-17-0401/` runs the issue #152
+  cross-ask replay - restore the draft produced for the terminal and ask for an **interior**
+  step, so the correct answer sits inside the restored text and a copy rule must fail - plus
+  the issue #152 item-2 budget-matched filler control, on the three M4 items whose turn-1
+  prompts are byte-identical to the round-63, round-69 and round-70 dispatches. 19 of 40
+  prompts (5 turn-1 cells, the `C64_over` past-the-tail control and the `j = 8` anchor
+  included, and 12 two-turn arms, all asking interior step 40), 0 transport retries, 290.1 s
+  dispatch wall; instrument `cross_ask_r72.py` (stdlib, `--selftest` 119 checks: the interior
+  ask asserted strictly inside the walk and the interior gold asserted distinct from the tail
+  and the start, the X2 detector pinned to the treatment side, three turn-1 prompt digests
+  asserted against the round-63/69/70 pins) with gate `round72-gate-v1` (blob
+  `2b3139d790011ce3`) frozen before dispatch, every registered row a key of the frozen gate,
+  closing issue #152 item 4. Result on the build pinned as `26df9af5972ff312` (a 27B-class
+  local endpoint; first public firing on this build): **row R2 ships `cross_ask_gated` -
+  arm X 2 of 3 against arm F 0 of 3 and arm B 0 of 3, both discordant pairs X-only**
+  (exact two-sided binomial on 2-0 is 0.5, reported as arithmetic at n = 2), and the
+  registered X2 downgrade does not fire: in 2 of 2 delivered arm-X records the emitted name
+  is not the last vocabulary name of the restored draft, so the recovery is selection beyond
+  the draft's tail; the 890, 941 and 767 filler-token arm buys no name in 0 of 3, so the
+  recovery tracks the draft's content, not its budget. The wall on this build is cap-bound,
+  a third firing on that side of the split (`L3_cap_bound` fits 7 of 17 records; the
+  1,556 to 1,558 self-stop band and the 492 reserve fit nothing; the M4 cells that round 69
+  stopped at 1,556 to 1,558 run to the cap here again), issue #139 re-presents on a fourth
+  digest, truncation direction (0 of 1 past-the-tail control declares `NONE` at turn 1, the
+  control's own arm F declares `NONE` at 2,032), zero false names in any arm, and the anchor
+  prompt self-agrees at 266 tokens across two dispatches (issue #100). Whole-panel census:
+  6 `censored_at_cap`, 6 `declared_none_on_name_gold`, 3 `delivered_correct`, 2
+  `declared_none` (issue #145, third censored-panel instance).
+
 ### 2026-11-16
 
 #### Added
