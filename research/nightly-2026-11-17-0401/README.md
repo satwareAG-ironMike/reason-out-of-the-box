@@ -80,11 +80,15 @@ is written to disk anywhere in this directory.
 The verdict is the visible answer field against the generator's own solver, never the
 trace (issue #94). The draft is a treatment and a count census (`trace_chars`,
 `gold_in_trace`, `interior_gold_in_trace`, `draft_vocab_tail`), and it licenses no
-verdict. The registered rows are keys of the frozen gate [gate.json](gate.json)
-(`round72-gate-v1`): `V0` to `V3` (preconditions), `R2_cross_ask` (primary),
-`X2_tail_shortcut` (the registered downgrade), `F1_filler_budget`, `H1_answer_stability`,
-`C1_name_pressure`, `S1_delivery_census`, `W2_wall_law_counts` and `M4_matched_pair`.
-Every row is a key of the frozen artifact, closing issue #152 item 4.
+verdict. The registered rows sit in the frozen gate [gate.json](gate.json)
+(`round72-gate-v1`): `V0` to `V3` (preconditions, as `V0_precondition` to `V3_anchor`),
+`R2_cross_ask` (primary, as the decision table `decision_R2`), `X2_tail_shortcut` (the
+registered downgrade), `F1_filler_budget`, `H1_answer_stability`, `C1_name_pressure`
+(as `controls_C1`), and the definitions of `S1_delivery_census`, `W2_wall_law_counts`
+and `M4_matched_pair` registered as data keys: the census states as `delivery_states`,
+the wall-law tests L1 to L3 as `wall_laws`, the byte-identical prompt pins as
+`matched_pair`. `--selftest` asserts all eleven of these keys, so every row definition
+lives in the frozen artifact, closing issue #152 item 4.
 
 ## Result
 
