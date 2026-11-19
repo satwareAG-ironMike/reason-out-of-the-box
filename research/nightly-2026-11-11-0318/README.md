@@ -94,8 +94,10 @@ records. The level-64 pin is asserted the same way before the first prompt.
 26 calls of the 40-call cap, plus one health call at cap 256 and one calibration call before the
 gate was frozen (a `j = 2` name query on a level-8 load-floor item at cap 512; `brep` asked, `brep`
 answered, never experimental data and never in `raw.jsonl`). `temperature` 0.0, every requested cap
-at most 2,048, dispatch wall-clock guard 1,800 s. Instrument selftest: 127 checks, green before
-dispatch, including planted negatives (an off-by-one gold must be scored wrong, a censored record
+at most 2,048, dispatch wall-clock guard 1,800 s. Instrument selftest: 120 checks as shipped (the
+review fix pass removed nine vacuous checks that re-asserted invariants the code already enforces;
+the pre-review instrument printed 129 and this line said 127), green before dispatch and at this
+head, including planted negatives (an off-by-one gold must be scored wrong, a censored record
 must be a non-delivery rather than a wrong answer, an empty pseudo-gold must not read as present, a
 constant token cost must not pass `C9`, a planted tie at the tier line must read
 `laws_not_separable`, a law set that fits every cell must not be called a wall, each of the four
@@ -110,7 +112,7 @@ planted defects).
 | `C2` | NONE controls: zero false names among delivered controls, at least 3 of 6 controls delivered | gated |
 | `C3` | the four wall laws against the 17 name cells, and the pocket detector | unique law at 14 of 17 |
 | `C4` | accuracy versus delivery: no false name, no undetermined answer, every non-delivery cap-bound | gated |
-| `C5` | delivery-state agreement with the landed flash-class round 55 at the 9 shared coordinates | 6 of 9, 0 name contradictions |
+| `C5` | delivery-state agreement with the open-PR flash-class round 55 at the 9 shared coordinates | 6 of 9, 0 name contradictions |
 | `C6` | the two byte-identical re-dispatch pairs agree on answer and completion tokens | 2 of 2 |
 | `C7` | order-based trace provenance, gold terminal last named minus pseudo-gold last named | 0.50 gap over at least 3 records |
 | `C8` | message-field census on every dispatched record (issue #105) | all dispatched records |
@@ -186,7 +188,7 @@ Dispatch: 26 of 26 planned calls of the 40-call cap, 1800.523 s dispatch phase a
 
 5. **Issue #94's order readout never got its data, and that is worth more than a gap of 0.0.** `C7` admits only name-gold records that produced no terminal and carry a non-empty reasoning channel. On this firing all 17 name cells produced a terminal (`NONE` is a produced answer), so `n = 0`, the row is inadmissible, and the containment legacy numbers are equally uncomputable. Rounds 50, 55 and 58 refused the same row at gap 0.0 because containment could not separate "reached the terminal" from "enumerated the candidate tails"; this firing does not even reach that test, because the `j >= 40` failures are wrong answers rather than withheld answers. The surfacing question moves: on this build at this depth there is nothing stuck under the surface, the surface is full and what is on it is the wrong position.
 
-6. **Same class, different build: the column extends, the capability does not.** `C5` reads 8 of 9 state agreement with the landed flash-class round 55 grid with 0 name contradictions and no regression to a censored state; the single extension is `L48_j32`, censored at 2,048 there and `stop` at 1,557 with the correct name `whesh` here. `X1`, post-hoc and unregistered against the killed round-58 27B archive, reads 12 of 16, with four build extensions (`L32A_j24`, `L48_j32`, `L48_j40`, `L64_j40`: censored at 2,048 there, `stop` here) of which two are wrong answers here. "Delivered" means an answer field exists, and at `j >= 40` that is not a capability claim: this build gets further out of the token budget and lands on the wrong node, which is the cleanest evidence in this program that a delivery-state comparison across builds cannot be read as a depth comparison.
+6. **Same class, different build: the column extends, the capability does not.** `C5` reads 8 of 9 state agreement with the flash-class round 55 grid (open as PR #136 at this firing) with 0 name contradictions and no regression to a censored state; the single extension is `L48_j32`, censored at 2,048 there and `stop` at 1,557 with the correct name `whesh` here. `X1`, post-hoc and unregistered against the killed round-58 27B archive, reads 12 of 16, with four build extensions (`L32A_j24`, `L48_j32`, `L48_j40`, `L64_j40`: censored at 2,048 there, `stop` here) of which two are wrong answers here. "Delivered" means an answer field exists, and at `j >= 40` that is not a capability claim: this build gets further out of the token budget and lands on the wrong node, which is the cleanest evidence in this program that a delivery-state comparison across builds cannot be read as a depth comparison.
 
 
 

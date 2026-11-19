@@ -15,7 +15,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   32 on every item and out to 40 at 96 facts and 48 at 128 facts, 6 `NONE` controls fired first, one
   256-token rung and 2 byte-identical re-dispatches: 26 dispatches of the 40-call cap plus a health
   and a calibration call, `max_tokens` 2048, `temperature` 0.0, 0 retries. Instrument
-  `wall_transfer_probe_r59.py` (stdlib, `--selftest` 129 checks), gate `round59-gate-v1` (blob
+  `wall_transfer_probe_r59.py` (stdlib, `--selftest` 120 checks), gate `round59-gate-v1` (blob
   `f9a2c845`) frozen before the first dispatch, and the issue #137 row-and-blob guard implemented
   round-side as `--check-readme` with five planted negatives. Result (tier `controls_invalid`, flag
   `self_agreement_split`): **the registered wall is absent on this build.** All 17 name cells and 5
@@ -34,8 +34,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   control failures (`L48_offend` named the path endpoint, `L64_offend` named the fabricated name), so
   `C3`'s met criterion is reported rather than promoted, and the issue #94 order-based readout got no
   data at all (`n = 0`: every name cell produced an answer, so nothing was withheld under the
-  surface). Cross-build readouts: 8 of 9 shared coordinates agree with the landed round-55 flash grid
-  (`L48_j32` is an extension, censored at 2,048 there and `stop` with the correct name here) and 12
+  surface). Cross-build readouts: 8 of 9 shared coordinates agree with the round-55 flash grid
+  (open as PR #136 at this firing; `L48_j32` is an extension, censored at 2,048 there and `stop`
+  with the correct name here) and 12
   of 16 with the killed round-58 27B firing, which is disclosed as uncommitted provenance and gates
   nothing.
 

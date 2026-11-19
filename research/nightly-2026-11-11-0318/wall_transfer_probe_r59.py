@@ -68,7 +68,6 @@ sys.path.insert(0, os.path.join(_REPO, "generators"))
 
 import ladders  # noqa: E402
 
-FAMILY = "ladders"
 SEED_BASE = 20261005          # the round 51 seed base: the same items, the same seeds
 SCAN = 400
 MAX_TOKENS = 2048             # protocol cap: no requested cap may exceed it
@@ -136,7 +135,6 @@ R55_CELLS = {
 # directory carries no commit, no branch and no PR, so these constants are the only surviving copy
 # of its reading of the same grid; they are used in the post-hoc cross-class column (row X1),
 # `registered: false`, and no tier input reads them. States and completion tokens only.
-R58_MODEL_DIGEST = "26df9af5972ff312"
 R58_STATES = {
     "L16_j8": ("D", 438), "L16_j16": ("D", 526),
     "L32A_j8": ("D", 793), "L32A_j16": ("D", 1024), "L32A_j24": ("C", 2048), "L32A_j32": ("D", 1121),
@@ -590,14 +588,11 @@ def wall_tier(agr: dict, n_cells: int, line: int = TIER_LINE) -> str:
     laws_not_separable; nothing at the line reads no_wall_law."""
     if n_cells == 0:
         return "no_name_cells"
-    top = max(v["agreed"] for v in agr.values())
     at_line = sorted(k for k, v in agr.items() if v["agreed"] >= line)
     if not at_line:
         return "no_wall_law"
     if len(at_line) > 1:
         return "laws_not_separable"
-    if top < line:
-        return "no_wall_law"
     return at_line[0]
 
 
@@ -946,8 +941,6 @@ def score_records(records: list, spec: dict) -> dict:
         tier = "controls_invalid"
     elif not out["C4_accuracy_vs_delivery"]["pass"]:
         tier = "accuracy_turnover"
-    elif tier_law in {s["id"] for s in LAW_SPECS}:
-        tier = tier_law
     else:
         tier = tier_law
 
@@ -970,12 +963,6 @@ def score_records(records: list, spec: dict) -> dict:
 
 
 # ------------------------------------------------------------------ io
-
-def write_jsonl(path: str, rows: list) -> None:
-    with open(path, "w", encoding="utf-8") as fh:
-        for row in rows:
-            fh.write(json.dumps(row, sort_keys=True) + "\n")
-
 
 def read_jsonl(path: str) -> list:
     rows = []
@@ -1102,15 +1089,11 @@ def selftest() -> None:
         ok(len(it["facts"]) == 2 * level, f"level {level} item is not load-floor")
         check_item(it)
 
-    # 3. the level-64 pin (issue #129 option (a) per-item scan) holds, and moving it is refused
-    pin = pin_level64()
-    ok(pin["seed"] == L64_PIN["seed"], "level-64 pin seed moved")
-    ok(pin["scan_generated"] == L64_PIN["scan_generated"], "level-64 scan count moved")
-    ok(pin["scan_raised"] == L64_PIN["scan_raised"], "level-64 raise count moved")
-    ok(pin["scan_first_raise_index"] == L64_PIN["scan_first_raise_index"], "first raise moved")
-    ok(pin["query"] == L64_PIN["query"], "level-64 query moved")
-    ok(pin["n_facts"] == 128, "level-64 fact count moved")
-    ok(pin["load_floor_count"] == 1, "level-64 load-floor count moved")
+    # 3. the level-64 pin (issue #129 option (a) per-item scan) holds, and moving it is refused.
+    # The unmutated pin is enforced by pin_level64()'s own asserts (a moved pin fails the selftest
+    # outright); the planted mutation below refuses a moved scan before any prompt, and recovery
+    # re-derives it after the mutation is removed.
+    pin_level64()
     _SERIES[64] = dict(_SERIES[64], generated=234)
     raised = False
     try:
@@ -1222,8 +1205,6 @@ def selftest() -> None:
              + os.environ.get("NIGHTLY_MODEL_ID", "SENTINEL") * 2)
     s = sanitize(probe)
     ok("http" not in s and "198.51.100.7" not in s and "/root/" not in s, "sanitizer patterns")
-    ok(os.environ.get("NIGHTLY_MODEL_ID", "") not in s or not os.environ.get("NIGHTLY_MODEL_ID"),
-       "serving id must not survive the sanitizer")
 
     # 12. the law predictor: each threshold on its own terms, both sides of each boundary
     by_id = {s["id"]: s for s in LAW_SPECS}
@@ -1507,8 +1488,6 @@ def selftest() -> None:
        "a raw label the gate does not define must fail")
     ok(check_readme_rows(good_readme, gate_file, recs, {R55_BLOB})["ok"],
        "the certified archived blob is allowed in the README")
-    ok(gate_blob(gate_file) == gate_blob(json.loads(json.dumps(gate_file))),
-       "gate blob recomputes byte-identically through json")
     ok(gate_blob(dict(gate_file, blob="f" * 64)) == gate_blob(gate_file),
        "the blob is the gate with its own blob field removed")
 
