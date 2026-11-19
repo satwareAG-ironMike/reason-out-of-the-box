@@ -16,8 +16,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   depth is isolated from input load by construction rather than by round 50's cross-item band
   matching - 29 of the 40-call cap: `k = 8` seed 36261005 at `j` in 1, 2, 4, 8; `k = 16` seed
   52261033 at `j` in 2, 8, 16; `k = 32` seeds 84261011 and 84261050; `k = 48` seed 116261051 (the
-  item rounds 51, 53 and 54 dispatched byte-identically, re-certified before dispatch against the
-  archived yes/no digest `068bc6a1fb0620fb`) at `j` in 2, 8, 16, 32, 48; seven NONE controls (five
+  item archived round 51 dispatched byte-identically (rounds 53 and 54 are same-family firings
+  pending merge in PRs #131 and #133), re-certified before dispatch against the archived yes/no
+  digest `068bc6a1fb0620fb`) at `j` in 2, 8, 16, 32, 48; seven NONE controls (five
   at `j = k + 1`, two at a dead-end source), one budget rung (`j = 48` at `max_tokens` 256) and two
   re-dispatches (#100), plus the census call; `temperature` 0.0, `max_tokens` at most 2048, zero
   retries, 504.4 s dispatch wall on the resumed dispatch: the first 8 cells were written by a dispatch

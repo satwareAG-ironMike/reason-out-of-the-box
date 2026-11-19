@@ -1,4 +1,4 @@
-# Round 55 (2026-11-09 03:01): the ladder answers in a name space it cannot guess - 27 of 27 delivered names correct to j = 48 on the certified k = 48 item, and every NONE control refuses
+# Round 55 (2026-11-09 03:01): the ladder answers in a name space it cannot guess - 18 of 18 delivered names correct to j = 32, zero wrong names, and both C2 misses are censored refusals rather than false names
 
 Firing: 2026-11-09 03:01 (issue #65 timer, pool slot 2/6). Class: a flash-next-class local model
 (the serving id is disclosed only in the commit `Model:` trailer; artifact digest `4075b5949b2b0487`). No
@@ -55,7 +55,7 @@ time choice:
 | L16 | 16 | 52261033 | 32 | load-floor scan |
 | L32A | 32 | 84261011 | 64 | load-floor scan |
 | L32B | 32 | 84261050 | 64 | second 32 item, two cells |
-| L48 | 48 | 116261051 | 96 | the item rounds 51, 53 and 54 dispatched byte-identically |
+| L48 | 48 | 116261051 | 96 | the item archived round 51 dispatched byte-identically (rounds 53 and 54 are same-family firings pending merge, PRs #131 and #133) |
 
 `L48` is the certification anchor: the instrument rebuilds round 51's *yes/no* prompt from the same
 rule and fact block and asserts its sha256 against the archived digest `068bc6a1fb0620fb` before any
@@ -163,8 +163,9 @@ Across the 22 name-gold records: 18 delivered, 18 of 18 delivered correct, 0 wro
 6. **Self-agreement holds on the deliverable half (issue #100).** `L32A_j32` and its re-dispatch are
    identical in completion tokens (951) and declared name. `L48_j48` and its re-dispatch are both
    censored at 2,048 with identical token counts, which is reproducibility of a non-answer, not of a
-   decision. Round 54's byte-identical `L48` fact block was reused here under the archived yes/no
-   digest `068bc6a1fb0620fb`, so round 51's wrong `k = 48` verdict and this round's censored
+   decision. The `L48` fact block was reused here under archived round 51's yes/no digest
+   `068bc6a1fb0620fb` (rounds 53 and 54 are same-family firings pending merge in PRs #131 and
+   #133), so round 51's wrong `k = 48` verdict and this round's censored
    `j = 48` name query are the same 96 facts and the same class: on this item the 48-step traversal
    was never surfaced in either format, while the same facts answer correctly at `j` up to 16.
 
