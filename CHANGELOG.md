@@ -25,8 +25,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   nor cap-absolute - the ladder stopped at 1044 at cap 1536 (predicted 1167) and at 532 at cap 1024
   (predicted 778), C1 0 of 6 and C2 2 of 6, the listing control was never cut at the predicted hook
   (C5 0 of 2); the marker appears in 11 of 14 records including both listing controls and both
-  enumerate records (159 and 157 tokens above the hook) and is absent only where the output is hard
-  truncated (both cap-512 records, `length`, no answer line). Every one of the seven pinned ladder
+  enumerate records (159 and 157 tokens above the hook) and is absent in the two hard-truncated
+  cap-512 records (`length`, no answer line) and in the gold-yes control that stopped naturally at
+  1205. Every one of the seven pinned ladder
   records stopped 492 tokens below its requested cap; that reserve is reported as an explicitly
   post-hoc column (`summary.json.stop_offsets`, `registered: false`, added after the tier rule was
   frozen, gate blob and `gate.json` byte-unchanged by it, selftest controls planted for it) and no

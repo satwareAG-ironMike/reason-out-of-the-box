@@ -95,7 +95,7 @@ them; the health probe reports the same two fields.
 | C7 duplicate re-dispatch byte-identical (issue #100) | 1 of 1 | 0 of 1 | fail |
 | C8 same-prompt cross-firing vs round 51 | 2 of 2 | 1 of 2 | fail |
 | C9 off-hook marker anomalies | reported | 8 records | reported |
-| R1 coverage, R2 seed pairing, N1 census, H0 health | reported | reported | reported |
+| R1 traversal completeness, N1 census, H0 health | reported | reported | reported |
 
 Tier: **`no_serving_budget`** (the registered rule fired on its third branch: C1 0 of 6 <= 2 of 6
 and C5 0 of 2). Flag: `marker_not_locked_to_predicted_hook`.
