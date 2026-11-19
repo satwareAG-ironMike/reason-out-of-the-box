@@ -1,0 +1,757 @@
+{
+ "C1_name_pressure": {
+  "controls": [
+   "C64_over"
+  ],
+  "false_names_arm_B": 0,
+  "false_names_arm_C": 0,
+  "false_names_arm_F": 0,
+  "false_names_arm_X": 0,
+  "turn1_declared_none": 0
+ },
+ "C2_foreign_draft": {
+  "arm_B_correct": 1,
+  "arm_B_seen": 3,
+  "arm_C_correct": 0,
+  "arm_C_delivered_foreign_tail": [],
+  "arm_C_seen": 3,
+  "arm_F_correct": 0,
+  "arm_F_seen": 3,
+  "arm_X_correct": 3,
+  "arm_X_seen": 3,
+  "discordant_C_only": [],
+  "discordant_X_only": [
+   "A48_j48",
+   "B50_j50",
+   "C64_j64"
+  ],
+  "evaluable_scope": 3,
+  "exact_two_sided_binomial_on_X_C_discordants": 0.25,
+  "lost_cells": [
+   "A48_j48",
+   "B50_j50",
+   "C64_j64"
+  ],
+  "n_lost_turn1": 3,
+  "paired_cells_X_vs_C": [
+   "A48_j48",
+   "B50_j50",
+   "C64_j64"
+  ],
+  "scope_cells": [
+   "A48_j48",
+   "B50_j50",
+   "C64_j64"
+  ],
+  "verdict": "own_content_selects"
+ },
+ "F1_filler_budget": {
+  "A48_j48": 880,
+  "B50_j50": 941,
+  "C64_j64": 767,
+  "C64_over": 846
+ },
+ "H1_answer_stability": {
+  "arm_B_kept": 0,
+  "arm_B_seen": 0,
+  "arm_C_kept": 0,
+  "arm_C_seen": 0,
+  "arm_F_kept": 0,
+  "arm_F_seen": 0,
+  "arm_X_kept": 0,
+  "arm_X_seen": 0,
+  "held_cells": [],
+  "n_held": 0
+ },
+ "M4_matched_pair": {
+  "A48_j48": {
+   "completion_tokens": 2048,
+   "delivery_state": "censored_at_cap",
+   "prompt_sha256": "baabc3462652878f"
+  },
+  "B50_j50": {
+   "completion_tokens": 2048,
+   "delivery_state": "censored_at_cap",
+   "prompt_sha256": "c15a68eb63cc4744"
+  },
+  "C64_j64": {
+   "completion_tokens": 2048,
+   "delivery_state": "censored_at_cap",
+   "prompt_sha256": "c1ef6c20bfd84e2f"
+  }
+ },
+ "P1_prompt_tokens_parity": {
+  "band": 400,
+  "cells": {
+   "A48_j48": {
+    "cell_matched": false,
+    "notes_spread": 1168,
+    "prompt_tokens": {
+     "B": 994,
+     "C": 2743,
+     "F": 1883,
+     "X": 3051
+    }
+   },
+   "B50_j50": {
+    "cell_matched": false,
+    "notes_spread": 1107,
+    "prompt_tokens": {
+     "B": 1020,
+     "C": 2879,
+     "F": 1970,
+     "X": 3077
+    }
+   },
+   "C64_j64": {
+    "cell_matched": false,
+    "notes_spread": 1281,
+    "prompt_tokens": {
+     "B": 1297,
+     "C": 2943,
+     "F": 2073,
+     "X": 3354
+    }
+   },
+   "C64_over": {
+    "cell_matched": false,
+    "notes_spread": 1202,
+    "prompt_tokens": {
+     "B": 1297,
+     "C": 3108,
+     "F": 2152,
+     "X": 3354
+    }
+   }
+  },
+  "cells_armed": 4,
+  "cells_matched": 0,
+  "context_matched": false
+ },
+ "R2_cross_ask": {
+  "arm_B_correct": 1,
+  "arm_B_seen": 3,
+  "arm_F_correct": 0,
+  "arm_F_seen": 3,
+  "arm_X_correct": 3,
+  "arm_X_seen": 3,
+  "discordant_F_only": [],
+  "discordant_X_only": [
+   "A48_j48",
+   "B50_j50",
+   "C64_j64"
+  ],
+  "evaluable_scope": 3,
+  "exact_two_sided_binomial_on_X_F_discordants": 0.25,
+  "paired_cells_X_vs_F": [
+   "A48_j48",
+   "B50_j50",
+   "C64_j64"
+  ],
+  "scope_cells": [
+   "A48_j48",
+   "B50_j50",
+   "C64_j64"
+  ],
+  "verdict": "cross_ask_gated"
+ },
+ "S1_delivery_census": {
+  "censored_at_cap": 16,
+  "delivered_correct": 5
+ },
+ "W2_wall_law_counts": {
+  "L3_cap_bound": 16
+ },
+ "X2_tail_shortcut": {
+  "arm_X_delivered_is_draft_tail": [
+   false,
+   false,
+   false
+  ],
+  "verdict": "selection_beyond_tail"
+ },
+ "gold_in_trace_census": {
+  "false": 0,
+  "n_a_none_gold": 5,
+  "true": 16
+ },
+ "interior_gold_in_trace_census": {
+  "false": 0,
+  "true": 4
+ },
+ "model_digest": "26df9af5972ff312",
+ "per_record": [
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "t1",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": null,
+   "finish": "length",
+   "foreign_block_contains_gold": null,
+   "foreign_tokens": null,
+   "gold": "spog",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": true,
+   "j": 48,
+   "label": "A48_j48",
+   "prompt_tokens": 932,
+   "reserve": 0,
+   "tok_per_s": 98.108,
+   "tokens": 2048,
+   "trace_chars": 5357,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "t1",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": null,
+   "finish": "length",
+   "foreign_block_contains_gold": null,
+   "foreign_tokens": null,
+   "gold": "prish",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": true,
+   "j": 50,
+   "label": "B50_j50",
+   "prompt_tokens": 958,
+   "reserve": 0,
+   "tok_per_s": 92.977,
+   "tokens": 2048,
+   "trace_chars": 5381,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "t1",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": null,
+   "finish": "length",
+   "foreign_block_contains_gold": null,
+   "foreign_tokens": null,
+   "gold": "brelt",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": true,
+   "j": 64,
+   "label": "C64_j64",
+   "prompt_tokens": 1234,
+   "reserve": 0,
+   "tok_per_s": 112.379,
+   "tokens": 2048,
+   "trace_chars": 5504,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "t1",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": null,
+   "finish": "length",
+   "foreign_block_contains_gold": null,
+   "foreign_tokens": null,
+   "gold": "NONE",
+   "gold_in_trace": null,
+   "interior_gold_in_trace": null,
+   "j": 72,
+   "label": "C64_over",
+   "prompt_tokens": 1234,
+   "reserve": 0,
+   "tok_per_s": 95.705,
+   "tokens": 2048,
+   "trace_chars": 5735,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "t1",
+   "correct": true,
+   "declared": "trackst",
+   "delivery_state": "delivered_correct",
+   "donor_item": null,
+   "filler_tokens": null,
+   "finish": "stop",
+   "foreign_block_contains_gold": null,
+   "foreign_tokens": null,
+   "gold": "trackst",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": true,
+   "j": 8,
+   "label": "A48_j8",
+   "prompt_tokens": 930,
+   "reserve": 872,
+   "tok_per_s": 83.268,
+   "tokens": 1176,
+   "trace_chars": 3474,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": false,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": true,
+   "arm": "X",
+   "correct": true,
+   "declared": "knudnd",
+   "delivery_state": "delivered_correct",
+   "donor_item": null,
+   "filler_tokens": 0,
+   "finish": "stop",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "knudnd",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "A48_j48_X",
+   "prompt_tokens": 3051,
+   "reserve": 1781,
+   "tok_per_s": 66.501,
+   "tokens": 267,
+   "trace_chars": 586,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": false,
+   "answer_is_notes_tail": null,
+   "arm": "C",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": "B50",
+   "filler_tokens": 0,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 880,
+   "gold": "knudnd",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "A48_j48_C",
+   "prompt_tokens": 2743,
+   "reserve": 0,
+   "tok_per_s": 90.26,
+   "tokens": 2048,
+   "trace_chars": 5765,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "F",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": 880,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "knudnd",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "A48_j48_F",
+   "prompt_tokens": 1883,
+   "reserve": 0,
+   "tok_per_s": 103.712,
+   "tokens": 2048,
+   "trace_chars": 5778,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "B",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": 0,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "knudnd",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "A48_j48_B",
+   "prompt_tokens": 994,
+   "reserve": 0,
+   "tok_per_s": 99.674,
+   "tokens": 2048,
+   "trace_chars": 6162,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": false,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": true,
+   "arm": "X",
+   "correct": true,
+   "declared": "clog",
+   "delivery_state": "delivered_correct",
+   "donor_item": null,
+   "filler_tokens": 0,
+   "finish": "stop",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "clog",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "B50_j50_X",
+   "prompt_tokens": 3077,
+   "reserve": 1777,
+   "tok_per_s": 62.775,
+   "tokens": 271,
+   "trace_chars": 591,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": false,
+   "answer_is_notes_tail": null,
+   "arm": "C",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": "C64",
+   "filler_tokens": 0,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 767,
+   "gold": "clog",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "B50_j50_C",
+   "prompt_tokens": 2879,
+   "reserve": 0,
+   "tok_per_s": 97.757,
+   "tokens": 2048,
+   "trace_chars": 5757,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "F",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": 941,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "clog",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "B50_j50_F",
+   "prompt_tokens": 1970,
+   "reserve": 0,
+   "tok_per_s": 75.427,
+   "tokens": 2048,
+   "trace_chars": 5376,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "B",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": 0,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "clog",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "B50_j50_B",
+   "prompt_tokens": 1020,
+   "reserve": 0,
+   "tok_per_s": 99.302,
+   "tokens": 2048,
+   "trace_chars": 5510,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": false,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": true,
+   "arm": "X",
+   "correct": true,
+   "declared": "frixm",
+   "delivery_state": "delivered_correct",
+   "donor_item": null,
+   "filler_tokens": 0,
+   "finish": "stop",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "frixm",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "C64_j64_X",
+   "prompt_tokens": 3354,
+   "reserve": 1356,
+   "tok_per_s": 83.585,
+   "tokens": 692,
+   "trace_chars": 1730,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": false,
+   "answer_is_notes_tail": null,
+   "arm": "C",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": "A48",
+   "filler_tokens": 0,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 767,
+   "gold": "frixm",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "C64_j64_C",
+   "prompt_tokens": 2943,
+   "reserve": 0,
+   "tok_per_s": 102.847,
+   "tokens": 2048,
+   "trace_chars": 5568,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "F",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": 767,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "frixm",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "C64_j64_F",
+   "prompt_tokens": 2073,
+   "reserve": 0,
+   "tok_per_s": 82.537,
+   "tokens": 2048,
+   "trace_chars": 5206,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "B",
+   "correct": true,
+   "declared": "frixm",
+   "delivery_state": "delivered_correct",
+   "donor_item": null,
+   "filler_tokens": 0,
+   "finish": "stop",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "frixm",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "C64_j64_B",
+   "prompt_tokens": 1297,
+   "reserve": 83,
+   "tok_per_s": 89.253,
+   "tokens": 1965,
+   "trace_chars": 5708,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": false,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": false,
+   "arm": "X",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": 0,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "NONE",
+   "gold_in_trace": null,
+   "interior_gold_in_trace": null,
+   "j": 72,
+   "label": "C64_over_X",
+   "prompt_tokens": 3354,
+   "reserve": 0,
+   "tok_per_s": 61.096,
+   "tokens": 2048,
+   "trace_chars": 5294,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": false,
+   "answer_is_notes_tail": null,
+   "arm": "C",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": "A48",
+   "filler_tokens": 0,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 846,
+   "gold": "NONE",
+   "gold_in_trace": null,
+   "interior_gold_in_trace": null,
+   "j": 72,
+   "label": "C64_over_C",
+   "prompt_tokens": 3108,
+   "reserve": 0,
+   "tok_per_s": 91.839,
+   "tokens": 2048,
+   "trace_chars": 5491,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "F",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": 846,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "NONE",
+   "gold_in_trace": null,
+   "interior_gold_in_trace": null,
+   "j": 72,
+   "label": "C64_over_F",
+   "prompt_tokens": 2152,
+   "reserve": 0,
+   "tok_per_s": 131.4,
+   "tokens": 2048,
+   "trace_chars": 5477,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_foreign_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "B",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "donor_item": null,
+   "filler_tokens": 0,
+   "finish": "length",
+   "foreign_block_contains_gold": false,
+   "foreign_tokens": 0,
+   "gold": "NONE",
+   "gold_in_trace": null,
+   "interior_gold_in_trace": null,
+   "j": 72,
+   "label": "C64_over_B",
+   "prompt_tokens": 1297,
+   "reserve": 0,
+   "tok_per_s": 23.535,
+   "tokens": 2048,
+   "trace_chars": 5786,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  }
+ ],
+ "prompts_dispatched": 21,
+ "trace_exposure": {
+  "fields": [
+   "audio",
+   "content",
+   "function_call",
+   "reasoning",
+   "refusal",
+   "role"
+  ],
+  "records_with_trace": 21,
+  "supplying_field": [
+   "reasoning"
+  ]
+ }
+}
