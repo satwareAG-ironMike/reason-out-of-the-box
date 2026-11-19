@@ -1,0 +1,648 @@
+{
+  "criteria": {
+    "C1": {
+      "correct": 12,
+      "delivered": 12,
+      "false_names": [],
+      "n_rows": 18,
+      "pass": false
+    },
+    "C2": {
+      "admissible": true,
+      "censored_non_deliveries": [
+        "L32A_offend",
+        "L48_offend",
+        "L64_offend"
+      ],
+      "delivered": 3,
+      "delivery_rate": 0.5,
+      "false_names": [],
+      "n": 6,
+      "pass": true
+    },
+    "C3": {
+      "input_load_wall": {
+        "agreements": 8,
+        "disagreements": [
+          {
+            "label": "L32A_j24",
+            "observed": "censored",
+            "predicted": "delivered"
+          },
+          {
+            "label": "L48_j8",
+            "observed": "delivered",
+            "predicted": "censored"
+          },
+          {
+            "label": "L48_j16",
+            "observed": "delivered",
+            "predicted": "censored"
+          },
+          {
+            "label": "L48_j24",
+            "observed": "delivered",
+            "predicted": "censored"
+          },
+          {
+            "label": "L64_j8",
+            "observed": "delivered",
+            "predicted": "censored"
+          },
+          {
+            "label": "L64_j16",
+            "observed": "delivered",
+            "predicted": "censored"
+          },
+          {
+            "label": "L64_j24",
+            "observed": "delivered",
+            "predicted": "censored"
+          },
+          {
+            "label": "L64_j32",
+            "observed": "delivered",
+            "predicted": "censored"
+          }
+        ],
+        "n": 16
+      },
+      "load_depth_product": {
+        "agreements": 13,
+        "disagreements": [
+          {
+            "label": "L32A_j24",
+            "observed": "censored",
+            "predicted": "delivered"
+          },
+          {
+            "label": "L64_j24",
+            "observed": "delivered",
+            "predicted": "censored"
+          },
+          {
+            "label": "L64_j32",
+            "observed": "delivered",
+            "predicted": "censored"
+          }
+        ],
+        "n": 16
+      },
+      "step40_wall": {
+        "agreements": 14,
+        "disagreements": [
+          {
+            "label": "L32A_j24",
+            "observed": "censored",
+            "predicted": "delivered"
+          },
+          {
+            "label": "L48_j32",
+            "observed": "censored",
+            "predicted": "delivered"
+          }
+        ],
+        "n": 16
+      },
+      "step_count_wall": {
+        "agreements": 13,
+        "disagreements": [
+          {
+            "label": "L32A_j24",
+            "observed": "censored",
+            "predicted": "delivered"
+          },
+          {
+            "label": "L32A_j32",
+            "observed": "delivered",
+            "predicted": "censored"
+          },
+          {
+            "label": "L64_j32",
+            "observed": "delivered",
+            "predicted": "censored"
+          }
+        ],
+        "n": 16
+      }
+    },
+    "C4": {
+      "observed": {
+        "L32A_j32": {
+          "j": 32,
+          "n_facts": 64,
+          "observed": "delivered",
+          "predicted": {
+            "input_load_wall": "delivered",
+            "load_depth_product": "delivered",
+            "step40_wall": "delivered",
+            "step_count_wall": "censored"
+          },
+          "product": 2048
+        },
+        "L48_j16": {
+          "j": 16,
+          "n_facts": 96,
+          "observed": "delivered",
+          "predicted": {
+            "input_load_wall": "censored",
+            "load_depth_product": "delivered",
+            "step40_wall": "delivered",
+            "step_count_wall": "delivered"
+          },
+          "product": 1536
+        },
+        "L48_j24": {
+          "j": 24,
+          "n_facts": 96,
+          "observed": "delivered",
+          "predicted": {
+            "input_load_wall": "censored",
+            "load_depth_product": "delivered",
+            "step40_wall": "delivered",
+            "step_count_wall": "delivered"
+          },
+          "product": 2304
+        },
+        "L48_j32": {
+          "j": 32,
+          "n_facts": 96,
+          "observed": "censored",
+          "predicted": {
+            "input_load_wall": "censored",
+            "load_depth_product": "censored",
+            "step40_wall": "delivered",
+            "step_count_wall": "censored"
+          },
+          "product": 3072
+        },
+        "L48_j8": {
+          "j": 8,
+          "n_facts": 96,
+          "observed": "delivered",
+          "predicted": {
+            "input_load_wall": "censored",
+            "load_depth_product": "delivered",
+            "step40_wall": "delivered",
+            "step_count_wall": "delivered"
+          },
+          "product": 768
+        },
+        "L64_j16": {
+          "j": 16,
+          "n_facts": 128,
+          "observed": "delivered",
+          "predicted": {
+            "input_load_wall": "censored",
+            "load_depth_product": "delivered",
+            "step40_wall": "delivered",
+            "step_count_wall": "delivered"
+          },
+          "product": 2048
+        },
+        "L64_j24": {
+          "j": 24,
+          "n_facts": 128,
+          "observed": "delivered",
+          "predicted": {
+            "input_load_wall": "censored",
+            "load_depth_product": "censored",
+            "step40_wall": "delivered",
+            "step_count_wall": "delivered"
+          },
+          "product": 3072
+        },
+        "L64_j32": {
+          "j": 32,
+          "n_facts": 128,
+          "observed": "delivered",
+          "predicted": {
+            "input_load_wall": "censored",
+            "load_depth_product": "censored",
+            "step40_wall": "delivered",
+            "step_count_wall": "censored"
+          },
+          "product": 4096
+        },
+        "L64_j8": {
+          "j": 8,
+          "n_facts": 128,
+          "observed": "delivered",
+          "predicted": {
+            "input_load_wall": "censored",
+            "load_depth_product": "delivered",
+            "step40_wall": "delivered",
+            "step_count_wall": "delivered"
+          },
+          "product": 1024
+        }
+      },
+      "registered_cells": [
+        "L32A_j32",
+        "L48_j16",
+        "L48_j24",
+        "L48_j32",
+        "L48_j8",
+        "L64_j16",
+        "L64_j24",
+        "L64_j32",
+        "L64_j8"
+      ],
+      "undispatched": []
+    },
+    "C5": {
+      "lineage_certified": true,
+      "lineage_digest16": "068bc6a1fb0620fb",
+      "lineage_seed": 116261051,
+      "n": 13,
+      "name_reproduced": 12,
+      "rows": [
+        {
+          "archived_declared": "stacklt",
+          "archived_tokens": 441,
+          "label": "L16_j8",
+          "name_reproduces": true,
+          "observed_declared": "stacklt",
+          "observed_tokens": 438,
+          "state_reproduces": true,
+          "token_delta": -3
+        },
+        {
+          "archived_declared": "brond",
+          "archived_tokens": 529,
+          "label": "L16_j16",
+          "name_reproduces": true,
+          "observed_declared": "brond",
+          "observed_tokens": 526,
+          "state_reproduces": true,
+          "token_delta": -3
+        },
+        {
+          "archived_declared": "NONE",
+          "archived_tokens": 974,
+          "label": "L16_offend",
+          "name_reproduces": true,
+          "observed_declared": "NONE",
+          "observed_tokens": 794,
+          "state_reproduces": true,
+          "token_delta": -180
+        },
+        {
+          "archived_declared": "thrend",
+          "archived_tokens": 528,
+          "label": "L32A_j8",
+          "name_reproduces": true,
+          "observed_declared": "thrend",
+          "observed_tokens": 793,
+          "state_reproduces": true,
+          "token_delta": 265
+        },
+        {
+          "archived_declared": "crux",
+          "archived_tokens": 437,
+          "label": "L32A_j16",
+          "name_reproduces": true,
+          "observed_declared": "crux",
+          "observed_tokens": 1024,
+          "state_reproduces": true,
+          "token_delta": 587
+        },
+        {
+          "archived_declared": "vixx",
+          "archived_tokens": 1285,
+          "label": "L32A_j24",
+          "name_reproduces": false,
+          "observed_declared": null,
+          "observed_tokens": 2048,
+          "state_reproduces": false,
+          "token_delta": 763
+        },
+        {
+          "archived_declared": "sterk",
+          "archived_tokens": 951,
+          "label": "L32A_j32",
+          "name_reproduces": true,
+          "observed_declared": "sterk",
+          "observed_tokens": 1121,
+          "state_reproduces": true,
+          "token_delta": 170
+        },
+        {
+          "archived_declared": null,
+          "archived_tokens": 2048,
+          "label": "L32A_offend",
+          "name_reproduces": true,
+          "observed_declared": null,
+          "observed_tokens": 2048,
+          "state_reproduces": true,
+          "token_delta": 0
+        },
+        {
+          "archived_declared": "NONE",
+          "archived_tokens": 204,
+          "label": "L32A_deadend",
+          "name_reproduces": true,
+          "observed_declared": "NONE",
+          "observed_tokens": 741,
+          "state_reproduces": true,
+          "token_delta": 537
+        },
+        {
+          "archived_declared": "trackst",
+          "archived_tokens": 1096,
+          "label": "L48_j8",
+          "name_reproduces": true,
+          "observed_declared": "trackst",
+          "observed_tokens": 365,
+          "state_reproduces": true,
+          "token_delta": -731
+        },
+        {
+          "archived_declared": "flixm",
+          "archived_tokens": 883,
+          "label": "L48_j16",
+          "name_reproduces": true,
+          "observed_declared": "flixm",
+          "observed_tokens": 1003,
+          "state_reproduces": true,
+          "token_delta": 120
+        },
+        {
+          "archived_declared": null,
+          "archived_tokens": 2048,
+          "label": "L48_j32",
+          "name_reproduces": true,
+          "observed_declared": null,
+          "observed_tokens": 2048,
+          "state_reproduces": true,
+          "token_delta": 0
+        },
+        {
+          "archived_declared": null,
+          "archived_tokens": 2048,
+          "label": "L48_offend",
+          "name_reproduces": true,
+          "observed_declared": null,
+          "observed_tokens": 2048,
+          "state_reproduces": true,
+          "token_delta": 0
+        }
+      ],
+      "state_reproduced": 12
+    },
+    "C6": {
+      "name_agreement": 2,
+      "pairs": [
+        {
+          "name_agrees": true,
+          "pair": [
+            "L48_j40",
+            "L48_j40_dup"
+          ],
+          "tokens": [
+            2048,
+            2048
+          ],
+          "tokens_agree": true
+        },
+        {
+          "name_agrees": true,
+          "pair": [
+            "L64_j40",
+            "L64_j40_dup"
+          ],
+          "tokens": [
+            2048,
+            2048
+          ],
+          "tokens_agree": true
+        }
+      ],
+      "pass": true
+    },
+    "C7": {
+      "admissible": false,
+      "gap": 0.0,
+      "gold_rate": 1.0,
+      "n": 4,
+      "pass": false,
+      "pseudo_rate": 1.0
+    },
+    "C8": {
+      "censused": 25,
+      "n": 25,
+      "pass": true,
+      "reasoning_open": 25
+    },
+    "H1": {
+      "n": 1,
+      "non_delivered": 1,
+      "pass": true
+    },
+    "X1": {
+      "name_agreement": 2,
+      "note": "post-hoc same-class column against the parallel killed round-56 firing (untracked archive, disclosed); exposure stated on both sides; no verdict reads it",
+      "registered": false,
+      "rows": [
+        {
+          "archived": {
+            "build": "86d6f3507f8725bf",
+            "declared": "sterk",
+            "finish": "stop",
+            "reasoning_field": "reasoning_content",
+            "tokens": 1283
+          },
+          "label": "L32A_j32",
+          "name_agrees": true,
+          "observed": {
+            "build": "e3b0c44298fc1c14",
+            "declared": "sterk",
+            "finish": "stop",
+            "reasoning_field": "reasoning",
+            "tokens": 1121
+          },
+          "state_agrees": true
+        },
+        {
+          "archived": {
+            "build": "86d6f3507f8725bf",
+            "declared": "flixm",
+            "finish": "stop",
+            "reasoning_field": "reasoning_content",
+            "tokens": 1325
+          },
+          "label": "L48_j16",
+          "name_agrees": true,
+          "observed": {
+            "build": "e3b0c44298fc1c14",
+            "declared": "flixm",
+            "finish": "stop",
+            "reasoning_field": "reasoning",
+            "tokens": 1003
+          },
+          "state_agrees": true
+        },
+        {
+          "archived": {
+            "build": "86d6f3507f8725bf",
+            "declared": "whesh",
+            "finish": "stop",
+            "reasoning_field": "reasoning_content",
+            "tokens": 1636
+          },
+          "label": "L48_j32",
+          "name_agrees": false,
+          "observed": {
+            "build": "e3b0c44298fc1c14",
+            "declared": null,
+            "finish": "length",
+            "reasoning_field": "reasoning",
+            "tokens": 2048
+          },
+          "state_agrees": false
+        }
+      ],
+      "state_agreement": 2
+    }
+  },
+  "dispatch": {
+    "anchor_certification": {
+      "archived_model_digest": "4075b5949b2b0487",
+      "build_model_digest": "26df9af5972ff312",
+      "certified": 13,
+      "lineage_digest16": "068bc6a1fb0620fb",
+      "lineage_seed": 116261051,
+      "of": 13
+    },
+    "calibration_calls": 1,
+    "call_cap": 40,
+    "dispatched": 25,
+    "not_dispatched": [],
+    "planned": 25,
+    "retries_used": 0,
+    "wall_s": 364.198
+  },
+  "flags": [
+    "control_censored_reported_not_gated",
+    "trace_provenance_refused"
+  ],
+  "tier": "step40_wall",
+  "token_surface": {
+    "note": "post-hoc column: the completion-token surface is reported for the next round's cost law and no verdict here reads it",
+    "registered": false,
+    "rows": [
+      {
+        "completion_tokens": 438,
+        "delivered": true,
+        "j": 8,
+        "label": "L16_j8",
+        "n_facts": 32
+      },
+      {
+        "completion_tokens": 526,
+        "delivered": true,
+        "j": 16,
+        "label": "L16_j16",
+        "n_facts": 32
+      },
+      {
+        "completion_tokens": 793,
+        "delivered": true,
+        "j": 8,
+        "label": "L32A_j8",
+        "n_facts": 64
+      },
+      {
+        "completion_tokens": 1024,
+        "delivered": true,
+        "j": 16,
+        "label": "L32A_j16",
+        "n_facts": 64
+      },
+      {
+        "completion_tokens": 2048,
+        "delivered": false,
+        "j": 24,
+        "label": "L32A_j24",
+        "n_facts": 64
+      },
+      {
+        "completion_tokens": 1121,
+        "delivered": true,
+        "j": 32,
+        "label": "L32A_j32",
+        "n_facts": 64
+      },
+      {
+        "completion_tokens": 365,
+        "delivered": true,
+        "j": 8,
+        "label": "L48_j8",
+        "n_facts": 96
+      },
+      {
+        "completion_tokens": 1003,
+        "delivered": true,
+        "j": 16,
+        "label": "L48_j16",
+        "n_facts": 96
+      },
+      {
+        "completion_tokens": 1816,
+        "delivered": true,
+        "j": 24,
+        "label": "L48_j24",
+        "n_facts": 96
+      },
+      {
+        "completion_tokens": 2048,
+        "delivered": false,
+        "j": 32,
+        "label": "L48_j32",
+        "n_facts": 96
+      },
+      {
+        "completion_tokens": 2048,
+        "delivered": false,
+        "j": 40,
+        "label": "L48_j40",
+        "n_facts": 96
+      },
+      {
+        "completion_tokens": 1423,
+        "delivered": true,
+        "j": 8,
+        "label": "L64_j8",
+        "n_facts": 128
+      },
+      {
+        "completion_tokens": 1156,
+        "delivered": true,
+        "j": 16,
+        "label": "L64_j16",
+        "n_facts": 128
+      },
+      {
+        "completion_tokens": 895,
+        "delivered": true,
+        "j": 24,
+        "label": "L64_j24",
+        "n_facts": 128
+      },
+      {
+        "completion_tokens": 1767,
+        "delivered": true,
+        "j": 32,
+        "label": "L64_j32",
+        "n_facts": 128
+      },
+      {
+        "completion_tokens": 2048,
+        "delivered": false,
+        "j": 40,
+        "label": "L64_j40",
+        "n_facts": 128
+      }
+    ]
+  }
+}
