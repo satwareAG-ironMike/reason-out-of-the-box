@@ -22,8 +22,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   correct here versus 0 of 2 on the reference firing) but the wall's mode is class-split (three of
   four censored at the 2,048 cap here against two delivered-wrong there); the 1,556-token pin is
   not reproduced (7 distinct delivered negative stops, none at 1,556); the issue #126
-  zero-truncation claim does not transfer to the ladder family on this class (6 of 6 gold-no at
-  k = 40/48 censored, positive arm 10 of 10 delivered); self-agreement at temperature 0 holds 2 of
+  zero-truncation claim does not transfer to the ladder family on this class (6 of 7 gold-no
+  records at k = 40/48 censored, 5 of 6 distinct items, positive arm 10 of 10 delivered); self-agreement at temperature 0 holds 2 of
   2 including the censored pair; the single cross-class discordance (McNemar b = 0, c = 1, p = 1.0
   over 12 delivered pairs) is the item the small class answered wrong. 73 selftest checks; the
   instrument's own summary-write crash post-dispatch is disclosed and rescored offline at zero

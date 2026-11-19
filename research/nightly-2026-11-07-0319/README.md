@@ -154,8 +154,8 @@ same pattern from below (336.0 yes vs 460.5 no).
 
 Issue #126 recorded a monotone collapse of the 2,048 truncation wall to zero on both classes
 across four firings, on the E = 192 knob panel. On the ladder family at the load floor the wall
-is back: 6 of 6 gold-no records at k = 40 and k = 48 (including one extra) are censored at the
-cap on this class, while the positive arm on the same firing delivers 10 of 10 with `stop`.
+is back: 6 of 7 gold-no records at k = 40 and k = 48 are censored at the cap on this class
+(5 of 6 distinct items; the seventh, the extra 116261303, delivered the correct no at 1,731), while the positive arm on the same firing delivers 10 of 10 with `stop`.
 The zero-truncation statement holds for the panel it was measured on and for the reference
 firing's ladder run, and does not generalize to this class on this family: the cap binds on
 exactly one label, which is what the `wall_is_label_split` flag now records for the family.
@@ -193,8 +193,9 @@ blob `0b0e8d77`) was not modified to fit anything.
 
 ## Limits
 
-- 2 items per cell (4 on the k = 48 cross-path arm including extras); one delivery flips the
-  P1 boundary, and the tier rests on 3 of 4 censored versus 0 of 2 wrong on the reference side.
+- 2 items per cell (4 on the k = 48 cross-path arm including extras); two further correct
+  deliveries flip the P1 boundary (band `>= 3 of 4`, measured 1 of 4), and the tier rests on
+  3 of 4 censored versus 2 of 2 delivered-and-wrong on the reference side.
 - One firing, one deployment (a 27B-class local endpoint, digest `86d6f3507f8725bf`), one
   class, temperature 0, concurrency 2. The reference side is a different class on a different
   firing (flash-next class, digest `c62b81e96826354e`): this is a cross-class comparison, not a
