@@ -5,6 +5,18 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-19
+
+#### Added
+
+- Void firing 2026-11-10 02:23 preserved (issue #150; refs #65, #149):
+  `research/nightly-2026-11-10-0223/` holds the one file that firing left, its probe instrument, plus
+  a README stating that it is void - no gate, no records, and `--selftest` fails on the script's own
+  registered-discriminator-set assertion, so the firing never reached its gate freeze. Preservation
+  with a keep-or-delete decision attached, not a result. The sanitizer selftest fixture was retarget
+  to a documentation-range address and a non-model path so the tracked-file guard passes; fixture
+  only, and the failure above predates it.
+
 ### 2026-11-06
 
 #### Added
