@@ -5,6 +5,19 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-20
+
+#### Changed
+
+- Trailer rule and `GATES.md` read against the public-only rule (issue #149, owner ruling
+  2026-11-19): the `Model:` commit trailer is now the public model name only - no provider or
+  model-id parenthetical and no quantization-tagged deployment label, because squash merges replay
+  trailer text onto `main` and the serving-id guard treats those label shapes as leaks in tracked
+  files; the five absolute maintainer-home paths in `GATES.md` (one `CHECK` command path and four
+  `EVIDENCE` `cwd=` fields) are redacted to `<unlazy-skill>` and `<repo-checkout>` placeholders.
+  No CI job changed - the guard-extension alternative stays optional; merged trailers on `main` are
+  not rewritten (linear history), the rule is forward-only.
+
 ### 2026-11-06
 
 #### Added
