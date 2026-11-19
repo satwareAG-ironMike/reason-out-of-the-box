@@ -5,6 +5,25 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-19
+
+#### Added
+
+- Stranded nightly round 58 landed (issue #150; serves #71, #126, #129, #94, #100, #105; refs #65,
+  #149): `research/nightly-2026-11-10-0401/` is the 2026-11-10 04:01 re-fire of the round-54 build -
+  the 27B-class step boundary sits at 40, not 32; the flash-class input-load and product laws are
+  refuted on this build; the (64, 24) and (96, 32) censored pockets split the class builds; the
+  trace-provenance row refuses itself for the third time in the name-arm family. 25 records, tier
+  `step40_wall`, flags `control_censored_reported_not_gated` and `trace_provenance_refused`, C8
+  census 25 of 25 on the `reasoning` channel. Landed `Executed` and exploratory with a landing note
+  disclosing three things: the `summary.json` here is the deterministic `--rescore` derivative from
+  the 2026-11-19 verification and the shipped bytes (same size, different sha256) were already
+  non-reproducible at field level; a duplicated `## Limits` block with a stale pending marker is
+  as-shipped from the session restart; and the instrument's sanitizer selftest fixture was retarget
+  to a documentation-range address and a non-model path, because the serving-id guard scans tracked
+  files and this tree had never met it. Fixture-only, 128 `--selftest` checks green, gate blob
+  `ff1df364dc84a2be`; `run.log` stays local.
+
 ### 2026-11-06
 
 #### Added
