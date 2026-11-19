@@ -107,7 +107,8 @@ therefore the depth this round could reach. Measuring instead item by item, with
 
 The pool is `25 * 9 * 12 = 2700` synthetic names and `ladders._entity` accepts at most 100
 rejection tries per name. An item with `C` chains needs `C*(k+1)` fresh names, so an item at
-`k = 49` with `C = 50` needs 2550 of the 2700 available names and the sampler dies on the last few
+`k = 49` with the largest possible draw `C = 51` needs 2550 of the 2700 available names
+(errata 2026-11-19, see Errata) and the sampler dies on the last few
 draws; the largest item that *did* generate at level 49 used 2500. The load-floor items need only
 `2*(k+1)` names and they keep appearing past the level where the whole-series call dies (5 at 49, 6
 at 50, 1 at 64 of the surviving 178).
@@ -168,7 +169,7 @@ and 48 for cross-path queries, and no `d*` delivery boundary was reached at all.
 Every one of the eight gold-no records stopped at exactly 1556 completion tokens - at `k = 24`, 32,
 40 and 48 alike - while the gold-yes arm grows with depth (718.5, 915.0, 1106.0, 1409.5; F4 slope
 28.3 tokens/hop, inside the registered band, between round 50's 31.3 at pinned load and round 6's
-80 at growing load). Their trace character counts differ (4201..4940), so this is not one cached
+80 at growing load). Their trace character counts differ (3902..4614, errata 2026-11-19, see Errata), so this is not one cached
 reply: it is the same *length* reached by different traversals.
 
 The cost consequence is measured per cell (F5): the negative arm costs 2.17x, 1.70x, 1.41x and
@@ -262,3 +263,20 @@ other than `60b0d62c165f8c2a225a4eeb499e456859c281c4d30b64855c6a4dc3bf247716`, a
 number in this README from the archived bytes. The endpoint variables are read from the runner
 environment and are never written into a file in this directory: artifacts carry
 `model_digest` only, and every stored response string passes the sanitizer.
+
+## Errata
+
+Forward-only errata under the `research/AGENTS.md` carve-out (issue #120): README prose corrected
+against bytes already in this directory, matching CHANGELOG entry, no re-dispatch, no gate change, no
+registered row moved. `raw.jsonl`, `summary.json` and `gate.json` are untouched. Filed as issue #135,
+re-derived from this directory on 2026-11-19.
+
+| Claim as published | Recomputed from the shipped bytes |
+|---|---|
+| "an item at `k = 49` with `C = 50` needs 2550 of the 2700 available names" | the figure 2550 is right, the label is not. `gate.json` `generator_ceiling.mechanism` draws `C` uniform in `2..level+2`, so the largest draw at level 49 is `C = 51` and `51 * (49 + 1) = 2550`; `C = 50` is `2500`, which is `gate.json` `past_ceiling_scans` `max_names` and the number the next sentence quotes for the largest item that did generate. One level down the same rule gives the registered `max_entities_at_max_level` `2450 = 50 * 49` |
+| "Their trace character counts differ (4201..4940)" | the eight gold-no records that stop at 1,556 completion tokens carry `trace_chars` 3902, 4119, 4335, 4500, 4525, 4530, 4538, 4614: the range is 3902..4614. 4201 is the `k = 48` gold-no arm mean (`summary.json` `grid_table[10].mean_trace_chars`), and 4940 appears nowhere in this directory |
+
+Neither correction moves a finding. Finding 3 rests on the traces differing in length while the stop
+is pinned at 1,556, and it does: the eight values above are distinct. The generator-ceiling raise rests
+on the last few draws at level 49 exceeding the 2,700-name pool, and that stands with the corrected
+`C`.

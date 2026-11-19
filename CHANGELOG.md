@@ -5,6 +5,22 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-19
+
+#### Fixed
+
+- Errata for the merged round-51 record (issue #135; refs #129, #126, #120): two prose figures in
+  `research/nightly-2026-11-06-0433/README.md` corrected against that round's own archived bytes, with
+  an Errata section added and the sentences marked in place. (1) The level-49 name budget named
+  `C = 50` for 2,550 names; the gate draws `C` uniform in `2..level+2`, so the largest draw at level 49
+  is `C = 51` and 51 x 50 = 2,550, while `C = 50` is 2,500 - the number `gate.json` records as
+  `max_names` and the README quotes for the largest item that did generate. (2) The gold-no trace
+  range in Finding 3 read 4201..4940; the eight records' `trace_chars` are 3902, 4119, 4335, 4500,
+  4525, 4530, 4538 and 4614, so the range is 3902..4614 - 4201 is the `k = 48` arm mean and 4940
+  appears nowhere in the directory. No re-dispatch, no gate change, no scored row moved;
+  `raw.jsonl`, `summary.json` and `gate.json` are byte-identical. Both statements had been named as
+  blocking on PR #130 on 2026-11-07 and reached `main` unchanged on 2026-11-08.
+
 ### 2026-11-06
 
 #### Added
@@ -85,7 +101,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   different deployments of one class and the digest width is now fixed at 16 for issue #100.
   Zero-prompt finding 1: the level-49 `entity pool exhausted` raise is a collision ceiling on item
   size and not on depth (pool 2700 names, `ladders._entity` at 100 rejection tries, an item at
-  level 49 with C = 50 needs 2550 names); item-by-item scans generate 285 of 300 at 49, 284 at 50
+  level 49 with the largest draw C = 51 needs 2550 names); item-by-item scans generate 285 of 300 at 49, 284 at 50
   and 178 at 64 and still find load-floor items (5, 6, 1), so `k > 48` is reachable on the floor
   family and the fix is generator-side - filed as a new issue against `generators/`. Cutoff
   disclosed: the firing lost its first hour to a transcription defect (the vendored round-50
