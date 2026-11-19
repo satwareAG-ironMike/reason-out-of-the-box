@@ -54,7 +54,7 @@ are in [docs/counterarguments.md](docs/counterarguments.md).
 | `docs/claims-hinton-lemoine.md` | Claim ledger: Hinton "AI thinks" and Lemoine/LaMDA, judged against 2026 evidence |
 | `docs/claims-marcus-wall.md` | Claim ledger: Marcus "Deep Learning Is Hitting a Wall" (2022), judged against evidence through 2026 |
 | `docs/claims-insect-sentience.md` | Claim ledger: insect sentience as a substrate threshold, judged against the round-16 evidence chain |
-| `docs/review-rounds/` | Round-level adversarial review records for the archive rounds and the nightly rounds |
+| `docs/review-rounds/` | Round-level adversarial review records: 3 archive rounds, 2 nightly rounds |
 | `generators/` | Condition-2 task generators (issue #4): digit matrices and k-hop ladders, solvability and seed policy, permutation-calibrated leak gate with pinned negative-control fixtures |
 | `runs/` | Executed-run record: manifests, raw per-prompt responses, calibration records, regeneration scripts, independent verification records, round report |
 | `research/` | Nightly round artifacts (issue #65): one directory per firing with script, prompts, raw responses and scores |
@@ -97,34 +97,22 @@ weight-editing line reads as loop-obstacle removal rather than a new general rea
 so it is no counterexample to the "from nothing" claim. The 2026-10-16 research finding records
 the first merged experimental record, the ladder family being budget-limited rather than
 depth-limited. Since 2026-10-16 the nightly research program (issue #65) has run to round 51
-(34 archived round records on main): the matched-pair traversal verdict replicates across
-depth and model class, and the ceilings observed so far are output-budget truncations, not
-wrong answers, except at the load floor, where round 51 found the wall as three wrong
-cross-path answers out of 16 delivered and bracketed the depth ceiling at 40 < d* <= 48.
-Rounds 42, 44 and 46 re-attribute the E = 192 cap-truncation: it is class-tied and
-firing-state dependent (11/11 truncations on the flash class's archive versus 1-2/11 on a
-27B class for the same 11 items), a surface output-policy artifact rather than a property of
-the task, and the rounds 44-49 truncation ledger (8/11, 2/11, 1/11, 0/11 across four firings)
-makes the wall a property of the serving build, so a truncated verdict must not be recorded
-as a depth limit; round 49 opened issue #126 because the archived panel's cap-bound
-selection premise no longer holds on the current builds. Round 50 added the load axis at
-matched input load: accuracy never turns over, only delivery does, tripled load costs
-nothing at k = 16 and three of four verdicts at k = 32, and round 6's 80-token-per-hop law
-was a depth-plus-load law. Two record-integrity rules bind every reading of that archive: a
-cross-class or cross-firing trace claim must state each side's trace exposure and is an
-answer-level claim against a zero-trace deployment (issue #105), and errata are
-forward-only, so a merged `raw.jsonl`, `summary.json` and `gate.json` stay immutable while
-round prose and CHANGELOG entries carry the annotation (issue #120, which annotated the
-retracted round-31 and round-37 statements and closed the 4 verified defect classes of
-issue #113). The remaining gap is experimental, not bibliographic, and the open
-experimental problems are named on the board: the ladder depth ceiling d* (#71), the
-missing same-prompt self-agreement control (#100), the probe readout provenance (#94), the
-audited leak class not yet widened to relational features (#77), the stale cap-bound panel
-premise (#126) and the entity-pool ceiling as an item-size artifact, not a depth limit
-(#129). The thesis program (study design execution on open-data models) is tracked in the
+(34 archived round records on main): the matched-pair traversal verdict replicates across depth
+and model class, and the ceilings observed so far are output-budget truncations of the serving
+build rather than wrong answers or depth limits, except at the load floor, where round 51
+bracketed the depth ceiling at 40 < d* <= 48. The per-firing truncation ledgers and the
+round-by-round narrative are in [CHANGELOG.md](CHANGELOG.md). Two record-integrity rules bind
+every reading of that archive, the trace-exposure rule (issue #105) and the forward-only errata
+rule over immutable raw records (issue #120), both operative in
+[research/AGENTS.md](research/AGENTS.md). The remaining gap is experimental, not bibliographic,
+and the open problems are named on the board: the ladder depth ceiling d* (#71), the missing
+same-prompt self-agreement control (#100), the probe readout provenance (#94), the audited leak
+class not yet widened to relational features (#77), the stale cap-bound panel premise (#126)
+and the entity-pool ceiling as an item-size artifact (#129). The thesis program (study design
+execution on open-data models) is tracked in the
 [issue board](https://github.com/satwareAG-ironMike/reason-out-of-the-box/issues) under
 milestones M1 (protocol freeze + pre-registration, 2026-09-30) to M5 (paper + public
-release, 2027-04-30); as of 2026-11-15 M1 (pre-registration #11, IRB path #7) and M2
+release, 2027-04-30); as of 2026-11-19 M1 (pre-registration #11, IRB path #7) and M2
 (pilot run #8) are past their due dates and still open, with the generator half of M2
 (issue #4) partly shipped; see [docs/next-investigations.md](docs/next-investigations.md).
 University students can join the thesis program: apply via bewerbung@satware.com or

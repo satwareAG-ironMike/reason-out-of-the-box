@@ -105,9 +105,9 @@ When the user requests a durable behavior change, record it here or in the relev
   markdown hygiene (em/en dashes, `scripts/check_links.py`), a full-history gitleaks secret
   scan, and a serving-id guard (`scripts/check_serving_ids.py`, endpoint host:port / GGUF file
   names / quantization-tagged deployment labels, issue #85). The first three are the
-  ruleset-required checks; the serving-id guard job (owner go 2026-11-04) runs on every push
-  and PR but is not in the ruleset's required list. The single action is SHA-pinned;
-  the workflow is read-only (`permissions: contents: read`)
+  ruleset-required checks; the serving-id guard job (owner go 2026-11-04) runs on every push to
+  `main`, and on every PR, but is not in the ruleset's required list. The single action is
+  SHA-pinned; the workflow is read-only (`permissions: contents: read`)
 - Local CI parity before pushing: `python3 scripts/check_archive.py --selftest && python3
   scripts/check_archive.py` then `python3 scripts/check_links.py --selftest && python3
   scripts/check_links.py` then `set +e; git grep -n -P "\x{2014}|\x{2013}" -- .; r=$?;
@@ -140,8 +140,7 @@ When the user requests a durable behavior change, record it here or in the relev
 |------|-------|------|
 | `archive/` | Paper archive: 141 entries, 19 thematic rounds, INDEX catalog and provenance standards | [AGENTS.md](archive/AGENTS.md) |
 | `generators/` | Condition-2 task generators (issue #4): digit matrices + ladders k-hop shipped; ladders mult_mult/dp_puzzle and ARC-style planned; seed policy, solvability and manifest contracts; permutation-calibrated leak gate, pinned issue #67 negative-control fixtures and the seed-paired shortcut probe (issue #67; a true matched pair is owed, issue #78) | [AGENTS.md](generators/AGENTS.md) |
-| `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), IRB protocol draft (issue #7), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall, insect-sentience threshold, round-level adversarial review records in review-rounds/); governed by root
-  rules | - |
+| `docs/` | Durable project documents (acceptance criteria, counterargument ledger with claim ladder C1-C5, study design, pre-registration package: analysis plan + registration skeleton + version-lock manifest (issue #11), IRB protocol draft (issue #7), agent-execution operating model + standards (issue #39), next investigations + thesis timeline, claim ledgers: Hinton-Lemoine, Marcus wall, insect-sentience threshold, round-level adversarial review records in review-rounds/); governed by root rules | - |
 | `runs/` | Executed-run record: per-round manifests, raw per-prompt responses, calibration records, regeneration and battery scripts, independent verification records, round reports; immutable manifests, public-only artifacts, Executed/Reproduced/Validated labels | [AGENTS.md](runs/AGENTS.md) |
 | `scripts/` | `check_archive.py` archive consistency checker, `check_links.py` markdown link checker and `check_serving_ids.py` endpoint serving-id guard (issue #85; stdlib, each with `--selftest`); run all three before any closeout | - |
 | `research/` | Nightly round artifacts (issue #65): per-firing directories with probe scripts, prompts, raw responses, scores, sanitization and evidence-label contracts, the trace-exposure census (issue #105) and the forward-only errata carve-out over immutable raw records (issue #120) | [AGENTS.md](research/AGENTS.md) |
