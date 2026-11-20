@@ -138,11 +138,16 @@ hashes, status, failure codes.
 
 ## 10. Open decisions (owner)
 
-1. **Human baseline**: (a) published-baseline mapping (least resources; check Webb et al.
-   released data for digit matrices, ARC human data, published human performance for the
-   ladder family) with a gap list; (b) minimal external collection (owner-operated; IRB
-   lead time and platform costs); (c) hybrid. Recommendation: (a) first, revisit after the
-   gap list. Tracked in #7.
+1. **Human baseline**: DECIDED 2026-09-14 (two-track, recorded on #7 and in
+   `docs/irb-protocol.md` "IRB path decision"): published human baselines are the
+   anchor (`docs/human-baseline.md`); the dedicated M4 collection (#13) runs under
+   institutional review only if a partner institution materializes before M4; the
+   protocol, consent form and task instructions stay submission-ready. Revisit at M4
+   kickoff (#13). The options below are the historical framing, kept for the record:
+   (a) published-baseline mapping (least resources; check Webb et al. released data
+   for digit matrices, ARC human data, published human performance for the ladder
+   family) with a gap list; (b) minimal external collection (owner-operated; IRB lead
+   time and platform costs); (c) hybrid. Recommendation then: (a) first.
 2. **Compute node naming** when pilot dates are set (private channel).
 3. **OSF / AsPredicted timing** (#11 checklist).
 
