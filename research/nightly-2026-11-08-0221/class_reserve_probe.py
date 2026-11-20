@@ -85,7 +85,6 @@ HOOK_BAND = 8                 # tokens: |measured - predicted| for a hook hit
 CAPS = (512, 1024, 1536, 2048)
 MARKER = "I have thought about this long enough; time to give my answer."
 LISTING_MAX = 4000            # integers the non-ladder control is asked to write
-LISTING_SMALL = 600           # the same control at a smaller extent (completable, so uncapped)
 RESERVE = 492                 # the constant reserve round 53 measured below every pinned cap
 
 ROUND51_RAW_SHA256 = "fbfa4fde59f43ea3f484b4205b5beff11d2add27e6c3f60e210ca092e3452f7a"
@@ -93,9 +92,12 @@ ROUND52_RAW_SHA256 = "6c1ca286bffd4421ea4aef0bb71aac50648f6591b2c950b1185ba4d989
 ROUND53_RAW_SHA256 = "d75ced46f51ece2ddf7413bf4331fe8618568d4e300965471486700657efc246"
 
 # Trace exposure quoted from each archive's own per-record census field (issue #105): the message
-# field names the endpoint supplied and the field that supplied the reasoning text. `text_stored` is
-# whether that directory keeps the reasoning text itself, which is what makes a marker count
-# evaluable there at all. All three of this round's archives store the reasoning text.
+# field names the endpoint supplied, the field that supplied the reasoning text, and whether that
+# archive records a marker count at all (round 52 stores the reasoning text but no marker count,
+# so its cross-firing stays an answer-level claim). `marker_quotable` and `reasoning_source` are
+# what the rules read (the exposure rule and the same-class-pair flag); `fields` and `text_stored`
+# are carried unchanged because this table is part of the registered gate blob, frozen in
+# gate.json before dispatch and not editable after it (issue #120).
 TRACE_EXPOSURE = {
     "round 51": {"fields": ("content", "reasoning_content"),
                  "reasoning_source": "reasoning_content", "text_stored": True,
@@ -941,12 +943,10 @@ def evaluate_gate(records: list, health: dict) -> dict:
             and TRACE_EXPOSURE["round 52"]["reasoning_source"]):
         flags.append("same_class_pair_exposed")
 
-    health_census = health.get("census") if isinstance(health.get("census"), dict) else {}
     health_row = {"id": "H0", "status": "pass" if health.get("ok") else "fail",
                   "measured": {"ok": health.get("ok"), "tokens": health.get("completion_tokens"),
                                "finish": health.get("finish_reason"),
-                               "reasoning_source": health.get("reasoning_source")
-                               or health_census.get("reasoning_source"),
+                               "reasoning_source": health.get("reasoning_source"),
                                "wall_s": health.get("wall_s"), "error": health.get("error")}}
     return {"rows": rows, "tier": tier, "tier_rule": spec["tier_rule"], "flags": flags,
             "health": health_row, "enumerate_detail": enum_detail, "cross_fire_detail": c8_detail,
@@ -1009,9 +1009,6 @@ def stop_offsets(records: list) -> dict:
             "note": "post-dispatch observation column, outside the registered gate blob; "
                     "no verdict of this round rests on it",
             "shape_flags": shape_flags,
-            "by_arm_and_cap": {arm: {str(c): sorted(v, key=lambda x: x["seed"] or 0)
-                                     for c, v in sorted(by_cap.items())}
-                               for arm, by_cap in sorted(per_arm.items())},
             "reserve_histogram": sorted(({"arms": sorted(d["arms"]), "marker_rows": d["marker_rows"],
                                           "reserve": d["reserve"], "rows": d["rows"]}
                                          for d in distinct.values()),
@@ -1097,17 +1094,16 @@ def score_record(job, resp, err, blob: str) -> dict:
     if arm in ("as_is", "enumerate"):
         item = item_by_seed(seed)
         rec["seed"] = item["seed"]
-        rec["seed_hash"] = hashlib.sha256(str(item["seed"]).encode()).hexdigest()[:16]
+        rec["seed_hash"] = item["seed_hash"]
         rec["level"] = item["level"]
         rec["gold"] = item["answer"]
         rec["n_facts"] = len(item["facts"])
-        rec["n_chains"] = len(weak_components(item["facts"]))
     if resp is None:
         rec.update({"kind": "transport_error", "error": err, "completion_tokens": None,
                     "prompt_tokens": None, "finish_reason": None, "delivered": False,
                     "declared": None, "declared_source": "none", "correct": None,
                     "marker_count": 0, "wall_s": None, "prompt_sha256": None,
-                    "prompt_tokens_chars": None, "census": None, "trace": "", "content": "",
+                    "prompt_chars": None, "census": None, "trace": "", "content": "",
                     "trace_chars": 0, "coverage_measures": None, "enumeration_measures": None,
                     "listing_measures": None, "marker_tails": []})
         return rec
@@ -1138,10 +1134,13 @@ def score_record(job, resp, err, blob: str) -> dict:
     if rec["gold"] is None:
         rec["correct"] = None
     if arm in ("as_is", "enumerate"):
-        item = item_by_seed(seed)
         rec["coverage_measures"] = coverage_measures(item, both)
-        vocab = entity_vocabulary(item)
-        listed = parse_listed_entities(both, vocab)
+    else:
+        rec["coverage_measures"] = None
+    if arm == "enumerate":
+        # the recovery measures belong to the enumerate arm only: C6 selects enumerate rows
+        # and nothing reads them for an as-is record.
+        listed = parse_listed_entities(both, entity_vocabulary(item))
         dist = bfs_reachable(item["facts"], item["query"][0])
         reachable = set(dist) | {item["query"][0]}
         extra = [e for e in listed if e not in reachable]
@@ -1149,13 +1148,11 @@ def score_record(job, resp, err, blob: str) -> dict:
         rec["enumeration_measures"] = {
             "listed_count": len(listed), "bfs_reachable_count": len(reachable),
             "extra_count": len(extra), "missing_count": len(missing),
-            "list_equals_bfs_reachable_set": (arm == "enumerate" and not extra
-                                              and not missing and len(listed) > 0),
+            "list_equals_bfs_reachable_set": not extra and not missing and len(listed) > 0,
             "query_target_listed": item["query"][2] in listed,
             "gold_says_target_reachable": rec["gold"] == "yes",
         }
     else:
-        rec["coverage_measures"] = None
         rec["enumeration_measures"] = None
     rec["listing_measures"] = measure_listing(both) if arm == "listing" else None
     rec["trace"] = sanitize(trace)
@@ -1282,13 +1279,12 @@ def run_dispatch(a, blob: str, raw_path: Path, summary_path: Path, health_path: 
             try:
                 res = call_endpoint(CENSUS_PROMPT, base, model, key, 256)
                 content, trace, finish, usage = channels_of(res["payload"])
+                census = census_of(res["payload"])
                 health = {"probe": "health", "ok": True, "wall_s": res["wall_s"],
-                          "census": sanitize(json.dumps(census_of(res["payload"]),
-                                                        sort_keys=True), secrets),
                           "completion_tokens": usage.get("completion_tokens"),
                           "finish_reason": finish,
-                          "census_fields": census_of(res["payload"])["fields"],
-                          "reasoning_source": census_of(res["payload"])["reasoning_source"],
+                          "census_fields": census["fields"],
+                          "reasoning_source": census["reasoning_source"],
                           "marker_in_health": len(marker_positions((trace or "") + content))}
             except RuntimeError as exc:
                 health = {"probe": "health", "ok": False, "error": sanitize(str(exc), secrets)}
@@ -1327,7 +1323,7 @@ def run_dispatch(a, blob: str, raw_path: Path, summary_path: Path, health_path: 
     gate = evaluate_gate(records, health)
     summary = summarize(records, gate, digest, blob)
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    (here_gate := Path(__file__).resolve().parent / "gate.json").write_text(
+    (Path(__file__).resolve().parent / "gate.json").write_text(
         json.dumps(gate_spec(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(f"tier {gate['tier']}; flags {gate['flags']}; calls used {summary['dispatch']['calls_used']}")
     return 0
@@ -1783,10 +1779,10 @@ def selftest() -> int:  # noqa: C901  (the certified control list)
           offsets["registered"] is False)
     check("the reserve column states that no verdict rests on it",
           "no verdict" in offsets["note"])
-    check("the reserve is the requested cap minus the completion tokens",
-          offsets["by_arm_and_cap"]["as_is"]["2048"][0]["reserve"] == 2048 - PIN_TOKENS
-          and offsets["by_arm_and_cap"]["as_is"]["512"][0]["reserve"] == 0)
     hist = {row["reserve"]: row for row in offsets["reserve_histogram"]}
+    check("the reserve is the requested cap minus the completion tokens",
+          hist[2048 - PIN_TOKENS]["arms"] == ["as_is"] and hist[2048 - PIN_TOKENS]["rows"] == 1
+          and hist[0]["arms"] == ["as_is"] and hist[0]["rows"] == 1)
     check("the reserve histogram separates the archived offset from a truncation",
           hist[2048 - PIN_TOKENS]["rows"] == 1 and hist[0]["rows"] == 1)
     check("only the marker row counts as marker-bearing",

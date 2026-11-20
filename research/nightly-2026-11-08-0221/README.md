@@ -32,17 +32,16 @@ C5 == 0 of 2; `unresolved` otherwise.
 ## Why this firing discharges two debts
 
 Round 53 (flash class, #131) re-fired the 1,556-token pin as a cap ladder and found none of its
-three registered shapes: the stops moved with neither the cap (1,044 at cap 1,536 where the
-proportional prediction was 1,167) nor a fixed fraction, and every one of its seven pinned ladder
-records stopped with 492 tokens of reserve below its requested cap. Round 52 (27B class, #132),
-the last 27B-class firing, showed the opposite shape on the same item family at the load floor:
-every censored record ran to the full 2,048 cap (reserve 0) with `finish_reason` `length`, and the
-1,556 pin never appeared. The two debts this firing discharges are: **(B)** the cap-ladder design,
+three registered shapes, and round 52 (27B class, #132), the last 27B-class firing, showed the
+opposite shape on the same item family at the load floor; `gate.json`
+`archived_reference.pin_signature` carries both archived shapes and the instrument docstring
+states them. The two debts this firing discharges are: **(B)** the cap-ladder design,
 and with it the 492-reserve shape, had so far been measured on one class only, so this
 byte-identical re-dispatch of round 53's prompts on a 27B-class deployment asks whether the
 reserve region travels with the class or is a property of the flash-class deployment; and **(A)**
-a second 27B-class firing of the certified k = 48 item set, which gives the 27B class its second
-same-class pair with the reasoning channel open on both sides (issue #105), read against round
+a second 27B-class firing of the certified k = 48 item set, which pairs this firing with round 52
+in a same-class pair with the reasoning channel open on both sides (issue #105; rounds 46 and 48
+already carry one such pair on main), read against round
 52's archived k = 48 records (gate row X1, answer-level only: round 52's archive stores the
 reasoning text but no marker count, so its cross-firing cannot be a marker claim).
 
@@ -65,8 +64,9 @@ matched rounds 51 and 53 byte for byte before dispatch: `068bc6a1fb0620fb`,
 call, issue #73), `temperature 0.0`, `max_tokens` at most 2048, dispatch budget 3,000 s (the 27B
 class is the slower of the two classes measured so far). The decisive same-prompt anchors, the
 duplicate control and the enumerate arm were dispatched first so a wall-clock cutoff would cost
-the low-cap rungs and not the replication. Dispatch took 237.36 s wall, 11,283 prompt tokens and
-20,044 completion tokens. No call was dropped, no arm timed out.
+the low-cap rungs and not the replication. The 14 scored calls took 237.36 s wall, 11,283 prompt
+tokens and 20,044 completion tokens (the health probe is not among them). No call was dropped,
+no arm timed out.
 
 ## What fired
 
@@ -118,14 +118,14 @@ list is `audio`, `content`, `function_call`, `reasoning`, `refusal`).
 
 Tier: **`absolute_pin`** (the registered rule fired on its second branch: C2 6 of 6 >= 5 of 6).
 Flag: `same_class_pair_exposed` (N1 complete with a non-empty reasoning source on every record,
-and round 52's archived source non-empty on all of its records: the 27B class now has a
+and round 52's archived source non-empty on all of its records: rounds 52 and 54 now form a
 same-class pair with the channel open on both sides).
 
 ## Reading
 
 1. **H2 is what the registered rule picked, and it picked it fully.** All six ladder records
    below the pin reached their requested cap with `finish_reason` `length`, no marker and no
-   answer line (1,536, 1,024 and 512 on both gold-no items, C2 6 of 6). On this 27B-class build
+   answer line. On this 27B-class build
    the output consumes the whole requested budget at every rung; the cap is the binding
    constraint, not a hook.
 2. **The reserve region does not travel to the class (H4, negative).** The post-hoc stop-offset
@@ -146,16 +146,13 @@ same-class pair with the channel open on both sides).
 
 ## The reserve column is post-hoc, and labelled as such
 
-`summary.json.stop_offsets` is not part of the registered gate blob: it reads only the frozen
-`raw.jsonl`, and `gate.json` and the gate blob are untouched by it (`gate.json`
+`summary.json.stop_offsets` reads only the frozen `raw.jsonl`; `gate.json` and the gate blob are
+untouched by it (`gate.json`
 `8a9859758e1b6e530b434678fa975023d2e808c955817b470ed6a84d9d455aa4`; `raw.jsonl`
 `041c8d6b18280abaa963141e18192583e7b85002e87f38ea132d49a214fb4689`). Its reserve histogram,
 emitted by the instrument: reserve 0 carries 12 rows (every censored record across all three
 arms), 250 the duplicate's 1,798 stop and 1,210 the gold-yes control. **No verdict of this round
-rests on that column**; the tier came from the registered rows alone. It is reported because it
-is the readout the H4 cross-class contrast was registered against, and it names the shape
-(`no_reserve_cap_bound`) the flash-class shape (`constant_reserve_below_cap`) failed to
-produce.
+rests on that column**; the tier came from the registered rows alone.
 
 ## Two side findings that did not need the ladder
 
@@ -191,7 +188,7 @@ the class differs, and the finish states do not reproduce (censored here). The c
 non-reproduction is the expected reading, not a defect: it is the control row against which the
 in-class reproduction of X1 is contrasted.
 
-## Archive provenance (disclosed, no verdict depends on it)
+## Archive provenance (disclosed)
 
 The pin and the cross-firing rows are quoted from three round directories that are open PRs, not
 on `main` yet: round 51 (`research/nightly-2026-11-06-0433`, #130), round 52
@@ -207,18 +204,19 @@ slip in either direction.
 
 ## Firing integrity
 
-All 15 planned calls ran inside the 3,000 s dispatch guard (dispatch wall 237.36 s): 14
-experiment records plus the health probe, `not_dispatched` empty, no arm timed out, and no
+All 15 planned calls ran inside the 3,000 s dispatch guard: the 14 scored experiment records
+(237.36 s wall over them) plus the health probe, `not_dispatched` empty, no arm timed out, and no
 runner abnormality followed. No arm is reported as a result other than what `raw.jsonl`
 carries. The local `run.log` stays out of the round directory by the round contract.
 
 ## Limits
 
-Executed only: one firing, one 27B-class build (a third 27B-class firing, a different build
-from round 52's), 14 experiment records, n = 2 items per cap band and n = 2 per arm, which is
-exploratory. The three archive quotes come from branches that are still unmerged, and this
+Executed only: one firing, one 27B-class build (a second k = 48 firing on the 27B class, after
+round 52, on a different build from round 52's), 14 experiment records, n = 2 items per cap band
+and n = 2 per arm: exploratory. The three archive quotes come from branches that are still
+unmerged, and this
 firing is itself in an open PR, so its own numbers are not yet main-carried evidence. The
-reserve observation is post-hoc and single-firing: it is one stop-offset column of one dispatch
+reserve observation is single-firing: it is one stop-offset column of one dispatch
 on one deployment, consistent with round 52's censored-at-cap shape but not a serving-stack
 measurement, and no stack-level mechanism was probed here. The registered tier names what the
 firing rules out (a cap-proportional budget and the flash-class reserve shape for the ladder
