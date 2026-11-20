@@ -653,7 +653,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   such pair on main, rounds 46 and 48); the gold-yes natural stop
   is 838 (round 52: 840, flash class: 1,310); the issue #100 duplicate control fails (the twin
   was censored at 2,048, the duplicate stopped at 1,798 and declared the correct gold label).
-=======
 
 ### 2026-11-07
 
