@@ -3,3 +3,10 @@ state-projection.json
 .unlazy/
 __pycache__/
 *.pyc
+# agent helper artifacts (issue #169: 2026-11-20 cascade; blanket-add guard)
+/cascade.log
+/merge-one.sh
+/wait-checks.sh
+/resolve_changelog.py
+/*.log
+
