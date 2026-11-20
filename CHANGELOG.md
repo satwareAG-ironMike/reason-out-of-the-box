@@ -585,6 +585,23 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ||||||| 90be10c
 ||||||| 2ea6ae1
+### 2026-11-19
+
+#### Added
+
+- Stranded nightly round 56 landed (issue #150; serves #71, #129, #94, #100, #105; refs #65):
+  `research/nightly-2026-11-09-0417/` is the 2026-11-09 04:17 firing that dispatched and scored but
+  never got a branch or a #65 summary - the first `k = 64` load-floor name-space panel, 19 records,
+  tier `name_space_ceiling_below_64`, flags `delivery_bound_loss` and `trace_provenance_refused`,
+  deep band 0 of 4 with 0 false names, 2 of 2 duplicate name agreement, trace exposed on all 19
+  records (`reasoning_content`). Landed as `Executed` and exploratory (4 cells per band), with a
+  landing note recording that `summary.json` here is the deterministic `--rescore` derivative from
+  the 2026-11-19 verification and that the shipped summary bytes were lost during that
+  verification. Instrument `name_depth_probe_r56.py` byte-unchanged, `--selftest` 49 checks green
+  at landing; `run.log` stays local.
+
+||||||| 90be10c
+||||||| 2ea6ae1
 ### 2026-11-06
 
 #### Added
