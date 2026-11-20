@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
+"""Resolve the CHANGELOG.md merge conflict in a PR branch: keep origin/main's
+[Unreleased] entries first, then the branch's own entry, then the common tail."""
 import sys
+
 path = sys.argv[1]
 lines = open(path, encoding="utf-8").read().split("\n")
 out, i = [], 0
