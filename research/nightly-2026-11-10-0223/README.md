@@ -1,3 +1,9 @@
+> **VOID FIRING - INSTRUMENT ONLY.** No gate, no records, no result. This
+> directory preserves `wall_shape_probe.py` from the 2026-11-10 02:23 firing
+> (the round-57 slot, issue #150). The instrument fails its own selftest;
+> nothing was dispatched or scored. Keep-or-delete decision: issue #150 ask 2.
+> Label: **void, not Executed.**
+
 # Firing 2026-11-10 02:23 (void): instrument only, no gate, no records
 
 This directory preserves an instrument, not a round record. The 2026-11-10 02:23 firing of the #65
