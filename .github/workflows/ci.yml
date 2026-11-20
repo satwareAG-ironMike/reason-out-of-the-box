@@ -72,6 +72,4 @@ jobs:
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_BODY: ${{ github.event.pull_request.body }}
-        run: python3 scripts/check_serving_ids.py --text "$PR_TITLE
-
-$PR_BODY"
+        run: python3 scripts/check_serving_ids.py --text "$(printf '%s\n\n%s' "$PR_TITLE" "$PR_BODY")"
