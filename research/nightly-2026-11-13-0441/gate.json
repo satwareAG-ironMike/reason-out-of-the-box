@@ -1,0 +1,544 @@
+{
+ "blob": "298e21f4e366d29f91d876297f925ab626590158bacf622b0915b2921bd75518",
+ "cells": [
+  {
+   "arm": "P",
+   "gold": "trackst",
+   "gold_slot": 0,
+   "j": 8,
+   "kind": "name",
+   "label": "A48_j8_P",
+   "level": 48,
+   "options": [
+    "trackst",
+    "glund",
+    "knix",
+    "flackg",
+    "NONE"
+   ],
+   "prompt_sha256": "31c15051462e391a42209cb5151ad18bccc230cb9baa13690b78f226c2effc86",
+   "seed": 116261051,
+   "src": "glag"
+  },
+  {
+   "arm": "P",
+   "gold": "frash",
+   "gold_slot": 3,
+   "j": 16,
+   "kind": "name",
+   "label": "B40_j16_P",
+   "level": 40,
+   "options": [
+    "NONE",
+    "quix",
+    "cren",
+    "frash",
+    "flig"
+   ],
+   "prompt_sha256": "a9bd6ee4687258a33cd24dda62c6fad2c9fb30fe951c8409f88fe321fb13a920",
+   "seed": 100261062,
+   "src": "brixsh"
+  },
+  {
+   "arm": "P",
+   "gold": "NONE",
+   "gold_slot": 2,
+   "j": 1,
+   "kind": "dead_end",
+   "label": "A48_deadend_P",
+   "level": 48,
+   "options": [
+    "whek",
+    "spog",
+    "NONE",
+    "strackm",
+    "quackrk"
+   ],
+   "prompt_sha256": "895bfaf6d9ac4d28c3b6b814ca21f0e976decfa3d42a02dd4c6f3e21d52c757e",
+   "seed": 116261051,
+   "src": "quackrk"
+  },
+  {
+   "arm": "P",
+   "gold": "NONE",
+   "gold_slot": 3,
+   "j": 1,
+   "kind": "dead_end",
+   "label": "C64_deadend_P",
+   "level": 64,
+   "options": [
+    "brelt",
+    "brixn",
+    "drudst",
+    "NONE",
+    "smurk"
+   ],
+   "prompt_sha256": "5bdb20fbce72e6e6492318fc0bd445751db42ef7f8cdf7ba93165d326346bea4",
+   "seed": 148261120,
+   "src": "brelt"
+  },
+  {
+   "arm": "R",
+   "gold": "NONE",
+   "gold_slot": null,
+   "j": 1,
+   "kind": "dead_end",
+   "label": "A48_deadend_R",
+   "level": 48,
+   "options": null,
+   "prompt_sha256": "184a5d4d226419826ecf250366ce9f04a96ac0c56f68819f361fba7be0f76597",
+   "seed": 116261051,
+   "src": "quackrk"
+  },
+  {
+   "arm": "R",
+   "gold": "NONE",
+   "gold_slot": null,
+   "j": 1,
+   "kind": "dead_end",
+   "label": "C64_deadend_R",
+   "level": 64,
+   "options": null,
+   "prompt_sha256": "c36ea5dff6d90a069d0573968c9823c92e403bfdb0891862aab56a19669af465",
+   "seed": 148261120,
+   "src": "brelt"
+  },
+  {
+   "arm": "R",
+   "gold": "trackst",
+   "gold_slot": null,
+   "j": 8,
+   "kind": "name",
+   "label": "A48_j8_R",
+   "level": 48,
+   "options": null,
+   "prompt_sha256": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260",
+   "seed": 116261051,
+   "src": "glag"
+  },
+  {
+   "arm": "R",
+   "gold": "frash",
+   "gold_slot": null,
+   "j": 16,
+   "kind": "name",
+   "label": "B40_j16_R",
+   "level": 40,
+   "options": null,
+   "prompt_sha256": "58d9ae3bc9fe841fd53e3d9a142b7538546e984632fa6c29fd8a07e5d0319e43",
+   "seed": 100261062,
+   "src": "brixsh"
+  },
+  {
+   "arm": "R",
+   "gold": "knudnd",
+   "gold_slot": null,
+   "j": 40,
+   "kind": "name",
+   "label": "A48_j40_R",
+   "level": 48,
+   "options": null,
+   "prompt_sha256": "f06957363201d1e788a24afb7107487a5ff4895591a58b34c69705337dfd9170",
+   "seed": 116261051,
+   "src": "glag"
+  },
+  {
+   "arm": "P",
+   "gold": "knudnd",
+   "gold_slot": 3,
+   "j": 40,
+   "kind": "name",
+   "label": "A48_j40_P",
+   "level": 48,
+   "options": [
+    "drackst",
+    "quep",
+    "NONE",
+    "knudnd",
+    "sponrk"
+   ],
+   "prompt_sha256": "39c9aebeb42d8691a6dc2006c62ebd37004b9333c1b10bcbdb5aa2c6616bba9f",
+   "seed": 116261051,
+   "src": "glag"
+  },
+  {
+   "arm": "R",
+   "gold": "spog",
+   "gold_slot": null,
+   "j": 48,
+   "kind": "name",
+   "label": "A48_j48_R",
+   "level": 48,
+   "options": null,
+   "prompt_sha256": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+   "seed": 116261051,
+   "src": "glag"
+  },
+  {
+   "arm": "P",
+   "gold": "spog",
+   "gold_slot": 2,
+   "j": 48,
+   "kind": "name",
+   "label": "A48_j48_P",
+   "level": 48,
+   "options": [
+    "glag",
+    "clox",
+    "spog",
+    "NONE",
+    "schem"
+   ],
+   "prompt_sha256": "63727472b40a150536b6ccf1aa0d892c079fce58ecc0fe4415d205cf67781a06",
+   "seed": 116261051,
+   "src": "glag"
+  },
+  {
+   "arm": "R",
+   "gold": "clax",
+   "gold_slot": null,
+   "j": 40,
+   "kind": "name",
+   "label": "B40_j40_R",
+   "level": 40,
+   "options": null,
+   "prompt_sha256": "ba15c79815e23aa1a1724360ab9c7731db4c79f2671d73daeab5edeae92e2f37",
+   "seed": 100261062,
+   "src": "brixsh"
+  },
+  {
+   "arm": "P",
+   "gold": "clax",
+   "gold_slot": 1,
+   "j": 40,
+   "kind": "name",
+   "label": "B40_j40_P",
+   "level": 40,
+   "options": [
+    "drest",
+    "clax",
+    "spixt",
+    "NONE",
+    "brixsh"
+   ],
+   "prompt_sha256": "7df2fe2c1b397785c9afc9edac9722b4faf7620cc0881c5934dc3b4c267eec24",
+   "seed": 100261062,
+   "src": "brixsh"
+  },
+  {
+   "arm": "R",
+   "gold": "blackt",
+   "gold_slot": null,
+   "j": 48,
+   "kind": "name",
+   "label": "C64_j48_R",
+   "level": 64,
+   "options": null,
+   "prompt_sha256": "3c1df0be9c48b5a5d53024c3c10d84bdfea35c94c134488c91c598f7136fd5a0",
+   "seed": 148261120,
+   "src": "smixg"
+  },
+  {
+   "arm": "P",
+   "gold": "blackt",
+   "gold_slot": 0,
+   "j": 48,
+   "kind": "name",
+   "label": "C64_j48_P",
+   "level": 64,
+   "options": [
+    "blackt",
+    "frixst",
+    "NONE",
+    "prap",
+    "grish"
+   ],
+   "prompt_sha256": "5ea20b191ce6464647ddb280a1221f5819d35694341f0011197827f1d9ee5b88",
+   "seed": 148261120,
+   "src": "smixg"
+  },
+  {
+   "arm": "R",
+   "gold": "brelt",
+   "gold_slot": null,
+   "j": 64,
+   "kind": "name",
+   "label": "C64_j64_R",
+   "level": 64,
+   "options": null,
+   "prompt_sha256": "c1ef6c20bfd84e2fd30a6eaefa22caf1dfb4663280b0824cac72e89f298eea7e",
+   "seed": 148261120,
+   "src": "smixg"
+  },
+  {
+   "arm": "P",
+   "gold": "brelt",
+   "gold_slot": 1,
+   "j": 64,
+   "kind": "name",
+   "label": "C64_j64_P",
+   "level": 64,
+   "options": [
+    "brok",
+    "brelt",
+    "NONE",
+    "spudx",
+    "smixg"
+   ],
+   "prompt_sha256": "b97f87f501be381bdacf81165e8000296349db87dc5c4b57bf746da7f79e5638",
+   "seed": 148261120,
+   "src": "smixg"
+  },
+  {
+   "arm": "R",
+   "gold": "whek",
+   "gold_slot": null,
+   "j": 24,
+   "kind": "name",
+   "label": "A48_j24_R",
+   "level": 48,
+   "options": null,
+   "prompt_sha256": "107666e0fa7e7af377e6cc990a33f1480a01e224910a67cea6c72e7aeadb9e16",
+   "seed": 116261051,
+   "src": "glag"
+  },
+  {
+   "arm": "P",
+   "gold": "whek",
+   "gold_slot": 2,
+   "j": 24,
+   "kind": "name",
+   "label": "A48_j24_P",
+   "level": 48,
+   "options": [
+    "zesh",
+    "whest",
+    "whek",
+    "NONE",
+    "frudx"
+   ],
+   "prompt_sha256": "d10da32bfcfa3c86e484f9aea6dadd763b779dfb1e6b604d534e27772550d36f",
+   "seed": 116261051,
+   "src": "glag"
+  },
+  {
+   "arm": "R",
+   "gold": "knalt",
+   "gold_slot": null,
+   "j": 32,
+   "kind": "name",
+   "label": "C64_j32_R",
+   "level": 64,
+   "options": null,
+   "prompt_sha256": "205a74d52d6cd23e415dbe2fb34b30b90494e78bd11796dcf0ef27102478acab",
+   "seed": 148261120,
+   "src": "smixg"
+  },
+  {
+   "arm": "P",
+   "gold": "knalt",
+   "gold_slot": 3,
+   "j": 32,
+   "kind": "name",
+   "label": "C64_j32_P",
+   "level": 64,
+   "options": [
+    "smong",
+    "strash",
+    "whult",
+    "knalt",
+    "NONE"
+   ],
+   "prompt_sha256": "72a222c97d4470a140f6ea791c64c8cddb20fc90ffbaba3e3bf185c529f234ca",
+   "seed": 148261120,
+   "src": "smixg"
+  },
+  {
+   "arm": "R",
+   "gold": "knudnd",
+   "gold_slot": null,
+   "j": 40,
+   "kind": "dup",
+   "label": "A48_j40_R_dup",
+   "level": 48,
+   "options": null,
+   "prompt_sha256": "f06957363201d1e788a24afb7107487a5ff4895591a58b34c69705337dfd9170",
+   "seed": 116261051,
+   "src": "glag"
+  }
+ ],
+ "contract": {
+  "arm_pair": "shared prefix through the task sentence, answer clause only differs",
+  "call_cap": 40,
+  "control_shape": "one-step ask on a path tail (issue #139 fix)",
+  "max_tokens": 2048,
+  "stateless_arms": true,
+  "temperature": 0.0
+ },
+ "criteria": {
+  "C3_census": {
+   "criterion": "every record carries its message field names and the reasoning-supplying field under the issue #105 merge rule, and the class-level statement names the archived same-class side",
+   "threshold": "all records"
+  },
+  "C4_option_balance": {
+   "criterion": "the gold slot index is recorded for every recognition cell and the slot distribution is reported; the instrument claims no per-slot test at this n",
+   "threshold": "recorded"
+  },
+  "C5_option_integrity": {
+   "criterion": "every offered option other than NONE occurs in that item's own vocabulary, the five options are distinct, exactly one equals the gold, and the two arms share a byte-identical prefix through the task sentence",
+   "threshold": "all cells"
+  },
+  "D1_dissociation": {
+   "criterion": "over the paired name cells at j >= 24 whose recall arm missed the gold (n cells), the recognition arm picks the gold in m cells; tier readout_failure needs m >= 4 and an exact one-sided binomial P(X >= m | n, 0.2) < 0.05; representation_failure needs m <= 1; a firing with fewer than 4 recall-missed cells has no dissociation material",
+   "threshold": "n >= 4"
+  },
+  "D2_head_to_head": {
+   "criterion": "among the recall-missed paired cells, the recognition pick is counted as gold, the same wrong name the recall arm declared, another option, or NONE; a pick that repeats the recall error is a representation error, not a lost readout",
+   "threshold": "descriptive"
+  },
+  "D3_error_census": {
+   "criterion": "every recall cell is filed under exactly one frozen signature (correct, near_step_offset, far_on_path, other_path_name, off_item, refusal, clamp_start, past_end_same_path, no_delivery) and every recognition cell under gold, recall_match, other_option, none, off_options or no_delivery",
+   "threshold": "all cells filed"
+  },
+  "D4_j_band": {
+   "criterion": "recall accuracy is reported separately for j <= 16, 24 <= j <= 32 and j >= 40; the round-59 turnover claim is refuted on this build where a j >= 40 cell delivers the gold, and supported where every j >= 40 cell misses while every j <= 32 cell hits",
+   "threshold": "descriptive"
+  },
+  "F1_form_validity": {
+   "criterion": "recognition delivers the gold on both shallow cells and picks NONE on both one-step dead-end controls, four of four delivered",
+   "threshold": "4/4"
+  },
+  "F2_recall_controls": {
+   "criterion": "the free-response arm delivers the gold on both shallow cells and NONE on both one-step dead-end controls, so the control set certifies this firing on the shallow control shape the issue #139 fix prescribes",
+   "threshold": "4/4"
+  },
+  "L1_archived_prompt_identity": {
+   "criterion": "the free-response prompts that reproduce archived name-arm records are byte-identical to them by prompt sha256, so the recall arm is a cross-firing duplicate rather than a new task",
+   "threshold": "all named cells"
+  },
+  "R1_rate_gate": {
+   "criterion": "the dispatch plan was selected by the measured pre-dispatch completion rate against the frozen thresholds, and the measurement is recorded in measure.json before gate.json freezes (issue #141)",
+   "threshold": "selected"
+  },
+  "S1_self_agreement": {
+   "criterion": "the byte-identical recall duplicate pair agrees on the declared answer conditioned on both delivering (issue #100; the delivery outcome is not the claimed quantity, per the round-63 MTP lesson), and the recognition twin of the pre-gate calibration call is reported separately",
+   "threshold": "descriptive"
+  }
+ },
+ "panel_name": "r64",
+ "plan_rule": {
+  "alpha": 0.05,
+  "chance": 0.2,
+  "dispatch_budget_s": 1800,
+  "min_material": 4,
+  "rate_core_plan": 16.0,
+  "rate_full_plan": 27.0,
+  "rate_trim_plan": 22.0,
+  "worst_case_tokens": {
+   "r64": 47104,
+   "r64core": 28672,
+   "r64trim": 38912
+  }
+ },
+ "question": "On a name-walk item and one asked step j, does a forced-choice recognition arm recover the gold on the cells the free-response recall arm misses? If it does, the deep failure is a readout loss on a walk the deployment still represents; if recognition sits at the one-in-five chance line on exactly those cells, the step position is not represented and the length-generalization reading stands. Registered on the flash-next-class build this firing was assigned, on the round-59 wrong-step band (j >= 40) plus a mid and a shallow band, with the archived k = 48 and k = 64 anchor items.",
+ "rate_measurement": {
+  "calibration": {
+   "cap": 2048,
+   "completion_tokens": 1176,
+   "declared": "trackst",
+   "finish_reason": "stop",
+   "gold": "trackst",
+   "j": 8,
+   "label": "A48_j8_P",
+   "level": 48,
+   "note": "recognition form of the shallow anchor cell; the plan cell of the same label is a within-firing twin of this dispatch",
+   "tok_per_s": 79.626,
+   "wall_s": 14.769
+  },
+  "census": [
+   {
+    "call": 1,
+    "cap": 256,
+    "completion_tokens": 55,
+    "content": "yes",
+    "finish_reason": "stop",
+    "tok_per_s": 41.199,
+    "wall_s": 1.335
+   },
+   {
+    "call": 2,
+    "cap": 256,
+    "completion_tokens": 55,
+    "content": "yes",
+    "finish_reason": "stop",
+    "tok_per_s": 48.587,
+    "wall_s": 1.132
+   }
+  ],
+  "health": {
+   "completion_tokens": 55,
+   "content": "yes",
+   "finish_reason": "stop",
+   "id": "health",
+   "message_fields": [
+    "content",
+    "reasoning_content",
+    "role"
+   ],
+   "model_digest": "4075b5949b2b0487",
+   "prompt_sha256": "f0c183f26f409a46d4f9ae16a76ab8acdd18ccdf7954573e84635cfefc6ca447",
+   "reasoning_field": "reasoning_content",
+   "trace_chars": 205,
+   "wall_s": 1.228
+  },
+  "plan_rule": {
+   "dispatch_budget_s": 1800,
+   "rate_core_plan": 16.0,
+   "rate_full_plan": 27.0,
+   "rate_trim_plan": 22.0
+  },
+  "rate_tok_per_s": 79.626,
+  "selected_panel": "r64"
+ },
+ "schema": "round64-gate-v1",
+ "theory": {
+  "T1_position_bias_confound": {
+   "source": "arXiv:2309.03882 (ICLR 2024); arXiv:2308.11483",
+   "statement": "option-position preference moves reported multiple-choice accuracy, and the preference traces to token-level bias rather than to content, so a forced-choice arm needs its key positions balanced and recorded",
+   "verification": "abstract-level in this firing (arXiv export API id_list fetch)"
+  },
+  "T2_format_is_not_neutral": {
+   "source": "arXiv:2507.02856; arXiv:2503.14996; arXiv:2503.13508",
+   "statement": "the same model scores differently on multiple-choice and on generative answer matching, and part of the multiple-choice score is extraction- and format-driven, so a recognition-arm gain is not by itself evidence of competence",
+   "verification": "abstract-level in this firing (arXiv export API)"
+  },
+  "T3_recognition_without_recall": {
+   "source": "DOI:10.1080/09658211.2024.2397037; DOI:10.1037/0278-7393.6.2.135",
+   "statement": "in human memory the two readouts of one store dissociate: forced-choice recognition can stay above chance where cued recall fails, and a prior recall attempt changes later recognition, which is why the arms here run as independent stateless dispatches",
+   "verification": "metadata-level in this firing (Crossref records, no quote taken)"
+  },
+  "T4_knowledge_prediction_gap": {
+   "source": "arXiv:2509.23782 (ICML 2026); arXiv:2207.05221; arXiv:2305.04388",
+   "statement": "a model can hold an answer in its hidden representations and still fail to emit it, and its written trace need not report what drove the answer, so representation and expression are separate measurement targets",
+   "verification": "abstract-level in this firing (arXiv export API)"
+  },
+  "T5_step_counting_is_not_connectivity": {
+   "source": "arXiv:2305.18654; arXiv:2407.15160; arXiv:2405.18719",
+   "statement": "multi-step composition degrades with graph depth while counting and ordinal selection are separately capacity-limited and are not what token positions encode, which is the mechanism the archived wrong-step signatures point at",
+   "verification": "abstract-level in this firing (arXiv export API)"
+  }
+ },
+ "tier_rule": {
+  "notes": "form_invalid fires from the F1 row whether or not the run was stopped early for it; controls_invalid fires when the free-response arm names an entity where the links ran out or misses a shallow cell, which is the round-59 and round-60 refusal and leaves the paired contrast uncertified rather than reinterpreted; the dissociation tiers apply only when D1 has at least 4 paired recall-missed cells; nothing in this table converts a single cell into a class-level claim; the core panel carries 3 deep pairs, so a rate-starved firing cannot reach a dissociation tier and owes the panel to the next one",
+  "order": [
+   "form_invalid",
+   "dispatch_incomplete",
+   "controls_invalid",
+   "no_dissociation_material",
+   "readout_failure",
+   "representation_failure",
+   "mixed",
+   "unresolved"
+  ]
+ }
+}
