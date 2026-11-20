@@ -1,0 +1,335 @@
+{
+  "blob": "eadf84d55d10b649c952a29a350437a8658c837fb62c6f39356c508378a151a4",
+  "cells": [
+    {
+      "cap": 2048,
+      "gold": "stonsh",
+      "j": 1,
+      "kind": "name",
+      "label": "L8_j1",
+      "level": 8,
+      "prompt_sha256": "6e33c155a722711b94f7661587b5581422e689f50ba45a867e325df3c836dbee",
+      "seed": 36261005
+    },
+    {
+      "cap": 2048,
+      "gold": "brep",
+      "j": 2,
+      "kind": "name",
+      "label": "L8_j2",
+      "level": 8,
+      "prompt_sha256": "79c89f4a5e9e0e44411e8560f9acc512bbb6856b6664943f21fbb5803532781d",
+      "seed": 36261005
+    },
+    {
+      "cap": 2048,
+      "gold": "crup",
+      "j": 4,
+      "kind": "name",
+      "label": "L8_j4",
+      "level": 8,
+      "prompt_sha256": "1b6ade6ad9883253cc5088a2c2cdf726b0f2be81a5de52746c84f341d5009183",
+      "seed": 36261005
+    },
+    {
+      "cap": 2048,
+      "gold": "zish",
+      "j": 8,
+      "kind": "name",
+      "label": "L8_j8",
+      "level": 8,
+      "prompt_sha256": "4f1fdb53f99a46ebbf6259ffbe2f04a990332b3416a6b22c42e1dab9230dbd53",
+      "seed": 36261005
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 9,
+      "kind": "off_end",
+      "label": "L8_offend",
+      "level": 8,
+      "prompt_sha256": "40ab806f7c5dec6dc1d3a7ee6ba6e8841a84f330677e0e70f05bebb6ab674ad1",
+      "seed": 36261005
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 1,
+      "kind": "dead_end",
+      "label": "L32A_deadend",
+      "level": 32,
+      "prompt_sha256": "1f56a9a6f5969364284e1af8ce1a5dcdf8ee22b90bc5c5ce99aecba5079fce86",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 1,
+      "kind": "dead_end",
+      "label": "L48_deadend",
+      "level": 48,
+      "prompt_sha256": "184a5d4d226419826ecf250366ce9f04a96ac0c56f68819f361fba7be0f76597",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "brixt",
+      "j": 2,
+      "kind": "name",
+      "label": "L16_j2",
+      "level": 16,
+      "prompt_sha256": "d6ab0cf6a2435f476c41d27cb722cf5b7613f0e90df016872d80df531cedd973",
+      "seed": 52261033
+    },
+    {
+      "cap": 2048,
+      "gold": "stacklt",
+      "j": 8,
+      "kind": "name",
+      "label": "L16_j8",
+      "level": 16,
+      "prompt_sha256": "87169f9ec6f776c3933f511b0e6b4c52c73627f9fe28c5e6b67aa7a3f796636c",
+      "seed": 52261033
+    },
+    {
+      "cap": 2048,
+      "gold": "brond",
+      "j": 16,
+      "kind": "name",
+      "label": "L16_j16",
+      "level": 16,
+      "prompt_sha256": "a22f1d12cc743d194ee386939eeb8d4998a8e2fc28c59b70b16ee2e9a5db1f30",
+      "seed": 52261033
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 17,
+      "kind": "off_end",
+      "label": "L16_offend",
+      "level": 16,
+      "prompt_sha256": "515a50f2c6478f796b0b46744566c670eb696da3581350968480ee363461dcd3",
+      "seed": 52261033
+    },
+    {
+      "cap": 2048,
+      "gold": "stonnd",
+      "j": 2,
+      "kind": "name",
+      "label": "L32A_j2",
+      "level": 32,
+      "prompt_sha256": "7572f321ee70c82c3e457476f19541fe0fd0048070129241d6097356add3696f",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "thrend",
+      "j": 8,
+      "kind": "name",
+      "label": "L32A_j8",
+      "level": 32,
+      "prompt_sha256": "70ed757a4d369ae5ff57164bb1937f1d8b24b0ddf63925ad35d8b28936a48366",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "crux",
+      "j": 16,
+      "kind": "name",
+      "label": "L32A_j16",
+      "level": 32,
+      "prompt_sha256": "40909990f780674a7d93d9df15d819e43fedb57c4e0df326c56290084242d4c7",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "vixx",
+      "j": 24,
+      "kind": "name",
+      "label": "L32A_j24",
+      "level": 32,
+      "prompt_sha256": "def7b75e37c9eaa4e7b72ebdba8435a4fdcbb440a264522cc2dc72fbe427380e",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "strark",
+      "j": 8,
+      "kind": "name",
+      "label": "L32B_j8",
+      "level": 32,
+      "prompt_sha256": "2a8f1e0f539a9b69786f37fb8e618b669a324f5104477da68c54efb9793fc88d",
+      "seed": 84261050
+    },
+    {
+      "cap": 2048,
+      "gold": "plost",
+      "j": 2,
+      "kind": "name",
+      "label": "L48_j2",
+      "level": 48,
+      "prompt_sha256": "f8660db2a22ecaf07421fde1e577f5f8f700f594078889480f6ff55d58dfcd27",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "trackst",
+      "j": 8,
+      "kind": "name",
+      "label": "L48_j8",
+      "level": 48,
+      "prompt_sha256": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "flixm",
+      "j": 16,
+      "kind": "name",
+      "label": "L48_j16",
+      "level": 48,
+      "prompt_sha256": "7f6bbe18f35294e11fdfba70a4fbd2f0243f00ebf123b75348ff9074161340b1",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "whesh",
+      "j": 32,
+      "kind": "name",
+      "label": "L48_j32",
+      "level": 48,
+      "prompt_sha256": "6f19b9f8c406d70313e6f598c99a982855aa4f51e43af4ff9b60d3819f82e054",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "sterk",
+      "j": 32,
+      "kind": "name",
+      "label": "L32A_j32",
+      "level": 32,
+      "prompt_sha256": "a8697dfb826079fc9be40fae6e6a8a78c915e1b16d5c066311eb438c9f694c53",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 33,
+      "kind": "off_end",
+      "label": "L32A_offend",
+      "level": 32,
+      "prompt_sha256": "cbd27af78988945009fce3608b9b7ebe9cc4e3bac6a4a2ed01c8192843c095b9",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "drist",
+      "j": 32,
+      "kind": "name",
+      "label": "L32B_j32",
+      "level": 32,
+      "prompt_sha256": "90da8b0ab13581fffec7e9f6a4e449bcf1292a9e8acda9196957c70c56f513d7",
+      "seed": 84261050
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 33,
+      "kind": "off_end",
+      "label": "L32B_offend",
+      "level": 32,
+      "prompt_sha256": "811f8e0196a7efa7c548013e4493633ff8d80880d9d1dd8b131f2030490d4d21",
+      "seed": 84261050
+    },
+    {
+      "cap": 2048,
+      "gold": "spog",
+      "j": 48,
+      "kind": "name",
+      "label": "L48_j48",
+      "level": 48,
+      "prompt_sha256": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 49,
+      "kind": "off_end",
+      "label": "L48_offend",
+      "level": 48,
+      "prompt_sha256": "e07afb24060fd6523c44f8c7147ae5e08e2b55a0131dcc2e14742f7452c45747",
+      "seed": 116261051
+    },
+    {
+      "cap": 256,
+      "gold": "spog",
+      "j": 48,
+      "kind": "name",
+      "label": "L48_j48_c256",
+      "level": 48,
+      "prompt_sha256": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "sterk",
+      "j": 32,
+      "kind": "dup",
+      "label": "L32A_j32_dup",
+      "level": 32,
+      "prompt_sha256": "a8697dfb826079fc9be40fae6e6a8a78c915e1b16d5c066311eb438c9f694c53",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "spog",
+      "j": 48,
+      "kind": "dup",
+      "label": "L48_j48_dup",
+      "level": 48,
+      "prompt_sha256": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+      "seed": 116261051
+    }
+  ],
+  "criteria": {
+    "C1_shallow_name_competence": {
+      "statement": "correct declared terminal on L8_j1, L8_j2, L8_j4, L8_j8 is at least 3 of 4",
+      "threshold": "3/4"
+    },
+    "C2_none_controls_honest": {
+      "statement": "correct NONE on the seven NONE-gold calls (five off-end, two dead-end) is at least 6 of 7",
+      "threshold": "6/7"
+    },
+    "C3_deep_cells": {
+      "statement": "correct on the four deep in-band cells L16_j16, L32A_j32, L32B_j32, L48_j48: ceiling if at most 1 of 4, no ceiling if at least 3 of 4",
+      "threshold": "1/4 ceiling, 3/4 no ceiling"
+    },
+    "C4_delivery_split": {
+      "statement": "delivery rate at j at most 8 minus delivery rate at j at least 24, name cells only: a drop of 0.25 or more is a delivery-bound loss",
+      "threshold": "0.25"
+    },
+    "C5_self_agreement": {
+      "statement": "both re-dispatch pairs agree on the declared name and completion tokens",
+      "threshold": "2/2"
+    },
+    "C6_trace_provenance": {
+      "statement": "among undelivered name-gold records, gold-terminal-in-trace minus pseudo-gold-in-trace is at least 0.50, else the trace readout is refused",
+      "threshold": "0.50"
+    }
+  },
+  "dispatch": {
+    "archived_k48_certification": {
+      "seed": 116261051,
+      "yesno_digest16": "068bc6a1fb0620fb"
+    },
+    "call_cap": 40,
+    "dispatch_budget_s": 1800,
+    "max_tokens_cap": 2048,
+    "planned_calls": 29,
+    "temperature": 0.0
+  },
+  "question": "On a flash-next-class deployment, with the prompt bytes fixed and only the step count j moved inside one load-floor ladder item, does a one-of-many entity-name answer space (a) deliver correct terminals at shallow j where no constant rule and no connectivity shortcut could, (b) hold to j = k on the certified k = 48 item, (c) refuse correctly when the links run out, and (d) leave a trace signal that passes a matched-name provenance control?",
+  "schema": "round55-gate-v1",
+  "tier_rule": "controls_invalid if C2 below 6/7; else name_space_ceiling_at_or_below_48 if C1 passes and C3 is a ceiling; else name_space_no_ceiling_in_range if C1 passes and C3 is no ceiling; else unresolved"
+}

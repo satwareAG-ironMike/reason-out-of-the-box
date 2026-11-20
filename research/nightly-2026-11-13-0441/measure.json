@@ -1,0 +1,59 @@
+{
+ "calibration": {
+  "cap": 2048,
+  "completion_tokens": 1176,
+  "declared": "trackst",
+  "finish_reason": "stop",
+  "gold": "trackst",
+  "j": 8,
+  "label": "A48_j8_P",
+  "level": 48,
+  "note": "recognition form of the shallow anchor cell; the plan cell of the same label is a within-firing twin of this dispatch",
+  "tok_per_s": 79.626,
+  "wall_s": 14.769
+ },
+ "census": [
+  {
+   "call": 1,
+   "cap": 256,
+   "completion_tokens": 55,
+   "content": "yes",
+   "finish_reason": "stop",
+   "tok_per_s": 41.199,
+   "wall_s": 1.335
+  },
+  {
+   "call": 2,
+   "cap": 256,
+   "completion_tokens": 55,
+   "content": "yes",
+   "finish_reason": "stop",
+   "tok_per_s": 48.587,
+   "wall_s": 1.132
+  }
+ ],
+ "health": {
+  "completion_tokens": 55,
+  "content": "yes",
+  "finish_reason": "stop",
+  "id": "health",
+  "message_fields": [
+   "content",
+   "reasoning_content",
+   "role"
+  ],
+  "model_digest": "4075b5949b2b0487",
+  "prompt_sha256": "f0c183f26f409a46d4f9ae16a76ab8acdd18ccdf7954573e84635cfefc6ca447",
+  "reasoning_field": "reasoning_content",
+  "trace_chars": 205,
+  "wall_s": 1.228
+ },
+ "plan_rule": {
+  "dispatch_budget_s": 1800,
+  "rate_core_plan": 16.0,
+  "rate_full_plan": 27.0,
+  "rate_trim_plan": 22.0
+ },
+ "rate_tok_per_s": 79.626,
+ "selected_panel": "r64"
+}
