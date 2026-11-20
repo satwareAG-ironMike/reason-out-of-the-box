@@ -72,6 +72,16 @@ jobs:
       - name: Validate all tracked workflow files
         run: python3 scripts/check_workflow_syntax.py
 
+  no-agent-artifacts:
+    name: no agent helper artifacts (log files, merge scripts)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Selftest (negative control)
+        run: python3 scripts/check_no_agent_artifacts.py --selftest
+      - name: Check tracked files
+        run: python3 scripts/check_no_agent_artifacts.py
+
   pr-reviewer-verdict:
     name: pr-reviewer verdict at head (merge gate)
     if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
