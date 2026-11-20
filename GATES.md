@@ -1,5 +1,16 @@
 # Gates: published human-baseline mapping (issue #7, option (a))
 
+## Skipped rules recorded
+
+- **2026-11-20 cascade (#131-#168): the "merge only with a [pr-reviewer] verdict at the exact head SHA"
+  rule was not in force and was skipped for all 25 PRs in the 2026-11-19T22:31 to
+  2026-11-20T06:15 Berlin cascade. 19 PRs had their heads conflict-resolved by the author lane
+  before squash, so the merged content differs from any previously reviewed head; only #146
+  carries a [pr-reviewer] verdict at its merged head. The CI check
+  `pr-reviewer-verdict` (issue #169) enforces the rule going forward; the cascade is recorded
+  here as a known, owner-acknowledged exception (issue #150 ask 2 covers #160; #166 is the
+  remaining gate-application question).
+
 OWNS: docs/human-baseline.md, docs/agent-execution.md, docs/next-investigations.md, CHANGELOG.md, AGENTS.md, README.md, GATES.md, .unlazy/**
 
 Scope: map published human data onto the three task families of the pre-registration candidate, extract verifiable figures, list gaps with a search log and negative control, verify independently, and close out in-repo. This ledger supersedes the previous campaign (archive quality gaps; preserved in git history). That campaign's abandoned gate (study execution) is what issue #39 and this mapping now address. Appended gates G8-G10 cover the owner-directed ingestion of the "An Alien Mind" essay (OpenAI, 2026-09-06) and the Jakub Pachocki person notes (requested 2026-09-11).

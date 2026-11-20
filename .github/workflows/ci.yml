@@ -62,6 +62,22 @@ jobs:
       - name: Scan tracked .md/.yml/.yaml files
         run: python3 scripts/check_conflict_markers.py
 
+  pr-reviewer-verdict:
+    name: pr-reviewer verdict at head (merge gate)
+    if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Selftest (negative control)
+        run: python3 scripts/check_pr_reviewer_verdict.py --selftest
+      - name: Check verdict at current head
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: python3 scripts/check_pr_reviewer_verdict.py "$PR_NUMBER" "$PR_HEAD_SHA"
+
   serving-id-guard:
     name: serving-id guard (endpoint leak)
     runs-on: ubuntu-latest
