@@ -5,6 +5,28 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-20
+
+#### Added
+
+- The serving-id guard (`scripts/check_serving_ids.py`) grew two leak classes and two scan
+  surfaces, closing issue #149 (refs #85, #83): absolute home paths that carry a user name
+  (`home`, `Users`, `Volumes` roots; identity-free fixture homes like `user` or the root
+  account stay exempt, matching the shipped sanitizer-fixture convention), and a new quantifier
+  suffix form in the deployment-label class - the shipped pattern never matched the two-segment
+  `_k_xl` tag, which is exactly the shape `Model:` trailers carried onto `main` (the widened
+  pattern still passes every public toolkit name in the selftest clean list). New modes
+  `--commits <range>` and `--text` are wired into CI: the guard job now fetches history and
+  scans the push-range commit messages on `main`, and on PRs scans the PR title plus body, the
+  sources a squash merge composes the landing message from. Intermediate messages of open branch
+  commits predate the rule and squash merges discard them, so nothing reopens retroactively.
+
+#### Fixed
+
+- `GATES.md` evidence lines redacted (issue #149 class 2): the maintainer-home CHECK path is
+  now written `~/.claude/...` and the four `cwd=` values are `<repo>`. Commands, expectations,
+  and every recorded hash are untouched; the evidence describes the same runs.
+
 ### 2026-11-06
 
 #### Added

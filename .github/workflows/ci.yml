@@ -57,7 +57,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # commit-message scan (issue #149): the push range must resolve
+          fetch-depth: 0
       - name: Selftest (negative control)
         run: python3 scripts/check_serving_ids.py --selftest
       - name: Scan tracked files
         run: python3 scripts/check_serving_ids.py
+      - name: Scan the messages landing on main (push)
+        if: github.event_name == 'push'
+        run: python3 scripts/check_serving_ids.py --commits "${{ github.event.before }}..${{ github.sha }}"
+      - name: Scan the squash-message sources (pull_request)
+        if: github.event_name == 'pull_request'
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: python3 scripts/check_serving_ids.py --text "$PR_TITLE
+
+$PR_BODY"

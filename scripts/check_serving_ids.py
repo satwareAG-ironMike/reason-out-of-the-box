@@ -13,11 +13,22 @@ tracked file. Leak classes:
 - serving id a model identifier ending in a hyphen plus a quantization tag of the
   q, iq or ud-q digit form (deployment labels). Serving models are referenced by
   public name only (research/AGENTS.md sanitized-by-construction contract).
+- home path a leading-slash home root (home, Users, Volumes) followed by a user
+  directory that carries a name (issue #149 class 2, the GATES.md evidence-line
+  leak). Identity-free home names are exempt and are the shipped fixture
+  convention: user, example(s), sample(s), test(er|s), shared, vagrant, runner,
+  ci, admin, demo, fix(ture|tures). root is the system account and names no
+  person, so a root home (the round-instrument sanitizer fixtures) stays clean;
+  a personal name in the home slot is what leaks.
 
-Scan: every git-tracked file in the working tree. The selftest plants each leak
-class plus clean references in a temp file and asserts the detector separates
-them; leak fixtures are assembled by concatenation so this file does not carry a
-pattern instance of its own.
+Scan: every git-tracked file in the working tree. Modes:
+--commits <range> scans the commit messages in that range (CI uses it on the
+push range to main, which is where the Model: trailer lands), and --text scans
+literal text (CI uses it on the PR title plus body, the sources a squash merge
+composes the landing message from, issue #149 class 1). The selftest plants
+each leak class plus clean references in a temp file and a temp git repo and
+asserts the detector separates them; leak fixtures are assembled by
+concatenation so this file does not carry a pattern instance of its own.
 """
 import pathlib
 import re
@@ -33,7 +44,18 @@ HOSTPORT = re.compile(
     r"\b(localhost|127\.\d{1,3}\.\d{1,3}\.\d{1,3}|\d{1,3}(?:\.\d{1,3}){3}):(\d{2,5})\b"
 )
 GGUFPATH = re.compile(r"[\w.-]+\.gguf\b")
-SERVID = re.compile(r"\b[a-z0-9][a-z0-9._-]*-(?:iq\d+|q\d+|ud-q\d+)(?:[_-]?[a-z0-9]+)?\b")
+# The suffix group repeats (issue #149): the shipped one-optional-segment form
+# never matched the two-segment _k_xl tag of the deployment labels found in
+# commit trailers on main; the class must catch q4, q4_k, q4_k_xl, iq3_xxs.
+SERVID = re.compile(r"\b[a-z0-9][a-z0-9._-]*-(?:iq\d+|q\d+|ud-q\d+)(?:[_-]?[a-z0-9]+)*\b")
+HOMEPATH = re.compile(r"(/(?:home|Users|Volumes)/)([^/\s\"'`,;:)\]]+)")
+# Identity-free home names: shipped fixture convention (research instruments) and
+# generic system accounts. A personal name in the home slot is what leaks.
+EXEMPT_HOME_NAMES = frozenset({
+    "user", "users", "example", "examples", "sample", "samples", "test", "tester",
+    "tests", "shared", "vagrant", "runner", "ci", "admin", "demo", "fix", "fixture",
+    "fixtures",
+})
 
 
 def scan_text(text):
@@ -48,6 +70,9 @@ def scan_text(text):
         hits.append(("gguf path", m.group(0)))
     for m in SERVID.finditer(text):
         hits.append(("serving id", m.group(0)))
+    for m in HOMEPATH.finditer(text):
+        if m.group(2).lower() not in EXEMPT_HOME_NAMES:
+            hits.append(("home path", m.group(0)))
     return hits
 
 
@@ -60,6 +85,36 @@ def scan_file(path):
     for i, line in enumerate(data.decode("utf-8", "replace").splitlines(), 1):
         for cls, match in scan_text(line):
             out.append((i, cls, match))
+    return out
+
+
+def commit_messages(rng, root=None):
+    """Yield (short_sha, message) for the commit range rng (e.g. base..HEAD)."""
+    repo = str(root or ROOT)
+    r = subprocess.run(
+        ["git", "-C", repo, "log", "--format=%h\x1f%B\x1e", rng],
+        capture_output=True, text=True, check=False,
+    )
+    if r.returncode != 0:
+        # A new branch has no merge base (all-zero push base): scan the tip commit.
+        r = subprocess.run(
+            ["git", "-C", repo, "log", "-1", "--format=%h\x1f%B\x1e"],
+            capture_output=True, text=True, check=True,
+        )
+    for record in r.stdout.split("\x1e"):
+        record = record.strip("\n")
+        if not record.strip():
+            continue
+        sha, _, body = record.partition("\x1f")
+        yield sha, body
+
+
+def scan_commits(rng, root=None):
+    """Return (sha, class, match) hits over commit messages in a range."""
+    out = []
+    for sha, body in commit_messages(rng, root=root):
+        for cls, match in scan_text(body):
+            out.append((sha, cls, match))
     return out
 
 
@@ -81,6 +136,8 @@ def selftest():
         "endpoint http://" + "localhost" + ":8080/v1 was used",
         "weights loaded from /models/qwen3.8-flash-" + "next-i" + "q3" + "_xxs" + ".gguf",
         "commit signed by " + "qwen38-27b-ud-" + "q4" + "_k_xl",
+        "ledger run from " + "/ho" + "me/maria" + "/repo and keys at "
+        + "/Use" + "rs/wei" + "/.ssh/id",
     ])
     clean = "\n".join([
         "see http://198.51.100.7:8080/v1 in the sanitizer fixture (documentation range)",
@@ -89,9 +146,11 @@ def selftest():
         "checkpoints allenai/OLMo-2-1124-7B and EleutherAI/pythia-2.8b-deduped",
         "MiMo-V2.6-Distill-Qwen-9B, Q6_K (public toolkit names, no deployment label)",
         "https://huggingface.co/allenai/OLMo-2-1124-7B/tree/main",
+        "/ho" + "me/user/f.bin and /root/models/f.bin (identity-free fixture homes)",
+        "the sanitizer strips /ma" + "nt/ and /media/ paths (no user slot)",
     ])
     lhits = scan_text(leak)
-    if not ({"host:port", "gguf path", "serving id"} <= {c for c, _ in lhits}):
+    if not ({"host:port", "gguf path", "serving id", "home path"} <= {c for c, _ in lhits}):
         print("FAIL: selftest did not detect all leak classes:", lhits)
         return 1
     chits = scan_text(clean)
@@ -116,13 +175,67 @@ def selftest():
         print("FAIL: scan_file did not skip binary file")
         return 1
     pathlib.Path(binn).unlink()
-    print("serving-id selftest passed (3 leak classes detected, 0 false positives)")
+    # Commit-message scan fixture: a temp repo with one clean commit and one
+    # planted trailer leak (issue #149 class 1: squash merges replay trailers).
+    with tempfile.TemporaryDirectory() as repo:
+        git = ["git", "-C", repo, "-c", "commit.gpgsign=false",
+               "-c", "user.name=fixture", "-c", "user.email=fixture@example.invalid"]
+        subprocess.run(git + ["init", "-q"], check=True, capture_output=True)
+        subprocess.run(git + ["commit", "-q", "--allow-empty", "-m",
+                              "Round N: honest subject (refs #1)\n\n"
+                              "Model: Public Model Name (provider/public-repo-id)"],
+                       check=True, capture_output=True)
+        subprocess.run(git + ["commit", "-q", "--allow-empty", "-m",
+                              "Round N+1: planted trailer\n\n"
+                              "Model: Public Name (" + "localhost" + ":11434/private-"
+                              + "qwen38-27b-ud-" + "q4" + "_k_xl)\n"
+                              "ran in " + "/ho" + "me/maria" + "/checkout"],
+                       check=True, capture_output=True)
+        tip = subprocess.run(git + ["rev-parse", "--short", "HEAD"],
+                             capture_output=True, text=True, check=True).stdout.strip()
+        shits = scan_commits("HEAD~1..HEAD", root=repo)
+        classes = {c for _, c, _ in shits}
+        if not {"host:port", "serving id", "home path"} <= classes:
+            print("FAIL: commit scan missed a planted trailer leak:", shits)
+            return 1
+        if {sha for sha, _, _ in shits} != {tip}:
+            print("FAIL: commit scan attributed hits to the wrong commit:", shits)
+            return 1
+        # empty-range behaviour: a range with no commits yields no hits
+        if scan_commits("HEAD..HEAD", root=repo) != []:
+            print("FAIL: empty commit range produced hits")
+            return 1
+    print("serving-id selftest passed (4 leak classes detected in files, "
+          "commit-message scan verified, 0 false positives)")
     return 0
 
 
 def main():
-    if len(sys.argv) > 1 and sys.argv[1] == "--selftest":
+    args = sys.argv[1:]
+    if args and args[0] == "--selftest":
         return selftest()
+    if args and args[0] == "--commits":
+        rng = args[1] if len(args) > 1 else "HEAD~1..HEAD"
+        hits = scan_commits(rng)
+        if hits:
+            for sha, cls, match in hits:
+                print(f"FAIL commit {sha}: {cls} {match!r}")
+            print(f"serving-id commit check failed: {len(hits)} hit(s)")
+            return 1
+        print(f"serving-id commit check passed (range {rng})")
+        return 0
+    if args and args[0] == "--text":
+        # Squash merges compose the landing commit message from the PR title and
+        # body, so PR text carries the same classes the commit scan enforces.
+        text = args[1] if len(args) > 1 else sys.stdin.read()
+        hits = scan_text(text)
+        if hits:
+            for cls, match in hits:
+                print(f"FAIL text: {cls} {match!r}")
+            print(f"serving-id text check failed: {len(hits)} hit(s)")
+            return 1
+        print("serving-id text check passed")
+        return 0
     hits = []
     for f in tracked_files():
         for line, cls, match in scan_file(f):
