@@ -5,6 +5,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-20 (TRAP-style corpus arm, issue #77)
+- `generators/trap.py`: the #77 TRAP-style surface-perturbation arm (Addendum 1 item 3
+  T7 triangulation). Multi-step arithmetic word problems at depth d = operation steps;
+  each item carries a base surface and a surprising TRAP-perturbed surface with one
+  shared gold answer (the arithmetic structure is invariant), so the base-vs-trap
+  accuracy gap at matched depth discriminates surface-pattern reliance from actual
+  computation. Gold is computed arithmetically at generation time (solvability by
+  construction). The selftest plants a #77 leaky hop_chain item and asserts the
+  family rejects it (Addendum 1 item 3: the leaky hop_chain items stay OUT; the TRAP
+  arm is distinct). Selftest green, generation deterministic.
+
 ### 2026-11-20 (round-78 instrument: aligned tail_copy_downgrade trigger, refs #166)
 - Round-78 cross-ask instrument `research/nightly-2026-11-21-0200/cross_ask_r78.py`
   lands the #166 fix: the `tail_copy_downgrade` trigger is registered at
