@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Pre-commit hook: fail-fast secret scan (betterleaks) on staged files, then
+# the house quality checks that CI runs. Fail on any nonzero exit.
+set -euo pipefail
+
+ROOT=$(git rev-parse --show-toplevel)
+cd "$ROOT"
+
+# 1. Secret scan: betterleaks on the staged files only (fail-fast).
+#    CI uses gitleaks v8.30.1 pinned on the full history; the local hook
+#    uses betterleaks on the diff so a commit is blocked before it exists.
+echo "pre-commit: betterleaks secret scan (staged files)"
+# Scan the staged files; -U0 keeps the scan scoped to the diff. betterleaks
+# reads file content, so hand it the staged file list directly.
+git diff --cached --name-only --diff-filter=ACM -z \
+  | xargs -0 -r betterleaks dir
+
+# 2. Quality checks: the same gates CI enforces on tracked files.
+echo "pre-commit: house quality checks"
+python3 scripts/check_conflict_markers.py
+python3 scripts/check_workflow_syntax.py
+python3 scripts/check_no_agent_artifacts.py
+python3 scripts/check_archive.py
+python3 scripts/check_links.py
+python3 scripts/check_serving_ids.py
+
+# 3. Punctuation standard: no em/en dashes in tracked files.
+set +e
+git grep -n -P $'\x{2014}|\x{2013}' -- . >/dev/null
+r=$?
+set -e
+[ "$r" -eq 1 ] || {
+  echo "pre-commit: BLOCKED - em/en dash found in a tracked file (project standard)."
+  exit 1
+}
+
+echo "pre-commit: all checks passed"

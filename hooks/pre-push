@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Pre-push hook: full-history betterleaks secret scan plus the full house
+# quality gate. Everything CI enforces must pass locally before a push.
+set -euo pipefail
+
+ROOT=$(git rev-parse --show-toplevel)
+cd "$ROOT"
+
+echo "pre-push: betterleaks full-history secret scan"
+betterleaks git
+
+echo "pre-push: house quality checks (full suite)"
+python3 scripts/check_archive.py --selftest >/dev/null
+python3 scripts/check_archive.py
+python3 scripts/check_links.py --selftest >/dev/null
+python3 scripts/check_links.py
+python3 scripts/check_serving_ids.py --selftest >/dev/null
+python3 scripts/check_serving_ids.py
+python3 scripts/check_conflict_markers.py --selftest >/dev/null
+python3 scripts/check_conflict_markers.py
+python3 scripts/check_workflow_syntax.py --selftest >/dev/null
+python3 scripts/check_workflow_syntax.py
+python3 scripts/check_no_agent_artifacts.py --selftest >/dev/null
+python3 scripts/check_no_agent_artifacts.py
+
+# Punctuation standard: no em/en dashes in tracked files.
+set +e
+git grep -n -P $'\x{2014}|\x{2013}' -- . >/dev/null
+r=$?
+set -e
+[ "$r" -eq 1 ] || {
+  echo "pre-push: BLOCKED - em/en dash found in a tracked file (project standard)."
+  exit 1
+}
+
+echo "pre-push: all checks passed"
