@@ -1,0 +1,12 @@
+Auto-merging CHANGELOG.md
+CONFLICT (content): Merge conflict in CHANGELOG.md
+Automatic merge failed; fix conflicts and then commit the result.
+resolved
+research/nightly-2026-11-09-0301: re-resolved+pushed
+PR 136 checks GREEN
+GraphQL: Repository rule violations found
+
+3 of 3 required status checks are expected.
+
+ (mergePullRequest)
+ABORTED at research/nightly-2026-11-09-0301 (PR #136)

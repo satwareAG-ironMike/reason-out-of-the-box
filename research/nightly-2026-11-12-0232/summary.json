@@ -1,0 +1,85 @@
+{
+ "criteria": {
+  "E1": {
+   "completion_tokens": 1123,
+   "correct": true,
+   "declared": "trackst",
+   "delivered": true,
+   "dispatched": true,
+   "gold": "trackst",
+   "pass": true,
+   "wall_s": 842.974
+  },
+  "E2": {
+   "content": "yes",
+   "dispatched": true,
+   "pass": true,
+   "reasoning_chars": 277,
+   "reasoning_field": "reasoning_content"
+  },
+  "N3": {
+   "seed": 116261051,
+   "status": "certified pre-dispatch",
+   "yesno_digest16": "068bc6a1fb0620fb"
+  },
+  "P1": {
+   "dispatched": false,
+   "status": "owed (registered; core panel on the next healthy 27B-class firing)"
+  },
+  "R1": {
+   "completion_tokens": 1025,
+   "declared": "none",
+   "dispatched": true,
+   "refused": true,
+   "status": "dispatched"
+  },
+  "T1_tc0_bound": {
+   "source": "arXiv:2604.25800",
+   "status": "verified",
+   "verification": "archive round 3 entry, re-verified against the OpenAlex work record 2026-11-12 (work-record level: title, authors, year; no quote taken)"
+  },
+  "T2_crasp_characterization": {
+   "source": "arXiv:2608.13433",
+   "status": "verified",
+   "verification": "next-investigations round-11 candidate (2026-09-10 scan), re-verified against the OpenAlex work record 2026-11-12"
+  },
+  "T3_encoding_specific_remedies": {
+   "source": "arXiv:2608.31067 (with arXiv:2604.25800)",
+   "status": "verified",
+   "verification": "next-investigations round-11 candidate (2026-09-10 scan), re-verified against the OpenAlex work record 2026-11-12"
+  },
+  "T4_task_complexity_not_the_wall": {
+   "source": "in-repo measurement (rounds 51/52/59)",
+   "status": "verified",
+   "verification": "executed in-repo records, no external source"
+  }
+ },
+ "dispatched": 2,
+ "flags": [
+  "endpoint_rate_limited",
+  "dead_end_control_refused"
+ ],
+ "gate_blob": "d29e33cf12760e95125fe225bbb7f72b40d0c432613e103364a8e660ea4bf555",
+ "model_digest": "86d6f3507f8725bf",
+ "not_dispatched": [],
+ "panel": 2,
+ "planned_calls": 2,
+ "records": {
+  "A48_j8": {
+   "completion_tokens": 1123,
+   "correct": true,
+   "declared": "trackst",
+   "delivered": true,
+   "finish_reason": "stop"
+  },
+  "A49_deadend": {
+   "completion_tokens": 1025,
+   "correct": true,
+   "declared": "none",
+   "delivered": true,
+   "finish_reason": "stop"
+  }
+ },
+ "schema": "round61-gate-v1",
+ "verdict": "literature_synthesis_rate_limited_record"
+}

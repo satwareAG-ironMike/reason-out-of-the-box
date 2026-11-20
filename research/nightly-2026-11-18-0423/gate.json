@@ -1,0 +1,156 @@
+{
+ "F1_filler_budget": "the arm-F notes block carries the draft's whitespace-token budget per item (field filler_tokens); parity is declared in whitespace tokens, not in the endpoint's tokenization, and the filler token is asserted outside every item vocabulary in --selftest",
+ "H1_answer_stability": "over the terminal cells whose turn-1 answer WAS the terminal gold: how often each arm still reports the interior step correctly (the arm-damages-a-right-answer side, issue #152 item 3)",
+ "V0_precondition": "the deployment must hand back a non-report channel at the pre-gate census; without it arm X cannot be built and row R2 is refused, not trusted (issue #105)",
+ "V1_solver_certified": "the independent solver agrees with the path walk at j = 0, 1, mid, level and returns None one step past the tail; every item is a load-floor (facts = 2 * level), component-isomorphic two-chain item; the interior gold is asserted distinct from the terminal and the filler token outside every vocabulary",
+ "V2_control_liveness": "the past-the-tail control declares NONE at turn 1 (issue #139 shape)",
+ "V3_anchor": "the shallow j = 8 anchor cell delivers the correct terminal (liveness)",
+ "X2_tail_shortcut": "if every delivered arm-X record on the scope emitted the draft's last vocabulary name, the reading is tail_copy, not selection; on the interior ask a tail copy is a wrong answer, so the downgrade and a correct recovery are mutually exclusive",
+ "arms": {
+  "B": "turn-1 answer field only in the assistant turn",
+  "F": "turn-1 answer field plus a budget-matched filler under the same label in the assistant turn",
+  "X": "turn-1 answer field plus the turn-1 non-report channel under the notes label in the assistant turn"
+ },
+ "caps": {
+  "dispatch_budget_s": 2100,
+  "max_prompts": 40,
+  "max_tokens": 2048,
+  "planned_calls": 5,
+  "pre_gate_calls": 2
+ },
+ "cells": [
+  {
+   "arm": "t1",
+   "gold": "spog",
+   "j": 48,
+   "kind": "name",
+   "label": "A48_j48",
+   "level": 48,
+   "prompt_sha256": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+   "seed": 116261051
+  },
+  {
+   "arm": "t1",
+   "gold": "prish",
+   "j": 50,
+   "kind": "name",
+   "label": "B50_j50",
+   "level": 50,
+   "prompt_sha256": "c15a68eb63cc474457ebe6f8ee806f6e0182d38967bfdbe67726417c272e5362",
+   "seed": 120261132
+  },
+  {
+   "arm": "t1",
+   "gold": "brelt",
+   "j": 64,
+   "kind": "name",
+   "label": "C64_j64",
+   "level": 64,
+   "prompt_sha256": "c1ef6c20bfd84e2fd30a6eaefa22caf1dfb4663280b0824cac72e89f298eea7e",
+   "seed": 148261120
+  },
+  {
+   "arm": "t1",
+   "gold": "NONE",
+   "j": 72,
+   "kind": "over_end",
+   "label": "C64_over",
+   "level": 64,
+   "prompt_sha256": "3fe1fe63ac99ccdd5b260595252b9a63d1dd0e8a67ed832778860a6b1d58a8b9",
+   "seed": 148261120
+  },
+  {
+   "arm": "t1",
+   "gold": "trackst",
+   "j": 8,
+   "kind": "name",
+   "label": "A48_j8",
+   "level": 48,
+   "prompt_sha256": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260",
+   "seed": 116261051
+  }
+ ],
+ "controls_C1": "a name emitted where the links ran out is a manufactured name; the NONE-gold control runs under all three arms, draft included, and any false name caps the R2 reading",
+ "decision_R2": {
+  "ambiguous": "|n_X - n_F| <= 1 and n_X < 2",
+  "cross_ask_gated": "n_X >= 2 and n_X - n_F >= 2",
+  "evaluable_scope": "the terminal cells whose turn-1 draft contains the interior gold, census field interior_gold_in_trace, registered here before any prompt",
+  "filler_matches_budget": "n_F >= n_X - 1 and n_F >= 1",
+  "min_drafts_with_gold": 2,
+  "no_recovery": "n_X == 0 and no arm-X record on the scope was delivered",
+  "statistics": "exact two-sided binomial over the X-vs-F discordant pairs across the three items, exploratory, n single digits, no significance claim",
+  "tail_copy_downgrade": "n_X == 0 and every delivered arm-X record on the scope emitted the draft's last vocabulary name"
+ },
+ "delivery_states": [
+  "delivered_correct",
+  "delivered_wrong_on_right_path",
+  "delivered_wrong_off_path",
+  "declared_none_on_name_gold",
+  "delivered_no_item_name",
+  "declared_none",
+  "false_name_on_none_gold",
+  "censored_at_cap",
+  "empty_answer_field"
+ ],
+ "firing": "2026-11-18 04:23",
+ "matched_pair": {
+  "prompt_sha256": {
+   "A48_j48": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+   "B50_j50": "c15a68eb63cc474457ebe6f8ee806f6e0182d38967bfdbe67726417c272e5362",
+   "C64_j64": "c1ef6c20bfd84e2fd30a6eaefa22caf1dfb4663280b0824cac72e89f298eea7e"
+  },
+  "record": "round-63 gate cells (PR #143, unmerged here), re-dispatched by rounds 69, 70 and 72"
+ },
+ "model_digest": "4075b5949b2b0487",
+ "question": "on the flash build where round 70 found the tail-copy confound (digest 4075b5949b2b0487), when the restored draft names every node of the walk, is the name reported for an interior step selected by position or copied from the draft's tail, and does that match round 72's 27B result",
+ "round": 73,
+ "schema": "round73-gate-v1",
+ "scoring": "visible answer field against the generator's independent solver; the trace is a treatment and a count census, never a scorer (issue #94)",
+ "slot": "2/6",
+ "theory_rows": {
+  "T1_verbal_report_bibliographic": {
+   "source": "Ericsson & Simon 1980, Psychological Review 87(3):215-251, DOI 10.1037/0033-295X.87.3.215",
+   "statement": "used only as the bibliographic anchor for the frame that a verbal report is a retrieval from a prior store rather than a special introspective faculty. The thesis wording itself was NOT read this round and is carried as owed",
+   "verification": "carried from round 72's gate (open PR #153, unmerged here), record level on 2026-11-17; re-confirmed via Crossref this round 2026-11-18 (see README); no content claim from this row"
+  },
+  "T2_reports_as_causal_theory": {
+   "source": "Nisbett & Wilson 1977, Psychological Review 84(3):231-259, DOI 10.1037/0033-295X.84.3.231",
+   "statement": "a fluent report can be produced by implicit causal theory instead of by access to the process, so arm X recovering a name is not by itself access. Content carried as owed at the same level",
+   "verification": "carried from round 72's gate (open PR #153, unmerged here), record level on 2026-11-17; re-confirmed via Crossref this round 2026-11-18 (see README)"
+  },
+  "T3_accessibility": {
+   "source": "Block 2007, Behavioral and Brain Sciences 30:481-499, DOI 10.1017/S0140525X07002786",
+   "statement": "the row R2 operationalizes availability-for-report versus report; the article takes accessibility as its object of analysis. No argument content is claimed from this row",
+   "verification": "carried from round 72's gate (open PR #153, unmerged here), record level on 2026-11-17; re-confirmed via OpenAlex this round 2026-11-18 (Crossref 429'd). Caveat on record: citation databases circulate a second DOI suffix for this article"
+  },
+  "T4_verbalizable_workspace": {
+   "source": "arXiv:2607.15495 v1, 2026-07-16 (Gurnee, Sofroniew, Pearce, and co-authors), unrefereed preprint",
+   "statement": "title 'Verbalizable Representations Form a Global Workspace in Language Models'; the abstract reports a set of representations the model is poised to verbalize whose contents can be reported and are used to carry the intermediate steps of silent reasoning (quote, 9 words). The closest published neighbour to this design",
+   "verification": "carried from round 72's gate (open PR #153, unmerged here), abstract level on 2026-11-17; re-confirmed via arXiv export API this round 2026-11-18 (see README)"
+  },
+  "T5_introspection_gap": {
+   "source": "arXiv:2601.01828 v1, 2026-01-05 (Lindsey), unrefereed preprint",
+   "statement": "injecting known concepts into activations and reading the self-report separates grounded report from confabulation; the abstract reports the capacity is highly unreliable and context-dependent (quote, 5 words)",
+   "verification": "carried from round 72's gate (open PR #153, unmerged here), abstract level on 2026-11-17; re-confirmed via arXiv export API this round 2026-11-18 (see README)"
+  },
+  "T6_trace_answer_dissociation": {
+   "source": "arXiv:2605.29087 v1, 2026-05-27, unrefereed preprint",
+   "statement": "'The Chain Holds, the Answer Folds: Trace-Answer Dissociation in Reasoning Models Under Adversarial Pressure': the abstract reports the chain staying correct while the emitted answer flips, and that a naive trace-anchored defense backfired. That last clause is the registered prior against arm X: restoring the channel is not assumed to help",
+   "verification": "carried from round 72's gate (open PR #153, unmerged here), abstract level on 2026-11-17; re-confirmed via arXiv export API this round 2026-11-18 (see README)"
+  }
+ },
+ "wall_laws": {
+  "L1_self_stop_band": {
+   "source": "round 59 (PR #140, unmerged here) and round 69, both on one digest",
+   "test": "1556 <= completion_tokens <= 1558 and finish_reason == 'stop'"
+  },
+  "L2_reserve_492": {
+   "source": "round 53 (PR #131, unmerged here)",
+   "test": "cap - completion_tokens == 492"
+  },
+  "L3_cap_bound": {
+   "source": "round 54 (PR #133, unmerged here), the 27B-class shape",
+   "test": "cap - completion_tokens <= 19"
+  }
+ }
+}

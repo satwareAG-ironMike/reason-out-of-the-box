@@ -1,0 +1,24 @@
+{
+ "calibration": {
+  "completion_tokens": 381,
+  "declared": "trackst",
+  "delivery_state": "delivered_correct",
+  "tok_per_s": 33.927,
+  "wall_s": 11.23
+ },
+ "census": {
+  "completion_tokens": 58,
+  "content": "yes",
+  "finish_reason": "stop",
+  "message_fields": [
+   "content",
+   "reasoning_content",
+   "role"
+  ],
+  "prompt_tokens": 115,
+  "trace_chars": 217,
+  "trace_field": "reasoning_content",
+  "wall_s": 1.887
+ },
+ "model_digest": "4075b5949b2b0487"
+}
