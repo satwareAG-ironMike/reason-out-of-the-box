@@ -65,3 +65,14 @@ Scope: map published human data onto the three task families of the pre-registra
   CHECK: node .unlazy/pk/check-closeout.mjs && python3 scripts/check_archive.py && python3 scripts/check_links.py && (git grep -n -P "\x{2014}|\x{2013}" -- . ; [ $? -eq 1 ]) && echo "ingestion closeout passed"
   EXPECT: ingestion closeout passed
   EVIDENCE: exit=0; shell=/bin/sh; cwd=<repo-checkout>; path=4f1febc988dd/17 entries; EXPECT=matched; gate-sig=4efc88004709bfbc; output-sha256=21e6869eb5b665a32593b2d2e42d726c00994a2c37264c9ed51339fc6832a133; output-bytes=91
+
+## Identity limitation (owner-accepted, 2026-11-20, refs #180, #169, #171)
+
+Author, reviewer, and merger are the same GitHub account. The `pr-reviewer-verdict`
+gate (PR #171) enforces that a `[pr-reviewer]` verdict comment exists at the PR's head
+SHA; it does **not** enforce that the verdict came from a different account than the
+merger. The owner was informed (issue #180, closed as not-applicable: no separate
+reviewer account exists) and accepts this as a known constraint. The gate is stronger
+than no check (it enforces the verdict-exists-at-head rule), weaker than an
+independence check. Any future addition of a second reviewer account should extend
+`scripts/check_pr_reviewer_verdict.py` to filter on `user.login`.
