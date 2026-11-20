@@ -62,6 +62,16 @@ jobs:
       - name: Scan tracked .md/.yml/.yaml files
         run: python3 scripts/check_conflict_markers.py
 
+  workflow-syntax:
+    name: workflow YAML syntax (fail loudly on unparsable workflows)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Selftest (negative control)
+        run: python3 scripts/check_workflow_syntax.py --selftest
+      - name: Validate all tracked workflow files
+        run: python3 scripts/check_workflow_syntax.py
+
   pr-reviewer-verdict:
     name: pr-reviewer verdict at head (merge gate)
     if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
