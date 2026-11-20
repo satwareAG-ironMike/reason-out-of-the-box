@@ -1,0 +1,661 @@
+{
+  "anomalies": {
+    "count": 8,
+    "records": [
+      {
+        "arm": "enumerate",
+        "cap": 2048,
+        "class": "marker_above_predicted_hook",
+        "predicted": 1556,
+        "seed": 116261051,
+        "tokens": 1715
+      },
+      {
+        "arm": "enumerate",
+        "cap": 2048,
+        "class": "marker_above_predicted_hook",
+        "predicted": 1556,
+        "seed": 116261076,
+        "tokens": 1713
+      },
+      {
+        "arm": "listing",
+        "cap": 2048,
+        "class": "marker_above_predicted_hook",
+        "predicted": 1556,
+        "seed": null,
+        "tokens": 2048
+      },
+      {
+        "arm": "as_is",
+        "cap": 1536,
+        "class": "marker_below_predicted_hook",
+        "predicted": 1167,
+        "seed": 116261051,
+        "tokens": 1044
+      },
+      {
+        "arm": "as_is",
+        "cap": 1536,
+        "class": "marker_below_predicted_hook",
+        "predicted": 1167,
+        "seed": 116261076,
+        "tokens": 1044
+      },
+      {
+        "arm": "listing",
+        "cap": 1024,
+        "class": "marker_above_predicted_hook",
+        "predicted": 778,
+        "seed": null,
+        "tokens": 1024
+      },
+      {
+        "arm": "as_is",
+        "cap": 1024,
+        "class": "marker_below_predicted_hook",
+        "predicted": 778,
+        "seed": 116261051,
+        "tokens": 532
+      },
+      {
+        "arm": "as_is",
+        "cap": 1024,
+        "class": "marker_below_predicted_hook",
+        "predicted": 778,
+        "seed": 116261076,
+        "tokens": 532
+      }
+    ]
+  },
+  "answers": {
+    "correct": 2,
+    "delivered": 10,
+    "delivered_wrong": [
+      {
+        "arm": "as_is",
+        "cap": 2048,
+        "declared": "yes",
+        "gold": "no",
+        "seed": 116261076
+      },
+      {
+        "arm": "as_is",
+        "cap": 2048,
+        "declared": "yes",
+        "gold": "no",
+        "seed": 116261051
+      },
+      {
+        "arm": "enumerate",
+        "cap": 2048,
+        "declared": "yes",
+        "gold": "no",
+        "seed": 116261051
+      },
+      {
+        "arm": "enumerate",
+        "cap": 2048,
+        "declared": "yes",
+        "gold": "no",
+        "seed": 116261076
+      },
+      {
+        "arm": "as_is",
+        "cap": 1536,
+        "declared": "yes",
+        "gold": "no",
+        "seed": 116261051
+      },
+      {
+        "arm": "as_is",
+        "cap": 1536,
+        "declared": "yes",
+        "gold": "no",
+        "seed": 116261076
+      },
+      {
+        "arm": "as_is",
+        "cap": 1024,
+        "declared": "yes",
+        "gold": "no",
+        "seed": 116261051
+      },
+      {
+        "arm": "as_is",
+        "cap": 1024,
+        "declared": "yes",
+        "gold": "no",
+        "seed": 116261076
+      }
+    ],
+    "records": 14
+  },
+  "archive_certification": {
+    "measured": {
+      "round 48": {
+        "at_cap": 5,
+        "at_pin": 0,
+        "marker": null,
+        "records": 36,
+        "utilisations_at_pin": []
+      },
+      "round 49": {
+        "at_cap": 0,
+        "at_pin": 33,
+        "marker": 33,
+        "records": 36,
+        "utilisations_at_pin": [
+          0.7598
+        ]
+      },
+      "round 50": {
+        "at_cap": 5,
+        "at_pin": 0,
+        "marker": 0,
+        "records": 31,
+        "utilisations_at_pin": []
+      },
+      "round 51": {
+        "at_cap": 0,
+        "at_pin": 8,
+        "marker": 9,
+        "records": 20,
+        "utilisations_at_pin": [
+          0.7598
+        ]
+      }
+    },
+    "ok": true,
+    "pin_ratio_recomputed": 0.7598,
+    "problems": []
+  },
+  "census": {
+    "censused": 14,
+    "records": 14,
+    "sources": [
+      "reasoning_content"
+    ]
+  },
+  "classes": {
+    "alt_absolute_cap_no_marker": 2,
+    "hook_hit_predicted": 3,
+    "marker_above_predicted_hook": 4,
+    "marker_below_predicted_hook": 4,
+    "natural_stop_no_marker": 1
+  },
+  "cross_fire_detail": [
+    {
+      "all_match_archived": false,
+      "answer": [
+        "no",
+        "yes"
+      ],
+      "archived_answer": "yes",
+      "archived_finish": "stop",
+      "archived_tokens": 1556,
+      "finish": [
+        "stop",
+        "stop"
+      ],
+      "internally_consistent": false,
+      "records": 2,
+      "seed": 116261051,
+      "tokens": [
+        1556,
+        1556
+      ]
+    },
+    {
+      "all_match_archived": true,
+      "answer": [
+        "yes"
+      ],
+      "archived_answer": "yes",
+      "archived_finish": "stop",
+      "archived_tokens": 1556,
+      "finish": [
+        "stop"
+      ],
+      "internally_consistent": true,
+      "records": 1,
+      "seed": 116261076,
+      "tokens": [
+        1556
+      ]
+    }
+  ],
+  "dispatch": {
+    "call_cap": 40,
+    "calls_used": 14,
+    "completion_tokens": 16549,
+    "dispatch_wall_s": 305.729,
+    "not_dispatched": [],
+    "planned_calls": 15,
+    "prompt_tokens": 11283
+  },
+  "enumerate_detail": [
+    {
+      "bfs_reachable": 49,
+      "declared": "yes",
+      "extra": 0,
+      "gold": "no",
+      "gold_consistent": false,
+      "list_equals_bfs": true,
+      "listed": 49,
+      "missing": 0,
+      "seed": 116261051
+    },
+    {
+      "bfs_reachable": 49,
+      "declared": "yes",
+      "extra": 0,
+      "gold": "no",
+      "gold_consistent": false,
+      "list_equals_bfs": true,
+      "listed": 49,
+      "missing": 0,
+      "seed": 116261076
+    }
+  ],
+  "flags": [
+    "marker_not_locked_to_predicted_hook"
+  ],
+  "gate": "1f78366a0d610f12e03b3f46c4ab8e6ee21c9301d5a51e452758dd3998b9ae8c",
+  "gate_rows": {
+    "C1": {
+      "band": "6 of 6",
+      "id": "C1",
+      "measured": "0 of 6",
+      "status": "fail",
+      "text": "the cap ladder below the pin lands at the predicted hook: 6 records (2 items x caps 512, 1024, 1536), measured tokens within 8 of 1556*cap//2048, finish_reason stop, marker present"
+    },
+    "C2": {
+      "band": "reported; 5 of 6 or more refuses C1 and the H1 reading",
+      "id": "C2",
+      "measured": "2 of 6",
+      "status": "fail",
+      "text": "the absolute-budget signature at the same 6 records: tokens equal the requested cap, finish_reason length, no marker"
+    },
+    "C3": {
+      "band": "0 disagreements",
+      "id": "C3",
+      "measured": 4,
+      "status": "fail",
+      "text": "the marker appears in every predicted-hook record and in no natural-stop record (0 disagreements)"
+    },
+    "C4": {
+      "band": "1 of 1",
+      "id": "C4",
+      "measured": "1 of 1",
+      "status": "pass",
+      "text": "the gold-yes item whose archived natural stop was 1310 stays below the hook at cap 2048: delivered, finish_reason stop, no marker, tokens below 1556"
+    },
+    "C5": {
+      "band": "2 of 2",
+      "id": "C5",
+      "measured": "0 of 2",
+      "status": "fail",
+      "text": "the non-ladder listing control is cut by the same hook at caps 2048 and 1024 (predicted lengths, marker present, DONE absent)"
+    },
+    "C6": {
+      "band": "2 of 2 for the recovery flag; 0 of 2 keeps the ceiling",
+      "id": "C6",
+      "measured": "0 of 2",
+      "status": "fail",
+      "text": "the enumerate arm delivers the gold label on both items round 51 delivered wrong, and its own list equals the independent BFS reachable set"
+    },
+    "C7": {
+      "band": "1 of 1",
+      "id": "C7",
+      "measured": "0 of 1",
+      "status": "fail",
+      "text": "issue #100 self-agreement: the duplicate re-dispatch of the same request is byte-identical to its twin (trace and answer)"
+    },
+    "C8": {
+      "band": "2 of 2",
+      "id": "C8",
+      "measured": "1 of 2",
+      "status": "fail",
+      "text": "same-prompt cross-firing against the archived rows of round 51 on the certified pair: same finish_reason and same answer-channel readout for both items, with the serving-id digest comparison stated"
+    },
+    "C9": {
+      "band": "reported",
+      "id": "C9",
+      "measured": {
+        "count": 8,
+        "records": [
+          {
+            "arm": "enumerate",
+            "cap": 2048,
+            "class": "marker_above_predicted_hook",
+            "predicted": 1556,
+            "seed": 116261051,
+            "tokens": 1715
+          },
+          {
+            "arm": "enumerate",
+            "cap": 2048,
+            "class": "marker_above_predicted_hook",
+            "predicted": 1556,
+            "seed": 116261076,
+            "tokens": 1713
+          },
+          {
+            "arm": "listing",
+            "cap": 2048,
+            "class": "marker_above_predicted_hook",
+            "predicted": 1556,
+            "seed": null,
+            "tokens": 2048
+          },
+          {
+            "arm": "as_is",
+            "cap": 1536,
+            "class": "marker_below_predicted_hook",
+            "predicted": 1167,
+            "seed": 116261051,
+            "tokens": 1044
+          },
+          {
+            "arm": "as_is",
+            "cap": 1536,
+            "class": "marker_below_predicted_hook",
+            "predicted": 1167,
+            "seed": 116261076,
+            "tokens": 1044
+          },
+          {
+            "arm": "listing",
+            "cap": 1024,
+            "class": "marker_above_predicted_hook",
+            "predicted": 778,
+            "seed": null,
+            "tokens": 1024
+          },
+          {
+            "arm": "as_is",
+            "cap": 1024,
+            "class": "marker_below_predicted_hook",
+            "predicted": 778,
+            "seed": 116261051,
+            "tokens": 532
+          },
+          {
+            "arm": "as_is",
+            "cap": 1024,
+            "class": "marker_below_predicted_hook",
+            "predicted": 778,
+            "seed": 116261076,
+            "tokens": 532
+          }
+        ]
+      },
+      "status": "pass",
+      "text": "markers that appear below the predicted hook are counted as anomalies, never as hook hits (round 51's archived rung record is one: marker at 532 tokens where the prediction was 778)"
+    },
+    "N1": {
+      "band": "every record censused",
+      "id": "N1",
+      "measured": {
+        "censused": 14,
+        "records": 14,
+        "sources": [
+          "reasoning_content"
+        ]
+      },
+      "status": "pass",
+      "text": "issue #105 field census on every record: the message field names and the reasoning-supplying field (reasoning_content if non-empty, else reasoning, else empty)"
+    },
+    "R1": {
+      "band": "reported",
+      "id": "R1",
+      "measured": [
+        {
+          "coverage_ratio": 1.0,
+          "entities_in_item": 98,
+          "entities_mentioned": 98,
+          "gold": "no",
+          "marker_count": 1,
+          "query_target_mentioned": true,
+          "seed": 116261051,
+          "tokens": 1556
+        },
+        {
+          "coverage_ratio": 1.0,
+          "entities_in_item": 98,
+          "entities_mentioned": 98,
+          "gold": "no",
+          "marker_count": 1,
+          "query_target_mentioned": true,
+          "seed": 116261076,
+          "tokens": 1556
+        },
+        {
+          "coverage_ratio": 1.0,
+          "entities_in_item": 98,
+          "entities_mentioned": 98,
+          "gold": "no",
+          "marker_count": 1,
+          "query_target_mentioned": true,
+          "seed": 116261051,
+          "tokens": 1556
+        },
+        {
+          "coverage_ratio": 1.0,
+          "entities_in_item": 98,
+          "entities_mentioned": 98,
+          "gold": "yes",
+          "marker_count": 0,
+          "query_target_mentioned": true,
+          "seed": 116261338,
+          "tokens": 1205
+        }
+      ],
+      "status": "pass",
+      "text": "traversal completeness at the hook, as-is cap-2048 records only: the fraction of the item's entities the run mentioned before the cut, and whether the query target was mentioned"
+    }
+  },
+  "health": {
+    "id": "H0",
+    "measured": {
+      "error": null,
+      "finish": "stop",
+      "ok": true,
+      "reasoning_source": "reasoning_content",
+      "tokens": 60,
+      "wall_s": 2.246
+    },
+    "status": "pass"
+  },
+  "model_digest": "c62b81e96826354e",
+  "schema": "round53-gate-v1",
+  "stop_offsets": {
+    "by_arm_and_cap": {
+      "as_is": {
+        "1024": [
+          {
+            "cap": 1024,
+            "finish": "stop",
+            "markers": 1,
+            "reserve": 492,
+            "seed": 116261051,
+            "tokens": 532
+          },
+          {
+            "cap": 1024,
+            "finish": "stop",
+            "markers": 1,
+            "reserve": 492,
+            "seed": 116261076,
+            "tokens": 532
+          }
+        ],
+        "1536": [
+          {
+            "cap": 1536,
+            "finish": "stop",
+            "markers": 1,
+            "reserve": 492,
+            "seed": 116261051,
+            "tokens": 1044
+          },
+          {
+            "cap": 1536,
+            "finish": "stop",
+            "markers": 1,
+            "reserve": 492,
+            "seed": 116261076,
+            "tokens": 1044
+          }
+        ],
+        "2048": [
+          {
+            "cap": 2048,
+            "finish": "stop",
+            "markers": 1,
+            "reserve": 492,
+            "seed": 116261051,
+            "tokens": 1556
+          },
+          {
+            "cap": 2048,
+            "finish": "stop",
+            "markers": 1,
+            "reserve": 492,
+            "seed": 116261051,
+            "tokens": 1556
+          },
+          {
+            "cap": 2048,
+            "finish": "stop",
+            "markers": 1,
+            "reserve": 492,
+            "seed": 116261076,
+            "tokens": 1556
+          },
+          {
+            "cap": 2048,
+            "finish": "stop",
+            "markers": 0,
+            "reserve": 843,
+            "seed": 116261338,
+            "tokens": 1205
+          }
+        ],
+        "512": [
+          {
+            "cap": 512,
+            "finish": "length",
+            "markers": 0,
+            "reserve": 0,
+            "seed": 116261051,
+            "tokens": 512
+          },
+          {
+            "cap": 512,
+            "finish": "length",
+            "markers": 0,
+            "reserve": 0,
+            "seed": 116261076,
+            "tokens": 512
+          }
+        ]
+      },
+      "enumerate": {
+        "2048": [
+          {
+            "cap": 2048,
+            "finish": "stop",
+            "markers": 1,
+            "reserve": 333,
+            "seed": 116261051,
+            "tokens": 1715
+          },
+          {
+            "cap": 2048,
+            "finish": "stop",
+            "markers": 1,
+            "reserve": 335,
+            "seed": 116261076,
+            "tokens": 1713
+          }
+        ]
+      },
+      "listing": {
+        "1024": [
+          {
+            "cap": 1024,
+            "finish": "length",
+            "markers": 1,
+            "reserve": 0,
+            "seed": null,
+            "tokens": 1024
+          }
+        ],
+        "2048": [
+          {
+            "cap": 2048,
+            "finish": "length",
+            "markers": 1,
+            "reserve": 0,
+            "seed": null,
+            "tokens": 2048
+          }
+        ]
+      }
+    },
+    "note": "post-dispatch observation, added after the tier rule had been frozen; no verdict of this round rests on it",
+    "registered": false,
+    "reserve_histogram": [
+      {
+        "arms": [
+          "as_is",
+          "listing"
+        ],
+        "marker_rows": 2,
+        "reserve": 0,
+        "rows": 4
+      },
+      {
+        "arms": [
+          "enumerate"
+        ],
+        "marker_rows": 1,
+        "reserve": 333,
+        "rows": 1
+      },
+      {
+        "arms": [
+          "enumerate"
+        ],
+        "marker_rows": 1,
+        "reserve": 335,
+        "rows": 1
+      },
+      {
+        "arms": [
+          "as_is"
+        ],
+        "marker_rows": 7,
+        "reserve": 492,
+        "rows": 7
+      },
+      {
+        "arms": [
+          "as_is"
+        ],
+        "marker_rows": 0,
+        "reserve": 843,
+        "rows": 1
+      }
+    ]
+  },
+  "tier": "no_serving_budget",
+  "tier_rule": [
+    "serving_budget_hook if C1 >= 5 of 6 and C2 <= 1 of 6 and C5 == 2 of 2",
+    "absolute_pin if C2 >= 5 of 6",
+    "no_serving_budget if C1 <= 2 of 6 and C5 == 0 of 2",
+    "unresolved otherwise"
+  ]
+}

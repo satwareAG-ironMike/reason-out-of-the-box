@@ -31,6 +31,12 @@ maintainer owns deletion or relocation. Durable conclusions do not stay here: th
   independent second implementation reproduces it (`Reproduced`) or the pre-registered
   decision table covers it (`Validated`). Small n per level is exploratory and must say so.
 - A round directory is append-only after its PR opens; a later round opens a new directory.
+- Same-firing resume: immutability of `raw.jsonl`, `summary.json` and `gate.json` binds from the
+  moment the round's PR opens. A resume inside the same firing may rebuild `summary.json` and
+  re-emit `gate.json` only if `raw.jsonl` and the gate blob are byte-unchanged by the rebuild, the
+  instrument change is disclosed in the README, and any column added after the dispatch carries a
+  `registered: false` marker and a planted-slip selftest control. No registered row or tier may move
+  in a resume.
 - Errata carve-out (issue #120): forward-only errata may annotate a merged round's
   `README.md` prose and the matching CHANGELOG entry, and may edit instrument docstrings
   (comment-only, no code change); `raw.jsonl`, `summary.json` and `gate.json` stay
