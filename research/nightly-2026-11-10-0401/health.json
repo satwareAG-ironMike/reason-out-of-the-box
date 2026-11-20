@@ -1,0 +1,15 @@
+{
+  "completion_tokens": 60,
+  "fields": [
+    "audio",
+    "content",
+    "function_call",
+    "reasoning",
+    "refusal",
+    "role"
+  ],
+  "finish_reason": "stop",
+  "model_digest": "26df9af5972ff312",
+  "reasoning_field": "reasoning",
+  "trace_chars": 224
+}

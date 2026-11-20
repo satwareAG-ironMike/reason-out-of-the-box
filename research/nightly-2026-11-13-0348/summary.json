@@ -1,0 +1,147 @@
+{
+ "criteria": {
+  "E1": {
+   "completion_tokens": 306,
+   "correct": true,
+   "declared": "trackst",
+   "delivered": true,
+   "dispatched": true,
+   "gold": "trackst",
+   "in_plan": true,
+   "pass": true,
+   "wall_s": 3.837
+  },
+  "E2": {
+   "content": "\n\nyes",
+   "content_stripped": "yes",
+   "dispatched": true,
+   "pass": true,
+   "reasoning_chars": 239,
+   "reasoning_field": "reasoning"
+  },
+  "N3": {
+   "seed": 116261051,
+   "status": "certified pre-dispatch",
+   "yesno_digest16": "068bc6a1fb0620fb"
+  },
+  "P1": {
+   "certified": true,
+   "controls_valid": true,
+   "n_correct": 1,
+   "n_endpoint_cells": 4,
+   "n_recorded": 4,
+   "reading": "length-generalization reading survives on the 27B class (T1-T3): at most one of four deep endpoints delivered"
+  },
+  "R1": {
+   "all_refused": true,
+   "completion_tokens": {
+    "A49_deadend": 1026,
+    "C64_deadend": 1268
+   },
+   "declared": {
+    "A49_deadend": "none",
+    "C64_deadend": "none"
+   },
+   "dispatched": [
+    "A49_deadend",
+    "C64_deadend"
+   ]
+  },
+  "T1_tc0_bound": {
+   "source": "arXiv:2604.25800",
+   "status": "carried from round 61 (work-record level)",
+   "verification": "carried from the round-61 gate (work-record verified 2026-11-12, OpenAlex: title, authors, year; no quote taken); not re-verified this firing"
+  },
+  "T2_crasp_characterization": {
+   "source": "arXiv:2608.13433",
+   "status": "carried from round 61 (work-record level)",
+   "verification": "carried from the round-61 gate (work-record verified 2026-11-12)"
+  },
+  "T3_encoding_specific_remedies": {
+   "source": "arXiv:2608.31067 (with arXiv:2604.25800)",
+   "status": "carried from round 61 (work-record level)",
+   "verification": "carried from the round-61 gate (work-record verified 2026-11-12)"
+  },
+  "T4_task_complexity_not_the_wall": {
+   "source": "in-repo measurement (rounds 51/52/59)",
+   "status": "carried from round 61 (work-record level)",
+   "verification": "executed in-repo records, no external source"
+  }
+ },
+ "dispatch_wall_s": 97.5,
+ "dispatched": 8,
+ "flags": [
+  "endpoint_censored_at_cap:A48_j48,A49_j49,C64_j64",
+  "dup_pair_diverges:B50_j50/B50_j50_dup"
+ ],
+ "gate_blob": "8ae5029d565181681e3d47cf2cabfe691f1985370999fd0eaa8e9d12e4704950",
+ "model_digest": "26df9af5972ff312",
+ "not_dispatched": [],
+ "panel": 8,
+ "panel_name": "r63",
+ "planned_calls": 8,
+ "records": {
+  "A48_j48": {
+   "completion_tokens": 2048,
+   "correct": false,
+   "declared": null,
+   "delivered": false,
+   "finish_reason": "length"
+  },
+  "A48_j8": {
+   "completion_tokens": 306,
+   "correct": true,
+   "declared": "trackst",
+   "delivered": true,
+   "finish_reason": "stop"
+  },
+  "A49_deadend": {
+   "completion_tokens": 1026,
+   "correct": true,
+   "declared": "none",
+   "delivered": true,
+   "finish_reason": "stop"
+  },
+  "A49_j49": {
+   "completion_tokens": 2048,
+   "correct": false,
+   "declared": null,
+   "delivered": false,
+   "finish_reason": "length"
+  },
+  "B50_j50": {
+   "completion_tokens": 1956,
+   "correct": true,
+   "declared": "prish",
+   "delivered": true,
+   "finish_reason": "stop"
+  },
+  "B50_j50_dup": {
+   "completion_tokens": 2048,
+   "correct": false,
+   "declared": null,
+   "delivered": false,
+   "finish_reason": "length"
+  },
+  "C64_deadend": {
+   "completion_tokens": 1268,
+   "correct": true,
+   "declared": "none",
+   "delivered": true,
+   "finish_reason": "stop"
+  },
+  "C64_j64": {
+   "completion_tokens": 2048,
+   "correct": false,
+   "declared": null,
+   "delivered": false,
+   "finish_reason": "length"
+  }
+ },
+ "schema": "round63-gate-v1",
+ "transport": {
+  "errors": 0,
+  "retries": 0
+ },
+ "verdict": "panel_delivered"
+}

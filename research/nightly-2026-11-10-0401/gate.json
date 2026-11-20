@@ -1,0 +1,700 @@
+{
+  "blob": "ff1df364dc84a2bed6f399a10ea3e65b3c7417355fd16a33f73f39ebbbcfcd4c",
+  "cells": [
+    {
+      "cap": 2048,
+      "gold": "stacklt",
+      "j": 8,
+      "kind": "name",
+      "label": "L16_j8",
+      "level": 16,
+      "n_facts": 32,
+      "prompt_sha256": "87169f9ec6f776c3933f511b0e6b4c52c73627f9fe28c5e6b67aa7a3f796636c",
+      "seed": 52261033
+    },
+    {
+      "cap": 2048,
+      "gold": "brond",
+      "j": 16,
+      "kind": "name",
+      "label": "L16_j16",
+      "level": 16,
+      "n_facts": 32,
+      "prompt_sha256": "a22f1d12cc743d194ee386939eeb8d4998a8e2fc28c59b70b16ee2e9a5db1f30",
+      "seed": 52261033
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 17,
+      "kind": "off_end",
+      "label": "L16_offend",
+      "level": 16,
+      "n_facts": 32,
+      "prompt_sha256": "515a50f2c6478f796b0b46744566c670eb696da3581350968480ee363461dcd3",
+      "seed": 52261033
+    },
+    {
+      "cap": 2048,
+      "gold": "thrend",
+      "j": 8,
+      "kind": "name",
+      "label": "L32A_j8",
+      "level": 32,
+      "n_facts": 64,
+      "prompt_sha256": "70ed757a4d369ae5ff57164bb1937f1d8b24b0ddf63925ad35d8b28936a48366",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "crux",
+      "j": 16,
+      "kind": "name",
+      "label": "L32A_j16",
+      "level": 32,
+      "n_facts": 64,
+      "prompt_sha256": "40909990f780674a7d93d9df15d819e43fedb57c4e0df326c56290084242d4c7",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "vixx",
+      "j": 24,
+      "kind": "name",
+      "label": "L32A_j24",
+      "level": 32,
+      "n_facts": 64,
+      "prompt_sha256": "def7b75e37c9eaa4e7b72ebdba8435a4fdcbb440a264522cc2dc72fbe427380e",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "sterk",
+      "j": 32,
+      "kind": "name",
+      "label": "L32A_j32",
+      "level": 32,
+      "n_facts": 64,
+      "prompt_sha256": "a8697dfb826079fc9be40fae6e6a8a78c915e1b16d5c066311eb438c9f694c53",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 33,
+      "kind": "off_end",
+      "label": "L32A_offend",
+      "level": 32,
+      "n_facts": 64,
+      "prompt_sha256": "cbd27af78988945009fce3608b9b7ebe9cc4e3bac6a4a2ed01c8192843c095b9",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 1,
+      "kind": "dead_end",
+      "label": "L32A_deadend",
+      "level": 32,
+      "n_facts": 64,
+      "prompt_sha256": "1f56a9a6f5969364284e1af8ce1a5dcdf8ee22b90bc5c5ce99aecba5079fce86",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "trackst",
+      "j": 8,
+      "kind": "name",
+      "label": "L48_j8",
+      "level": 48,
+      "n_facts": 96,
+      "prompt_sha256": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "flixm",
+      "j": 16,
+      "kind": "name",
+      "label": "L48_j16",
+      "level": 48,
+      "n_facts": 96,
+      "prompt_sha256": "7f6bbe18f35294e11fdfba70a4fbd2f0243f00ebf123b75348ff9074161340b1",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "whek",
+      "j": 24,
+      "kind": "name",
+      "label": "L48_j24",
+      "level": 48,
+      "n_facts": 96,
+      "prompt_sha256": "107666e0fa7e7af377e6cc990a33f1480a01e224910a67cea6c72e7aeadb9e16",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "whesh",
+      "j": 32,
+      "kind": "name",
+      "label": "L48_j32",
+      "level": 48,
+      "n_facts": 96,
+      "prompt_sha256": "6f19b9f8c406d70313e6f598c99a982855aa4f51e43af4ff9b60d3819f82e054",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "knudnd",
+      "j": 40,
+      "kind": "name",
+      "label": "L48_j40",
+      "level": 48,
+      "n_facts": 96,
+      "prompt_sha256": "f06957363201d1e788a24afb7107487a5ff4895591a58b34c69705337dfd9170",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "knudnd",
+      "j": 40,
+      "kind": "dup",
+      "label": "L48_j40_dup",
+      "level": 48,
+      "n_facts": 96,
+      "prompt_sha256": "f06957363201d1e788a24afb7107487a5ff4895591a58b34c69705337dfd9170",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 49,
+      "kind": "off_end",
+      "label": "L48_offend",
+      "level": 48,
+      "n_facts": 96,
+      "prompt_sha256": "e07afb24060fd6523c44f8c7147ae5e08e2b55a0131dcc2e14742f7452c45747",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "crilt",
+      "j": 8,
+      "kind": "name",
+      "label": "L64_j8",
+      "level": 64,
+      "n_facts": 128,
+      "prompt_sha256": "0246fedd916f5074dceba89a5b98f3c4d355af1c38270c4a87d1c5858e5adf5b",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "crep",
+      "j": 16,
+      "kind": "name",
+      "label": "L64_j16",
+      "level": 64,
+      "n_facts": 128,
+      "prompt_sha256": "ffb9cc5d705d893f8bb2b13d1c84b6f65590ee0f2ecedbd81f4b12c9322fac9d",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "clixg",
+      "j": 24,
+      "kind": "name",
+      "label": "L64_j24",
+      "level": 64,
+      "n_facts": 128,
+      "prompt_sha256": "f6b26cc39595b58b02675ec41b9a53a5b1c734964ed101043a72394e4c684b1f",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "knalt",
+      "j": 32,
+      "kind": "name",
+      "label": "L64_j32",
+      "level": 64,
+      "n_facts": 128,
+      "prompt_sha256": "205a74d52d6cd23e415dbe2fb34b30b90494e78bd11796dcf0ef27102478acab",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "frixm",
+      "j": 40,
+      "kind": "name",
+      "label": "L64_j40",
+      "level": 64,
+      "n_facts": 128,
+      "prompt_sha256": "968f2e252f6d76913b13c7993f22a1314dac73091685426377877e059d5bf8e0",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "frixm",
+      "j": 40,
+      "kind": "dup",
+      "label": "L64_j40_dup",
+      "level": 64,
+      "n_facts": 128,
+      "prompt_sha256": "968f2e252f6d76913b13c7993f22a1314dac73091685426377877e059d5bf8e0",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 65,
+      "kind": "off_end",
+      "label": "L64_offend",
+      "level": 64,
+      "n_facts": 128,
+      "prompt_sha256": "5d1438aa141fd9b7d3648ce5bffec64c5368ccefca1daf3e9a500007c5c09bbc",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 1,
+      "kind": "dead_end",
+      "label": "L64_deadend",
+      "level": 64,
+      "n_facts": 128,
+      "prompt_sha256": "c36ea5dff6d90a069d0573968c9823c92e403bfdb0891862aab56a19669af465",
+      "seed": 148261120
+    },
+    {
+      "cap": 256,
+      "gold": "knalt",
+      "j": 32,
+      "kind": "rung",
+      "label": "L64_j32_c256",
+      "level": 64,
+      "n_facts": 128,
+      "prompt_sha256": "205a74d52d6cd23e415dbe2fb34b30b90494e78bd11796dcf0ef27102478acab",
+      "seed": 148261120
+    }
+  ],
+  "criteria": {
+    "C1_name_accuracy": {
+      "statement": "every delivered row of the 16 name cells plus the 2 re-dispatch rows declares the BFS gold terminal; a delivered row with a different name is a false name",
+      "threshold": "18/18 delivered rows correct, 0 false names"
+    },
+    "C2_none_controls": {
+      "statement": "amendment adopted from round 55 finding 3 and carried by rounds 56 and 57: a censored NONE control is a non-delivery, not a miss. Gate: zero false names among the controls that delivered, with at least 3 controls delivered for the statement to be admissible. The control delivery rate is reported, never gated.",
+      "threshold": "0 false names among delivered controls, delivered >= 3"
+    },
+    "C3_wall_law": {
+      "statement": "agreement of each of the four registered laws with the observed delivered / censored state over the 16 name cells, scored only on delivery shape, never on accuracy",
+      "threshold": "the unique law with at least 13 of 16; mixed_laws at the best law's at least 10 of 16; unresolved below that"
+    },
+    "C4_discriminators": {
+      "statement": "the nine registered discriminating cells: each one separates at least two laws; their observed states are reported beside the predictions",
+      "threshold": "reported"
+    },
+    "C5_anchor_reproduction": {
+      "statement": "13 byte-identical archived prompts (round 55, a different build of the same class) plus the level-48 fact-block lineage: the count whose delivered / censored state and declared name both match the archived record",
+      "threshold": "reported, with the token delta per row"
+    },
+    "C6_self_agreement": {
+      "statement": "both re-dispatch pairs agree on the declared name (issue #100)",
+      "threshold": "2/2"
+    },
+    "C7_trace_provenance": {
+      "statement": "among undelivered name-gold records, gold-terminal-in-trace minus matched pseudo-gold-in-trace is at least 0.50, else the trace readout is refused (issue #94, issue #105)",
+      "threshold": "0.50"
+    },
+    "C8_census": {
+      "statement": "every record carries its field census and the reasoning-supplying field; the cross-firing trace column states both exposures (issue #105)",
+      "threshold": "25/25 rows censused"
+    },
+    "H1_budget_rung": {
+      "statement": "the 256-token rung on the heaviest load's step-32 cell is a non-delivery",
+      "threshold": "1/1 non-delivered"
+    }
+  },
+  "discriminators": {
+    "L32A_j32": {
+      "j": 32,
+      "n_facts": 64,
+      "predict_censored": {
+        "input_load_wall": false,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": true
+      },
+      "product": 2048
+    },
+    "L48_j16": {
+      "j": 16,
+      "n_facts": 96,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 1536
+    },
+    "L48_j24": {
+      "j": 24,
+      "n_facts": 96,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 2304
+    },
+    "L48_j32": {
+      "j": 32,
+      "n_facts": 96,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": true,
+        "step40_wall": false,
+        "step_count_wall": true
+      },
+      "product": 3072
+    },
+    "L48_j8": {
+      "j": 8,
+      "n_facts": 96,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 768
+    },
+    "L64_j16": {
+      "j": 16,
+      "n_facts": 128,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 2048
+    },
+    "L64_j24": {
+      "j": 24,
+      "n_facts": 128,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": true,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 3072
+    },
+    "L64_j32": {
+      "j": 32,
+      "n_facts": 128,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": true,
+        "step40_wall": false,
+        "step_count_wall": true
+      },
+      "product": 4096
+    },
+    "L64_j8": {
+      "j": 8,
+      "n_facts": 128,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 1024
+    }
+  },
+  "dispatch": {
+    "anchor_certification": {
+      "archived_dir": "research/nightly-2026-11-09-0301",
+      "archived_gate_blob": "eadf84d55d10b649c952a29a350437a8658c837fb62c6f39356c508378a151a4",
+      "archived_head": "806f5d3728ce04314f9c4e8bcb503bd95f28f478",
+      "archived_model_digest": "4075b5949b2b0487",
+      "archived_pr": 136,
+      "archived_raw_sha256": "57dff62e1f53b6b8b5abc02ccd205332c13a2dbfe7421ab9acf448041d89ec4a",
+      "digests16": [
+        "87169f9ec6f776c3",
+        "a22f1d12cc743d19",
+        "515a50f2c6478f79",
+        "70ed757a4d369ae5",
+        "40909990f780674a",
+        "def7b75e37c9eaa4",
+        "a8697dfb826079fc",
+        "cbd27af789889450",
+        "1f56a9a6f5969364",
+        "cec71db935bf42f9",
+        "7f6bbe18f35294e1",
+        "6f19b9f8c406d703",
+        "e07afb24060fd652"
+      ],
+      "lineage_digest16": "068bc6a1fb0620fb",
+      "lineage_seed": 116261051
+    },
+    "build_load_record": {
+      "archived_dir": "research/nightly-2026-11-08-0221",
+      "archived_head": "a116f6784c0038e2e4ea5142a349931898b2dfa1",
+      "archived_pr": 133,
+      "model_digest": "26df9af5972ff312",
+      "statement": "every 96-fact ladder dispatch on this build stopped at its requested cap with finish_reason length on all cap-ladder rungs below the pin (round 54: 1536 at 1536, 1024 at 1024, 512 at 512, and 2048 at 2048 on the two gold-no items), no self-termination marker, gold-yes natural stop 838, and the duplicate re-dispatch diverged from its censored twin to a natural stop at 1798 with the correct label at temperature 0"
+    },
+    "calibration_calls": 1,
+    "call_cap": 40,
+    "dispatch_budget_s": 3000,
+    "max_tokens_cap": 2048,
+    "planned_calls": 25,
+    "same_class_pair_provenance": {
+      "archive_state": "untracked (killed firing, no PR)",
+      "cells": [
+        "L32A_j32",
+        "L48_j16",
+        "L48_j32"
+      ],
+      "model_digest": "86d6f3507f8725bf",
+      "round": 56
+    },
+    "scan_pins": {
+      "16": {
+        "first_seed": 52261033,
+        "generated_ok": 400,
+        "load_floor_items": 22,
+        "raised": 0
+      },
+      "32": {
+        "first_seed": 84261011,
+        "generated_ok": 400,
+        "load_floor_items": 12,
+        "raised": 0
+      },
+      "48": {
+        "first_seed": 116261051,
+        "generated_ok": 400,
+        "load_floor_items": 6,
+        "raised": 0
+      },
+      "64": {
+        "first_seed": 148261120,
+        "generated_ok": 235,
+        "load_floor_items": 1,
+        "raised": 165
+      }
+    },
+    "temperature": 0.0
+  },
+  "laws": {
+    "input_load_wall": {
+      "basis": "cross-class transfer candidate: the flash-class archived record censored the 96-fact name cells (rounds 55, 57) and this build's own archived yes/no cap-ladder rows put every 96-fact dispatch cap-bound at every rung below the pin (round 54)",
+      "predict_censored_iff": "n_facts >= 96"
+    },
+    "load_depth_product": {
+      "basis": "cross-class transfer candidate: round 55's archived surface on the class sibling, largest delivered product 64 * 32 = 2048, smallest censored product 96 * 32 = 3072; the threshold is the archived censoring coordinate, declared before dispatch",
+      "predict_censored_iff": "n_facts * j >= 3072"
+    },
+    "step40_wall": {
+      "basis": "boundary extension declared before dispatch: the parallel killed round-56 firing on the sibling 27B build (digest 86d6f3507f8725bf, untracked archive, disclosed provenance, post-hoc column only) delivered j = 32 and censored j = 40..64 at 128 facts, so the class's own boundary must be separated from step 32",
+      "predict_censored_iff": "j >= 40"
+    },
+    "step_count_wall": {
+      "basis": "cross-class transfer candidate: the k = 48 cliff archived on both classes and the flash-class name arm's 96-fact censorship at j = 32 (round 55)",
+      "predict_censored_iff": "j >= 32"
+    }
+  },
+  "post_hoc_columns": {
+    "X1_same_class_pair": {
+      "registered": false,
+      "statement": "answer-level comparison against the parallel killed round-56 firing (sibling 27B build 86d6f3507f8725bf, untracked archive, disclosed): the three shared cells L32A_j32, L48_j16, L48_j32 beside that firing's archived states. Exposure is stated on both sides (this firing's channel from its own census, that build's reasoning_content). No verdict of this round reads it; it is the issue #105 same-class pair for the class-level trace statement the next depth round owes."
+    }
+  },
+  "prediction_table": {
+    "L16_j16": {
+      "j": 16,
+      "n_facts": 32,
+      "predict_censored": {
+        "input_load_wall": false,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 512
+    },
+    "L16_j8": {
+      "j": 8,
+      "n_facts": 32,
+      "predict_censored": {
+        "input_load_wall": false,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 256
+    },
+    "L32A_j16": {
+      "j": 16,
+      "n_facts": 64,
+      "predict_censored": {
+        "input_load_wall": false,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 1024
+    },
+    "L32A_j24": {
+      "j": 24,
+      "n_facts": 64,
+      "predict_censored": {
+        "input_load_wall": false,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 1536
+    },
+    "L32A_j32": {
+      "j": 32,
+      "n_facts": 64,
+      "predict_censored": {
+        "input_load_wall": false,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": true
+      },
+      "product": 2048
+    },
+    "L32A_j8": {
+      "j": 8,
+      "n_facts": 64,
+      "predict_censored": {
+        "input_load_wall": false,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 512
+    },
+    "L48_j16": {
+      "j": 16,
+      "n_facts": 96,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 1536
+    },
+    "L48_j24": {
+      "j": 24,
+      "n_facts": 96,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 2304
+    },
+    "L48_j32": {
+      "j": 32,
+      "n_facts": 96,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": true,
+        "step40_wall": false,
+        "step_count_wall": true
+      },
+      "product": 3072
+    },
+    "L48_j40": {
+      "j": 40,
+      "n_facts": 96,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": true,
+        "step40_wall": true,
+        "step_count_wall": true
+      },
+      "product": 3840
+    },
+    "L48_j8": {
+      "j": 8,
+      "n_facts": 96,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 768
+    },
+    "L64_j16": {
+      "j": 16,
+      "n_facts": 128,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 2048
+    },
+    "L64_j24": {
+      "j": 24,
+      "n_facts": 128,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": true,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 3072
+    },
+    "L64_j32": {
+      "j": 32,
+      "n_facts": 128,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": true,
+        "step40_wall": false,
+        "step_count_wall": true
+      },
+      "product": 4096
+    },
+    "L64_j40": {
+      "j": 40,
+      "n_facts": 128,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": true,
+        "step40_wall": true,
+        "step_count_wall": true
+      },
+      "product": 5120
+    },
+    "L64_j8": {
+      "j": 8,
+      "n_facts": 128,
+      "predict_censored": {
+        "input_load_wall": true,
+        "load_depth_product": false,
+        "step40_wall": false,
+        "step_count_wall": false
+      },
+      "product": 1024
+    }
+  },
+  "question": "On a 27B-class local build (the re-fired round-54 build; the record carries the one-way model digest only), with the round-55 name-or-NONE response format re-pinned byte-identically (13 archived prompt digests certified against open PR #136 and the level-48 fact block lineage-certified against the archived round-51 yes/no digest) and a grid of three input loads (64, 96, 128 facts) against five step counts (j = 8, 16, 24, 32, 40) plus a 32-fact reference row, does delivery on a one-of-many entity-name answer space stop at the input load, at the step count, or at a single load-times-depth product, and does the class's own boundary sit at step 32 or step 40?",
+  "schema": "round58-gate-v1",
+  "tier_rule": "tier is the name of the unique registered law that agrees with all 16 observed delivered / censored name-cell states on at least 13 of 16; if no law reaches 13, the tier is mixed_laws when the best law reaches at least 10 of 16 and unresolved below that. No tier reads accuracy: C1 is reported beside it and a false name sets the flag false_name_present."
+}

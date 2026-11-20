@@ -1,0 +1,16 @@
+{
+ "completion_tokens": 55,
+ "content": "yes",
+ "finish_reason": "stop",
+ "id": "health",
+ "message_fields": [
+  "content",
+  "reasoning_content",
+  "role"
+ ],
+ "model_digest": "4075b5949b2b0487",
+ "prompt_sha256": "f0c183f26f409a46d4f9ae16a76ab8acdd18ccdf7954573e84635cfefc6ca447",
+ "reasoning_field": "reasoning_content",
+ "trace_chars": 205,
+ "wall_s": 1.808
+}

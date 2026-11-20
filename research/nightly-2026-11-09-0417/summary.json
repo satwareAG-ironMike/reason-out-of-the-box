@@ -1,0 +1,79 @@
+{
+  "criteria": {
+    "C1": {
+      "correct": 3,
+      "n": 4,
+      "pass": true
+    },
+    "C2": {
+      "correct_refusals": 2,
+      "delivered": 2,
+      "delivery_rate": 0.5,
+      "false_name_cells": [],
+      "false_names": 0,
+      "n": 4,
+      "pass": true,
+      "undetermined": 0
+    },
+    "C3": {
+      "correct": 0,
+      "n": 4,
+      "verdict": "ceiling"
+    },
+    "C4": {
+      "n": 4,
+      "pass": true,
+      "r55_delivered_anchors_correct": 2,
+      "r55_delivered_anchors_n": 2,
+      "wrong_name_cells": [],
+      "wrong_names": 0
+    },
+    "C5": {
+      "name_agreement": 2,
+      "pairs": [
+        {
+          "name_agrees": true,
+          "pair": [
+            "L64_j48",
+            "L64_j48_dup"
+          ],
+          "tokens": [
+            2048,
+            2048
+          ]
+        },
+        {
+          "name_agrees": true,
+          "pair": [
+            "L64_j64",
+            "L64_j64_dup"
+          ],
+          "tokens": [
+            2048,
+            2048
+          ]
+        }
+      ],
+      "pass": true
+    },
+    "C6": {
+      "admissible": false,
+      "gap": -0.1429,
+      "gold_rate": 0.8571,
+      "n": 7,
+      "pass": false,
+      "pseudo_rate": 1.0
+    },
+    "D1": {
+      "delivery_bound": true,
+      "delivery_deep": 0.0,
+      "delivery_shallow": 0.75,
+      "drop": 0.75
+    }
+  },
+  "flags": [
+    "delivery_bound_loss",
+    "trace_provenance_refused"
+  ],
+  "tier": "name_space_ceiling_below_64"
+}
