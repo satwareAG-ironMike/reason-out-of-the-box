@@ -31,6 +31,19 @@ land one PR at a time (Baby Steps).
   a shortcut and none stays unreachable; the selftest re-derives both invariants by
   independent BFS plus a four-rule surface battery (issue #67 acceptance criterion
   2). Subtypes `mult_mult` and `dp_puzzle` (issue #4 list) are pending.
+- Family 3 `trap.py` (subtype `trap_arithmetic`, issue #77 TRAP arm, Addendum 1 item 3):
+  multi-step arithmetic word problems; depth level d = number of operation steps (the
+  T7 triangulation arm of the analysis plan). Each item carries two surfaces with one
+  shared gold answer: a base surface (plain wording) and a TRAP-perturbed surface
+  (surprising context, identical operation chain and therefore identical gold). The
+  discriminator is the base-vs-trap accuracy gap at matched depth: a model that scores
+  the base surface but fails the perturbed one is exploiting surface form, not
+  computing. Gold is computed arithmetically at generation time (solvability by
+  construction). Per Addendum 1 item 3 the #77 leaky hop_chain items stay OUT of every
+  arm: `is_trap_item` rejects a `hop_chain` task_type, and the selftest plants a leaky
+  hop_chain item (the #77 leak class, the pinned issue #67 fixture shape) and asserts
+  the family rejects it - the planted-defect negative control required of every
+  generator selftest.
 - Leak gate `audit_ladder_leaks.py`: permutation-calibrated, not an absolute floor.
   The null is the exact hit-count distribution of the best rule in the audited
   hypothesis class under label permutation (binomial weights over the bitmask
@@ -137,6 +150,7 @@ land one PR at a time (Baby Steps).
 
 - `python3 generators/digit_matrices.py --selftest`
 - `python3 generators/ladders.py --selftest`
+- `python3 generators/trap.py --selftest` (plants the #77 leaky hop_chain item and asserts the family rejects it)
 - `python3 generators/audit_ladder_leaks.py --selftest` (10 controls, planted leak
   plus label-shuffle null)
 - `python3 generators/audit_ladder_leaks.py --audit-fixtures` (exit 0 required: the

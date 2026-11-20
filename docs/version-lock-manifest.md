@@ -31,7 +31,7 @@ analysis on the archived raw outputs reproduces every confirmatory number bit-fo
 
 | Artifact | Path | SHA-256 | Captured |
 |----------|------|---------|----------|
-| Statistical analysis plan | `docs/analysis-plan.md` | `9ef9b061944cc4d3c5937ee2f0f93f3984f394304d565ae56b8a6573ec68e0d7` | 2026-09-11, re-captured 2026-09-14 (unchanged), re-capture at freeze |
+| Statistical analysis plan | `docs/analysis-plan.md` | `54a6d0f2a777b7961814845c79bba00c1849a0a7c5fa8f10b36c62aadc46460a` | 2026-09-11, re-captured 2026-09-14 (unchanged), re-captured 2026-11-20 (Addendum 1: OLMo/Pythia confirmatory scope, pass@k arm, GSM-Symbolic T7 distinct from #77 leaky hop_chain; refs #177, #169, #174), re-capture at freeze |
 | Study design | `docs/study-design.md` | `27b0f34543ab50a6547afcc04aee704e41a27dec7cec6a1752895928ccce85a3` | 2026-09-11, re-captured 2026-09-14 (unchanged), re-capture at freeze |
 | Frozen model list | `docs/next-investigations.md`, feasibility audit section (closed 2026-09-10) | living document - extract to a frozen snapshot at freeze, then hash it | - |
 
@@ -72,6 +72,34 @@ is not covered by the pre-registration.
 - Generator seeds per family recorded here at freeze.
 - Generated item sets (300 items x 5 depth levels x 3 families): manifest hash per set at freeze.
 - Human-solvability-checked item pools (Section 10): hash-pinned before M4.
+
+## 4a. Cross-ask family instrument pin (round 78, issue #166 fix)
+
+The #166 gate/code-divergence fix landed in the round-78 instrument (PR #184): the
+`tail_copy_downgrade` trigger is registered at `n_X >= 2 AND every delivered arm-X record
+emitted the draft's last vocabulary name`, with the `n_X == 0` case documented as
+`no_recovery` by definition. Pinned here so the next cross-ask-family round inherits the
+aligned trigger:
+
+| Artifact | Path | SHA-256 | Captured |
+|----------|------|---------|----------|
+| Round-78 cross-ask instrument | `research/nightly-2026-11-21-0200/cross_ask_r78.py` | `9517226bb0cb2e59856ba2c9f192f7b26fbb5afa02f9c7f1bbebe4d39a60123b` | 2026-11-20 |
+| Round-78 frozen gate | `research/nightly-2026-11-21-0200/gate.json` | see below | 2026-11-20 |
+
+The gate.json hash is recorded at the round's own gate freeze (the instrument emits it);
+this pin is the instrument code only.
+
+## 4b. Addendum 1 literature pins (2026-11-20, issue #177)
+
+Four arXiv IDs verified live via the arXiv export API on 2026-11-20 (the #65 free-scholarly-APIs
+protocol; firecrawl not available on the maintainer host):
+
+| ID | Title (verified) | Addendum 1 role |
+|----|------------------|-----------------|
+| `2504.13837` | Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model? (Yue et al., NeurIPS 2025) | pass@k arm (chain vs answer scored separately) |
+| `2506.18880` | OMEGA: Can LLMs Reason Outside the Box in Math? | confirmatory-scope triangulation |
+| `2506.10947` | Spurious Rewards: Rethinking Training Signals in RLVR | OLMo/Pythia confirmatory scope (model-family-specific RLVR) |
+| `2410.05229` | GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in LLMs | T7 surface-perturbation triangulation arm |
 
 ## 5. Activation-patching specification grid (Section 8)
 

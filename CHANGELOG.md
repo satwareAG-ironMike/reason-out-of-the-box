@@ -5,6 +5,40 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-20 (round-79 cross-ask instrument: #139/#94/#145 trigger fixes, refs #65)
+- `research/nightly-2026-11-21-0400/cross_ask_r79.py`: the next cross-ask-family
+  instrument lands three trigger fixes in one gate.json, each with a planted-slip
+  selftest fixture:
+  - #145 censored_not_a_miss: censored arm cells (finish_reason length, no delivery
+    inside the budget) are excluded from the contrast denominator and reported as
+    censored_at_cap, not counted as misses; the competence verdict no longer inherits
+    the output budget.
+  - #139 control_own_budget: the NONE-gold control (over_end) carries its own
+    CONTROL_MAX_TOKENS = 512 budget, not the deep cells' max_tokens; a control
+    exhausted at its own budget ships not_delivered, not a censored-miss.
+  - #94 fallback_provenance: the reasoning-fallback token's first-occurrence position
+    in the trace is recorded and classified own-channel vs donor-block; a token
+    sourced from the restored donor block is not the model's own reasoning provenance.
+- Selftest 158/158 green (151 base + 7 new planted-slip fixtures).
+
+### 2026-11-20 (M1 pre-registration prep, issue #11)
+- `docs/version-lock-manifest.md`: re-captured the analysis-plan hash after Addendum 1
+  (now 54a6d0f2...); pinned the round-78 instrument SHA-256 (Section 4a) and the
+  Addendum 1 literature pins (Section 4b, four arXiv IDs verified live via the arXiv
+  export API 2026-11-20). `GATES-M1.md`: the unlazy gate ledger for the M1 steps; the
+  OSF/AsPredicted submission remains owner-gated (G5-G7 pending owner).
+
+### 2026-11-20 (TRAP-style corpus arm, issue #77)
+- `generators/trap.py`: the #77 TRAP-style surface-perturbation arm (Addendum 1 item 3
+  T7 triangulation). Multi-step arithmetic word problems at depth d = operation steps;
+  each item carries a base surface and a surprising TRAP-perturbed surface with one
+  shared gold answer (the arithmetic structure is invariant), so the base-vs-trap
+  accuracy gap at matched depth discriminates surface-pattern reliance from actual
+  computation. Gold is computed arithmetically at generation time (solvability by
+  construction). The selftest plants a #77 leaky hop_chain item and asserts the
+  family rejects it (Addendum 1 item 3: the leaky hop_chain items stay OUT; the TRAP
+  arm is distinct). Selftest green, generation deterministic.
+
 ### 2026-11-20 (round-78 instrument: aligned tail_copy_downgrade trigger, refs #166)
 - Round-78 cross-ask instrument `research/nightly-2026-11-21-0200/cross_ask_r78.py`
   lands the #166 fix: the `tail_copy_downgrade` trigger is registered at
