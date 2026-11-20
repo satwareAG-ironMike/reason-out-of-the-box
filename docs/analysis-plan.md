@@ -203,6 +203,33 @@ decision table of Section 6.
 - The frozen document hash enters the version-lock manifest alongside prompt hashes,
   generator seeds, checkpoint Hub IDs + revisions, and analysis-code hash.
 
+## Addendum 1 (2026-11-20, issue #177, owner-adopted)
+
+Literature-driven amendment, arXiv-API-verified 2026-11-20. Three additions to the frozen plan;
+the decision-table evaluation order, confirmatory/exploratory membership, T1 margin, retention
+threshold, primary patching specification, and asymmetry rule are unchanged (Section 13
+invariants preserved).
+
+1. **Confirmatory scope narrowed to OLMo/Pythia base.** The confirmatory claim is scoped to
+   OLMo 2 and Pythia checkpoints only. Qwen-class checkpoints remain exploratory:
+   Spurious Rewards (arXiv:2506.10947) shows random-reward baselines lift Qwen but not
+   Llama 3 / OLMo 2, so RLVR results are model-family-specific and the spurious-reward
+   control holds only where it was measured.
+
+2. **Pre-registered pass@k arm (Yue et al., arXiv:2504.13837).** Both chains and answers
+   are scored. Pass@k conflates answer correctness with chain faithfulness; this arm
+   scores chain correctness and answer correctness separately, per the C4 row. The arm
+   is confirmatory; its verdict feeds the decision table alongside T1-T9.
+
+3. **#77 leaky hop_chain items stay OUT; GSM-Symbolic T7 triangulation is distinct.**
+   The surface-perturbation variants (GSM-Symbolic family, arXiv:2410.05229) are the
+   T7 triangulation arm (Section 4, T7 row) and are reported as triangulation, not
+   verdict-gating. The #77 leaky hop_chain items are excluded from all arms and from
+   the analysis; they are a separate leak class and are not conflated with T7.
+
+Sources: Yue et al. arXiv:2504.13837 (NeurIPS 2025 Oral), OMEGA arXiv:2506.18880,
+Spurious Rewards arXiv:2506.10947, GSM-Symbolic arXiv:2410.05229 (ICLR 2025).
+
 ## Sources
 
 Design inputs: study-design.md v0.4 (decision table, Conditions 1-5, red-team items 1-7,

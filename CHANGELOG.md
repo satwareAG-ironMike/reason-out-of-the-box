@@ -5,6 +5,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-20 (analysis-plan amendment)
+- Adopted the literature-driven analysis-plan amendment from issue #177 (refs #169, #174):
+  `docs/analysis-plan.md` carries Addendum 1 - confirmatory scope narrowed to OLMo/Pythia
+  base (Qwen-class exploratory, per Spurious Rewards arXiv:2506.10947), a pre-registered
+  pass@k arm scoring chain and answer correctness separately (Yue et al. arXiv:2504.13837),
+  and the #77 leaky hop_chain items excluded from all arms with GSM-Symbolic T7 triangulation
+  kept distinct. Decision-table order, T1 margin, retention threshold, patching specification,
+  and asymmetry rule are unchanged.
+
 ### 2026-11-20
 - Records sync for the 2026-09-14 two-track human-baseline decision (issue #147; refs #7, #12, #13):
   `docs/agent-execution.md` section 10 item 1 now records the decision instead of presenting the
