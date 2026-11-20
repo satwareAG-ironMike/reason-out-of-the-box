@@ -159,9 +159,21 @@ gate statements are re-verified against the work record.
 
 ## Reproduce
 
-- `python3 name_walk_probe_r61.py --selftest` (113 deterministic checks: frozen gate schema
-  and blob, the r61/full/core panel plans, item lineage and issue #67 guards, the E1/E2/R1/P1
-  scoring paths against synthetic records, sanitizer fixtures)
+- `python3 name_walk_probe_r61.py --selftest` (68 deterministic checks: the solver against an
+  independent walk, the archived anchor digest, the prompt template, the r61/full/core panel
+  plans and their call caps, the E1/E2/R1 scoring paths and the summary's not-dispatched path
+  against synthetic records, sanitizer fixtures)
+- Post-review instrument cleanup (PR #142, dead code and vacuous selftest checks only): the
+  script lost three dead-code paths (an unreferenced `_cell` helper, the lone `ENDPOINT_CELLS`
+  constant, the unused `spec` parameter of `score_records`) and the stale round-60 wall-clock
+  paragraph above the reduced plan, and the selftest lost 46 re-assert checks that construction
+  already forces (an anchor seed the item selection filters on, gold properties the plan
+  constructor asserts, per-cell gold re-walks against the recorded value, gate-spec dictionary
+  literals, hard-coded tier and status strings, and the complete-panel summary case), with one
+  of them re-targeted at a record set that is short one cell. The certified selftest count went
+  from 113 checks at dispatch to 68 now. No dispatch, scoring or gate line changed: `--rescore`
+  against a copy of this directory reproduces the shipped `summary.json` except for the
+  environment-derived model digest.
 - `python3 name_walk_probe_r61.py --freeze --panel r61` (derives the gate; the frozen
   `gate.json` in this directory is the contract and is never rewritten by a run)
 - `python3 name_walk_probe_r61.py --run --panel r61` (health call plus the 2 dispatches;

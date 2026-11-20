@@ -195,10 +195,6 @@ def prompt_digest(text: str) -> str:
 # ------------------------------------------------------------------ plan
 
 
-def _cell(label: str, key: str, j: int, kind: str, cap: int = MAX_TOKENS) -> tuple:
-    return (label, key, j, cap, kind)
-
-
 PLAN_FULL = [
     # round-60 order: validity gates first, then the primary contrast, then the droppable
     ("A49_deadend", "A49", 1, MAX_TOKENS, "dead_end"),
@@ -221,12 +217,10 @@ PLAN_FULL = [
     ("C64_j48", "C64", 48, MAX_TOKENS, "name"),
 ]
 
-# The reduced panel, used only if the endpoint's warm per-call wall (measured before the
-# gate is frozen) makes the full panel unfinishable inside the round's wall clock. Both
-# panels share the first two controls, all four endpoints and the A49 duplicate pair.
 # The reduced panel, kept for the next healthy 27B-class firing (the prediction P1 in the
-# gate is registered against it). Both panels share the first two controls, all four
-# endpoints and the A49 duplicate pair.
+# gate is registered against it): this firing is rate-limited, so none of the panel's deep
+# cells were dispatched here and they are owed to that firing, not dropped. Both panels
+# share the first two controls, all four endpoints and the A49 duplicate pair.
 PLAN_CORE = [
     ("A49_deadend", "A49", 1, MAX_TOKENS, "dead_end"),
     ("C64_deadend", "C64", 1, MAX_TOKENS, "dead_end"),
@@ -258,7 +252,6 @@ PLAN_R61 = [
 PANELS["r61"] = PLAN_R61
 
 DUP_PAIRS = (("A49_j49", "A49_j49_dup"), ("C64_j64", "C64_j64_dup"))
-ENDPOINT_CELLS = ("A48_j48", "A49_j49", "B50_j50", "C64_j64")
 
 
 def cell_src(item: dict, kind: str) -> str:
@@ -493,7 +486,7 @@ def gate_blob(spec: dict) -> str:
     return hashlib.sha256(json.dumps(spec, sort_keys=True).encode()).hexdigest()
 
 
-def score_records(records: list, spec: dict, health: dict | None = None) -> dict:
+def score_records(records: list, health: dict | None = None) -> dict:
     by = {r["label"]: r for r in records}
     out = {}
     e1 = by.get("A48_j8")
@@ -590,7 +583,7 @@ def score_record(row: dict, resp: dict, error: str = "") -> dict:
 
 def build_summary(records: list, spec: dict, blob: str,
                   health: dict | None = None) -> dict:
-    scored = score_records(records, spec, health)
+    scored = score_records(records, health)
     return {
         "schema": GATE_SCHEMA,
         "gate_blob": blob,
@@ -645,8 +638,7 @@ def selftest() -> None:
             ok(terminal_at(item, src, steps) == expect, f"terminal_at mismatch {key} {steps}")
         ok(terminal_at(item, src, item["level"] + 1) is None, f"past-end None {key}")
         ok(terminal_at(item, src, 0) == src, f"zero steps {key}")
-    # anchor certification (planted-slip control: a wrong seed must not match)
-    ok(items["A48"]["seed"] == ARCHIVED_K48["seed"], "anchor seed")
+    # anchor certification (planted-slip control: the archived yes/no digest must match)
     ok(prompt_digest(render_yesno(items["A48"]))[:16] == ARCHIVED_K48["yesno_digest16"],
        "anchor yes/no digest")
     # pairwise overlap is EXPECTED (shared 2700-name pool, independent per-item streams);
@@ -663,25 +655,19 @@ def selftest() -> None:
     ok("follow the direct links for exactly 8 steps." in ta, "j rendered into the task")
     ok("Answer with exactly one entity name, or the single word NONE" in ta,
        "answer space is one entity name or NONE")
-    # golds: name cells have a name gold, dead-end cells have NONE
+    # golds: every non-NONE gold sits in its own item's vocabulary. The NONE-versus-name
+    # split and the gold's walk position are both produced inside plan_prompts (its own
+    # assert stops a mismatch before any check sees it), so no check re-derives them here.
     for plan_name, plan in PANELS.items():
         rows = plan_prompts(plan)
         by = {r["label"]: r for r in rows}
-        ok(all(r["gold"] == NONE_GOLD for r in rows if r["kind"] == "dead_end"),
-           f"{plan_name} dead-end golds are NONE")
-        ok(all(r["gold"] != NONE_GOLD for r in rows if r["kind"] in ("name", "dup")),
-           f"{plan_name} name golds are names")
         ok(all(r["gold"] in vocab_of(item_for(r["item_key"])) for r in rows
                if r["gold"] != NONE_GOLD), f"{plan_name} golds in own vocab")
         ok(len({r["label"] for r in rows}) == len(rows), f"{plan_name} labels unique")
         ok(len(rows) <= CALL_CAP, f"{plan_name} within call cap")
         ok(all(r["cap"] <= MAX_TOKENS for r in rows), f"{plan_name} caps within protocol")
-        # every non-NONE gold is a walk-position name, verified by the solver
-        for r in rows:
-            if r["kind"] in ("name", "dup"):
-                ok(terminal_at(item_for(r["item_key"]), r["src"], r["j"]) == r["gold"],
-                   f"{plan_name} {r['label']} gold walk")
-        # duplicate pairs re-ask the same item, src and j
+        # duplicate pairs are two plan rows: a depth or source typo in either row breaks
+        # the byte-identity (verified by mutation: shifting the dup row's j fails this)
         for a_l, b_l in DUP_PAIRS:
             if a_l in by and b_l in by:
                 ok(by[a_l]["prompt_sha256"] == by[b_l]["prompt_sha256"],
@@ -696,45 +682,40 @@ def selftest() -> None:
     fk = [c[0] for c in PANELS["full"]]
     ok(fk[0].endswith("deadend") and fk[1].endswith("deadend"), "controls dispatch first")
     ok(fk.index("A48_j48") < fk.index("A48_j8"), "endpoints before mid-depth")
-    # gate spec rows for this round: E1/E2/R1/P1/N3 plus the theory block
+    # the gate spec for this round: the five criterion ids are the contract frozen in
+    # gate.json (the --check-readme guard and the blob check them against the record), so
+    # no selftest check re-reads this function's own dict literals
     spec = gate_spec(PANELS["r61"])
-    for rid in ("E1_shallow_anchor_delivers", "E2_census_trace_exposure",
-                "R1_dead_end_control", "P1_owed_panel_prediction",
-                "N3_anchor_certification"):
-        ok(rid in spec["criteria"], f"gate row {rid} present")
-    ok(len(spec["theory"]) == 4, "four theory rows")
-    # scoring on synthetic records: E1 pass, R1 report, P1 owed
+    # scoring on synthetic records: E1 and E2 pass, R1 reports a refusal
     rows = plan_prompts(PANELS["r61"])
     by = {r["label"]: r for r in rows}
     synth = [score_record(p, {"message": {"content": p["gold"], "reasoning_content": "abc"},
                               "finish_reason": "stop", "completion_tokens": 100,
                               "prompt_tokens": 900, "wall_s": 1.0}) for p in rows]
-    scored = score_records(synth, spec, {"content": "yes", "reasoning_chars": 300,
-                                         "reasoning_field": "reasoning_content"})
+    scored = score_records(synth, {"content": "yes", "reasoning_chars": 300,
+                                   "reasoning_field": "reasoning_content"})
     ok(scored["criteria"]["E1"]["pass"] is True, "synthetic E1 passes")
     ok(scored["criteria"]["E2"]["pass"] is True, "synthetic E2 passes")
     ok(scored["criteria"]["R1"]["refused"] is True, "synthetic R1 refuses")
-    ok(scored["criteria"]["P1"]["status"].startswith("owed"), "P1 stays owed")
-    ok(scored["tier"] == "literature_synthesis_rate_limited_record", "round tier")
     # planted negatives: E1 must fail on a wrong name, E2 on an empty trace
     bad = [dict(synth[0]), dict(synth[1])]
     wrong = sorted(vocab_of(items["A48"]))[0]
     if wrong != by["A48_j8"]["gold"]:
         bad[0]["declared"] = wrong
         bad[0]["correct"] = False
-    scored_bad = score_records(bad, spec, {"content": "yes", "reasoning_chars": 0,
-                                           "reasoning_field": ""})
+    scored_bad = score_records(bad, {"content": "yes", "reasoning_chars": 0,
+                                     "reasoning_field": ""})
     ok(scored_bad["criteria"]["E1"]["pass"] is False, "wrong name must fail E1")
     ok(scored_bad["criteria"]["E2"]["pass"] is False, "empty trace must fail E2")
     # R1 not dispatched: the status must say so, and the tier must not change
-    scored_missing = score_records([synth[0]], spec, None)
+    scored_missing = score_records([synth[0]], None)
     ok(scored_missing["criteria"]["R1"]["status"].startswith("not_dispatched"),
        "missing R1 reported as not dispatched")
     ok(scored_missing["tier"] == scored["tier"], "missing R1 does not move the tier")
-    # gate blob: deterministic and stable
+    # gate blob: the freeze must reproduce (verified by mutation: a timestamp inside the
+    # spec fails this), and it must be the 64 hex the README guard matches on
     b1, b2 = gate_blob(spec), gate_blob(gate_spec(PANELS["r61"]))
     ok(b1 == b2 and len(b1) == 64, "gate blob deterministic")
-    ok(gate_blob(gate_spec(PANELS["core"])) != b1, "core panel has a different blob")
     # declared_answer: planted negatives
     vocab = vocab_of(items["A48"])
     name = sorted(vocab)[0]
@@ -776,18 +757,17 @@ def selftest() -> None:
                               "finish_reason": "stop", "completion_tokens": 100,
                               "prompt_tokens": 1000, "wall_s": 10.0})
     ok(rec3["delivered"] is True and rec3["correct"] is True, "gold content scores correct")
-    # summary build: a complete record set for the r61 dispatch reproduces the round tier
+    # summary build: a record set that is short one cell must report that cell as
+    # not_dispatched (the complete-panel case is a self-comparison: the records and the
+    # gate's cell list come from the same plan, so it can only ever read empty)
     r61 = [score_record(p, {"message": {"content": p["gold"] if p["gold"] != NONE_GOLD
                                         else "NONE", "reasoning_content": "abc"},
                             "finish_reason": "stop", "completion_tokens": 100 + i,
                             "prompt_tokens": 900, "wall_s": 1.0})
            for i, p in enumerate(plan_prompts(PANELS["r61"]))]
-    summ = build_summary(r61, spec, b1, {"content": "yes", "reasoning_chars": 300,
-                                         "reasoning_field": "reasoning_content"})
-    ok(summ["verdict"] == "literature_synthesis_rate_limited_record", "round tier on synthetics")
-    ok(summ["not_dispatched"] == [], "synthetic r61 panel complete")
-    ok(summ["criteria"]["E1"]["pass"] is True and summ["criteria"]["E2"]["pass"] is True,
-       "synthetic E rows pass")
+    summ = build_summary(r61[:1], spec, b1, {"content": "yes", "reasoning_chars": 300,
+                                             "reasoning_field": "reasoning_content"})
+    ok(summ["not_dispatched"] == ["A49_deadend"], "summary reports the cell it did not get")
 
     if failures:
         for f in failures:

@@ -22,7 +22,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   arXiv:2604.25800, C-RASP characterization arXiv:2608.13433, encoding-specific remedies
   arXiv:2608.31067, in-repo NC-class task complexity) are re-verified at work-record level against one
   OpenAlex call (with arXiv:2211.15661 as context). Instrument `name_walk_probe_r61.py` (stdlib,
-  `--selftest` 113 checks); gate `round61-gate-v1` (blob `d29e33cf`) frozen before dispatch; 6 calls of
+  `--selftest` 113 checks at dispatch, 68 after the PR #142 dead-code and vacuous-check
+  cleanup); gate `round61-gate-v1` (blob `d29e33cf`) frozen before dispatch; 6 calls of
   the 40-call cap, `max_tokens` 2048, temperature 0.0, 0 retries; tier
   `literature_synthesis_rate_limited_record`, flags `endpoint_rate_limited` and
   `dead_end_control_refused` (informational); label `Executed`, small-n exploratory (2 dispatched
