@@ -26,14 +26,28 @@ research/nightly-2026-11-21-0200/cross_ask_r78.py
   EXPECT: all four IDs resolve to non-empty arXiv entries
   EVIDENCE: 2504.13837 (Yue et al., RL-reasoning), 2506.18880 (OMEGA), 2506.10947 (Spurious
     Rewards), 2410.05229 (GSM-Symbolic) - all returned titles via the arXiv export API this session
+  TOOLING NOTE: the objective names firecrawl/perplexity for the cross-check; neither is
+    installed on the maintainer host. Per the #65 free-scholarly-APIs protocol the live
+    arXiv export API is the accepted equivalent (no paid key, no third-party gateway),
+    and it returns the same ground-truth titles/years. The OLMo 2 / Pythia model-card
+    cross-check (manifest Section 4c, PR #188) used the HF Hub public API + raw model
+    cards for the same reason.
 
-## Owner-gated gates (not this session - the OSF/AsPredicted submission is owner-gated per
-## docs/preregistration.md "Submission record (owner-gated, filled at submission)")
+## Owner-gated gates (NOT repo-executable - explicit owner parking, not a gap)
+
+The OSF/AsPredicted submission is owner-gated per docs/preregistration.md
+"Submission record (owner-gated, filled at submission)". The owner explicitly
+parked G5-G7 for this session (decision 2026-11-20, session record): the
+in-repo prep is complete and frozen-pending-submission; the external steps are
+owner-owned and will run in the owner's submission session.
 
 - [ ] G5: OSF registration created (public), URL recorded in preregistration.md
-  EVIDENCE: pending owner (owner-gated external step)
+  EVIDENCE: PENDING OWNER (owner-gated external step; parked 2026-11-20 by
+    explicit owner decision - not a gap, not silently dropped)
 - [ ] G6: AsPredicted timestamp taken, URL recorded
-  EVIDENCE: pending owner (owner-gated external step)
+  EVIDENCE: PENDING OWNER (owner-gated external step; parked 2026-11-20 by
+    explicit owner decision - the AsPredicted URL is the public verification
+    URL for the OSF registration and can only be taken by the account holder)
 - [ ] G7: every hash in the version-lock manifest re-captured immediately before submission
   EVIDENCE: pending owner (must run in the submission session; the 2026-11-20 pre-submission
     re-capture is recorded, the final one is owed at freeze)

@@ -100,7 +100,7 @@
   "no_recovery": "n_X == 0 (zero correct recoveries is no_recovery by definition; an all-tail result at n_X == 0 is also no_recovery, since there is no recovery to downgrade)",
   "statistics": "exact two-sided binomial over the X-vs-F discordant pairs across the three items, exploratory, n single digits, no significance claim",
   "tail_copy_downgrade": "n_X >= 2 and every delivered arm-X record on the scope emitted the draft's last vocabulary name (the cross_ask_gated case where all recoveries are tail copies; refs #166, the trigger aligned to the code)",
-  "censored_not_a_miss": "arm cells whose finish_reason is length (censored at the cap, no delivery inside the budget) are excluded from the contrast denominator and reported as censored_at_cap, not counted as misses; refs #145",
+  "censored_not_a_miss": "arm cells whose finish_reason is length (censored at the cap, no delivery inside the budget) are excluded from the contrast denominator and reported as censored_at_cap, not counted as misses; refs #145; prior: arXiv:2611.00833 (Fewer Tokens, More Answers, 2026-10) - token-budget-aware answer extraction at a fixed cap; a capped response is a measurement boundary, not a wrong response",
   "control_own_budget": "the NONE-gold control gets its own per-control budget CONTROL_MAX_TOKENS, not the deep cells' max_tokens; a control whose own budget is exhausted ships not_delivered, not a censored-miss; refs #139",
   "fallback_provenance": "the reasoning-fallback token's first-occurrence position in the trace is recorded and classified own-channel vs donor-block; a token sourced from the restored donor block is not the model's own reasoning provenance; refs #94"
  },
