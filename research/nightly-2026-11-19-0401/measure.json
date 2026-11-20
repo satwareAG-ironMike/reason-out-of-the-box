@@ -1,0 +1,27 @@
+{
+ "calibration": {
+  "completion_tokens": 250,
+  "declared": "trackst",
+  "delivery_state": "delivered_correct",
+  "tok_per_s": 79.064,
+  "wall_s": 3.162
+ },
+ "census": {
+  "completion_tokens": 95,
+  "content": "\n\nyes",
+  "finish_reason": "stop",
+  "message_fields": [
+   "audio",
+   "content",
+   "function_call",
+   "reasoning",
+   "refusal",
+   "role"
+  ],
+  "prompt_tokens": 115,
+  "trace_chars": 311,
+  "trace_field": "reasoning",
+  "wall_s": 2.142
+ },
+ "model_digest": "26df9af5972ff312"
+}
