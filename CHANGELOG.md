@@ -6,6 +6,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### 2026-11-20
+- Records sync for the 2026-09-14 two-track human-baseline decision (issue #147; refs #7, #12, #13):
+  `docs/agent-execution.md` section 10 item 1 now records the decision instead of presenting the
+  option set as open, and the issue bodies of #12 (M5: repository-based public record, no venue
+  submission assumed, per the 2026-09-11 re-scope) and #13 (M4 collection conditional on a partner
+  institution materializing; published baselines are the anchor meanwhile) carry dated scope
+  updates with the original text preserved as superseded. No research change; the decision itself
+  and `docs/irb-protocol.md` are unchanged.
+
 ### 2026-11-20 (second entry)
 
 #### Added
