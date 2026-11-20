@@ -107,10 +107,12 @@ When the user requests a durable behavior change, record it here or in the relev
 - CI: GitHub Actions run on every push and PR - archive consistency (`scripts/check_archive.py`),
   markdown hygiene (em/en dashes, `scripts/check_links.py`), a full-history gitleaks secret
   scan, and a serving-id guard (`scripts/check_serving_ids.py`, endpoint host:port / GGUF file
-  names / quantization-tagged deployment labels, issue #85). The first three are the
-  ruleset-required checks; the serving-id guard job (owner go 2026-11-04) runs on every push to
-  `main`, and on every PR, but is not in the ruleset's required list. The single action is
-  SHA-pinned; the workflow is read-only (`permissions: contents: read`)
+  names / quantization-tagged deployment labels / absolute home paths that carry a user name,
+  issues #85 and #149; the guard also scans the push-range commit messages on `main` and the PR
+  title plus body, the sources a squash merge composes the landing message from). The first
+  three are the ruleset-required checks; the serving-id guard job (owner go 2026-11-04) runs on
+  every push to `main`, and on every PR, but is not in the ruleset's required list. The single
+  action is SHA-pinned; the workflow is read-only (`permissions: contents: read`)
 - Local CI parity before pushing: `python3 scripts/check_archive.py --selftest && python3
   scripts/check_archive.py` then `python3 scripts/check_links.py --selftest && python3
   scripts/check_links.py` then `set +e; git grep -n -P "\x{2014}|\x{2013}" -- .; r=$?;
