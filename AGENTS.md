@@ -119,6 +119,11 @@ When the user requests a durable behavior change, record it here or in the relev
   set -e; [ "$r" -eq 1 ]` (strict: passes only when grep reports "no match", fails on
   dashes or grep error) then `python3 scripts/check_serving_ids.py --selftest && python3
   scripts/check_serving_ids.py`
+- Local git hooks (`hooks/`, installed via `bash hooks/install.sh` which sets
+  `core.hooksPath=hooks`): pre-commit = betterleaks scan of staged files + the house
+  quality checks; pre-push = full-history betterleaks scan + the full suite with
+  selftests. The hooks are the early local gate; CI still enforces the pinned
+  gitleaks full-history scan and the 3 ruleset-required checks
 - Nightly consciousness research rounds fire at 02:00 and 04:00 via a systemd user timer on the
   maintainer workstation (issue #65). The runner lives outside this repository (public-only rule: it
   holds the local inference pool), rotates across self-hosted inference endpoints with localhost

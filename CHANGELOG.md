@@ -5,6 +5,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-20 (local git hooks: betterleaks + quality gates)
+- Added `hooks/` (pre-commit, pre-push, install.sh) wired via `core.hooksPath=hooks`:
+  pre-commit runs a betterleaks secret scan on staged files then the house quality
+  checks (conflict markers, workflow syntax, agent artifacts, archive, links,
+  serving-id, em/en dash scan); pre-push runs the full-history betterleaks scan
+  plus the full quality suite with selftests. Install with `bash hooks/install.sh`.
+  CI still uses the pinned gitleaks v8.30.1 full-history scan; the hooks are the
+  local early gate so a commit or push is blocked before it reaches CI.
+
 ### 2026-11-20 (analysis-plan amendment)
 - Adopted the literature-driven analysis-plan amendment from issue #177 (refs #169, #174):
   `docs/analysis-plan.md` carries Addendum 1 - confirmatory scope narrowed to OLMo/Pythia
