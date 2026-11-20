@@ -110,6 +110,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   and the gate blob byte-unchanged, the instrument change disclosed in the README, and a
   `registered: false` marker plus planted-slip controls on any column added after the dispatch. No
   registered row or tier may move in a resume (refs #65).
+### 2026-11-20
+
+#### Changed
+
+- Trailer rule and `GATES.md` read against the public-only rule (issue #149, owner ruling
+  2026-11-19): the `Model:` commit trailer is now the public model name only - no provider or
+  model-id parenthetical and no quantization-tagged deployment label, because squash merges replay
+  trailer text onto `main` and the serving-id guard treats those label shapes as leaks in tracked
+  files; the five absolute maintainer-home paths in `GATES.md` (one `CHECK` command path and four
+  `EVIDENCE` `cwd=` fields) are redacted to `<unlazy-skill>` and `<repo-checkout>` placeholders.
+  No CI job changed - the guard-extension alternative stays optional; merged trailers on `main` are
+  not rewritten (linear history), the rule is forward-only.
+
+||||||| 3e10e81
 ### 2026-11-06
 
 #### Added
