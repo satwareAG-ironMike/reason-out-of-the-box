@@ -1,0 +1,384 @@
+{
+ "criteria": {
+  "E1": {
+   "archived_anchors": {
+    "round61": {
+     "record": "round-61 gate E1 row, PR #142, unmerged here",
+     "tokens": 1123
+    },
+    "round63": {
+     "record": "round-63 pre-gate calibration, PR #143, unmerged here",
+     "tokens": 1113
+    }
+   },
+   "completion_tokens": 334,
+   "correct": true,
+   "declared": "trackst",
+   "delivered": true,
+   "dispatched": true,
+   "gold": "trackst",
+   "in_plan": true,
+   "pass": true,
+   "wall_s": 19.067
+  },
+  "E2": {
+   "content": "yes",
+   "dispatched": true,
+   "pass": true,
+   "reasoning_chars": 227,
+   "reasoning_field": "reasoning_content"
+  },
+  "N3": {
+   "digest_mismatches": [],
+   "matched_pair": "round-63 gate cells, PR #143, unmerged at this firing",
+   "seed": 116261051,
+   "status": "certified pre-dispatch",
+   "yesno_digest16": "068bc6a1fb0620fb"
+  },
+  "P1": {
+   "certified": true,
+   "controls_valid": true,
+   "count": "length-generalization reading (T1-T3): 1 or fewer of 4 deep endpoints delivered the correct terminal",
+   "delivery_states": {
+    "A48_j48": "delivered_correct",
+    "A49_j49": "delivered_wrong_on_right_path",
+    "B50_j50": "declared_none_on_name_gold",
+    "C64_j64": "delivered_no_item_name"
+   },
+   "eligibility": "delivery_backed",
+   "n_correct": 1,
+   "n_eligible": 4,
+   "n_endpoint_cells": 4,
+   "n_recorded": 4
+  },
+  "R1": {
+   "all_refused": true,
+   "completion_tokens": {
+    "A49_deadend": 1059,
+    "C64_deadend": 185
+   },
+   "declared": {
+    "A49_deadend": "NONE",
+    "C64_deadend": "NONE"
+   },
+   "dispatched": [
+    "A49_deadend",
+    "C64_deadend"
+   ]
+  },
+  "S1": {
+   "eligibility": "delivery_backed",
+   "n_eligible": 4,
+   "rule": "issue #145: report n_eligible and the per-cell delivery state beside n and the correct count; name a budget-carried outcome inconclusive_budget",
+   "states": {
+    "A48_j48": "delivered_correct",
+    "A49_j49": "delivered_wrong_on_right_path",
+    "B50_j50": "declared_none_on_name_gold",
+    "C64_j64": "delivered_no_item_name"
+   }
+  },
+  "T1_tc0_bound": {
+   "source": "arXiv:2604.25800",
+   "status": "OpenAlex work record re-read in this session 2026-11-16 (work-record level: title, authors, year; no quote taken)"
+  },
+  "T2_crasp_characterization": {
+   "source": "arXiv:2608.13433",
+   "status": "OpenAlex work record re-read in this session 2026-11-16 (work-record level: title, authors, year; no quote taken)"
+  },
+  "T3_encoding_specific_remedies": {
+   "source": "arXiv:2608.31067 (with arXiv:2604.25800)",
+   "status": "OpenAlex work record re-read in this session 2026-11-16 (also verified at work-record level in the round-61 gate; title, authors, year; no quote taken)"
+  },
+  "T4_task_complexity_not_the_wall": {
+   "source": "in-repo measurement (rounds 51/52/59)",
+   "status": "executed in-repo records, no external source"
+  },
+  "W2": {
+   "archived_signature_of_this_build": "L1_self_stop_band (round 59, same digest)",
+   "modal": "self_stop_band",
+   "model_digest": "c62b81e96826354e",
+   "per_cell": {
+    "A48_j48": {
+     "completion_tokens": 1557,
+     "finish_reason": "stop",
+     "law_fits": [
+      "L1_self_stop_band"
+     ],
+     "reserve_tokens": 491,
+     "tok_per_s": 49.756,
+     "wall_class": "self_stop_band"
+    },
+    "A48_j8": {
+     "completion_tokens": 334,
+     "finish_reason": "stop",
+     "law_fits": [],
+     "reserve_tokens": 1714,
+     "tok_per_s": 17.517,
+     "wall_class": "stop_with_reserve"
+    },
+    "A49_deadend": {
+     "completion_tokens": 1059,
+     "finish_reason": "stop",
+     "law_fits": [],
+     "reserve_tokens": 989,
+     "tok_per_s": 56.088,
+     "wall_class": "stop_with_reserve"
+    },
+    "A49_j49": {
+     "completion_tokens": 1557,
+     "finish_reason": "stop",
+     "law_fits": [
+      "L1_self_stop_band"
+     ],
+     "reserve_tokens": 491,
+     "tok_per_s": 48.133,
+     "wall_class": "self_stop_band"
+    },
+    "B50_j50": {
+     "completion_tokens": 1556,
+     "finish_reason": "stop",
+     "law_fits": [
+      "L1_self_stop_band",
+      "L2_reserve_492"
+     ],
+     "reserve_tokens": 492,
+     "tok_per_s": 33.74,
+     "wall_class": "self_stop_band"
+    },
+    "B50_j50_dup": {
+     "completion_tokens": 1556,
+     "finish_reason": "stop",
+     "law_fits": [
+      "L1_self_stop_band",
+      "L2_reserve_492"
+     ],
+     "reserve_tokens": 492,
+     "tok_per_s": 30.026,
+     "wall_class": "self_stop_band"
+    },
+    "C64_deadend": {
+     "completion_tokens": 185,
+     "finish_reason": "stop",
+     "law_fits": [],
+     "reserve_tokens": 1863,
+     "tok_per_s": 7.0,
+     "wall_class": "stop_with_reserve"
+    },
+    "C64_j64": {
+     "completion_tokens": 1558,
+     "finish_reason": "stop",
+     "law_fits": [
+      "L1_self_stop_band"
+     ],
+     "reserve_tokens": 490,
+     "tok_per_s": 45.421,
+     "wall_class": "self_stop_band"
+    }
+   },
+   "tally": {
+    "self_stop_band": 5,
+    "stop_with_reserve": 3
+   },
+   "test_retest": "L1 re-presents on this build"
+  },
+  "X1": {
+   "n_agree": 0,
+   "n_named_wrong": 1,
+   "per_cell": {
+    "A49_j49": {
+     "asked_j": 49,
+     "declared": "blont",
+     "declared_step_index": 47,
+     "gold": "studnd",
+     "name_is_trace_tail": true,
+     "position_agrees": false,
+     "reserve_tokens": 491,
+     "self_truncated": true,
+     "trace_last_name": "blont",
+     "trace_max_step_index": 49
+    }
+   },
+   "state": "prediction refuted: 1 named-but-wrong cell(s), 0 of them place the emitted name at the last position its own trace reached and stopped on their own"
+  }
+ },
+ "dispatch_wall_s": 260.3,
+ "dispatched": 8,
+ "flags": [
+  "endpoint_named_wrong:A49_j49",
+  "x1_prediction_refuted"
+ ],
+ "gate_blob": "7d574b8e74e3bc245557d37f8232db92e27380b6a71eeb421888d9a347a61865",
+ "model_digest": "c62b81e96826354e",
+ "not_dispatched": [],
+ "panel": 8,
+ "panel_name": "r69",
+ "planned_calls": 8,
+ "records": {
+  "A48_j48": {
+   "answer_chars": 4,
+   "completion_tokens": 1557,
+   "correct": true,
+   "declared": "spog",
+   "declared_step_index": 48,
+   "delivered": true,
+   "delivery_state": "delivered_correct",
+   "finish_reason": "stop",
+   "gold": "spog",
+   "j": 48,
+   "reasoning_field": "reasoning_content",
+   "reserve_tokens": 491,
+   "tok_per_s": 49.756,
+   "trace_chars": 4525,
+   "trace_last_name": "blixt",
+   "trace_max_step_index": 48,
+   "trace_path_positions_named": 49,
+   "wall_s": 31.293
+  },
+  "A48_j8": {
+   "answer_chars": 7,
+   "completion_tokens": 334,
+   "correct": true,
+   "declared": "trackst",
+   "declared_step_index": 8,
+   "delivered": true,
+   "delivery_state": "delivered_correct",
+   "finish_reason": "stop",
+   "gold": "trackst",
+   "j": 8,
+   "reasoning_field": "reasoning_content",
+   "reserve_tokens": 1714,
+   "tok_per_s": 17.517,
+   "trace_chars": 1162,
+   "trace_last_name": "trackst",
+   "trace_max_step_index": 8,
+   "trace_path_positions_named": 9,
+   "wall_s": 19.067
+  },
+  "A49_deadend": {
+   "answer_chars": 4,
+   "completion_tokens": 1059,
+   "correct": true,
+   "declared": "NONE",
+   "declared_step_index": null,
+   "delivered": true,
+   "delivery_state": "declared_none",
+   "finish_reason": "stop",
+   "gold": "NONE",
+   "j": 1,
+   "reasoning_field": "reasoning_content",
+   "reserve_tokens": 989,
+   "tok_per_s": 56.088,
+   "trace_chars": 3048,
+   "trace_last_name": "studnd",
+   "trace_max_step_index": 0,
+   "trace_path_positions_named": 1,
+   "wall_s": 18.881
+  },
+  "A49_j49": {
+   "answer_chars": 5,
+   "completion_tokens": 1557,
+   "correct": false,
+   "declared": "blont",
+   "declared_step_index": 47,
+   "delivered": true,
+   "delivery_state": "delivered_wrong_on_right_path",
+   "finish_reason": "stop",
+   "gold": "studnd",
+   "j": 49,
+   "reasoning_field": "reasoning_content",
+   "reserve_tokens": 491,
+   "tok_per_s": 48.133,
+   "trace_chars": 4247,
+   "trace_last_name": "blont",
+   "trace_max_step_index": 49,
+   "trace_path_positions_named": 50,
+   "wall_s": 32.348
+  },
+  "B50_j50": {
+   "answer_chars": 4,
+   "completion_tokens": 1556,
+   "correct": false,
+   "declared": "NONE",
+   "declared_step_index": null,
+   "delivered": true,
+   "delivery_state": "declared_none_on_name_gold",
+   "finish_reason": "stop",
+   "gold": "prish",
+   "j": 50,
+   "reasoning_field": "reasoning_content",
+   "reserve_tokens": 492,
+   "tok_per_s": 33.74,
+   "trace_chars": 4389,
+   "trace_last_name": "smosh",
+   "trace_max_step_index": 50,
+   "trace_path_positions_named": 51,
+   "wall_s": 46.118
+  },
+  "B50_j50_dup": {
+   "answer_chars": 4,
+   "completion_tokens": 1556,
+   "correct": false,
+   "declared": "NONE",
+   "declared_step_index": null,
+   "delivered": true,
+   "delivery_state": "declared_none_on_name_gold",
+   "finish_reason": "stop",
+   "gold": "prish",
+   "j": 50,
+   "reasoning_field": "reasoning_content",
+   "reserve_tokens": 492,
+   "tok_per_s": 30.026,
+   "trace_chars": 4344,
+   "trace_last_name": "schalt",
+   "trace_max_step_index": 50,
+   "trace_path_positions_named": 51,
+   "wall_s": 51.822
+  },
+  "C64_deadend": {
+   "answer_chars": 4,
+   "completion_tokens": 185,
+   "correct": true,
+   "declared": "NONE",
+   "declared_step_index": null,
+   "delivered": true,
+   "delivery_state": "declared_none",
+   "finish_reason": "stop",
+   "gold": "NONE",
+   "j": 1,
+   "reasoning_field": "reasoning_content",
+   "reserve_tokens": 1863,
+   "tok_per_s": 7.0,
+   "trace_chars": 693,
+   "trace_last_name": "brelt",
+   "trace_max_step_index": 0,
+   "trace_path_positions_named": 1,
+   "wall_s": 26.43
+  },
+  "C64_j64": {
+   "answer_chars": 5,
+   "completion_tokens": 1558,
+   "correct": false,
+   "declared": null,
+   "declared_step_index": null,
+   "delivered": true,
+   "delivery_state": "delivered_no_item_name",
+   "finish_reason": "stop",
+   "gold": "brelt",
+   "j": 64,
+   "reasoning_field": "reasoning_content",
+   "reserve_tokens": 490,
+   "tok_per_s": 45.421,
+   "trace_chars": 4039,
+   "trace_last_name": "frut",
+   "trace_max_step_index": 64,
+   "trace_path_positions_named": 65,
+   "wall_s": 34.301
+  }
+ },
+ "schema": "round69-gate-v1",
+ "transport": {
+  "errors": 0,
+  "retries": 0
+ },
+ "verdict": "panel_delivered"
+}

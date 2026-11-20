@@ -525,6 +525,66 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ||||||| 90be10c
 ||||||| 2ea6ae1
+### 2026-11-16
+
+#### Added
+
+- Nightly research round 69 (issue #65; serves #129, #126, #145, #100, #105, #94, #139, #73,
+  #141, #137; opens #150): `research/nightly-2026-11-16-0219/` re-fires the k > 48 name-walk panel
+  that the round-61 gate registered as row P1 **as a byte-identical matched pair** on the other
+  side of the identity split - the eight cells (`A49_deadend`, `C64_deadend`, `A48_j48`,
+  `A49_j49`, `B50_j50`, `C64_j64`, `B50_j50_dup`, `A48_j8`) that round 63 dispatched on a
+  27B-class build, now dispatched on the flash-next-class build whose serving digest is pinned as
+  `c62b81e96826354e`, the round-59 build and the only build in this record that has named wrong
+  terminals: items, seeds (116261051, 118261016, 120261132, 148261120), golds, caps, template and
+  order frozen, all eight prompt digests asserted against the round-63 pins in `--selftest`, the
+  archived k = 48 anchor re-certified at yes/no digest `068bc6a1fb0620fb`, so the build is the
+  only variable. Instrument `name_walk_panel_r69.py` (stdlib, `--selftest` 125 checks: planted
+  non-load-floor and out-degree-two items refused, the seven delivery states, the three wall laws
+  at both boundaries, all four P1 branches plus the `inconclusive_budget` naming, all three X1
+  measures plus its not-evaluable branch, a named dead-end control must uncertify the panel, an
+  undispatched panel must stay owed, a mid-word censor, a stopped record with no answer field, an
+  answer field carrying a non-entity token, the trace-merge rule, and six planted README-guard
+  negatives; `init_items()` fails closed on pin drift); sequential dispatch (`workers = 1`,
+  issue #73 adopted here for the first time, one record flushed per cell, 900 s per-call guard,
+  4 attempts, 3,000 s dispatch budget, 120 s cell floor); gate `round69-gate-v1` (blob
+  `7d574b8e`) frozen on the measured rate 17.744 tok/s from 2 census calls at cap 256 plus one
+  full-cap calibration, which selected the full eight-cell panel before any panel call. Result
+  (tier `panel_delivered`, 8 of 8 dispatched, 12 of 40 prompts, 260.3 s panel wall, 0 errors, 0
+  retries, controls valid): **row P1 lands on 1 of 4 on this build as it did on the 27B build
+  (`A48_j48` correct, `A49_j49` a wrong name, `B50_j50` a refusal, `C64_j64` an answer field
+  carrying `cruuk`, a token that is not one of the 128 entities of its own item), so the registered
+  count does not move with the build**, while row S1 (issue #145, run for the first time) reports
+  `n_eligible = 4` and `delivery_backed`, and retro-scanning round 63's records under the same
+  census rule classifies four of its eight as `censored_at_cap` at `n_eligible = 1`, i.e. the same
+  registered 1-of-4 is behavior-carried here and budget-carried there, where it would take the name
+  `inconclusive_budget`. Row W2: 5 of 8 records in the 1,556 to 1,558 self-stop band at finish
+  `stop` (reserves 490 to 492, two of them also fitting the 492 law) and **no cell cap-bound**, so
+  the round-59 wall mode re-presents on its own digest and the band is flat from j = 48 to j = 64,
+  while the identical prompts on the round-63 build put four records at exactly 2,048 reserves 0 -
+  wall shape stays build-tied, now on a matched pair. Row X1 (the prediction round 64 registered
+  about this build) is **refuted** on its position measure: `A49_j49` emitted node 47 of the 49-link
+  path, its name is the last generator-vocab name of its own trace and it truncated itself (491
+  tokens of reserve), but the furthest position its trace names along that path is 49; n = 1 record,
+  and the row's vocabulary-bound definition cannot see `C64_j64` at all while the trace tail measure
+  also fails in the correct cell (`blixt` named last, `spog` emitted). Census finding, unscored and
+  trace-text-free: in 4 of 4 endpoint cells the trace names every node of the asked path including
+  the terminal at the asked position, and only 1 of 4 answer fields carries it, so at these depths
+  on this build the loss sits between a name the record already contains and the word the answer
+  field carries. Instrument records: per-cell rates 30.026 to 56.088 tok/s against a 0.548 tok/s
+  first census call (a ~19 to 30 s per-request floor dominates small requests), so the pre-gate
+  calibration rate predicted neither; the B50 duplicate pair is byte-identical in count and verdict
+  (1,556 / 1,556, NONE / NONE) where round 63's diverged; the identical anchor prompt costs 334,
+  359, 306, 1,113 and 1,123 tokens across five dispatches on three builds and is correct in all
+  five; erratum disclosed - the frozen gate counts 11 prompts and the firing spent 12 because
+  `--run` also makes the trace-exposure call. Also filed as #150: walking the remote's
+  `research/nightly-*` heads against the runner's working copy found complete round records for
+  rounds 56 and 58, a script-only firing for 57, and three firings that left an empty local head,
+  i.e. six scheduled firings contributed nothing to the public record and the round's exit status
+  is not a landing test.
+
+||||||| 90be10c
+||||||| 2ea6ae1
 ### 2026-11-06
 
 #### Added
