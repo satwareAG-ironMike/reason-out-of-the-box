@@ -11,10 +11,15 @@ control). Evidence label: **Executed** (exploratory, one endpoint, one build, on
 one sample per cell).
 
 The round-71 firing (2026-11-17 02:00, slot 4/6) died at start (exit 1, a registry drift
-on the rotated slot) and left no record; this digest last fired in a scheduled round
-whose record never reached the repository (issue #150 class, a local-only record of the
-round-58 firing), so as far as the public record goes this is the first firing on it: no
-archived number on this build is quoted anywhere below.
+on the rotated slot) and left no record. The serving id pinned here (`26df9af5972ff312`,
+`model_digest()` = `sha256(model_id)[:16]`) is **not** unique to this firing: the same
+16-hex digest appears in the archived round-54 record
+(`research/nightly-2026-11-08-0221/README.md`, `raw.jsonl`, `summary.json`) and the
+archived round-58 record (`research/nightly-2026-11-10-0401/README.md`, `gate.json`,
+`raw.jsonl`, `health.json`, `calibration.json`), all on main. The digest identifies the
+serving id string; a rebuilt serving under the same id string is not distinguishable from
+these artifacts. What the digest pins: the model id string the endpoint reported at
+dispatch, not the weight bytes.
 
 ## Question
 
@@ -41,6 +46,22 @@ are refused; the interior ask is asserted strictly inside the walk and the inter
 asserted distinct from the tail and the start, so the tail-copy detector is not vacuous;
 the filler token is asserted outside every item vocabulary; the archived k = 48 anchor
 regenerates with seed 116261051 and its archived yes/no prompt digest
+**Context-length disclosure (issue #152, carried from the round-70 record).** The
+shared first user turn in every two-turn arm is the archive's sanitized 900-character
+copy of the turn-1 prompt, not the full prompt the model saw at turn 1 (the
+instrument stores `rec["prompt"] = sanitize(spec["prompt"], limit=900)` and the arm
+replay reads from that stored record). The turn-1 dispatches carry `prompt_tokens`
+932 / 958 / 1,234 on the three name cells; the arm-B dispatches carry 445 / 449 / 462
+on the same cells, so arm B is "900 characters of facts plus nothing kept", not
+"the same context minus the draft". Arm X keeps the uncapped draft. Endpoint-level
+length parity across arms is **not** licensed by the committed files: the endpoint's
+own `prompt_tokens` are asymmetric (arm X adds 2,057 over arm B on all three cells,
+arm F adds 899 / 950 / 776 - 38 to 46 per cent of the context arm X carries), and no
+draft-side token field is archived. What the artifacts license is the whitespace-token
+parity declared in `gate.json` `F1_filler_budget`: filler of this declared word
+budget buys no name in 0 of 3. The inference "the recovery tracks the draft's
+content, not its budget" ships downgraded to that narrower reading.
+
 `068bc6a1fb0620fb`; three turn-1 prompt digests equal the round-63/69/70 pins and the
 round-70 dispatch (row M4), so the claim "same items, same prompts, different serving
 build" is machine-checked here; arm construction (the three arms differ only in the notes

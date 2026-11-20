@@ -1,0 +1,18 @@
+A48_j48 censored_at_cap ct=2048 trace=5565 72.591 tok/s
+A48_j48_X delivered_correct ct=1426 68.541 tok/s
+A48_j48_F declared_none_on_name_gold ct=986 64.881 tok/s
+A48_j48_B declared_none_on_name_gold ct=1960 72.881 tok/s
+B50_j50 censored_at_cap ct=2048 trace=5375 88.658 tok/s
+B50_j50_X delivered_correct ct=287 60.587 tok/s
+B50_j50_F declared_none_on_name_gold ct=764 46.461 tok/s
+B50_j50_B declared_none_on_name_gold ct=796 56.048 tok/s
+C64_j64 censored_at_cap ct=2048 trace=5504 83.381 tok/s
+C64_j64_X censored_at_cap ct=2048 83.469 tok/s
+C64_j64_F declared_none_on_name_gold ct=892 83.435 tok/s
+C64_j64_B declared_none_on_name_gold ct=1858 111.198 tok/s
+C64_over censored_at_cap ct=2048 trace=5358 131.215 tok/s
+C64_over_X censored_at_cap ct=2048 126.116 tok/s
+C64_over_F declared_none ct=2032 94.279 tok/s
+C64_over_B declared_none ct=784 102.524 tok/s
+A48_j8 delivered_correct ct=266 trace=820 90.476 tok/s
+raw.jsonl holds 17 records

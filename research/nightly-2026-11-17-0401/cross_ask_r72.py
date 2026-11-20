@@ -32,7 +32,10 @@ notes' tail must miss. Scoring is against the generator's independent solver on 
 answer field, never on trace text (issue #94); the draft is a treatment and a count census
 (issue #105), and no trace text is archived.
 
-Registered rows, frozen in gate.json before any prompt; every row is a key of the frozen
+Registered rows, frozen in gate.json before any prompt; the S1/W2/M4 row
+definitions sit in the frozen gate under the data keys delivery_states,
+wall_laws and matched_pair (the row ids are named in the instrument, not
+literal gate keys),
 gate (closing issue #152 item 4, which found round 70's rows named in the docstring only):
 
   V0_trace_exposure   the deployment must hand back a non-report channel at the pre-gate

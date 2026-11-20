@@ -262,12 +262,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   the issue #152 item-2 budget-matched filler control, on the three M4 items whose turn-1
   prompts are byte-identical to the round-63, round-69 and round-70 dispatches. 19 of 40
   prompts (5 turn-1 cells, the `C64_over` past-the-tail control and the `j = 8` anchor
-  included, and 12 two-turn arms, all asking interior step 40), 0 transport retries, 290.1 s
+  included, and 12 two-turn arms, 9 of 12 asking interior step 40 and 3
+  (the past-the-tail control cell, which keeps its own `j = 72`) asking 72),
+  0 transport retries, 290.1 s
   dispatch wall; instrument `cross_ask_r72.py` (stdlib, `--selftest` 119 checks: the interior
   ask asserted strictly inside the walk and the interior gold asserted distinct from the tail
   and the start, the X2 detector pinned to the treatment side, three turn-1 prompt digests
   asserted against the round-63/69/70 pins) with gate `round72-gate-v1` (blob
-  `2b3139d790011ce3`) frozen before dispatch, every registered row a key of the frozen gate,
+  `2b3139d790011ce3`) frozen before dispatch, the S1/W2/M4 row definitions
+  registered as the data keys `delivery_states`, `wall_laws` and
+  `matched_pair` (the row ids are named in the instrument, not in the
+  frozen gate),
   closing issue #152 item 4. Result on the build pinned as `26df9af5972ff312` (a 27B-class
   local endpoint; first public firing on this build): **row R2 ships `cross_ask_gated` -
   arm X 2 of 3 against arm F 0 of 3 and arm B 0 of 3, both discordant pairs X-only**
