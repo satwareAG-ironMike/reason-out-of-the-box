@@ -5,6 +5,32 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-08
+
+#### Added
+
+- Nightly research round 54 (issue #65; serves #71, #100, #105; refs #94, #126, #73):
+  `research/nightly-2026-11-08-0221/` re-dispatches round 53's cap-ladder design byte-identically
+  on a 27B-class local endpoint (the two round-51 gold-no items, the gold-yes natural-stop
+  control, one duplicate re-dispatch as the issue #100 control, the enumerate pair and the
+  non-ladder listing control at two caps): 15 of the 40-call cap (the 14 scored experiment
+  records plus one census health probe; the wall and token totals are over the scored records),
+  `max_tokens` 2048,
+  `temperature 0.0`, 237.36 s dispatch wall, 11,283 prompt and 20,044 completion tokens, no call
+  dropped. Gate `435e1939` (schema `round54-gate-v1`) frozen and pinned before dispatch; 152
+  selftest checks with planted controls. Result (tier `absolute_pin`, flag
+  `same_class_pair_exposed`): every ladder rung below the 1,556 pin is cap-bound (1,536, 1,024
+  and 512 stop at the cap with `finish_reason` `length`, no marker, no answer; C2 6 of 6), so the
+  flash class's 492-token reserve region (round 53) does not travel to the 27B class (stop-offset
+  shape flag `no_reserve_cap_bound`, the round-52 27B-class shape); the self-termination marker is
+  absent from all 14 records; the 27B-class answer state reproduces round 52's archived k = 48
+  state on all three items (X1 3 of 3, answer-level by the exposure rule), forming with round 52
+  a same-class pair with the reasoning channel open on both sides (the class already carries one
+  such pair on main, rounds 46 and 48); the gold-yes natural stop
+  is 838 (round 52: 840, flash class: 1,310); the issue #100 duplicate control fails (the twin
+  was censored at 2,048, the duplicate stopped at 1,798 and declared the correct gold label).
+||||||| 90be10c
+=======
 ### 2026-11-20
 
 #### Added
@@ -84,6 +110,54 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   and the gate blob byte-unchanged, the instrument change disclosed in the README, and a
   `registered: false` marker plus planted-slip controls on any column added after the dispatch. No
   registered row or tier may move in a resume (refs #65).
+### 2026-11-20
+
+#### Changed
+
+- Trailer rule and `GATES.md` read against the public-only rule (issue #149, owner ruling
+  2026-11-19): the `Model:` commit trailer is now the public model name only - no provider or
+  model-id parenthetical and no quantization-tagged deployment label, because squash merges replay
+  trailer text onto `main` and the serving-id guard treats those label shapes as leaks in tracked
+  files; the five absolute maintainer-home paths in `GATES.md` (one `CHECK` command path and four
+  `EVIDENCE` `cwd=` fields) are redacted to `<unlazy-skill>` and `<repo-checkout>` placeholders.
+  No CI job changed - the guard-extension alternative stays optional; merged trailers on `main` are
+  not rewritten (linear history), the rule is forward-only.
+
+||||||| 3e10e81
+### 2026-11-09
+
+#### Added
+
+- Nightly research round 55 (issue #65; serves #71, #94, #100, #105; refs #129, #77, #73):
+  `research/nightly-2026-11-09-0301/` moves the ladder from a two-way answer space to a
+  one-of-many name space on a flash-next-class endpoint, holding the prompt bytes fixed and moving
+  only the step count `j` inside a single load-floor item (issue #129's `facts = 2k` family), so
+  depth is isolated from input load by construction rather than by round 50's cross-item band
+  matching - 29 of the 40-call cap: `k = 8` seed 36261005 at `j` in 1, 2, 4, 8; `k = 16` seed
+  52261033 at `j` in 2, 8, 16; `k = 32` seeds 84261011 and 84261050; `k = 48` seed 116261051 (the
+  item archived round 51 dispatched byte-identically (rounds 53 and 54 are same-family firings
+  pending merge in PRs #131 and #133), re-certified before dispatch against the archived yes/no
+  digest `068bc6a1fb0620fb`) at `j` in 2, 8, 16, 32, 48; seven NONE controls (five
+  at `j = k + 1`, two at a dead-end source), one budget rung (`j = 48` at `max_tokens` 256) and two
+  re-dispatches (#100), plus the census call; `temperature` 0.0, `max_tokens` at most 2048, zero
+  retries, 504.4 s dispatch wall on the resumed dispatch: the first 8 cells were written by a dispatch
+  process killed mid-round, `--run` resumed by label, and all 29 records are in `raw.jsonl`. Instrument `name_depth_probe.py` (stdlib, `--selftest` 34 checks:
+  an off-by-one gold must score wrong, a censored record must be a non-delivery rather than a wrong
+  answer, an empty pseudo-gold must not read as present, and the tier rule must land on each of its
+  four tiers under planted record sets). Tier `controls_invalid`, flags
+  `delivery_bound_loss` and `trace_provenance_refused`: 18 of 18 delivered name cells correct with
+  zero wrong names anywhere (`j = 16` at 529 tokens, `j = 24` at 1,285, `j = 32` at 951 and 1,515),
+  four non-deliveries all `finish_reason` `length` at the cap, and both C2 misses non-deliveries
+  rather than false names - 5 of 5 controls that answered refused correctly, so the registered
+  6-of-7 rule lets a delivery failure invalidate a capability claim it does not bear on. Delivery
+  1.00 at `j <= 8` against 0.50 at `j >= 24`; `j = 32` delivers at 64 facts and is censored at 96,
+  so the surface is load times depth and the cheapest deeper curve is fewer facts per item, not a
+  bigger cap. The matched-name provenance control refuses the trace readout (gold-in-trace 0.6667
+  against pseudo-gold 0.6667 on 3 undelivered records): a long traversal enumerates both tails, so
+  containment is not a provenance test in the name format either (#94). Self-agreement 2 of 2, one
+  pair degenerate (both censored at 2,048). Evidence level `Executed`, exploratory, n = 1 per cell.
+
+||||||| 2ea6ae1
 ### 2026-11-11
 
 #### Added
@@ -116,6 +190,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   this build, and the `d*` procedure must name the channel it prices.
 
 ||||||| 90be10c
+||||||| 2ea6ae1
 ### 2026-11-06
 
 #### Added
