@@ -200,6 +200,52 @@ repository concedes, and what remains open.
   standard no machine claim has yet met. The argument lowers the prior on substrate exclusion;
   it does not raise the posterior on machine sentience.
 
+### 12. "Benchmark scores are not reasoning: the ARC-AGI process-level gap" (Chollet, 2026-11-20, refs #169)
+
+- **Claim.** ARC-AGI scores (GPT-6 Astra: 98.5% ARC-AGI-1, 95.0% ARC-AGI-2,
+  62.7% ARC-AGI-3 under the neutral Standard harness vs 99.9% under the
+  Provider Adapter harness) do not establish reasoning. No peer-reviewed
+  process-level analysis of how any system solves ARC-AGI-2 exists; a high
+  score without a mechanistic account is a result awaiting explanation, not
+  evidence of reasoning. The 37-point harness gap (same model, two harnesses)
+  is the strongest single datapoint: the score is harness-dependent, so it
+  cannot be read off as a model property.
+- **Source.** x.com/fchollet/status/2041248358518731020 (2026-11-20, social
+  media; not independently verified beyond the in-repo ARC figures, which
+  were verified against arcprize.org on 2026-09-10).
+- **Record.** The repository concedes this fully. Field #4 in
+  docs/next-investigations.md states the gap explicitly: "GPT-6 Astra 95.0%
+  ARC-AGI-2 verified; ARC-AGI-3 62.7% vs 99.9% depending on harness; still
+  no peer-reviewed process analysis." The C5 claim is scoped to a base model
+  on procedurally novel tasks, not to benchmark pass rates; the two-track
+  human-baseline mapping (issue #7) is the repository's own answer to
+  "score without process": pass rates are never treated as reasoning
+  evidence on their own.
+- **Conceded.** Benchmark scores are necessary but not sufficient; the
+  process-level gap is a first-order open question.
+- **Open.** The ARC-AGI-3 milestone prize (2026-09-30) and the Kaggle 2026
+  write-ups are the next candidate process-level sources; field #4 tracks
+  them.
+
+### 13. "The 'reasoning' label conflates pattern matching and inference" (Kambhampati, 2026-11-20, refs #169)
+
+- **Claim.** "Reasoning" in the LLM literature is used loosely: what is
+  called reasoning decomposes into pattern matching plus a small amount of
+  genuine inference. Without separating the two, "LLMs reason" is
+  undefined.
+- **Source.** x.com/rao2z/status/2110370483547815957 (2026-11-20, social
+  media; cites Subbarao Kambhampati's published position; not independently
+  verified beyond the citation).
+- **Record.** The claim ladder already implements the split: C1-C4 are the
+  established and bounded claims (C3 is the pattern-matching row, with
+  GSM-Symbolic as its anchor); C5 is the strict "out of the box" claim,
+  untested. The headline verdict ("the strict claim is unmet") is the
+  C5-specific verdict, not a general "LLMs cannot reason" claim.
+- **Conceded.** Broader-literature terminology is imprecise; the claim
+  ladder is this repository's answer to that imprecision.
+- **Open.** C5 requires the study-design experiment (M1-M5); until then the
+  C5 row is "untested," not "false."
+
 ## Using this page in a debate
 
 Ask which claim is meant. "LLMs cannot reason" is refuted by C1-C4 in peer-reviewed venues,
@@ -233,3 +279,4 @@ thesis program tracked in the issue board.
   alignment-faking transcripts re-entering training corpora
 - ARC Prize, OpenAI's GPT-6 Astra on ARC-AGI-3 (arcprize.org/blog/astra, 2026-09-03) and
   verified results (arcprize.org/results/openai-gpt-6-astra)
+

@@ -31,6 +31,76 @@ What is needed to settle H1, in order:
 | 4. Main experiment + human baseline | The confirmatory data |
 | 5. Pre-registered report + public release of code and data | The paper itself |
 
+## Related work (added 2026-11-20, refs #169)
+
+Verified 2026-11-20: arXiv API for 2504.13837, 2506.18880, 2506.10947, 2410.05229
+(title + first-posted date match). Social-media sources (x.com) are listed but not
+independently verified; treat as claim-ledger datapoints, not archive entries.
+
+### RL vs base model at large sampling budgets
+
+- **Yue et al., arXiv:2504.13837** (NeurIPS 2025 Oral): "Does Reinforcement Learning
+  Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?" At large
+  pass@k sampling budgets, base models match or exceed RLVR-trained siblings;
+  RL sharpens existing latent paths, it does not create new ones.
+  - Caveat (x.com/ChombaBupe/status/2122773726571700454): right answers can arrive
+    via wrong intermediate chains; pass@k conflates answer correctness with
+    chain faithfulness, so the "base wins" result needs the C4 faithfulness row
+    (archive C4) before it can be read as latent reasoning.
+- **OMEGA, arXiv:2506.18880**: "Can LLMs Reason Outside the Box in Math?" Evaluates
+  exploratory, compositional, and transformative generalization. Closest published
+  framing of the "out of the box" question; no training-data control (closed
+  models only), so it does not meet acceptance-criteria 2.
+- **Spurious Rewards, arXiv:2506.10947**: "Spurious Rewards: Rethinking Training
+  Signals in RLVR." Random-reward baselines lift Qwen-class models but not
+  Llama 3 or OLMo 2; RLVR gains are model-family-specific, which complicates any
+  cross-model transfer of the 2504.13837 finding.
+
+### Surface-perturbation collapse (GSM-Symbolic family)
+
+- **Mirzadeh et al., arXiv:2410.05229** (ICLR 2025): "GSM-Symbolic: Understanding
+  the Limitations of Mathematical Reasoning in LLMs." About 10% accuracy drop on
+  surface-perturbed variants (renamed variables, reordered steps); up to 65% drop
+  with an irrelevant clause. This is the pre-registered T7 triangulation arm
+  (analysis-plan.md row T7): between-instantiation SD of cell accuracy > 10 pp.
+  Surface-perturbation variants should be added to the study design as
+  registered T7 items, distinct from the #77 leaky hop_chain items.
+
+### Two-hop real-bridge
+
+- **Owain Evans (x.com/OwainEvans_UK/status/2025712247763575234)**: two-hop
+  reasoning (Dallas -> Texas -> Austin; rhyme planning) shows the model plans
+  the bridge word internally; injecting the planned word changes the output.
+  This is a real-bridge two-hop result, distinct from the abstract two-hop
+  tasks in the archive. Not peer-reviewed; claim-ledger datapoint only.
+- **lesswrong.com/posts/CdWbCvKEoK39L3DzK**: companion post on the same
+  two-hop phenomenon. Same caveat.
+
+### OLMo 3 + OlmoTrace replication
+
+- **Allen Institute for AI (x.com/allen_ai/status/1991507983881379896)**:
+  OLMo 3 7B/32B release (Dolma 3, ~9.3T tokens; report arXiv:2512.13961,
+  in archive). Olmo 3 7B/32B are already in the study-design v0.4
+  replication family (docs/study-design.md).
+- **Hanna Hajishirzi (x.com/HannaHajishirzi/status/1991565432889999838)**:
+  OlmoTrace: full pretraining trace (activations, attention, loss curves)
+  released alongside OLMo 3. OlmoTrace is the replication resource for the
+  mechanistic row (C2): it allows circuit-level verification of the
+  induction-head and in-context-learning claims without re-running
+  pretraining. Add to docs/next-investigations.md field #3 (literature
+  round 9) as a replication action.
+
+### Against (steelman counter-positions)
+
+- **François Chollet (x.com/fchollet/status/2041248358518731020)**:
+  ARC-AGI results and benchmark scores do not establish reasoning;
+  the ARC process-level analysis gap (field #4) is the strongest
+  empirical objection to the "benchmarks reason" reading.
+- **Kambhampiri et al. (x.com/rao2z/status/2110370483547815957)**:
+  (Kambhampati, cited by Rao) the "reasoning" label in LLM literature
+  conflates pattern matching with genuine inference; the distinction
+  is the C3/C5 split in docs/counterarguments.md.
+
 ## Investigation fields (ranked)
 
 | # | Field | State | Next action |
@@ -38,6 +108,7 @@ What is needed to settle H1, in order:
 | 1 | The H1 experiment on open-data models | Open; no paper fills the gap (criteria 1-3 unmet) | Execute study design v1.0 (milestones M1-M5 below) |
 | 2 | Feasibility: models, data, compute | Re-verified 2026-09-10 (findings below): OLMo 2 32B exists, OLMo 3 7B/32B + Dolma 3 public, Apertus 1.5 released, no DCLM v2 | Closed 2026-09-10 (issue #2): manifests, corpus access path, budgets, and the frozen model list are in the findings below |
 | 3 | Literature round 9: 2026 latent-reasoning updates | Executed 2026-09-05: 15 papers added (6 reasoning traces + the issue #1 list incl. corrected Akyurek ID 2211.15661). 2026-09-10 re-scan: verdict unchanged, 24 verified round-11 candidates (findings below) | Round 11 from the 2026-09-10 candidate list |
+| 3a | OLMo 3 + OlmoTrace replication (new 2026-11-20, refs #169) | Olmo 3 7B/32B in study-design v0.4 replication family; OlmoTrace (Hajishirzi, x.com/HannaHajishirzi/status/1991565432889999838) releases full pretraining traces - circuit-level verification resource for the C2 row without re-running pretraining | Run the T7 surface-perturbation arm on OLMo 3 7B/32B; use OlmoTrace to verify the in-context-learning circuits claimed in C2; add to the next investigation plan |
 | 4 | ARC-AGI-2 process level | 2026-09-03: GPT-6 Astra 95.0% ARC-AGI-2 verified; ARC-AGI-3 62.7% vs 99.9% depending on harness; still no peer-reviewed process analysis | Audit the Kaggle 2026 write-ups after the 2026-09-30 milestone prize |
 | 5 | In-context learning as algorithm formation | New theoretical frame for "from nothing" | Done in round 9 (2026-09-05): Garg 2208.01066, Akyurek 2211.15661, In-Context Algebra 2512.16902 |
 | 6 | Pre-registration practice | Established: two-layer (human IRB + computational analysis plan) | Pre-register in M1 |
