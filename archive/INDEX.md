@@ -8,7 +8,7 @@ and associative readings.)
 
 **Archive built**: 2026-09-02 (rounds 1-4), 2026-09-03 (rounds 5-6), 2026-09-05 (round 9),
 2026-09-06 (round 8 extension), 2026-09-09 (round 10), 2026-09-14 (round 12),
-2026-09-15 (round 13), 2026-09-28 (round 14), 2026-10-05 (round 15), 2026-10-14 (round 16), 2026-10-19 (round 17), 2026-10-25 (round 18) |
+2026-09-15 (round 13), 2026-09-28 (round 14), 2026-10-05 (round 15), 2026-10-14 (round 16), 2026-10-19 (round 17), 2026-10-25 (round 18), 2026-11-04 (rounds 19-20) |
 **Method**: Firecrawl
 research suite (semantic arXiv search, metadata inspection, full-text passage verification)
 + multi-round web-grounded analysis (Perplexity).
