@@ -449,6 +449,40 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ||||||| 90be10c
 ||||||| 2ea6ae1
+### 2026-11-18
+
+#### Added
+
+- Nightly research round 73 (issue #65; serves #152, #71, #94, #100, #105, #126, #139, #145, #137):
+  `research/nightly-2026-11-18-0423/` runs issue #152's confound-breaking cross-ask arm on the
+  flash-next-class build where round 70 found the tail-copy confound (serving build pinned by model
+  digest `4075b5949b2b0487`, open PR #151), the fourth cell of the {terminal,interior} x
+  {flash,27B} square. Byte-identical port of round 72's instrument (open PR #153) except the gate
+  schema, question, round identity and theory-row verification strings; `--selftest` 119 checks
+  green before any prompt, three turn-1 prompt digests pinned to the round-63/69/70 values (row
+  `M4`) so "same items, same prompts, different build" is machine-checked. Gate `round73-gate-v1`
+  blob `91ba8535` frozen before dispatch (re-frozen to `94372064` to correct one unscored theory-row
+  verification channel to OpenAlex; the only gate diff is the `theory_rows` key, scored rows and
+  pins byte-identical). 19 of 40 prompts (2 pre-gate + 17 dispatched), 0 retries, 696.5 s wall.
+  Result: `R2` arm X recovers the interior step 40 in **3 of 3** against arm F (budget-matched
+  filler) **0 of 3** and arm B (removal) **0 of 3**, verdict `cross_ask_gated`; `X2` all three
+  arm-X recoveries are not the draft's last name, verdict `selection_beyond_tail`, so the tail-copy
+  confound round 70 could not escape on this build was a terminal-equals-tail coincidence and the
+  flash build selects an interior position of its own draft on the same side as the 27B build
+  (round 72, 2 of 2 beyond tail), confirming the transfer across class rather than localising it;
+  `H1` is the first non-empty firing in the family (`A48_j48` answered its terminal at turn 1, and
+  arm X kept the interior 1 of 1 while arms F and B each lost it, 0 of 1); `C1` false names 0/0/0;
+  the past-the-tail control truncated instead of refusing (`V2` fail, issue #139 re-presents, this
+  build truncating). `L3_cap_bound` fits 4 records, the round-59/69 self-stop band and the round-53
+  reserve-of-492 fit none, and `A48_j48` (prompt digest `baabc346`) delivered at 2,006 tokens where
+  round 70 ran the same prompt to the cap on this digest, so the wall is a (build, firing) property
+  (issue #126). Evidence label **Executed**; trace `reasoning_content` on 17 of 17 (issue #105), no
+  verdict from a trace (issue #94). The interior ask breaks the tail-copy confound but not
+  retrieval-versus-recomputation: the round-70 owed arm C (a same-length draft from a different
+  item, frozen before dispatch) stays owed.
+
+||||||| 90be10c
+||||||| 2ea6ae1
 ### 2026-11-06
 
 #### Added
