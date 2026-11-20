@@ -767,7 +767,10 @@ def gate_spec(records: list, theory: dict) -> dict:
             "censored_not_a_miss": ("arm cells whose finish_reason is length (censored at the "
                                     "cap, no delivery inside the budget) are excluded from the "
                                     "contrast denominator and reported as censored_at_cap, not "
-                                    "counted as misses; refs #145"),
+                                    "counted as misses; refs #145; prior: arXiv:2611.00833 "
+                                    "(Fewer Tokens, More Answers, 2026-10) - token-budget-aware "
+                                    "answer extraction at a fixed cap; a capped response is a "
+                                    "measurement boundary, not a wrong response"),
             # refs #139: the NONE-gold control (over_end) carries its OWN per-control token
             # budget, not the deep cells' max_tokens. A control whose own budget is
             # exhausted ships not_delivered, not a censored-miss.
