@@ -52,6 +52,16 @@ jobs:
       - name: Scan git history
         run: /tmp/gitleaks detect --redact
 
+  conflict-marker-guard:
+    name: conflict marker guard (git merge debris in tracked files)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Selftest (negative control)
+        run: python3 scripts/check_conflict_markers.py --selftest
+      - name: Scan tracked .md/.yml/.yaml files
+        run: python3 scripts/check_conflict_markers.py
+
   serving-id-guard:
     name: serving-id guard (endpoint leak)
     runs-on: ubuntu-latest
