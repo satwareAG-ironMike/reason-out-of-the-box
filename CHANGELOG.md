@@ -5,6 +5,22 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-20
+
+#### Added
+
+- `docs/pre-submission-checklist.md` (issue #11 prep, refs #83): one-page owner-facing
+  ready-to-submit state: what is registrable now, what a freeze cannot cover before M2 locks its
+  prompt/manifest values, the five open owner decisions, and the freeze-moment step order.
+  Nothing is submitted; OSF/AsPredicted stays owner-gated.
+
+#### Fixed
+
+- Version-lock manifest and `docs/preregistration.md` record the 2026-11-20 pre-submission
+  re-capture (issue #11 prep): both frozen-document hashes and all eleven Hub revisions are
+  unchanged from the 2026-09-14 capture (public API, access date 2026-11-20); the final
+  immediately-before-submission re-capture remains owed by the freeze semantics.
+
 ### 2026-11-07
 
 #### Added

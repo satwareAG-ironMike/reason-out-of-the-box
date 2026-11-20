@@ -60,7 +60,7 @@ The AsPredicted submission maps the registered content to the form areas:
 | OSF registration URL | TBD |
 | AsPredicted timestamp URL | TBD |
 | Freeze date | TBD |
-| Manifest hashes re-captured | TBD (immediately before submission) |
+| Manifest hashes re-captured | Pre-submission re-capture 2026-11-20 (issue #11 prep): both frozen-document hashes and all eleven Hub revisions unchanged from the 2026-09-14 capture; the final re-capture immediately before submission is still owed |
 
 ## Submission checklist
 
