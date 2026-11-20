@@ -34,7 +34,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `reasoning` field against `reasoning_content` on the round-61 27B-class firing
   (issue #105: the exposure setting is a deployment property; every raw record
   carries the census). Instrument `name_walk_panel_r63.py` (stdlib, `--selftest`
-  102 checks, `--measure` / `--freeze` / `--run` / `--rescore` / `--check-readme`);
+  87 checks after the PR 143 review fix removed 15 vacuous re-asserts and a dead helper,
+  102 certified at dispatch, `--measure` / `--freeze` / `--run` / `--rescore` /
+  `--check-readme`);
   gate `round63-gate-v1` (blob `8ae5029d`) frozen before dispatch. Evidence label
   `Executed`, small-n exploratory.
 

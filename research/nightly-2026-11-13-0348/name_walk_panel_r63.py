@@ -226,10 +226,6 @@ def prompt_digest(text: str) -> str:
 # ------------------------------------------------------------------ plan
 
 
-def _cell(label: str, key: str, j: int, kind: str, cap: int = MAX_TOKENS) -> tuple:
-    return (label, key, j, cap, kind)
-
-
 # The round-60 order: validity gates first, then the primary contrast (the four
 # endpoint cells of the registered P1 panel), then the droppable cells.
 PLAN_R63 = [
@@ -743,7 +739,6 @@ def selftest() -> None:
         ok(terminal_at(item, src, item["level"] + 1) is None, f"past-end None {key}")
         ok(terminal_at(item, src, 0) == src, f"zero steps {key}")
     # anchor certification (planted-slip control: a wrong seed must not match)
-    ok(items["A48"]["seed"] == ARCHIVED_K48["seed"], "anchor seed")
     ok(prompt_digest(render_yesno(items["A48"]))[:16] == ARCHIVED_K48["yesno_digest16"],
        "anchor yes/no digest")
     keys = list(items)
@@ -761,7 +756,6 @@ def selftest() -> None:
     # golds and structure for every plan
     for plan_name, plan in PANELS.items():
         rows = plan_prompts(plan)
-        by = {r["label"]: r for r in rows}
         ok(all(r["gold"] == NONE_GOLD for r in rows if r["kind"] == "dead_end"),
            f"{plan_name} dead-end golds are NONE")
         ok(all(r["gold"] != NONE_GOLD for r in rows if r["kind"] in ("name", "dup")),
@@ -770,15 +764,6 @@ def selftest() -> None:
                if r["gold"] != NONE_GOLD), f"{plan_name} golds in own vocab")
         ok(len({r["label"] for r in rows}) == len(rows), f"{plan_name} labels unique")
         ok(len(rows) + PREGATE_CALLS <= CALL_CAP, f"{plan_name} within call cap")
-        ok(all(r["cap"] <= MAX_TOKENS for r in rows), f"{plan_name} caps within protocol")
-        for r in rows:
-            if r["kind"] in ("name", "dup"):
-                ok(terminal_at(item_for(r["item_key"]), r["src"], r["j"]) == r["gold"],
-                   f"{plan_name} {r['label']} gold walk")
-        for a_l, b_l in DUP_PAIRS:
-            if a_l in by and b_l in by:
-                ok(by[a_l]["prompt_sha256"] == by[b_l]["prompt_sha256"],
-                   f"{plan_name} dup pair {a_l}/{b_l} byte-identical prompt")
     ok(len(PANELS["r63"]) == 8, "r63 plan size")
     ok(len(PANELS["r63core"]) == 6, "r63core plan size")
     # plan order: controls first, endpoints before the droppable cells
@@ -797,7 +782,6 @@ def selftest() -> None:
                 "P1_panel_prediction", "N3_anchor_certification"):
         ok(rid in spec["criteria"], f"gate row {rid} present")
     ok(len(spec["theory"]) == 4, "four theory rows")
-    ok(spec["plan_rule"]["rate_full_plan"] == RATE_FULL_PLAN, "plan rule thresholds frozen")
     # plan selection: the frozen rule at each threshold
     ok(plan_selection(50.0) == "r63", "full plan at a healthy rate")
     ok(plan_selection(RATE_FULL_PLAN) == "r63", "full plan at the threshold")

@@ -5,7 +5,7 @@
 | Question | Does the k > 48 name-walk panel (issue #129) discriminate the two wall readings on the 27B class, as registered by the round-61 gate row P1? Full wording in `gate.json`. |
 | Gate blob | `8ae5029d565181681e3d47cf2cabfe691f1985370999fd0eaa8e9d12e4704950` (sha256 of `gate.json`, `blob` key omitted) |
 | Contract | Rate-gated panel dispatch on a healthy 27B-class endpoint: 8 planned cells (two dead-end NONE controls, the four registered P1 endpoint cells, one byte-identical re-dispatch pair, one anchor liveness cell), `max_tokens` 2048, temperature 0.0, 3 pre-gate calls (two 256-token census plus one full-cap calibration dispatch on the anchor cell), measured rate 123.4 tok/s against the frozen plan thresholds, call cap 40, 11 calls used |
-| Fired | 2026-11-13, gate frozen pre-dispatch; dispatch 8 of 8 cells, 97.5 s wall, 0 retries, 0 transport errors, 0 not_dispatched; 11 calls counting the 3 pre-gate and the health call |
+| Fired | 2026-11-13, gate frozen pre-dispatch; dispatch 8 of 8 cells, 97.5 s wall, 0 retries, 0 transport errors, 0 not_dispatched; 11 calls counted (8 dispatch plus the 3 pre-gate calls), the health call recorded separately in `health.json` |
 | Verdict | `panel_delivered`, flags `endpoint_censored_at_cap` (three of four P1 cells) and `dup_pair_diverges` (the k = 50 endpoint pair); P1: 1 of 4 endpoint cells delivered, the length-generalization reading (T1-T3) survives on the 27B class; scorecard: E1 pass, E2 pass, R1 both refused, P1 1 of 4, N3 certified |
 
 ## Why
@@ -168,7 +168,7 @@ new claim.
 
 ## Reproduce
 
-- `python3 name_walk_panel_r63.py --selftest` (102 deterministic checks: frozen gate
+- `python3 name_walk_panel_r63.py --selftest` (87 deterministic checks: frozen gate
   schema, both plans, item lineage and issue #67 guards, the P1 count rule against
   synthetic record sets, the plan-selection thresholds, the dup-pair and censored-cell
   flags, sanitizer fixtures)
@@ -186,6 +186,17 @@ new claim.
   this README)
 
 `raw.jsonl` and `health.json` carry a machine-only 16-hex model digest for verification
-and are excluded from human-readable surfaces, per `research/AGENTS.md`. Every raw
-record carries the gate blob. Evidence label: `Executed`; the small-n exploratory
-caveat is in Limits.
+and are excluded from human-readable surfaces; this is the round family's own convention
+(established in the round-50 and round-51 records), not a `research/AGENTS.md` clause -
+that file carries the public-only rule the digest complies with, but says nothing about
+digests. Every raw record carries the gate blob. Evidence label: `Executed`; the
+small-n exploratory caveat is in Limits.
+
+- Post-dispatch instrument annotation (PR review fix): the instrument lost a never-called
+  `_cell` helper and 15 selftest re-asserts that restated values their own constructors
+  guarantee (the anchor-seed filter of `select_items`, the plan cap constant, the gold
+  walk against the gold `plan_prompts` computes, the dup-pair prompt identity, the
+  `gate_spec` threshold constant); `--selftest` measured 102 checks at dispatch and 87
+  after the removal (re-measured, not copied), `--check-readme` clean before and after,
+  and no dispatch or scoring behaviour changed (the diff is deletions only: one dead
+  helper and selftest assertions).
