@@ -5,6 +5,32 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-08
+
+#### Added
+
+- Nightly research round 54 (issue #65; serves #71, #100, #105; refs #94, #126, #73):
+  `research/nightly-2026-11-08-0221/` re-dispatches round 53's cap-ladder design byte-identically
+  on a 27B-class local endpoint (the two round-51 gold-no items, the gold-yes natural-stop
+  control, one duplicate re-dispatch as the issue #100 control, the enumerate pair and the
+  non-ladder listing control at two caps): 15 of the 40-call cap (the 14 scored experiment
+  records plus one census health probe; the wall and token totals are over the scored records),
+  `max_tokens` 2048,
+  `temperature 0.0`, 237.36 s dispatch wall, 11,283 prompt and 20,044 completion tokens, no call
+  dropped. Gate `435e1939` (schema `round54-gate-v1`) frozen and pinned before dispatch; 152
+  selftest checks with planted controls. Result (tier `absolute_pin`, flag
+  `same_class_pair_exposed`): every ladder rung below the 1,556 pin is cap-bound (1,536, 1,024
+  and 512 stop at the cap with `finish_reason` `length`, no marker, no answer; C2 6 of 6), so the
+  flash class's 492-token reserve region (round 53) does not travel to the 27B class (stop-offset
+  shape flag `no_reserve_cap_bound`, the round-52 27B-class shape); the self-termination marker is
+  absent from all 14 records; the 27B-class answer state reproduces round 52's archived k = 48
+  state on all three items (X1 3 of 3, answer-level by the exposure rule), forming with round 52
+  a same-class pair with the reasoning channel open on both sides (the class already carries one
+  such pair on main, rounds 46 and 48); the gold-yes natural stop
+  is 838 (round 52: 840, flash class: 1,310); the issue #100 duplicate control fails (the twin
+  was censored at 2,048, the duplicate stopped at 1,798 and declared the correct gold label).
+||||||| 90be10c
+=======
 ### 2026-11-20
 
 #### Added
@@ -84,6 +110,280 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   and the gate blob byte-unchanged, the instrument change disclosed in the README, and a
   `registered: false` marker plus planted-slip controls on any column added after the dispatch. No
   registered row or tier may move in a resume (refs #65).
+### 2026-11-20
+
+#### Changed
+
+- Trailer rule and `GATES.md` read against the public-only rule (issue #149, owner ruling
+  2026-11-19): the `Model:` commit trailer is now the public model name only - no provider or
+  model-id parenthetical and no quantization-tagged deployment label, because squash merges replay
+  trailer text onto `main` and the serving-id guard treats those label shapes as leaks in tracked
+  files; the five absolute maintainer-home paths in `GATES.md` (one `CHECK` command path and four
+  `EVIDENCE` `cwd=` fields) are redacted to `<unlazy-skill>` and `<repo-checkout>` placeholders.
+  No CI job changed - the guard-extension alternative stays optional; merged trailers on `main` are
+  not rewritten (linear history), the rule is forward-only.
+
+||||||| 3e10e81
+### 2026-11-09
+
+#### Added
+
+- Nightly research round 55 (issue #65; serves #71, #94, #100, #105; refs #129, #77, #73):
+  `research/nightly-2026-11-09-0301/` moves the ladder from a two-way answer space to a
+  one-of-many name space on a flash-next-class endpoint, holding the prompt bytes fixed and moving
+  only the step count `j` inside a single load-floor item (issue #129's `facts = 2k` family), so
+  depth is isolated from input load by construction rather than by round 50's cross-item band
+  matching - 29 of the 40-call cap: `k = 8` seed 36261005 at `j` in 1, 2, 4, 8; `k = 16` seed
+  52261033 at `j` in 2, 8, 16; `k = 32` seeds 84261011 and 84261050; `k = 48` seed 116261051 (the
+  item archived round 51 dispatched byte-identically (rounds 53 and 54 are same-family firings
+  pending merge in PRs #131 and #133), re-certified before dispatch against the archived yes/no
+  digest `068bc6a1fb0620fb`) at `j` in 2, 8, 16, 32, 48; seven NONE controls (five
+  at `j = k + 1`, two at a dead-end source), one budget rung (`j = 48` at `max_tokens` 256) and two
+  re-dispatches (#100), plus the census call; `temperature` 0.0, `max_tokens` at most 2048, zero
+  retries, 504.4 s dispatch wall on the resumed dispatch: the first 8 cells were written by a dispatch
+  process killed mid-round, `--run` resumed by label, and all 29 records are in `raw.jsonl`. Instrument `name_depth_probe.py` (stdlib, `--selftest` 34 checks:
+  an off-by-one gold must score wrong, a censored record must be a non-delivery rather than a wrong
+  answer, an empty pseudo-gold must not read as present, and the tier rule must land on each of its
+  four tiers under planted record sets). Tier `controls_invalid`, flags
+  `delivery_bound_loss` and `trace_provenance_refused`: 18 of 18 delivered name cells correct with
+  zero wrong names anywhere (`j = 16` at 529 tokens, `j = 24` at 1,285, `j = 32` at 951 and 1,515),
+  four non-deliveries all `finish_reason` `length` at the cap, and both C2 misses non-deliveries
+  rather than false names - 5 of 5 controls that answered refused correctly, so the registered
+  6-of-7 rule lets a delivery failure invalidate a capability claim it does not bear on. Delivery
+  1.00 at `j <= 8` against 0.50 at `j >= 24`; `j = 32` delivers at 64 facts and is censored at 96,
+  so the surface is load times depth and the cheapest deeper curve is fewer facts per item, not a
+  bigger cap. The matched-name provenance control refuses the trace readout (gold-in-trace 0.6667
+  against pseudo-gold 0.6667 on 3 undelivered records): a long traversal enumerates both tails, so
+  containment is not a provenance test in the name format either (#94). Self-agreement 2 of 2, one
+  pair degenerate (both censored at 2,048). Evidence level `Executed`, exploratory, n = 1 per cell.
+
+||||||| 2ea6ae1
+### 2026-11-11
+
+#### Added
+
+- Nightly research round 60 (issue #65; serves #71, #94, #100, #105, #126; refs #73, #67):
+  `research/nightly-2026-11-11-0440/` withdraws the permission to write the chain and asks what is
+  left - 36 cells on a flash-next-class endpoint (18 per arm), the arms a minimal pair (round 55's
+  name template against the same bytes plus an 81-character clause banning written intermediate
+  names, pair asserted byte-wise), pinned load-floor items with the `k = 48` fact block certified
+  against archived digest `068bc6a1fb0620fb`, 10 NONE-gold controls, 2 byte-identical re-dispatch
+  pairs, `max_tokens` 2048, `temperature` 0, zero retries, dispatch wall 633.0 s. Instrument
+  `internalized_traversal_probe.py` (stdlib, `--selftest` 82 checks, 83 with `NIGHTLY_MODEL_ID` set
+  because its serving-id sanitizer negative is env-guarded: planted wrong gold, planted
+  name-on-NONE, planted inputs for all six tiers, sanitizer, census merge rule, exact slope
+  arithmetic); gate `round60-gate-v1` (blob `8aeb5ec6`) frozen before dispatch and stamped on every
+  record. Result (tier `controls_invalid`: 7 of 10 NONE controls declared NONE, 0 named an entity,
+  3 were non-deliveries at exactly 2,048 tokens): **the visible answer channel is already
+  answer-only in both arms** (mean 4.31 characters free against 4.69 under the ban, `content` and
+  `reasoning_content` present on 36 of 36), so an output-permission knob is bolted to a channel
+  that spends nothing; 21 of 21 delivered names correct with 0 wrong names and 3 undelivered cells
+  all at the cap; **one matched deep pair flips from truncation to a correct name under the ban**
+  (`j = 32` on the 96-fact item: free truncated at 2,048, ban delivered correct at 1,080 tokens)
+  and the byte-identical re-dispatch reproduces it at the same 1,080 tokens and 2,860 trace
+  characters; the ban buys no cheaper traversal (cost slope +36.64 tokens/hop ban against +30.49
+  free, both inflated by cap-censored cells); the deep off-end controls die at the cap while the
+  path-tail dead-end control on the same item refuses at 1,002 and 130 tokens, which is the
+  controls-design gap that invalidated the gate; and the trace provenance row refuses itself with
+  the mechanism on the record (gold 3/3 and matched pseudo-gold 3/3 in the undelivered traces, gap
+  0.00). Consequence for #71: no ceiling on this family can be priced in visible-output tokens on
+  this build, and the `d*` procedure must name the channel it prices.
+
+||||||| 90be10c
+||||||| 2ea6ae1
+### 2026-11-11
+
+#### Added
+
+- Nightly research round 59 (issue #65; serves #71, #94, #100, #105, #129; refs #73, #83, #137):
+  `research/nightly-2026-11-11-0318/` asks which single wall law explains the flash class on the
+  load-floor ladder family - 17 name cells over four items at 32, 64, 96 and 128 facts, `j` from 8 to
+  32 on every item and out to 40 at 96 facts and 48 at 128 facts, 6 `NONE` controls fired first, one
+  256-token rung and 2 byte-identical re-dispatches: 26 dispatches of the 40-call cap plus a health
+  and a calibration call, `max_tokens` 2048, `temperature` 0.0, 0 retries. Instrument
+  `wall_transfer_probe_r59.py` (stdlib, `--selftest` 120 checks), gate `round59-gate-v1` (blob
+  `f9a2c845`) frozen before the first dispatch, and the issue #137 row-and-blob guard implemented
+  round-side as `--check-readme` with five planted negatives. Result (tier `controls_invalid`, flag
+  `self_agreement_split`): **the registered wall is absent on this build.** All 17 name cells and 5
+  of 6 controls produced an answer field at `finish_reason = stop`, the largest completion anywhere
+  under the 2,048 cap is 1,558, 16 of 26 records sit in a 1,556 to 1,558 band and zero cells are
+  cap-bound, so the cap never binds and what the grid measures is round 49's self-imposed 1,557 token
+  stop. The four frozen laws fit 6, 11, 11 and 14 of the 17 name cells and only `step40_wall` reaches
+  the registered line, and its three disagreements are exactly the three cells where the answer is
+  wrong. Accuracy turns over instead of delivery: 14 of 14 correct at `j <= 32`, 0 of 3 at `j >= 40`,
+  and every failure is a node of the asked path at a different index (`trudsh` sits at step 38 against
+  an asked 40, `cruk` at step 1 against an asked 48, `spog` is the 48-step endpoint and is named at an
+  asked 40 and again at `j = 49` where the links have run out) plus one name that is not in the item's
+  130-name vocabulary at all (`cruuk`). Both duplicate pairs split at `temperature` 0.0 (`NONE` 1,556
+  against `spog` 1,557; `trudsh` 1,558 against `NONE` 1,556), so the failing regime is not
+  reproducible and one dispatch at `j >= 40` is not a measurement. The `C2` control gate broke on two
+  control failures (`L48_offend` named the path endpoint, `L64_offend` named the fabricated name), so
+  `C3`'s met criterion is reported rather than promoted, and the issue #94 order-based readout got no
+  data at all (`n = 0`: every name cell produced an answer, so nothing was withheld under the
+  surface). Cross-build readouts: 8 of 9 shared coordinates agree with the round-55 flash grid
+  (open as PR #136 at this firing; `L48_j32` is an extension, censored at 2,048 there and `stop`
+  with the correct name here) and 12
+  of 16 with the killed round-58 27B firing, which is disclosed as uncommitted provenance and gates
+  nothing.
+
+||||||| 90be10c
+||||||| 2ea6ae1
+### 2026-11-12
+
+#### Added
+
+- Nightly research round 61 (issue #65; serves #129, #126, #105, #71; refs #65, #105, #126, #129):
+  `research/nightly-2026-11-12-0232/` places the measured ladder wall where the theory places it:
+  a literature-first round on a rate-limited 27B-class endpoint (about 1 completion token per second
+  under a co-fired load, measured pre-gate) records the shallow anchor cell (the archived k = 48 anchor
+  item at j = 8: correct, 1123 tokens, 843.0 s) and the one-step dead-end NONE control (k = 49:
+  correctly refused, 1025 tokens), and registers the now-generatable k > 48 core panel (issue #129) as
+  the single remaining discriminator - at least 3 of 4 endpoint cells delivering the correct terminal
+  makes the wall an output-budget and output-policy artifact (the issue #126 reading), at most 1 of 4
+  (censor at the cap or a position error on the right path, the round-59 shape) keeps the
+  length-generalization reading alive on the 27B class. The four theory rows (TC-level barrier
+  arXiv:2604.25800, C-RASP characterization arXiv:2608.13433, encoding-specific remedies
+  arXiv:2608.31067, in-repo NC-class task complexity) are re-verified at work-record level against one
+  OpenAlex call (with arXiv:2211.15661 as context). Instrument `name_walk_probe_r61.py` (stdlib,
+  `--selftest` 113 checks at dispatch, 68 after the PR #142 dead-code and vacuous-check
+  cleanup); gate `round61-gate-v1` (blob `d29e33cf`) frozen before dispatch; 6 calls of
+  the 40-call cap, `max_tokens` 2048, temperature 0.0, 0 retries; tier
+  `literature_synthesis_rate_limited_record`, flags `endpoint_rate_limited` and
+  `dead_end_control_refused` (informational); label `Executed`, small-n exploratory (2 dispatched
+  cells, n = 1 each).
+
+||||||| 90be10c
+||||||| 2ea6ae1
+### 2026-11-13
+
+#### Added
+
+- Nightly research round 63 (issue #65; serves #129, #71, #126, #100, #105):
+  `research/nightly-2026-11-13-0348/` dispatches the k > 48 name-walk panel that the
+  round-61 gate registered as owed (issue #129) on a healthy 27B-class local endpoint:
+  8 planned cells (two dead-end NONE controls, the four registered endpoint cells at
+  k = 48/49/50/64 and each item's deepest step, one byte-identical re-dispatch pair, one
+  anchor liveness cell), `max_tokens` 2048, `temperature` 0.0, zero retries, 0
+  not_dispatched, 11 calls of the 40-call cap. The plan was selected by the frozen
+  pre-dispatch rate measurement (123.4 tok/s against the 10 tok/s threshold, the
+  standing round-61 rule), and the k = 48 anchor item was re-certified byte-identical
+  against the archived yes/no digest `068bc6a1fb0620fb` before any prompt was spent
+  (N3). Result (tier `panel_delivered`): **1 of 4 endpoint cells delivered the correct
+  terminal** (the k = 50 item at j = 50, 1,956 tokens), the other three censored at
+  the 2,048 cap with empty answer channels, so the registered discriminator resolves at
+  the 1-of-4 branch: the length-generalization reading (T1-T3) survives on the 27B
+  class and the output-budget artifact reading (the issue #126 reading, which needed
+  3 of 4) is not supported on this class at these depths. The byte-identical
+  re-dispatch of the delivered cell was itself censored at the cap (issue #100:
+  self-agreement on delivery fails when the completion length sits near the budget,
+  while the declared answer agrees whenever both sides deliver), the same anchor
+  prompt measured 1,113 / 306 completion tokens across two dispatches of one firing
+  (completion-token counts at temperature 0 are run properties on this
+  multi-token-prediction serving stack), and this firing's trace channel is the
+  `reasoning` field against `reasoning_content` on the round-61 27B-class firing
+  (issue #105: the exposure setting is a deployment property; every raw record
+  carries the census). Instrument `name_walk_panel_r63.py` (stdlib, `--selftest`
+  87 checks after the PR 143 review fix removed 15 vacuous re-asserts and a dead helper,
+  102 certified at dispatch, `--measure` / `--freeze` / `--run` / `--rescore` /
+  `--check-readme`);
+  gate `round63-gate-v1` (blob `8ae5029d`) frozen before dispatch. Evidence label
+  `Executed`, small-n exploratory.
+
+||||||| 90be10c
+||||||| 2ea6ae1
+#### Changed
+
+- Round 64 post-review record (issue #65; refs #71, #100): the `D3` row is recorded as the
+  recall-only census it computes - the frozen `gate.json` criterion (`gate.json` L399-403) also
+  names the recognition pick kinds, but the instrument's `sig_counts` (L830-832 at the corrected
+  head) counts `arm == "R"` records only and the recognition classifier had no call site; the
+  frozen gate is not rewritten. The instrument shed dead code and vacuous selftest checks only:
+  the never-called `pick_kind`, the lone-occurrence `DEEP_J`/`SHALLOW_J` constants, and 105 of the
+  177 checks that recomputed the construction that produced the compared value (selftest now
+  reports 72). No dispatch or scoring line changed; `gate.json`, `raw.jsonl` and `summary.json`
+  are byte-identical and `--check-scores` is identical.
+
+### 2026-11-13
+
+#### Added
+
+- Nightly research round 64 (issue #65; serves #71, #94, #100, #105, #126, #129, #139, #141;
+  refs #73): `research/nightly-2026-11-13-0441/` runs the first non-recall answer channel in this
+  program, a forced-choice recognition arm over the same name-walk item and the same asked step as
+  the free-response recall arm, five options (the gold, three in-item distractors at adjacent step
+  positions, and `NONE`), so a deep failure can be read as a lost readout rather than a missing
+  walk. 23 cells on a flash-next-class endpoint at `max_tokens` 2048 and `temperature` 0.0, 28 calls
+  inside the 40-call cap, 0 retries; the recall arm reproduces four archived prompts byte-wise, and
+  controls use the one-step path-tail shape the issue #139 fix prescribes. Instrument
+  `recall_recognition_probe_r64.py` (stdlib, `--selftest` 72 checks after the post-review trim
+  recorded under 2026-11-20: planted off-options answer, planted wrong-step and other-component
+  signatures, binomial
+  arithmetic
+  on both sides of alpha, plan selection against every frozen threshold, a planted controls failure,
+  the rescore wall basis, and the issue #137 guard against a README with four planted defects); gate
+  `round64-gate-v1` (blob `298e21f4`) frozen before dispatch. Result (tier
+  `representation_failure`, n 5, m 1, exact binomial 0.6723, flag `cap_truncation_present`):
+  **12 delivered records, 12 correct, 0 wrong names, and 11 records censored at exactly 2,048
+  tokens with an empty answer channel**, so the tier is produced by censoring rather than by
+  evidence about representation, since on 4 of the 5 recall-missed cells the recognition arm
+  censored too and never expressed a choice; the two cells where both channels could answer split
+  one way each (the `k = 64` item at `j = 48` censors in recall and delivers the correct terminal
+  in recognition at 1,602 tokens, the `k = 40` item at `j = 40` delivers in recall at 1,779 tokens
+  and censors in recognition), so the channels are not ordered by difficulty and the wall crossing
+  point sits in the completion length and not in the asked step. Also on the record: the issue #139
+  shallow control shape certified a deep-ladder firing for the first time (`F1` and `F2` both 4/4
+  where rounds 55, 59 and 60 scored `controls_invalid`, controls costing 145 to 1,016 tokens instead
+  of the whole cap); the issue #126 premise is contradicted on this firing (the 2,048 wall is 11 of
+  23 records, so its presence is a per-firing endpoint property); the issue #105 census is
+  `reasoning_content` on 23 of 23, a fourth same-class firing with the channel exposed; the issue
+  #100 duplicate pair agrees only vacuously (both sides censored); and the wrong-step signature
+  round 59 recorded does not re-present on this build, which ties the wall *mode* to the serving
+  identity rather than to the class.
+
+||||||| 90be10c
+||||||| 2ea6ae1
+### 2026-11-16
+
+#### Added
+
+- Nightly research round 70 (issue #65; serves #71, #94, #100, #105, #126, #129, #137, #139, #145,
+  refs #73, #141, #150): `research/nightly-2026-11-16-0412/` asks whether a name the record contains
+  and the answer field omits is **accessible for report**, with a paired context manipulation on the
+  name-walk ladder: 6 deep cells (terminals at j = 48/50/64 plus mid-path j = 40/42/56 on three
+  load-floor items), 2 past-the-tail `NONE` controls and the `j = 8` anchor, every non-anchor cell
+  replayed as a two-turn conversation where arm A keeps the turn-1 non-report channel and arm B keeps
+  only the turn-1 answer field, both scored against the generator's own solver so the trace is never
+  a scorer (issue #94). 27 of 40 prompts, 0 transport errors, 845.0 s dispatch wall as recorded in
+  `raw_meta.json` (the 25 dispatched records sum to 844.987 s; an earlier entry and README quoted
+  416.2 s, a figure no subset of the 27 dispatches reproduces, corrected per issue #151); instrument
+  `readout_recovery_r70.py` (stdlib, `--selftest` 96 checks, three prompt digests asserted against
+  the round-63 pins so the build is the only variable) with gate `round70-gate-v1` (blob `41369020`)
+  frozen before dispatch. Result on the build pinned as `4075b5949b2b0487`: **6 of 6 deep turn-1
+  cells censor at 2,048 with reserve 0 and `gold_in_trace` true**, so `n_eligible = 0` and the panel
+  is `inconclusive_budget` under issue #145; the wall on this build is cap-bound (`L3` fits 11
+  records, the 1,556 to 1,558 self-stop band and the 492 reserve fit none), so the wall's mode is
+  build-tied in the opposite direction from rounds 59 and 69 on the byte-identical M4 cells; and
+  **arm A recovers the correct terminal in 5 of 6 against arm B 0 of 6**, 5 of 5 discordant pairs
+  A-only (exact two-sided binomial 0.0625, exploratory), zero false names in any arm. The registered
+  downgrade does **not** fire: re-measured from the unchanged `raw.jsonl` against the notes the arms
+  receive (the gate's registered test), 0 of 5 arm-A recoveries equals the restored draft's last
+  vocabulary name and the draft's tail misses the asked node in 6 of 6 cells, so X2 reads
+  `selection_beyond_tail` and the verdict ships as `readout_gated`, undowngraded. Corrected
+  2026-11-19 after the PR review (issue #151): the shipped column had compared each arm's answer to
+  the tail of its *own* response channel, not the draft it receives, and the entry and README had
+  reported the downgrade as firing on that mis-measurement; `summary.json` was regenerated by
+  `--rescore` from the frozen gate and the unchanged `raw.jsonl` (both byte-identical), moving exactly
+  the X2 column, the X2 verdict and the R1 verdict. Both arms shared a 900-character sanitize-truncated
+  copy of the turn-1 prompt (arm B `prompt_tokens` 449/453/466 against turn-1 932/958/1234), an
+  undisclosed deviation in the shipped record, now disclosed per issue #151 without a re-run; the next
+  instrument must build the arms from the reconstructed prompt or an explicitly declared cap. Issue #139
+  re-presents on a third digest (0 of 2 controls refuse, both truncate); `H1_answer_stability` is
+  empty at `n_held = 0`; the anchor prompt self-agrees at 1,096 tokens across two dispatches
+  (issue #100). Rows `V0` to `V3`, `X2`, `H1`, `S1`, `W2`, `M4` are named in the instrument, not in
+  the frozen gate, and no `--check-readme` guard ran this round (issue #137).
+
+||||||| 90be10c
+||||||| 2ea6ae1
 ### 2026-11-17
 
 #### Added
@@ -148,6 +448,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   the frozen gate, and no `--check-readme` guard ran this round (issue #137).
 
 ||||||| 90be10c
+||||||| 2ea6ae1
 ### 2026-11-06
 
 #### Added
