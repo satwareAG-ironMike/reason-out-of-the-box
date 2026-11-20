@@ -1,0 +1,472 @@
+{
+ "C1_name_pressure": {
+  "controls": [
+   "C64_over"
+  ],
+  "false_names_arm_B": 0,
+  "false_names_arm_F": 0,
+  "false_names_arm_X": 0,
+  "turn1_declared_none": 0
+ },
+ "F1_filler_budget": {
+  "A48_j48": 890,
+  "B50_j50": 941,
+  "C64_j64": 767
+ },
+ "H1_answer_stability": {
+  "arm_B_kept": 0,
+  "arm_B_seen": 0,
+  "arm_F_kept": 0,
+  "arm_F_seen": 0,
+  "arm_X_kept": 0,
+  "arm_X_seen": 0,
+  "held_cells": [],
+  "n_held": 0
+ },
+ "M4_matched_pair": {
+  "A48_j48": {
+   "completion_tokens": 2048,
+   "delivery_state": "censored_at_cap",
+   "prompt_sha256": "baabc3462652878f"
+  },
+  "B50_j50": {
+   "completion_tokens": 2048,
+   "delivery_state": "censored_at_cap",
+   "prompt_sha256": "c15a68eb63cc4744"
+  },
+  "C64_j64": {
+   "completion_tokens": 2048,
+   "delivery_state": "censored_at_cap",
+   "prompt_sha256": "c1ef6c20bfd84e2f"
+  }
+ },
+ "R2_cross_ask": {
+  "arm_B_correct": 0,
+  "arm_B_seen": 3,
+  "arm_F_correct": 0,
+  "arm_F_seen": 3,
+  "arm_X_correct": 2,
+  "arm_X_seen": 3,
+  "discordant_F_only": [],
+  "discordant_X_only": [
+   "A48_j48",
+   "B50_j50"
+  ],
+  "evaluable_scope": 3,
+  "exact_two_sided_binomial_on_X_F_discordants": 0.5,
+  "lost_cells": [
+   "A48_j48",
+   "B50_j50",
+   "C64_j64"
+  ],
+  "n_lost_turn1": 3,
+  "paired_cells": [
+   "A48_j48",
+   "B50_j50",
+   "C64_j64"
+  ],
+  "scope_cells": [
+   "A48_j48",
+   "B50_j50",
+   "C64_j64"
+  ],
+  "verdict": "cross_ask_gated"
+ },
+ "S1_delivery_census": {
+  "censored_at_cap": 6,
+  "declared_none": 2,
+  "declared_none_on_name_gold": 6,
+  "delivered_correct": 3
+ },
+ "W2_wall_law_counts": {
+  "L3_cap_bound": 7
+ },
+ "X2_tail_shortcut": {
+  "arm_X_delivered_is_draft_tail": [
+   false,
+   false
+  ],
+  "verdict": "selection_beyond_tail"
+ },
+ "gold_in_trace_census": {
+  "false": 4,
+  "n_a_none_gold": 4,
+  "true": 9
+ },
+ "interior_gold_in_trace_census": {
+  "false": 1,
+  "true": 3
+ },
+ "model_digest": "26df9af5972ff312",
+ "per_record": [
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "t1",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "filler_tokens": null,
+   "finish": "length",
+   "gold": "spog",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": true,
+   "j": 48,
+   "label": "A48_j48",
+   "reserve": 0,
+   "tok_per_s": 72.591,
+   "tokens": 2048,
+   "trace_chars": 5565,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": false,
+   "answer_is_notes_tail": true,
+   "arm": "X",
+   "correct": true,
+   "declared": "knudnd",
+   "delivery_state": "delivered_correct",
+   "filler_tokens": 0,
+   "finish": "stop",
+   "gold": "knudnd",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "A48_j48_X",
+   "reserve": 622,
+   "tok_per_s": 68.541,
+   "tokens": 1426,
+   "trace_chars": 3496,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "F",
+   "correct": false,
+   "declared": "NONE",
+   "delivery_state": "declared_none_on_name_gold",
+   "filler_tokens": 890,
+   "finish": "stop",
+   "gold": "knudnd",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "A48_j48_F",
+   "reserve": 1062,
+   "tok_per_s": 64.881,
+   "tokens": 986,
+   "trace_chars": 3599,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "B",
+   "correct": false,
+   "declared": "NONE",
+   "delivery_state": "declared_none_on_name_gold",
+   "filler_tokens": 0,
+   "finish": "stop",
+   "gold": "knudnd",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "A48_j48_B",
+   "reserve": 88,
+   "tok_per_s": 72.881,
+   "tokens": 1960,
+   "trace_chars": 6550,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "t1",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "filler_tokens": null,
+   "finish": "length",
+   "gold": "prish",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": true,
+   "j": 50,
+   "label": "B50_j50",
+   "reserve": 0,
+   "tok_per_s": 88.658,
+   "tokens": 2048,
+   "trace_chars": 5375,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": false,
+   "answer_is_notes_tail": true,
+   "arm": "X",
+   "correct": true,
+   "declared": "clog",
+   "delivery_state": "delivered_correct",
+   "filler_tokens": 0,
+   "finish": "stop",
+   "gold": "clog",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "B50_j50_X",
+   "reserve": 1761,
+   "tok_per_s": 60.587,
+   "tokens": 287,
+   "trace_chars": 644,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "F",
+   "correct": false,
+   "declared": "NONE",
+   "delivery_state": "declared_none_on_name_gold",
+   "filler_tokens": 941,
+   "finish": "stop",
+   "gold": "clog",
+   "gold_in_trace": false,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "B50_j50_F",
+   "reserve": 1284,
+   "tok_per_s": 46.461,
+   "tokens": 764,
+   "trace_chars": 2697,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "B",
+   "correct": false,
+   "declared": "NONE",
+   "delivery_state": "declared_none_on_name_gold",
+   "filler_tokens": 0,
+   "finish": "stop",
+   "gold": "clog",
+   "gold_in_trace": false,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "B50_j50_B",
+   "reserve": 1252,
+   "tok_per_s": 56.048,
+   "tokens": 796,
+   "trace_chars": 2766,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "t1",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "filler_tokens": null,
+   "finish": "length",
+   "gold": "brelt",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": true,
+   "j": 64,
+   "label": "C64_j64",
+   "reserve": 0,
+   "tok_per_s": 83.381,
+   "tokens": 2048,
+   "trace_chars": 5504,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": false,
+   "answer_is_notes_tail": false,
+   "arm": "X",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "filler_tokens": 0,
+   "finish": "length",
+   "gold": "frixm",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "C64_j64_X",
+   "reserve": 0,
+   "tok_per_s": 83.469,
+   "tokens": 2048,
+   "trace_chars": 5304,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "F",
+   "correct": false,
+   "declared": "NONE",
+   "delivery_state": "declared_none_on_name_gold",
+   "filler_tokens": 767,
+   "finish": "stop",
+   "gold": "frixm",
+   "gold_in_trace": false,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "C64_j64_F",
+   "reserve": 1156,
+   "tok_per_s": 83.435,
+   "tokens": 892,
+   "trace_chars": 2583,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "B",
+   "correct": false,
+   "declared": "NONE",
+   "delivery_state": "declared_none_on_name_gold",
+   "filler_tokens": 0,
+   "finish": "stop",
+   "gold": "frixm",
+   "gold_in_trace": false,
+   "interior_gold_in_trace": null,
+   "j": 40,
+   "label": "C64_j64_B",
+   "reserve": 190,
+   "tok_per_s": 111.198,
+   "tokens": 1858,
+   "trace_chars": 5519,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "t1",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "filler_tokens": null,
+   "finish": "length",
+   "gold": "NONE",
+   "gold_in_trace": null,
+   "interior_gold_in_trace": null,
+   "j": 72,
+   "label": "C64_over",
+   "reserve": 0,
+   "tok_per_s": 131.215,
+   "tokens": 2048,
+   "trace_chars": 5358,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": false,
+   "answer_is_notes_tail": false,
+   "arm": "X",
+   "correct": false,
+   "declared": null,
+   "delivery_state": "censored_at_cap",
+   "filler_tokens": 0,
+   "finish": "length",
+   "gold": "NONE",
+   "gold_in_trace": null,
+   "interior_gold_in_trace": null,
+   "j": 72,
+   "label": "C64_over_X",
+   "reserve": 0,
+   "tok_per_s": 126.116,
+   "tokens": 2048,
+   "trace_chars": 5192,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "F",
+   "correct": true,
+   "declared": "NONE",
+   "delivery_state": "declared_none",
+   "filler_tokens": 856,
+   "finish": "stop",
+   "gold": "NONE",
+   "gold_in_trace": null,
+   "interior_gold_in_trace": null,
+   "j": 72,
+   "label": "C64_over_F",
+   "reserve": 16,
+   "tok_per_s": 94.279,
+   "tokens": 2032,
+   "trace_chars": 6447,
+   "wall_laws": [
+    "L3_cap_bound"
+   ]
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "B",
+   "correct": true,
+   "declared": "NONE",
+   "delivery_state": "declared_none",
+   "filler_tokens": 0,
+   "finish": "stop",
+   "gold": "NONE",
+   "gold_in_trace": null,
+   "interior_gold_in_trace": null,
+   "j": 72,
+   "label": "C64_over_B",
+   "reserve": 1264,
+   "tok_per_s": 102.524,
+   "tokens": 784,
+   "trace_chars": 2558,
+   "wall_laws": []
+  },
+  {
+   "answer_is_draft_tail": null,
+   "answer_is_notes_tail": null,
+   "arm": "t1",
+   "correct": true,
+   "declared": "trackst",
+   "delivery_state": "delivered_correct",
+   "filler_tokens": null,
+   "finish": "stop",
+   "gold": "trackst",
+   "gold_in_trace": true,
+   "interior_gold_in_trace": false,
+   "j": 8,
+   "label": "A48_j8",
+   "reserve": 1782,
+   "tok_per_s": 90.476,
+   "tokens": 266,
+   "trace_chars": 820,
+   "wall_laws": []
+  }
+ ],
+ "prompts_dispatched": 17,
+ "trace_exposure": {
+  "fields": [
+   "audio",
+   "content",
+   "function_call",
+   "reasoning",
+   "refusal",
+   "role"
+  ],
+  "records_with_trace": 17,
+  "supplying_field": [
+   "reasoning"
+  ]
+ }
+}

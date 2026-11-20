@@ -1,0 +1,264 @@
+{
+  "blob": "5ee32d3f59c2e3891246720dfe6cf4322f8fe8d5284b48827137c708f4ef87d8",
+  "cells": [
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 65,
+      "kind": "off_end",
+      "label": "L64_offend",
+      "level": 64,
+      "prompt_sha256": "5d1438aa141fd9b7d3648ce5bffec64c5368ccefca1daf3e9a500007c5c09bbc",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 1,
+      "kind": "dead_end",
+      "label": "L64_deadend",
+      "level": 64,
+      "prompt_sha256": "b501456b26985dffe999347ae311196312f50426712aa1b6d47c7a093de7f9ec",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 49,
+      "kind": "off_end",
+      "label": "L48_offend",
+      "level": 48,
+      "prompt_sha256": "e07afb24060fd6523c44f8c7147ae5e08e2b55a0131dcc2e14742f7452c45747",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "NONE",
+      "j": 1,
+      "kind": "dead_end",
+      "label": "L48_deadend",
+      "level": 48,
+      "prompt_sha256": "184a5d4d226419826ecf250366ce9f04a96ac0c56f68819f361fba7be0f76597",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "crilt",
+      "j": 8,
+      "kind": "name",
+      "label": "L64_j8",
+      "level": 64,
+      "prompt_sha256": "0246fedd916f5074dceba89a5b98f3c4d355af1c38270c4a87d1c5858e5adf5b",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "crep",
+      "j": 16,
+      "kind": "name",
+      "label": "L64_j16",
+      "level": 64,
+      "prompt_sha256": "ffb9cc5d705d893f8bb2b13d1c84b6f65590ee0f2ecedbd81f4b12c9322fac9d",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "clixg",
+      "j": 24,
+      "kind": "name",
+      "label": "L64_j24",
+      "level": 64,
+      "prompt_sha256": "f6b26cc39595b58b02675ec41b9a53a5b1c734964ed101043a72394e4c684b1f",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "knalt",
+      "j": 32,
+      "kind": "name",
+      "label": "L64_j32",
+      "level": 64,
+      "prompt_sha256": "205a74d52d6cd23e415dbe2fb34b30b90494e78bd11796dcf0ef27102478acab",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "flixm",
+      "j": 16,
+      "kind": "name",
+      "label": "L48_j16",
+      "level": 48,
+      "prompt_sha256": "7f6bbe18f35294e11fdfba70a4fbd2f0243f00ebf123b75348ff9074161340b1",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "whesh",
+      "j": 32,
+      "kind": "name",
+      "label": "L48_j32",
+      "level": 48,
+      "prompt_sha256": "6f19b9f8c406d70313e6f598c99a982855aa4f51e43af4ff9b60d3819f82e054",
+      "seed": 116261051
+    },
+    {
+      "cap": 2048,
+      "gold": "sterk",
+      "j": 32,
+      "kind": "name",
+      "label": "L32A_j32",
+      "level": 32,
+      "prompt_sha256": "a8697dfb826079fc9be40fae6e6a8a78c915e1b16d5c066311eb438c9f694c53",
+      "seed": 84261011
+    },
+    {
+      "cap": 2048,
+      "gold": "frixm",
+      "j": 40,
+      "kind": "name",
+      "label": "L64_j40",
+      "level": 64,
+      "prompt_sha256": "968f2e252f6d76913b13c7993f22a1314dac73091685426377877e059d5bf8e0",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "blackt",
+      "j": 48,
+      "kind": "name",
+      "label": "L64_j48",
+      "level": 64,
+      "prompt_sha256": "3c1df0be9c48b5a5d53024c3c10d84bdfea35c94c134488c91c598f7136fd5a0",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "frum",
+      "j": 56,
+      "kind": "name",
+      "label": "L64_j56",
+      "level": 64,
+      "prompt_sha256": "058d77533cf6a155e68b22594124df3c514afc6587711fcb16bef71c6a5efc25",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "brelt",
+      "j": 64,
+      "kind": "name",
+      "label": "L64_j64",
+      "level": 64,
+      "prompt_sha256": "c1ef6c20bfd84e2fd30a6eaefa22caf1dfb4663280b0824cac72e89f298eea7e",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "spog",
+      "j": 48,
+      "kind": "name",
+      "label": "L48_j48",
+      "level": 48,
+      "prompt_sha256": "baabc3462652878fdbdca1994faa18240e917b5f0fea69fd786d34e56526c4c9",
+      "seed": 116261051
+    },
+    {
+      "cap": 256,
+      "gold": "brelt",
+      "j": 64,
+      "kind": "name",
+      "label": "L64_j64_c256",
+      "level": 64,
+      "prompt_sha256": "c1ef6c20bfd84e2fd30a6eaefa22caf1dfb4663280b0824cac72e89f298eea7e",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "blackt",
+      "j": 48,
+      "kind": "dup",
+      "label": "L64_j48_dup",
+      "level": 64,
+      "prompt_sha256": "3c1df0be9c48b5a5d53024c3c10d84bdfea35c94c134488c91c598f7136fd5a0",
+      "seed": 148261120
+    },
+    {
+      "cap": 2048,
+      "gold": "brelt",
+      "j": 64,
+      "kind": "dup",
+      "label": "L64_j64_dup",
+      "level": 64,
+      "prompt_sha256": "c1ef6c20bfd84e2fd30a6eaefa22caf1dfb4663280b0824cac72e89f298eea7e",
+      "seed": 148261120
+    }
+  ],
+  "criteria": {
+    "C1_mid_name_competence": {
+      "statement": "correct declared terminal on the four mid-band in-band cells of the k = 64 item, L64_j8, L64_j16, L64_j24, L64_j32, is at least 3 of 4",
+      "threshold": "3/4"
+    },
+    "C2_none_controls_two_part": {
+      "statement": "on the four NONE-gold controls (two off-end, two dead-end): every delivered control must declare NONE and the false-name count among delivered NONE-gold controls must be 0; the control delivery rate is reported, not gated. A censored control is a non-delivery, not a miss (round 55 finding 4: a refusal control needs a two-part score)",
+      "threshold": "0 false names"
+    },
+    "C3_deep_band_past_48": {
+      "statement": "correct on the four deep-band cells of the k = 64 item, L64_j40, L64_j48, L64_j56, L64_j64: ceiling if at most 1 of 4, no ceiling if at least 3 of 4",
+      "threshold": "1/4 ceiling, 3/4 no ceiling"
+    },
+    "C4_anchor_replication": {
+      "statement": "on the four anchor cells L48_j16, L48_j32, L48_j48, L32A_j32 (prompts byte-identical to the vendored round 55 digests): zero wrong names, and the two in-band anchors that delivered correct on the flash class in round 55 (L48_j16, L32A_j32) deliver correct here, 2 of 2",
+      "threshold": "0 wrong names, 2/2 delivered correct"
+    },
+    "C5_self_agreement": {
+      "statement": "both re-dispatch pairs (L64_j48 / L64_j48_dup, L64_j64 / L64_j64_dup) agree on the declared name, 2 of 2; completion tokens are reported, not gated (the round 42 counter quirk on this class family)",
+      "threshold": "2/2"
+    },
+    "C6_trace_provenance": {
+      "statement": "among undelivered name-gold records with a non-empty trace, gold-terminal-in-trace minus pseudo-gold-in-trace is at least 0.50, else the trace readout is refused",
+      "threshold": "0.50"
+    },
+    "D1_delivery_split_flag": {
+      "statement": "FLAG ONLY, outside the tier rule: on the k = 64 item's name cells (kind name or dup), delivery rate at j at most 32 minus delivery rate at j at least 40: a drop of 0.25 or more is a delivery-bound loss",
+      "threshold": "0.25 (flag)"
+    }
+  },
+  "dispatch": {
+    "archived_k48_certification": {
+      "seed": 116261051,
+      "yesno_digest16": "068bc6a1fb0620fb"
+    },
+    "call_cap": 40,
+    "dispatch_budget_s": 2400,
+    "max_tokens_cap": 2048,
+    "new_k64_item": {
+      "index": 115,
+      "seed": 148261120
+    },
+    "planned_calls": 19,
+    "temperature": 0.0
+  },
+  "question": "On a 27B-class local deployment, with the registered name-or-NONE response format (round 55's template re-pinned byte-identically, every cell's prompt digest frozen in this gate before the first prompt) and the prompt bytes fixed with only the step count j moving, does the one-of-many entity-name answer space (a) deliver correct terminals in the mid band j = 8..32 of the first ever dispatched k = 64 load-floor item (issue #129), (b) hold in the deep band j = 40..64 past the deepest archived level 48, (c) refuse with no false name when the links run out, (d) reproduce the archived k = 48 and k = 32 anchor cells on this class, (e) hold self-agreement on the re-dispatched deep cells, and (f) pass or refuse itself on the matched-name trace-provenance row?",
+  "response_format": {
+    "control_scoring": "two-part: false names among delivered NONE-gold controls are the gated quantity (0); the control delivery rate is reported, not gated; a censored control is not a miss",
+    "declared_answer_rule": "the last generator-vocab name in the content field; else the NONE sentinel; else undetermined (delivered but not a name); an empty content field is a non-delivery",
+    "first_use": "round 55 (2026-11-09 03:01), exploratory, no registration",
+    "identity_pins": {
+      "L32A_name_round55_16": {
+        "j32": "a8697dfb826079fc"
+      },
+      "L48_name_round55_16": {
+        "j16": "7f6bbe18f35294e1",
+        "j32": "6f19b9f8c406d703",
+        "j48": "baabc3462652878f",
+        "j49_offend": "e07afb24060fd652"
+      },
+      "L48_yesno_round51_16": "068bc6a1fb0620fb"
+    },
+    "name": "name_or_none_v1",
+    "none_gold_classes": "off_end (j = k + 1 from the query source); dead_end (the OTHER path's tail, out-degree zero, asked for one step)",
+    "prompt_template": "byte-identical to round 55: the rule line, the Facts block in item order, then 'Task: start at {src} and follow the direct links for exactly {j} steps. Answer with exactly one entity name, or the single word NONE if the links run out before {j} steps.'; the per-cell digests in cells[] are the check",
+    "registered_use": "this gate, frozen before the first prompt; a confirmatory round cites this blob"
+  },
+  "schema": "round56-gate-v1",
+  "tier_rule": "controls_invalid if any delivered NONE-gold control declares a false name; else name_space_extends_past_48 if C1 passes and C3 is no ceiling; else name_space_ceiling_below_64 if C1 passes and C3 is a ceiling; else unresolved"
+}

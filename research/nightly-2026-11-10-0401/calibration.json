@@ -1,0 +1,18 @@
+{
+  "completion_tokens": 358,
+  "correct": true,
+  "declared": "zish",
+  "delivered": true,
+  "digest_matches": true,
+  "expect_digest16": "4f1fdb53f99a46eb",
+  "finish_reason": "stop",
+  "gold": "zish",
+  "j": 8,
+  "label": "CALIBRATION_L8_j8",
+  "level": 8,
+  "model_digest": "26df9af5972ff312",
+  "note": "pre-gate calibration, not experimental data",
+  "prompt_sha256": "4f1fdb53f99a46ebbf6259ffbe2f04a990332b3416a6b22c42e1dab9230dbd53",
+  "seed": 36261005,
+  "wall_s": 3.464
+}
