@@ -3,7 +3,11 @@
 Status: draft 2026-09-11, issue #11, M1 work package. NOT yet frozen; the freeze happens at
 the issue #11 pre-registration timestamp (OSF + AsPredicted). Refreshed 2026-09-14:
 document hashes re-captured (unchanged), current Hub revisions captured as draft values.
-Submission URLs and the freeze
+Re-captured 2026-11-20 (issue #11 prep, refs #83): `docs/analysis-plan.md` and
+`docs/study-design.md` hash unchanged from the 2026-09-14 capture, and all eleven Hub
+revisions in section 2 re-fetch identical via the public API (access date 2026-11-20); the
+capture therefore needs no value change. A further re-capture immediately before submission
+remains required by the freeze semantics below. Submission URLs and the freeze
 date are recorded in [preregistration.md](preregistration.md). Public-only rule: this
 manifest records hashes, identifiers, and versions only - no secrets, no private
 infrastructure.

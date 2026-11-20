@@ -1,0 +1,120 @@
+{
+  "budget": {
+    "call_cap": 40,
+    "concurrency": 2,
+    "dispatch_budget_s": 1800,
+    "max_tokens": 2048,
+    "planned_calls": 25,
+    "temperature": 0.0
+  },
+  "cells": {
+    "dispatch_order": "levels descending (k = 48 first), then extras, then dups: the wall question lives in the deep cells, so a wall-clock cutoff costs the shallow anchors (k = 16, 24) and not the wall",
+    "dup_calls": 2,
+    "duplicates": "two k = 48 items re-dispatched once at stage dup: the gold-no item the reference firing answered wrong, and the smallest-seed gold-yes item (the issue #100 control)",
+    "extra_calls": 2,
+    "extras": "the two unselected floor items at k = 48 (both gold-no) run at stage extra, so the cross-path arm at the cliff depth carries four items",
+    "levels": [
+      16,
+      24,
+      32,
+      40,
+      48
+    ],
+    "pairing": "k = 24, 40, 48 items are byte-identical (prompt digests pinned) to the reference firing's archived grid records; k = 32 is round 50's digest-pinned M32 item set, which the reference firing re-dispatched; k = 16 is a same-construction anchor (the reference firing did not dispatch it, and round 50's M16 band row is a different item: facts = 64 against the floor's 32)",
+    "rule": "first two gold-yes and first two gold-no in generation order with facts == 2*level exactly; 4 items per cell; constant baseline 0.50 per cell",
+    "stage1_calls": 20
+  },
+  "flags": [
+    "P2 fail (delivered >= 5, distinct < 3) -> negative_arm_pin_reproduced (a depth-invariant negative-arm length on this class; the pinned value is reported)",
+    "any gold-no record truncated at 2048 -> wall_is_label_split (against issue #126's zero-truncation claim; reported beside the tier)",
+    "N2 pass -> self_agreement_holds_at_temperature_0 (the issue #100 control owed by the reference firing holds on this class)"
+  ],
+  "question": "On the load-floor ladder family (facts = 2k), does a 27B-class local endpoint reproduce the reference firing's wall (the k = 48 cross-path answer flip, and the negative arm pinned at 1556 completion tokens), and are identical-prompt re-dispatches byte-identical on this class (the issue #100 self-agreement control the reference firing owed)?",
+  "readout_policy": "answer field only; the trace-recovery rules stay refused after round 50's calibration failure (agreement 0.5652), so no claim in this round rests on a trace-derived verdict. Trace text is stored for prefix identity and length only. The cross-class comparison is an answer-level claim with both sides' trace exposure stated (issue #105).",
+  "reference": {
+    "round50_m32_rows": 4,
+    "round50_raw_blob_sha256": "e2a9d47ecb69e40e4e908df9adf20362ea6f9ff9e0430516148a5e4c8021041f",
+    "round51_census": "reasoning_content open on 20 of 20 records",
+    "round51_firing": "2026-11-06 04:33, flash-next-class local endpoint",
+    "round51_model_digest": "c62b81e96826354e",
+    "round51_raw_blob_sha256": "fbfa4fde59f43ea3f484b4205b5beff11d2add27e6c3f60e210ca092e3452f7a",
+    "round51_rows": 16,
+    "round6_fit": "completion_tokens = -36 + 80k"
+  },
+  "rows": [
+    {
+      "arm": "k = 48 gold-no (2 paired + 2 extra)",
+      "band": "correct >= 3 of 4 (an undelivered item counts as not-correct)",
+      "id": "P1",
+      "kind": "prediction",
+      "statement": "the k = 48 cross-path arm does not reproduce the reference firing's flip: at least 3 of the 4 delivered k = 48 gold-no answers are correct"
+    },
+    {
+      "arm": "gold-no natural stops, k in {24,32,40,48}",
+      "band": "distinct values >= 3 (row refused when delivered < 5)",
+      "id": "P2",
+      "kind": "prediction",
+      "statement": "the negative arm's natural stop varies with depth on this class: at least 3 distinct completion-token values across the delivered gold-no records of the four paired levels"
+    },
+    {
+      "arm": "gold-yes natural stops, k = 16..48",
+      "band": [
+        15.0,
+        50.0
+      ],
+      "id": "P3",
+      "kind": "prediction",
+      "statement": "the positive arm's natural stop grows with depth at 15 to 50 tokens per hop, against round 6's 80 and the reference firing's 28.3 on this family"
+    },
+    {
+      "arm": "label-split cost",
+      "band": "reported or refused",
+      "id": "P4",
+      "kind": "readout",
+      "statement": "mean natural stop of gold-no over gold-yes per cell, over delivered uncensored records only; reportable when at least 3 of the 5 cells carry both arms"
+    },
+    {
+      "arm": "cross-class join (zero prompts)",
+      "band": "reported",
+      "id": "P5",
+      "kind": "readout",
+      "statement": "join the 16 paired items on (level, seed) to the reference firing's archived outcomes; exact McNemar on matched correct/incorrect pairs; per-arm completion-token deltas; both sides' trace exposure stated (reference: reasoning_content open on 20 of 20 records, 16-hex model digest c62b81e96826354e; this firing: this round's census and digest)"
+    },
+    {
+      "arm": "issue #105 exposure",
+      "band": "share >= 0.90",
+      "id": "N1",
+      "kind": "census",
+      "statement": "the reasoning-supplying field is open on at least 90% of records"
+    },
+    {
+      "arm": "issue #100 self-agreement",
+      "band": "byte_identical >= 2 of 2",
+      "id": "N2",
+      "kind": "control",
+      "statement": "both in-firing duplicate re-dispatches are byte-identical to their grid original (content and trace) and token-identical"
+    },
+    {
+      "arm": "pairing certification",
+      "band": "certified == 22 of 22 (16 + 4 + 2), anchors == 4 of 4 at k = 16",
+      "id": "N3",
+      "kind": "control",
+      "statement": "all 18 pinned prompts (16 reference-firing rows, 4 of which are also round 50's M32 anchors, plus 2 extra floor items) regenerate byte-identically from the shipped generator before any prompt is spent; the gate refuses to dispatch if any pin moves"
+    }
+  ],
+  "schema": "round52-gate-v1",
+  "serves": [
+    "#71",
+    "#100",
+    "#105",
+    "#126",
+    "#129",
+    "#65"
+  ],
+  "tier_rule": [
+    "N3 uncertified -> refused_no_dispatch (fatal before any prompt is spent)",
+    "P1 fail -> cross_path_cliff_class_invariant (delivered wrong cross-path answers at k = 48 on both classes: the accuracy boundary d* <= 48 on the cross-path arm is class-shared, not a flash artifact)",
+    "P1 pass -> cross_path_cliff_flash_specific (the k = 48 flip does not reproduce: the wall at the floor is a capability artifact of the small class)",
+    "otherwise -> ambiguous"
+  ]
+}
