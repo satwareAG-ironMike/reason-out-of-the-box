@@ -5,6 +5,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-20 (round-78 instrument: aligned tail_copy_downgrade trigger, refs #166)
+- Round-78 cross-ask instrument `research/nightly-2026-11-21-0200/cross_ask_r78.py`
+  lands the #166 fix: the `tail_copy_downgrade` trigger is registered at
+  `n_X >= 2 AND every delivered arm-X record emitted the draft's last vocabulary
+  name` (aligned to the code, which downgrades only in the `cross_ask_gated` case),
+  and the `n_X == 0` case is documented as `no_recovery` by definition. The
+  instrument's gate.json registers the same aligned string. Selftest 151/151 green.
+
 ### 2026-11-20 (local git hooks: betterleaks + quality gates)
 - Added `hooks/` (pre-commit, pre-push, install.sh) wired via `core.hooksPath=hooks`:
   pre-commit runs a betterleaks secret scan on staged files then the house quality
