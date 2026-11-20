@@ -1,0 +1,46 @@
+{
+ "calibration": {
+  "cap": 2048,
+  "completion_tokens": 359,
+  "correct": true,
+  "declared": "trackst",
+  "finish_reason": "stop",
+  "gold": "trackst",
+  "j": 8,
+  "label": "A48_j8",
+  "level": 48,
+  "note": "cross-build duplicate of the round-61 (1,123 tokens) and round-63 (1,113 tokens) records on the identical prompt; temperature 0.0; the calibration dispatch runs alone, so it is also this firing's host-rate record",
+  "reserve_tokens": 1689,
+  "tok_per_s": 17.744,
+  "wall_s": 20.232
+ },
+ "census": [
+  {
+   "call": 1,
+   "cap": 256,
+   "completion_tokens": 60,
+   "content": "yes",
+   "tok_per_s": 0.548,
+   "wall_s": 109.521
+  },
+  {
+   "call": 2,
+   "cap": 256,
+   "completion_tokens": 60,
+   "content": "yes",
+   "tok_per_s": 2.008,
+   "wall_s": 29.875
+  }
+ ],
+ "dispatch_shape": {
+  "note": "one worker, cells in panel order (issue #73)",
+  "workers": 1
+ },
+ "model_digest": "c62b81e96826354e",
+ "plan_rule": {
+  "rate_core_plan": 5.0,
+  "rate_full_plan": 10.0
+ },
+ "rate_tok_per_s": 17.744,
+ "selected_panel": "r69"
+}

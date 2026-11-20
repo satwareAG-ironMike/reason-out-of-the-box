@@ -79,8 +79,11 @@ Default section order:
 When the user requests a durable behavior change, record it here or in the relevant child AGENTS.md
 
 - Every agent commit must be signed with the model it actually ran on: the commit message ends with a
-  trailer line `Model: <public model name> (<provider/model-id>)`. Detect the model live in the current
-  session (runtime metadata plus a `/v1/models` probe of the serving endpoint), never from memory.
+  trailer line `Model: <public model name>` only (issue #149, owner ruling 2026-11-19: no provider
+  or model-id parenthetical and no quantization-tagged deployment label - squash merges replay trailer
+  text onto `main`, and those label shapes are the leak class the serving-id guard rejects in tracked
+  files). Detect the model live in the current session (runtime metadata plus a `/v1/models` probe of
+  the serving endpoint), never from memory, and quote only the public model name.
   No host paths, hostnames, IPs, or device names in the trailer (public-only rule).
 
 ## Project Notes
