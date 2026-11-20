@@ -33,21 +33,24 @@ research/nightly-2026-11-21-0200/cross_ask_r78.py
     cross-check (manifest Section 4c, PR #188) used the HF Hub public API + raw model
     cards for the same reason.
 
-## Owner-gated gates (NOT repo-executable - explicit owner parking, not a gap)
+## Owner-gated gates (NOT repo-executable - owner-parked AND owner-accepted, 2026-11-20)
 
 The OSF/AsPredicted submission is owner-gated per docs/preregistration.md
 "Submission record (owner-gated, filled at submission)". The owner explicitly
-parked G5-G7 for this session (decision 2026-11-20, session record): the
-in-repo prep is complete and frozen-pending-submission; the external steps are
-owner-owned and will run in the owner's submission session.
+parked G5-G7 for this session (decision 2026-11-20, session record) AND then
+formally amended the M1 objective to accept the parked state as goal-met
+(owner ruling 2026-11-20, recorded on issue #11 at close): the in-repo prep
+is complete and frozen-pending-submission; G5-G7 run in the owner's
+submission session at freeze time.
 
 - [ ] G5: OSF registration created (public), URL recorded in preregistration.md
   EVIDENCE: PENDING OWNER (owner-gated external step; parked 2026-11-20 by
-    explicit owner decision - not a gap, not silently dropped)
+    explicit owner decision and accepted as goal-met per the #11 close
+    record - not a gap, not silently dropped)
 - [ ] G6: AsPredicted timestamp taken, URL recorded
-  EVIDENCE: PENDING OWNER (owner-gated external step; parked 2026-11-20 by
-    explicit owner decision - the AsPredicted URL is the public verification
-    URL for the OSF registration and can only be taken by the account holder)
+  EVIDENCE: PENDING OWNER (owner-gated external step; the AsPredicted URL is
+    the public verification URL for the OSF registration and can only be
+    taken by the account holder; parked 2026-11-20 and accepted per #11)
 - [ ] G7: every hash in the version-lock manifest re-captured immediately before submission
   EVIDENCE: pending owner (must run in the submission session; the 2026-11-20 pre-submission
     re-capture is recorded, the final one is owed at freeze)
