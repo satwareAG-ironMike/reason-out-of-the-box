@@ -118,7 +118,13 @@ completion tokens with an empty answer channel (`finish_reason = length`). Deliv
 Scorecard. `F1` 4/4. `F2` 4/4 (shallow 2/2, NONE controls 2/2). `D1` n 5, m 1, exact
 `P(X >= 1` given `5, 0.2)` 0.6723. `D2` gold 1, no delivery 4, other categories 0. `D3` over the
 12 recall records: 6 correct, 6 no delivery, 0 near-step offsets, 0 far-on-path, 0 other-component
-names, 0 off-item names. `D4` recall accuracy `j <= 16` 2/2, `24 <= j <= 32` 1/2, `j >= 40` 1/6.
+names, 0 off-item names. On this firing `D3` is a recall-only census as implemented: the frozen row
+(`gate.json` L399-403) also describes every recognition cell under `gold`, `recall_match`,
+`other_option`, `none`, `off_options` or `no_delivery`, but the instrument's census (`sig_counts`,
+`recall_recognition_probe_r64.py` L830-832 at the corrected head) counts only `arm == "R"` records,
+and the recognition classifier (`pick_kind`, former L499, since removed as dead code) had no call
+site, so no recognition-cell filing was ever computed and the frozen row is not rewritten.
+`D4` recall accuracy `j <= 16` 2/2, `24 <= j <= 32` 1/2, `j >= 40` 1/6.
 `S1` the duplicate pair agrees only vacuously: both sides censored at 2,048, so `agree_declared`
 true here is `null` equal to `null`. `C3` `reasoning_content` supplying the trace on 23 of 23
 records, `content` present on 23 of 23. `C4` gold key slots spread over 0 to 3 (2, 2, 3, 4 cells)
@@ -201,9 +207,9 @@ pass on every cell (`L1` byte-identity on all four archived twins).
 
 ## Reproduce
 
-- `python3 recall_recognition_probe_r64.py --selftest` (177 deterministic checks, no endpoint: the
-  frozen gate and tier ladder, the four archived prompt identities, the minimal-pair prefix, option
-  integrity with a planted off-item option, the signature taxonomy with a planted off-item name and
+- `python3 recall_recognition_probe_r64.py --selftest` (72 deterministic checks, no endpoint: the
+  frozen gate and tier ladder, the four archived prompt identities, a planted one-character prompt
+  edit against the real cell prompt, the signature taxonomy with a planted off-item name and
   a planted other-component name, the recognition readout with a planted substring and a planted
   off-options answer, exact binomial arithmetic on both sides of the alpha line, plan selection
   against every frozen threshold with the worst-case budget arithmetic, the summary assembly path
@@ -226,3 +232,14 @@ pass on every cell (`L1` byte-identity on all four archived twins).
 
 Evidence label: `Executed`. Single firing, single endpoint, no second implementation, and the
 registered decision table is what graded it; small `n` per cell, exploratory.
+
+Post-dispatch instrument note (post-review, 2026-11-20): after this round's verdict the instrument
+lost dead code and vacuous selftest checks only - the never-called `pick_kind` (former L499), the
+lone-occurrence constants `DEEP_J`/`SHALLOW_J` (former L355-356), and 105 of the 177 checks that
+recomputed the construction that produced the compared value (option-integrity self-comparisons,
+gold re-walks, gate-blob and gate-cell self-comparisons, minimal-pair clause re-synthesis; the
+planted off-item option test exercised the selftest's own re-implementation, not the instrument);
+the selftest count went 177 to 72. No dispatch or scoring line changed (every diff hunk sits inside
+a comment, a constant declaration, the dead helper definition, or a selftest body), `--check-scores`
+is identical, and `gate.json`, `raw.jsonl` and `summary.json` are byte-identical to the dispatched
+bytes.

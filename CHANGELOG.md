@@ -5,6 +5,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-20
+
+#### Changed
+
+- Round 64 post-review record (issue #65; refs #71, #100): the `D3` row is recorded as the
+  recall-only census it computes - the frozen `gate.json` criterion (`gate.json` L399-403) also
+  names the recognition pick kinds, but the instrument's `sig_counts` (L830-832 at the corrected
+  head) counts `arm == "R"` records only and the recognition classifier had no call site; the
+  frozen gate is not rewritten. The instrument shed dead code and vacuous selftest checks only:
+  the never-called `pick_kind`, the lone-occurrence `DEEP_J`/`SHALLOW_J` constants, and 105 of the
+  177 checks that recomputed the construction that produced the compared value (selftest now
+  reports 72). No dispatch or scoring line changed; `gate.json`, `raw.jsonl` and `summary.json`
+  are byte-identical and `--check-scores` is identical.
+
 ### 2026-11-13
 
 #### Added
@@ -17,8 +31,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   walk. 23 cells on a flash-next-class endpoint at `max_tokens` 2048 and `temperature` 0.0, 28 calls
   inside the 40-call cap, 0 retries; the recall arm reproduces four archived prompts byte-wise, and
   controls use the one-step path-tail shape the issue #139 fix prescribes. Instrument
-  `recall_recognition_probe_r64.py` (stdlib, `--selftest` 177 checks: planted off-item option,
-  planted off-options answer, planted wrong-step and other-component signatures, binomial arithmetic
+  `recall_recognition_probe_r64.py` (stdlib, `--selftest` 72 checks after the post-review trim
+  recorded under 2026-11-20: planted off-options answer, planted wrong-step and other-component
+  signatures, binomial
+  arithmetic
   on both sides of alpha, plan selection against every frozen threshold, a planted controls failure,
   the rescore wall basis, and the issue #137 guard against a README with four planted defects); gate
   `round64-gate-v1` (blob `298e21f4`) frozen before dispatch. Result (tier
