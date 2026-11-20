@@ -1,0 +1,93 @@
+{
+ "blob": "d29e33cf12760e95125fe225bbb7f72b40d0c432613e103364a8e660ea4bf555",
+ "cells": [
+  {
+   "cap": 2048,
+   "gold": "trackst",
+   "item_key": "A48",
+   "j": 8,
+   "kind": "name",
+   "label": "A48_j8",
+   "level": 48,
+   "prompt_sha256": "cec71db935bf42f9b0707da23f6973c622dd8b780fc9abc68f1f33edd5716260",
+   "seed": 116261051
+  },
+  {
+   "cap": 2048,
+   "gold": "NONE",
+   "item_key": "A49",
+   "j": 1,
+   "kind": "dead_end",
+   "label": "A49_deadend",
+   "level": 49,
+   "prompt_sha256": "8a6aadff52bf045290536c44d8877c330582f51a7e18c4150def8cbfd3499f27",
+   "seed": 118261016
+  }
+ ],
+ "criteria": {
+  "E1_shallow_anchor_delivers": {
+   "statement": "the k = 48 anchor item (archived seed 116261051) at j = 8, cap 2048, delivers the correct declared terminal on this 27B-class firing under the measured ~1 tok/s load",
+   "threshold": "delivered and correct"
+  },
+  "E2_census_trace_exposure": {
+   "statement": "the 256-token census call answers the two-fact transitivity query correctly and exposes the trace in the reasoning_content channel (issue #105 firing-state census)",
+   "threshold": "correct content and non-empty reasoning_content"
+  },
+  "N3_anchor_certification": {
+   "statement": "pre-dispatch, fatal: the k = 48 anchor item regenerates from the shipped generator with seed 116261051 and its archived yes/no prompt digest 068bc6a1fb0620fb (rounds 51/52/53/54), and every item in the set is a load-floor, component-isomorphic item (issue #67 guards)",
+   "threshold": "certified before any prompt is spent"
+  },
+  "P1_owed_panel_prediction": {
+   "statement": "REGISTERED PREDICTION, owed to the next healthy 27B-class firing: on the core panel's four endpoint cells (A48_j48, A49_j49, B50_j50, C64_j64, cap 2048), if at least 3 of 4 deliver the correct terminal the wall is an output-budget and output-policy artifact (the issue #126 reading); if at most 1 of 4 delivers (censor at the cap or a position error on the right path, the round-59 shape) the length-generalization reading (T1-T3) survives on the 27B class. The two readings are already both partially supported in the record; this panel is the cleanest remaining discriminator because the 27B-class yes/no arm censors at k = 48 while the name arm has never fired on the class.",
+   "threshold": "not dispatched this firing: owed"
+  },
+  "R1_dead_end_control": {
+   "statement": "REPORT ROW (no tier input): the k = 49 dead-end NONE control (path tail asked one step, j = 1) declares NONE, as it does on the flash-class record",
+   "threshold": "reported if dispatched; the control is shallow on purpose (round 60 lesson: off-end controls at depth inherit truncation)"
+  }
+ },
+ "dispatch": {
+  "archived_k48_certification": {
+   "seed": 116261051,
+   "yesno_digest16": "068bc6a1fb0620fb"
+  },
+  "call_cap": 40,
+  "dispatch_budget_s": 3000,
+  "max_tokens_cap": 2048,
+  "planned_calls": 2,
+  "rate_measurement": {
+   "note": "pre-dispatch calibration dispatch on the k = 48 anchor at j = 8, cap 2048, under a co-fired load on the shared host; two 256-token census calls measured 1.7 and 0.9 tok/s",
+   "tok_per_s": 1.01,
+   "tokens": 1123,
+   "wall_s": 1116.0
+  },
+  "temperature": 0.0,
+  "workers": 2
+ },
+ "panel": 2,
+ "question": "Where does the theory place the measured ladder wall, and which single prediction does the now-generatable k > 48 name-walk panel (issue #129) discriminate? Measured so far on this program: the flash-class accuracy turnover at j >= 40 with position errors on the right path (round 59), the 27B-class yes/no censors at k = 48 on the gold-no cells (round 52), the zero-truncation wall on the current flash builds (issue #126), and the generator scan ceiling at k = 48 (issue #129, now unlocked at 49/50/64 for the load-floor family). This firing's dispatch is rate-limited (about 1 completion token per second under a co-fired load, measured pre-dispatch): it records the shallow anchor cell E1 and the dead-end control R1, and registers P1 for the owed panel.",
+ "schema": "round61-gate-v1",
+ "theory": {
+  "T1_tc0_bound": {
+   "source": "arXiv:2604.25800",
+   "statement": "learnable chain-of-thought length-generalizes only within TC0 under standard positional encodings and a finite alphabet; the signpost-token remedy shows the barrier is encoding-specific, not universal",
+   "verification": "archive round 3 entry, re-verified against the OpenAlex work record 2026-11-12 (work-record level: title, authors, year; no quote taken)"
+  },
+  "T2_crasp_characterization": {
+   "source": "arXiv:2608.13433",
+   "statement": "complete characterization of length generalization for regular languages under NoPE: it holds iff the syntactic monoid decomposes into loop-balanced integer counters (C-RASP); near-binary split on 175 languages and 10x data does not rescue the failing class. Caveat on record: NoPE theory; the deployed models use RoPE",
+   "verification": "next-investigations round-11 candidate (2026-09-10 scan), re-verified against the OpenAlex work record 2026-11-12"
+  },
+  "T3_encoding_specific_remedies": {
+   "source": "arXiv:2608.31067 (with arXiv:2604.25800)",
+   "statement": "depth-tracking positional encoding plus halting gives exact length generalization on Boolean evaluation, ListOps and modular arithmetic with 280 parameters: the second encoding-specific remedy after the signpost tokens, i.e. the wall moves with the encoding",
+   "verification": "next-investigations round-11 candidate (2026-09-10 scan), re-verified against the OpenAlex work record 2026-11-12"
+  },
+  "T4_task_complexity_not_the_wall": {
+   "source": "in-repo measurement (rounds 51/52/59)",
+   "statement": "the ladder item at any tested depth is a two-path BFS problem in NC1 (128 facts at k = 64); the task stays computationally trivial while the observed walls sit at output budget (2048 cap, round 52) and step position (j >= 40, round 59), so the wall is a length-generalization and output-budget property of the deployment, not a task-complexity limit",
+   "verification": "executed in-repo records, no external source"
+  }
+ },
+ "tier_rule": "no experimental tier: this is a literature round with a rate-limited endpoint record. E1 and E2 are scored report-only against the dispatched records; R1 is reported if dispatched; P1 stays owed. The verdict is the literature synthesis stated in the README."
+}
