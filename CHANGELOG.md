@@ -5,6 +5,111 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-08
+
+#### Added
+
+- Nightly research round 54 (issue #65; serves #71, #100, #105; refs #94, #126, #73):
+  `research/nightly-2026-11-08-0221/` re-dispatches round 53's cap-ladder design byte-identically
+  on a 27B-class local endpoint (the two round-51 gold-no items, the gold-yes natural-stop
+  control, one duplicate re-dispatch as the issue #100 control, the enumerate pair and the
+  non-ladder listing control at two caps): 15 of the 40-call cap (the 14 scored experiment
+  records plus one census health probe; the wall and token totals are over the scored records),
+  `max_tokens` 2048,
+  `temperature 0.0`, 237.36 s dispatch wall, 11,283 prompt and 20,044 completion tokens, no call
+  dropped. Gate `435e1939` (schema `round54-gate-v1`) frozen and pinned before dispatch; 152
+  selftest checks with planted controls. Result (tier `absolute_pin`, flag
+  `same_class_pair_exposed`): every ladder rung below the 1,556 pin is cap-bound (1,536, 1,024
+  and 512 stop at the cap with `finish_reason` `length`, no marker, no answer; C2 6 of 6), so the
+  flash class's 492-token reserve region (round 53) does not travel to the 27B class (stop-offset
+  shape flag `no_reserve_cap_bound`, the round-52 27B-class shape); the self-termination marker is
+  absent from all 14 records; the 27B-class answer state reproduces round 52's archived k = 48
+  state on all three items (X1 3 of 3, answer-level by the exposure rule), forming with round 52
+  a same-class pair with the reasoning channel open on both sides (the class already carries one
+  such pair on main, rounds 46 and 48); the gold-yes natural stop
+  is 838 (round 52: 840, flash class: 1,310); the issue #100 duplicate control fails (the twin
+  was censored at 2,048, the duplicate stopped at 1,798 and declared the correct gold label).
+||||||| 90be10c
+=======
+### 2026-11-20
+
+#### Added
+
+- `docs/pre-submission-checklist.md` (issue #11 prep, refs #83): one-page owner-facing
+  ready-to-submit state: what is registrable now, what a freeze cannot cover before M2 locks its
+  prompt/manifest values, the five open owner decisions, and the freeze-moment step order.
+  Nothing is submitted; OSF/AsPredicted stays owner-gated.
+
+#### Fixed
+
+- Version-lock manifest and `docs/preregistration.md` record the 2026-11-20 pre-submission
+  re-capture (issue #11 prep): both frozen-document hashes and all eleven Hub revisions are
+  unchanged from the 2026-09-14 capture (public API, access date 2026-11-20); the final
+  immediately-before-submission re-capture remains owed by the freeze semantics.
+
+### 2026-11-07
+
+#### Added
+
+- Nightly research round 53 (issue #65; serves #100, #105; refs #94, #73, #125, #127, #128, #130):
+  `research/nightly-2026-11-07-0400/` is the cap-move test of the 1,556 stop - the round-51 `k = 48`
+  load-floor prompts (96 facts, 98 entities, two disjoint 48-edge paths) re-dispatched with the
+  prompt bytes held fixed while the requested cap moves 2048 / 1536 / 1024 / 512, on the two gold-no
+  items round 51 delivered wrong (116261051, 116261076), their duplicate re-dispatch, the gold-yes
+  control 116261338 (archived natural stop 1310), an enumerate arm (list the reachable set before
+  answering) and a non-ladder listing control (`count 1 to 4000`, caps 2048 and 1024); 15 planned
+  calls of the 40-call cap (14 records plus the 256-token census health call), `temperature 0.0`,
+  305.729 s wall, 11,283 prompt and 16,549 completion tokens, no dropped call and no timed-out arm.
+  Gate `1f78366a` (schema `round53-gate-v1`) frozen and re-pinned from the placeholder before any
+  dispatch, item digests certified against the archived rows first (`068bc6a1fb0620fb`,
+  `ffc75c928f37f0d9`, `87e36020f5c31c93`, byte-identical to round 51). Result (tier
+  `no_serving_budget`, flag `marker_not_locked_to_predicted_hook`): the pin is neither proportional
+  nor cap-absolute - the ladder stopped at 1044 at cap 1536 (predicted 1167) and at 532 at cap 1024
+  (predicted 778), C1 0 of 6 and C2 2 of 6, the listing control was never cut at the predicted hook
+  (C5 0 of 2); the marker appears in 11 of 14 records including both listing controls and both
+  enumerate records (159 and 157 tokens above the hook) and is absent in the two hard-truncated
+  cap-512 records (`length`, no answer line) and in the gold-yes control that stopped naturally at
+  1205. Every one of the seven pinned ladder
+  records stopped 492 tokens below its requested cap; that reserve is reported as an explicitly
+  post-hoc column (`summary.json.stop_offsets`, `registered: false`, added after the tier rule was
+  frozen, gate blob and `gate.json` byte-unchanged by it, selftest controls planted for it) and no
+  verdict of the round rests on it. Two registered failures are filed as findings of their own: the
+  duplicate re-dispatch of a byte-identical prompt diverged (same 1,556 tokens, same `stop`, same
+  marker count, traces sharing only a 108-character prefix, answers `no` then `yes`; C7 0 of 1,
+  issue #100), and both enumerate arms listed exactly the 49 BFS-reachable entities with the query
+  target absent and still answered `yes` against gold `no` (C6 0 of 2). Same-prompt cross-firing
+  against round 51 reproduces the finish state on both items and the verdict on one (C8 1 of 2,
+  serving-id digest identical). The runner's abnormal-end record for this firing (exit 124 at the
+  90-minute window) post-dates a completed dispatch and is stated in the round README.
+
+- Nightly research round 52 (issue #65; serves #71, #100, #105; refs #126, #129, #94, #73):
+  `research/nightly-2026-11-07-0319/` re-dispatches the round-51 load-floor items byte-identically
+  (22 pinned prompt digests certified fail-closed before dispatch, plus 4 same-construction anchors
+  at k = 16) on a 27B-class local endpoint: cells k = 16..48 (4 items each), the two unselected
+  k = 48 floor items (both gold-no) at stage extra, and two k = 48 duplicate re-dispatches as the
+  issue #100 control; 25 of the 40-call cap, `max_tokens` 2048, `temperature 0.0`, concurrency 2,
+  zero transport errors, 16,672 prompt and 27,673 completion tokens. Gate `0b0e8d77`
+  (schema `round52-gate-v1`) frozen and pinned before dispatch. Result (tier
+  `cross_path_cliff_class_invariant`, flags `wall_is_label_split`,
+  `self_agreement_holds_at_temperature_0`): the k = 48 cross-path boundary is class-shared (1 of 4
+  correct here versus 0 of 2 on the reference firing) but the wall's mode is class-split (three of
+  four censored at the 2,048 cap here against two delivered-wrong there); the 1,556-token pin is
+  not reproduced (7 distinct delivered negative stops, none at 1,556); the issue #126
+  zero-truncation claim does not transfer to the ladder family on this class (6 of 7 gold-no
+  records at k = 40/48 censored, 5 of 6 distinct items, positive arm 10 of 10 delivered); self-agreement at temperature 0 holds 2 of
+  2 including the censored pair; the single cross-class discordance (McNemar b = 0, c = 1, p = 1.0
+  over 12 delivered pairs) is the item the small class answered wrong. 73 selftest checks; the
+  instrument's own summary-write crash post-dispatch is disclosed and rescored offline at zero
+  prompt cost.
+
+#### Changed
+
+- `research/AGENTS.md` states the same-firing resume boundary that this round had to operate in:
+  immutability of `raw.jsonl`, `summary.json` and `gate.json` binds when the round's PR opens; a
+  resume in the same firing may rebuild `summary.json` and re-emit `gate.json` only with `raw.jsonl`
+  and the gate blob byte-unchanged, the instrument change disclosed in the README, and a
+  `registered: false` marker plus planted-slip controls on any column added after the dispatch. No
+  registered row or tier may move in a resume (refs #65).
 ### 2026-11-20
 
 #### Changed
@@ -18,6 +123,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   No CI job changed - the guard-extension alternative stays optional; merged trailers on `main` are
   not rewritten (linear history), the rule is forward-only.
 
+||||||| 3e10e81
 ### 2026-11-06
 
 #### Added
