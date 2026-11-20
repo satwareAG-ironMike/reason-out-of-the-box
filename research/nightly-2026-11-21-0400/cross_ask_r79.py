@@ -192,7 +192,7 @@ WALL_LAWS = {
 DELIVERY_STATES = ("delivered_correct", "delivered_wrong_on_right_path",
                    "delivered_wrong_off_path", "declared_none_on_name_gold",
                    "delivered_no_item_name", "declared_none", "false_name_on_none_gold",
-                   "censored_at_cap", "empty_answer_field")
+                   "censored_at_cap", "empty_answer_field", "not_delivered")
 
 # ------------------------------------------------------------------ item selection
 
@@ -573,6 +573,15 @@ def delivery_state(rec: dict) -> str:
     gold = rec["gold"]
     ans, delivered = rec["declared"], rec["delivered"]
     if not delivered:
+        # refs #139: a NONE-gold control (over_end) exhausted at its own
+        # CONTROL_MAX_TOKENS budget is a design-instrument failure, not a censored
+        # measurement: the control is a liveness check on the item, and an
+        # exhausted control cannot deliver, so it ships not_delivered (excluded
+        # from the control's scored row), not a censored-miss at the control
+        # cap. Deep name cells keep censored_at_cap: their cap is part of the
+        # measurement.
+        if gold == NONE_GOLD:
+            return "not_delivered"
         return ("censored_at_cap" if rec["finish_reason"] == "length" else "empty_answer_field")
     if gold == NONE_GOLD:
         if ans == NONE_GOLD:
@@ -937,9 +946,14 @@ def _arm_n_isolated(cell_labels: list, arm: str, by_label: dict):
         rec = by_label.get(f"{lab}_{arm}")
         if rec is None:
             continue
-        if (not rec["delivered"]) and rec["finish_reason"] == "length":
-            n_censored += 1
-            continue
+        if not rec["delivered"]:
+            # refs #139: a not_delivered NONE-gold control is excluded entirely
+            # (neither a miss nor a censored cell).
+            if rec.get("delivery_state") == "not_delivered":
+                continue
+            if rec["finish_reason"] == "length":
+                n_censored += 1
+                continue
         n_seen += 1
         if rec["correct"]:
             n_ok += 1
@@ -961,6 +975,9 @@ def score(records: list, gate: dict) -> dict:
         # refs #145: censored arm cells (finish_reason length, no delivery inside the
         # budget) are excluded from the contrast denominator and counted separately -
         # a censored arm is censored_at_cap, not a miss.
+        # refs #139: a NONE-gold control exhausted at its own budget is
+        # not_delivered (design-instrument failure) and is excluded from every
+        # arm_n seen count, not counted as a miss.
         return _arm_n_isolated(cell_labels, arm, by_label)
 
 
@@ -1580,10 +1597,17 @@ def selftest() -> int:
     over_spec = next(s for s in plan_records() if s["kind"] == "over_end")
     ok("over_end control cap is the control budget",
        over_spec["cap"] == CONTROL_MAX_TOKENS)
-    ctrl_censor = dict(sample, delivered=False, finish_reason="length",
-                       cap=CONTROL_MAX_TOKENS, gold=NONE_GOLD)
-    ok("control exhausted at own budget is censored_at_cap",
-       delivery_state(ctrl_censor) == "censored_at_cap")
+    # refs #139: a NONE-gold control exhausted at its OWN budget ships
+    # not_delivered (design-instrument failure, excluded from the control's
+    # scored row), not a censored-miss. Planted slip: the state must not be
+    # censored_at_cap for a NONE-gold exhausted control.
+    ctrl_exhausted = dict(sample, delivered=False, finish_reason="length",
+                          cap=CONTROL_MAX_TOKENS, gold=NONE_GOLD)
+    ok("NONE-gold control exhausted at own budget ships not_delivered",
+       delivery_state(ctrl_exhausted) == "not_delivered")
+    ok("deep name cell exhausted at its cap is still censored_at_cap",
+       delivery_state(dict(sample, delivered=False, finish_reason="length",
+                           gold="crath")) == "censored_at_cap")
 
     # refs #145: a censored arm cell is excluded from the contrast seen count, not a
     # miss. Verified via score() on a synthetic panel where the X arm is censored: the
