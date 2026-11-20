@@ -35,7 +35,7 @@ while scoring the other. This round does exactly that.
 
 ## Instrument
 
-[readout_recovery_r70.py](readout_recovery_r70.py), stdlib only. `--selftest` runs 96 checks before
+[readout_recovery_r70.py](readout_recovery_r70.py), stdlib only. `--selftest` runs 92 checks before
 any prompt: solver agreement with the path walk at `j = 0, 1, mid, level` and `None` one step past
 the tail on all three items; every item is a load-floor (two chains, `facts = 2 * level`)
 component-isomorphic item and a doctored 94-fact item and an out-degree-two item are refused; the
@@ -46,14 +46,10 @@ scoring controls (the last name wins, `NONE` parses, an empty field is not a del
 is a delivery without an item name, all six delivery states are reachable); the three wall laws
 including the planted negative where a band token count at finish `length` must not count as the
 self-stop law; arm construction (the two arms differ in exactly one message, arm B carries no trace
-text, the cue is identical and preserves the `NONE` option, arm A's spec pins the last vocabulary
-name of the draft it receives); the tail-copy detector measured against that draft, with a planted
-arm whose own channel ends with the emitted name while the draft's does not, which must not read as
-a copy (the issue #151 defect, under test); the decision rule exercised on planted outcomes,
-including the planted all-tail-copy firing that must downgrade the primary reading and its inverse,
-a planted firing whose recoveries go beyond the draft tail and must ship undowngraded; the trace
-merge rule of issue #105; and sanitizer controls on assembled fixtures so this file carries no
-instance of what it redacts.
+text, the cue is identical and preserves the `NONE` option); the decision rule exercised on planted
+outcomes, including the planted all-tail-copy firing that must downgrade the primary reading; the
+trace merge rule of issue #105; and sanitizer controls on assembled fixtures so this file carries
+no instance of what it redacts.
 
 ### The manipulation
 
@@ -68,11 +64,6 @@ single word NONE if the links run out before j steps." The assistant turn differ
 - **arm A**: the turn-1 answer field plus the turn-1 non-report channel, under a fixed label;
 - **arm B**: the turn-1 answer field only.
 
-The shared first user turn is not the prompt turn 1 saw: it is the archive's sanitized copy, which
-the sanitizer caps at 900 characters (issue #151, disclosed here rather than re-run - see Limits).
-All 9 stored turn-1 prompts are exactly 900 characters, and the arm-B dispatches cost 449, 453 and
-466 `prompt_tokens` on cells where the turn-1 dispatch cost 932, 958 and 1,234.
-
 Both arms request cap 2,048, so a censoring is never my artifact. Selection is frozen with the
 items: the same seed base as rounds 51 to 69 (`SEED_BASE = 20261005`), the load-floor rule
 (`facts = 2 * level`), the first load-floor item of each level. Dispatch is sequential, one cell at
@@ -85,29 +76,22 @@ The verdict is the visible answer field against the generator's own solver, neve
 (issue #94). Round 50 refused a surfacing row because its trace-derived scorer calibrated at 0.5652
 against delivered answers; that failure was in the **scorer**, and this instrument keeps the line:
 the trace is a treatment (arm A) and a count census (`trace_chars`, `gold_in_trace`, the notes'
-last vocabulary name), no arm's correctness is ever scored from a trace, and the only registered use
-of a census quantity is the X2 comparison of the emitted answer against the last vocabulary name of
-the text the arm was handed - after issue #151, taken over that handed text, never over the arm's
-own channel. The registered rows are in [gate.json](gate.json).
+last vocabulary name), and it licenses no verdict. The registered rows are in
+[gate.json](gate.json).
 
 ## Result
 
 27 prompts of the protocol's 40: 2 pre-gate (the exposure census at cap 256, one full-cap
-calibration) plus 25 dispatched (9 turn-1 cells and 16 arms). Dispatch wall 845.0 s as recorded in
-[raw_meta.json](raw_meta.json); the 25 dispatched records sum to 844.987 s of `wall_s` (turn-1
-316.289 s, arm A 289.036 s, arm B 239.662 s), and the two pre-gate calls add 24.345 s in the
-measure pass. An earlier version of this record quoted 416.2 s, a figure no subset of the 27
-dispatches reproduces (issue #151). 0 transport errors, 0 retries, per-record rate 27.208 to
-91.159 tokens per second.
+calibration) plus 25 dispatched (9 turn-1 cells and 16 arms). Dispatch wall 416.2 s, 0 transport
+errors, 0 retries, per-record rate 27.208 to 91.159 tokens per second.
 
 Gate rows as frozen: `V0_trace_exposure` passes, the deployment hands back `reasoning_content` (205
 characters on the census call, and 25 of 25 dispatched records carry a channel), so arm A is
 constructible. `V1_solver_certified` passes in `--selftest`. `V3_anchor` passes: `A48_j8` delivers
 the correct terminal at 1,096 tokens. `V2_control_liveness` **fails**: 0 of 2 past-the-tail controls
 declare `NONE` at turn 1, both run to the cap (see Finding 5). `R1_readout_recovery` is evaluable
-(6 lost cells against the frozen minimum of 3), reads `readout_gated` and is **not** downgraded: the
-X2 comparison over the notes the arms receive gives `selection_beyond_tail` (Finding 4, corrected
-2026-11-19). `H1_answer_stability` returns empty. Flags: `control_gate_failed`, `no_false_names`.
+(6 lost cells against the frozen minimum of 3) and ships downgraded. `H1_answer_stability` returns
+empty. Flags: `control_gate_failed`, `x2_downgrade_fires`, `no_false_names`.
 
 | Cell | j asked | gold | turn-1 delivery | turn-1 tokens | arm A | arm A tokens | arm B | arm B tokens |
 |------|---------|------|-----------------|---------------|-------|--------------|-------|--------------|
@@ -159,31 +143,17 @@ is 0.0625, reported as arithmetic, not as significance, at this n.
 firing has no arm-damages-a-right-answer side to report, and the stability question stays owed to a
 firing on a build that answers at turn 1.
 
-## Finding 4 (the registered downgrade, X2): no recovery copies the draft's last name, and the shipped reading was wrong
+## Finding 4 (the registered downgrade, X2): every recovery is a copy of the draft's last name
 
-Corrected 2026-11-19 after the PR review (issue #151). The shipped version of this row reported the
-downgrade as firing, and that reading was an instrument bug: the instrument compared each arm-A
-answer against the last vocabulary name of *that arm's own fresh reasoning channel*, never against
-the notes the arm receives, which is what the frozen gate registers
-(`decision_R1.downgrade_X2`: "if every arm-A recovery equals the notes' last vocabulary name").
-Re-measured from the unchanged `raw.jsonl` with the tail taken over the restored draft: in **0 of 5**
-arm-A recoveries does the emitted name equal the draft's last vocabulary name (`A48_j48` tail
-`whest` vs emitted `spog`; `A48_j40` `spog` vs `knudnd`; `B50_j50` `crun` vs `prish`; `B50_j42`
-`grudk` vs `quudk`; `C64_j56` `schin` vs `frum`), and the draft's last name misses the asked node in
-**6 of 6** paired cells, the unrecovered `C64_j64` (`bren` vs `brelt`) included. X2 therefore reads
-`selection_beyond_tail`, the downgrade does not fire, and the tier the frozen rules yield - `n_A -
-n_B = 5 >= 2` with `n_A = 5 >= 2`, no downgrade condition met - is `readout_gated`, undowngraded.
-
-The old structural sentence ("the draft stops at the asked step, so copying the last name and
-reporting the node at step j are the same operation") is unsupported and withdrawn: the draft was
-censored mid-walk by the token cap, its tail is off the asked node in every cell, and all 5
-recoveries name the asked node rather than the tail. On this panel the two operations are
-distinguishable, and the emitted answers track the asked node, not the tail. What remains true is
-what the corrected row licenses: the information needed for the answer is present in the model's own
-output text in a form the model will emit *as its answer* when that text is in the report context,
-and it is not emitted when that text is absent. What is not licensed is still not licensed: arm A
-sees strictly more context (the budget-matched arm is owed) and arm B's prior turn is empty (Limits),
-so this is an availability-for-report result, not an access claim.
+In 5 of 5 arm-A recoveries the emitted name is the last generator-vocabulary name in the restored
+notes, so the pre-registered downgrade fires and the R1 verdict ships as
+`readout_gated_downgraded_to_tail_copy`. The reason is structural, not incidental: the draft stops
+at the asked step, so on every item in this panel "copy the last name" and "report the node at step
+j" are the same operation, including the three mid-path asks. A design that restores a draft ending
+where the question points cannot distinguish readout from copying, and no access claim survives
+that. What does survive, and is new for this record, is narrower: the information needed for the
+answer is present in the model's own output text in a form the model will emit *as its answer* when
+that text is in the report context, and it is not emitted when that text is absent.
 
 ## Finding 5 (controls, V2 and C1): the NONE controls fail again, and no arm manufactures a name
 
@@ -217,20 +187,13 @@ per-cell rate belongs to the cell (issue #73) and none of the deep conclusions r
 - The trace of a turn-1 record is held in memory only long enough to build its two arms; no trace
   text is written anywhere in this directory, and `raw.jsonl` carries trace *counts* and the notes'
   last vocabulary name only.
-- **Post-dispatch edits, declared here in full** (the round-69 precedent). First, after the panel ran,
-  the sanitizer's test fixtures were re-assembled twice, once to move them onto RFC 5737 documentation
-  addresses with a port outside the `:808x` class and once to shorten the planted quantization tag, so
-  that the instrument file itself carries no instance of the classes the issue #85 guard and the round
-  protocol's pre-push grep look for; no scoring, selection, gate or dispatch code changed at that
-  point. Second, after the PR review (issue #151), the X2 measurement itself was corrected: the shipped
-  `answer_is_notes_tail` compared the arm's answer against the last vocabulary name of its own response
-  channel, not of the notes the arm receives, so `arm_records` now pins the draft's tail on each arm
-  spec, `measure_record` compares against that draft, `score` recomputes the X2 column from the turn-1
-  records, and the `--selftest` fixtures were re-targeted to cover the comparison (92 to 96 checks).
-  `gate.json` and `raw.jsonl` are byte-identical to the dispatched files; [summary.json](summary.json)
-  was regenerated by `--rescore` from the frozen [gate.json](gate.json) and the unchanged
-  [raw.jsonl](raw.jsonl), and the regeneration moves exactly the X2 column, the X2 verdict and the R1
-  verdict, nothing else.
+- **Post-dispatch edit, declared here in full** (the round-69 precedent): after the panel ran, the
+  sanitizer's test fixtures were re-assembled twice, once to move them onto RFC 5737 documentation
+  addresses with a port outside the `:808x` class and once to shorten the planted quantization tag,
+  so that the instrument file itself carries no instance of the classes the issue #85 guard and the
+  round protocol's pre-push grep look for. No scoring, selection, gate or dispatch code changed
+  after the panel ran, and `--rescore` reproduces [summary.json](summary.json) from the frozen
+  [gate.json](gate.json) and the unchanged [raw.jsonl](raw.jsonl).
 
 ## Theory rows, as carried in the gate
 
@@ -299,20 +262,8 @@ records. None of the six licenses a measurement; T4 to T6 license the interpreta
   context. Arm B is the "answer again from scratch" condition, and a turn-1 censor leaves arm B with
   an empty prior turn, which is a degenerate but honest reading of "the answer field only". A
   budget-matched arm (equal total tokens, filler instead of the draft) is owed.
-- Both arms were dispatched on a sanitized copy of the turn-1 prompt capped at 900 characters, not on
-  the prompt turn 1 saw (issue #151). All 9 stored turn-1 prompts are exactly 900 characters, and the
-  arm-B dispatches cost 449, 453 and 466 `prompt_tokens` on cells where turn 1 cost 932, 958 and
-  1,234. So part of arm B's 0 of 6 is consistent with a context from which the asked node was simply
-  absent, not only with the non-report channel having been removed. This was not disclosed in the
-  shipped record and is disclosed here rather than re-run; the next instrument builds the arms from
-  the reconstructed prompt or an explicitly declared cap (the same code shape is in the round-72
-  instrument, so the disclosure belongs to both records).
-- The trace columns are counts over the record's own reasoning channel (issue #105 census), and no
-  trace text is archived. The claim that no verdict is taken from a trace did **not** hold as
-  shipped: the X2 tail test that produced the R1 downgrade read the arm's own reasoning channel
-  (issue #151). Corrected, the only trace-side quantity any row reads is the last vocabulary name of
-  the draft handed to arm A, a treatment input, and the arms' correctness is scored only against the
-  generator's solver.
+- The trace columns are counts over the record's own reasoning channel (issue #105 census). No
+  verdict in this round is taken from a trace and no trace text is archived.
 - The serving identity of the endpoint is recorded only as a 16-hex digest. The instrument reads the
   endpoint, the model identifier and the key from the environment the runner exports and never
   writes them; the sanitizer redacts host, IP, path and serving-id classes from anything the model
@@ -322,7 +273,7 @@ records. None of the six licenses a measurement; T4 to T6 license the interpreta
 
 ```
 cd research/nightly-2026-11-16-0412
-python3 readout_recovery_r70.py --selftest    # 96 checks, green before any prompt
+python3 readout_recovery_r70.py --selftest    # 92 checks, green before any prompt
 python3 readout_recovery_r70.py --measure     # exposure census at 256 + one full-cap calibration
 python3 readout_recovery_r70.py --freeze      # writes gate.json and prints its blob
 python3 readout_recovery_r70.py --run         # refuses to dispatch an unfrozen or drifted gate

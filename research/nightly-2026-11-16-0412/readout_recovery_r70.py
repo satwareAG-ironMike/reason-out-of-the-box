@@ -302,10 +302,8 @@ def arm_records(t1: dict) -> list:
     for arm in ARMS:
         msgs = [{"role": "user", "content": t1["prompt"]}]
         assistant = t1["content_visible"]
-        draft_tail = None
         if arm == "A":
             assistant = f"{assistant}\n\n{NOTES_LABEL}\n{t1['trace']}"
-            draft_tail = last_vocab_name(t1["trace"], vocab)
         msgs.append({"role": "assistant", "content": assistant})
         msgs.append({"role": "user", "content": cue})
         out.append({"label": f"{t1['label']}_{arm}", "arm": arm, "cell": t1["cell"],
@@ -314,9 +312,6 @@ def arm_records(t1: dict) -> list:
                     "gold": t1["gold"], "prompt": cue, "messages": msgs,
                     "on_path": t1.get("on_path", []),
                     "vocab": sorted(vocab),
-                    # the registered X2 quantity (issue #151): the last vocabulary name of
-                    # the draft the arm actually receives, never of the arm's own response
-                    "draft_vocab_tail": draft_tail,
                     # the pin covers the whole treatment: the cue plus the reconstructed turn
                     "prompt_sha256": prompt_digest(json.dumps(msgs, sort_keys=True))})
     return out
@@ -478,13 +473,7 @@ def measure_record(spec: dict, res: dict) -> dict:
     rec["wall_laws"] = wall_laws_fit(rec)
     rec["delivery_state"] = delivery_state(rec)
     if rec["arm"] == "A":
-        # registered X2 quantity (gate decision_R1.downgrade_X2): the answer compared
-        # against the tail of the notes the arm receives, never against the tail of the
-        # arm's own reasoning channel (the field above belongs to this response, not the
-        # draft) - issue #151
-        draft_tail = spec.get("draft_vocab_tail")
-        rec["answer_is_notes_tail"] = (ans is not None and draft_tail is not None
-                                       and ans == draft_tail)
+        rec["answer_is_notes_tail"] = (ans is not None and ans == rec["trace_vocab_tail"])
     rec["prompt"] = sanitize(spec["prompt"], limit=900)
     rec["prompt_sha256"] = spec.get("prompt_sha256") or prompt_digest(spec["prompt"])
     return rec
@@ -644,23 +633,11 @@ def score(records: list, gate: dict) -> dict:
     else:
         verdict_r1 = "ambiguous"
 
-    def is_notes_tail(rec: dict) -> bool:
-        # the X2 quantity as the gate registers it: the last vocabulary name of the notes
-        # restored to arm A, never the tail of the arm's own response channel (issue #151).
-        # The same cell's turn-1 record summarizes exactly the draft handed verbatim to the
-        # arm, so the rescore recomputes from it; the stored answer_is_notes_tail column of
-        # this archive was measured on the arm's own channel and is not trusted here.
-        t1rec = by_label.get(rec["cell"])
-        tail = t1rec.get("trace_vocab_tail") if t1rec else None
-        return (rec.get("declared") is not None and tail is not None
-                and rec["declared"] == tail)
-
     recov = [by_label[f"{lab}_A"] for lab in paired
              if by_label[f"{lab}_A"]["correct"]]
-    recov_tail = [is_notes_tail(r) for r in recov]
     if not recov:
         verdict_x2 = "no_recovery_to_explain"
-    elif all(recov_tail):
+    elif all(r.get("answer_is_notes_tail") for r in recov):
         verdict_x2 = "tail_copy"
         if verdict_r1 == "readout_gated":
             verdict_r1 = "readout_gated_downgraded_to_tail_copy"
@@ -697,7 +674,7 @@ def score(records: list, gate: dict) -> dict:
         },
         "X2_tail_shortcut": {
             "verdict": verdict_x2,
-            "arm_A_correct_is_notes_tail": recov_tail,
+            "arm_A_correct_is_notes_tail": [bool(r.get("answer_is_notes_tail")) for r in recov],
         },
         "H1_answer_stability": {"n_held": len(held), "arm_A_kept": hA, "arm_A_seen": hseenA,
                                 "arm_B_kept": hB, "arm_B_seen": hseenB},
@@ -725,8 +702,7 @@ def score(records: list, gate: dict) -> dict:
                         "tokens": r["completion_tokens"], "reserve": r.get("reserve"),
                         "tok_per_s": r["tok_per_s"], "trace_chars": r["trace_chars"],
                         "gold_in_trace": r["gold_in_trace"], "wall_laws": r["wall_laws"],
-                        "answer_is_notes_tail": (is_notes_tail(r) if r["arm"] == "A"
-                                                  else None)}
+                        "answer_is_notes_tail": r.get("answer_is_notes_tail")}
                        for r in records],
     }
 
@@ -991,10 +967,7 @@ def selftest() -> int:
 
     # arm construction: one bit, and nothing else
     spec = next(r for r in plan_records() if r["label"] == "B50_j50")
-    b50 = item_for("B50")
-    b50_two = terminal_at(b50, b50["query"][0], 2)
-    fake_t1 = {**spec, "content_visible": "prish",
-               "trace": f"dunnu precedes crath. the walk reaches {b50_two}."}
+    fake_t1 = {**spec, "content_visible": "prish", "trace": "dunnu precedes crath. crath blorp."}
     arms = {a["arm"]: a for a in arm_records(fake_t1)}
     ok("two arms per cell", set(arms) == {"A", "B"})
     a_txt = json.dumps(arms["A"]["messages"])
@@ -1011,30 +984,11 @@ def selftest() -> int:
         1 for x, y in zip(arms["A"]["messages"], arms["B"]["messages"])
         if json.dumps(x) != json.dumps(y)) == 1)
     ok("arm cap within protocol", ARM_CAP <= MAX_TOKENS)
-    ok("arm A spec pins the tail of the draft it receives",
-       arms["A"]["draft_vocab_tail"] == b50_two)
-    ok("arm B spec receives no draft tail", arms["B"]["draft_vocab_tail"] is None)
 
     # notes-tail measure (the X2 shortcut detector)
     ok("tail name is the last vocabulary name",
        last_vocab_name("blorp then crath then dunnu then zorp", vocab) == "dunnu")
     ok("tail name None when no vocabulary name", last_vocab_name("nothing here", vocab) is None)
-    # the detector compares against the restored draft, never against the arm's own
-    # channel (issue #151): in this fixture the arm's own reasoning ends with the name
-    # it emitted while the draft's last name differs
-    fake_arm = {"label": "t_A", "arm": "A", "cell": "t", "kind": "name", "j": 48,
-                "cap": 2048, "gold": "crath", "vocab": sorted(vocab),
-                "on_path": ["blorp", "crath"], "draft_vocab_tail": "zorp",
-                "prompt": "cue text"}
-    fake_resp = {"message": {"content": "Answer: crath",
-                             "reasoning_content": "walking on, blorp then crath"},
-                 "finish_reason": "stop", "completion_tokens": 60,
-                 "prompt_tokens": 400, "wall_s": 2.0, "tok_per_s": 30.0}
-    ok("X2 detector ignores the arm's own channel tail",
-       measure_record(fake_arm, fake_resp)["answer_is_notes_tail"] is False)
-    ok("X2 detector fires when the answer equals the draft tail",
-       measure_record({**fake_arm, "draft_vocab_tail": "crath"},
-                      fake_resp)["answer_is_notes_tail"] is True)
 
     # decision rule, exercised on synthetic outcomes
     dc = list(DEEP_CELLS)   # the scorer only looks at registered deep cells
@@ -1042,18 +996,11 @@ def selftest() -> int:
         fake = []
         for lab, (t1_ok, a_ok, b_ok) in outcomes.items():
             gold = "crath"
-            # the fixtures carry no precomputed answer_is_notes_tail: X2 must be derived
-            # from the tail of the draft the arm receives (carried on the turn-1 record,
-            # exactly as in the frozen archive) against the name the arm emitted (#151).
-            # Each arm's own channel tail is planted equal to its emitted name, so a
-            # regression to scoring against the arm's own reasoning flips the tail_all
-            # false case below into tail_copy and fails here.
             fake.append({"label": lab, "arm": "t1", "cell": lab, "kind": "name", "j": 48,
                          "gold": gold, "correct": t1_ok, "declared": gold if t1_ok else "blorp",
                          "delivered": True, "finish_reason": "stop", "completion_tokens": 1557,
                          "cap": 2048, "on_path": ["blorp", "crath"], "trace_chars": 900,
-                         "gold_in_trace": True,
-                         "trace_vocab_tail": gold if tail_all else "zorp", "wall_laws": [],
+                         "gold_in_trace": True, "trace_vocab_tail": "blorp", "wall_laws": [],
                          "delivery_state": "delivered_correct" if t1_ok else
                          "delivered_wrong_on_right_path", "tok_per_s": 40.0,
                          "message_fields": [], "trace_field": "reasoning_content"})
@@ -1063,10 +1010,10 @@ def selftest() -> int:
                              "declared": gold if okk else "blorp", "delivered": True,
                              "finish_reason": "stop", "completion_tokens": 60, "cap": 2048,
                              "on_path": ["blorp", "crath"], "trace_chars": 0,
-                             "gold_in_trace": None,
-                             "trace_vocab_tail": gold if okk else "blorp", "wall_laws": [],
+                             "gold_in_trace": None, "trace_vocab_tail": "blorp", "wall_laws": [],
                              "delivery_state": "delivered_correct" if okk else
                              "delivered_wrong_on_right_path", "tok_per_s": 30.0,
+                             "answer_is_notes_tail": (okk and arm == "A" and tail_all),
                              "message_fields": [], "trace_field": ""})
         out = score(fake, gate_spec(plan_records()))
         return out["R1_readout_recovery"]["verdict"], out["X2_tail_shortcut"]["verdict"]

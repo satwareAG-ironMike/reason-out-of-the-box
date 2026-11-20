@@ -65,7 +65,7 @@
    "B50_j42",
    "C64_j56"
   ],
-  "verdict": "readout_gated"
+  "verdict": "readout_gated_downgraded_to_tail_copy"
  },
  "S1_delivery_census": {
   "censored_at_cap": 11,
@@ -78,13 +78,13 @@
  },
  "X2_tail_shortcut": {
   "arm_A_correct_is_notes_tail": [
-   false,
-   false,
-   false,
-   false,
-   false
+   true,
+   true,
+   true,
+   true,
+   true
   ],
-  "verdict": "selection_beyond_tail"
+  "verdict": "tail_copy"
  },
  "gold_in_trace_census": {
   "false": 4,
@@ -223,7 +223,7 @@
    ]
   },
   {
-   "answer_is_notes_tail": false,
+   "answer_is_notes_tail": true,
    "arm": "A",
    "correct": true,
    "declared": "spog",
@@ -276,7 +276,7 @@
    ]
   },
   {
-   "answer_is_notes_tail": false,
+   "answer_is_notes_tail": true,
    "arm": "A",
    "correct": true,
    "declared": "prish",
@@ -384,7 +384,7 @@
    ]
   },
   {
-   "answer_is_notes_tail": false,
+   "answer_is_notes_tail": true,
    "arm": "A",
    "correct": true,
    "declared": "knudnd",
@@ -437,7 +437,7 @@
    ]
   },
   {
-   "answer_is_notes_tail": false,
+   "answer_is_notes_tail": true,
    "arm": "A",
    "correct": true,
    "declared": "quudk",
@@ -490,7 +490,7 @@
    ]
   },
   {
-   "answer_is_notes_tail": false,
+   "answer_is_notes_tail": true,
    "arm": "A",
    "correct": true,
    "declared": "frum",

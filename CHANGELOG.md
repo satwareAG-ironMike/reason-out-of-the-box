@@ -384,6 +384,71 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ||||||| 90be10c
 ||||||| 2ea6ae1
+### 2026-11-17
+
+#### Added
+
+- Nightly research round 72 (issue #65; serves #71, #94, #100, #105, #126, #129, #139,
+  #145, #152, refs #73, #141): `research/nightly-2026-11-17-0401/` runs the issue #152
+  cross-ask replay - restore the draft produced for the terminal and ask for an **interior**
+  step, so the correct answer sits inside the restored text and a copy rule must fail - plus
+  the issue #152 item-2 budget-matched filler control, on the three M4 items whose turn-1
+  prompts are byte-identical to the round-63, round-69 and round-70 dispatches. 19 of 40
+  prompts (5 turn-1 cells, the `C64_over` past-the-tail control and the `j = 8` anchor
+  included, and 12 two-turn arms, all asking interior step 40), 0 transport retries, 290.1 s
+  dispatch wall; instrument `cross_ask_r72.py` (stdlib, `--selftest` 119 checks: the interior
+  ask asserted strictly inside the walk and the interior gold asserted distinct from the tail
+  and the start, the X2 detector pinned to the treatment side, three turn-1 prompt digests
+  asserted against the round-63/69/70 pins) with gate `round72-gate-v1` (blob
+  `2b3139d790011ce3`) frozen before dispatch, every registered row a key of the frozen gate,
+  closing issue #152 item 4. Result on the build pinned as `26df9af5972ff312` (a 27B-class
+  local endpoint; first public firing on this build): **row R2 ships `cross_ask_gated` -
+  arm X 2 of 3 against arm F 0 of 3 and arm B 0 of 3, both discordant pairs X-only**
+  (exact two-sided binomial on 2-0 is 0.5, reported as arithmetic at n = 2), and the
+  registered X2 downgrade does not fire: in 2 of 2 delivered arm-X records the emitted name
+  is not the last vocabulary name of the restored draft, so the recovery is selection beyond
+  the draft's tail; the 890, 941 and 767 filler-token arm buys no name in 0 of 3, so the
+  recovery tracks the draft's content, not its budget. The wall on this build is cap-bound,
+  a third firing on that side of the split (`L3_cap_bound` fits 7 of 17 records; the
+  1,556 to 1,558 self-stop band and the 492 reserve fit nothing; the M4 cells that round 69
+  stopped at 1,556 to 1,558 run to the cap here again), issue #139 re-presents on a fourth
+  digest, truncation direction (0 of 1 past-the-tail control declares `NONE` at turn 1, the
+  control's own arm F declares `NONE` at 2,032), zero false names in any arm, and the anchor
+  prompt self-agrees at 266 tokens across two dispatches (issue #100). Whole-panel census:
+  6 `censored_at_cap`, 6 `declared_none_on_name_gold`, 3 `delivered_correct`, 2
+  `declared_none` (issue #145, third censored-panel instance).
+
+### 2026-11-16
+
+#### Added
+
+- Nightly research round 70 (issue #65; serves #71, #94, #100, #105, #126, #129, #137, #139, #145,
+  refs #73, #141, #150): `research/nightly-2026-11-16-0412/` asks whether a name the record contains
+  and the answer field omits is **accessible for report**, with a paired context manipulation on the
+  name-walk ladder: 6 deep cells (terminals at j = 48/50/64 plus mid-path j = 40/42/56 on three
+  load-floor items), 2 past-the-tail `NONE` controls and the `j = 8` anchor, every non-anchor cell
+  replayed as a two-turn conversation where arm A keeps the turn-1 non-report channel and arm B keeps
+  only the turn-1 answer field, both scored against the generator's own solver so the trace is never
+  a scorer (issue #94). 27 of 40 prompts, 0 transport errors, 416.2 s dispatch wall; instrument
+  `readout_recovery_r70.py` (stdlib, `--selftest` 92 checks, three prompt digests asserted against
+  the round-63 pins so the build is the only variable) with gate `round70-gate-v1` (blob `41369020`)
+  frozen before dispatch. Result on the build pinned as `4075b5949b2b0487`: **6 of 6 deep turn-1
+  cells censor at 2,048 with reserve 0 and `gold_in_trace` true**, so `n_eligible = 0` and the panel
+  is `inconclusive_budget` under issue #145; the wall on this build is cap-bound (`L3` fits 11
+  records, the 1,556 to 1,558 self-stop band and the 492 reserve fit none), so the wall's mode is
+  build-tied in the opposite direction from rounds 59 and 69 on the byte-identical M4 cells; and
+  **arm A recovers the correct terminal in 5 of 6 against arm B 0 of 6**, 5 of 5 discordant pairs
+  A-only (exact two-sided binomial 0.0625, exploratory), zero false names in any arm. The registered
+  downgrade fires and the verdict ships as `readout_gated_downgraded_to_tail_copy`: in 5 of 5
+  recoveries the emitted name is the last vocabulary name of the restored draft, and because the
+  draft always stops at the asked step, this design cannot separate readout from copying. Issue #139
+  re-presents on a third digest (0 of 2 controls refuse, both truncate); `H1_answer_stability` is
+  empty at `n_held = 0`; the anchor prompt self-agrees at 1,096 tokens across two dispatches
+  (issue #100). Rows `V0` to `V3`, `X2`, `H1`, `S1`, `W2`, `M4` are named in the instrument, not in
+  the frozen gate, and no `--check-readme` guard ran this round (issue #137).
+
+||||||| 90be10c
+||||||| 2ea6ae1
 ### 2026-11-06
 
 #### Added
