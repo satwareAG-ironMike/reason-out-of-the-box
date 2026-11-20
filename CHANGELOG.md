@@ -5,6 +5,49 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-20
+
+#### Added
+
+- Nightly research round 77 (issue #65; serves #152, #71, #94, #105, #100, #145, #139,
+  #126; refs #73, #141, #137): `research/nightly-2026-11-20-0400/` pays the P1 debt
+  round 75 registered - match the arms on the endpoint's measured `prompt_tokens` with
+  a tokenization-aware filler/donor budget - on the 27B build that produced round 75's
+  downgraded context-length claim (fifth public firing on its serving id string), on the
+  three M4 pins whose turn-1 prompts are byte-identical to the round-63/69/70/72/73/75
+  dispatches. Instrument `cross_ask_tk_r77.py` (stdlib, `--selftest` 151 checks: the
+  per-donor-pair gold-leak assertion, planted-outcome tests of the F tuner - in-band
+  keep, the rescale step, the non-positive-increment fallback, the missing-measurement
+  keep, the rescale floor - and probe records kept out of every scored row and census),
+  gate `round77-gate-v1` (blob `c42a9f657da9bf52`) frozen before dispatch; arm C carries
+  the donor draft whole (prompt-token parity by construction, no whitespace cut), arm F
+  is tuned by at most two registered cap-1 probes that read the endpoint's own measured
+  `prompt_tokens` into the P1 band of arm X, per-cell dispatch order X, C, B, F. 31
+  prompts of the 40 cap, 0 transport errors, dispatch wall 343.1 s. Result:
+  **`P1_prompt_tokens_parity` holds on all four armed cells** (measured X/C/F spreads of
+  11, 10, 10 and 13 tokens against the 400 band; the round-75 whitespace match spread
+  1,107 to 1,281), so the context-length claim ships without the
+  `context_length_unmatched` downgrade; under that licensed reading
+  **`C2_foreign_draft` ships `own_content_selects`** - the item's own draft recovers the
+  interior step-40 name in 3 of 3 (269, 333 and 782 tokens) against the whole foreign
+  draft in 1 of 3 (1,622 tokens) and the tuned filler in 0 of 3, with the margin thinned
+  from round 75's 3-0 and the removal arm at 2 of 3 (1,898 and 1,966 tokens); the one
+  foreign recovery is a recomputation, not a readout of the donor's content (the
+  per-donor-pair gold-leak precondition holds: the asked gold is absent from the donor
+  item's vocabulary and the delivered foreign block's census is gold-free), so the
+  readout claim narrows to a route claim - the own prior output is the fast route, the
+  foreign draft and the removal arm share the slow, near-cap recompute route; `R2`
+  ships `cross_ask_gated` on the token-matched filler (3 of 3 against 0 of 3); the wall
+  is cap-bound, `L3_cap_bound` fitting 13 of 21 scored records at a reserve of 0, a
+  fifth public firing on that side of the round-59/69 split; the NONE control
+  re-presents a sixth time, truncating (its arm X declares `NONE` at 1,571 tokens this
+  firing), and no arm manufactures a name (0 false names in 16 arm dispatches);
+  `H1_answer_stability` empty again (`n_held = 0`, the band-build side stays owed).
+  Evidence label **Executed** (one endpoint, one build, one firing, single-digit n,
+  exploratory; the four arms of one turn-1 record are a matched paired design, not
+  replicates); trace exposure `reasoning` on 29 of 29 dispatched records (issue #105),
+  no verdict taken from a trace (issue #94).
+
 ### 2026-11-08
 
 #### Added
