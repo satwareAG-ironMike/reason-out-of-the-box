@@ -101,6 +101,25 @@ protocol; firecrawl not available on the maintainer host):
 | `2506.10947` | Spurious Rewards: Rethinking Training Signals in RLVR | OLMo/Pythia confirmatory scope (model-family-specific RLVR) |
 | `2410.05229` | GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in LLMs | T7 surface-perturbation triangulation arm |
 
+## 4c. Confirmatory model-card metadata (2026-11-20, OLMo 2 / Pythia, refs #177)
+
+Verified live via the Hugging Face Hub public API and model cards on 2026-11-20
+(firecrawl not available on the maintainer host; the API + raw model card are the
+free-scholarly-APIs protocol per #65):
+
+| Model | Hub repo | Metadata verified | Source |
+|-------|----------|-------------------|--------|
+| OLMo 2 7B | `allenai/OLMo-2-1124-7B` | 7B, 32 layers, hidden 4096, 32 heads, ctx 4096, 4T training tokens, OLMo-mix-1124 + Dolmino-mix-1124, arXiv:2501.00656 | Hub API + raw model card |
+| OLMo 2 7B Instruct (RLVR) | `allenai/OLMo-2-1124-7B-Instruct` | RLVR final model; tag `dataset:allenai/RLVR-GSM-MATH-IF-Mixed-Constraints`; DPO -> RLVR pipeline | Hub API |
+| OLMo 2 32B Instruct | `allenai/OLMo-2-0325-32B-Instruct` | RLVR final model; tag `dataset:allenai/RLVR-GSM-MATH-IF-Mixed-Constraints`; base DPO, arXiv:2501.00656 + 2411.15124 | Hub API |
+| Pythia (70M-6.9B) | `EleutherAI/pythia-{70m,160m,410m,1.4b,2.8b,6.9b}` | GPT-NeoX architecture, Pile dataset, arXiv:2304.01373 (Pythia: A Playground for Fine-Tuning and Interpretability) | Hub API |
+
+The OLMo 2 confirmatory scope (Addendum 1) is the RLVR-Instruct variant, not the
+base model: the `RLVR-GSM-MATH-IF-Mixed-Constraints` dataset tag on the Instruct
+repos confirms the RLVR training step is part of the model family, so the
+confirmatory-scope triangulation (arXiv:2506.10947, spurious rewards in RLVR)
+applies to the OLMo 2 family specifically.
+
 ## 5. Activation-patching specification grid (Section 8)
 
 Primary specification (fixed by the analysis plan NOW; immutable post-freeze):
