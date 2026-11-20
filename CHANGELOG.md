@@ -16,7 +16,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   names, pair asserted byte-wise), pinned load-floor items with the `k = 48` fact block certified
   against archived digest `068bc6a1fb0620fb`, 10 NONE-gold controls, 2 byte-identical re-dispatch
   pairs, `max_tokens` 2048, `temperature` 0, zero retries, dispatch wall 633.0 s. Instrument
-  `internalized_traversal_probe.py` (stdlib, `--selftest` 139 checks: planted wrong gold, planted
+  `internalized_traversal_probe.py` (stdlib, `--selftest` 82 checks, 83 with `NIGHTLY_MODEL_ID` set
+  because its serving-id sanitizer negative is env-guarded: planted wrong gold, planted
   name-on-NONE, planted inputs for all six tiers, sanitizer, census merge rule, exact slope
   arithmetic); gate `round60-gate-v1` (blob `8aeb5ec6`) frozen before dispatch and stamped on every
   record. Result (tier `controls_invalid`: 7 of 10 NONE controls declared NONE, 0 named an entity,

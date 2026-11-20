@@ -31,7 +31,7 @@ resource is scarce, so this round withdraws the permission to write the chain.
 
 ## Arms, items and dispatch
 
-Minimal pair, asserted byte-wise in the selftest: the ban prompt is the free prompt (round 55's
+Minimal pair, asserted byte-wise at plan construction: the ban prompt is the free prompt (round 55's
 template, byte-identical) plus the 81-character clause `Do not write out any intermediate entity
 name; answer with the single name only.` No equal-length neutral filler on the free arm.
 

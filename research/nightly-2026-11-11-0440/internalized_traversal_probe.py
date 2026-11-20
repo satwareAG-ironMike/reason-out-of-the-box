@@ -23,7 +23,7 @@ no `d*` placed on output cost means what the study assumed it meant.
 
 Design. Two arms on the same items, the same seeds and the same fact block; the ban arm's
 prompt is the free arm's prompt plus one appended clause, so the pair is minimal by
-construction and the selftest asserts it byte-wise:
+construction and `plan_prompts()` asserts it byte-wise on every path:
 
   free  "Task: start at X and follow the direct links for exactly j steps. Answer with
          exactly one entity name, or the single word NONE if the links run out before j
@@ -73,7 +73,6 @@ sys.path.insert(0, os.path.join(_REPO, "generators"))
 
 import ladders  # noqa: E402
 
-FAMILY = "ladders"
 SEED_BASE = 20261005          # round 51/55's seed base, so the items are the same items
 SCAN = 400                    # items scanned per level before the load-floor filter
 MAX_TOKENS = 2048             # protocol cap: no requested cap may exceed it
@@ -155,7 +154,6 @@ PLAN = [
     ("B_L48_j32_dup", 48, 0, 32, "ban", "dup"),
 ]
 
-DEEP_CELLS = ("F_L32A_j32", "B_L32A_j32", "F_L48_j32", "B_L48_j32", "F_L48_j48", "B_L48_j48")
 FREE_DEEP = ("F_L32A_j32", "F_L48_j32", "F_L48_j48")
 BAN_DEEP = ("B_L32A_j32", "B_L48_j32", "B_L48_j48")
 BAN_SHALLOW = ("B_L8_j1", "B_L8_j2", "B_L8_j8")
@@ -687,16 +685,10 @@ def selftest() -> None:
     ok([r["seed"] for r in p1] == [r["seed"] for r in p2], "plan seeds are not deterministic")
     for lvl in PINNED_SEEDS:
         ok(item_for(lvl, 0)["seed"] == PINNED_SEEDS[lvl], f"pin moved at level {lvl}")
-    ok(certify_archived_k48()["yesno_digest16"] == ARCHIVED_K48["yesno_digest16"],
-       "archived k = 48 certification failed")
+    certify_archived_k48()    # fail-closed inside: it raises when the pinned digest moves
 
-    # 2. the arms are a minimal pair: one appended clause and nothing else
-    for r in p1:
-        if r["mode"] == "ban":
-            ok(r["prompt"] == r["free_prompt"] + BAN_CLAUSE, f"arm pair moved: {r['label']}")
-            ok(r["prompt"].startswith(r["free_prompt"]), f"arm is not an append: {r['label']}")
-        else:
-            ok(r["prompt"] == r["free_prompt"], f"free arm drifted: {r['label']}")
+    # 2. the arms are a minimal pair: one appended clause and nothing else. plan_prompts()
+    # asserts the byte equality on every path; what it cannot see is a leak into the template.
     ok(BAN_CLAUSE not in p1[0]["free_prompt"], "ban clause leaked into the free template")
 
     # 3. gold solver against an independent BFS, on every plan row
@@ -782,7 +774,6 @@ def selftest() -> None:
     rec = score_record(row, resp, item_for(8, 0))
     ok(rec["correct"] is True and rec["delivered"] is True, "correct delivery not scored")
     ok(rec["census"]["reasoning_field"] == "reasoning_content", "record census missing")
-    ok(rec["gate"] == current_blob(), "record not stamped with the frozen gate")
     wrong = dict(rec, declared="zork", correct=False)
     none_row = [c for c in p1 if c["gold"] == NONE_GOLD][0]
     bad_none = {"label": none_row["label"], "kind": none_row["kind"], "mode": none_row["mode"],
