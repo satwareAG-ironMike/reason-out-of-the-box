@@ -483,6 +483,48 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ||||||| 90be10c
 ||||||| 2ea6ae1
+### 2026-11-19
+
+#### Added
+
+- Nightly research round 75 (issue #65; serves #152, #71, #94, #105, #100, #145, #139,
+  #126; refs #73, #141, #137): `research/nightly-2026-11-19-0401/` runs the round-70
+  owed arm C - a same-length draft from a DIFFERENT item, frozen before dispatch - on
+  the 27B build that produced round 72's interior-ask result, on the three M4 pins
+  whose turn-1 prompts are byte-identical to the round-63/69/70/72/73 dispatches.
+  Instrument `cross_ask_c_r75.py` (stdlib, `--selftest` 140 checks: per-donor-pair
+  gold-leak assertion - the item vocabularies are NOT pairwise disjoint, so the
+  asserted property is the narrower one that the asked interior gold is absent from
+  the donor's vocabulary; the arms dispatch from the full turn-1 prompt, the fix the
+  2026-11-18 pr-review record owed this instrument family; the C2/R2/X2/P1 decision
+  rules on planted outcomes), gate `round75-gate-v1` (blob `94b56078aea92c82`) frozen
+  before dispatch, 23 prompts of the 40 cap, 0 transport errors, dispatch wall
+  470.2 s. Result: **`C2_foreign_draft` ships `own_content_selects`** - the item's
+  own draft recovers the interior step-40 name in 3 of 3 (267 to 692 tokens, all
+  stopping well short of the cap) against a different item's draft cut to the same
+  whitespace-token budget in 0 of 3 and a budget-matched filler in 0 of 3 (all three
+  X-vs-C discordant pairs X-only, exact two-sided binomial 3-0 = 0.25, arithmetic
+  not significance), so the recovery is specific to the model's own prior output for
+  that item and the name-scaffold hypothesis is not supported on this build; `X2`
+  is `selection_beyond_tail` on a second firing on this id string (emitted names
+  `knudnd`, `clog`, `frixm` against terminal golds `spog`, `prish`, `brelt`); the
+  removal arm is not a null arm, it recomputes the interior name once (`C64_j64_B`
+  at 1,965 tokens, first public firing of the family in which arm B delivers); the
+  wall is cap-bound, `L3_cap_bound` fitting 16 of 21 records, a fourth public
+  firing on that side of the round-59/69 split; the NONE control re-presents on a
+  fifth public firing, truncating under all four arms; no false name in any arm
+  (0 of 4 control arms, 0 of 3 on each name cell); `H1_answer_stability` empty
+  (n_held = 0, the band-build side stays owed); `P1_prompt_tokens_parity` fails on
+  all four armed cells (notes-arm prompt-token spread 1,107 to 1,281 against the
+  400 band: whitespace-token parity does not imply model-token parity, arm X adds
+  a constant 2,057 measured prompt tokens over arm B on all three name cells), so
+  the context-length claim ships downgraded to `context_length_unmatched`.
+  Evidence label **Executed** (one endpoint, one build, one firing, single-digit n,
+  exploratory); trace exposure `reasoning` on 21 of 21 records (issue #105), no
+  verdict taken from a trace (issue #94).
+
+||||||| 90be10c
+||||||| 2ea6ae1
 ### 2026-11-06
 
 #### Added

@@ -1,0 +1,32 @@
+{
+ "T1_verbal_report_bibliographic": {
+  "source": "Ericsson & Simon 1980, Psychological Review 87(3):215-255, DOI 10.1037/0033-295X.87.3.215",
+  "statement": "used only as the bibliographic anchor for the frame that a verbal report is a retrieval from a prior store rather than a special introspective faculty. The thesis wording itself was NOT read this session and is carried as owed",
+  "verification": "Crossref work record refetched this round 2026-11-19 (record level: title 'Verbal reports as data.'...), title match against the Ericsson-Simon frame"
+ },
+ "T2_reports_as_causal_theory": {
+  "source": "Nisbett & Wilson 1977, Psychological Review 84(3):231-259, DOI 10.1037/0033-295X.84.3.231",
+  "statement": "a fluent report can be produced by implicit causal theory instead of by access to the process, so an arm recovering a name is not by itself access. Content carried as owed at the same level",
+  "verification": "record level, Crossref work record fetched 2026-11-17 in the round-72 gate (PR #153), with the round-72 title/venue correction on record"
+ },
+ "T3_accessibility": {
+  "source": "Block 2007, Behavioral and Brain Sciences 30:481-499, DOI 10.1017/S0140525X07002786",
+  "statement": "the row R1 operationalizes availability-for-report versus report; the article takes accessibility as its object of analysis. No argument content is claimed from this row",
+  "verification": "record level, Crossref work record fetched 2026-11-17 in the round-72 gate (PR #153). Caveat on record: citation databases circulate a second DOI suffix for this article and the alternative was not cross-checked"
+ },
+ "T4_verbalizable_workspace": {
+  "source": "arXiv:2607.15495 v1, 2026-07-16 (Gurnee, Sofroniew, Pearce, and co-authors, 16; Lindsey corresponding group), unrefereed preprint",
+  "statement": "title 'Verbalizable Representations Form a Global Workspace in Language Models'; the abstract reports a set of representations the model is poised to verbalize whose contents can be reported and are used to carry the intermediate steps of silent reasoning (quote, 9 words), and it introduces training that changes only what a model would say if interrupted and asked to reflect",
+  "verification": "arXiv export API, abstract level; refetched this round 2026-11-19, 1889 chars, quoted phrase present"
+ },
+ "T5_introspection_gap": {
+  "source": "arXiv:2601.01828 v1, 2026-01-05 (Lindsey), unrefereed preprint",
+  "statement": "injecting known concepts into activations and reading the self-report separates grounded report from confabulation; the abstract reports the capacity is highly unreliable and context-dependent (quote, 5 words)",
+  "verification": "record level via the archived [FT] entry archive/round8-do-llms-think/2601.01828-lindsey-introspective-awareness.md (provenance arXiv); the base-model versus post-trained asymmetry is NOT in the abstract and is not claimed here"
+ },
+ "T6_trace_answer_dissociation": {
+  "source": "arXiv:2605.29087 v1, 2026-05-27, unrefereed preprint",
+  "statement": "paper title 'The Chain Holds, the Answer Folds: Trace-Answer Dissociation in Reasoning Models Under Adversarial Pressure'; the abstract reports the chain staying correct while the emitted answer flips, a latent-correct rate near 50 percent at the behavioral flip in think mode against 11 to 15 percent without a thinking channel, and that a naive trace-anchored defense backfired (the abstract says backfires). That last clause is the registered prior against arms X and C: restoring the channel is not assumed to help",
+  "verification": "arXiv export API, abstract level; refetched this round 2026-11-19, 1126 chars, quoted phrase present"
+ }
+}
