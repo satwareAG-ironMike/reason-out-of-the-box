@@ -5,6 +5,32 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-08
+
+#### Added
+
+- Nightly research round 54 (issue #65; serves #71, #100, #105; refs #94, #126, #73):
+  `research/nightly-2026-11-08-0221/` re-dispatches round 53's cap-ladder design byte-identically
+  on a 27B-class local endpoint (the two round-51 gold-no items, the gold-yes natural-stop
+  control, one duplicate re-dispatch as the issue #100 control, the enumerate pair and the
+  non-ladder listing control at two caps): 15 of the 40-call cap (the 14 scored experiment
+  records plus one census health probe; the wall and token totals are over the scored records),
+  `max_tokens` 2048,
+  `temperature 0.0`, 237.36 s dispatch wall, 11,283 prompt and 20,044 completion tokens, no call
+  dropped. Gate `435e1939` (schema `round54-gate-v1`) frozen and pinned before dispatch; 152
+  selftest checks with planted controls. Result (tier `absolute_pin`, flag
+  `same_class_pair_exposed`): every ladder rung below the 1,556 pin is cap-bound (1,536, 1,024
+  and 512 stop at the cap with `finish_reason` `length`, no marker, no answer; C2 6 of 6), so the
+  flash class's 492-token reserve region (round 53) does not travel to the 27B class (stop-offset
+  shape flag `no_reserve_cap_bound`, the round-52 27B-class shape); the self-termination marker is
+  absent from all 14 records; the 27B-class answer state reproduces round 52's archived k = 48
+  state on all three items (X1 3 of 3, answer-level by the exposure rule), forming with round 52
+  a same-class pair with the reasoning channel open on both sides (the class already carries one
+  such pair on main, rounds 46 and 48); the gold-yes natural stop
+  is 838 (round 52: 840, flash class: 1,310); the issue #100 duplicate control fails (the twin
+  was censored at 2,048, the duplicate stopped at 1,798 and declared the correct gold label).
+||||||| 90be10c
+=======
 ### 2026-11-20
 
 #### Added
@@ -84,6 +110,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   and the gate blob byte-unchanged, the instrument change disclosed in the README, and a
   `registered: false` marker plus planted-slip controls on any column added after the dispatch. No
   registered row or tier may move in a resume (refs #65).
+### 2026-11-20
+
+#### Changed
+
+- Trailer rule and `GATES.md` read against the public-only rule (issue #149, owner ruling
+  2026-11-19): the `Model:` commit trailer is now the public model name only - no provider or
+  model-id parenthetical and no quantization-tagged deployment label, because squash merges replay
+  trailer text onto `main` and the serving-id guard treats those label shapes as leaks in tracked
+  files; the five absolute maintainer-home paths in `GATES.md` (one `CHECK` command path and four
+  `EVIDENCE` `cwd=` fields) are redacted to `<unlazy-skill>` and `<repo-checkout>` placeholders.
+  No CI job changed - the guard-extension alternative stays optional; merged trailers on `main` are
+  not rewritten (linear history), the rule is forward-only.
+
+||||||| 3e10e81
 ### 2026-11-09
 
 #### Added
@@ -117,6 +157,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   containment is not a provenance test in the name format either (#94). Self-agreement 2 of 2, one
   pair degenerate (both censored at 2,048). Evidence level `Executed`, exploratory, n = 1 per cell.
 
+||||||| 2ea6ae1
 ### 2026-11-06
 
 #### Added
