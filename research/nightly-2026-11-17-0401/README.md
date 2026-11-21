@@ -21,6 +21,28 @@ serving id string; a rebuilt serving under the same id string is not distinguish
 these artifacts. What the digest pins: the model id string the endpoint reported at
 dispatch, not the weight bytes.
 
+## Erratum (2026-11-20, forward-only, issue #120; refs #151, #178, #169)
+
+The `## Question` paragraph below and the last sentence of Finding 2 describe round 70 as a
+firing whose registered control X2 fired on every recovery and whose verdict shipped downgraded
+to `readout_gated_downgraded_to_tail_copy`, and say the confound "round 70 could not break" is
+broken by the ask itself. Accurate as shipped on 2026-11-17, superseded since: the round-70
+instrument of that date compared each arm-A answer against the last vocabulary name of that
+arm's own fresh channel, which is the defect issue #151 identified; PR #178 restored the
+round-70 record on `main`, where X2 reads `selection_beyond_tail` with 0 of 5 recoveries equal
+to the draft's last name and the verdict is `readout_gated`, undowngraded (`summary.json`
+sha256 `362e1ca5`, reproducible by `--rescore` from the byte-unchanged `gate.json` and
+`raw.jsonl`; proof posted on #178, 2026-11-20).
+
+Consequence, stated forward-only: the flash-build terminal cell of the {terminal, interior} x
+{flash, 27B} square is not a tail-anchored cell, and the round-70 downgrade was an instrument
+artifact rather than a property of that build. What does not move: on a terminal ask a tail copy
+and a correct report are the same observable, so the terminal design cannot discriminate the
+copy rule at any accuracy - that is a property of the ask, not of round 70's measurement - and
+the interior ask remains the arm that can. This round's own rows are untouched by the erratum:
+`X2_tail_shortcut.verdict` = `selection_beyond_tail` on 2 of 2 delivered arm-X records, verdict
+`cross_ask_gated`, and `gate.json`, `raw.jsonl` and `summary.json` immutable (issue #120).
+
 ## Question
 
 Round 70 (`research/nightly-2026-11-16-0412/`, PR #151) restored each censored deep
@@ -28,7 +50,8 @@ cell's own draft into the assistant turn and recovered the correct terminal in 5
 against 0 of 6 without the draft. Its registered control X2 fired on every recovery: the
 draft always stops at the asked step, so "copy the draft's last name" and "report the node
 at the asked step" are the same operation, and the verdict shipped downgraded to
-`readout_gated_downgraded_to_tail_copy`. Issue #152 registered the arm that breaks the
+`readout_gated_downgraded_to_tail_copy` (as shipped then; superseded by #178, see the Erratum
+above). Issue #152 registered the arm that breaks the
 confound: restore the draft produced for the terminal and ask for an INTERIOR step, so
 the correct answer sits inside the restored text and a copy rule must fail. Item 2 of the
 same issue registered the budget-matched control: the same notes-block budget in filler
@@ -156,7 +179,8 @@ matched budget, the draft's content recovers what filler and removal do not.
 In 2 of 2 delivered arm-X records the emitted name is NOT the last vocabulary name of
 the restored draft (`answer_is_draft_tail` false, false): the model reports an interior
 position of the restored text, not its tail. A copy rule is a wrong answer on the
-interior ask, and the registered X2 downgrade does not fire. The tail-copy confound
+interior ask, and the registered X2 downgrade does not fire (as shipped then;
+superseded by #178, see the Erratum above). The tail-copy confound
 round 70 could not break is broken by the ask itself, and the budget-matched filler
 arm (Finding 1) shows the recovery is not an artifact of context length: 890, 941 and
 767 neutral tokens bought no name in 0 of 3.
