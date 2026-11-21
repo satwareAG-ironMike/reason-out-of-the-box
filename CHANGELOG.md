@@ -31,8 +31,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   with a printed hash diff. `scripts/check_frozen_owner_go.py` is the owner-go gate: a PR that
   changes `evaluation/frozen/` must carry the `owner-go` label (label created; the CI job that
   enforces it is an owner wiring act, the job and script are carried in the draft PR body).
-- Selftests at the draft head: verify 473 of 473, novelty 32 of 32, baselines 129 of 129, score 114
-  of 114, integrity gate 13 of 13, owner-go gate 10 of 10. Opened #195 (`explore/` loop layout and
+- Pre-freeze review fixes (owner instruction 2026-11-21): an unmeasured novelty verdict now
+  carries the same key set as a measured one (`basis` + `ngram_words` on the no-backend path,
+  the `KeyError` the exploratory scoring path hit in round 81); a calibration arm that
+  delivered no answer at any level is a delivery failure, not a d_hat = 0 competence floor
+  (`trained_depth.no_delivery_case` in rule.json, `depth_measured` in the frozen pre-Holm
+  checks; a fully censored run reads OPEN with the blocker named, never NEGATIVE).
+  Re-frozen manifest (recorded act, `--confirm`): rule `325f8897...`, pins unchanged
+  `74b1719c...`, score `c5473e06...`, novelty `d8f7c830...`.
+- Selftests at the draft head: verify 473 of 473, novelty 33 of 33, baselines 129 of 129,
+  score 119 of 119, integrity gate 13 of 13, owner-go gate 10 of 10. Opened #195 (`explore/` loop layout and
   the weekly compute cap) and #196 (no confirmatory checkpoint is served locally, so the
   confirmatory track has 0 measurable cells).
 

@@ -166,12 +166,17 @@ def trained_depth(calibration_rows: list[dict], family: str, surface: str) -> di
     non-mastered level: depth is a run of mastered levels, not a count of them."""
     mastery = DEPTH["mastery_accuracy"]
     levels = sorted({r["level"] for r in calibration_rows if r["family"] == family})
-    accs, ns = {}, {}
+    accs, ns, delivered = {}, {}, {}
     for level in levels:
         rows = [r for r in calibration_rows if r["family"] == family and r["level"] == level
                 and r["surface"] == surface]
         ns[level] = len(rows)
+        delivered[level] = sum(1 for r in rows if r["state"] in ("delivered_correct", "delivered_wrong"))
         accs[level] = (sum(1 for r in rows if r["correct"]) / len(rows)) if rows else 0.0
+    # no_delivery_case (rule.json trained_depth): an arm that delivered no answer at
+    # any level is a delivery failure, not a competence floor. Trained depth is
+    # not_evaluable and the run carries no beyond-depth reading for this family.
+    measurable = any(delivered.values()) if delivered else False
     d_hat = 0
     for level in levels:
         if accs.get(level, 0.0) >= mastery:
@@ -181,7 +186,9 @@ def trained_depth(calibration_rows: list[dict], family: str, surface: str) -> di
     return {"d_hat": d_hat, "grid": levels, "mastery_accuracy": mastery,
             "calibration_accuracy": {str(k): round(v, 4) for k, v in accs.items()},
             "calibration_n": {str(k): v for k, v in ns.items()},
-            "no_mastery_case": not any(v >= mastery for v in accs.values())}
+            "calibration_delivered": {str(k): v for k, v in delivered.items()},
+            "no_mastery_case": not any(v >= mastery for v in accs.values()),
+            "measurable": measurable}
 
 
 # ---------------------------------------------------------------- one cell
@@ -235,7 +242,10 @@ def cell_report(family: str, level: int, surface: str, items: dict, model_rows: 
     depth = trained_depth(calibration_rows, family, surface)
     d_hat = depth["d_hat"]
     offset = level - d_hat
-    beyond = level > d_hat and (offset in DEPTH["novel_band_offsets"] or depth["no_mastery_case"])
+    # beyond depth is only readable where trained depth was measured: a censored
+    # calibration arm (no_delivery_case) blocks the reading, it does not read as 0.
+    beyond = (depth["measurable"] and level > d_hat
+              and (offset in DEPTH["novel_band_offsets"] or depth["no_mastery_case"]))
 
     tests, evaluable, blocked = {}, {}, []
     for key in BASELINE_KEYS:
@@ -278,6 +288,7 @@ def cell_report(family: str, level: int, surface: str, items: dict, model_rows: 
         "ci_above_baselines": bool(evaluable) and all(lo > evaluable[key] for key in evaluable),
         "holm_significant": False,
         "gold_carrying_rows": sum(1 for r in rows if r["gold_token_in_prompt"]),
+        "depth_measured": depth["measurable"],
     }
     carrying = checks["gold_carrying_rows"]
     checks["gold_carry_share"] = round(carrying / n, 4)
@@ -287,7 +298,8 @@ def cell_report(family: str, level: int, surface: str, items: dict, model_rows: 
     checks["cell_gate_pre_holm"] = all(checks[key] for key in pre_holm)
     checks["cell_passes"] = checks["cell_gate_pre_holm"] and checks["holm_significant"]
     measurable = {
-        "N1_depth_cliff": bool(rows) and depth["calibration_accuracy"].get(str(d_hat), 0.0) > 0,
+        "N1_depth_cliff": bool(rows) and depth["measurable"]
+                        and depth["calibration_accuracy"].get(str(d_hat), 0.0) > 0,
         "N2_baselines_match": bool(rows) and bool(evaluable),
         "N3_corpus_answers": measured > 0,
         "N4_no_competence": bool(rows),
@@ -442,6 +454,9 @@ def blockers_of(cells: list[dict], pin: dict, flag_clean: bool) -> list[str]:
             out.append(f"{cell['cell_id']}: baseline blocked ({', '.join(cell['checks']['baselines_blocked'])})")
         if cell["novelty"]["status"] != "evaluable" and cell["n"] > 0:
             out.append(f"{cell['cell_id']}: novelty {cell['novelty']['status']} ({cell['novelty']['reason']})")
+        if not cell["checks"].get("depth_measured", True):
+            out.append(f"{cell['cell_id']}: trained depth not_evaluable (calibration arm delivered no "
+                       f"answers; {cell['n']} dispatched, no beyond-depth reading exists)")
         carrying = cell["checks"]["gold_carrying_rows"]
         if carrying:
             cap = CELL_GATE["max_share_of_rows_carrying_the_gold"]
@@ -465,7 +480,11 @@ def distance_to_checkpoint(cells: list[dict], passing: list[dict]) -> list[dict]
         if not checks["n_ok"]:
             gaps.append(f"n {c['n']} below {CELL_GATE['min_n']}")
         if not checks["beyond_depth"]:
-            gaps.append(f"level {c['level']} is not beyond d_hat {c['d_hat']} by a registered offset")
+            if not checks.get("depth_measured", True):
+                gaps.append("trained depth not_evaluable: the calibration arm delivered no "
+                            "answers (delivery failure, no beyond-depth reading)")
+            else:
+                gaps.append(f"level {c['level']} is not beyond d_hat {c['d_hat']} by a registered offset")
         if not checks["accuracy_ok"]:
             gaps.append(f"accuracy {c['accuracy']} below {CELL_GATE['min_accuracy_at_depth']}")
         if not checks["novelty_ok"]:
@@ -968,6 +987,40 @@ def selftest() -> int:
        f"the exclusion must be stated, got {mixed['blockers']}")
     only_expl = claim([exploratory])
     ok(only_expl["verdict"] == "OPEN", "exploratory pins alone can never reach a claim verdict")
+
+    # NEGATIVE CONTROL (delivery failure): a calibration arm that delivered nothing
+    # is a blocker, not a d_hat = 0 competence floor. The cells keep their n,
+    # they lose the beyond-depth reading, and no NEGATIVE branch can fire over them.
+    censored = checkpoint_status(cells, CONFIRMATORY["olmo2-13b"], _corpus().report())
+    censored_cells = []
+    for c in cells:
+        clone = json.loads(json.dumps(c))
+        for row in clone["rows"]:
+            row["state"] = "not_delivered"
+            row["correct"] = False
+        clone["delivery_census"] = {s: (clone["n"] if s == "not_delivered" else 0)
+                                    for s in RULE["delivery_census"]["model_states"]}
+        depth = clone["trained_depth"]
+        depth["measurable"] = False
+        depth["calibration_delivered"] = {k: 0 for k in depth["calibration_n"]}
+        clone["checks"]["beyond_depth"] = False
+        clone["checks"]["depth_measured"] = False
+        clone["checks"]["cell_gate_pre_holm"] = all(clone["checks"][k] for k in CELL_GATE["pre_holm_checks"])
+        clone["checks"]["cell_passes"] = False
+        for key in ("N1_depth_cliff",):
+            clone["measurable"][key] = False
+        censored_cells.append(clone)
+    censored = checkpoint_status(censored_cells, CONFIRMATORY["olmo2-13b"], _corpus().report())
+    ok(all(not c["checks"]["beyond_depth"] for c in censored_cells),
+       "a censored calibration arm must strip the beyond-depth reading, not read it as d_hat = 0")
+    ok(any("trained depth not_evaluable" in blocker for blocker in censored["blockers"]),
+       f"the delivery failure must be named as a blocker, got {censored['blockers']}")
+    ok(censored["gate_met"] is False, "a censored arm cannot meet the family gate")
+    ok(not censored["negative_fired"],
+       f"no NEGATIVE branch may fire over censored cells, got {censored['negative_fired']}")
+    censored_claim = claim([dict(censored, _cells=censored_cells)])
+    ok(censored_claim["verdict"] == "OPEN",
+       "a fully censored run must read OPEN, never NEGATIVE")
 
     small = checkpoint_status([dict(c, n=60, checks=dict(c["checks"], n_ok=False)) for c in cells],
                               CONFIRMATORY["olmo2-13b"], _corpus().report())
