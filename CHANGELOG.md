@@ -5,6 +5,37 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-21 (frozen judge: the instrument that decides the claim, issue #194)
+- `evaluation/frozen/`: the decision instrument, drafted for the owner to merge. `rule.json`
+  (`frozen-judge-rule-v1`) holds every threshold in machine-readable form (alpha 0.05, min gap 0.10,
+  min n 300 confirmatory / 40 exploratory, mastery 0.80 for trained depth, calibration n 40 at seed
+  base 20260101, novel-band offsets 1-4, 13-gram novelty with a per-cell clean-rate floor of 0.95,
+  a 0.25 cap on the share of a cell's prompts that may carry the gold, delivery census states,
+  pooled Holm-Bonferroni, and the POSITIVE / NEGATIVE / OPEN gates with their numbers).
+  `pins.json` (`frozen-judge-pins-v1`) names the only confirmatory models: OLMo 2 7B/13B/32B and
+  Pythia 1B/2.8B/6.9B/12B base pins with hub revisions, `instruct`/`rl`/`reasoning_prompt` false,
+  each with its pinned smaller same-family partner; everything else, including the locally served
+  Qwen-class builds, is `exploratory_only_model_class`.
+- `verify.py` (per-family verifier, independent re-solver, frozen prompt builder, trap gold-leak
+  guard, `--generate`), `novelty.py` (`local_scan` Aho-Corasick plus inert `infinigram` /
+  `olmotrace` adapters), `baselines.py` (B1 corpus nearest-neighbour on the identical surface, B2
+  recombination off the audited public gold pool at `RECOMB_SEED_BASE` 20260202, B3 the pinned
+  smaller checkpoint), `score.py` (Wilson, exact two-sided McNemar, pooled Holm; `--score` writes a
+  checkpoint report, `--claim` is the only place a verdict exists and it recomputes every gate).
+- Unmeasurable is not evidence: a NEGATIVE branch fires only over cells it can measure, and an
+  unconfigured corpus backend or a missing partner arm is reported as a blocker
+  (`verdicts.NEGATIVE.measurability_rule`, `verdicts.unmeasurable_rule`).
+- `MANIFEST.json` records the sha256 of every instrument file; `scripts/check_frozen_integrity.py`
+  recomputes it and fails on a changed file, a missing file, an unregistered file, a malformed
+  digest or a non-canonical manifest; `--freeze` refuses a silent refresh and needs `--confirm`
+  with a printed hash diff. `scripts/check_frozen_owner_go.py` is the owner-go gate: a PR that
+  changes `evaluation/frozen/` must carry the `owner-go` label (label created; the CI job that
+  enforces it is an owner wiring act, the job and script are carried in the draft PR body).
+- Selftests at the draft head: verify 473 of 473, novelty 32 of 32, baselines 129 of 129, score 114
+  of 114, integrity gate 13 of 13, owner-go gate 10 of 10. Opened #195 (`explore/` loop layout and
+  the weekly compute cap) and #196 (no confirmatory checkpoint is served locally, so the
+  confirmatory track has 0 measurable cells).
+
 ### 2026-11-20 (TRAP-style corpus arm, issue #77)
 - `generators/trap.py`: the #77 TRAP-style surface-perturbation arm (Addendum 1 item 3
   T7 triangulation). Multi-step arithmetic word problems at depth d = operation steps;
