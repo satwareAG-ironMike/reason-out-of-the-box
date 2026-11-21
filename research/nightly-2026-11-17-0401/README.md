@@ -179,7 +179,8 @@ matched budget, the draft's content recovers what filler and removal do not.
 In 2 of 2 delivered arm-X records the emitted name is NOT the last vocabulary name of
 the restored draft (`answer_is_draft_tail` false, false): the model reports an interior
 position of the restored text, not its tail. A copy rule is a wrong answer on the
-interior ask, and the registered X2 downgrade does not fire. The tail-copy confound
+interior ask, and the registered X2 downgrade does not fire (as shipped then;
+superseded by #178, see the Erratum above). The tail-copy confound
 round 70 could not break is broken by the ask itself, and the budget-matched filler
 arm (Finding 1) shows the recovery is not an artifact of context length: 890, 941 and
 767 neutral tokens bought no name in 0 of 3.
