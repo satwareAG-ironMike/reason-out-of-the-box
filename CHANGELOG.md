@@ -5,6 +5,21 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-21 (exploratory loop: explore/ layout and the weekly compute cap, issue #195)
+- `explore/AGENTS.md` and `explore/LEDGER.md`: the open loop. One round directory per
+  hypothesis, non-reasoning prompts only, pinned model + seed + sampler + build recorded per
+  round, scored by the frozen judge (`evaluation/frozen/`, issue #194), one ledger row per
+  round. The kill rule is 10 consecutive no-gain rounds or the weekly compute cap.
+- `research/AGENTS.md`: the weekly compute cap is now explicit - 80 prompts a week for the
+  nightly lane, 400 prompts a week for `explore/`, self-hosted endpoints only, no metered
+  keys. A confirmatory or PROMOTE run is owner-scoped and not part of the cap.
+- `explore/2026-11-21-r78-cross-ask/` and `explore/2026-11-21-r79-cross-ask/`: rounds 78
+  and 79 moved from `research/nightly-2026-11-21-0200` and `-0400` by owner objective
+  2026-11-21 (they fire in the exploratory lane, not the nightly lane). The instrument hash
+  in `docs/version-lock-manifest.md` Section 4a is unchanged (same file, new path).
+- Root AGENTS.md Child DOX Index: `explore/` row added, `research/` row now names the
+  weekly cap.
+
 ### 2026-11-20 (record erratum: the round-70 verdict as cited by rounds 72 and 73, refs #169, #151, #178)
 - Forward-only erratum (issue #120) over the merged round records `research/nightly-2026-11-17-0401/`
   (round 72) and `research/nightly-2026-11-18-0423/` (round 73): both describe round 70 as a firing

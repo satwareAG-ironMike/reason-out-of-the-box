@@ -93,16 +93,16 @@
  },
  "decision_R2": {
   "ambiguous": "|n_X - n_F| <= 1 and n_X < 2",
+  "censored_not_a_miss": "arm cells whose finish_reason is length (censored at the cap, no delivery inside the budget) are excluded from the contrast denominator and reported as censored_at_cap, not counted as misses; refs #145; prior: arXiv:2611.00833 (Fewer Tokens, More Answers, 2026-10) - token-budget-aware answer extraction at a fixed cap; a capped response is a measurement boundary, not a wrong response",
+  "control_own_budget": "the NONE-gold control gets its own per-control budget CONTROL_MAX_TOKENS, not the deep cells' max_tokens; a control whose own budget is exhausted ships not_delivered, not a censored-miss; refs #139",
   "cross_ask_gated": "n_X >= 2 and n_X - n_F >= 2",
   "evaluable_scope": "the terminal cells whose turn-1 draft contains the interior gold, census field interior_gold_in_trace, registered here before any prompt",
+  "fallback_provenance": "the reasoning-fallback token's first-occurrence position in the trace is recorded and classified own-channel vs donor-block; a token sourced from the restored donor block is not the model's own reasoning provenance; refs #94",
   "filler_matches_budget": "n_F >= n_X - 1 and n_F >= 1",
   "min_drafts_with_gold": 2,
   "no_recovery": "n_X == 0 (zero correct recoveries is no_recovery by definition; an all-tail result at n_X == 0 is also no_recovery, since there is no recovery to downgrade)",
   "statistics": "exact two-sided binomial over the X-vs-F discordant pairs across the three items, exploratory, n single digits, no significance claim",
-  "tail_copy_downgrade": "n_X >= 2 and every delivered arm-X record on the scope emitted the draft's last vocabulary name (the cross_ask_gated case where all recoveries are tail copies; refs #166, the trigger aligned to the code)",
-  "censored_not_a_miss": "arm cells whose finish_reason is length (censored at the cap, no delivery inside the budget) are excluded from the contrast denominator and reported as censored_at_cap, not counted as misses; refs #145; prior: arXiv:2611.00833 (Fewer Tokens, More Answers, 2026-10) - token-budget-aware answer extraction at a fixed cap; a capped response is a measurement boundary, not a wrong response",
-  "control_own_budget": "the NONE-gold control gets its own per-control budget CONTROL_MAX_TOKENS, not the deep cells' max_tokens; a control whose own budget is exhausted ships not_delivered, not a censored-miss; refs #139",
-  "fallback_provenance": "the reasoning-fallback token's first-occurrence position in the trace is recorded and classified own-channel vs donor-block; a token sourced from the restored donor block is not the model's own reasoning provenance; refs #94"
+  "tail_copy_downgrade": "n_X >= 2 and every delivered arm-X record on the scope emitted the draft's last vocabulary name (the cross_ask_gated case where all recoveries are tail copies; refs #166, the trigger aligned to the code)"
  },
  "delivery_states": [
   "delivered_correct",
@@ -113,7 +113,8 @@
   "declared_none",
   "false_name_on_none_gold",
   "censored_at_cap",
-  "empty_answer_field"
+  "empty_answer_field",
+  "not_delivered"
  ],
  "f_probe_cap": 1,
  "f_probe_max_per_cell": 2,
@@ -131,7 +132,7 @@
   },
   "record": "round-63 gate cells (PR #143, unmerged here), re-dispatched by rounds 69, 70, 72, 73 and 75"
  },
- "model_digest": "26df9af5972ff312",
+ "model_digest": "4075b5949b2b0487",
  "question": "does the round-75 own-content readout (own draft 3 of 3 against a foreign draft 0 of 3 and a whitespace-budget filler 0 of 3) survive when the arms are matched on the endpoint's measured prompt_tokens: the registered P1 debt, a tokenization-aware filler/donor budget",
  "round": 79,
  "schema": "round77-gate-v1",
@@ -141,7 +142,7 @@
   "T1_verbal_report_bibliographic": {
    "source": "Ericsson & Simon 1980, Psychological Review 87(3):215-255, DOI 10.1037/0033-295X.87.3.215",
    "statement": "used only as the bibliographic anchor for the frame that a verbal report is a retrieval from a prior store rather than a special introspective faculty. The thesis wording itself was NOT read this session and is carried as owed",
-   "verification": "Crossref work record refetched this round 2026-11-20 (record level: title 'Verbal reports as data.'...), title match against the Ericsson-Simon frame"
+   "verification": "record level, Crossref work record fetched 2026-11-17 in the round-72 gate (PR #153); no abstract, so no content claim from this row"
   },
   "T2_reports_as_causal_theory": {
    "source": "Nisbett & Wilson 1977, Psychological Review 84(3):231-259, DOI 10.1037/0033-295X.84.3.231",
@@ -156,7 +157,7 @@
   "T4_verbalizable_workspace": {
    "source": "arXiv:2607.15495 v1, 2026-07-16 (Gurnee, Sofroniew, Pearce, and co-authors, 16; Lindsey corresponding group), unrefereed preprint",
    "statement": "title 'Verbalizable Representations Form a Global Workspace in Language Models'; the abstract reports a set of representations the model is poised to verbalize whose contents can be reported and are used to carry the intermediate steps of silent reasoning (quote, 9 words), and it introduces training that changes only what a model would say if interrupted and asked to reflect",
-   "verification": "arXiv export API, abstract level; refetched this round 2026-11-20, 1889 chars, quoted phrase present"
+   "verification": "arXiv export API, abstract level; fetched 2026-11-17 in round 72, refetched 2026-11-19 in round 75"
   },
   "T5_introspection_gap": {
    "source": "arXiv:2601.01828 v1, 2026-01-05 (Lindsey), unrefereed preprint",
@@ -166,7 +167,7 @@
   "T6_trace_answer_dissociation": {
    "source": "arXiv:2605.29087 v1, 2026-05-27, unrefereed preprint",
    "statement": "paper title 'The Chain Holds, the Answer Folds: Trace-Answer Dissociation in Reasoning Models Under Adversarial Pressure'; the abstract reports the chain staying correct while the emitted answer flips, a latent-correct rate near 50 percent at the behavioral flip in think mode against 11 to 15 percent without a thinking channel, and that a naive trace-anchored defense backfired (the abstract says backfires). That last clause is the registered prior against arms X and C: restoring the channel is not assumed to help",
-   "verification": "arXiv export API, abstract level; refetched this round 2026-11-20, 1126 chars, quoted phrase present"
+   "verification": "arXiv export API, abstract level; fetched 2026-11-17 in round 72, refetched 2026-11-19 in round 75"
   }
  },
  "wall_laws": {
