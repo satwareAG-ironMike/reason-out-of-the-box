@@ -1,0 +1,8 @@
+{
+ "dispatch_wall_s": 743.3,
+ "gate_blob": "add64e29e143104cb2afd8c1d05d125949bdac4a13c5f17447f301907c1c4602",
+ "model_digest": "4075b5949b2b0487",
+ "prompts_in_raw": 29,
+ "stopped_early": [],
+ "transport_retries": 0
+}
