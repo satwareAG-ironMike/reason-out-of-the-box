@@ -20,29 +20,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Root AGENTS.md Child DOX Index: `explore/` row added, `research/` row now names the
   weekly cap.
 
-### 2026-11-20 (record erratum: the round-70 verdict as cited by rounds 72 and 73, refs #169, #151, #178)
-- Forward-only erratum (issue #120) over the merged round records `research/nightly-2026-11-17-0401/`
-  (round 72) and `research/nightly-2026-11-18-0423/` (round 73): both describe round 70 as a firing
-  whose registered `X2` fired on every recovery and whose verdict shipped
-  `readout_gated_downgraded_to_tail_copy`. Accurate as dispatched (2026-11-17 and 2026-11-18),
-  superseded by issue #151 and PR #178: round 70 on `main` reads `X2` = `selection_beyond_tail`
-  (0 of 5 arm-A recoveries equal the draft's last vocabulary name) and verdict `readout_gated`,
-  undowngraded. Each round gets an Erratum section plus an inline marker at the affected rows; the
-  superseded sentences stay in place, and no `gate.json`, `raw.jsonl` or `summary.json` of any
-  round is touched. The corrected reading sharpens rather than removes the reason the cross-ask
-  arm was owed: a terminal ask cannot discriminate a tail copy at any accuracy, which is a property
-  of the ask, not of round 70's measurement.
-- Checked and clean, no erratum owed: `research/nightly-2026-11-19-0401/` (round 75) and
-  `research/nightly-2026-11-20-0400/` (round 77) cite round 70 only as the origin of the owed arm
-  C and as the build whose deep cells censored at the cap; neither states the round-70 downgrade
-  verdict (grep over both READMEs for the round-70 references: three lines, none verdict-bearing).
-- `CHANGELOG.md`: erratum annotation appended to the stale round-70 entry under "2026-11-16
-  (second entry)"; the corrected entry under "2026-11-16" is the live one.
-- Reproducibility proof: `readout_recovery_r70.py --selftest` 96/96 and `--rescore` at `main`
-  regenerate `summary.json` byte-identically (sha256 `362e1ca521faa65168c2cddbfb3de2fc9f62b1e77511a56a0bb5c667a7e92573`
-  before and after; `gate.json` `14a51bf4` and `raw.jsonl` `b30493b7` not rewritten); posted on
-  #178.
-
 ### 2026-11-20 (TRAP-style corpus arm, issue #77)
 - `generators/trap.py`: the #77 TRAP-style surface-perturbation arm (Addendum 1 item 3
   T7 triangulation). Multi-step arithmetic word problems at depth d = operation steps;
@@ -469,17 +446,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   empty at `n_held = 0`; the anchor prompt self-agrees at 1,096 tokens across two dispatches
   (issue #100). Rows `V0` to `V3`, `X2`, `H1`, `S1`, `W2`, `M4` are named in the instrument, not in
   the frozen gate, and no `--check-readme` guard ran this round (issue #137).
-  - Erratum 2026-11-20 (forward-only, issue #120; refs #151, #178, #169): this entry carries the
-    shipped 2026-11-16 wording and is superseded by the corrected round-70 entry under "###
-    2026-11-16" above it. The shipped X2 predicate read each arm's own fresh channel instead of
-    the draft the arm receives (issue #151); PR #178 restored the round-70 record on `main`,
-    where `X2_tail_shortcut.verdict` is `selection_beyond_tail` (0 of 5 arm-A recoveries equal
-    the restored draft's last vocabulary name) and the verdict is `readout_gated` with no
-    downgrade. That round's `gate.json` and `raw.jsonl` were never modified; the restored
-    `summary.json` (sha256 `362e1ca5`) reproduces byte-identically from them under `--rescore`,
-    proof posted on #178 on 2026-11-20. The design-level sentence stays true: on a terminal ask a
-    tail copy and a correct report are the same observable, so that ask cannot separate readout
-    from copying at any accuracy.
 
 
 ### 2026-11-16 (second entry)

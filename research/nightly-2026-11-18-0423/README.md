@@ -13,35 +13,6 @@ This round is a build transfer of round 72's confound-breaking arm, not a new de
 digest `4075b5949b2b0487` is the build that round 70 (open PR #151, unmerged here) ran when it
 found the confound, so this is the arm run on the very build whose result motivated it.
 
-## Erratum (2026-11-20, forward-only, issue #120; refs #151, #178, #169)
-
-Two statements in the `## Question` section and the first row of the 2x2 table below describe
-round 70 as a firing whose registered control `X2` fired on every recovery and whose verdict
-shipped downgraded to `readout_gated_downgraded_to_tail_copy`. They were accurate as shipped on
-2026-11-18: the round-70 instrument of that date did compare each arm-A answer against the last
-vocabulary name of that arm's own fresh channel, and on that predicate the downgrade fired.
-
-Both are superseded. Issue #151 showed the predicate read the wrong text, and PR #178 restored
-the round-70 record on `main`: with the tail taken over the draft the arms receive, `X2` reads
-`selection_beyond_tail` with 0 of 5 recoveries equal to the draft's last name and the round-70
-verdict is `readout_gated`, undowngraded (`summary.json` sha256 `362e1ca5`, reproducible by
-`--rescore` from the byte-unchanged `gate.json` and `raw.jsonl`; the proof is posted on #178,
-2026-11-20).
-
-What that changes here and what it does not:
-
-- The square's flash/terminal row now reads: arm X 5 of 6, beyond the tail in 5 of 5 delivered
-  recoveries, source round 70 as restored by #178. No cell of the square is tail-anchored.
-- On the terminal-ask side the confound this round was built to break was partly an artifact of
-  the round-70 instrument defect rather than a property of the flash build. The interior arm is
-  still owed on its own grounds: only an interior gold makes a tail copy a detectable wrong
-  answer, so the interior ask is the only design of the four that can test the copy rule.
-- Nothing in this round's own measurement moves. This round's `X2` predicate is taken over the
-  draft the arms receive, its `X2_tail_shortcut.verdict` is `selection_beyond_tail` on 3 of 3,
-  and its registered verdict is `cross_ask_gated` with `arm_X_correct` 3 of 3 against arm F 0 of
-  3 and arm B 0 of 3. `gate.json`, `raw.jsonl` and `summary.json` of this round are untouched by
-  this erratum (issue #120).
-
 ## Question
 
 Round 70 (open PR #151, `research/nightly-2026-11-16-0412/`) restored each censored deep cell's
@@ -49,8 +20,7 @@ own draft into the assistant turn on this build and recovered the correct termin
 against 0 of 6 without it, but its registered control `X2` fired on every recovery: the draft
 always stops at the asked step, so "copy the draft's last name" and "report the node at the asked
 step" were the same operation, and the verdict shipped downgraded to
-`readout_gated_downgraded_to_tail_copy` (as shipped then; superseded by #178, see the Erratum
-above). Issue #152 registered the arm that breaks that confound:
+`readout_gated_downgraded_to_tail_copy`. Issue #152 registered the arm that breaks that confound:
 restore the draft produced for the terminal and ask for an INTERIOR step, so the correct answer
 sits inside the restored text and a copy rule must fail, plus a budget-matched filler control.
 Round 72 (open PR #153, unmerged here) ran both on a different, 27B-class build (digest
@@ -61,7 +31,7 @@ its fourth cell: the interior ask on the flash build where the confound lives. T
 
 | build (digest) | ask | arm X recovers | beyond the tail | source |
 |----------------|-----|----------------|-----------------|--------|
-| flash `4075b5949b2b0487` | terminal | 5 of 6 | no, `X2` fired on all | round 70, open PR #151 (row superseded 2026-11-20, see Erratum) |
+| flash `4075b5949b2b0487` | terminal | 5 of 6 | no, `X2` fired on all | round 70, open PR #151 |
 | flash `4075b5949b2b0487` | interior | 3 of 3 | yes, 3 of 3 | this round |
 | 27B `26df9af5972ff312` | interior | 2 of 3 | yes, 2 of 2 delivered | round 72, open PR #153 |
 
