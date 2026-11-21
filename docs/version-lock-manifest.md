@@ -83,8 +83,8 @@ aligned trigger:
 
 | Artifact | Path | SHA-256 | Captured |
 |----------|------|---------|----------|
-| Round-78 cross-ask instrument | `research/nightly-2026-11-21-0200/cross_ask_r78.py` | `9517226bb0cb2e59856ba2c9f192f7b26fbb5afa02f9c7f1bbebe4d39a60123b` | 2026-11-20 |
-| Round-78 frozen gate | `research/nightly-2026-11-21-0200/gate.json` | see below | 2026-11-20 |
+| Round-78 cross-ask instrument | `explore/2026-11-21-r78-cross-ask/cross_ask_r78.py` | `9517226bb0cb2e59856ba2c9f192f7b26fbb5afa02f9c7f1bbebe4d39a60123b` | 2026-11-20, path moved to `explore/` 2026-11-21 (owner objective: r78 fires in the exploratory lane; hash unchanged) |
+| Round-78 frozen gate | `explore/2026-11-21-r78-cross-ask/gate.json` | see below | 2026-11-20, path moved to `explore/` 2026-11-21 |
 
 The gate.json hash is recorded at the round's own gate freeze (the instrument emits it);
 this pin is the instrument code only.
