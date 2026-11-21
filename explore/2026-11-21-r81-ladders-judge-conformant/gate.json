@@ -1,0 +1,10 @@
+{
+  "schema": "round81-gate-v1",
+  "rows": {
+    "V0_solver_certified": "the generator's independent solver (BFS over the fact graph) agrees with the recorded gold at every level; gold is computed arithmetically at generation time",
+    "P0_non_reasoning_prompt": "the prompt is the frozen judge's ladders build_prompt: the fact list, the query, and the one-word answer format; no chain-of-thought scaffold, no few-shot reasoner trace, no 'think step by step' (verify.py selftest asserts 'think' is absent)",
+    "P1_judge_seed_policy": "item i at level L uses seed_base + 2_000_000*L + i; calibration seed base 20260101, novel-band seed base 20261121 (run-date fresh seed, never shipped)",
+    "P2_delivery_contract": "the one-word contract is deliverable only at max_tokens >= 256 on this build (thinking-enabled); the 8-token first pass produced 240 empty completions and is retained in .trash-8tok/ as the failure record; the shipped run used max_tokens 256",
+    "P3_trace_exposure": "the response-side reasoning trace (separate 'reasoning' channel) is excluded from scoring; the judge scores the 'completion' field only (issue #105 class finding, registered in README)"
+  }
+}
