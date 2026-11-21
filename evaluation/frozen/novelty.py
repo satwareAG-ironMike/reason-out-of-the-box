@@ -265,7 +265,10 @@ def check_solution(solution: str, item_surface: str, backends: dict) -> dict:
         if searchable:
             statuses.append(solution_row["status"])
     if not rows:
-        return {"verdict": "not_evaluable", "reason": "no backend enabled", "rows": []}
+        # same shape as the measured path: basis and ngram_words ride along so a
+        # consumer can read one key set regardless of whether a backend answered
+        return {"verdict": "not_evaluable", "ngram_words": NGRAM_WORDS, "basis": basis,
+                "reason": "no backend enabled", "rows": []}
     if "flagged" in statuses:
         verdict = "flagged"
     elif all(status == "clean" for status in statuses):
@@ -393,6 +396,8 @@ def selftest() -> int:
        "an unmeasurable backend can never produce a clean verdict")
     none = check_solution(solution, novel_surface, {})
     ok(none["verdict"] == "not_evaluable", "no backend enabled is not_evaluable")
+    ok(none["basis"] == solution_basis(solution) and none["ngram_words"] == NGRAM_WORDS,
+       "an unmeasured verdict must carry the same key set as a measured one")
     ok(set(r["solution_status"] for r in flagged["rows"]) <= set(STATUSES),
        "backend statuses must come from the frozen census")
 

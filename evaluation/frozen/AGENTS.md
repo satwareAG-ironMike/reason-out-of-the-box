@@ -55,7 +55,10 @@ a run under different statistics.
 - A configured-and-read corpus slice that matches nothing answers `clean`. An unconfigured backend
   answers `not_evaluable`, never `clean`.
 - `d_hat` comes from the model's own calibration arm at the frozen calibration seed policy. The
-  novel band is `level - d_hat` in {1, 2, 3, 4}.
+  novel band is `level - d_hat` in {1, 2, 3, 4}. A calibration arm that delivered no answer at
+  any level is a delivery failure, not a competence floor: trained depth is `not_evaluable`
+  (`no_delivery_case`), the cells keep their `n`, they lose the beyond-depth reading, and no
+  NEGATIVE branch can fire over them.
 - A round that cannot run an arm says so in its ledger row and keeps the failure record. A timed
   out arm is never reported as a result.
 - Nothing public here names a host, port, endpoint, model file path or serving build digest.
