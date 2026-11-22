@@ -19,6 +19,45 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   zero-dispatch firing (a stale pool model column, runner-side; issue #211).
   Next dispatch window: 2026-W48.
 
+||||||| ecb0f98
+- Selftests at the draft head: verify 473 of 473, novelty 33 of 33, baselines 129 of 129,
+  score 119 of 119, integrity gate 13 of 13, owner-go gate 10 of 10.
+### 2026-11-21 (frozen judge: the instrument that decides the claim, issue #194)
+- `evaluation/frozen/`: the decision instrument, drafted for the owner to merge. `rule.json`
+  (`frozen-judge-rule-v1`) holds every threshold in machine-readable form (alpha 0.05, min gap 0.10,
+  min n 300 confirmatory / 40 exploratory, mastery 0.80 for trained depth, calibration n 40 at seed
+  base 20260101, novel-band offsets 1-4, 13-gram novelty with a per-cell clean-rate floor of 0.95,
+  a 0.25 cap on the share of a cell's prompts that may carry the gold, delivery census states,
+  pooled Holm-Bonferroni, and the POSITIVE / NEGATIVE / OPEN gates with their numbers).
+  `pins.json` (`frozen-judge-pins-v1`) names the only confirmatory models: OLMo 2 7B/13B/32B and
+  Pythia 1B/2.8B/6.9B/12B base pins with hub revisions, `instruct`/`rl`/`reasoning_prompt` false,
+  each with its pinned smaller same-family partner; everything else, including the locally served
+  Qwen-class builds, is `exploratory_only_model_class`.
+- `verify.py` (per-family verifier, independent re-solver, frozen prompt builder, trap gold-leak
+  guard, `--generate`), `novelty.py` (`local_scan` Aho-Corasick plus inert `infinigram` /
+  `olmotrace` adapters), `baselines.py` (B1 corpus nearest-neighbour on the identical surface, B2
+  recombination off the audited public gold pool at `RECOMB_SEED_BASE` 20260202, B3 the pinned
+  smaller checkpoint), `score.py` (Wilson, exact two-sided McNemar, pooled Holm; `--score` writes a
+  checkpoint report, `--claim` is the only place a verdict exists and it recomputes every gate).
+- Unmeasurable is not evidence: a NEGATIVE branch fires only over cells it can measure, and an
+  unconfigured corpus backend or a missing partner arm is reported as a blocker
+  (`verdicts.NEGATIVE.measurability_rule`, `verdicts.unmeasurable_rule`).
+- `MANIFEST.json` records the sha256 of every instrument file; `scripts/check_frozen_integrity.py`
+  recomputes it and fails on a changed file, a missing file, an unregistered file, a malformed
+  digest or a non-canonical manifest; `--freeze` refuses a silent refresh and needs `--confirm`
+  with a printed hash diff. `scripts/check_frozen_owner_go.py` is the owner-go gate: a PR that
+  changes `evaluation/frozen/` must carry the `owner-go` label (label created; the CI job that
+  enforces it is an owner wiring act, the job and script are carried in the draft PR body).
+- Pre-freeze review fixes (owner instruction 2026-11-21): an unmeasured novelty verdict now
+  carries the same key set as a measured one (`basis` + `ngram_words` on the no-backend path,
+  the `KeyError` the exploratory scoring path hit in round 81); a calibration arm that
+  delivered no answer at any level is a delivery failure, not a d_hat = 0 competence floor
+  (`trained_depth.no_delivery_case` in rule.json, `depth_measured` in the frozen pre-Holm
+  checks; a fully censored run reads OPEN with the blocker named, never NEGATIVE).
+  Re-frozen manifest (recorded act, `--confirm`): rule `325f8897...`, pins unchanged
+  `74b1719c...`, score `c5473e06...`, novelty `d8f7c830...`.
+- Selftests at the draft head: verify 473 of 473, novelty 33 of 33, baselines 129 of 129,
+  score 119 of 119, integrity gate 13 of 13, owner-go gate 10 of 10.
 ### 2026-11-21 (exploratory loop: explore/ layout and the weekly compute cap, issue #195)
 - `explore/AGENTS.md` and `explore/LEDGER.md`: the open loop. One round directory per
   hypothesis, non-reasoning prompts only, pinned model + seed + sampler + build recorded per
