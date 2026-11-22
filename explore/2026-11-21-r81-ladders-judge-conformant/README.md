@@ -2,7 +2,7 @@
 
 ## Question
 
-Does the 27B-class base build (`qwen3.8-27b-nvfp4-mtp`, self-hosted, no instruct, no RL,
+Does the 27B-class base build (`Qwen3.8-27B class local endpoint`, self-hosted, no instruct, no RL,
 no reasoning prompt in the dispatch) clear the ladders k-hop reachability family at a
 depth beyond its measured trained depth, with one-word answers, at the frozen judge's
 minimum exploratory n=40?
@@ -33,7 +33,7 @@ step past d_hat) reads ACC 0.35 with a Wilson 95% CI computed in score.json.
   measured trained depth. This is a NEGATIVE-type exploratory signal (a clean negative is
   a valid result per the objective).
 - **Delivery-contract finding**: an 8-token answer budget is not deliverable on this
-  build. `qwen3.8-27b-nvfp4-mtp` is a thinking-enabled build: its internal reasoning
+  build. `Qwen3.8-27B class local endpoint` is a thinking-enabled build: its internal reasoning
   trace (in a separate `reasoning` channel, not in the prompt) consumes the token budget,
   so at max_tokens=8 every completion was empty (`finish_reason: length`). At
   max_tokens=256 the one-word answer lands in `content` with `finish_reason: stop` on the
@@ -59,7 +59,7 @@ track (owner lane), which remains at 0 measurable beyond-depth cells.
 
 ## Reproducibility
 
-- Pinned model: `qwen3.8-27b-nvfp4-mtp` (self-hosted endpoint, exploratory-only class)
+- Pinned model: `Qwen3.8-27B class local endpoint` (self-hosted endpoint, exploratory-only class)
 - Sampler: temperature 0.0, max_tokens 256 (see delivery-contract finding), one dispatch
   at a time
 - Seeds: calibration seed base 20260101, novel-band seed base 20261121 (run-date fresh

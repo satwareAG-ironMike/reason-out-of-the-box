@@ -1,6 +1,6 @@
 # Round 81: ladders, judge-conformant, exploratory lane
 
-Tests: does the 27B-class base build (qwen3.8-27b-nvfp4-mtp, self-hosted, no instruct, no RL,
+Tests: does the 27B-class base build (Qwen3.8-27B class local endpoint, self-hosted, no instruct, no RL,
 no reasoning prompt) clear the ladders k-hop reachability family at a depth beyond its
 measured trained depth, with one-word answers, at the frozen judge's minimum exploratory
 n=40?
