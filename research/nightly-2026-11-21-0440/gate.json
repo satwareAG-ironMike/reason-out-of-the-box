@@ -1,0 +1,36 @@
+{
+ "blob": "40d238b4690758a1063b601c46d012a5208355cc98e537f7956ababaae654d09",
+ "calibration": {
+  "calibration_n": 40,
+  "calibration_seed_base": 20260101,
+  "definition": "the greatest level L such that ACC(level) >= 0.80 for every level <= L on the calibration pool",
+  "mastery_accuracy": 0.8,
+  "source": "evaluation/frozen/rule.json trained_depth, issue #194"
+ },
+ "caps": {
+  "dispatch_budget_s": 1500,
+  "max_prompts": 40,
+  "max_tokens": 512,
+  "request_timeout_s": 150
+ },
+ "checks": {
+  "V0_slot_identity": "the slot answers /v1/models and NIGHTLY_MODEL_ID is non-empty before any prompt (issue #200)",
+  "V1_solver_certified": "the judge's BFS gold flips to no when the first hop of a yes item is removed",
+  "V2_pool_balance": "every level reports its gold share and majority-class accuracy, so no 0.80 read is reported without its chance",
+  "V3_gate_measured": "the #67 permutation-calibrated leak gate runs on exactly this pool and every per-level status is recorded",
+  "V4_prompt_clean": "no built prompt carries the gold token",
+  "V5_delivery_census": "every record carries a frozen DELIVERY_STATES value and the message-field census (issue #105); a cap-exhausted record is not_delivered, not a miss (issue #145)"
+ },
+ "decision": {
+  "no_mastery_case": "if no level reaches 0.80 then d_hat = 0 and the accuracy floor is reported (rule.json no_mastery_case)",
+  "reported": "d_hat over the dispatched census, intent to treat (every dispatched item stays in n)",
+  "underpowered": "n=8 per level, below min_n_exploratory 40: report the Wilson interval and the majority baseline beside every level accuracy, never the point estimate alone",
+  "worthless_if": "level accuracy is driven by censoring, extraction failure or a surface leak rather than by depth, or if the endpoint identity moves mid-run"
+ },
+ "firing": "2026-11-21 04:40",
+ "id": "nightly-2026-11-21-0440-ladders-dhat-gate-v1",
+ "model_digest": "4075b5949b2b0487",
+ "nightly_round_number": 79,
+ "round": "nightly-2026-11-21-0440",
+ "slot": "2/6"
+}

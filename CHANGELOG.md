@@ -72,6 +72,23 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   in `docs/version-lock-manifest.md` Section 4a is unchanged (same file, new path).
 - Root AGENTS.md Child DOX Index: `explore/` row added, `research/` row now names the
   weekly cap.
+||||||| parent of 9545dc9 (Nightly round 79: the first d_hat calibration on a pool endpoint reads its token budget (refs #65, #194, #196))
+### 2026-11-21 (nightly round: the first `d_hat` calibration attempt on a pool endpoint, refs #65)
+- `research/nightly-2026-11-21-0440/`: the nightly firing of 2026-11-21 04:40 runs the frozen
+  judge's trained-depth calibration (`rule.json` `trained_depth`: `calibration_n` 40,
+  `calibration_seed_base` 20260101, mastery 0.80) on the `ladders` family against one
+  self-hosted flash-class endpoint - the first calibration record attempted for any build the
+  nightly pool actually serves (issue #196: it serves none of the pinned checkpoints). Scored
+  by the pinned frozen judge (`verify.py` at `634d7fa`, sha256-pinned by the runner; the judge
+  is not on `main` yet, so the round points `FROZEN_JUDGE_DIR` at a checkout of it instead of
+  copying it into the repository). Stdlib runner: 26-check `--selftest` (independent-solver
+  negative control, planted censoring and refusal records, Wilson arithmetic), a pre-dispatch
+  #67 leak-gate run on exactly the calibration pool, and `--rescore` that never re-dispatches.
+- Why the loop needed it: every "beyond depth" sentence the loop has written is defined
+  relative to a measured `d_hat`, and no such measurement exists for a pool build. The result
+  is that the frozen calibration cannot be read on a deployment that emits a native reasoning
+  channel until its sampler budget is frozen per family - see the round README and the #65
+  comment.
 
 ### 2026-11-21 (round 78 dead-firing record, refs #65, #73, #200)
 
