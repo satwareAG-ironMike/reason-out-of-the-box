@@ -73,6 +73,24 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Root AGENTS.md Child DOX Index: `explore/` row added, `research/` row now names the
   weekly cap.
 
+### 2026-11-21 (round 78 dead-firing record, refs #65, #73, #200)
+
+- `research/nightly-2026-11-21-0230/README.md`: the round-78 firing record for a firing that
+  dispatched nothing. The 2026-11-21 02:00 slot 1/6 firing (a flash-class endpoint) exported
+  `NIGHTLY_BASE_URL` with `NIGHTLY_MODEL_ID`, `NIGHTLY_MODEL_LABEL` and `NIGHTLY_PROVIDER_MODEL`
+  all empty, and its endpoint did not answer `/v1/models` at all. The staged round-78
+  instrument therefore aborted its dispatch pass at the frozen build pin (exit 3, gate output
+  quoted in the README, 0 of 40 prompts used): the pin is sha256 of the model id, so an empty
+  id hashes to `e3b0c44298fc1c14` and the guard prints "the serving build moved after the
+  freeze" for a firing that never had a build identity. No research result; the flash
+  token-matched cross-ask cell (round 77 Next item 1, issue #152) is still owed.
+- Two root causes filed: comment on #73 (a slot that exports no identity must be fatal at
+  runner level, before the agent window burns, and an empty identity deserves its own
+  pre-flight class instead of reading as a gate breach) and issue #200 (both staged gates for
+  the 2026-11-21 firings pin `26df9af5972ff312` and carry the predecessor's `firing` and
+  `slot`, so a build frozen a day ahead of a rotating pool refuses by construction on five of
+  six slots; freeze decision rows in advance and fill the build pin in-firing).
+
 ### 2026-11-20 (record erratum: the round-70 verdict as cited by rounds 72 and 73, refs #169, #151, #178)
 - Forward-only erratum (issue #120) over the merged round records `research/nightly-2026-11-17-0401/`
   (round 72) and `research/nightly-2026-11-18-0423/` (round 73): both describe round 70 as a firing
@@ -95,6 +113,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   regenerate `summary.json` byte-identically (sha256 `362e1ca521faa65168c2cddbfb3de2fc9f62b1e77511a56a0bb5c667a7e92573`
   before and after; `gate.json` `14a51bf4` and `raw.jsonl` `b30493b7` not rewritten); posted on
   #178.
+
 
 ### 2026-11-20 (TRAP-style corpus arm, issue #77)
 - `generators/trap.py`: the #77 TRAP-style surface-perturbation arm (Addendum 1 item 3
