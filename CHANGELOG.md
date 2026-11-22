@@ -5,6 +5,18 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-22 (README status alignment through round 81 and the spent 2026-W47 cap, refs #83, #192, #195)
+- The weekly doc collection measured its README Status block against the `main` tip at
+  collection start and landed behind eight later merges, so the intro page understated the
+  record on arrival: it named round 77 as the high-water mark and rounds 78 and 79 for the
+  exploratory loop, while `main` already held the 2026-11-21 04:40 firing landed as the round
+  79 record (`research/nightly-2026-11-21-0440`, PR #204), the r80 and r81 rows of
+  `explore/LEDGER.md`, and the 2026-W47 cap audit. README Status now names rounds to 81, the
+  cap closed over budget on both lanes in 2026-W47 (157 of 80 nightly and 545 of 400
+  exploratory dispatches), the round-81 zero-prompt kill report and the next dispatch window
+  2026-W48. No archive entry, no verdict change. Entry added here to honour the standing
+  CHANGELOG rule for merged substance (issue #192).
+
 ### 2026-11-22 (nightly round 81: the weekly compute cap is spent in 2026-W47, zero-prompt kill report, issue #195)
 - `research/nightly-2026-11-22-0409/`: the weekly compute-cap audit instrument
   (`cap_audit.py`, stdlib, `--selftest` with 17 arithmetic and negative-control
