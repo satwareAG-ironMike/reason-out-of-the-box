@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Check that a [pr-reviewer] verdict comment exists at the PR's current head SHA.
 
-A verdict comment is any issue comment on the PR whose body contains
-`[pr-reviewer] verdict at head `X`` (backtick-wrapped SHA, any prefix length
->= 7 hex digits) where X is a prefix of the PR's current headRefOid.
+A passing verdict comment is an issue comment on the PR whose body contains
+`[pr-reviewer] verdict at head `X` ... : MERGED` (backtick-wrapped SHA, any
+prefix length >= 7 hex digits) where X is a prefix of the PR's current
+headRefOid, and the outcome is the positive word MERGED (a NOT MERGED
+verdict at the head does not pass the gate, issue #193).
 
 The check FAILS when no such comment exists: a PR may only merge once a
-verdict has been posted at the exact head that will land.
+MERGED verdict has been posted at the exact head that will land.
 
 Usage:
   check_pr_reviewer_verdict.py PR_NUMBER HEAD_SHA
@@ -34,6 +36,10 @@ def main():
         assert not has_verdict_at_head(stale, head), "verdict at stale head must not match"
         assert not has_verdict_at_head("plain comment", head), "non-verdict must not match"
         assert has_verdict_at_head("[pr-reviewer] verdict at head `541342e355` (full head): MERGED.", head)
+        # issue #193: a NOT MERGED verdict at the current head must NOT pass
+        # the merge gate; only a MERGED verdict at the head does.
+        notmerged = "[pr-reviewer] verdict at head `541342e` (2026-11-21): NOT MERGED, one blocking item."
+        assert not has_verdict_at_head(notmerged, head), "NOT MERGED verdict must not pass the gate"
         print("selftest ok")
         return 0
     if len(args) != 2:
@@ -64,14 +70,20 @@ def main():
         if has_verdict_at_head(c.get("body", ""), head):
             print(f"ok: [pr-reviewer] verdict at head {head[:7]} exists (comment by {c.get('user', {}).get('login', '?')})")
             return 0
-    print(f"FAIL: no [pr-reviewer] verdict at head {head[:7]}; post a three-lens verdict at the current head before merging")
+    print(f"FAIL: no [pr-reviewer] MERGED verdict at head {head[:7]}; post a three-lens MERGED verdict at the current head before merging")
     return 1
 
-_VERDICT_RE = re.compile(r"\[pr-reviewer\] verdict at head `([0-9a-f]{7,40})`")
+_VERDICT_RE = re.compile(
+    r"\[pr-reviewer\] verdict at head `([0-9a-f]{7,40})`[^:]*: (MERGED|NOT MERGED)"
+)
 
 def has_verdict_at_head(body, head):
     for m in _VERDICT_RE.finditer(body):
         sha = m.group(1).lower()
+        outcome = m.group(2)
+        # the merge gate only accepts a positive verdict: NOT MERGED fails the gate (issue #193)
+        if outcome != "MERGED":
+            continue
         # verdict SHA must be a prefix of (or identical to) the current head
         if head.startswith(sha) or sha.startswith(head[:len(sha)]):
             return True
