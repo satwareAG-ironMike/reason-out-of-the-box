@@ -5,6 +5,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-22 (nightly round 81: the weekly compute cap is spent in 2026-W47, zero-prompt kill report, issue #195)
+- `research/nightly-2026-11-22-0409/`: the weekly compute-cap audit instrument
+  (`cap_audit.py`, stdlib, `--selftest` with 17 arithmetic and negative-control
+  checks, `--audit`) and its 2026-W47 record (`cap_audit.json`): the nightly lane
+  dispatched 157 of 80 prompts (117 in tree, 40 in open PR #204, plus PR #201's
+  0-of-40 record) and the exploratory lane 545 of 400 (57 in tree, 8 in open PR
+  #203, 480 in open PR #210), so the kill rule stops both lanes for the rest of
+  2026-W47 and this round dispatched zero prompts. Registers the round 81
+  single-round 480-prompt dispatch against the 40-prompt round cap for owner
+  adjudication (issues #195/#194: the judge's 40-items-per-arm exploratory
+  minimum and the 40-prompt round cap do not compose), and the 2026-11-22 02:00
+  zero-dispatch firing (a stale pool model column, runner-side; issue #211).
+  Next dispatch window: 2026-W48.
+
 ### 2026-11-21 (exploratory loop: explore/ layout and the weekly compute cap, issue #195)
 - `explore/AGENTS.md` and `explore/LEDGER.md`: the open loop. One round directory per
   hypothesis, non-reasoning prompts only, pinned model + seed + sampler + build recorded per
