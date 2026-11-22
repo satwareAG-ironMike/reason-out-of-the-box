@@ -31,6 +31,14 @@ maintainer owns deletion or relocation. Durable conclusions do not stay here: th
   write them anywhere.
 - Caps from the round protocol are contractual, not advisory: at most 40 prompts,
   `max_tokens <= 2048`, free scholarly APIs only, no metered or hosted providers.
+- Weekly compute cap (issue #195): the nightly rounds above are capped at 2 firings a week x
+  40 prompts x `max_tokens <= 2048` = at most 80 dispatched prompts a week, and the exploratory
+  loop in `explore/` (issue #195) adds at most 400 dispatched prompts a week (10 rounds at the
+  40-prompt cap). The cap is a kill rule for the loop, not a target; when it is spent the loop
+  stops and reports, and the next week starts a fresh count. The cap does not apply to owner
+  actions (PROMOTE runs, confirmatory runs on the OLMo 2 / Pythia pins), which are not part of the
+  loop. A local self-hosted endpoint is the only serving path the cap assumes; no metered or
+  hosted provider key is ever used under this cap.
 - Evidence label per `docs/agent-execution.md`: a nightly run is `Executed` unless an
   independent second implementation reproduces it (`Reproduced`) or the pre-registered
   decision table covers it (`Validated`). Small n per level is exploratory and must say so.
