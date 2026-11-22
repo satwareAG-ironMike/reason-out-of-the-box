@@ -1,0 +1,184 @@
+{
+  "b3_rule": "B3_smaller_same_family is the pin named by smaller_partner, under byte-identical prompts, sampler and item order. A pin with smaller_partner null cannot hold a confirmatory cell.",
+  "confirmatory": [
+    {
+      "b3_rule": "smallest checkpoint of this family: no smaller same-family pin exists, so B3 is not_evaluable for this pin; such a pin can carry a NEGATIVE and a distance report but no confirmatory POSITIVE cell",
+      "corpus": [
+        "allenai/olmo-mix-1124",
+        "allenai/dolmino-mix-1124"
+      ],
+      "corpus_public": true,
+      "family_minimum": true,
+      "hub_id": "allenai/OLMo-2-1124-7B",
+      "hub_revision": "7df9a82518afdecae4e8c026b27adccc8c1f0032",
+      "instruct": false,
+      "note": "the RLVR line in this family is the -Instruct repos (dataset tag RLVR-GSM-MATH-IF-Mixed-Constraints); those repos never enter the confirmatory track",
+      "novelty_backend": [
+        "olmotrace",
+        "infinigram",
+        "local_scan"
+      ],
+      "pin": "olmo2-7b",
+      "reasoning_prompt": false,
+      "rl": false,
+      "scale_label": "7B",
+      "scale_label_source": "Hub repository name; the OLMo 2 7B card (arXiv:2501.00656, 32 layers, hidden 4096) is the only one verified live (version-lock manifest Section 4c, 2026-11-20)",
+      "smaller_partner": null
+    },
+    {
+      "corpus": [
+        "allenai/olmo-mix-1124",
+        "allenai/dolmino-mix-1124"
+      ],
+      "corpus_public": true,
+      "family_minimum": false,
+      "hub_id": "allenai/OLMo-2-1124-13B",
+      "hub_revision": "3fefddc1bf18a30e1d9b91000271630718f2aa8b",
+      "instruct": false,
+      "novelty_backend": [
+        "olmotrace",
+        "infinigram",
+        "local_scan"
+      ],
+      "pin": "olmo2-13b",
+      "reasoning_prompt": false,
+      "rl": false,
+      "scale_label": "13B",
+      "scale_label_source": "Hub repository name; the OLMo 2 7B card (arXiv:2501.00656, 32 layers, hidden 4096) is the only one verified live (version-lock manifest Section 4c, 2026-11-20)",
+      "smaller_partner": "olmo2-7b"
+    },
+    {
+      "corpus": [
+        "allenai/olmo-mix-1124",
+        "allenai/dolmino-mix-1124"
+      ],
+      "corpus_public": true,
+      "family_minimum": false,
+      "hub_id": "allenai/OLMo-2-0325-32B",
+      "hub_revision": "cc9d3cf9c7230b86ee6b84607b37db1c01e3f1ed",
+      "instruct": false,
+      "note": "the 0325-32B training mix is recorded as assumed in the version-lock manifest; the judge requires it verified before this pin may carry a POSITIVE",
+      "novelty_backend": [
+        "olmotrace",
+        "infinigram",
+        "local_scan"
+      ],
+      "pin": "olmo2-32b",
+      "reasoning_prompt": false,
+      "rl": false,
+      "scale_label": "32B",
+      "scale_label_source": "Hub repository name; the OLMo 2 7B card (arXiv:2501.00656, 32 layers, hidden 4096) is the only one verified live (version-lock manifest Section 4c, 2026-11-20)",
+      "smaller_partner": "olmo2-13b"
+    },
+    {
+      "b3_rule": "smallest checkpoint of this family: no smaller same-family pin exists, so B3 is not_evaluable for this pin; such a pin can carry a NEGATIVE and a distance report but no confirmatory POSITIVE cell",
+      "corpus": [
+        "EleutherAI/the_pile_deduplicated"
+      ],
+      "corpus_public": true,
+      "family_minimum": true,
+      "hub_id": "EleutherAI/pythia-1b-deduped",
+      "hub_revision": "7199d8fc61a6d565cd1f3c62bf11525b563e13b2",
+      "instruct": false,
+      "novelty_backend": [
+        "infinigram",
+        "local_scan"
+      ],
+      "pin": "pythia-1b",
+      "reasoning_prompt": false,
+      "rl": false,
+      "scale_label": "1b",
+      "scale_label_source": "Hub repository name; the OLMo 2 7B card (arXiv:2501.00656, 32 layers, hidden 4096) is the only one verified live (version-lock manifest Section 4c, 2026-11-20)",
+      "smaller_partner": null
+    },
+    {
+      "corpus": [
+        "EleutherAI/the_pile_deduplicated"
+      ],
+      "corpus_public": true,
+      "family_minimum": false,
+      "hub_id": "EleutherAI/pythia-2.8b-deduped",
+      "hub_revision": "7d977fed8c4ce9649816af8cd5fe36a639cbe5b2",
+      "instruct": false,
+      "novelty_backend": [
+        "infinigram",
+        "local_scan"
+      ],
+      "pin": "pythia-2.8b",
+      "reasoning_prompt": false,
+      "rl": false,
+      "scale_label": "2.8b",
+      "scale_label_source": "Hub repository name; the OLMo 2 7B card (arXiv:2501.00656, 32 layers, hidden 4096) is the only one verified live (version-lock manifest Section 4c, 2026-11-20)",
+      "smaller_partner": "pythia-1b"
+    },
+    {
+      "corpus": [
+        "EleutherAI/the_pile_deduplicated"
+      ],
+      "corpus_public": true,
+      "family_minimum": false,
+      "hub_id": "EleutherAI/pythia-6.9b-deduped",
+      "hub_revision": "372b1c08d9b5b0fc18ce86bbf294930e26e66ed5",
+      "instruct": false,
+      "novelty_backend": [
+        "infinigram",
+        "local_scan"
+      ],
+      "pin": "pythia-6.9b",
+      "reasoning_prompt": false,
+      "rl": false,
+      "scale_label": "6.9b",
+      "scale_label_source": "Hub repository name; the OLMo 2 7B card (arXiv:2501.00656, 32 layers, hidden 4096) is the only one verified live (version-lock manifest Section 4c, 2026-11-20)",
+      "smaller_partner": "pythia-2.8b"
+    },
+    {
+      "corpus": [
+        "EleutherAI/the_pile_deduplicated"
+      ],
+      "corpus_public": true,
+      "family_minimum": false,
+      "hub_id": "EleutherAI/pythia-12b-deduped",
+      "hub_revision": "39c1bd94f9dbe4ebd1d191f364cb33a2e5c47707",
+      "instruct": false,
+      "novelty_backend": [
+        "infinigram",
+        "local_scan"
+      ],
+      "pin": "pythia-12b",
+      "reasoning_prompt": false,
+      "rl": false,
+      "scale_label": "12b",
+      "scale_label_source": "Hub repository name; the OLMo 2 7B card (arXiv:2501.00656, 32 layers, hidden 4096) is the only one verified live (version-lock manifest Section 4c, 2026-11-20)",
+      "smaller_partner": "pythia-6.9b"
+    }
+  ],
+  "exploratory_only_class": {
+    "criterion": "training corpus not public, or a serving build whose identity is only a digest",
+    "examples_recorded": [
+      "locally served Qwen-class builds used by the #65 nightly family"
+    ],
+    "judge_behaviour": "status exploratory_only_model_class; the round is logged in explore/LEDGER.md and can never enter a POSITIVE or a NEGATIVE"
+  },
+  "id": "frozen-judge-pins-v1",
+  "replication_secondary": [
+    {
+      "corpus": [
+        "allenai/dolma3_mix-6T-1025-7B"
+      ],
+      "corpus_public": true,
+      "hub_id": "allenai/Olmo-3-1025-7B",
+      "hub_revision": "a81bae42db3975be1671e27b9c9a56da1a9f980f",
+      "pin": "olmo3-7b",
+      "pooling": "reported separately, never pooled into the confirmatory verdict (analysis-plan Section 11)"
+    },
+    {
+      "corpus_public": false,
+      "hub_id": "swiss-ai/Apertus-8B-2509",
+      "hub_revision": "3162c99675aa588097cecd4a24b9aa1f712af477",
+      "note": "Apertus discloses filtering and provenance statistics, not an instance-level corpus; the novelty criterion is not_evaluable on this pin",
+      "pin": "apertus-8b"
+    }
+  ],
+  "rule": "only these checkpoints enter a confirmatory verdict; anything else is exploratory and the judge labels it so",
+  "source": "docs/version-lock-manifest.md Section 2 and 4c (issue #11, pinned 2026-09-14, re-captured and model-card verified 2026-11-20 via the Hugging Face Hub public API)"
+}
