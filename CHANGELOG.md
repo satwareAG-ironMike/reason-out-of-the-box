@@ -5,6 +5,59 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-22 (nightly round 81: the weekly compute cap is spent in 2026-W47, zero-prompt kill report, issue #195)
+- `research/nightly-2026-11-22-0409/`: the weekly compute-cap audit instrument
+  (`cap_audit.py`, stdlib, `--selftest` with 17 arithmetic and negative-control
+  checks, `--audit`) and its 2026-W47 record (`cap_audit.json`): the nightly lane
+  dispatched 157 of 80 prompts (117 in tree, 40 in open PR #204, plus PR #201's
+  0-of-40 record) and the exploratory lane 545 of 400 (57 in tree, 8 in open PR
+  #203, 480 in open PR #210), so the kill rule stops both lanes for the rest of
+  2026-W47 and this round dispatched zero prompts. Registers the round 81
+  single-round 480-prompt dispatch against the 40-prompt round cap for owner
+  adjudication (issues #195/#194: the judge's 40-items-per-arm exploratory
+  minimum and the 40-prompt round cap do not compose), and the 2026-11-22 02:00
+  zero-dispatch firing (a stale pool model column, runner-side; issue #211).
+  Next dispatch window: 2026-W48.
+
+||||||| ecb0f98
+- Selftests at the draft head: verify 473 of 473, novelty 33 of 33, baselines 129 of 129,
+  score 119 of 119, integrity gate 13 of 13, owner-go gate 10 of 10.
+### 2026-11-21 (frozen judge: the instrument that decides the claim, issue #194)
+- `evaluation/frozen/`: the decision instrument, drafted for the owner to merge. `rule.json`
+  (`frozen-judge-rule-v1`) holds every threshold in machine-readable form (alpha 0.05, min gap 0.10,
+  min n 300 confirmatory / 40 exploratory, mastery 0.80 for trained depth, calibration n 40 at seed
+  base 20260101, novel-band offsets 1-4, 13-gram novelty with a per-cell clean-rate floor of 0.95,
+  a 0.25 cap on the share of a cell's prompts that may carry the gold, delivery census states,
+  pooled Holm-Bonferroni, and the POSITIVE / NEGATIVE / OPEN gates with their numbers).
+  `pins.json` (`frozen-judge-pins-v1`) names the only confirmatory models: OLMo 2 7B/13B/32B and
+  Pythia 1B/2.8B/6.9B/12B base pins with hub revisions, `instruct`/`rl`/`reasoning_prompt` false,
+  each with its pinned smaller same-family partner; everything else, including the locally served
+  Qwen-class builds, is `exploratory_only_model_class`.
+- `verify.py` (per-family verifier, independent re-solver, frozen prompt builder, trap gold-leak
+  guard, `--generate`), `novelty.py` (`local_scan` Aho-Corasick plus inert `infinigram` /
+  `olmotrace` adapters), `baselines.py` (B1 corpus nearest-neighbour on the identical surface, B2
+  recombination off the audited public gold pool at `RECOMB_SEED_BASE` 20260202, B3 the pinned
+  smaller checkpoint), `score.py` (Wilson, exact two-sided McNemar, pooled Holm; `--score` writes a
+  checkpoint report, `--claim` is the only place a verdict exists and it recomputes every gate).
+- Unmeasurable is not evidence: a NEGATIVE branch fires only over cells it can measure, and an
+  unconfigured corpus backend or a missing partner arm is reported as a blocker
+  (`verdicts.NEGATIVE.measurability_rule`, `verdicts.unmeasurable_rule`).
+- `MANIFEST.json` records the sha256 of every instrument file; `scripts/check_frozen_integrity.py`
+  recomputes it and fails on a changed file, a missing file, an unregistered file, a malformed
+  digest or a non-canonical manifest; `--freeze` refuses a silent refresh and needs `--confirm`
+  with a printed hash diff. `scripts/check_frozen_owner_go.py` is the owner-go gate: a PR that
+  changes `evaluation/frozen/` must carry the `owner-go` label (label created; the CI job that
+  enforces it is an owner wiring act, the job and script are carried in the draft PR body).
+- Pre-freeze review fixes (owner instruction 2026-11-21): an unmeasured novelty verdict now
+  carries the same key set as a measured one (`basis` + `ngram_words` on the no-backend path,
+  the `KeyError` the exploratory scoring path hit in round 81); a calibration arm that
+  delivered no answer at any level is a delivery failure, not a d_hat = 0 competence floor
+  (`trained_depth.no_delivery_case` in rule.json, `depth_measured` in the frozen pre-Holm
+  checks; a fully censored run reads OPEN with the blocker named, never NEGATIVE).
+  Re-frozen manifest (recorded act, `--confirm`): rule `325f8897...`, pins unchanged
+  `74b1719c...`, score `c5473e06...`, novelty `d8f7c830...`.
+- Selftests at the draft head: verify 473 of 473, novelty 33 of 33, baselines 129 of 129,
+  score 119 of 119, integrity gate 13 of 13, owner-go gate 10 of 10.
 ### 2026-11-21 (exploratory loop: explore/ layout and the weekly compute cap, issue #195)
 - `explore/AGENTS.md` and `explore/LEDGER.md`: the open loop. One round directory per
   hypothesis, non-reasoning prompts only, pinned model + seed + sampler + build recorded per
@@ -19,6 +72,41 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   in `docs/version-lock-manifest.md` Section 4a is unchanged (same file, new path).
 - Root AGENTS.md Child DOX Index: `explore/` row added, `research/` row now names the
   weekly cap.
+||||||| parent of 9545dc9 (Nightly round 79: the first d_hat calibration on a pool endpoint reads its token budget (refs #65, #194, #196))
+### 2026-11-21 (nightly round: the first `d_hat` calibration attempt on a pool endpoint, refs #65)
+- `research/nightly-2026-11-21-0440/`: the nightly firing of 2026-11-21 04:40 runs the frozen
+  judge's trained-depth calibration (`rule.json` `trained_depth`: `calibration_n` 40,
+  `calibration_seed_base` 20260101, mastery 0.80) on the `ladders` family against one
+  self-hosted flash-class endpoint - the first calibration record attempted for any build the
+  nightly pool actually serves (issue #196: it serves none of the pinned checkpoints). Scored
+  by the pinned frozen judge (`verify.py` at `634d7fa`, sha256-pinned by the runner; the judge
+  is not on `main` yet, so the round points `FROZEN_JUDGE_DIR` at a checkout of it instead of
+  copying it into the repository). Stdlib runner: 26-check `--selftest` (independent-solver
+  negative control, planted censoring and refusal records, Wilson arithmetic), a pre-dispatch
+  #67 leak-gate run on exactly the calibration pool, and `--rescore` that never re-dispatches.
+- Why the loop needed it: every "beyond depth" sentence the loop has written is defined
+  relative to a measured `d_hat`, and no such measurement exists for a pool build. The result
+  is that the frozen calibration cannot be read on a deployment that emits a native reasoning
+  channel until its sampler budget is frozen per family - see the round README and the #65
+  comment.
+
+### 2026-11-21 (round 78 dead-firing record, refs #65, #73, #200)
+
+- `research/nightly-2026-11-21-0230/README.md`: the round-78 firing record for a firing that
+  dispatched nothing. The 2026-11-21 02:00 slot 1/6 firing (a flash-class endpoint) exported
+  `NIGHTLY_BASE_URL` with `NIGHTLY_MODEL_ID`, `NIGHTLY_MODEL_LABEL` and `NIGHTLY_PROVIDER_MODEL`
+  all empty, and its endpoint did not answer `/v1/models` at all. The staged round-78
+  instrument therefore aborted its dispatch pass at the frozen build pin (exit 3, gate output
+  quoted in the README, 0 of 40 prompts used): the pin is sha256 of the model id, so an empty
+  id hashes to `e3b0c44298fc1c14` and the guard prints "the serving build moved after the
+  freeze" for a firing that never had a build identity. No research result; the flash
+  token-matched cross-ask cell (round 77 Next item 1, issue #152) is still owed.
+- Two root causes filed: comment on #73 (a slot that exports no identity must be fatal at
+  runner level, before the agent window burns, and an empty identity deserves its own
+  pre-flight class instead of reading as a gate breach) and issue #200 (both staged gates for
+  the 2026-11-21 firings pin `26df9af5972ff312` and carry the predecessor's `firing` and
+  `slot`, so a build frozen a day ahead of a rotating pool refuses by construction on five of
+  six slots; freeze decision rows in advance and fill the build pin in-firing).
 
 ### 2026-11-20 (record erratum: the round-70 verdict as cited by rounds 72 and 73, refs #169, #151, #178)
 - Forward-only erratum (issue #120) over the merged round records `research/nightly-2026-11-17-0401/`
@@ -42,6 +130,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   regenerate `summary.json` byte-identically (sha256 `362e1ca521faa65168c2cddbfb3de2fc9f62b1e77511a56a0bb5c667a7e92573`
   before and after; `gate.json` `14a51bf4` and `raw.jsonl` `b30493b7` not rewritten); posted on
   #178.
+
 
 ### 2026-11-20 (TRAP-style corpus arm, issue #77)
 - `generators/trap.py`: the #77 TRAP-style surface-perturbation arm (Addendum 1 item 3

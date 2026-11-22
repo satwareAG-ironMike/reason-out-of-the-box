@@ -70,7 +70,9 @@ Scope: map published human data onto the three task families of the pre-registra
 
 Author, reviewer, and merger are the same GitHub account. The `pr-reviewer-verdict`
 gate (PR #171) enforces that a `[pr-reviewer]` verdict comment exists at the PR's head
-SHA; it does **not** enforce that the verdict came from a different account than the
+SHA; a NOT MERGED verdict at the head does **not** pass the gate (the gate requires
+the positive word MERGED, issue #193; `scripts/check_pr_reviewer_verdict.py` parses
+the outcome). The gate does **not** enforce that the verdict came from a different account than the
 merger. The owner was informed (issue #180, closed as not-applicable: no separate
 reviewer account exists) and accepts this as a known constraint. The gate is stronger
 than no check (it enforces the verdict-exists-at-head rule), weaker than an

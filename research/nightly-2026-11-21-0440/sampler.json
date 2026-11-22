@@ -1,0 +1,19 @@
+{
+ "dispatch_order": "round-robin over levels",
+ "family": "ladders",
+ "items_per_level": 8,
+ "judge_commit": "634d7fab5a4d3702feb084ea4c3ea96089ef2f79",
+ "judge_sha256": "40b6a6eb765f09623a874855ef882eddf53e8247d7f22a053e895e709eef845e",
+ "levels": [
+  1,
+  2,
+  4,
+  6,
+  8
+ ],
+ "max_tokens": 512,
+ "model_digest": "4075b5949b2b0487",
+ "request_seed": 20261121,
+ "seed_base": 20260101,
+ "temperature": 0.0
+}

@@ -1,0 +1,48 @@
+{
+ "audit_date": "2026-11-22",
+ "cap_source": "research/AGENTS.md weekly compute cap (issue #195), codified 2026-11-21",
+ "iso_week": "2026-W47",
+ "kill_report": "nightly lane 157 of 80, explore lane 545 of 400 in 2026-W47: both lanes spent, the loop stops and reports",
+ "lanes": {
+  "explore": {
+   "cap_week": 400,
+   "in_tree_prompts": 57,
+   "next_dispatch_window": "2026-W48",
+   "open_pr_prompts": 488,
+   "open_pr_records_deduped": {},
+   "open_pr_records_used": {
+    "203": 8,
+    "210": 480
+   },
+   "over_by": 145,
+   "spent": true,
+   "total": 545
+  },
+  "nightly": {
+   "cap_week": 80,
+   "in_tree_prompts": 117,
+   "next_dispatch_window": "2026-W48",
+   "open_pr_prompts": 40,
+   "open_pr_records_deduped": {},
+   "open_pr_records_used": {
+    "201": 0,
+    "204": 40
+   },
+   "over_by": 77,
+   "spent": true,
+   "total": 157
+  }
+ },
+ "round_cap": {
+  "cap": 40,
+  "violations": [
+   {
+    "over_by": 440,
+    "prompts": 480,
+    "round_dir": "explore/2026-11-21-r81-ladders-judge-conformant",
+    "source": "PR #210 body: 200 calibration + 40 novelty-band + 240 max_tokens=8 failure-record completions (round 81)"
+   }
+  ]
+ },
+ "this_firing_dispatched": 0
+}
