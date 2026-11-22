@@ -7,8 +7,12 @@ decision rule the round moved, and the distance it closed or confirmed open.
 | Round | Date | Claim | n | Effect | Novelty clean rate | Baseline gap | Verdict | Distance moved |
 |-------|------|-------|---|--------|--------------------|--------------|---------|----------------|
 | r78-cross-ask | 2026-11-21 | Cross-ask family: does the arm-notes block tune the terminal answer to the interior step (H1_answer_stability)? The #166 `tail_copy_downgrade` trigger is registered at `n_X >= 2 AND every delivered arm-X record emitted the draft's last vocabulary name`. | 29 records | `selection_beyond_tail` (arm X delivered the draft tail 0 of 3) | exploratory only (no corpus arm configured) | exploratory only | `OPEN, exploratory` | P1 prompt-token parity held on C64; confirms the trigger alignment; does not move the beyond-depth gap |
-| r79-cross-ask | 2026-11-21 | Cross-ask family: #139/#94/#145 trigger fixes on the cross-ask family. | 28 records | `selection_beyond_tail` (arm X delivered the draft tail 0 of 3); `over_end` control shipped `not_delivered` under its own 512-token budget; censored arm cells read `censored_at_cap` and are excluded from the contrast denominator | exploratory only (no corpus arm configured) | exploratory only | `OPEN, exploratory` | Registers the cross-ask arm; does not move the beyond-depth gap |
+| r80-ladders | 2026-11-21 | Ladders k-hop reachability on a fresh seed (20261121), one probe per level 4-64. | 8 probes | L4/L12 correct (2/2); L8+ censored at the 512-token cap (delivery-contract finding at depth 8+, not a competence verdict) | exploratory only | exploratory only | `OPEN, exploratory` | Items are off the frozen judge's seed grid (judge: `seed_base + 2_000_000*L + i`); n=1 per level < exploratory min n=40 - the next ladders round must fire the judge-conformant arm (r81) |
+| r81-ladders-judge-conformant | 2026-11-21 | First judge-conformant exploratory round: ladders grid (1,2,4,6,8), judge seed policy, judge frozen prompt builder; calibration arm measures d_hat, novel-band arm fires the first scorable exploratory cell. | 240 prompts (200 calibration + 40 novel band) | pending (scoring) | exploratory only | B3 not_evaluable (no pinned smaller partner for this class) | `pending` | Closes the "no scorable exploratory round exists" distance item; d_hat measured for the build on the ladders family |
 
 Both rounds are exploratory (Qwen-class endpoint, `exploratory_only_model_class`). They do not
 produce a confirmatory cell and do not advance the confirmatory track, which is blocked at 0
-cells by issue #196.
+cells by issue #196. r78/r79 use the cross-ask family, which is not in the frozen judge's
+FAMILIES (digit_matrices, ladders, trap): a `score.py` run over them reports "family not in
+the frozen grid", so their distance contribution is the registered finding itself, not a
+numeric cell.
