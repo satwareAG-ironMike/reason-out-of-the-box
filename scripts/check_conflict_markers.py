@@ -2,8 +2,9 @@
 """Fail if any tracked file carries a git conflict marker line.
 
 Pattern: a line whose first non-whitespace chars form one of
-  <<<<<<<  =======  >>>>>>>
-(each marker is 7+ characters of that symbol).
+  <<<<<<<  =======  >>>>>>>  |||||||
+(each marker is 7+ characters of that symbol; the seven-pipe line is the
+diff3-style base marker, issue #213).
 
 Usage:
   check_conflict_markers.py            # scan tracked .md and .yml/.yaml files
@@ -11,9 +12,10 @@ Usage:
 """
 import subprocess, re, sys
 
-# 7+ consecutive <, =, or >
-# 7+ consecutive <, =, or > at start of line (optional leading whitespace)
-MARKER = re.compile(r"^\s*(?:<{7,}|={7,}|>{7,})")
+# 7+ consecutive <, =, >, or |
+# 7+ consecutive <, =, >, or | at start of line (optional leading whitespace);
+# the pipe class is the diff3-style base marker (issue #213)
+MARKER = re.compile(r"^\s*(?:<{7,}|={7,}|>{7,}|\|{7,})")
 
 def tracked_files():
     out = subprocess.run(
@@ -46,6 +48,14 @@ def main():
         assert any("<<<<<<< HEAD" in g for g in got)
         assert any("=======" in g for g in got)
         assert any(">>>>>>> theirs" in g for g in got)
+        # diff3-style base marker line (seven pipes, issue #213): the line
+        # class PR #204's head 6991d94 left behind in CHANGELOG.md
+        p2 = os.path.join(d, "diff3.md")
+        with open(p2, "w") as f2:
+            f2.write("ok line\n||||||| parent of 9545dc9\n=======\n>>>>>>> theirs\n")
+        got2 = scan([p2])
+        assert len(got2) == 3, f"expected 3 marker lines, got {len(got2)}: {got2}"
+        assert any("||||||| parent of" in g for g in got2)
         print("selftest ok")
         return 0
     bad = scan(tracked_files())
