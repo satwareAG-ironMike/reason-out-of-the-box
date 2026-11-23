@@ -5,6 +5,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-23 (conflict-marker guard: the diff3 seven-pipe base-marker line is now rejected, issue #213)
+- `scripts/check_conflict_markers.py`: the marker regex gains the seven-pipe
+  line class (`|{7,}` at start of line), the diff3-style base marker
+  (`||||||| parent of <sha>`) that PR #204's head 6991d94 left in
+  CHANGELOG.md and the guard passed. The selftest fixture for the diff3
+  shape fails on the previous regex (negative control).
+
 ### 2026-11-22 (nightly round 81: the weekly compute cap is spent in 2026-W47, zero-prompt kill report, issue #195)
 - `research/nightly-2026-11-22-0409/`: the weekly compute-cap audit instrument
   (`cap_audit.py`, stdlib, `--selftest` with 17 arithmetic and negative-control
@@ -19,7 +26,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   zero-dispatch firing (a stale pool model column, runner-side; issue #211).
   Next dispatch window: 2026-W48.
 
-||||||| ecb0f98
 - Selftests at the draft head: verify 473 of 473, novelty 33 of 33, baselines 129 of 129,
   score 119 of 119, integrity gate 13 of 13, owner-go gate 10 of 10.
 ### 2026-11-21 (frozen judge: the instrument that decides the claim, issue #194)
@@ -72,7 +78,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   in `docs/version-lock-manifest.md` Section 4a is unchanged (same file, new path).
 - Root AGENTS.md Child DOX Index: `explore/` row added, `research/` row now names the
   weekly cap.
-||||||| parent of 9545dc9 (Nightly round 79: the first d_hat calibration on a pool endpoint reads its token budget (refs #65, #194, #196))
 ### 2026-11-21 (nightly round: the first `d_hat` calibration attempt on a pool endpoint, refs #65)
 - `research/nightly-2026-11-21-0440/`: the nightly firing of 2026-11-21 04:40 runs the frozen
   judge's trained-depth calibration (`rule.json` `trained_depth`: `calibration_n` 40,

@@ -2,8 +2,9 @@
 """Fail if any tracked file carries a git conflict marker line.
 
 Pattern: a line whose first non-whitespace chars form one of
-  <<<<<<<  =======  >>>>>>>
-(each marker is 7+ characters of that symbol).
+  <<<<<<<  =======  >>>>>>>  |||||||
+(each marker is 7+ characters of that symbol; the seven-pipe line is the
+diff3-style base marker, issue #213).
 
 Usage:
   check_conflict_markers.py            # scan tracked .md and .yml/.yaml files
@@ -11,9 +12,10 @@ Usage:
 """
 import subprocess, re, sys
 
-# 7+ consecutive <, =, or >
-# 7+ consecutive <, =, or > at start of line (optional leading whitespace)
-MARKER = re.compile(r"^\s*(?:<{7,}|={7,}|>{7,})")
+# 7+ consecutive <, =, >, or |
+# 7+ consecutive <, =, >, or | at start of line (optional leading whitespace);
+# the pipe class is the diff3-style base marker (issue #213)
+MARKER = re.compile(r"^\s*(?:<{7,}|={7,}|>{7,}|\|{7,})")
 
 def tracked_files():
     out = subprocess.run(
