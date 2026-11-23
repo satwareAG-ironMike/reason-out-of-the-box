@@ -101,12 +101,17 @@ criteria (its closest "out of the box" framing, OMEGA 2506.18880, uses closed mo
 controls no training data). The 2026-10-16 research finding records the first merged
 experimental record, the ladder family being budget-limited rather than depth-limited.
 
-Since 2026-10-16 the nightly research program (issue #65) has run to round 77 on `main`, and
-since 2026-11-21 an open exploratory loop (issue #195, `explore/`, scored by the frozen judge
-of issue #194 and logged one row per round in `explore/LEDGER.md`) carries rounds 78 and 79.
-The loop runs under a weekly compute cap: at most 80 dispatched prompts a week on the nightly
-lane and 400 on the exploratory lane, kill rule 10 consecutive no-gain rounds or the cap
-spent. Across the ladder work the measured wall sits in the deployment's encoding and output
+Since 2026-10-16 the research program (issue #65) has recorded rounds to 81 on `main`: the
+newest nightly firings in tree are `research/nightly-2026-11-21-0440` (`d_hat` on a pool
+endpoint, the round 79 record) and `research/nightly-2026-11-22-0409` (round 81, a zero-prompt
+kill report), and since 2026-11-21 the open exploratory loop (issue #195, `explore/`, scored
+by the frozen judge of issue #194 and logged one row per round in `explore/LEDGER.md`) carries
+the r78, r80 and r81 rows. The weekly compute cap is 80 dispatched prompts a week on the
+nightly lane and 400 on the exploratory lane, kill rule 10 consecutive no-gain rounds or the
+cap spent; the 2026-W47 audit closed that week over budget on both lanes, 157 of the 80 and
+545 of the 400 dispatches, so round 81 ran the kill report and the next dispatch window is
+2026-W48 (issue #195). Across the ladder work the measured wall sits in the deployment's
+encoding and output
 budget rather than in task complexity (round 61 theory mapping): the curve that bends with
 depth at constant load is the delivery curve, so the depth ceiling d* cannot be placed from
 accuracy (round 50, issue #71); the 2048 cap-bound panel premise is refuted on the current
