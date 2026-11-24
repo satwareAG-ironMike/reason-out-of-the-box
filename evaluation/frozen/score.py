@@ -418,11 +418,15 @@ def checkpoint_status(cells: list[dict], pin: dict, corpus_report: dict) -> dict
     """One round, one checkpoint. Reports gates and distance; never a claim verdict."""
     name = pin.get("pin", "")
     if name not in CONFIRMATORY or not pin.get("corpus_public"):
+        # Addendum 1 (2026-11-24): the report carries the cause recorded on the
+        # pin record (pin_record labels checkpoints outside the pin set); the
+        # rule text is the fallback for registered pins with no corpus.
+        cause = pin.get("reason") or NOVELTY["not_evaluable_case"]
         return {"model_pin": name, "checkpoint_status": "exploratory_only_model_class",
-                "reason": NOVELTY["not_evaluable_case"], "cells": [c["cell_id"] for c in cells],
+                "reason": cause, "cells": [c["cell_id"] for c in cells],
                 "confirmatory_cells": 0, "passing_cells": [], "families_passed": [],
                 "gate_met": False, "negative_fired": [],
-                "blockers": [NOVELTY["not_evaluable_case"]],
+                "blockers": [cause],
                 "corpus_backend": corpus_report,
                 "distance": distance_to_checkpoint(cells, [])}
 
