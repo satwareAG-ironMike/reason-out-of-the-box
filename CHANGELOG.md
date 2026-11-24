@@ -5,6 +5,29 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-24 (nightly round 84: the process-suppression probe - a ban throttles the reasoning trace, it does not switch it off, issue #65)
+- `research/nightly-2026-11-24-0226/`: `suppression_trace_probe_r84.py` (stdlib, `--selftest`
+  with negative controls, `--freeze-gate`/`--measure`/`--dispatch`/`--summarize`/`--check-readme`)
+  and its record (`gate.json`, `measure.json`, `raw.jsonl` 32 records, `summary.json`,
+  `literature-scan.md`). Eight `ladders` items on the frozen grid at levels 4 and 8 (fresh seed base
+  20261124) under four instruction arms that differ only in what they say about reasoning, task
+  surface byte-identical: the frozen judge template, an imperative ban, the same ban in negated form,
+  and a permission to reason after the answer. 32 prompts at `max_tokens` 1024, `temperature` 0.0.
+  Findings: the trace is present on 32 of 32 records in every arm, so **the ban does not switch the
+  trace off** and the negated ban does not backfire either; the instruction is a **throttle on trace
+  length** (median completion tokens 336.5 ban / 406.0 negated / 439.0 baseline / 846.5 permission,
+  paired ban/baseline median-of-ratios 0.894); censoring tracks the instruction-driven length (2
+  truncations baseline, 2 permission, 0 and 0 under the two bans), including one level-4 item that
+  the ban arm delivers in 156 tokens and the permission arm truncates; and **no verdict moves**
+  (28 delivered, 28 correct, 6 of 6 comparable items invariant). Against #108 the ban is a
+  delivery-surface lever, not a budget lever: its completion ratio sits far above the 0.50 re-claim
+  ceiling. Exploratory `Executed`, n = 4 per level per arm, one build; the discriminating run is at
+  or past the measured wall. Census consequence reported on #105: on one build the trace channel is
+  decided by the API surface (chat serves `reasoning_content`, completions inlines the trace with no
+  reasoning field), so the #105 merge rule reads the same build as trace-exposed and as zero-trace;
+  instruction-arm dependence reported on #126 and the recurring `core.bare` checkout fault on #205.
+  No archive entry, no verdict change.
+
 ### 2026-11-23 (conflict-marker guard: the diff3 seven-pipe base-marker line is now rejected, issue #213)
 - `scripts/check_conflict_markers.py`: the marker regex gains the seven-pipe
   line class (`|{7,}` at start of line), the diff3-style base marker
