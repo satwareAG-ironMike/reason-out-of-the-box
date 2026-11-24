@@ -5,6 +5,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-24 (serving-id guard: named device host plus port becomes a leak class, issue #207)
+- `scripts/check_serving_ids.py`: the `NAMEDHOST` pattern catches a
+  letter-initial, lowercase, hyphenated hostname followed by a port (space
+  before the colon allowed), the class HOSTPORT alone missed and that carried
+  a named host into the public record on PR #217. Clean fixtures pin
+  digit-initial tokens (times, date-times), public domains and `localhost`
+  out of the class; the selftest plants both leak and clean shapes.
 ### 2026-11-24 (nightly round 85: the instruction arms at the wall - the verdict moves with the wall, not with the instruction, issue #65)
 - `research/nightly-2026-11-24-0401/`: `wall_trace_probe_r85.py` (stdlib, `--selftest`,
   `--freeze-gate`, `--measure`, `--dispatch`, `--summarize`, `--check-readme`),

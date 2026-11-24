@@ -8,6 +8,10 @@ tracked file. Leak classes:
   colon and a port. RFC 5737 documentation ranges (192.0.2.0/24, 198.51.100.0/24,
   203.0.113.0/24) are exempt: the sanitizer selftest fixtures use reserved
   documentation addresses, which no live endpoint can use.
+- named host  a letter-initial, lowercase, hyphenated hostname (an internal
+  device name) followed by a colon and a port, space before the colon allowed.
+  Public domains, digit-initial time and date tokens and localhost stay clean
+  (issue #207: the leak class HOSTPORT alone missed in the PR #217 record).
 - gguf path  a lowercase gguf model file name (word characters before the suffix).
   Upper-case "GGUF" as a format word is fine; a file name is a model file path.
 - serving id a model identifier ending in a hyphen plus a quantization tag of the
@@ -43,6 +47,14 @@ DOC_NETS = ("192.0.2.", "198.51.100.", "203.0.113.")
 HOSTPORT = re.compile(
     r"\b(localhost|127\.\d{1,3}\.\d{1,3}\.\d{1,3}|\d{1,3}(?:\.\d{1,3}){3}):(\d{2,5})\b"
 )
+# Named device host (issue #207): a hyphenated, letter-initial, lowercase
+# hostname followed by a colon and a port (space before the colon allowed).
+# The lookbehind kills mid-word matches and domain TLD slots ("example.com:443");
+# digit-initial candidates are out, so times ("05:40") and date-time fragments
+# ("11-23 05:40") can never match. "localhost" carries no hyphen: HOSTPORT
+# owns it. A named device host is exactly the inventory the public-only rule
+# bans, and HOSTPORT alone missed it in the PR #217 run record.
+NAMEDHOST = re.compile(r"(?<![\w.-])[a-z][a-z0-9]*(-[a-z0-9]+)+\s*:\d{2,5}\b")
 GGUFPATH = re.compile(r"[\w.-]+\.gguf\b")
 # The suffix group repeats (issue #149): the shipped one-optional-segment form
 # never matched the two-segment _k_xl tag of the deployment labels found in
@@ -66,6 +78,8 @@ def scan_text(text):
         if host[0].isdigit() and any(host.startswith(n) for n in DOC_NETS):
             continue
         hits.append(("host:port", m.group(0)))
+    for m in NAMEDHOST.finditer(text):
+        hits.append(("named host", m.group(0)))
     for m in GGUFPATH.finditer(text):
         hits.append(("gguf path", m.group(0)))
     for m in SERVID.finditer(text):
@@ -138,6 +152,8 @@ def selftest():
         "commit signed by " + "qwen38-27b-ud-" + "q4" + "_k_xl",
         "ledger run from " + "/ho" + "me/maria" + "/repo and keys at "
         + "/Use" + "rs/wei" + "/.ssh/id",
+        "the model was served on " + "omar-2" + " :8081 (pointer contract)",
+        "endpoint " + "gw-node-1" + ":8080/v1 answered",
     ])
     clean = "\n".join([
         "see http://198.51.100.7:8080/v1 in the sanitizer fixture (documentation range)",
@@ -148,9 +164,13 @@ def selftest():
         "https://huggingface.co/allenai/OLMo-2-1124-7B/tree/main",
         "/ho" + "me/user/f.bin and /root/models/f.bin (identity-free fixture homes)",
         "the sanitizer strips /ma" + "nt/ and /media/ paths (no user slot)",
+        "nightly timers fire at 02:00 and 04:00 (digit-only time tokens)",
+        "ops entries 2026-11-23 05:40/06:45 UTC (date and time, no host)",
+        "public docs site example.com:443 (public domain, no device host)",
     ])
     lhits = scan_text(leak)
-    if not ({"host:port", "gguf path", "serving id", "home path"} <= {c for c, _ in lhits}):
+    if not ({"host:port", "gguf path", "serving id", "home path", "named host"}
+            <= {c for c, _ in lhits}):
         print("FAIL: selftest did not detect all leak classes:", lhits)
         return 1
     chits = scan_text(clean)
@@ -189,13 +209,14 @@ def selftest():
                               "Round N+1: planted trailer\n\n"
                               "Model: Public Name (" + "localhost" + ":11434/private-"
                               + "qwen38-27b-ud-" + "q4" + "_k_xl)\n"
-                              "ran in " + "/ho" + "me/maria" + "/checkout"],
+                              "ran in " + "/ho" + "me/maria" + "/checkout\n"
+                              "served on " + "omar-2" + " :8081"],
                        check=True, capture_output=True)
         tip = subprocess.run(git + ["rev-parse", "--short", "HEAD"],
                              capture_output=True, text=True, check=True).stdout.strip()
         shits = scan_commits("HEAD~1..HEAD", root=repo)
         classes = {c for _, c, _ in shits}
-        if not {"host:port", "serving id", "home path"} <= classes:
+        if not {"host:port", "serving id", "home path", "named host"} <= classes:
             print("FAIL: commit scan missed a planted trailer leak:", shits)
             return 1
         if {sha for sha, _, _ in shits} != {tip}:
@@ -205,7 +226,7 @@ def selftest():
         if scan_commits("HEAD..HEAD", root=repo) != []:
             print("FAIL: empty commit range produced hits")
             return 1
-    print("serving-id selftest passed (4 leak classes detected in files, "
+    print("serving-id selftest passed (5 leak classes detected in files, "
           "commit-message scan verified, 0 false positives)")
     return 0
 
