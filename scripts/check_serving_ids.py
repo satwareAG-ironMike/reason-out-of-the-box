@@ -8,6 +8,10 @@ tracked file. Leak classes:
   colon and a port. RFC 5737 documentation ranges (192.0.2.0/24, 198.51.100.0/24,
   203.0.113.0/24) are exempt: the sanitizer selftest fixtures use reserved
   documentation addresses, which no live endpoint can use.
+- named host  a letter-initial, lowercase, hyphenated hostname (an internal
+  device name) followed by a colon and a port, space before the colon allowed.
+  Public domains, digit-initial time and date tokens and localhost stay clean
+  (issue #207: the leak class HOSTPORT alone missed in the PR #217 record).
 - gguf path  a lowercase gguf model file name (word characters before the suffix).
   Upper-case "GGUF" as a format word is fine; a file name is a model file path.
 - serving id a model identifier ending in a hyphen plus a quantization tag of the
@@ -43,6 +47,14 @@ DOC_NETS = ("192.0.2.", "198.51.100.", "203.0.113.")
 HOSTPORT = re.compile(
     r"\b(localhost|127\.\d{1,3}\.\d{1,3}\.\d{1,3}|\d{1,3}(?:\.\d{1,3}){3}):(\d{2,5})\b"
 )
+# Named device host (issue #207): a hyphenated, letter-initial, lowercase
+# hostname followed by a colon and a port (space before the colon allowed).
+# The lookbehind kills mid-word matches and domain TLD slots ("example.com:443");
+# digit-initial candidates are out, so times ("05:40") and date-time fragments
+# ("11-23 05:40") can never match. "localhost" carries no hyphen: HOSTPORT
+# owns it. A named device host is exactly the inventory the public-only rule
+# bans, and HOSTPORT alone missed it in the PR #217 run record.
+NAMEDHOST = re.compile(r"(?<![\w.-])[a-z][a-z0-9]*(-[a-z0-9]+)+\s*:\d{2,5}\b")
 GGUFPATH = re.compile(r"[\w.-]+\.gguf\b")
 # The suffix group repeats (issue #149): the shipped one-optional-segment form
 # never matched the two-segment _k_xl tag of the deployment labels found in
@@ -66,6 +78,8 @@ def scan_text(text):
         if host[0].isdigit() and any(host.startswith(n) for n in DOC_NETS):
             continue
         hits.append(("host:port", m.group(0)))
+    for m in NAMEDHOST.finditer(text):
+        hits.append(("named host", m.group(0)))
     for m in GGUFPATH.finditer(text):
         hits.append(("gguf path", m.group(0)))
     for m in SERVID.finditer(text):
@@ -212,7 +226,7 @@ def selftest():
         if scan_commits("HEAD..HEAD", root=repo) != []:
             print("FAIL: empty commit range produced hits")
             return 1
-    print("serving-id selftest passed (4 leak classes detected in files, "
+    print("serving-id selftest passed (5 leak classes detected in files, "
           "commit-message scan verified, 0 false positives)")
     return 0
 

@@ -106,9 +106,10 @@ When the user requests a durable behavior change, record it here or in the relev
 - Changes of substance get a CHANGELOG.md entry under [Unreleased] until a version is cut
 - CI: GitHub Actions run on every push and PR - archive consistency (`scripts/check_archive.py`),
   markdown hygiene (em/en dashes, `scripts/check_links.py`), a full-history gitleaks secret
-  scan, and a serving-id guard (`scripts/check_serving_ids.py`, endpoint host:port / GGUF file
+  scan, and a serving-id guard (`scripts/check_serving_ids.py`, literal endpoint
+  host:port (localhost, 127.x, IPv4) / named device host plus port / GGUF file
   names / quantization-tagged deployment labels / absolute home paths that carry a user name,
-  issues #85 and #149; the guard also scans the push-range commit messages on `main` and the PR
+  issues #85, #149 and #207; the guard also scans the push-range commit messages on `main` and the PR
   title plus body, the sources a squash merge composes the landing message from). The first
   three are the ruleset-required checks; the serving-id guard job (owner go 2026-11-04) runs on
   every push to `main`, and on every PR, but is not in the ruleset's required list. The single
