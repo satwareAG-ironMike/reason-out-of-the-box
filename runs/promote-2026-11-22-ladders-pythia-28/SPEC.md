@@ -18,9 +18,9 @@ negative is an equally valid result; this run optimises for a decisive answer.
 - **Confirmatory pin**: `pythia-2.8b` = `EleutherAI/pythia-2.8b-deduped`,
   hub revision `7d977fed8c4ce9649816af8cd5fe36a639cbe5b2`, Q4_K_M.
   `instruct`/`rl`/`reasoning_prompt` all false, quantised to Q4_K_M. Served on
-  omar-2 behind the single-server pointer contract (`otob-llm.service`,
-  port 8081, pointer file selects the model; the build digest is recorded in
-  `sampler.json` at scoring time, not named in any public file).
+  the internal serving host behind the single-server pointer contract (port
+  8081, pointer file selects the model; the build digest is recorded at
+  scoring time in the tracker ops record, not named in any public file).
 - **B3 partner arm**: `pythia-1b` (family's smaller partner, `family_minimum`),
   same item set, same sampler.
 - **Calibration arm** (trained depth d_hat): seed base `20260101` (frozen
@@ -44,9 +44,10 @@ negative is an equally valid result; this run optimises for a decisive answer.
 ## Known blockers (pre-registered, reported not waived)
 
 - **B1 corpus nearest-neighbour**: not_evaluable without a corpus backend.
-  No corpus slice of the Pile is configured on omar-2 and no infini-gram /
-  OlmoTrace instance has been named (owner act #3). A baseline that cannot be
-  evaluated blocks the unique claim for the cell; it never waives it.
+  No corpus slice of the Pile is configured on the serving host, and no
+  infini-gram / OlmoTrace instance has been named (owner act #3). A
+  baseline that cannot be evaluated blocks the unique claim for the cell;
+  it never waives it.
 - **Novelty**: without a configured corpus backend the novelty check is
   not_evaluable; the N3 NEGATIVE branch and the POSITIVE `novelty_ok` check
   read not_evaluable over this run's cells.
@@ -59,9 +60,10 @@ negative is an equally valid result; this run optimises for a decisive answer.
 
 Confirmatory runs are owner-scoped and not part of the weekly compute cap
 (research/AGENTS.md): 200 calibration + up to 1200 novel-band prompts on
-pythia-2.8b, plus the same novel-band item set on pythia-1b (B3). omar-2
-decode speeds at probe time: 2.8b ~27.6 tok/s, 1b ~77.7 tok/s; the whole
-battery is expected to finish in a single night. Self-hosted endpoint only.
+pythia-2.8b, plus the same novel-band item set on pythia-1b (B3).
+Serve-side decode speeds at probe time: 2.8b ~27.6 tok/s, 1b ~77.7 tok/s;
+the whole battery is expected to finish in a single night. Self-hosted
+endpoint only.
 
 ## Execution record (filled after dispatch, forward-only)
 

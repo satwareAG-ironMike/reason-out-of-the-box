@@ -4,26 +4,28 @@ Owner-scoped confirmatory run under the PROMOTE contract (SPEC.md pre-registers
 family, pins, sampler, novelty band, B3 partner, budget; known blockers B1 +
 novelty-not-evaluable stay reported, never waived; verdict floor OPEN-with-blockers).
 
-Owner ruling B (2026-11-23): serving host stays omar-2 :8081 (frozen contract);
-wall time accepted. 2026-11-23 device split (vulkaninfo-verified mapping:
-Vulkan0 = RX 550/560 dGPU RADV POLARIS11 4GB VRAM, Vulkan1 = APU iGPU RADV
-RAVEN): the gate arm ran two-phase - first 246 records on the iGPU (Vulkan1,
-pp ~199 t/s), the remainder on the dGPU (Vulkan0) after the omar team's
-amdgpu.mcbp=0 + reboot fix (acceptance bench pp64 122.4 / tg32 25.4 t/s,
-0 fence errors; owner directive 2026-11-23: pythia arms on the 4GB dGPU
-only). The partner arm runs on the dGPU. Frozen contract unchanged (host,
+Owner ruling B (2026-11-23): serving stays on the internal serving host at
+port 8081 (frozen contract); wall time accepted. 2026-11-23 device split
+(vulkaninfo-verified mapping: Vulkan0 = 4GB dGPU, Vulkan1 = APU iGPU; vendor
+model strings omitted, public-only rule): the gate arm ran two-phase - first
+246 records on the iGPU (Vulkan1, pp ~199 t/s), the remainder on the dGPU
+(Vulkan0) after the host team's amdgpu.mcbp=0 + reboot fix (acceptance bench
+pp64 122.4 / tg32 25.4 t/s, 0 fence errors; owner directive 2026-11-23:
+pythia arms on the 4GB dGPU only). The partner arm runs on the dGPU. Frozen contract unchanged (host,
 endpoint, model artifacts, sampler, prompts); the device split is provenance,
 not a spec change. The 35B MoE service (:8080) intentionally stays on the
 iGPU and is out of scope for this run.
 
 ## Artifact provenance (recorded at scoring time per sampler.json contract)
 
-| Arm | Artifact (served on omar-2 :8081, single-server pointer contract) | Provenance |
+| Arm | Artifact (served on the internal serving host, port 8081, single-server pointer contract) | Provenance |
 |-----|-------------------------------------------------------------------|------------|
-| Gate arm (B1) | Pinned `EleutherAI/pythia-2.8b-deduped` artifact, Q4_K_M (sha256 `3ed7714c1fba3a1f...`, 1788959872 B, 2026-11-22 21:31 CEST) | Converted from `EleutherAI/pythia-2.8b-deduped` @ revision `7d977fed8c4ce9649816af8cd5fe36a639cbe5b2` (fresh HF re-download 2026-11-22; the Nov 21 source safetensors was corrupt, mid-file ranges differ from HF), quantised Q4_K_M with llama.cpp b12366 `llama-quantize`, served by b12366 llama-server `-ngl 99`, two-phase device split: first 246 records on `-dev Vulkan1` (iGPU), remainder on `-dev Vulkan0` (RX 550 4GB dGPU, owner directive 2026-11-23) |
-| B3 partner | Pinned `EleutherAI/pythia-1b-deduped` artifact, Q4_K_M (sha256 `fb7ebd7ad1433c30...`, 2026-11-22 20:39 CEST) | Same pipeline, `EleutherAI/pythia-1b-deduped` @ revision pinned in SPEC.md, served on `-dev Vulkan0` (RX 550 4GB dGPU, owner directive 2026-11-23) |
+| Gate arm (B1) | Pinned `EleutherAI/pythia-2.8b-deduped` artifact, Q4_K_M (sha256 `3ed7714c1fba3a1f...`, 1788959872 B, 2026-11-22 21:31 CEST) | Converted from `EleutherAI/pythia-2.8b-deduped` @ revision `7d977fed8c4ce9649816af8cd5fe36a639cbe5b2` (fresh HF re-download 2026-11-22; the Nov 21 source safetensors was corrupt, mid-file ranges differ from HF), quantised Q4_K_M with the pinned llama.cpp build (`llama-quantize`), served by the pinned llama-server `-ngl 99` (build digests in the tracker ops record, issue #83; public-only rule: build numbers not named in repo files), two-phase device split: first 246 records on `-dev Vulkan1` (iGPU), remainder on `-dev Vulkan0` (4GB dGPU, owner directive 2026-11-23) |
+| B3 partner | Pinned `EleutherAI/pythia-1b-deduped` artifact, Q4_K_M (sha256 `fb7ebd7ad1433c30...`, 2026-11-22 20:39 CEST) | Same pipeline, `EleutherAI/pythia-1b-deduped` @ revision pinned in SPEC.md, served on `-dev Vulkan0` (4GB dGPU, owner directive 2026-11-23) |
 
-Serving-build pin: llama.cpp b12366 (b12427 source tree used for conversion only).
+Serving-build pin: the pinned llama.cpp build (a later build's source tree
+was used for conversion only; build digests recorded in the tracker ops
+record, issue #83 - public-only rule: build numbers not named in repo files).
 Corrupt-source incident and exoneration of converter/quantizer/runtime: ops
 record on tracker issue #83 (2026-11-22 21:35 UTC entry + device-correction
 entries 2026-11-23 05:40/06:45 UTC).
@@ -54,7 +56,7 @@ frozen score.py.
 - [ ] calibration-dhat.json (frozen judge per-level d_hat)
 - [ ] tasks.jsonl (novel cells, seed base 20261122, n=300 per cell)
 - [ ] raw.jsonl (gate arm) / partner-raw.jsonl (B3 partner, same items)
-- [ ] score.json (frozen judge: score.py --score with tasks / calibration-tasks / raw / calibration / partner-raw; corpus slice absent on omar-2 => novelty arm not_evaluable by pre-registration, blocker B-novelty)
+- [ ] score.json (frozen judge: score.py --score with tasks / calibration-tasks / raw / calibration / partner-raw; corpus slice absent on the serving host => novelty arm not_evaluable by pre-registration, blocker B-novelty)
 - [ ] verdict line: per-level H0 with Holm-Bonferroni pooled, alpha 0.05, min_gap 0.10; overall verdict OPEN-with-blockers unless B1 + novelty clear
 - [ ] delivery census (finish_reason length mapping)
 - [ ] Executed / Reproduced / Validated labels per runs/ conventions
