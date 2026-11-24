@@ -1,0 +1,8 @@
+{
+  "issue": "#196 first confirmatory dispatch on the OLMo 2 32B pin",
+  "ts": "2026-11-24T14:38:13+01:00",
+  "provider": "omar-2",
+  "model": "OLMo-2-0325-32B-Q4_K_M",
+  "build_digest_live": "309afe8b9cc98f2888cd30b04d82614c90f33cc1e626fad6c8550d3ce528cd5d",
+  "note": "#200 pattern: digest re-measured on the live build at dispatch, never carried from a predecessor. #211 exact-id gate passed (slot healthy). Dispatch: 1 prompt (health/READY), confirmatory class, uncapped."
+}

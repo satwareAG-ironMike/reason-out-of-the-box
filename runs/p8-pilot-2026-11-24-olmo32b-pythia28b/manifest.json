@@ -1,0 +1,17 @@
+{
+  "run_id": "p8-pilot-2026-11-24-olmo32b-pythia28b",
+  "issue": "#8 go/no-go pilot arm - first confirmatory-track dispatch (owner goal, 2026-11-24)",
+  "ts": "2026-11-24T14:5x:xxZ (see records)",
+  "checkpoints": [
+    {"model": "pythia-2.8b-deduped", "provider": "omar-2 otob slot", "class": "confirmatory (study-design scale control)"},
+    {"model": "OLMo-2-0325-32B-Q4_K_M", "provider": "omar-2 OLMo slot (issue #196 pin)", "class": "confirmatory"}
+  ],
+  "family": "digit_matrices level 3, 3 items (seed 23261005 base sequence, generators/digit_matrices.py --generate --level 3 --count 3)",
+  "arms": {
+    "A": "Q-style prompt, greedy (temp 0), max_tokens 128",
+    "B": "DEVIATION: CoT-style one-line rule statement + answer, greedy (temp 0), max_tokens 300. Design arm B is top-k=10 first-token branch with confidence selection; the OpenAI-compatible endpoint cannot fork continuations per branch, so the minimal honest approximation is a CoT-prompted greedy continuation. Deviation registered here per #8 acceptance criteria."
+  },
+  "n_prompts": 12,
+  "raw": "raw.jsonl (one JSON object per prompt, sorted keys, public-only)",
+  "items": "items.jsonl (generator output, carries seed, seed_hash, gold)"
+}
