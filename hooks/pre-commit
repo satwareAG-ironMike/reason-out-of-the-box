@@ -3,6 +3,21 @@
 # the house quality checks that CI runs. Fail on any nonzero exit.
 set -euo pipefail
 
+# 0. Checkout-integrity probe (issue #205): the shared checkout must not be
+#    re-armed bare. A worktree op executed FROM the primary checkout writes
+#    core.bare=true into .git/config and leaves "git rev-parse
+#    --show-toplevel" (and friends) failing with "this operation must be run
+#    in a work tree" (captures 2026-11-24 11:23 and 15:02, the manual-ops
+#    vector). "git config --get core.bare" still works in the re-armed state
+#    (only work-tree-scoped commands break), so the probe runs on it - and it
+#    MUST run before the ROOT resolution below, which is the first command
+#    that dies on a bare checkout.
+if [ "$(git config --get core.bare 2>/dev/null || echo false)" = "true" ]; then
+  echo "pre-commit: BLOCKED - this checkout has core.bare=true (issue #205 re-arm)."
+  echo "Heal with: git config --unset core.bare  (then re-run the commit)"
+  exit 1
+fi
+
 ROOT=$(git rev-parse --show-toplevel)
 cd "$ROOT"
 
