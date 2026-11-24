@@ -119,3 +119,9 @@ jobs:
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_BODY: ${{ github.event.pull_request.body }}
         run: python3 scripts/check_serving_ids.py --text "$(printf '%s\n\n%s' "$PR_TITLE" "$PR_BODY")"
+      # issue #206: a squash landing composes from every squashed commit's
+      # subject and body, so the PR's own commit list is scanned too -
+      # planted trailers on a PR head are caught before merge, not after.
+      - name: Scan the PR's commit messages (pull_request)
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/check_serving_ids.py --commits "${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
