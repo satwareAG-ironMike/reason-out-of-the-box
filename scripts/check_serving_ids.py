@@ -138,6 +138,8 @@ def selftest():
         "commit signed by " + "qwen38-27b-ud-" + "q4" + "_k_xl",
         "ledger run from " + "/ho" + "me/maria" + "/repo and keys at "
         + "/Use" + "rs/wei" + "/.ssh/id",
+        "the model was served on " + "omar-2" + " :8081 (pointer contract)",
+        "endpoint " + "gw-node-1" + ":8080/v1 answered",
     ])
     clean = "\n".join([
         "see http://198.51.100.7:8080/v1 in the sanitizer fixture (documentation range)",
@@ -148,9 +150,13 @@ def selftest():
         "https://huggingface.co/allenai/OLMo-2-1124-7B/tree/main",
         "/ho" + "me/user/f.bin and /root/models/f.bin (identity-free fixture homes)",
         "the sanitizer strips /ma" + "nt/ and /media/ paths (no user slot)",
+        "nightly timers fire at 02:00 and 04:00 (digit-only time tokens)",
+        "ops entries 2026-11-23 05:40/06:45 UTC (date and time, no host)",
+        "public docs site example.com:443 (public domain, no device host)",
     ])
     lhits = scan_text(leak)
-    if not ({"host:port", "gguf path", "serving id", "home path"} <= {c for c, _ in lhits}):
+    if not ({"host:port", "gguf path", "serving id", "home path", "named host"}
+            <= {c for c, _ in lhits}):
         print("FAIL: selftest did not detect all leak classes:", lhits)
         return 1
     chits = scan_text(clean)
@@ -189,13 +195,14 @@ def selftest():
                               "Round N+1: planted trailer\n\n"
                               "Model: Public Name (" + "localhost" + ":11434/private-"
                               + "qwen38-27b-ud-" + "q4" + "_k_xl)\n"
-                              "ran in " + "/ho" + "me/maria" + "/checkout"],
+                              "ran in " + "/ho" + "me/maria" + "/checkout\n"
+                              "served on " + "omar-2" + " :8081"],
                        check=True, capture_output=True)
         tip = subprocess.run(git + ["rev-parse", "--short", "HEAD"],
                              capture_output=True, text=True, check=True).stdout.strip()
         shits = scan_commits("HEAD~1..HEAD", root=repo)
         classes = {c for _, c, _ in shits}
-        if not {"host:port", "serving id", "home path"} <= classes:
+        if not {"host:port", "serving id", "home path", "named host"} <= classes:
             print("FAIL: commit scan missed a planted trailer leak:", shits)
             return 1
         if {sha for sha, _, _ in shits} != {tip}:
