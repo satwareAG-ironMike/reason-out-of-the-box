@@ -5,21 +5,18 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-### 2026-11-24 (cap-audit registry fix + ARC-AGI-2026 write-up audit, issues #199, #148)
-- `research/nightly-2026-11-22-0409/cap_audit.py`: the static open-PR
-  registry now keeps a record for a round that merged the same day the audit
-  runs - the #199 gap where a same-day merge made a PR's dispatch record
-  vanish from the weekly cap count. Dedup rule: in-tree with nonzero
-  `raw.jsonl` = tree walk counted it, dedupe; in-tree with zero records
-  (undelivered round) = the record's dispatch count stands. New record
-  #219 (round 84, 42 prompts, merged 2026-11-24). Selftest 19/19.
-- `docs/next-investigations.md` field 4: audited the Kaggle 2026 ARC Prize
-  write-ups (issue #148). Tufa Labs' 1st-place ARC2/ARC3 write-up and
-  paper-track submission, Team Turducken's ARC-AGI-3 write-up, and the
-  Keith Tyser audit are the process-level record - all competition
-  write-ups, none peer-reviewed. The counterargument ledger's harness-gap
-  reading stands and is strengthened: general harness + strong base model
-  beat domain-specific fine-tuning.
+### 2026-11-24 (panel re-freeze: issue #126, owner go executed in W48)
+- `research/nightly-2026-11-24-refreeze/`: the round-49 battery re-fired against a live
+  flash-class build (36 dispatches + 1 health, `max_tokens` 2048, the round-49 instrument
+  byte-identical). The #126 "2048 wall collapsed to zero / cap-bound premise void" finding
+  (round 49: 0/11 truncated) is re-verified and FALSE on the current build: mode A truncates
+  8/11, C 7/11, D 8/11. The wall is a property of the serving build (#126's own root cause)
+  and is back. The cap-bound panel is not empty and re-derives to the 5 dispatches that
+  actually hit 2048 on the serving build: S4-X (k = 8), S5-F and S5-X (k = 12), S6-F and
+  S6-X (k = 16). The panel re-anchors to these under the 2048 cap with a current-build
+  baseline; the archived 11-item panel is retired, not amended. `docs/next-investigations.md`
+  panel-rule consequence line updated; `explore/LEDGER.md` carries the re-freeze row.
+
 
 ### 2026-11-24 (merge-lane and gate-authority contracts from the PR #217-#222 sweep, issues #193, #205, #206)
 - Root AGENTS.md: the merge bullet records the strict up-to-date policy on the

@@ -16,3 +16,5 @@ cells by issue #196. r78/r79 use the cross-ask family, which is not in the froze
 FAMILIES (digit_matrices, ladders, trap): a `score.py` run over them reports "family not in
 the frozen grid", so their distance contribution is the registered finding itself, not a
 numeric cell.
+
+| refreeze-126 | 2026-11-24 | #126 panel re-freeze (owner go, W48): re-fire the round-49 battery on a live flash-class build to re-verify the "cap-bound premise void" finding and re-derive the cap-bound panel. | 36 dispatches | mode A truncates 8/11 at 2048 (round 49: 0/11) - the wall is a build property and is back on the current build | n/a (panel re-derivation, not a scorable cell) | n/a | `re-derivation executed` | The #126 "premise void" finding is false on the current build; the cap-bound panel is not empty and re-anchors to the 5 dispatches that hit 2048: S4-X(k=8), S5-F/S5-X(k=12), S6-F/S6-X(k=16). Exploratory rounds keep the cap-bound panel; the archived 11-item panel is retired, not amended |
