@@ -5,6 +5,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-24 (merge-lane and gate-authority contracts from the PR #217-#222 sweep, issues #193, #205, #206)
+- Root AGENTS.md: the merge bullet records the strict up-to-date policy on the
+  required checks, the head-pinned verdict requirement (`[pr-reviewer] verdict
+  at head <sha>: MERGED`, issue #193), and the head-pinned merge-API landing
+  with explicit commit_title/commit_message: a squash landing message composes
+  from the subject and body of every squashed commit, the third source the
+  serving-id guard scans (issue #206; the exception `76b2807` stands
+  forward-only). The local-parity bullet names `origin/main` as the gate
+  authority for checker copies.
+- `research/AGENTS.md`: identity contract - dispatch lanes name model cells
+  with the registry's exact key; a scorer records a label mismatch instead of
+  silently down-classifying, and cause text cites the cause recorded on the
+  pin record (issue #73, frozen rule addendum 1).
+
 ### 2026-11-24 (frozen judge addendum 1: exploratory reports name the recorded cause, issue #207 review F3 on PR #217)
 - `evaluation/frozen/rule.json` gains numbered addendum 1 (per `amendment_path`):
   `novelty.not_evaluable_case` lists every cause of a missing corpus backend

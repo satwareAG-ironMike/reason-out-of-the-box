@@ -42,6 +42,12 @@ maintainer owns deletion or relocation. Durable conclusions do not stay here: th
 - Evidence label per `docs/agent-execution.md`: a nightly run is `Executed` unless an
   independent second implementation reproduces it (`Reproduced`) or the pre-registered
   decision table covers it (`Validated`). Small n per level is exploratory and must say so.
+- Identity contract (issue #73, R82 review): a dispatch lane names every model cell with the
+  registry's exact key - the pinned name verbatim, never a composite label like
+  `alias (pin NAME)`. A scorer that matches no registry key must record the mismatch in the
+  gate record instead of silently down-classifying the run; the README and gate cause text
+  cite the cause recorded on the pin record, never boilerplate for a different known cause
+  (frozen rule addendum 1, issue #207 review F3).
 - A round directory is append-only after its PR opens; a later round opens a new directory.
 - Same-firing resume: immutability of `raw.jsonl`, `summary.json` and `gate.json` binds from the
   moment the round's PR opens. A resume inside the same firing may rebuild `summary.json` and
