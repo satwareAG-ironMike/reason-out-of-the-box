@@ -51,15 +51,26 @@ frozen score.py.
 
 ## Execution record (filled at scoring time)
 
-- [ ] calibration-tasks.jsonl (frozen verify.py --generate, seed base 20260101)
-- [ ] calibration.jsonl (200 raw records, frozen schema {seed_hash, surface:"na", completion, finish_reason, model_pin})
-- [ ] calibration-dhat.json (frozen judge per-level d_hat)
-- [ ] tasks.jsonl (novel cells, seed base 20261122, n=300 per cell)
-- [ ] raw.jsonl (gate arm) / partner-raw.jsonl (B3 partner, same items)
-- [ ] score.json (frozen judge: score.py --score with tasks / calibration-tasks / raw / calibration / partner-raw; corpus slice absent on the serving host => novelty arm not_evaluable by pre-registration, blocker B-novelty)
-- [ ] verdict line: per-level H0 with Holm-Bonferroni pooled, alpha 0.05, min_gap 0.10; overall verdict OPEN-with-blockers unless B1 + novelty clear
-- [ ] delivery census (finish_reason length mapping)
-- [ ] Executed / Reproduced / Validated labels per runs/ conventions
+- [x] calibration-tasks.jsonl (frozen verify.py --generate, seed base 20260101)
+- [x] calibration.jsonl (200 raw records, frozen schema {seed_hash, surface:"na", completion, finish_reason, model_pin})
+- [x] calibration-dhat.json (frozen judge per-level d_hat)
+- [x] tasks.jsonl (novel cells, seed base 20261122, n=300 per cell)
+- [x] raw.jsonl (gate arm) / partner-raw.jsonl (B3 partner, same items)
+- [x] score.json (frozen judge: score.py --score with tasks / calibration-tasks / raw / calibration / partner-raw; corpus slice absent on the serving host => novelty arm not_evaluable by pre-registration, blocker B-novelty)
+- [x] verdict line: per-level H0 with Holm-Bonferroni pooled, alpha 0.05, min_gap 0.10; overall verdict OPEN-with-blockers unless B1 + novelty clear
+- [x] delivery census (finish_reason length mapping)
+- [x] Executed / Reproduced / Validated labels per runs/ conventions
+
+Calibration completeness disclosure: 3 of the 200 calibration records are
+transient error records (connection refused / HTTP 503) from the 2026-11-23
+host-down window and were never re-dispatched. d_hat = 0 is robust to them:
+even all-correct, level 1 reaches at most 11/40, below the 0.80 mastery
+threshold, so the novel cell set {l1, l2, l4} is unchanged.
+
+Labels (runs/ conventions): *Executed* - yes (1,900 dispatch records: 900
+gate + 900 partner + 200 calibration). *Reproduced* - not performed (no
+independent rerun in this round). *Validated* - frozen judge over the
+immutable raw records; no separate independent verifier record in this round.
 
 ## Ledger routing
 
