@@ -6,7 +6,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### 2026-11-24 (panel re-freeze: issue #126, owner go executed in W48)
-- `research/nightly-2026-11-24-refreeze/`: the round-49 battery re-fired against a live
+- `research/nightly-2026-11-24-refreeze/`: the round-49 battery re-fired against a live- `runs/p8-pilot-2026-11-24-olmo32b-pythia28b/`: the #8 go/no-go pilot arm, first
+  confirmatory-track dispatch (12 prompts: 3 digit-matrix level-3 items x arms A/B x
+  pythia-2.8b-deduped and OLMo-2-0325-32B-Q4_K_M). Pythia arm A 1/3, arm B (CoT
+  approximation, deviation registered in the manifest) 0/3 in-range. The OLMo slot is
+  serving up (liveness, exact-id, generation all pass) but generates degenerate text on
+  trivial probes - the confirmatory pin is not usable until the iGPU serving is fixed;
+  the OLMo half: the original dispatches ran under host contention (co-resident pythia + an oom-kill) and are a serving-contention failure record, superseded by the sidecar olmo-rerun.jsonl after a clean restart (arm A 1/3, arm B 0/3).
+
   flash-class build (36 dispatches + 1 health, `max_tokens` 2048, the round-49 instrument
   byte-identical). The #126 "2048 wall collapsed to zero / cap-bound premise void" finding
   (round 49: 0/11 truncated) is re-verified and FALSE on the current build: mode A truncates
