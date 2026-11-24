@@ -5,6 +5,19 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-24 (frozen judge addendum 1: exploratory reports name the recorded cause, issue #207 review F3 on PR #217)
+- `evaluation/frozen/rule.json` gains numbered addendum 1 (per `amendment_path`):
+  `novelty.not_evaluable_case` lists every cause of a missing corpus backend
+  (corpus not public, checkpoint label outside the confirmatory pin set, no
+  configured slice). `score.py` cites the cause recorded on the pin record when a
+  label is outside the pin set instead of the corpus-not-public boilerplate. The
+  R82 record on PR #217 exposed the gap: a registered public-corpus pin was
+  short-circuited by a dispatch-label mismatch and the report misattributed the
+  cause. No threshold, arithmetic, cell-gate or eligibility change; forward-only,
+  already-scored runs keep their reports. Recorded re-freeze: rule.json
+  `325f8897...` to `35ad25b7...`, score.py `c5473e06...` to `ca7efe1c...`.
+  Merging this instrument change is the owner's act (`owner-go` label,
+  `check_frozen_owner_go.py`); agents prepare only.
 ### 2026-11-24 (serving-id guard: named device host plus port becomes a leak class, issue #207)
 - `scripts/check_serving_ids.py`: the `NAMEDHOST` pattern catches a
   letter-initial, lowercase, hyphenated hostname followed by a port (space

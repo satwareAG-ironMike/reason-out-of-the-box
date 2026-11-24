@@ -418,11 +418,15 @@ def checkpoint_status(cells: list[dict], pin: dict, corpus_report: dict) -> dict
     """One round, one checkpoint. Reports gates and distance; never a claim verdict."""
     name = pin.get("pin", "")
     if name not in CONFIRMATORY or not pin.get("corpus_public"):
+        # Addendum 1 (2026-11-24): the report carries the cause recorded on the
+        # pin record (pin_record labels checkpoints outside the pin set); the
+        # rule text is the fallback for registered pins with no corpus.
+        cause = pin.get("reason") or NOVELTY["not_evaluable_case"]
         return {"model_pin": name, "checkpoint_status": "exploratory_only_model_class",
-                "reason": NOVELTY["not_evaluable_case"], "cells": [c["cell_id"] for c in cells],
+                "reason": cause, "cells": [c["cell_id"] for c in cells],
                 "confirmatory_cells": 0, "passing_cells": [], "families_passed": [],
                 "gate_met": False, "negative_fired": [],
-                "blockers": [NOVELTY["not_evaluable_case"]],
+                "blockers": [cause],
                 "corpus_backend": corpus_report,
                 "distance": distance_to_checkpoint(cells, [])}
 
@@ -980,6 +984,12 @@ def selftest() -> int:
        "a private-corpus build must be labelled exploratory, never gated")
     ok(not exploratory["gate_met"] and exploratory["confirmatory_cells"] == 0,
        "exploratory cells never count as confirmatory")
+    # Addendum 1 (2026-11-24): an unregistered pin must carry its recorded
+    # cause, not the corpus-public boilerplate (PR #217 review finding F3).
+    ok("not in pins.json" in exploratory["reason"],
+       "an unregistered pin must report its recorded cause, not the corpus-public boilerplate")
+    ok(any("not in pins.json" in b for b in exploratory["blockers"]),
+       "the blocker list must carry the recorded cause too")
     mixed = claim([exploratory, report, second])
     ok(mixed["verdict"] == "POSITIVE",
        f"an exploratory pin must be excluded, not poison the claim, got {mixed['verdict']}")
