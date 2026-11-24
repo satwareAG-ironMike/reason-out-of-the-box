@@ -1,0 +1,26 @@
+{
+  "schema": "reason-out-of-the-box/harness-config/v1",
+  "note": "Single source of decoding/seed policy (issue #5). Changing any value changes the config hash, which is what the run manifest records. The runner (harness_run.py) reads ONLY this file for decoding and seed policy - no inline overrides.",
+  "arms": {
+    "A": {"decode": "greedy", "temperature": 0.0, "top_k": 1, "max_tokens": 256, "prompt_suffix": "Answer with the option index number only."},
+    "B": {"decode": "greedy_cot_approx", "temperature": 0.0, "top_k": 1, "max_tokens": 512,
+          "prompt_suffix": "First name the most likely rule per column in one line, then give the option index number only on the last line.",
+          "deviation": "Design arm B is top-k=10 first-token-branch CoT-decoding with confidence selection; the OpenAI-compatible serving endpoint cannot fork continuations per branch, so arm B is a CoT-prompted greedy continuation. Registered deviation (also on #8)."},
+    "S": {"decode": "greedy", "temperature": 0.0, "top_k": 1, "max_tokens": 256,
+          "prompt_suffix": "Let's think step by step. Then give the option index number only on the last line.",
+          "note": "Secondary arm - quantifies the verbal-trigger gap (H0-b); analysis only, not a primary claim."}
+  },
+  "seed_policy": {
+    "bootstrap_seed": 20261124,
+    "item_seeds": "generators/digit_matrices.py --seed-base; each item carries seed + seed_hash = sha256('digit_matrices|level|seed')[:16]"
+  },
+  "context": {"fresh_per_item": true, "no_cross_item_state": true, "max_context": 16384},
+  "retry_rule": "one retry on HTTP 5xx / connection reset; a second failure marks the record outcome=error and stops (never a silent third).",
+  "raw_archive": {
+    "format": "one JSON object per prompt, sorted keys, public-only",
+    "fields": ["prompt_sha256", "item_seed", "item_seed_hash", "item_level", "family", "arm", "gold",
+               "raw_content", "parsed_answer", "parse_method", "correct", "finish_reason",
+               "completion_tokens", "prompt_tokens", "wall_s", "ts", "outcome"]
+  },
+  "endpoints": "injected at run time (env/args), never in this file - the config is the policy, the endpoint is the environment"
+}
