@@ -1,6 +1,31 @@
 # Changelog
 
-All notable changes to this project are documented here.
+Al
+### 2026-11-24 (backfill: the 2026-11-20 cascade part 2, issue #192 - seven merged PRs with no entry)
+- `scripts/check_serving_ids.py` gained the home-path rule and the commit-range
+  (`--commits`) and PR-text (`--text`) scan modes (PR #163, squash `1545d59`): the
+  guard now scans the push-range commit messages and the PR title plus body, the
+  two additional sources a squash landing message composes from.
+- New CI job plus `scripts/check_pr_reviewer_verdict.py` (PR #171, squash
+  `05bbc52`): a `[pr-reviewer]` verdict at the exact head SHA is required before
+  merge; the merge gate is the fourth source of the house merge contract.
+- New CI job plus `scripts/check_workflow_syntax.py` (PR #172, squash `6a6f7d5`):
+  an unparsable `.github/workflows` YAML fails the required check, fail-loud on
+  workflow drift.
+- New CI job plus `scripts/check_no_agent_artifacts.py` and `.gitignore` rules
+  (PR #173, squash `f039756`): agent helper artifacts (`*.log`, merge scripts)
+  are refused in tracked files and the check runs as a CI job, not only as a hook
+  step.
+- `docs/counterarguments.md` gained the related-work rows and the Chollet and
+  Kambhampati counterarguments; `docs/next-investigations.md` the matching
+  consequences (PR #174, squash `be520c6`).
+- `docs/version-lock-manifest.md` Section 4c: OLMo 2 / Pythia model-card
+  metadata pinned via the HF Hub API (PR #188, squash `c85fdfe`).
+- `GATES-M1.md`: the owner ruling that accepts G5-G7 as goal-met at the #11
+  close (PR #190, squash `92b38f0`) - the later, stronger decision behind the
+  parked #189 note.
+
+ notable changes to this project are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
