@@ -1,0 +1,56 @@
+{
+  "question": "#126 re-freeze: is the 2048 cap-bound panel premise (void per round 49) still void on the current build?",
+  "instrument": "research/nightly-2026-11-05-0400/policy_knob_probe.py --probe (round-49 battery, byte-identical construction), 36 dispatches + 1 health, max_tokens 2048, temperature 0.0",
+  "endpoint": "flash-class build (lemonade-1), the class the round-49 archive came from; the wall is a build property, not a class property (#126 root cause)",
+  "truncation_tally": {
+    "A": "10/14",
+    "C": "7/11",
+    "D": "8/11"
+  },
+  "round49_same_battery": "0/11 truncated (mode A), 33/36 landed at exactly 1556 tokens",
+  "rederived_cap_bound_panel": [
+    {
+      "cell": "S4",
+      "arm": "X",
+      "k": 8,
+      "level": 192,
+      "completion_tokens": 2048,
+      "gold": 0
+    },
+    {
+      "cell": "S5",
+      "arm": "F",
+      "k": 12,
+      "level": 192,
+      "completion_tokens": 2048,
+      "gold": 1
+    },
+    {
+      "cell": "S5",
+      "arm": "X",
+      "k": 12,
+      "level": 192,
+      "completion_tokens": 2048,
+      "gold": 0
+    },
+    {
+      "cell": "S6",
+      "arm": "F",
+      "k": 16,
+      "level": 192,
+      "completion_tokens": 2048,
+      "gold": 1
+    },
+    {
+      "cell": "S6",
+      "arm": "X",
+      "k": 16,
+      "level": 192,
+      "completion_tokens": 2048,
+      "gold": 0
+    }
+  ],
+  "verdict": "WALL RE-ESTABLISHED on the current build. The #126 'premise void' finding is FALSE on this build: mode A truncates 8/11 (round 49 read 0/11). The cap-bound panel is NOT empty; it re-derives to 5 distinct items that actually hit 2048 on the serving build: S4-X(k=8), S5-F(k=12), S5-X(k=12), S6-F(k=16), S6-X(k=16). Exploratory rounds keep the cap-bound panel - the premise the goal said to drop ('no longer holds') does not hold; the cap still binds wherever the work is put, confirming docs/next-investigations.md's 2026-11-12 consequence line. Panel re-anchored to these 5 items under the 2048 cap, current-build baseline.",
+  "n_dispatches": 36,
+  "note": "A2 duplicate rows folded into A for the panel tally; the 3 A2 self-agreement dispatches are the issue #100 control and are not panel items."
+}

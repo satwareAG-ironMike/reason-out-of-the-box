@@ -109,7 +109,7 @@ independently verified; treat as claim-ledger datapoints, not archive entries.
 | 2 | Feasibility: models, data, compute | Re-verified 2026-09-10 (findings below): OLMo 2 32B exists, OLMo 3 7B/32B + Dolma 3 public, Apertus 1.5 released, no DCLM v2 | Closed 2026-09-10 (issue #2): manifests, corpus access path, budgets, and the frozen model list are in the findings below |
 | 3 | Literature round 9: 2026 latent-reasoning updates | Executed 2026-09-05: 15 papers added (6 reasoning traces + the issue #1 list incl. corrected Akyurek ID 2211.15661). 2026-09-10 re-scan: verdict unchanged, 24 verified round-11 candidates (findings below) | Round 11 from the 2026-09-10 candidate list |
 | 3a | OLMo 3 + OlmoTrace replication (new 2026-11-20, refs #169) | Olmo 3 7B/32B in study-design v0.4 replication family; OlmoTrace (Hajishirzi, x.com/HannaHajishirzi/status/1991565432889999838) releases full pretraining traces - circuit-level verification resource for the C2 row without re-running pretraining | Run the T7 surface-perturbation arm on OLMo 3 7B/32B; use OlmoTrace to verify the in-context-learning circuits claimed in C2; add to the next investigation plan |
-| 4 | ARC-AGI-2 process level | 2026-09-03: GPT-6 Astra 95.0% ARC-AGI-2 verified; ARC-AGI-3 62.7% vs 99.9% depending on harness; still no peer-reviewed process analysis | Audited 2026-11-24 (issue #148): the Kaggle 2026 write-ups exist and are process-level - Tufa Labs' 1st-place ARC2/ARC3 write-up ("General approaches now beat domain-specific tricks", Nov 9) and paper-track submission, Team Turducken's ARC-AGI-3 write-up plus the "Abundant Tokens, General Tools" paper, and the Keith Tyser blog audit. No peer-reviewed analysis yet: all are competition write-ups, not journal-reviewed. Counterargument ledger entry 6 (harness-gap reading) stands; the write-ups strengthen it - Tufa Labs' key result is that a descriptive, powerful, general harness plus a strong base model beat domain-specific RL fine-tuning, and "saturation of ARC3 will come from improved base models, not from any ARC-specific development". The ARC-AGI process gap is now a corpus of unreviewed process accounts, not a blank field |
+| 4 | ARC-AGI-2 process level | 2026-09-03: GPT-6 Astra 95.0% ARC-AGI-2 verified; ARC-AGI-3 62.7% vs 99.9% depending on harness; still no peer-reviewed process analysis | Audit the Kaggle 2026 write-ups after the 2026-09-30 milestone prize |
 | 5 | In-context learning as algorithm formation | New theoretical frame for "from nothing" | Done in round 9 (2026-09-05): Garg 2208.01066, Akyurek 2211.15661, In-Context Algebra 2512.16902 |
 | 6 | Pre-registration practice | Established: two-layer (human IRB + computational analysis plan) | Pre-register in M1 |
 | 7 | Biological disanalogy (child data efficiency arm) | Future work per study design | Keep as follow-up; not in the thesis timeline |
@@ -1124,6 +1124,16 @@ four archived round-6 k = 8 items as a same-seed anchor. 28 experimental records
   cap-bound panel can be re-derived from (depth, fact-count) coordinates under the serving build
   instead of by walking the archived firing, provided the panel records the fact count next to the
   depth.
+- Re-freeze executed 2026-11-24 (issue #126, owner go, W48): the round-49 battery re-fired
+  against a live flash-class build - `research/nightly-2026-11-24-refreeze/`. The #126
+  "premise void" finding (round 49: 0/11 truncated, the wall collapsed to zero) is FALSE on the
+  current build: mode A truncates 8/11, C 7/11, D 8/11 at 2048. The wall is a property of the
+  serving build (#126's own root cause), and it is back. The cap-bound panel is NOT empty and
+  re-derives to the 5 dispatches that actually hit 2048 on the serving build: S4-X (k = 8),
+  S5-F (k = 12), S5-X (k = 12), S6-F (k = 16), S6-X (k = 16). The exploratory rounds keep the
+  cap-bound panel (the premise the goal flagged as void does not hold); the panel re-anchors to
+  these 5 items under the 2048 cap with a current-build baseline, and the archived 11-item panel
+  is retired, not amended.
 
 Primary sources located by this round, all abstract-level unless stated: arXiv:2505.15684
 (ThinkLess, Li, Gao, Li, Wu, 2025) names the mechanism ("excessive length of reasoning tokens ...
