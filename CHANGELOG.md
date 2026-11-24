@@ -30,6 +30,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-24 (digit-matrix contamination-audit canary primitive, issue #3 first deliverable)
+- `generators/digit_matrices_canary.py`: the recall-calibration half of the #3
+  contamination audit for the digit-matrix family - exact-prompt n-gram and
+  rule-signature matchers with a planted-canary selftest (planted recall 2/2,
+  negative control 0/2) and a per-item hit report over any corpus slice.
+  The #8 pilot's canary-recovery gate runs on it: 0/10 recovered against the
+  only locally-available slice (the repo's own public text, 222 KB). The
+  real-corpus sweep over Dolma/Pile remains the named blocker on #3.
+
+
 ### 2026-11-24 (panel re-freeze: issue #126, owner go executed in W48)
 - `research/nightly-2026-11-24-refreeze/`: the round-49 battery re-fired against a live- `runs/p8-pilot-2026-11-24-olmo32b-pythia28b/`: the #8 go/no-go pilot arm, first
   confirmatory-track dispatch (12 prompts: 3 digit-matrix level-3 items x arms A/B x
