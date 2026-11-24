@@ -5,6 +5,22 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-24 (cap-audit registry fix + ARC-AGI-2026 write-up audit, issues #199, #148)
+- `research/nightly-2026-11-22-0409/cap_audit.py`: the static open-PR
+  registry now keeps a record for a round that merged the same day the audit
+  runs - the #199 gap where a same-day merge made a PR's dispatch record
+  vanish from the weekly cap count. Dedup rule: in-tree with nonzero
+  `raw.jsonl` = tree walk counted it, dedupe; in-tree with zero records
+  (undelivered round) = the record's dispatch count stands. New record
+  #219 (round 84, 42 prompts, merged 2026-11-24). Selftest 19/19.
+- `docs/next-investigations.md` field 4: audited the Kaggle 2026 ARC Prize
+  write-ups (issue #148). Tufa Labs' 1st-place ARC2/ARC3 write-up and
+  paper-track submission, Team Turducken's ARC-AGI-3 write-up, and the
+  Keith Tyser audit are the process-level record - all competition
+  write-ups, none peer-reviewed. The counterargument ledger's harness-gap
+  reading stands and is strengthened: general harness + strong base model
+  beat domain-specific fine-tuning.
+
 ### 2026-11-24 (merge-lane and gate-authority contracts from the PR #217-#222 sweep, issues #193, #205, #206)
 - Root AGENTS.md: the merge bullet records the strict up-to-date policy on the
   required checks, the head-pinned verdict requirement (`[pr-reviewer] verdict

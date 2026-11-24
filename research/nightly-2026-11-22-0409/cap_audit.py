@@ -41,8 +41,9 @@ CAP_NIGHTLY_WEEK = 80
 CAP_EXPLORE_WEEK = 400
 CAP_ROUND = 40
 
-# Dated open-PR dispatch records (issue #150 class: records that live only in
-# unmerged heads). Each carries the round directory it counts, its lane, the
+# Dated dispatch records (issue #150 class: records that live only in unmerged
+# heads, or that merged the same day the audit runs - the 2026-11-24 gap,
+# issue #199). Each carries the round directory it counts, its lane, the
 # dispatched prompt count, the as-of date, and the public provenance.
 OPEN_PR_RECORDS = [
     {
@@ -81,6 +82,18 @@ OPEN_PR_RECORDS = [
         "as_of": "2026-11-21",
         "source": "PR #210 body: 200 calibration + 40 novelty-band + 240 "
                   "max_tokens=8 failure-record completions (round 81)",
+    },
+    {
+        # Issue #199 gap (2026-11-24): a PR merged the same day it is audited
+        # disappears from a static open-PR registry; the #219 record lived
+        # only in the registry until its directory merged in-tree.
+        "pr": 219,
+        "dir": "research/nightly-2026-11-24-0226",
+        "lane": "nightly",
+        "prompts": 42,
+        "as_of": "2026-11-24",
+        "source": "PR #219 (merged 2026-11-24): round 84 dispatch record, 32 "
+                  "scored + 2 out-of-plan diagnostics (#219 README:142)",
     },
 ]
 
@@ -150,23 +163,34 @@ def lane_week_total(rounds: dict, lane: str, week: str) -> int:
 
 
 def open_pr_counts(records: list, rounds: dict, week: str, lane: str) -> tuple[dict, dict]:
-    """Add open-PR records for the audit week, deduplicated against the tree."""
+    """Add dispatch records for the audit week, deduplicated against the tree.
+
+    The #199 gap (2026-11-24): a record whose round directory is in-tree but
+    whose raw.jsonl has zero records (an undelivered round) is NOT
+    double-counted - the tree walk counted 0, the record's dispatch count
+    stands. A record whose directory is in-tree AND has a nonzero raw.jsonl
+    count IS deduplicated: the tree walk already counted it.
+    """
     used: dict = {}
     deduped: dict = {}
-    known_dirs = set()
+    known_dirs: dict = {}
     for l, lane_rounds in rounds.items():
-        for dirname in lane_rounds:
-            known_dirs.add(f"{'research' if l == 'nightly' else 'explore'}/{dirname}")
+        for dirname, prompts in lane_rounds.items():
+            known_dirs[f"{'research' if l == 'nightly' else 'explore'}/{dirname}"] = prompts
     for rec in records:
         if rec["lane"] != lane:
             continue
-        lane = rec["lane"]
         ds = dir_date_str(rec["dir"].split("/", 1)[1])
         if ds is None or week_of_dir(ds) != week:
             continue
         if rec["dir"] in known_dirs:
-            # Merged in-tree: the tree walk already counted it.
-            deduped[rec["pr"]] = rec["dir"]
+            # In-tree: deduplicate only when the tree walk already counted
+            # this directory's records (nonzero); an undelivered round
+            # (zero records) keeps the record's dispatch count.
+            if known_dirs[rec["dir"]] > 0:
+                deduped[rec["pr"]] = rec["dir"]
+            else:
+                used[rec["pr"]] = rec["prompts"]
             continue
         used[rec["pr"]] = rec["prompts"]
     return used, deduped
@@ -254,7 +278,11 @@ def _selftest() -> int:
         os.makedirs(os.path.join(tmp, "research", "nightly-2026-11-21-0230"))
         with open(os.path.join(tmp, "research", "nightly-2026-11-21-0230", "raw.jsonl"),
                   "w") as fh:
-            pass  # an undelivered round: zero records
+            fh.write("\n".join(f'{{"i": {i}}}' for i in range(2)) + "\n")
+        # #199 gap fixture: a same-day-merged round whose raw.jsonl is absent
+        # (undelivered, zero records) - the tree walk does not see it at all,
+        # so the registry record's dispatch count is the only count.
+        os.makedirs(os.path.join(tmp, "research", "nightly-2026-11-22-0200"))
         os.makedirs(os.path.join(tmp, "explore", "2026-11-21-r78-cross-ask"))
         with open(os.path.join(tmp, "explore", "2026-11-21-r78-cross-ask", "raw.jsonl"),
                   "w") as fh:
@@ -271,22 +299,38 @@ def _selftest() -> int:
              "prompts": 480, "as_of": "2026-11-21", "source": "planted violation"},
             {"pr": 903, "dir": "research/nightly-2026-11-08-0221", "lane": "nightly",
              "prompts": 30, "as_of": "2026-11-08", "source": "planted out-of-week"},
+            # #199 gap control: merged same-day, undelivered round (in-tree,
+            # zero records). Its dispatch count must count - the registry
+            # entry is not voided by the merge.
+            {"pr": 904, "dir": "research/nightly-2026-11-22-0200", "lane": "nightly",
+             "prompts": 6, "as_of": "2026-11-22", "source": "planted same-day merge"},
         ]
         d = datetime.date(2026, 11, 22)  # a Sunday: still 2026-W47
         a = audit(tmp, records, d)
 
         # In-tree counts: 3 nightly, 5 explore; the zero-record round is present.
-        ok(a["lanes"]["nightly"]["in_tree_prompts"] == 3, "nightly in-tree count")
+        ok(a["lanes"]["nightly"]["in_tree_prompts"] == 5, "nightly in-tree count")
         ok(a["lanes"]["explore"]["in_tree_prompts"] == 5, "explore in-tree count")
         # Dedup: the stale record (901) is skipped, not double-counted.
-        ok(a["lanes"]["nightly"]["open_pr_prompts"] == 7, "open-PR nightly total")
+        ok(a["lanes"]["nightly"]["open_pr_prompts"] == 13, "open-PR nightly total (7 + #199 record 6)")
         ok("901" in a["lanes"]["nightly"]["open_pr_records_deduped"],
            "stale record deduped")
         # The out-of-week record (903, W45) is not in this week's totals.
         ok("903" not in a["lanes"]["nightly"]["open_pr_records_used"],
            "out-of-week record excluded")
-        ok(a["lanes"]["nightly"]["total"] == 10, "nightly total")
-        ok(not a["lanes"]["nightly"]["spent"], "nightly not spent at 10 of 80")
+        # Same-day merge gap (#199, 2026-11-24): a record whose round directory
+        # is in-tree AND carries a record of its own dispatch must still count
+        # in the audit week it belongs to - the registry entry is kept for the
+        # audit week even after the merge, deduplicated only when the tree
+        # walk already counted that very directory in that same week.
+        ok(a["lanes"]["nightly"]["open_pr_records_deduped"].get("901")
+           == "research/nightly-2026-11-21-0230",
+           "in-tree record deduped (directory present, zero records)")
+        ok(a["lanes"]["nightly"]["total"] == 18, "nightly total (in-tree 5 + open 13)")
+        ok(not a["lanes"]["nightly"]["spent"], "nightly not spent at 18 of 80")
+        # The #199 same-day-merge record (904, undelivered dir) is used, not deduped.
+        ok("904" in a["lanes"]["nightly"]["open_pr_records_used"],
+           "#199: undelivered same-day-merged record counts")
         ok(a["lanes"]["explore"]["total"] == 485, "explore total")
         ok(a["lanes"]["explore"]["spent"], "explore spent at 485 of 400")
         # Next dispatch window: Sunday's next window is the following Monday's week.
