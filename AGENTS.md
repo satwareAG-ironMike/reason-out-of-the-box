@@ -99,9 +99,9 @@ When the user requests a durable behavior change, record it here or in the relev
   merge); direct pushes are rejected (GH013) because a pushed commit must already carry the
   passing checks. The required checks carry the strict up-to-date policy: sync the PR branch
   (`gh pr update-branch`, or a local rebase resolving CHANGELOG collisions) before merging.
-  A merge is legitimate only with a `[pr-reviewer] verdict at head \`<sha>\`: MERGED` comment
-  at the exact current head (`scripts/check_pr_reviewer_verdict.py`; a NOT MERGED verdict
-  fails the gate, issue #193). Merge head-pinned through the merge API with explicit
+  A merge is legitimate only with a ``[pr-reviewer] verdict at head `<sha>`: MERGED``
+  comment at the exact current head (`scripts/check_pr_reviewer_verdict.py`; a NOT MERGED
+  verdict fails the gate, issue #193). Merge head-pinned through the merge API with explicit
   commit_title/commit_message: the fixture lane (issue #206) stacks commit text on PR heads
   within seconds of each push, and a squash landing message composes from the subject and
   body of every squashed commit - the 2026-11-24 sweep kept four of five landings clean this
