@@ -1,0 +1,98 @@
+{
+  "arms": {
+    "baseline": {
+      "labels": [
+        "L4_i0_baseline",
+        "L4_i1_baseline",
+        "L4_i2_baseline",
+        "L4_i3_baseline",
+        "L8_i0_baseline",
+        "L8_i1_baseline",
+        "L8_i2_baseline",
+        "L8_i3_baseline"
+      ],
+      "n": 8
+    },
+    "ironic": {
+      "labels": [
+        "L4_i0_ironic",
+        "L4_i1_ironic",
+        "L4_i2_ironic",
+        "L4_i3_ironic",
+        "L8_i0_ironic",
+        "L8_i1_ironic",
+        "L8_i2_ironic",
+        "L8_i3_ironic"
+      ],
+      "n": 8
+    },
+    "posthoc": {
+      "labels": [
+        "L4_i0_posthoc",
+        "L4_i1_posthoc",
+        "L4_i2_posthoc",
+        "L4_i3_posthoc",
+        "L8_i0_posthoc",
+        "L8_i1_posthoc",
+        "L8_i2_posthoc",
+        "L8_i3_posthoc"
+      ],
+      "n": 8
+    },
+    "suppression": {
+      "labels": [
+        "L4_i0_suppression",
+        "L4_i1_suppression",
+        "L4_i2_suppression",
+        "L4_i3_suppression",
+        "L8_i0_suppression",
+        "L8_i1_suppression",
+        "L8_i2_suppression",
+        "L8_i3_suppression"
+      ],
+      "n": 8
+    }
+  },
+  "blob": "80fa3866f4807fc0344b226836337f9c46fc20910d3dc24ab46cf8a2ab3f3d2d",
+  "criteria": [
+    {
+      "id": "G1",
+      "name": "trace_channel_exposed",
+      "rule": "At least one dispatched record carries a non-empty trace on a named channel; without exposure every trace claim below is answer-level only (issue #105)."
+    },
+    {
+      "id": "G2",
+      "name": "ban_reduces_trace",
+      "rule": "partial: the suppression arm traces strictly fewer records than baseline AND its trace-present fraction is below baseline's. full: partial AND the suppression trace-present fraction is at or under 0.25."
+    },
+    {
+      "id": "G3",
+      "name": "negated_ban_backfires",
+      "rule": "ironic traces at least baseline + 2 records, the ironic-process prediction."
+    },
+    {
+      "id": "G4",
+      "name": "verdict_invariant_to_the_ban",
+      "rule": "among items with a stop-terminated verdict in BOTH baseline and suppression, at least 80% carry the same verdict AND both arms agree with the judge gold on every one of them."
+    }
+  ],
+  "family": "ladders",
+  "firing": "2026-11-24T02:26+01:00",
+  "health": {
+    "id": "H1",
+    "name": "dispatch_integrity",
+    "rule": "Every dispatched record has a non-null finish_reason and a completion_tokens count; a transport failure is recorded, not scored."
+  },
+  "issue": 65,
+  "levels": [
+    4,
+    8
+  ],
+  "max_tokens": 1024,
+  "planned_dispatches": 32,
+  "prompt_cap": 40,
+  "question": "On a build that emits an inline reasoning trace under the frozen one-word contract, does an instruction that forbids reasoning change the trace, and does the verdict move when the trace does?",
+  "round": 84,
+  "seed_base": 20261124,
+  "temperature": 0.0
+}

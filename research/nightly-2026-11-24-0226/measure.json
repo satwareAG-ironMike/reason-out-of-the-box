@@ -1,0 +1,35 @@
+{
+  "census": [
+    {
+      "arm": "baseline",
+      "completion_tokens": 242,
+      "delivery_state": "delivered_correct",
+      "finish_reason": "stop",
+      "label": "L4_i0_baseline",
+      "level": 4,
+      "prompt_tokens": 250,
+      "tok_per_s": 66.925,
+      "trace_chars": 777,
+      "trace_present": true,
+      "wall_s": 3.616
+    },
+    {
+      "arm": "posthoc",
+      "completion_tokens": 986,
+      "delivery_state": "delivered_correct",
+      "finish_reason": "stop",
+      "label": "L8_i3_posthoc",
+      "level": 8,
+      "prompt_tokens": 593,
+      "tok_per_s": 67.995,
+      "trace_chars": 1600,
+      "trace_present": true,
+      "wall_s": 14.501
+    }
+  ],
+  "decision": "dispatch",
+  "max_tokens": 1024,
+  "mean_tok_per_s": 67.46,
+  "planned_dispatches": 32,
+  "worst_case_minutes_if_every_item_hits_the_cap": 8.1
+}
