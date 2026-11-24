@@ -48,7 +48,6 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   reasoning field), so the #105 merge rule reads the same build as trace-exposed and as zero-trace;
   instruction-arm dependence reported on #126 and the recurring `core.bare` checkout fault on #205.
   No archive entry, no verdict change.
->>>>>>> ff42f47 (Nightly round 85: at the wall the instruction arms move the delivery surface, not the verdict (issue #65))
 
 ### 2026-11-23 (conflict-marker guard: the diff3 seven-pipe base-marker line is now rejected, issue #213)
 - `scripts/check_conflict_markers.py`: the marker regex gains the seven-pipe
