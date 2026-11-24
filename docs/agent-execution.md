@@ -39,7 +39,7 @@ Report (2026 agentic-science practice; sources at the bottom). Mapped to this pr
 
 | Stage | Mechanism |
 |-------|-----------|
-| Plan | Pre-registration (#11): OSF + AsPredicted; analysis plan and version-lock manifest; seeds, margins, and budgets fixed before confirmatory runs |
+| Plan | Pre-registration (#11): OSF + AsPredicted; analysis plan and version-lock manifest; seeds, margins, and budgets fixed before confirmatory runs. Complex decomposition (multi-stage experiments, multi-issue dependencies, frozen-spec design) runs through the `sequential-thinking` MCP tool: its step graph is the durable decomposition record - one thought per node, linked - so a later lane resumes or audits the reasoning chain instead of re-deriving it |
 | Retrieve | Logged retrieval; every citation ID resolved via its API before use; claim-support statuses: exists / retrieved / supports / contradicts / not checked |
 | Generate | Generators, prompts, harness in-repo; every change is a commit; the commit is the run input |
 | Execute | Version-pinned environment; sources immutable during confirmatory runs; full run manifests (Section 4); fail closed on unexpected mutation |

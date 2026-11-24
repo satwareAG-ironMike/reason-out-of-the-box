@@ -29,8 +29,22 @@ maintainer owns deletion or relocation. Durable conclusions do not stay here: th
   them before writing. Refer to a serving model by public name only. Scripts read
   `NIGHTLY_BASE_URL`, `NIGHTLY_MODEL_ID`, `NIGHTLY_API_KEY` from the environment and never
   write them anywhere.
+- Model-resolution precondition (issue #211, fail-loud at dispatch): before any prompt is
+  sent, the configured model column MUST resolve against the live registry of the slot's
+  serving endpoint (one trivial-prompt probe, or the registry's model list when it exposes
+  one). If it does not - `Model unavailable`, stale column, empty identity (issue #200) -
+  the round writes its record and stops; a round that dispatches on a model the registry no
+  longer serves poisons every downstream score and hour. A frozen gate whose `model_digest`
+  pins the predecessor firing's build is refused by construction on a rotating pool
+  (issue #200): re-measure on the live build and re-freeze, never carry the stale digest.
 - Caps from the round protocol are contractual, not advisory: at most 40 prompts,
   `max_tokens <= 2048`, free scholarly APIs only, no metered or hosted providers.
+- Panel selection premise check (issue #126): before re-freezing a cap-bound panel, the lane
+  re-verifies the panel's selection premise on the current builds - on 2026-11-24 the
+  2048-token truncation wall had collapsed to zero on both classes, which voids the cap-bound
+  selection premise of the archived panel. A panel frozen on a premise the current build no
+  longer satisfies is spend, not signal: the re-freeze MUST cite the re-verified premise in
+  the round README and the frozen gate's dispatch block.
 - Weekly compute cap (issue #195): the nightly rounds above are capped at 2 firings a week x
   40 prompts x `max_tokens <= 2048` = at most 80 dispatched prompts a week, and the exploratory
   loop in `explore/` (issue #195) adds at most 400 dispatched prompts a week (10 rounds at the
@@ -48,6 +62,11 @@ maintainer owns deletion or relocation. Durable conclusions do not stay here: th
   gate record instead of silently down-classifying the run; the README and gate cause text
   cite the cause recorded on the pin record, never boilerplate for a different known cause
   (frozen rule addendum 1, issue #207 review F3).
+- Reasoning tooling: advanced reasoning on agent execution - decomposing a round's design,
+  planning multi-firing experiments, resolving cross-issue dependencies - runs through the
+  `sequential-thinking` MCP tool. Its step graph is the durable record: one thought per
+  node, links between nodes, so a later lane resumes or audits the chain instead of
+  re-deriving it. Simple single-step work stays inline; the tool is for the multi-step case.
 - A round directory is append-only after its PR opens; a later round opens a new directory.
 - Same-firing resume: immutability of `raw.jsonl`, `summary.json` and `gate.json` binds from the
   moment the round's PR opens. A resume inside the same firing may rebuild `summary.json` and
