@@ -97,7 +97,16 @@ When the user requests a durable behavior change, record it here or in the relev
   decision. Every change reaches `main` via PR, squash-merged once those checks are green
   (repo-level auto-merge is off, so `gh pr merge --auto` is refused; watch the checks, then
   merge); direct pushes are rejected (GH013) because a pushed commit must already carry the
-  passing checks. Never edit the ruleset without explicit user instruction
+  passing checks. The required checks carry the strict up-to-date policy: sync the PR branch
+  (`gh pr update-branch`, or a local rebase resolving CHANGELOG collisions) before merging.
+  A merge is legitimate only with a `[pr-reviewer] verdict at head \`<sha>\`: MERGED` comment
+  at the exact current head (`scripts/check_pr_reviewer_verdict.py`; a NOT MERGED verdict
+  fails the gate, issue #193). Merge head-pinned through the merge API with explicit
+  commit_title/commit_message: the fixture lane (issue #206) stacks commit text on PR heads
+  within seconds of each push, and a squash landing message composes from the subject and
+  body of every squashed commit - the 2026-11-24 sweep kept four of five landings clean this
+  way; the exception `76b2807` stands forward-only. Never edit the ruleset without explicit
+  user instruction
 - Public-only rule: the repository holds only public resources (papers, open repositories, published tools). No personal data, device or network inventories, session state, credentials, or private discussion content - in files or in history
 - Paper provenance rule: every archive entry must carry a source ID (arXiv, PubMed,
   or PhilPapers record), authors, venue, year, and peer-review status; entries with
@@ -109,8 +118,9 @@ When the user requests a durable behavior change, record it here or in the relev
   scan, and a serving-id guard (`scripts/check_serving_ids.py`, literal endpoint
   host:port (localhost, 127.x, IPv4) / named device host plus port / GGUF file
   names / quantization-tagged deployment labels / absolute home paths that carry a user name,
-  issues #85, #149 and #207; the guard also scans the push-range commit messages on `main` and the PR
-  title plus body, the sources a squash merge composes the landing message from). The first
+  issues #85, #149 and #207; the guard also scans the push-range commit messages on `main`
+  and the PR title plus body - the squashed commits' own subjects and bodies are the third
+  source a squash landing message composes from, issue #206). The first
   three are the ruleset-required checks; the serving-id guard job (owner go 2026-11-04) runs on
   every push to `main`, and on every PR, but is not in the ruleset's required list. The single
   action is SHA-pinned; the workflow is read-only (`permissions: contents: read`)
@@ -119,7 +129,10 @@ When the user requests a durable behavior change, record it here or in the relev
   scripts/check_links.py` then `set +e; git grep -n -P "\x{2014}|\x{2013}" -- .; r=$?;
   set -e; [ "$r" -eq 1 ]` (strict: passes only when grep reports "no match", fails on
   dashes or grep error) then `python3 scripts/check_serving_ids.py --selftest && python3
-  scripts/check_serving_ids.py`
+  scripts/check_serving_ids.py`. Gate authority is the `origin/main` copy of a checker: run the
+  parity suite from a clean checkout of it (or `git show origin/main:scripts/<name>`), a stale
+  copy in a dirty side-branch checkout is not the authority (2026-11-24 sweep: a stale local
+  `check_pr_reviewer_verdict.py` passed a comment the real gate rejects).
 - Local git hooks (`hooks/`, installed via `bash hooks/install.sh` which sets
   `core.hooksPath=hooks`): pre-commit = betterleaks scan of staged files + the house
   quality checks; pre-push = full-history betterleaks scan + the full suite with
