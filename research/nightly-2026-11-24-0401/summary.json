@@ -1,0 +1,208 @@
+{
+  "arms": {
+    "baseline": {
+      "censored_at_cap": 0,
+      "delivered_correct": 5,
+      "delivered_wrong": 2,
+      "max_trace_chars": 1600,
+      "median_completion_tokens": 1556,
+      "median_trace_chars": 1600,
+      "n": 7,
+      "non_answer": 0,
+      "think_closed": 0,
+      "trace_present": 7,
+      "trace_present_fraction": 1.0
+    },
+    "ironic": {
+      "censored_at_cap": 0,
+      "delivered_correct": 3,
+      "delivered_wrong": 2,
+      "max_trace_chars": 1600,
+      "median_completion_tokens": 1556,
+      "median_trace_chars": 1600,
+      "n": 5,
+      "non_answer": 0,
+      "think_closed": 0,
+      "trace_present": 5,
+      "trace_present_fraction": 1.0
+    },
+    "posthoc": {
+      "censored_at_cap": 1,
+      "delivered_correct": 3,
+      "delivered_wrong": 1,
+      "max_trace_chars": 1600,
+      "median_completion_tokens": 2024,
+      "median_trace_chars": 1600,
+      "n": 5,
+      "non_answer": 0,
+      "think_closed": 0,
+      "trace_present": 5,
+      "trace_present_fraction": 1.0
+    },
+    "suppression": {
+      "censored_at_cap": 0,
+      "delivered_correct": 3,
+      "delivered_wrong": 2,
+      "max_trace_chars": 1600,
+      "median_completion_tokens": 1556,
+      "median_trace_chars": 1600,
+      "n": 5,
+      "non_answer": 0,
+      "think_closed": 0,
+      "trace_present": 5,
+      "trace_present_fraction": 1.0
+    }
+  },
+  "census": {
+    "field_names": [
+      "content",
+      "reasoning_content",
+      "role"
+    ],
+    "trace_source_counts": {
+      "reasoning_content": 22
+    }
+  },
+  "criteria": {
+    "G0_wall_identified": {
+      "levels": {
+        "32": {
+          "n": 1,
+          "states": [
+            "delivered_correct"
+          ]
+        },
+        "48": {
+          "n": 1,
+          "states": [
+            "delivered_wrong"
+          ]
+        },
+        "64": {
+          "n": 5,
+          "states": [
+            "delivered_correct",
+            "delivered_wrong"
+          ]
+        }
+      },
+      "pass": true,
+      "reading": "wall_at_48",
+      "top_of_depth": false,
+      "wall_level": 48
+    },
+    "G1_trace_channel_exposed": {
+      "any_trace": true,
+      "channels": [
+        "reasoning_content"
+      ],
+      "pass": true
+    },
+    "G2_ban_reduces_trace": {
+      "baseline_fraction": 1.0,
+      "baseline_n": 7,
+      "baseline_traced": 7,
+      "full_pass": false,
+      "partial_pass": false,
+      "strictly_fewer": true,
+      "suppression_fraction": 1.0,
+      "suppression_traced": 5
+    },
+    "G3_negated_ban_backfires": {
+      "baseline_traced": 7,
+      "ironic_traced": 5,
+      "margin": -2,
+      "pass": false,
+      "threshold": 2
+    },
+    "G4_verdict_invariant_to_the_ban": {
+      "comparable_items": 5,
+      "invariant": 4,
+      "invariant_and_correct": 3,
+      "invariant_share": 0.8,
+      "pass": false,
+      "threshold": 0.8
+    },
+    "G5_ban_rescues_at_the_wall": {
+      "eligible_items": [
+        "L64_i196"
+      ],
+      "minimum_eligible": 3,
+      "n_eligible": 1,
+      "n_rescued": 0,
+      "outcome": "inconclusive_budget",
+      "pass": false,
+      "per_arm_censoring": {
+        "baseline": 0,
+        "ironic": 0,
+        "posthoc": 1,
+        "suppression": 0
+      },
+      "rescued_items": []
+    },
+    "G6_permission_lengthens": {
+      "baseline_median_completion_tokens": 1556,
+      "pass": true,
+      "posthoc_median_completion_tokens": 2024,
+      "ratio": 1.301
+    }
+  },
+  "g0_census": {
+    "levels": {
+      "32": {
+        "n": 1,
+        "states": [
+          "delivered_correct"
+        ]
+      },
+      "48": {
+        "n": 1,
+        "states": [
+          "delivered_wrong"
+        ]
+      },
+      "64": {
+        "n": 5,
+        "states": [
+          "delivered_correct",
+          "delivered_wrong"
+        ]
+      }
+    },
+    "pass": true,
+    "reading": "wall_at_48",
+    "top_of_depth": false,
+    "wall_level": 48
+  },
+  "gate": "d7d0ce0c31d36546afd102054372d8ac71d46ccd12958b541ec5a4a0af89cf52",
+  "health": {
+    "id": "H1",
+    "pass": true,
+    "records_with_finish_reason": 22,
+    "records_with_token_count": 22,
+    "transport_errors": 0
+  },
+  "records": 22,
+  "self_stop_census": {
+    "baseline": {
+      "marker": 0,
+      "records": 7,
+      "stop_band_1556_1558": 4
+    },
+    "ironic": {
+      "marker": 0,
+      "records": 5,
+      "stop_band_1556_1558": 4
+    },
+    "posthoc": {
+      "marker": 0,
+      "records": 5,
+      "stop_band_1556_1558": 0
+    },
+    "suppression": {
+      "marker": 0,
+      "records": 5,
+      "stop_band_1556_1558": 4
+    }
+  }
+}

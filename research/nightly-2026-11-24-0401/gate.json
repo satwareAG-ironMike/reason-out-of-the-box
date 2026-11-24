@@ -1,0 +1,129 @@
+{
+  "arms": {
+    "baseline": {
+      "labels": [
+        "L32_i142_baseline",
+        "L48_i128_baseline",
+        "L64_i128_baseline",
+        "L64_i196_baseline",
+        "L64_i305_baseline",
+        "L64_i322_baseline",
+        "L64_i327_baseline"
+      ],
+      "n": 7
+    },
+    "ironic": {
+      "labels": [
+        "L64_i128_ironic",
+        "L64_i196_ironic",
+        "L64_i305_ironic",
+        "L64_i322_ironic",
+        "L64_i327_ironic"
+      ],
+      "n": 5
+    },
+    "posthoc": {
+      "labels": [
+        "L64_i128_posthoc",
+        "L64_i196_posthoc",
+        "L64_i305_posthoc",
+        "L64_i322_posthoc",
+        "L64_i327_posthoc"
+      ],
+      "n": 5
+    },
+    "suppression": {
+      "labels": [
+        "L64_i128_suppression",
+        "L64_i196_suppression",
+        "L64_i305_suppression",
+        "L64_i322_suppression",
+        "L64_i327_suppression"
+      ],
+      "n": 5
+    }
+  },
+  "beyond_frozen_grid": true,
+  "blob": "d7d0ce0c31d36546afd102054372d8ac71d46ccd12958b541ec5a4a0af89cf52",
+  "criteria": [
+    {
+      "id": "G0",
+      "name": "wall_identified",
+      "rule": "the census rows identify the smallest census level that is not fully delivered_correct; if every census level is fully correct, the panel sits at the top of the available depth and the round states a top-of-depth invariance reading instead of a wall claim."
+    },
+    {
+      "id": "G1",
+      "name": "trace_channel_exposed",
+      "rule": "At least one dispatched record carries a non-empty trace on a named channel; without exposure every trace claim below is answer-level only (issue #105)."
+    },
+    {
+      "id": "G2",
+      "name": "ban_reduces_trace",
+      "rule": "partial: the suppression arm traces strictly fewer records than baseline AND its trace-present fraction is below baseline's. full: partial AND the suppression trace-present fraction is at or under 0.25."
+    },
+    {
+      "id": "G3",
+      "name": "negated_ban_backfires",
+      "rule": "ironic traces at least baseline + 2 records, the ironic-process prediction."
+    },
+    {
+      "id": "G4",
+      "name": "verdict_invariant_to_the_ban",
+      "rule": "among items with a stop-terminated verdict in BOTH baseline and suppression, at least 80% carry the same verdict AND both arms agree with the judge gold on every one of them."
+    },
+    {
+      "id": "G5",
+      "name": "ban_rescues_at_the_wall",
+      "rule": "eligible items are those whose BASELINE record is not delivered_correct; pass: the suppression arm is delivered_correct on at least one eligible item AND n_eligible >= 3. Below the minimum, the outcome is inconclusive_budget, never a competence claim (issue #145)."
+    },
+    {
+      "id": "G6",
+      "name": "permission_lengthens",
+      "rule": "the posthoc arm's median completion_tokens strictly exceeds the baseline arm's median (round 84's lengthening finding, re-registered at the 2048 budget)."
+    }
+  ],
+  "family": "ladders",
+  "firing": "2026-11-24T04:01+01:00",
+  "health": {
+    "id": "H1",
+    "name": "dispatch_integrity",
+    "rule": "Every dispatched record has a non-null finish_reason and a completion_tokens count; a transport failure is recorded, not scored."
+  },
+  "issue": 65,
+  "item_selection": {
+    "census_seeds": [
+      84261142,
+      116261128,
+      148261128,
+      148261196,
+      148261305,
+      148261322,
+      148261327
+    ],
+    "max_chains": 4,
+    "panel_seeds": [
+      148261128,
+      148261196,
+      148261305,
+      148261322,
+      148261327
+    ],
+    "rule": "first qualifying items in scan order, at most 4 chains per item (<= 4 x level facts); skipped seeds are recorded",
+    "scan_batch": 400
+  },
+  "kill_rule": "if measure.json's worst-case estimate exceeds 45 minutes the panel is not dispatched; the census stands as the round record and a zero-panel kill report is posted (round-61 rule)",
+  "levels": [
+    32,
+    48,
+    64
+  ],
+  "max_tokens": 2048,
+  "model_digest": "c62b81e96826354e",
+  "panel_level": 64,
+  "planned_dispatches": 22,
+  "prompt_cap": 40,
+  "question": "At or past this build's measured wall, do the four instruction arms change the verdict, or only the delivery surface?",
+  "round": 85,
+  "seed_base": 20261124,
+  "temperature": 0.0
+}

@@ -5,7 +5,28 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-### 2026-11-24 (nightly round 84: the process-suppression probe - a ban throttles the reasoning trace, it does not switch it off, issue #65)
+### 2026-11-24 (nightly round 85: the instruction arms at the wall - the verdict moves with the wall, not with the instruction, issue #65)
+- `research/nightly-2026-11-24-0401/`: `wall_trace_probe_r85.py` (stdlib, `--selftest`,
+  `--freeze-gate`, `--measure`, `--dispatch`, `--summarize`, `--check-readme`),
+  frozen `gate.json` (blob `d7d0ce0c31d36546afd102054372d8ac71d46ccd12958b541ec5a4a0af89cf52`),
+  `measure.json`, `raw.jsonl` (22 records), `summary.json`, `README.md`,
+  `literature-scan.md`.
+- Wall census on a flash-class local build (build pin `c62b81e96826354e`): delivered
+  correctly at k = 32, wrongly at k = 48, mixed at k = 64. The panel runs the four
+  instruction arms (baseline, ban, negated ban, permission) on 5 load-capped items at
+  k = 64, 22 prompts under the 40-prompt cap, 2,048-token budget, temperature 0.0.
+- At the wall the ban does not rescue: one eligible item, below the pre-registered
+  minimum of 3 (inconclusive_budget, not a competence claim, issue #145). The ban arm
+  flips one solvable item (L64_i322) from the correct verdict to the wrong one at the
+  same 1,556-band stop; the permission arm lengthens (median 2,024 vs 1,556 tokens,
+  one censored record) and is the only arm outside the build's self-stop band.
+- C4 reading at this build's wall: the verdict is decided by the computation at
+  depth; the trace and the instruction are epiphenomena on top of it (exploratory,
+  Executed, one build, no confirmatory cell, issue #196).
+- Weekly compute cap (issue #195): the true 2026-W48 nightly-lane ledger is 56 of 80
+  including this round's 22 and round 84's open PR #219 (34). The cap audit's static
+  open-PR registry does not yet carry #219, so its recorded W48 total is 22; the
+  registry gap is noted in the round README and owed to the next maintenance round.### 2026-11-24 (nightly round 84: the process-suppression probe - a ban throttles the reasoning trace, it does not switch it off, issue #65)
 - `research/nightly-2026-11-24-0226/`: `suppression_trace_probe_r84.py` (stdlib, `--selftest`
   with negative controls, `--freeze-gate`/`--measure`/`--dispatch`/`--summarize`/`--check-readme`)
   and its record (`gate.json`, `measure.json`, `raw.jsonl` 32 records, `summary.json`,
@@ -27,6 +48,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   reasoning field), so the #105 merge rule reads the same build as trace-exposed and as zero-trace;
   instruction-arm dependence reported on #126 and the recurring `core.bare` checkout fault on #205.
   No archive entry, no verdict change.
+>>>>>>> ff42f47 (Nightly round 85: at the wall the instruction arms move the delivery surface, not the verdict (issue #65))
 
 ### 2026-11-23 (conflict-marker guard: the diff3 seven-pipe base-marker line is now rejected, issue #213)
 - `scripts/check_conflict_markers.py`: the marker regex gains the seven-pipe
