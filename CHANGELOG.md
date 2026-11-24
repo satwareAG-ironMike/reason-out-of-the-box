@@ -30,6 +30,28 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-24 (M2 work packages shipped: #3 audit pipeline, #4 ARC generator, #5 harness, #6 patching protocol)
+- `generators/contamination_audit.py`: the full #3 contamination-audit
+  pipeline (exact-prompt n-gram + rule-signature + bounded k-gram arms,
+  per-item hit report). Calibrated on a real Dolma v1.6 slice (1,194 MiB of
+  OLMo training data): contamination report 0/10 pilot items hit; canary
+  calibration 10/10 planted items recovered, recall 1.0. The Pythia/Pile
+  side is a recorded corpus-access blocker (the-eye.eu down, HF mirrors
+  gated).
+- `generators/arc_grid.py`: the #4 ARC-style grid-transform family
+  (seed-hashed, deterministic, unique gold; the self-contained stand-in for
+  the ARC-GEN reference infrastructure the study names).
+- `harness/config.json` + `harness/harness_run.py`: the #5 inference
+  harness - config as the single source of decoding/seed policy (arms A/B/S,
+  config-hash in the manifest), the documented raw-output archive format,
+  and the retry rule.
+- `docs/activation-patching-protocol.md`: the #6 Nanda-style protocol for
+  OLMo 2 7B/13B - the depth-scaling causal signature with the required
+  random-control negative arm, and the public-only output contract.
+- Pile-slice deviation recorded under the #8 pilot run
+  (runs/p8-pilot-2026-11-24-olmo32b-pythia28b/canary-gate.md).
+
+
 ### 2026-11-24 (digit-matrix contamination-audit canary primitive, issue #3 first deliverable)
 - `generators/digit_matrices_canary.py`: the recall-calibration half of the #3
   contamination audit for the digit-matrix family - exact-prompt n-gram and
