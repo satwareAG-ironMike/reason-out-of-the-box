@@ -980,6 +980,12 @@ def selftest() -> int:
        "a private-corpus build must be labelled exploratory, never gated")
     ok(not exploratory["gate_met"] and exploratory["confirmatory_cells"] == 0,
        "exploratory cells never count as confirmatory")
+    # Addendum 1 (2026-11-24): an unregistered pin must carry its recorded
+    # cause, not the corpus-public boilerplate (PR #217 review finding F3).
+    ok("not in pins.json" in exploratory["reason"],
+       "an unregistered pin must report its recorded cause, not the corpus-public boilerplate")
+    ok(any("not in pins.json" in b for b in exploratory["blockers"]),
+       "the blocker list must carry the recorded cause too")
     mixed = claim([exploratory, report, second])
     ok(mixed["verdict"] == "POSITIVE",
        f"an exploratory pin must be excluded, not poison the claim, got {mixed['verdict']}")
