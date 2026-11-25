@@ -44,6 +44,23 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   out-of-range option index at each of levels 2, 3, 4 (9, 9, 8 on an
   8-option item).
 
+### 2026-11-25 (nightly round 87, issue #65): the chance floor under the M2 depth ceiling
+- `research/nightly-2026-11-25-0227/`: frozen gate (blob `e28654b3085a8628`), script with
+  18 selftest checks and 8 negative controls, health and rate records. No dispatch arm ran:
+  the registered G8 rate gate measured 4.6 tok/s against a 5.0 tok/s floor and refused the
+  32-dispatch panel.
+- Record audit of the landed #8 pilot archive: all 12 records are `finish_reason: length`,
+  6 carry no parsed answer, 2 carry an option index of 47 on an 8-option item, and the one
+  `correct: true` record is a truncated echo - `rule.json` calls that a delivery failure, not
+  a competence floor. `harness/harness_run.py::parse_answer` has no delivery state, so an
+  unparseable answer is scored as a wrong delivery.
+- Arithmetic: at 3 items per level with 8 options the best constant-answer strategy always
+  scores >= 1/3, so the grid's only non-zero cell (1/3) sits at the content-free floor; under
+  `rule.json` `trained_depth` (mastery 0.80, calibration n 40) the grid computes d_hat = 0.
+- Generator-side measurement: `_distractors` changes exactly one component per wrong option,
+  so at level 2 about 4.5 of 8 options carry the gold digit at any single component and a
+  one-component solver reaches 0.267 with no second-rule competence.
+
 ### 2026-11-24 (M2 work packages shipped: #3 audit pipeline, #4 ARC generator, #5 harness, #6 patching protocol)
 - `generators/contamination_audit.py`: the full #3 contamination-audit
   pipeline (exact-prompt n-gram + rule-signature + bounded k-gram arms,

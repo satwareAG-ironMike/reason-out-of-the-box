@@ -1,0 +1,95 @@
+{
+ "blob": "e28654b3085a8628eaf7a628361a846b392d782baaa570f1ca19351bd45e131f",
+ "dispatch_cap": 40,
+ "family": "digit_matrices",
+ "frozen_utc": "2026-11-25T02:27:00Z",
+ "id": "r87-chance-floor-gate-v1",
+ "instrument": "evaluation/frozen/verify.py (build_prompt, extract_answer, score_record, solve_digit_matrices, DELIVERY_STATES)",
+ "levels": [
+  1,
+  2
+ ],
+ "max_tokens": 1024,
+ "n_per_level": 15,
+ "offline_baselines": {
+  "1": {
+   "best_constant_accuracy": 0.2,
+   "best_constant_index": 1,
+   "key_histogram": {
+    "0": 2,
+    "1": 3,
+    "2": 1,
+    "3": 3,
+    "4": 1,
+    "5": 1,
+    "6": 2,
+    "7": 2
+   },
+   "mean_options_matching_one_component": {
+    "0": 1.0
+   },
+   "n_items": 15,
+   "partial_rule_accuracy_index_order": {
+    "0": 1.0
+   },
+   "partial_rule_accuracy_random_tiebreak": {
+    "0": 1.0
+   },
+   "seed_base": 20261125,
+   "solve_all_but_one": {
+    "0": 0.0
+   }
+  },
+  "2": {
+   "best_constant_accuracy": 0.2667,
+   "best_constant_index": 7,
+   "key_histogram": {
+    "1": 2,
+    "2": 1,
+    "3": 3,
+    "4": 1,
+    "5": 1,
+    "6": 3,
+    "7": 4
+   },
+   "mean_options_matching_one_component": {
+    "0": 4.2667,
+    "1": 4.7333
+   },
+   "n_items": 15,
+   "partial_rule_accuracy_index_order": {
+    "0": 0.1333,
+    "1": 0.0
+   },
+   "partial_rule_accuracy_random_tiebreak": {
+    "0": 0.2667,
+    "1": 0.0667
+   },
+   "seed_base": 20261125,
+   "solve_all_but_one": {
+    "0": 0.0,
+    "1": 0.1333
+   }
+  }
+ },
+ "question": "Can a digit-matrix grid place a trained-depth ceiling, or is its accuracy indistinguishable from option guessing and one-component shortcut solving?",
+ "rows": {
+  "G1_chance_floor": "content-free floor per level: best constant option index on the dispatched item set, reported next to the nominal 1/8",
+  "G2_signal": "signal at level L iff correct_L >= 5/15 AND Wilson95 lower bound > G1 floor AND exact two-sided binomial p vs 1/8 < 0.05; all three must hold",
+  "G3_d_hat": "d_hat over the tested levels per evaluation/frozen/rule.json trained_depth (mastery 0.80, greatest L with ACC >= 0.80 for every level <= L); not_evaluable when a level delivers nothing",
+  "G4_parse_integrity": "count of judged option indices outside 0..7 (must be 0) and count of records whose judged letter also appears earlier in the completion (last-letter-wins ambiguity)",
+  "G5_delivery_census": "counts per DELIVERY_STATES per level; n is the dispatched count, never the answered count",
+  "G6_determinism": "the two byte-identical re-dispatches must reproduce the judged value of their first dispatch; divergence flags dup_pair_diverges",
+  "G7_option_histogram": "diagnostic only, no tier input: the model's judged option-index histogram against the item key histogram",
+  "G8_rate_gate": "pre-dispatch measured completion-token rate selects the plan: >= 20.0 tok/s full plan, >= 5.0 tok/s reduced plan n=8, below that no dispatch"
+ },
+ "seed_base": 20261125,
+ "signal_rule": {
+  "alpha": 0.05,
+  "exact_two_sided_p_at_threshold": 0.031073,
+  "exact_two_sided_p_below_threshold": 0.107785,
+  "min_correct": 5,
+  "n": 15
+ },
+ "temperature": 0.0
+}
