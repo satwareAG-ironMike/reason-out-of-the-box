@@ -30,6 +30,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### 2026-11-26 (M2 exit-gate sidecar, issue #234): verdict and raw d* grid for the p8-pilot run
+- `runs/p8-pilot-2026-11-24-olmo32b-pythia28b/dstar-verdict.md`: the M2
+  exit-gate verdict as a dated sidecar record - all three gate criteria MET
+  (audit recall calibrated: canary recall 1.0 on a real Dolma v1.6 slice;
+  harness reproducible: determinism gate PASSES on both checkpoints; d*
+  established: d* = 1 for digit matrices on OLMo 2 32B). M2 GO-able; the M3
+  commitment is conditional on the single Pile corpus-access blocker.
+- `runs/p8-pilot-2026-11-24-olmo32b-pythia28b/dstar3-grid-raw.jsonl`: the
+  12 raw dispatches behind the d* grid (levels 1-4 x 3 items, arm A greedy,
+  #5 harness, config hash a7392930ac3330b6): 1/3 correct at level 1, 0/3 at
+  levels 2-4, all 12 deliveries parsed (`finish_reason: stop`), one
+  out-of-range option index at each of levels 2, 3, 4 (9, 9, 8 on an
+  8-option item).
+
 ### 2026-11-24 (M2 work packages shipped: #3 audit pipeline, #4 ARC generator, #5 harness, #6 patching protocol)
 - `generators/contamination_audit.py`: the full #3 contamination-audit
   pipeline (exact-prompt n-gram + rule-signature + bounded k-gram arms,
