@@ -81,6 +81,20 @@ def load_judge():
     return mod
 
 
+def dispatch_option_index(ext: dict) -> int | None:
+    """Judged option index of one dispatch: the frozen judge's own
+    extract_answer output carries `option_index` only when it judged the
+    answer (an A-H letter or an exact option tuple); anything else is None.
+    Never a re-parse of the completion."""
+    return ext.get("option_index") if isinstance(ext, dict) else None
+
+
+def out_of_range_indexes(rows: list[dict]) -> list[dict]:
+    """G4: the judged option indices outside 0..N_OPTIONS-1 (must be 0)."""
+    return [r for r in rows if r.get("option_index") is not None
+            and not (0 <= int(r["option_index"]) < N_OPTIONS)]
+
+
 # ---------------------------------------------------------------- statistics
 
 def binom_tail_ge(k: int, n: int, p: float) -> float:
@@ -466,14 +480,14 @@ def cmd_dispatch(items: list[dict]) -> int:
                 return 0
             prompt = _judge.build_prompt(item, FAMILY)
             res = call(prompt["text"], MAX_TOKENS)
+            ext = _judge.extract_answer(res["completion"], FAMILY, item)
             scored = _judge.score_record({"completion": res["completion"],
                                           "finish_reason": res["finish_reason"]}, item, FAMILY)
             rec = {"kind": "dispatch", "item_key": key, "level": level, "seed": item["seed"],
                    "seed_hash": item["seed_hash"], "prompt_sha256": prompt["sha256"],
                    "template": prompt["template"], "gold_index": int(item["answer_index"]),
                    "gold_cell": item["options"][int(item["answer_index"])],
-                   "option_index": (scored["extracted"].get("option_index")
-                                    if isinstance(scored["extracted"], dict) else None),
+                   "option_index": dispatch_option_index(ext),
                    "state": scored["state"], "correct": scored["correct"],
                    "finish_reason": res["finish_reason"],
                    "completion_tokens": res["completion_tokens"],
@@ -530,13 +544,13 @@ def cmd_score() -> int:
         n = len(lvl)
         correct = sum(1 for r in lvl if r["correct"])
         states = Counter(r["state"] for r in lvl)
-        off = [r for r in lvl if r.get("option_index") is not None
-               and not (0 <= int(r["option_index"]) < N_OPTIONS)]
+        off = out_of_range_indexes(lvl)
         amb = 0
         for r in lvl:
-            body = r["completion"]
-            if r.get("option_index") is not None:
-                letter = "ABCDEFGH"[int(r["option_index"])]
+            idx = r.get("option_index")
+            if idx is not None and 0 <= int(idx) < N_OPTIONS:
+                body = r["completion"]
+                letter = "ABCDEFGH"[int(idx)]
                 if body.upper().count(letter) > 1:
                     amb += 1
         floor = gate["offline_baselines"][str(level)]["best_constant_accuracy"]
@@ -760,6 +774,26 @@ def selftest() -> int:
 
     # negative control 8: check-readme must fail on a row id the gate lacks
     if not ok(SIGNAL_MIN_CORRECT == 5, "registered signal threshold is 5 of 15"):
+        return 1
+
+    # negative control 9: the dispatch option-index extraction (G4/G7 input)
+    # must carry a planted out-of-range judged index (the pilot's defect
+    # class, parsed index 47) into the G4 count, and stay None for a
+    # non-judged answer: a fallback that drops or fakes the index keeps
+    # --selftest green while the instrument goes blind to that class.
+    judged_ext = {"state": "judged", "value": "[9,9]", "option_index": 99}
+    unjudged_ext = {"state": "non_answer", "value": None}
+    if not ok(dispatch_option_index(judged_ext) == 99
+              and dispatch_option_index(unjudged_ext) is None,
+              "dispatch option-index extraction: judged carries the index, "
+              "non-judged stays None"):
+        return 1
+    planted_rows = [{"kind": "dispatch", "option_index": 99},
+                    {"kind": "dispatch", "option_index": 7},
+                    {"kind": "dispatch", "option_index": None}]
+    oor = out_of_range_indexes(planted_rows)
+    if not ok(len(oor) == 1 and oor[0]["option_index"] == 99,
+              "G4 count fires only on the planted out-of-range index"):
         return 1
 
     print(f"selftest OK ({checks} checks)")
