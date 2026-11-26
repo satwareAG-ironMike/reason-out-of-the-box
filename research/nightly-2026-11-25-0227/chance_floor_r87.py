@@ -42,6 +42,7 @@ import os
 import pathlib
 import random
 import re
+import statistics
 import sys
 import time
 import urllib.request
@@ -428,7 +429,7 @@ def cmd_census(items: list[dict]) -> int:
                       "trace_field": res["trace_field"],
                       "message_fields": res["message_fields"]})
     rates = [c["tok_per_s"] for c in calls]
-    med = sorted(rates)[len(rates) // 2]
+    med = round(statistics.median(rates), 2)
     if med >= RATE_FLOOR_FULL:
         cal = next(i for i in items if i["level"] == 1)
         prompt = _judge.build_prompt(cal, FAMILY)
@@ -439,7 +440,7 @@ def cmd_census(items: list[dict]) -> int:
                       "tok_per_s": round((res["completion_tokens"] or 0) / max(res["wall_s"], 0.01), 2),
                       "trace_field": res["trace_field"]})
         rates = [c["tok_per_s"] for c in calls]
-        med = sorted(rates)[len(rates) // 2]
+        med = round(statistics.median(rates), 2)
     plan = "full" if med >= RATE_FLOOR_FULL else ("reduced" if med >= RATE_FLOOR_REDUCED else "none")
     rec = {"kind": "measure", "model_digest": model_digest(), "calls": calls,
            "median_tok_per_s": med, "plan_selected": plan,
