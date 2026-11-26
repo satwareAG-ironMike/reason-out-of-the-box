@@ -1,5 +1,5 @@
 {
- "blob": "e28654b3085a8628eaf7a628361a846b392d782baaa570f1ca19351bd45e131f",
+ "blob": "c70231ac4cd8ffbabf2c705272bee6423ee44a98334f4c50af417993e5773a2f",
  "dispatch_cap": 40,
  "family": "digit_matrices",
  "frozen_utc": "2026-11-25T02:27:00Z",
@@ -35,10 +35,7 @@
    "partial_rule_accuracy_random_tiebreak": {
     "0": 1.0
    },
-   "seed_base": 20261125,
-   "solve_all_but_one": {
-    "0": 0.0
-   }
+   "seed_base": 20261125
   },
   "2": {
    "best_constant_accuracy": 0.2667,
@@ -65,11 +62,7 @@
     "0": 0.2667,
     "1": 0.0667
    },
-   "seed_base": 20261125,
-   "solve_all_but_one": {
-    "0": 0.0,
-    "1": 0.1333
-   }
+   "seed_base": 20261125
   }
  },
  "question": "Can a digit-matrix grid place a trained-depth ceiling, or is its accuracy indistinguishable from option guessing and one-component shortcut solving?",

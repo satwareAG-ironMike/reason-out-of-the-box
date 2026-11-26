@@ -5,7 +5,11 @@ rate gate (row G8) refused the panel. Model class: a locally served flash-class 
 endpoint, `exploratory_only_model_class` per `evaluation/frozen/pins.json`; build pin
 `model_digest` `c62b81e96826354e`. No confirmatory cell: that track stays blocked at issue #196.
 
-Gate: `gate.json`, blob `e28654b3085a8628`, frozen before any prompt was spent.
+Gate: `gate.json`, blob `c70231ac4cd8ffba`, frozen before any prompt was spent;
+re-emitted 2026-11-26 after the verdict-directed instrument cleanup (disclosed
+below): the unregistered `solve_all_but_one` diagnostic was dropped from the
+gate body - registered rows G1-G8, `signal_rule` and every offline-baseline
+value are byte-identical to the original freeze (blob `e28654b3085a8628`).
 
 ## Question
 

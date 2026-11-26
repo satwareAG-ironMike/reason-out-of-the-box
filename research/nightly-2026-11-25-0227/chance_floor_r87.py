@@ -98,16 +98,6 @@ def out_of_range_indexes(rows: list[dict]) -> list[dict]:
 
 # ---------------------------------------------------------------- statistics
 
-def binom_tail_ge(k: int, n: int, p: float) -> float:
-    """P(X >= k) for X ~ Binomial(n, p), exact."""
-    if k <= 0:
-        return 1.0
-    total = 0.0
-    for i in range(k, n + 1):
-        total += math.comb(n, i) * (p ** i) * ((1.0 - p) ** (n - i))
-    return total
-
-
 def binom_two_sided(k: int, n: int, p: float) -> float:
     """Exact two-sided binomial p-value: sum of probabilities of outcomes at
     least as far from n*p as the observed k (the standard 'central' method)."""
@@ -188,26 +178,7 @@ def partial_rule_accuracy(items: list[dict], comp: int, rng_seed: int = 20261125
     n = len(items)
     return {"component": comp, "n": n,
             "accuracy_index_order": hits_idx / n,
-            "accuracy_random_tiebreak": hits_rand / n,
-            "mean_matching_options": sum(component_ambiguity(items)[c] for c in range(1)) if False
-            else sum(amb[comp] for amb in map(component_ambiguity, items)) / n}
-
-
-def solve_all_but_one(items: list[dict], drop: int) -> float:
-    """Accuracy of a solver that pins every component rule except `drop` and
-    picks the lowest-index option matching all the others."""
-    hits = 0
-    for item in items:
-        gold_idx = int(item["answer_index"])
-        gold = item["options"][gold_idx]
-        keep = [c for c in range(item["level"]) if c != drop]
-        if not keep:
-            continue
-        matching = [i for i, opt in enumerate(item["options"])
-                    if all(opt[c] == gold[c] for c in keep)]
-        if matching and matching[0] == gold_idx:
-            hits += 1
-    return hits / len(items) if items else 0.0
+            "accuracy_random_tiebreak": hits_rand / n}
 
 
 # ---------------------------------------------------------------- sanitizer
@@ -215,13 +186,8 @@ def solve_all_but_one(items: list[dict], drop: int) -> float:
 SECRET_PATTERNS = [
     re.compile(r"https?://[^\s\"']+"),
     re.compile(r"\b(?:127\.\d{1,3}|\d{1,3}(?:\.\d{1,3}){3})(?::\d+)?\b"),
-    re.compile(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"),
     re.compile(r"/(?:home|root|mnt|srv|opt)/[^\s\"']+"),
     re.compile(r"\b\d{1,2}\.\d{1,2}\.\d{1,2}\b"),
-    re.compile(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"),
-    re.compile(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+\b"),
-    re.compile(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"),
-    re.compile(r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b"),
 ]
 
 
@@ -341,9 +307,6 @@ def make_gate(items: list[dict]) -> dict:
             "partial_rule_accuracy_random_tiebreak": {
                 str(c): round(partial_rule_accuracy(lvl_items, c)["accuracy_random_tiebreak"], 4)
                 for c in range(level)
-            },
-            "solve_all_but_one": {
-                str(d): round(solve_all_but_one(lvl_items, d), 4) for d in range(level)
             },
         }
     gate = {
@@ -654,8 +617,6 @@ def selftest() -> int:
         return True
 
     # arithmetic anchors
-    if not ok(abs(binom_tail_ge(5, 15, CHANCE) - 0.031073) < 1e-5, "binom tail P(X>=5|15,1/8)"):
-        return 1
     if not ok(abs(binom_two_sided(1, 3, CHANCE) - 0.3301) < 1e-3
               and wilson_bounds(1, 3)[0] < CHANCE,
               "pilot-scale anchor: 1/3 of 8-option items is not above chance"):
@@ -691,7 +652,6 @@ def selftest() -> int:
     for pos, opt in enumerate(tampered["options"]):
         if pos != gold_idx:
             opt[0] = gold[0] + 1 if gold[0] < 9 else gold[0] - 1
-    tampered["options"] = tampered["options"]
     amb = component_ambiguity(tampered)
     if not ok(amb[0] == 1, "planted item: component 0 pins the answer"):
         return 1
