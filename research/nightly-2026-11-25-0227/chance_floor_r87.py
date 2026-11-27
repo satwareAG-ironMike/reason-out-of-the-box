@@ -82,6 +82,17 @@ def load_judge():
     return mod
 
 
+def load_score():
+    """The frozen score module: wilson, trained_depth and RULE. The instrument
+    re-uses the frozen arithmetic, never a local re-implementation (#236
+    blocking item 7)."""
+    spec = importlib.util.spec_from_file_location(
+        "r87_frozen_score", ROOT / "evaluation" / "frozen" / "score.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
 def dispatch_option_index(ext: dict) -> int | None:
     """Judged option index of one dispatch: the frozen judge's own
     extract_answer output carries `option_index` only when it judged the
@@ -108,18 +119,6 @@ def binom_two_sided(k: int, n: int, p: float) -> float:
         if pi <= obs + 1e-15:
             total += pi
     return min(1.0, total)
-
-
-def wilson_bounds(k: int, n: int, z: float = 1.959963985):
-    """Wilson 95% score interval on an accuracy over the dispatched census n."""
-    if n == 0:
-        return (0.0, 0.0)
-    phat = k / n
-    z2 = z * z
-    denom = 1.0 + z2 / n
-    centre = phat + z2 / (2 * n)
-    margin = z * math.sqrt(phat * (1 - phat) / n + z2 / (4 * n * n))
-    return ((centre - margin) / denom, (centre + margin) / denom)
 
 
 # ---------------------------------------------------------------- baselines
@@ -499,6 +498,9 @@ def cmd_score() -> int:
     rows = _load_raw()
     disp = [r for r in rows if r["kind"] == "dispatch"]
     dups = [r for r in rows if r["kind"] == "dup"]
+    # mastery threshold from the frozen rule (rule.json trained_depth), not a
+    # hardcoded constant (#236 blocking item 7).
+    mastery = _score.RULE["trained_depth"]["mastery_accuracy"]
     per_level = {}
     for level in LEVELS:
         lvl = [r for r in disp if r["level"] == level]
@@ -519,7 +521,7 @@ def cmd_score() -> int:
                     amb += 1
         floor = gate["offline_baselines"][str(level)]["best_constant_accuracy"]
         p_two = binom_two_sided(correct, n, CHANCE)
-        lo, hi = wilson_bounds(correct, n)
+        lo, hi = _score.wilson(correct, n)
         signal = (correct >= SIGNAL_MIN_CORRECT and lo > floor and p_two < SIGNAL_ALPHA)
         acc = correct / n
         per_level[str(level)] = {
@@ -534,18 +536,15 @@ def cmd_score() -> int:
             "signal": signal,
             "out_of_range_option_index": len(off),
             "judged_letter_repeated_in_completion": amb,
-            "mastery_0_80_met": acc >= 0.80,
+            "mastery_met": acc >= mastery,
         }
-    mastered = [L for L in LEVELS
-                if per_level.get(str(L), {}).get("mastery_0_80_met") is True]
-    d_hat = 0
-    for L in LEVELS:
-        if L in mastered:
-            d_hat = L
-        else:
-            break
-    any_not_evaluable = any(per_level.get(str(L), {}).get("status") == "no_dispatch" for L in LEVELS)
-    d_hat_report = "not_evaluable" if any_not_evaluable else d_hat
+    # Frozen trained-depth walk (evaluation/frozen/score.py trained_depth):
+    # d_hat and the not_evaluable (no_delivery_case) determination come from
+    # the frozen instrument, never a local re-derivation.
+    depth_rows = [{"family": FAMILY, "surface": "na", "level": r["level"],
+                   "state": r["state"], "correct": bool(r["correct"])} for r in disp]
+    depth = _score.trained_depth(depth_rows, FAMILY, "na")
+    d_hat_report = "not_evaluable" if not depth["measurable"] else depth["d_hat"]
     dup_rows = []
     for d in dups:
         first = next((r for r in disp if r["item_key"] == d["item_key"]), None)
@@ -607,6 +606,7 @@ def cmd_check_readme() -> int:
 
 def selftest() -> int:
     checks = 0
+    score = load_score()
 
     def ok(cond, label):
         nonlocal checks
@@ -618,18 +618,18 @@ def selftest() -> int:
 
     # arithmetic anchors
     if not ok(abs(binom_two_sided(1, 3, CHANCE) - 0.3301) < 1e-3
-              and wilson_bounds(1, 3)[0] < CHANCE,
+              and score.wilson(1, 3)[0] < CHANCE,
               "pilot-scale anchor: 1/3 of 8-option items is not above chance"):
         return 1
     p5 = binom_two_sided(5, 15, CHANCE)
     p4 = binom_two_sided(4, 15, CHANCE)
     if not ok(p5 < SIGNAL_ALPHA <= p4, f"signal threshold separates 5/15 ({p5:.4f}) from 4/15 ({p4:.4f})"):
         return 1
-    lo5, _ = wilson_bounds(5, 15)
-    lo4, _ = wilson_bounds(4, 15)
+    lo5, _ = score.wilson(5, 15)
+    lo4, _ = score.wilson(4, 15)
     if not ok(lo5 > CHANCE and lo4 < CHANCE, "Wilson lower bound crosses the 1/8 floor at 5/15"):
         return 1
-    if not ok(abs(wilson_bounds(12, 15)[0] - 0.5481) < 1e-3, "Wilson anchor 12/15"):
+    if not ok(abs(score.wilson(12, 15)[0] - 0.5481) < 1e-3, "frozen Wilson anchor 12/15"):
         return 1
 
     judge = load_judge()
@@ -762,10 +762,11 @@ def selftest() -> int:
 
 
 _judge = None
+_score = None
 
 
 def main(argv: list[str]) -> int:
-    global _judge
+    global _judge, _score
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--freeze-gate", action="store_true")
@@ -778,6 +779,7 @@ def main(argv: list[str]) -> int:
     if args.selftest:
         return selftest()
     _judge = load_judge()
+    _score = load_score()
     items = build_items(_judge)
     if args.freeze_gate:
         gate = make_gate(items)
