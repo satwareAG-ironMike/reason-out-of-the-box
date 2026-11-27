@@ -1,0 +1,1 @@
+{"levels": [1, 2], "max_tokens": 1024, "model_digest": "c62b81e96826354e", "n_items": 30, "seed": null, "seed_base": 20261125, "temperature": 0.0, "top_p": null, "transport": "chat/completions"}
