@@ -41,7 +41,7 @@ gate claim before milestone spend.
   temperature 0.0, the frozen judge's own `build_prompt` / `extract_answer` /
   `score_record` / `solve_digit_matrices`, plus two byte-identical re-dispatch controls
   (issue #100). Selected only if the pre-dispatch rate cleared row G8.
-- Instrument: `chance_floor_r87.py`, stdlib only, `--selftest` 18 checks / 8 negative
+- Instrument: `chance_floor_r87.py`, stdlib only, `--selftest` 19 checks / 9 negative
   controls, `--check-readme` (issue #137). Reproduce: `--selftest`, then `--freeze-gate`,
   `--health`, `--census`, `--dispatch`, `--score`.
 
@@ -60,25 +60,35 @@ gate claim before milestone spend.
 
 ## Results
 
-### F1 The landed pilot archive contains no answer to score
+### F1 The landed pilot archive is a censored-delivery record, not a scored answer set
 
 All 12 records in `runs/p8-pilot-2026-11-24-olmo32b-pythia28b/raw.jsonl` carry
-`finish_reason: "length"` (censored at 128 or 300 tokens). In every record the stored
-`content` is a 300-character window of the item's own text - it holds the grid and the option
-list - so the completion is a restatement of the question cut off by the cap. 6 of 12 have
+`finish_reason: "length"` (censored at 128 or 300 tokens) and `item_level: 3` - the pilot
+is a level-3-only archive, not the levels 1-4 grid the M2 row describes. In every record
+the stored `content` is a 300-character window of the item's own text - it holds the grid
+and the option list - so the completion is a restatement of the question cut off by the
+cap. 4 of 12 carry an in-range parsed option index; the single `correct: true` record is
+a truncated echo whose last numeric token happened to equal the gold index. 6 have
 `parsed_answer: null`; 2 have `parsed_answer: 47` on an 8-option item (valid indices are
-0-7); the single `correct: true` record is a truncated echo whose last numeric token happened
-to equal the gold index. `rule.json` `trained_depth.no_delivery_case`: "A censored arm is a
-delivery failure, never a competence floor." The pilot is a delivery failure at 12/12.
+0-7). The OLMo half of the pilot is superseded by the tracked `olmo-rerun.jsonl` sidecar
+(6 records: 3 `stop`, 3 `length`, all parsed, 1 `correct: true`) per `report.md` and the
+CHANGELOG, and this round reads the rerun as the OLMo record.
+`rule.json` `trained_depth.no_delivery_case`: "A censored arm is a delivery failure,
+never a competence floor." The original pilot archive is a delivery failure at 12/12.
 
-### F2 The harness scores an unparseable answer as a wrong delivery
+### F2 The harness has no delivery state: nothing parsed is unscored, an out-of-range index is scored wrong
 
 `harness/harness_run.py::parse_answer` returns the last all-digit whitespace token of the
-completion and sets `correct = (parsed == answer_index)`. There is no delivery state, so an
-out-of-range index is recorded as a wrong answer rather than as `non_answer`. The frozen
-judge has the states (`DELIVERY_STATES`; `extract_answer` accepts only an A-H letter or an
-exact option tuple) and the harness does not use them. The exit-gate sentence "all deliveries
-parsed" is contradicted by the grid's own records: 3 of 12 carry an option index outside 0-7.
+completion, and `harness_run.py:103` sets `correct = (parsed == answer_index)` when
+something parsed and `correct = None` when nothing did. There is no delivery state: an
+out-of-range index (47 on an 8-option item) is recorded as a wrong answer rather than as
+`non_answer`. The frozen judge has the states (`DELIVERY_STATES`; `extract_answer` accepts
+only an A-H letter or an exact option tuple) and the harness does not use them. The
+exit-gate sentence "all deliveries parsed" is contradicted by the M2 d\* grid's own
+records: the #234 sidecar grid raw (12 dispatches, `dstar3-grid-raw.jsonl`, shipped as a
+tracked artifact by PR #238) is 12/12 delivered and parsed but carries 3 option indices
+outside 0-7 (9, 9, 8 - one each at levels 2, 3, 4); the tracked pilot archive separately
+carries 2 indices of 47 among its 12 records.
 
 ### F3 The landed grid is not reproducible from the shipped instrument
 
@@ -96,9 +106,12 @@ With 3 items and 8 options, some option index is the gold at least once, so the 
 constant-answer strategy scores >= 1/3 by the pigeonhole principle. The grid's only non-zero
 cell is exactly 1/3. The grid overall is 1/12 = 0.083, below the nominal 1/8 = 0.125. Exact
 two-sided binomial for 1/3 at n = 3 against 1/8: p = 0.3301; Wilson 95% interval [0.0615,
-0.7923], lower bound below the chance floor. Under `rule.json` `trained_depth` (mastery 0.80,
-calibration n 40) the grid computes d_hat = 0, not 1: no level reaches 0.80 and the
-calibration arm is defined at n = 40 per level, not 3.
+0.7923], lower bound below the chance floor. The delivered d\* grid meets `rule.json`
+`trained_depth`'s `no_mastery_case`: no level reaches mastery 0.80, so its d_hat is 0, not
+1 - and the reading is at n = 3 per level, where the frozen rule defines the calibration
+arm at n = 40, so it is a small-n reading, not a calibration-pool measurement. For the
+censored pilot archive the rule computes neither: `no_delivery_case` makes that arm
+`not_evaluable`, never 0.
 
 ### F5 The family's depth axis is not clean (frozen, measured pre-dispatch)
 
@@ -118,10 +131,12 @@ not yet evidence about simultaneous-rule depth.
 
 `health.json`: the issue #211 model-resolution precondition passes (registry present, size 1,
 configured column resolves), trace exposed on `reasoning_content` (115 characters on the
-probe). `measure.json`: pre-dispatch census median **4.6 completion tokens/s**, below the
-registered 5.0 tok/s reduced-plan floor, so G8 selected `plan: none` and no prompt was spent
-(3 of the 40-call cap used, 32 dispatches owed). These two files are the surviving failure
-record, per the `research/AGENTS.md` rule that an arm that could not run keeps its record.
+probe). `measure.json`: pre-dispatch census median **2.91 completion tokens/s** (the median of
+the two census rates 1.22 and 4.6; the record originally carried 4.6, the upper element of the
+two - the median fix is disclosed below), below the registered 5.0 tok/s reduced-plan floor, so
+G8 selected `plan: none` and no prompt was spent (3 of the 40-call cap used, 32 dispatches
+owed). These two files are the surviving failure record, per the `research/AGENTS.md` rule that
+an arm that could not run keeps its record.
 
 ### F7 Literature (abstract-level; OpenAlex and arXiv export API only)
 
@@ -139,13 +154,48 @@ applied to an LLM analogical-reasoning benchmark.
 
 ## Consequence for the M2 row
 
-`d* established MET` is not what the frozen instrument computes from this evidence. The row
-should read: d_hat `not_evaluable` on the pilot grid (12/12 censored, 6 unparsed, 3
-out-of-range indices), d_hat = 0 under `rule.json` mastery 0.80, and M2 carries a second
-blocker next to the corpus blocker - the depth measurement has to be re-run. The re-run is
-specified: the frozen `matrix_missing_cell_v1` template, `extract_answer` with
-`DELIVERY_STATES`, a `max_tokens` above the echo length, calibration n = 40 per level, and the
-dispatched set's constant-answer floor reported as a baseline row.
+`d* established MET` is not what the frozen instrument computes from this evidence, and the
+two landed archives must be read separately. On the **pilot archive** (`raw.jsonl`: 12/12
+censored, 6 unparsed, 2 out-of-range 47s) the frozen `trained_depth.no_delivery_case` gives
+`not_evaluable`, never 0 - "a censored arm is a delivery failure, never a competence floor."
+On the **M2 d\* grid** (`dstar3-grid-raw.jsonl`, now tracked via PR #238: 12/12 delivered,
+1/3 at level 1 and 0/3 at levels 2-4, 3 out-of-range 9s/8) the frozen `no_mastery_case` gives
+d_hat = 0 at n = 3 per level, where the rule defines the calibration arm at n = 40. Either
+way M2 carries a second blocker next to the corpus blocker - the depth measurement has to be
+re-run at the study's calibration n. The re-run is specified: the frozen
+`matrix_missing_cell_v1` template, `extract_answer` with `DELIVERY_STATES`, a `max_tokens`
+above the echo length, calibration n = 40 per level, and the dispatched set's constant-answer
+floor reported as a baseline row.
+
+## Instrument and record corrections (2026-11-26, the #236 review, forward-only)
+
+The first #236 review (NOT MERGED, 8 blocking items) directed these corrections on the open
+PR; per `research/AGENTS.md` the instrument changes are disclosed here:
+
+1. Detector fix: `score_record` returns the extracted value as a scalar, so the shipped
+   option-index detector never fired; the dispatch now records the frozen `extract_answer`
+   option_index, G4 counts through `out_of_range_indexes`, and negative control 9 plants an
+   out-of-range judged index and asserts it reaches the G4 count (`--selftest` 19 checks /
+   9 negative controls).
+2. Median fix: an even-count census median took the upper element; `measure.json`'s
+   `median_tok_per_s` is corrected 4.6 -> 2.91 (the census call rates themselves are
+   byte-unchanged), G8's `plan: none` selection unchanged.
+3. Frozen re-use: the local Wilson re-implementation and the hardcoded mastery 0.80 walk are
+   gone; `cmd_score` calls `evaluation/frozen/score.py` `wilson` and `trained_depth` and reads
+   the mastery threshold from `RULE["trained_depth"]`, so a rule amendment can no longer leave
+   this instrument on a stale threshold.
+4. Dead code removed: `solve_all_but_one`, the `if False` branch and the unread
+   `mean_matching_options` key, four duplicate IPv4 sanitizer patterns, `binom_tail_ge` with
+   its self-anchor, and a no-op self-assignment.
+5. Gate re-emitted for change 4: the only content diff is the dropped unregistered
+   `solve_all_but_one` keys; registered rows G1-G8, `signal_rule` and every offline-baseline
+   value are byte-identical to the original freeze. No registered row or tier moved; no raw
+   record changed (no dispatch ran).
+6. Record fixes: the F1 headline (4 of 12 in-range parses, level-3-only, the superseding
+   `olmo-rerun.jsonl`), the F2 delivery-state wording (`harness_run.py:103`: unparsed ->
+   `correct = None`, out-of-range -> `False`), the conflated archive counts (pilot archive
+   2 of 12; M2 d\* grid 3 of 12, attributed), and the frozen-rule attribution (censored arm
+   `not_evaluable` per `no_delivery_case`; the delivered grid meets `no_mastery_case`).
 
 ## Limits
 
@@ -154,10 +204,11 @@ dispatched set's constant-answer floor reported as a baseline row.
 - The constant-answer floor is chosen after seeing the keys, so it is an upper bound on the
   content-free rate, not a test; the registered G2 rule compares the model against it and
   against 1/8, and both must clear.
-- The sidecar grid archive the round read on disk (12 records, levels 1-4) is not in the
-  repository: `git diff 8cdc0e9^ 8cdc0e9 --stat` is empty, so the verdict and its grid exist
-  only as commit text. Its parse class matches F2 and is reported as such, not as a public
-  artifact.
+- The sidecar grid archive the round read on disk (12 records, levels 1-4) was not in the
+  repository when this PR opened (`git diff 8cdc0e9^ 8cdc0e9 --stat` is empty: the verdict and
+  its grid existed only as commit text). It ships as a tracked artifact in the M2 exit-gate
+  sidecar PR #238 (`dstar3-grid-raw.jsonl` plus the dated verdict record); until that PR
+  merges, its numbers are citable only from PR #238. Its parse class matches F2.
 - `scripts/check_serving_ids.py` exits 0 with "serving-id check passed" when invoked with an
   unrecognized flag (it falls through to the tracked-file scan): a mistyped invocation reads
   as a pass. Recorded on issue #206.

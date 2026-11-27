@@ -45,18 +45,22 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   8-option item).
 
 ### 2026-11-25 (nightly round 87, issue #65): the chance floor under the M2 depth ceiling
-- `research/nightly-2026-11-25-0227/`: frozen gate (blob `e28654b3085a8628`), script with
-  18 selftest checks and 8 negative controls, health and rate records. No dispatch arm ran:
-  the registered G8 rate gate measured 4.6 tok/s against a 5.0 tok/s floor and refused the
+- `research/nightly-2026-11-25-0227/`: frozen gate (blob `c70231ac4cd8ffba`, re-emitted with
+  the 2026-11-26 review corrections, registered rows byte-identical), script with
+  19 selftest checks and 9 negative controls, health and rate records. No dispatch arm ran:
+  the registered G8 rate gate measured 2.91 tok/s against a 5.0 tok/s floor and refused the
   32-dispatch panel.
 - Record audit of the landed #8 pilot archive: all 12 records are `finish_reason: length`,
   6 carry no parsed answer, 2 carry an option index of 47 on an 8-option item, and the one
   `correct: true` record is a truncated echo - `rule.json` calls that a delivery failure, not
-  a competence floor. `harness/harness_run.py::parse_answer` has no delivery state, so an
-  unparseable answer is scored as a wrong delivery.
+  a competence floor. `harness/harness_run.py:103` has no delivery state: nothing parsed
+  leaves `correct = None` (unscored) and an out-of-range index is scored wrong rather than
+  `non_answer`.
 - Arithmetic: at 3 items per level with 8 options the best constant-answer strategy always
-  scores >= 1/3, so the grid's only non-zero cell (1/3) sits at the content-free floor; under
-  `rule.json` `trained_depth` (mastery 0.80, calibration n 40) the grid computes d_hat = 0.
+  scores >= 1/3, so the grid's only non-zero cell (1/3) sits at the content-free floor; the
+  delivered M2 d\* grid meets `rule.json` `trained_depth`'s `no_mastery_case` (d_hat = 0 at
+  n = 3, where the rule defines the calibration arm at n = 40), while the censored pilot
+  archive is `not_evaluable` under `no_delivery_case`.
 - Generator-side measurement: `_distractors` changes exactly one component per wrong option,
   so at level 2 about 4.5 of 8 options carry the gold digit at any single component and a
   one-component solver reaches 0.267 with no second-rule competence.
